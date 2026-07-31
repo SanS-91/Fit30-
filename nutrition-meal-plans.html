@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Plans 7 Ngày - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Base palette */
+            --text-dark: #4A4A5A;
+            --text-medium: #7A7A8A;
+            --text-light: #A0A0B0;
+            --white: #FFFFFF;
+            --bg-primary: #FFFBFB;
+            --bg-soft: #FFF8F5;
+            --border-soft: #F0E8E6;
+            
+            /* Meal plan color - Pink */
+            --mealplan: #D4A8B8;
+            --mealplan-soft: #F8E8F0;
+            --mealplan-dark: #B888A0;
+            --mealplan-gradient: linear-gradient(135deg, #F8E8F0 0%, #D4A8B8 100%);
+            
+            /* Goal colors */
+            --fatloss: #F4A698;
+            --fatloss-soft: #FCEAE5;
+            --fatloss-gradient: linear-gradient(135deg, #FCEAE5 0%, #F4A698 100%);
+            
+            --muscle: #B8A8E8;
+            --muscle-soft: #EEE8F8;
+            --muscle-gradient: linear-gradient(135deg, #EEE8F8 0%, #B8A8E8 100%);
+            
+            --recomp: #7FB5B5;
+            --recomp-soft: #E0F0F0;
+            --recomp-gradient: linear-gradient(135deg, #E0F0F0 0%, #7FB5B5 100%);
+            
+            /* Meal type colors */
+            --breakfast: #E8C87A;
+            --breakfast-soft: #FBF3E0;
+            --lunch: #9AB89A;
+            --lunch-soft: #E8F3E8;
+            --snack: #E89A9A;
+            --snack-soft: #FCE8E8;
+            --dinner: #D4A8B8;
+            --dinner-soft: #F8E8F0;
+            
+            /* Macro colors */
+            --protein: #E89A9A;
+            --carb: #E8C87A;
+            --fat: #D4A8B8;
+            
+            /* Main gradient */
+            --main-gradient: linear-gradient(135deg, #9AB89A 0%, #E8C87A 50%, #D4A8B8 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        body::before {
+            width: 500px;
+            height: 500px;
+            background: var(--mealplan);
+            top: -150px;
+            right: -150px;
+        }
+        
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: var(--breakfast);
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 18px 40px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .btn-header {
+            padding: 9px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-header.secondary {
+            background: var(--bg-soft);
+            color: var(--text-medium);
+        }
+        
+        .btn-header.secondary:hover {
+            background: var(--mealplan-soft);
+            color: var(--mealplan-dark);
+        }
+        
+        .btn-header.primary {
+            background: var(--mealplan-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(212,168,184,0.3);
+        }
+        
+        .btn-header.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(212,168,184,0.4);
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 60px 40px 30px;
+            text-align: center;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: var(--mealplan-gradient);
+            color: white;
+            padding: 7px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 22px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(212,168,184,0.3);
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: var(--mealplan-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        
+        /* Calories Target Banner */
+        .target-banner {
+            max-width: 1300px;
+            margin: 30px auto 25px;
+            padding: 0 40px;
+        }
+        
+        .target-card {
+            background: white;
+            border-radius: 22px;
+            padding: 22px 28px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 25px;
+            align-items: center;
+        }
+        
+        .target-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: var(--target-gradient, var(--mealplan-gradient));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: white;
+        }
+        
+        .target-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+        
+        .target-info p {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+        }
+        
+        .target-stats {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .target-stat {
+            text-align: center;
+        }
+        
+        .target-stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1;
+        }
+        
+        .target-stat-label {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            margin-top: 3px;
+        }
+        
+        .target-divider {
+            width: 1px;
+            height: 40px;
+            background: var(--border-soft);
+        }
+        
+        /* Goal Tabs */
+        .goal-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 0 auto 30px;
+            padding: 0 40px;
+            max-width: 900px;
+            flex-wrap: wrap;
+        }
+        
+        .goal-tab {
+            padding: 14px 28px;
+            background: white;
+            border: 2px solid var(--border-soft);
+            border-radius: 16px;
+            font-weight: 700;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Quicksand', sans-serif;
+        }
+        
+        .goal-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        }
+        
+        .goal-tab.active[data-goal="fatloss"] {
+            background: var(--fatloss-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(244,166,152,0.3);
+        }
+        
+        .goal-tab.active[data-goal="muscle"] {
+            background: var(--muscle-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(184,168,232,0.3);
+        }
+        
+        .goal-tab.active[data-goal="recomp"] {
+            background: var(--recomp-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(127,181,181,0.3);
+        }
+        
+        .goal-tab-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+        }
+        
+        .goal-tab-name {
+            font-size: 0.95rem;
+        }
+        
+        .goal-tab-cal {
+            font-size: 0.72rem;
+            opacity: 0.85;
+            font-weight: 600;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px 60px;
+        }
+        
+        /* Weekly Overview */
+        .weekly-overview {
+            background: white;
+            border-radius: 22px;
+            padding: 25px 28px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+            margin-bottom: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 18px;
+        }
+        
+        .overview-stat {
+            text-align: center;
+            padding: 12px;
+            border-radius: 14px;
+            background: var(--bg-soft);
+        }
+        
+        .overview-stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        
+        .overview-stat-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+        
+        .overview-stat.protein .overview-stat-value { color: var(--protein); }
+        .overview-stat.carb .overview-stat-value { color: var(--carb); }
+        .overview-stat.fat .overview-stat-value { color: var(--fat); }
+        
+        /* Day Cards */
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 20px;
+        }
+        
+        .day-card {
+            background: white;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+            transition: all 0.3s;
+        }
+        
+        .day-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+        }
+        
+        .day-header {
+            padding: 18px 22px;
+            background: var(--day-gradient, var(--mealplan-gradient));
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .day-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .day-card[data-day="1"] { --day-gradient: var(--fatloss-gradient); }
+        .day-card[data-day="2"] { --day-gradient: var(--muscle-gradient); }
+        .day-card[data-day="3"] { --day-gradient: var(--recomp-gradient); }
+        .day-card[data-day="4"] { --day-gradient: linear-gradient(135deg, #FCEAE5 0%, #E8C87A 100%); }
+        .day-card[data-day="5"] { --day-gradient: linear-gradient(135deg, #EEE8F8 0%, #9AB89A 100%); }
+        .day-card[data-day="6"] { --day-gradient: linear-gradient(135deg, #E0F0F0 0%, #D4A8B8 100%); }
+        .day-card[data-day="7"] { --day-gradient: linear-gradient(135deg, #F8E8F0 0%, #B8A8E8 100%); }
+        
+        .day-info {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .day-name {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-medium);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 3px;
+        }
+        
+        .day-title {
+            font-size: 1.25rem;
+            color: var(--text-dark);
+        }
+        
+        .day-calories {
+            background: rgba(255,255,255,0.9);
+            padding: 8px 14px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+        }
+        
+        .day-cal-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1;
+        }
+        
+        .day-cal-label {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+        
+        /* Meals */
+        .meals-list {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .meal-item {
+            background: var(--bg-soft);
+            border-radius: 14px;
+            padding: 14px 16px;
+            border-left: 4px solid var(--meal-color);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .meal-item:hover {
+            background: white;
+            transform: translateX(3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .meal-item.breakfast { --meal-color: var(--breakfast); }
+        .meal-item.lunch { --meal-color: var(--lunch); }
+        .meal-item.snack { --meal-color: var(--snack); }
+        .meal-item.dinner { --meal-color: var(--dinner); }
+        
+        .meal-type {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--meal-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .meal-info {
+            min-width: 0;
+        }
+        
+        .meal-type-label {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        
+        .meal-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.98rem;
+            color: var(--text-dark);
+            line-height: 1.3;
+            margin-bottom: 4px;
+        }
+        
+        .meal-macros {
+            display: flex;
+            gap: 8px;
+            font-size: 0.72rem;
+            color: var(--text-medium);
+            font-weight: 600;
+        }
+        
+        .meal-macros span {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        
+        .meal-macros .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+        
+        .meal-macros .p { background: var(--protein); }
+        .meal-macros .c { background: var(--carb); }
+        .meal-macros .f { background: var(--fat); }
+        
+        .meal-cal {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            white-space: nowrap;
+        }
+        
+        .meal-cal small {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.68rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        
+        /* Day Footer */
+        .day-footer {
+            padding: 14px 18px;
+            background: var(--bg-soft);
+            border-top: 1px solid var(--border-soft);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .day-macro-bar {
+            flex: 1;
+            display: flex;
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+            background: white;
+        }
+        
+        .day-macro-bar .p { background: var(--protein); }
+        .day-macro-bar .c { background: var(--carb); }
+        .day-macro-bar .f { background: var(--fat); }
+        
+        .day-time {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        /* Action Buttons */
+        .actions-section {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-action {
+            padding: 13px 28px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-action.primary {
+            background: var(--mealplan-gradient);
+            color: white;
+            box-shadow: 0 6px 20px rgba(212,168,184,0.3);
+        }
+        
+        .btn-action.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(212,168,184,0.4);
+        }
+        
+        .btn-action.secondary {
+            background: white;
+            color: var(--text-medium);
+            border: 2px solid var(--border-soft);
+        }
+        
+        .btn-action.secondary:hover {
+            border-color: var(--mealplan);
+            color: var(--mealplan-dark);
+            transform: translateY(-2px);
+        }
+        
+        /* Tips Section */
+        .tips-section {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 40px;
+        }
+        
+        .tips-card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .tips-header {
+            margin-bottom: 25px;
+        }
+        
+        .tips-header h2 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .tips-header p {
+            color: var(--text-medium);
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+        }
+        
+        .tip-item {
+            padding: 20px;
+            background: var(--bg-soft);
+            border-radius: 16px;
+            border-left: 4px solid var(--tip-color, var(--mealplan));
+        }
+        
+        .tip-item:nth-child(1) { --tip-color: var(--breakfast); }
+        .tip-item:nth-child(2) { --tip-color: var(--lunch); }
+        .tip-item:nth-child(3) { --tip-color: var(--snack); }
+        .tip-item:nth-child(4) { --tip-color: var(--dinner); }
+        
+        .tip-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tip-content {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(74, 74, 90, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal {
+            background: white;
+            border-radius: 26px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-header {
+            padding: 30px 32px 20px;
+            border-bottom: 1px solid var(--border-soft);
+            position: relative;
+        }
+        
+        .modal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--modal-accent, var(--mealplan-gradient));
+            border-radius: 26px 26px 0 0;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--bg-soft);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            transition: all 0.3s;
+        }
+        
+        .modal-close:hover {
+            background: var(--mealplan-soft);
+            color: var(--mealplan-dark);
+            transform: rotate(90deg);
+        }
+        
+        .modal-meal-type {
+            display: inline-block;
+            background: var(--modal-accent-soft, var(--mealplan-soft));
+            color: var(--modal-accent-color, var(--mealplan-dark));
+            padding: 4px 12px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            padding-right: 50px;
+            line-height: 1.2;
+        }
+        
+        .modal-subtitle {
+            color: var(--text-medium);
+            font-size: 0.92rem;
+        }
+        
+        .modal-body {
+            padding: 28px 32px;
+        }
+        
+        .modal-macro-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+        
+        .modal-macro-card {
+            padding: 14px 10px;
+            border-radius: 12px;
+            text-align: center;
+            background: var(--bg-soft);
+            border-top: 3px solid var(--macro-color);
+        }
+        
+        .modal-macro-card.cal { --macro-color: var(--mealplan); }
+        .modal-macro-card.p { --macro-color: var(--protein); }
+        .modal-macro-card.c { --macro-color: var(--carb); }
+        .modal-macro-card.f { --macro-color: var(--fat); }
+        
+        .modal-macro-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1;
+            margin-bottom: 3px;
+        }
+        
+        .modal-macro-label {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+        
+        .modal-section {
+            margin-bottom: 20px;
+        }
+        
+        .modal-section h4 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+        }
+        
+        .ingredients-list {
+            list-style: none;
+            display: grid;
+            gap: 6px;
+        }
+        
+        .ingredients-list li {
+            padding: 9px 14px 9px 32px;
+            background: var(--bg-soft);
+            border-radius: 10px;
+            position: relative;
+            font-size: 0.88rem;
+            color: var(--text-dark);
+        }
+        
+        .ingredients-list li::before {
+            content: '•';
+            position: absolute;
+            left: 14px;
+            color: var(--mealplan);
+            font-weight: 700;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+        
+        .modal-info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        
+        .modal-info-item {
+            padding: 12px;
+            background: var(--bg-soft);
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .modal-info-label {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+        
+        .modal-info-value {
+            font-size: 0.92rem;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+        
+        .modal-footer {
+            padding: 18px 32px 28px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-modal {
+            padding: 12px 22px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+            flex: 1;
+        }
+        
+        .btn-modal.primary {
+            background: var(--mealplan-gradient);
+            color: white;
+        }
+        
+        .btn-modal.secondary {
+            background: var(--bg-soft);
+            color: var(--text-medium);
+        }
+        
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: 14px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 2000;
+            transform: translateX(400px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 4px solid var(--mealplan);
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--mealplan-soft);
+            color: var(--mealplan-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 40px 40px 25px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--mealplan);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .hero {
+                padding: 40px 20px 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .target-banner,
+            .goal-tabs,
+            .main-container,
+            .actions-section,
+            .tips-section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            
+            .target-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .target-stats {
+                justify-content: center;
+            }
+            
+            .goal-tabs {
+                flex-direction: column;
+            }
+            
+            .goal-tab {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .days-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-macro-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .modal-info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tips-card {
+                padding: 25px 20px;
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-soft);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--mealplan) 0%, var(--breakfast) 100%);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <div class="header-actions">
+            <a href="nutrition-overview.html" class="btn-header secondary">← Dinh dưỡng</a>
+            <button class="btn-header primary" onclick="generateShoppingList()">🛒 Shopping List</button>
+        </div>
+    </header>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <span class="hero-badge">MEAL PLANS</span>
+        <h1>Thực đơn <span>7 ngày</span></h1>
+        <p>3 mục tiêu · 4 bữa/ngày · Tự động tính toán theo TDEE của bạn. Chỉ cần làm theo, không cần tính toán.</p>
+    </section>
+    
+    <!-- Target Banner -->
+    <div class="target-banner">
+        <div class="target-card" id="targetCard">
+            <div class="target-icon" id="targetIcon">⚖️</div>
+            <div class="target-info">
+                <h3 id="targetTitle">Tái cấu trúc cơ thể</h3>
+                <p id="targetDesc">Cân bằng giữa giảm mỡ và tăng cơ · Dựa trên TDEE của bạn</p>
+            </div>
+            <div class="target-stats">
+                <div class="target-stat">
+                    <div class="target-stat-value" id="targetCal">1800</div>
+                    <div class="target-stat-label">kcal/ngày</div>
+                </div>
+                <div class="target-divider"></div>
+                <div class="target-stat">
+                    <div class="target-stat-value" id="targetProtein">135g</div>
+                    <div class="target-stat-label">Protein</div>
+                </div>
+                <div class="target-divider"></div>
+                <div class="target-stat">
+                    <div class="target-stat-value" id="targetCarb">180g</div>
+                    <div class="target-stat-label">Carb</div>
+                </div>
+                <div class="target-divider"></div>
+                <div class="target-stat">
+                    <div class="target-stat-value" id="targetFat">55g</div>
+                    <div class="target-stat-label">Fat</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Goal Tabs -->
+    <div class="goal-tabs">
+        <button class="goal-tab" data-goal="fatloss" onclick="switchGoal('fatloss')">
+            <span>🔥</span>
+            <div class="goal-tab-info">
+                <div class="goal-tab-name">Giảm mỡ</div>
+                <div class="goal-tab-cal" id="cal-fatloss">1500 kcal</div>
+            </div>
+        </button>
+        
+        <button class="goal-tab active" data-goal="recomp" onclick="switchGoal('recomp')">
+            <span>⚖️</span>
+            <div class="goal-tab-info">
+                <div class="goal-tab-name">Tái cấu trúc</div>
+                <div class="goal-tab-cal" id="cal-recomp">1800 kcal</div>
+            </div>
+        </button>
+        
+        <button class="goal-tab" data-goal="muscle" onclick="switchGoal('muscle')">
+            <span>💪</span>
+            <div class="goal-tab-info">
+                <div class="goal-tab-name">Tăng cơ</div>
+                <div class="goal-tab-cal" id="cal-muscle">2200 kcal</div>
+            </div>
+        </button>
+    </div>
+    
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Weekly Overview -->
+        <div class="weekly-overview" id="weeklyOverview">
+            <div class="overview-stat">
+                <div class="overview-stat-value" id="weekCalories">12600</div>
+                <div class="overview-stat-label">Tổng calo / tuần</div>
+            </div>
+            <div class="overview-stat protein">
+                <div class="overview-stat-value" id="weekProtein">945g</div>
+                <div class="overview-stat-label">Protein / tuần</div>
+            </div>
+            <div class="overview-stat carb">
+                <div class="overview-stat-value" id="weekCarb">1260g</div>
+                <div class="overview-stat-label">Carb / tuần</div>
+            </div>
+            <div class="overview-stat fat">
+                <div class="overview-stat-value" id="weekFat">385g</div>
+                <div class="overview-stat-label">Fat / tuần</div>
+            </div>
+            <div class="overview-stat">
+                <div class="overview-stat-value" id="weekMeals">28</div>
+                <div class="overview-stat-label">Bữa ăn / tuần</div>
+            </div>
+        </div>
+        
+        <!-- Days Grid -->
+        <div class="days-grid" id="daysGrid">
+            <!-- Rendered by JS -->
+        </div>
+    </div>
+    
+    <!-- Actions -->
+    <div class="actions-section">
+        <button class="btn-action primary" onclick="generateShoppingList()">🛒 Tạo danh sách mua sắm</button>
+        <button class="btn-action secondary" onclick="printMealPlan()">🖨️ In thực đơn</button>
+        <button class="btn-action secondary" onclick="saveMealPlan()">💾 Lưu thực đơn</button>
+    </div>
+    
+    <!-- Tips Section -->
+    <section class="tips-section">
+        <div class="tips-card">
+            <div class="tips-header">
+                <h2>💡 Mẹo áp dụng meal plan</h2>
+                <p>Những lưu ý quan trọng để meal plan phát huy hiệu quả tối đa.</p>
+            </div>
+            
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <div class="tip-title">🌅 Bữa sáng</div>
+                    <div class="tip-content">Ăn trong vòng 1 giờ sau khi thức dậy. Ưu tiên protein + carb phức hợp để có năng lượng bền vững cả ngày.</div>
+                </div>
+                
+                <div class="tip-item">
+                    <div class="tip-title">☀️ Bữa trưa</div>
+                    <div class="tip-content">Bữa lớn nhất trong ngày. Bao gồm đầy đủ protein, carb, fat và rau. Chuẩn bị từ tối hôm trước (meal prep).</div>
+                </div>
+                
+                <div class="tip-item">
+                    <div class="tip-title">🍎 Snack</div>
+                    <div class="tip-content">Ăn giữa bữa trưa và tối (3-4h chiều). Chọn snack giàu protein để tránh đói và kiểm soát bữa tối.</div>
+                </div>
+                
+                <div class="tip-item">
+                    <div class="tip-title">🌙 Bữa tối</div>
+                    <div class="tip-content">Ăn trước khi ngủ 2-3h. Tập trung vào protein và rau, giảm carb để hỗ trợ tiêu hóa và giấc ngủ.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="nutrition-overview.html">Dinh dưỡng</a>
+            <a href="nutrition-food-library.html">Thư viện thực phẩm</a>
+            <a href="nutrition-macro-calculator.html">TDEE Calculator</a>
+            <a href="nutrition-recipes.html">Recipes</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal()">✕</button>
+                <div class="modal-meal-type" id="modalMealType">BỮA SÁNG</div>
+                <h2 class="modal-title" id="modalTitle">Meal Name</h2>
+                <div class="modal-subtitle" id="modalSubtitle"></div>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer">
+                <button class="btn-modal secondary" onclick="closeModal()">Đóng</button>
+                <button class="btn-modal primary" onclick="viewRecipe()">📖 Xem công thức</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">✓</div>
+        <div class="toast-content" id="toastContent">Đã lưu!</div>
+    </div>
+    
+    <script>
+        // ==================== MEAL PLANS DATABASE ====================
+        const mealPlans = {
+            fatloss: {
+                name: 'Giảm mỡ',
+                emoji: '🔥',
+                calories: 1500,
+                protein: 135,
+                carb: 130,
+                fat: 50,
+                description: 'Thâm hụt calo nhẹ, protein cao để giữ cơ',
+                gradient: 'var(--fatloss-gradient)',
+                days: [
+                    {
+                        day: 1, name: 'Thứ 2', title: 'Khởi động tuần mới',
+                        meals: [
+                            { type: 'breakfast', name: 'Yến mạch + berries + whey', calories: 350, protein: 28, carb: 42, fat: 7, time: '10 phút', ingredients: ['Yến mạch 40g', 'Whey protein 1 scoop', 'Việt quất 50g', 'Hạt chia 1 muỗng'] },
+                            { type: 'lunch', name: 'Ức gà + gạo lứt + bông cải', calories: 450, protein: 42, carb: 40, fat: 10, time: '25 phút', ingredients: ['Ức gà 150g', 'Gạo lứt 80g', 'Bông cải xanh 150g', 'Dầu olive 1 muỗng'] },
+                            { type: 'snack', name: 'Sữa chua Hy Lạp + hạt', calories: 200, protein: 18, carb: 15, fat: 8, time: '2 phút', ingredients: ['Sữa chua Hy Lạp 150g', 'Hạnh nhân 15g', 'Mật ong 1 muỗng cà phê'] },
+                            { type: 'dinner', name: 'Cá hồi + rau xào', calories: 500, protein: 38, carb: 33, fat: 22, time: '20 phút', ingredients: ['Cá hồi 150g', 'Rau chân vịt 100g', 'Khoai lang 100g', 'Dầu olive 1 muỗng'] }
+                        ]
+                    },
+                    {
+                        day: 2, name: 'Thứ 3', title: 'Protein focus',
+                        meals: [
+                            { type: 'breakfast', name: 'Trứng luộc + bánh mì nguyên cám + bơ', calories: 380, protein: 25, carb: 30, fat: 18, time: '10 phút', ingredients: ['Trứng 2 quả', 'Bánh mì nguyên cám 2 lát', 'Bơ trái 1/4 quả'] },
+                            { type: 'lunch', name: 'Tôm + quinoa + rau', calories: 420, protein: 38, carb: 42, fat: 10, time: '20 phút', ingredients: ['Tôm 150g', 'Quinoa 80g', 'Ớt chuông 100g', 'Chanh 1/2 quả'] },
+                            { type: 'snack', name: 'Táo + bơ đậu phộng', calories: 200, protein: 6, carb: 28, fat: 9, time: '2 phút', ingredients: ['Táo 1 quả', 'Bơ đậu phộng 1 muỗng'] },
+                            { type: 'dinner', name: 'Thịt heo nạc + rau củ', calories: 500, protein: 42, carb: 35, fat: 18, time: '25 phút', ingredients: ['Thịt heo nạc 150g', 'Cà rốt 100g', 'Bí ngòi 100g', 'Gạo lứt 60g'] }
+                        ]
+                    },
+                    {
+                        day: 3, name: 'Thứ 4', title: 'Low carb day',
+                        meals: [
+                            { type: 'breakfast', name: 'Smoothie protein xanh', calories: 320, protein: 30, carb: 28, fat: 10, time: '5 phút', ingredients: ['Whey protein 1 scoop', 'Rau chân vịt 50g', 'Chuối 1/2 quả', 'Sữa hạnh nhân 200ml'] },
+                            { type: 'lunch', name: 'Salad cá ngừ', calories: 420, protein: 40, carb: 25, fat: 18, time: '10 phút', ingredients: ['Cá ngừ hộp 1 hộp', 'Rau diếp 100g', 'Cà chua bi 50g', 'Dầu olive 1 muỗng'] },
+                            { type: 'snack', name: 'Trứng luộc + hạt bí', calories: 220, protein: 16, carb: 8, fat: 14, time: '2 phút', ingredients: ['Trứng 2 quả', 'Hạt bí 20g'] },
+                            { type: 'dinner', name: 'Đậu phụ + rau xào + gạo lứt', calories: 540, protein: 32, carb: 58, fat: 20, time: '20 phút', ingredients: ['Đậu phụ 200g', 'Bông cải 150g', 'Nấm 100g', 'Gạo lứt 80g'] }
+                        ]
+                    },
+                    {
+                        day: 4, name: 'Thứ 5', title: 'High protein',
+                        meals: [
+                            { type: 'breakfast', name: 'Overnight oats + protein', calories: 380, protein: 32, carb: 40, fat: 10, time: '5 phút (+ đêm)', ingredients: ['Yến mạch 40g', 'Whey 1 scoop', 'Sữa hạnh nhân 200ml', 'Hạt chia 1 muỗng'] },
+                            { type: 'lunch', name: 'Gà xào rau + gạo lứt', calories: 450, protein: 42, carb: 40, fat: 12, time: '20 phút', ingredients: ['Ức gà 150g', 'Rau cải 150g', 'Gạo lứt 80g', 'Tỏi, gừng'] },
+                            { type: 'snack', name: 'Sữa chua + quả mọng', calories: 180, protein: 15, carb: 20, fat: 5, time: '2 phút', ingredients: ['Sữa chua Hy Lạp 150g', 'Dâu tây 50g'] },
+                            { type: 'dinner', name: 'Cá trắng + khoai lang', calories: 490, protein: 40, carb: 45, fat: 14, time: '25 phút', ingredients: ['Cá basa 180g', 'Khoai lang 150g', 'Rau xanh 100g', 'Chanh'] }
+                        ]
+                    },
+                    {
+                        day: 5, name: 'Thứ 6', title: 'Balanced day',
+                        meals: [
+                            { type: 'breakfast', name: 'Pancake yến mạch + berries', calories: 360, protein: 24, carb: 45, fat: 9, time: '15 phút', ingredients: ['Yến mạch 50g', 'Trứng 1 quả', 'Việt quất 50g', 'Mật ong 1 muỗng'] },
+                            { type: 'lunch', name: 'Bún gạo lứt + thịt heo', calories: 450, protein: 35, carb: 50, fat: 12, time: '20 phút', ingredients: ['Bún gạo lứt 100g', 'Thịt heo nạc 120g', 'Rau sống 100g', 'Nước dùng'] },
+                            { type: 'snack', name: 'Hạt hỗn hợp', calories: 200, protein: 6, carb: 12, fat: 15, time: '1 phút', ingredients: ['Hạnh nhân 15g', 'Óc chó 15g'] },
+                            { type: 'dinner', name: 'Tôm + rau + gạo lứt', calories: 490, protein: 38, carb: 48, fat: 15, time: '20 phút', ingredients: ['Tôm 150g', 'Rau xào 150g', 'Gạo lứt 80g'] }
+                        ]
+                    },
+                    {
+                        day: 6, name: 'Thứ 7', title: 'Weekend treat',
+                        meals: [
+                            { type: 'breakfast', name: 'Avocado toast + trứng', calories: 400, protein: 20, carb: 30, fat: 22, time: '10 phút', ingredients: ['Bánh mì nguyên cám 2 lát', 'Bơ trái 1/2 quả', 'Trứng 2 quả'] },
+                            { type: 'lunch', name: 'Bò xào + cơm gạo lứt', calories: 480, protein: 40, carb: 42, fat: 16, time: '20 phút', ingredients: ['Thịt bò nạc 150g', 'Ớt chuông 100g', 'Gạo lứt 80g', 'Hành, tỏi'] },
+                            { type: 'snack', name: 'Protein bar', calories: 200, protein: 20, carb: 22, fat: 7, time: '1 phút', ingredients: ['Protein bar 1 thanh'] },
+                            { type: 'dinner', name: 'Salad gà + quinoa', calories: 420, protein: 38, carb: 35, fat: 14, time: '15 phút', ingredients: ['Ức gà 130g', 'Quinoa 60g', 'Rau diếp 100g', 'Dầu olive'] }
+                        ]
+                    },
+                    {
+                        day: 7, name: 'CN', title: 'Meal prep Sunday',
+                        meals: [
+                            { type: 'breakfast', name: 'Smoothie bowl', calories: 350, protein: 25, carb: 45, fat: 8, time: '10 phút', ingredients: ['Chuối đông lạnh', 'Whey 1 scoop', 'Granola 30g', 'Hạt chia'] },
+                            { type: 'lunch', name: 'Cơm gạo lứt + cá + rau', calories: 480, protein: 40, carb: 48, fat: 14, time: '25 phút', ingredients: ['Cá hồi 150g', 'Gạo lứt 100g', 'Rau luộc 150g'] },
+                            { type: 'snack', name: 'Trái cây + sữa chua', calories: 180, protein: 12, carb: 25, fat: 4, time: '2 phút', ingredients: ['Táo 1/2 quả', 'Sữa chua Hy Lạp 100g'] },
+                            { type: 'dinner', name: 'Soup gà + bánh mì', calories: 490, protein: 35, carb: 45, fat: 18, time: '30 phút', ingredients: ['Ức gà 130g', 'Rau củ 150g', 'Bánh mì nguyên cám 1 lát'] }
+                        ]
+                    }
+                ]
+            },
+            
+            muscle: {
+                name: 'Tăng cơ',
+                emoji: '💪',
+                calories: 2200,
+                protein: 165,
+                carb: 250,
+                fat: 70,
+                description: 'Thặng dư calo nhẹ, protein rất cao, carb nhiều',
+                gradient: 'var(--muscle-gradient)',
+                days: [
+                    {
+                        day: 1, name: 'Thứ 2', title: 'Power Monday',
+                        meals: [
+                            { type: 'breakfast', name: 'Overnight oats + whey + chuối', calories: 550, protein: 38, carb: 68, fat: 14, time: '10 phút', ingredients: ['Yến mạch 80g', 'Whey 1.5 scoop', 'Chuối 1 quả', 'Sữa 250ml', 'Bơ đậu phộng 1 muỗng'] },
+                            { type: 'lunch', name: 'Gà + gạo lứt + rau + bơ', calories: 650, protein: 55, carb: 65, fat: 20, time: '25 phút', ingredients: ['Ức gà 200g', 'Gạo lứt 120g', 'Bông cải 150g', 'Bơ trái 1/4', 'Dầu olive'] },
+                            { type: 'snack', name: 'Sữa chua Hy Lạp + granola + hạt', calories: 400, protein: 28, carb: 45, fat: 14, time: '3 phút', ingredients: ['Sữa chua Hy Lạp 200g', 'Granola 50g', 'Hạnh nhân 20g', 'Mật ong'] },
+                            { type: 'dinner', name: 'Cá hồi + khoai lang + rau', calories: 600, protein: 45, carb: 60, fat: 22, time: '25 phút', ingredients: ['Cá hồi 200g', 'Khoai lang 200g', 'Rau xanh 150g', 'Dầu olive'] }
+                        ]
+                    },
+                    {
+                        day: 2, name: 'Thứ 3', title: 'High carb day',
+                        meals: [
+                            { type: 'breakfast', name: 'Pancake protein + berries', calories: 580, protein: 40, carb: 70, fat: 16, time: '15 phút', ingredients: ['Yến mạch 70g', 'Whey 1 scoop', 'Trứng 2 quả', 'Việt quất 80g', 'Mật ong'] },
+                            { type: 'lunch', name: 'Bò + cơm + rau', calories: 680, protein: 55, carb: 70, fat: 22, time: '25 phút', ingredients: ['Thịt bò nạc 200g', 'Cơm gạo lứt 150g', 'Rau xào 150g', 'Dầu olive'] },
+                            { type: 'snack', name: 'Smoothie protein + chuối + bơ đậu phộng', calories: 450, protein: 35, carb: 45, fat: 16, time: '5 phút', ingredients: ['Whey 1.5 scoop', 'Chuối 1 quả', 'Bơ đậu phộng 2 muỗng', 'Sữa 250ml'] },
+                            { type: 'dinner', name: 'Tôm + quinoa + rau', calories: 490, protein: 42, carb: 50, fat: 14, time: '20 phút', ingredients: ['Tôm 200g', 'Quinoa 100g', 'Rau xanh 150g', 'Chanh'] }
+                        ]
+                    },
+                    {
+                        day: 3, name: 'Thứ 4', title: 'Recovery day',
+                        meals: [
+                            { type: 'breakfast', name: 'Trứng + bánh mì + bơ + sữa', calories: 600, protein: 35, carb: 55, fat: 28, time: '10 phút', ingredients: ['Trứng 3 quả', 'Bánh mì nguyên cám 3 lát', 'Bơ trái 1/2 quả', 'Sữa 250ml'] },
+                            { type: 'lunch', name: 'Gà + khoai lang + rau', calories: 650, protein: 50, carb: 70, fat: 18, time: '25 phút', ingredients: ['Ức gà 200g', 'Khoai lang 250g', 'Bông cải 150g', 'Dầu olive'] },
+                            { type: 'snack', name: 'Cottage cheese + trái cây + hạt', calories: 400, protein: 30, carb: 40, fat: 14, time: '3 phút', ingredients: ['Cottage cheese 200g', 'Dâu tây 100g', 'Óc chó 20g'] },
+                            { type: 'dinner', name: 'Cá trắng + gạo + rau', calories: 550, protein: 45, carb: 60, fat: 15, time: '20 phút', ingredients: ['Cá basa 200g', 'Gạo lứt 120g', 'Rau xào 150g'] }
+                        ]
+                    },
+                    {
+                        day: 4, name: 'Thứ 5', title: 'Training day',
+                        meals: [
+                            { type: 'breakfast', name: 'Yến mạch + whey + chuối + hạt', calories: 620, protein: 42, carb: 75, fat: 18, time: '10 phút', ingredients: ['Yến mạch 80g', 'Whey 1.5 scoop', 'Chuối 1 quả', 'Hạt chia 2 muỗng', 'Sữa 250ml'] },
+                            { type: 'lunch', name: 'Bò + bún gạo lứt + rau', calories: 680, protein: 52, carb: 72, fat: 20, time: '25 phút', ingredients: ['Thịt bò 200g', 'Bún gạo lứt 120g', 'Rau sống 150g', 'Nước dùng'] },
+                            { type: 'snack', name: 'Pre-workout: chuối + bơ đậu phộng', calories: 350, protein: 10, carb: 45, fat: 16, time: '2 phút', ingredients: ['Chuối 1 quả', 'Bơ đậu phộng 2 muỗng'] },
+                            { type: 'dinner', name: 'Post-workout: Gà + cơm + rau + whey', calories: 550, protein: 50, carb: 55, fat: 14, time: '25 phút', ingredients: ['Ức gà 180g', 'Cơm gạo lứt 120g', 'Rau 150g', 'Whey 1 scoop'] }
+                        ]
+                    },
+                    {
+                        day: 5, name: 'Thứ 6', title: 'Balanced bulk',
+                        meals: [
+                            { type: 'breakfast', name: 'Smoothie bowl đầy đủ', calories: 580, protein: 38, carb: 70, fat: 18, time: '10 phút', ingredients: ['Chuối đông lạnh', 'Whey 1 scoop', 'Yến mạch 50g', 'Granola 40g', 'Hạt chia', 'Sữa 200ml'] },
+                            { type: 'lunch', name: 'Cá hồi + quinoa + rau', calories: 650, protein: 48, carb: 60, fat: 24, time: '25 phút', ingredients: ['Cá hồi 200g', 'Quinoa 100g', 'Rau xanh 150g', 'Bơ trái 1/4'] },
+                            { type: 'snack', name: 'Sữa chua + granola + quả mọng', calories: 420, protein: 30, carb: 50, fat: 12, time: '3 phút', ingredients: ['Sữa chua Hy Lạp 200g', 'Granola 50g', 'Việt quất 80g'] },
+                            { type: 'dinner', name: 'Thịt heo + khoai + rau', calories: 550, protein: 45, carb: 55, fat: 16, time: '25 phút', ingredients: ['Thịt heo nạc 180g', 'Khoai tây 200g', 'Rau luộc 150g'] }
+                        ]
+                    },
+                    {
+                        day: 6, name: 'Thứ 7', title: 'Weekend bulk',
+                        meals: [
+                            { type: 'breakfast', name: 'Avocado toast + trứng + sữa', calories: 620, protein: 32, carb: 55, fat: 30, time: '10 phút', ingredients: ['Bánh mì nguyên cám 3 lát', 'Bơ trái 1/2 quả', 'Trứng 3 quả', 'Sữa 250ml'] },
+                            { type: 'lunch', name: 'Phở bò gạo lứt', calories: 680, protein: 50, carb: 75, fat: 18, time: '25 phút', ingredients: ['Thịt bò 180g', 'Bún gạo lứt 120g', 'Rau thơm', 'Nước dùng'] },
+                            { type: 'snack', name: 'Protein shake + chuối', calories: 380, protein: 32, carb: 45, fat: 8, time: '3 phút', ingredients: ['Whey 1.5 scoop', 'Chuối 1 quả', 'Sữa 300ml'] },
+                            { type: 'dinner', name: 'Tôm + cơm + rau', calories: 520, protein: 42, carb: 55, fat: 14, time: '20 phút', ingredients: ['Tôm 200g', 'Cơm gạo lứt 120g', 'Rau xào 150g'] }
+                        ]
+                    },
+                    {
+                        day: 7, name: 'CN', title: 'Prep & recover',
+                        meals: [
+                            { type: 'breakfast', name: 'French toast protein', calories: 580, protein: 38, carb: 65, fat: 18, time: '15 phút', ingredients: ['Bánh mì nguyên cám 3 lát', 'Trứng 2 quả', 'Whey 1 scoop', 'Quế, mật ong'] },
+                            { type: 'lunch', name: 'Gà + gạo + rau + bơ', calories: 680, protein: 55, carb: 68, fat: 22, time: '25 phút', ingredients: ['Ức gà 220g', 'Gạo lứt 130g', 'Rau 150g', 'Bơ 1/4 quả'] },
+                            { type: 'snack', name: 'Hạt hỗn hợp + trái cây', calories: 400, protein: 12, carb: 40, fat: 22, time: '2 phút', ingredients: ['Hạnh nhân 30g', 'Óc chó 20g', 'Táo 1 quả'] },
+                            { type: 'dinner', name: 'Soup gà + bánh mì + salad', calories: 540, protein: 42, carb: 55, fat: 16, time: '30 phút', ingredients: ['Gà 180g', 'Rau củ 200g', 'Bánh mì 2 lát', 'Salad'] }
+                        ]
+                    }
+                ]
+            },
+            
+            recomp: {
+                name: 'Tái cấu trúc',
+                emoji: '⚖️',
+                calories: 1800,
+                protein: 145,
+                carb: 180,
+                fat: 60,
+                description: 'Maintenance calories, protein cao, cân bằng macro',
+                gradient: 'var(--recomp-gradient)',
+                days: [
+                    {
+                        day: 1, name: 'Thứ 2', title: 'Balanced start',
+                        meals: [
+                            { type: 'breakfast', name: 'Yến mạch + whey + berries', calories: 420, protein: 32, carb: 50, fat: 10, time: '10 phút', ingredients: ['Yến mạch 60g', 'Whey 1 scoop', 'Việt quất 60g', 'Hạt chia 1 muỗng', 'Sữa 200ml'] },
+                            { type: 'lunch', name: 'Gà + gạo lứt + rau', calories: 520, protein: 45, carb: 50, fat: 15, time: '25 phút', ingredients: ['Ức gà 170g', 'Gạo lứt 100g', 'Bông cải 150g', 'Dầu olive'] },
+                            { type: 'snack', name: 'Sữa chua Hy Lạp + hạt', calories: 280, protein: 22, carb: 22, fat: 12, time: '2 phút', ingredients: ['Sữa chua Hy Lạp 180g', 'Hạnh nhân 20g', 'Mật ong 1 muỗng'] },
+                            { type: 'dinner', name: 'Cá hồi + khoai lang + rau', calories: 580, protein: 42, carb: 55, fat: 22, time: '25 phút', ingredients: ['Cá hồi 170g', 'Khoai lang 180g', 'Rau xanh 150g'] }
+                        ]
+                    },
+                    {
+                        day: 2, name: 'Thứ 3', title: 'Protein focus',
+                        meals: [
+                            { type: 'breakfast', name: 'Trứng + bánh mì + bơ', calories: 450, protein: 28, carb: 35, fat: 22, time: '10 phút', ingredients: ['Trứng 2 quả', 'Bánh mì nguyên cám 2 lát', 'Bơ trái 1/3 quả'] },
+                            { type: 'lunch', name: 'Tôm + quinoa + rau', calories: 500, protein: 42, carb: 48, fat: 14, time: '20 phút', ingredients: ['Tôm 170g', 'Quinoa 90g', 'Ớt chuông 100g', 'Chanh'] },
+                            { type: 'snack', name: 'Táo + bơ đậu phộng', calories: 250, protein: 8, carb: 32, fat: 12, time: '2 phút', ingredients: ['Táo 1 quả', 'Bơ đậu phộng 1.5 muỗng'] },
+                            { type: 'dinner', name: 'Thịt bò + gạo + rau', calories: 600, protein: 48, carb: 58, fat: 20, time: '25 phút', ingredients: ['Thịt bò nạc 170g', 'Gạo lứt 100g', 'Rau xào 150g'] }
+                        ]
+                    },
+                    {
+                        day: 3, name: 'Thứ 4', title: 'Mid-week balance',
+                        meals: [
+                            { type: 'breakfast', name: 'Smoothie protein', calories: 400, protein: 32, carb: 45, fat: 12, time: '5 phút', ingredients: ['Whey 1 scoop', 'Chuối 1 quả', 'Rau chân vịt 50g', 'Sữa hạnh nhân 250ml', 'Hạt chia'] },
+                            { type: 'lunch', name: 'Salad cá ngừ + bánh mì', calories: 500, protein: 42, carb: 42, fat: 18, time: '10 phút', ingredients: ['Cá ngừ hộp 1 hộp', 'Rau diếp 150g', 'Bánh mì nguyên cám 2 lát', 'Dầu olive'] },
+                            { type: 'snack', name: 'Trứng luộc + hạt', calories: 250, protein: 18, carb: 10, fat: 16, time: '2 phút', ingredients: ['Trứng 2 quả', 'Hạt bí 20g'] },
+                            { type: 'dinner', name: 'Đậu phụ + rau + gạo lứt', calories: 650, protein: 38, carb: 75, fat: 22, time: '20 phút', ingredients: ['Đậu phụ 200g', 'Rau xào 200g', 'Gạo lứt 100g', 'Nấm'] }
+                        ]
+                    },
+                    {
+                        day: 4, name: 'Thứ 5', title: 'Training fuel',
+                        meals: [
+                            { type: 'breakfast', name: 'Overnight oats', calories: 450, protein: 30, carb: 55, fat: 12, time: '5 phút (+ đêm)', ingredients: ['Yến mạch 60g', 'Whey 1 scoop', 'Sữa 200ml', 'Hạt chia', 'Quế'] },
+                            { type: 'lunch', name: 'Gà + bún gạo lứt', calories: 520, protein: 45, carb: 52, fat: 14, time: '20 phút', ingredients: ['Ức gà 170g', 'Bún gạo lứt 100g', 'Rau sống 100g'] },
+                            { type: 'snack', name: 'Sữa chua + quả mọng', calories: 250, protein: 20, carb: 28, fat: 8, time: '2 phút', ingredients: ['Sữa chua Hy Lạp 180g', 'Dâu tây 80g'] },
+                            { type: 'dinner', name: 'Cá trắng + khoai + rau', calories: 580, protein: 42, carb: 58, fat: 18, time: '25 phút', ingredients: ['Cá basa 180g', 'Khoai tây 180g', 'Rau luộc 150g'] }
+                        ]
+                    },
+                    {
+                        day: 5, name: 'Thứ 6', title: 'Variety day',
+                        meals: [
+                            { type: 'breakfast', name: 'Pancake yến mạch', calories: 430, protein: 28, carb: 52, fat: 12, time: '15 phút', ingredients: ['Yến mạch 60g', 'Trứng 2 quả', 'Việt quất 60g', 'Mật ong'] },
+                            { type: 'lunch', name: 'Bò + cơm + rau', calories: 550, protein: 45, carb: 55, fat: 18, time: '25 phút', ingredients: ['Thịt bò nạc 170g', 'Cơm gạo lứt 100g', 'Rau xào 150g'] },
+                            { type: 'snack', name: 'Hạt hỗn hợp + trái cây', calories: 280, protein: 8, carb: 30, fat: 16, time: '2 phút', ingredients: ['Hạnh nhân 20g', 'Táo 1 quả'] },
+                            { type: 'dinner', name: 'Tôm + rau + gạo lứt', calories: 540, protein: 42, carb: 52, fat: 16, time: '20 phút', ingredients: ['Tôm 170g', 'Rau xanh 150g', 'Gạo lứt 100g'] }
+                        ]
+                    },
+                    {
+                        day: 6, name: 'Thứ 7', title: 'Weekend balance',
+                        meals: [
+                            { type: 'breakfast', name: 'Avocado toast + trứng', calories: 480, protein: 25, carb: 38, fat: 25, time: '10 phút', ingredients: ['Bánh mì nguyên cám 2 lát', 'Bơ trái 1/2 quả', 'Trứng 2 quả'] },
+                            { type: 'lunch', name: 'Phở bò gạo lứt', calories: 550, protein: 42, carb: 60, fat: 16, time: '25 phút', ingredients: ['Thịt bò 150g', 'Bún gạo lứt 100g', 'Rau thơm', 'Nước dùng'] },
+                            { type: 'snack', name: 'Protein bar', calories: 220, protein: 20, carb: 24, fat: 8, time: '1 phút', ingredients: ['Protein bar 1 thanh'] },
+                            { type: 'dinner', name: 'Gà + quinoa + salad', calories: 550, protein: 45, carb: 50, fat: 18, time: '20 phút', ingredients: ['Ức gà 160g', 'Quinoa 80g', 'Salad 150g'] }
+                        ]
+                    },
+                    {
+                        day: 7, name: 'CN', title: 'Prep day',
+                        meals: [
+                            { type: 'breakfast', name: 'Smoothie bowl', calories: 430, protein: 30, carb: 52, fat: 12, time: '10 phút', ingredients: ['Chuối đông lạnh', 'Whey 1 scoop', 'Granola 40g', 'Hạt chia', 'Sữa 200ml'] },
+                            { type: 'lunch', name: 'Cá hồi + gạo + rau', calories: 580, protein: 45, carb: 55, fat: 22, time: '25 phút', ingredients: ['Cá hồi 170g', 'Gạo lứt 100g', 'Rau luộc 150g'] },
+                            { type: 'snack', name: 'Trái cây + sữa chua', calories: 240, protein: 18, carb: 30, fat: 6, time: '2 phút', ingredients: ['Táo 1 quả', 'Sữa chua Hy Lạp 150g'] },
+                            { type: 'dinner', name: 'Soup gà + bánh mì', calories: 550, protein: 40, carb: 55, fat: 18, time: '30 phút', ingredients: ['Gà 160g', 'Rau củ 200g', 'Bánh mì nguyên cám 2 lát'] }
+                        ]
+                    }
+                ]
+            }
+        };
+        
+        // ==================== STATE ====================
+        let currentGoal = 'recomp';
+        let currentMeal = null;
+        
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Try to load saved nutrition results
+            const saved = localStorage.getItem('fit30_nutrition_results');
+            if (saved) {
+                try {
+                    const results = JSON.parse(saved);
+                    // Update default calories based on saved results
+                    if (results.targetCalories) {
+                        // Adjust meal plans based on user's TDEE
+                        updateCaloriesFromResults(results);
+                    }
+                    if (results.goal) {
+                        currentGoal = results.goal;
+                    }
+                } catch (e) {
+                    console.error('Error loading nutrition results', e);
+                }
+            }
+            
+            // Render
+            switchGoal(currentGoal);
+        });
+        
+        function updateCaloriesFromResults(results) {
+            // Adjust meal plan calories based on user's target
+            const userCal = results.targetCalories;
+            const ratio = userCal / 1800; // 1800 is default recomp
+            
+            // Scale all meal plans
+            Object.keys(mealPlans).forEach(goal => {
+                const plan = mealPlans[goal];
+                plan.calories = Math.round(plan.calories * ratio);
+                plan.protein = Math.round(plan.protein * ratio);
+                plan.carb = Math.round(plan.carb * ratio);
+                plan.fat = Math.round(plan.fat * ratio);
+                
+                plan.days.forEach(day => {
+                    let dayCal = 0, dayP = 0, dayC = 0, dayF = 0;
+                    day.meals.forEach(meal => {
+                        meal.calories = Math.round(meal.calories * ratio);
+                        meal.protein = Math.round(meal.protein * ratio);
+                        meal.carb = Math.round(meal.carb * ratio);
+                        meal.fat = Math.round(meal.fat * ratio);
+                        dayCal += meal.calories;
+                        dayP += meal.protein;
+                        dayC += meal.carb;
+                        dayF += meal.fat;
+                    });
+                    day.totalCalories = dayCal;
+                    day.totalProtein = dayP;
+                    day.totalCarb = dayC;
+                    day.totalFat = dayF;
+                });
+            });
+        }
+        
+        // ==================== GOAL SWITCHING ====================
+        function switchGoal(goal) {
+            currentGoal = goal;
+            
+            // Update tabs
+            document.querySelectorAll('.goal-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.goal === goal);
+            });
+            
+            // Update target banner
+            const plan = mealPlans[goal];
+            document.getElementById('targetTitle').textContent = plan.name;
+            document.getElementById('targetDesc').textContent = plan.description;
+            document.getElementById('targetCal').textContent = plan.calories;
+            document.getElementById('targetProtein').textContent = plan.protein + 'g';
+            document.getElementById('targetCarb').textContent = plan.carb + 'g';
+            document.getElementById('targetFat').textContent = plan.fat + 'g';
+            document.getElementById('targetIcon').textContent = plan.emoji;
+            
+            const targetCard = document.getElementById('targetCard');
+            targetCard.style.setProperty('--target-gradient', plan.gradient);
+            
+            // Update weekly overview
+            updateWeeklyOverview(plan);
+            
+            // Render days
+            renderDays(plan);
+        }
+        
+        function updateWeeklyOverview(plan) {
+            const weekCal = plan.calories * 7;
+            const weekP = plan.protein * 7;
+            const weekC = plan.carb * 7;
+            const weekF = plan.fat * 7;
+            
+            document.getElementById('weekCalories').textContent = weekCal.toLocaleString();
+            document.getElementById('weekProtein').textContent = weekP + 'g';
+            document.getElementById('weekCarb').textContent = weekC + 'g';
+            document.getElementById('weekFat').textContent = weekF + 'g';
+            document.getElementById('weekMeals').textContent = '28';
+        }
+        
+        // ==================== RENDER DAYS ====================
+        function renderDays(plan) {
+            const grid = document.getElementById('daysGrid');
+            
+            grid.innerHTML = plan.days.map(day => {
+                const mealsHtml = day.meals.map((meal, idx) => {
+                    const mealTypeNames = {
+                        breakfast: 'BỮA SÁNG',
+                        lunch: 'BỮA TRƯA',
+                        snack: 'SNACK',
+                        dinner: 'BỮA TỐI'
+                    };
+                    const mealTypeIcons = {
+                        breakfast: '🌅',
+                        lunch: '☀️',
+                        snack: '🍎',
+                        dinner: '🌙'
+                    };
+                    
+                    return `
+                        <div class="meal-item ${meal.type}" onclick="openMealModal(${day.day - 1}, ${idx})">
+                            <div class="meal-type">${mealTypeIcons[meal.type]}</div>
+                            <div class="meal-info">
+                                <div class="meal-type-label">${mealTypeNames[meal.type]}</div>
+                                <div class="meal-name">${meal.name}</div>
+                                <div class="meal-macros">
+                                    <span><span class="dot p"></span>${meal.protein}g P</span>
+                                    <span><span class="dot c"></span>${meal.carb}g C</span>
+                                    <span><span class="dot f"></span>${meal.fat}g F</span>
+                                </div>
+                            </div>
+                            <div class="meal-cal">${meal.calories}<small> kcal</small></div>
+                        </div>
+                    `;
+                }).join('');
+                
+                // Calculate day totals
+                const dayTotalCal = day.meals.reduce((sum, m) => sum + m.calories, 0);
+                const dayTotalP = day.meals.reduce((sum, m) => sum + m.protein, 0);
+                const dayTotalC = day.meals.reduce((sum, m) => sum + m.carb, 0);
+                const dayTotalF = day.meals.reduce((sum, m) => sum + m.fat, 0);
+                const dayTotalTime = day.meals.reduce((sum, m) => {
+                    const mins = parseInt(m.time);
+                    return sum + (isNaN(mins) ? 0 : mins);
+                }, 0);
+                
+                // Macro percentages for bar
+                const totalMacro = dayTotalP + dayTotalC + dayTotalF;
+                const pPercent = (dayTotalP / totalMacro * 100).toFixed(0);
+                const cPercent = (dayTotalC / totalMacro * 100).toFixed(0);
+                const fPercent = (dayTotalF / totalMacro * 100).toFixed(0);
+                
+                return `
+                    <div class="day-card" data-day="${day.day}">
+                        <div class="day-header">
+                            <div class="day-info">
+                                <div class="day-name">${day.name}</div>
+                                <div class="day-title">${day.title}</div>
+                            </div>
+                            <div class="day-calories">
+                                <div class="day-cal-value">${dayTotalCal}</div>
+                                <div class="day-cal-label">kcal</div>
+                            </div>
+                        </div>
+                        <div class="meals-list">
+                            ${mealsHtml}
+                        </div>
+                        <div class="day-footer">
+                            <div class="day-macro-bar">
+                                <div class="p" style="width: ${pPercent}%"></div>
+                                <div class="c" style="width: ${cPercent}%"></div>
+                                <div class="f" style="width: ${fPercent}%"></div>
+                            </div>
+                            <div class="day-time">⏱️ ${dayTotalTime} phút</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // ==================== MODAL ====================
+        function openMealModal(dayIdx, mealIdx) {
+            const plan = mealPlans[currentGoal];
+            const meal = plan.days[dayIdx].meals[mealIdx];
+            const day = plan.days[dayIdx];
+            
+            currentMeal = meal;
+            
+            const mealTypeNames = {
+                breakfast: 'BỮA SÁNG',
+                lunch: 'BỮA TRƯA',
+                snack: 'SNACK',
+                dinner: 'BỮA TỐI'
+            };
+            
+            const mealTypeColors = {
+                breakfast: { bg: 'var(--breakfast-soft)', color: 'var(--breakfast)', gradient: 'var(--breakfast-soft)' },
+                lunch: { bg: 'var(--lunch-soft)', color: 'var(--lunch)', gradient: 'var(--lunch-soft)' },
+                snack: { bg: 'var(--snack-soft)', color: 'var(--snack)', gradient: 'var(--snack-soft)' },
+                dinner: { bg: 'var(--dinner-soft)', color: 'var(--dinner)', gradient: 'var(--dinner-soft)' }
+            };
+            
+            const colors = mealTypeColors[meal.type];
+            
+            const modal = document.getElementById('modal');
+            modal.style.setProperty('--modal-accent', colors.gradient);
+            modal.style.setProperty('--modal-accent-soft', colors.bg);
+            modal.style.setProperty('--modal-accent-color', colors.color);
+            
+            document.getElementById('modalMealType').textContent = mealTypeNames[meal.type];
+            document.getElementById('modalMealType').style.background = colors.bg;
+            document.getElementById('modalMealType').style.color = colors.color;
+            document.getElementById('modalTitle').textContent = meal.name;
+            document.getElementById('modalSubtitle').textContent = `${day.name} · ${day.title}`;
+            
+            document.getElementById('modalBody').innerHTML = `
+                <div class="modal-macro-grid">
+                    <div class="modal-macro-card cal">
+                        <div class="modal-macro-value">${meal.calories}</div>
+                        <div class="modal-macro-label">Calories</div>
+                    </div>
+                    <div class="modal-macro-card p">
+                        <div class="modal-macro-value">${meal.protein}g</div>
+                        <div class="modal-macro-label">Protein</div>
+                    </div>
+                    <div class="modal-macro-card c">
+                        <div class="modal-macro-value">${meal.carb}g</div>
+                        <div class="modal-macro-label">Carb</div>
+                    </div>
+                    <div class="modal-macro-card f">
+                        <div class="modal-macro-value">${meal.fat}g</div>
+                        <div class="modal-macro-label">Fat</div>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h4>🥗 Nguyên liệu</h4>
+                    <ul class="ingredients-list">
+                        ${meal.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="modal-section">
+                    <h4>📊 Thông tin</h4>
+                    <div class="modal-info-grid">
+                        <div class="modal-info-item">
+                            <div class="modal-info-label">Thời gian</div>
+                            <div class="modal-info-value">${meal.time}</div>
+                        </div>
+                        <div class="modal-info-item">
+                            <div class="modal-info-label">Bữa thứ</div>
+                            <div class="modal-info-value">${['1', '2', '3', '4'][['breakfast', 'lunch', 'snack', 'dinner'].indexOf(meal.type)]}/4</div>
+                        </div>
+                        <div class="modal-info-item">
+                            <div class="modal-info-label">Calo / ngày</div>
+                            <div class="modal-info-value">${Math.round(meal.calories / plan.calories * 100)}%</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+            currentMeal = null;
+        }
+        
+        function viewRecipe() {
+            if (currentMeal) {
+                showToast('📖 Đang chuyển đến công thức...');
+                setTimeout(() => {
+                    window.location.href = 'nutrition-recipes.html';
+                }, 800);
+            }
+        }
+        
+        // ==================== ACTIONS ====================
+        function generateShoppingList() {
+            const plan = mealPlans[currentGoal];
+            const allIngredients = new Set();
+            
+            plan.days.forEach(day => {
+                day.meals.forEach(meal => {
+                    meal.ingredients.forEach(ing => {
+                        // Extract base ingredient (before quantity)
+                        const base = ing.split(' ')[0] + ' ' + (ing.split(' ')[1] || '');
+                        allIngredients.add(base.trim());
+                    });
+                });
+            });
+            
+            const list = Array.from(allIngredients).sort();
+            
+            // Create printable list
+            const listText = `🛒 DANH SÁCH MUA SẮM - ${plan.name.toUpperCase()}\n` +
+                            `Tuần ${new Date().toLocaleDateString('vi-VN')}\n\n` +
+                            list.map((item, i) => `${i + 1}. ${item}`).join('\n') +
+                            `\n\nTổng: ${list.length} nguyên liệu`;
+            
+            // Show in alert for now (could be modal)
+            alert(listText);
+            showToast('🛒 Đã tạo danh sách mua sắm!');
+        }
+        
+        function printMealPlan() {
+            window.print();
+        }
+        
+        function saveMealPlan() {
+            const data = {
+                goal: currentGoal,
+                plan: mealPlans[currentGoal],
+                savedAt: new Date().toISOString()
+            };
+            
+            localStorage.setItem('fit30_meal_plan', JSON.stringify(data));
+            showToast('💾 Đã lưu meal plan!');
+        }
+        
+        // ==================== MODAL CLOSE HANDLERS ====================
+        document.getElementById('modalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+        
+        // ==================== TOAST ====================
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastContent').textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
