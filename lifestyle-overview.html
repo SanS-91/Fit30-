@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tổng Quan Lối Sống - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Base palette */
+            --text-dark: #4A4A5A;
+            --text-medium: #7A7A8A;
+            --text-light: #A0A0B0;
+            --white: #FFFFFF;
+            --bg-primary: #FFFBFB;
+            --bg-soft: #FFF8F5;
+            --border-soft: #F0E8E6;
+            
+            /* Lifestyle color - Soft Lavender */
+            --lifestyle: #B8A8D8;
+            --lifestyle-soft: #F0E8F8;
+            --lifestyle-dark: #9888B8;
+            --lifestyle-gradient: linear-gradient(135deg, #F0E8F8 0%, #B8A8D8 100%);
+            
+            /* Module colors */
+            --sleep: #A8B8D8;
+            --sleep-soft: #E8F0F8;
+            --sleep-gradient: linear-gradient(135deg, #E8F0F8 0%, #A8B8D8 100%);
+            
+            --posture: #A8D4C8;
+            --posture-soft: #E8F8F3;
+            --posture-gradient: linear-gradient(135deg, #E8F8F3 0%, #A8D4C8 100%);
+            
+            --stress: #D8A8B8;
+            --stress-soft: #F8E8F0;
+            --stress-gradient: linear-gradient(135deg, #F8E8F0 0%, #D8A8B8 100%);
+            
+            --water: #A8C8E8;
+            --water-soft: #E8F3FB;
+            --water-gradient: linear-gradient(135deg, #E8F3FB 0%, #A8C8E8 100%);
+            
+            --recovery: #B8D8A8;
+            --recovery-soft: #F0F8E8;
+            --recovery-gradient: linear-gradient(135deg, #F0F8E8 0%, #B8D8A8 100%);
+            
+            --hormones: #E8B8C8;
+            --hormones-soft: #FBE8F0;
+            --hormones-gradient: linear-gradient(135deg, #FBE8F0 0%, #E8B8C8 100%);
+            
+            /* Main gradient */
+            --main-gradient: linear-gradient(135deg, #B8A8D8 0%, #A8C8E8 50%, #A8D4C8 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        body::before {
+            width: 500px;
+            height: 500px;
+            background: var(--lifestyle);
+            top: -150px;
+            right: -150px;
+        }
+        
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: var(--sleep);
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 18px 40px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .btn-header {
+            padding: 9px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-header.secondary {
+            background: var(--bg-soft);
+            color: var(--text-medium);
+        }
+        
+        .btn-header.secondary:hover {
+            background: var(--lifestyle-soft);
+            color: var(--lifestyle-dark);
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 80px 40px 60px;
+            text-align: center;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: var(--lifestyle-gradient);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 28px;
+            box-shadow: 0 6px 20px rgba(184,168,216,0.25);
+            letter-spacing: 1.5px;
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: var(--lifestyle-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.35rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-tag {
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 2px solid;
+        }
+        
+        .hero-tag.tag-1 {
+            background: var(--sleep-soft);
+            color: var(--sleep);
+            border-color: var(--sleep);
+        }
+        
+        .hero-tag.tag-2 {
+            background: var(--stress-soft);
+            color: var(--stress);
+            border-color: var(--stress);
+        }
+        
+        .hero-tag.tag-3 {
+            background: var(--hormones-soft);
+            color: var(--hormones);
+            border-color: var(--hormones);
+        }
+        
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            padding: 0 40px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 22px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            text-align: center;
+            border: 1px solid var(--border-soft);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--stat-accent);
+        }
+        
+        .stat-card:nth-child(1) { --stat-accent: var(--sleep); }
+        .stat-card:nth-child(2) { --stat-accent: var(--water); }
+        .stat-card:nth-child(3) { --stat-accent: var(--posture); }
+        .stat-card:nth-child(4) { --stat-accent: var(--stress); }
+        
+        .stat-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+        }
+        
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--stat-accent);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: var(--text-medium);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        /* Section Common */
+        .section {
+            padding: 60px 40px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+        
+        .section-eyebrow {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            padding: 6px 18px;
+            border-radius: 30px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.4rem;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        
+        .section-header p {
+            color: var(--text-medium);
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        
+        /* Philosophy Section */
+        .philosophy-section .section-eyebrow {
+            background: var(--lifestyle-soft);
+            color: var(--lifestyle-dark);
+        }
+        
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .philosophy-card {
+            background: white;
+            padding: 35px 30px;
+            border-radius: 24px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .philosophy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--card-accent);
+        }
+        
+        .philosophy-card:nth-child(1) { --card-accent: var(--sleep); --card-soft: var(--sleep-soft); }
+        .philosophy-card:nth-child(2) { --card-accent: var(--stress); --card-soft: var(--stress-soft); }
+        .philosophy-card:nth-child(3) { --card-accent: var(--recovery); --card-soft: var(--recovery-soft); }
+        
+        .philosophy-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: var(--card-soft);
+        }
+        
+        .philosophy-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: var(--card-soft);
+            color: var(--card-accent);
+            border-radius: 14px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 22px;
+        }
+        
+        .philosophy-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+        
+        .philosophy-card .compare {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .philosophy-card .compare .new {
+            color: var(--card-accent);
+        }
+        
+        .philosophy-card .compare .old {
+            color: var(--text-light);
+            text-decoration: line-through;
+            font-weight: 500;
+        }
+        
+        .philosophy-card p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        /* Flow Section - 6 Levels */
+        .flow-section {
+            background: linear-gradient(180deg, transparent 0%, var(--bg-soft) 50%, transparent 100%);
+        }
+        
+        .flow-section .section-eyebrow {
+            background: var(--sleep-soft);
+            color: var(--sleep);
+        }
+        
+        .flow-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 15px;
+            position: relative;
+        }
+        
+        .flow-step {
+            background: white;
+            padding: 28px 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: relative;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .flow-step:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+        
+        .flow-step:nth-child(1) { --step-color: var(--sleep); --step-soft: var(--sleep-soft); }
+        .flow-step:nth-child(2) { --step-color: var(--water); --step-soft: var(--water-soft); }
+        .flow-step:nth-child(3) { --step-color: var(--posture); --step-soft: var(--posture-soft); }
+        .flow-step:nth-child(4) { --step-color: var(--stress); --step-soft: var(--stress-soft); }
+        .flow-step:nth-child(5) { --step-color: var(--hormones); --step-soft: var(--hormones-soft); }
+        .flow-step:nth-child(6) { --step-color: var(--recovery); --step-soft: var(--recovery-soft); }
+        
+        .flow-step:hover {
+            border-color: var(--step-soft);
+        }
+        
+        .flow-level {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--step-color);
+            background: var(--step-soft);
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .flow-step h4 {
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+        }
+        
+        .flow-step p {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+        
+        .flow-arrow {
+            display: none;
+        }
+        
+        @media (min-width: 1200px) {
+            .flow-arrow {
+                display: block;
+                position: absolute;
+                right: -13px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: var(--step-color);
+                font-size: 1.2rem;
+                z-index: 2;
+                font-weight: 700;
+            }
+            
+            .flow-step:last-child .flow-arrow {
+                display: none;
+            }
+        }
+        
+        /* Navigation Cards - 6 modules */
+        .nav-section .section-eyebrow {
+            background: var(--stress-soft);
+            color: var(--stress);
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 25px;
+        }
+        
+        .nav-card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px 32px;
+            text-decoration: none;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            display: block;
+        }
+        
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--nav-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+        
+        .nav-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 18px 45px rgba(0,0,0,0.12);
+        }
+        
+        .nav-card.card-sleep {
+            --nav-accent: var(--sleep);
+            --nav-soft: var(--sleep-soft);
+            --nav-gradient: var(--sleep-gradient);
+        }
+        
+        .nav-card.card-posture {
+            --nav-accent: var(--posture);
+            --nav-soft: var(--posture-soft);
+            --nav-gradient: var(--posture-gradient);
+        }
+        
+        .nav-card.card-stress {
+            --nav-accent: var(--stress);
+            --nav-soft: var(--stress-soft);
+            --nav-gradient: var(--stress-gradient);
+        }
+        
+        .nav-card.card-water {
+            --nav-accent: var(--water);
+            --nav-soft: var(--water-soft);
+            --nav-gradient: var(--water-gradient);
+        }
+        
+        .nav-card.card-recovery {
+            --nav-accent: var(--recovery);
+            --nav-soft: var(--recovery-soft);
+            --nav-gradient: var(--recovery-gradient);
+        }
+        
+        .nav-card.card-hormones {
+            --nav-accent: var(--hormones);
+            --nav-soft: var(--hormones-soft);
+            --nav-gradient: var(--hormones-gradient);
+        }
+        
+        .nav-card:hover {
+            border-color: var(--nav-soft);
+        }
+        
+        .nav-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .nav-card-label {
+            display: inline-block;
+            background: var(--nav-soft);
+            color: var(--nav-accent);
+            padding: 5px 14px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .nav-card-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--nav-soft);
+            line-height: 1;
+            transition: color 0.3s;
+        }
+        
+        .nav-card:hover .nav-card-number {
+            color: var(--nav-accent);
+        }
+        
+        .nav-card h3 {
+            font-size: 1.55rem;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+        
+        .nav-card p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 22px;
+        }
+        
+        .nav-card-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 22px;
+        }
+        
+        .nav-feature {
+            font-size: 0.78rem;
+            padding: 5px 12px;
+            background: var(--bg-soft);
+            color: var(--text-medium);
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        
+        .nav-card-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--nav-accent);
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: gap 0.3s;
+        }
+        
+        .nav-card:hover .nav-card-btn {
+            gap: 14px;
+        }
+        
+        /* Daily Checklist */
+        .checklist-section {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px 60px;
+        }
+        
+        .checklist-card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .checklist-header {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .checklist-header h2 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+        
+        .checklist-header p {
+            color: var(--text-medium);
+        }
+        
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 18px;
+            background: var(--bg-soft);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .checklist-item:hover {
+            background: white;
+            border-color: var(--checklist-color, var(--lifestyle));
+            transform: translateX(3px);
+        }
+        
+        .checklist-item:nth-child(1) { --checklist-color: var(--sleep); }
+        .checklist-item:nth-child(2) { --checklist-color: var(--water); }
+        .checklist-item:nth-child(3) { --checklist-color: var(--posture); }
+        .checklist-item:nth-child(4) { --checklist-color: var(--stress); }
+        .checklist-item:nth-child(5) { --checklist-color: var(--hormones); }
+        .checklist-item:nth-child(6) { --checklist-color: var(--recovery); }
+        
+        .checklist-item.checked {
+            background: var(--checklist-color);
+            color: white;
+        }
+        
+        .checklist-item.checked .checklist-text {
+            color: white;
+        }
+        
+        .checklist-item.checked .checklist-desc {
+            color: rgba(255,255,255,0.85);
+        }
+        
+        .checklist-check {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: white;
+            border: 2px solid var(--border-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: transparent;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+        
+        .checklist-item.checked .checklist-check {
+            background: white;
+            border-color: white;
+            color: var(--checklist-color);
+        }
+        
+        .checklist-text {
+            flex: 1;
+        }
+        
+        .checklist-name {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+        
+        .checklist-desc {
+            font-size: 0.78rem;
+            color: var(--text-light);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            margin: 60px 40px 80px;
+            max-width: 1220px;
+            margin-left: auto;
+            margin-right: auto;
+            background: var(--lifestyle-gradient);
+            border-radius: 32px;
+            padding: 70px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.4;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.6rem;
+            color: var(--text-dark);
+            margin-bottom: 18px;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            color: var(--text-medium);
+            margin-bottom: 35px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            display: inline-block;
+            padding: 16px 40px;
+            background: white;
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+        }
+        
+        .btn-cta.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.6);
+            box-shadow: none;
+        }
+        
+        .btn-cta.secondary:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: white;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 50px 40px 30px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 18px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            color: var(--lifestyle);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 25px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero > * {
+            animation: fadeInUp 0.8s ease both;
+        }
+        
+        .hero > *:nth-child(1) { animation-delay: 0.1s; }
+        .hero > *:nth-child(2) { animation-delay: 0.2s; }
+        .hero > *:nth-child(3) { animation-delay: 0.3s; }
+        .hero > *:nth-child(4) { animation-delay: 0.4s; }
+        .hero > *:nth-child(5) { animation-delay: 0.5s; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .hero {
+                padding: 50px 20px 40px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .stats-row {
+                padding: 0 20px;
+                margin-bottom: 50px;
+            }
+            
+            .section {
+                padding: 40px 20px;
+            }
+            
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-section {
+                margin: 40px 20px 60px;
+                padding: 50px 25px;
+            }
+            
+            .cta-section h2 {
+                font-size: 1.9rem;
+            }
+            
+            .flow-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .checklist-section {
+                padding: 0 20px 40px;
+            }
+            
+            .checklist-card {
+                padding: 25px 20px;
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 9px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-soft);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--lifestyle) 0%, var(--sleep) 100%);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--stress) 0%, var(--hormones) 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <div class="header-actions">
+            <a href="index.html" class="btn-header secondary">← Trang chủ</a>
+        </div>
+    </header>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <span class="hero-badge">MODULE LỐI SỐNG</span>
+        <h1>Lối sống <span>cân bằng</span></h1>
+        <div class="hero-subtitle">Ngủ · Thư giãn · Tư thế · Hormone · Phục hồi</div>
+        <p>Không chỉ tập gym và ăn uống. Đây là hệ thống lối sống dạng "wellness" — giúp bạn cân bằng giữa công việc, gia đình và bản thân, đặc biệt quan trọng cho phụ nữ 30-40 tuổi.</p>
+        
+        <div class="hero-tags">
+            <span class="hero-tag tag-1">Giấc ngủ chất lượng</span>
+            <span class="hero-tag tag-2">Quản lý stress</span>
+            <span class="hero-tag tag-3">Cân bằng hormone</span>
+        </div>
+    </section>
+    
+    <!-- Stats Row -->
+    <div class="stats-row">
+        <div class="stat-card">
+            <div class="stat-number">7-8h</div>
+            <div class="stat-label">Giấc ngủ mỗi đêm</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">2L</div>
+            <div class="stat-label">Nước mỗi ngày</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">5'</div>
+            <div class="stat-label">Giãn cơ mỗi giờ</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">10'</div>
+            <div class="stat-label">Thiền mỗi ngày</div>
+        </div>
+    </div>
+    
+    <!-- Philosophy Section -->
+    <section class="section philosophy-section">
+        <div class="section-header">
+            <span class="section-eyebrow">Triết lý lối sống</span>
+            <h2>Vì sao lối sống quan trọng?</h2>
+            <p>Tập gym và ăn uống chỉ là 30% kết quả. 70% còn lại đến từ lối sống hàng ngày — đặc biệt với phụ nữ 30+.</p>
+        </div>
+        
+        <div class="philosophy-grid">
+            <div class="philosophy-card">
+                <div class="philosophy-number">1</div>
+                <h3>Cân bằng > Vắt kiệt</h3>
+                <div class="compare">
+                    <span class="new">Balance & Recovery</span>
+                    <span> > </span>
+                    <span class="old">Hustle culture</span>
+                </div>
+                <p>Phụ nữ 30+ cần cân bằng giữa công việc, gia đình và bản thân. Nghỉ ngơi không phải là lười biếng — đó là đầu tư cho sức khỏe dài hạn.</p>
+            </div>
+            
+            <div class="philosophy-card">
+                <div class="philosophy-number">2</div>
+                <h3>Đều đặn > Cường độ</h3>
+                <div class="compare">
+                    <span class="new">Consistency</span>
+                    <span> > </span>
+                    <span class="old">Intensity</span>
+                </div>
+                <p>Ngủ đủ 7h mỗi đêm tốt hơn là ngủ 10h cuối tuần. Đi bộ 30 phút mỗi ngày tốt hơn là chạy 10km 1 lần/tuần. Thói quen nhỏ, kết quả lớn.</p>
+            </div>
+            
+            <div class="philosophy-card">
+                <div class="philosophy-number">3</div>
+                <h3>Lắng nghe > Ép buộc</h3>
+                <div class="compare">
+                    <span class="new">Listen to body</span>
+                    <span> > </span>
+                    <span class="old">Push through</span>
+                </div>
+                <p>Cơ thể phụ nữ thay đổi theo chu kỳ kinh nguyệt, stress, tuổi tác. Học cách lắng nghe và điều chỉnh thay vì ép bản thân theo kế hoạch cứng.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Flow Section - 6 Levels -->
+    <section class="section flow-section">
+        <div class="section-header">
+            <span class="section-eyebrow">Cách hoạt động</span>
+            <h2>Hành trình 6 bước</h2>
+            <p>Xây dựng lối sống lành mạnh từ nền tảng đến nâng cao — mỗi bước xây dựng trên bước trước đó.</p>
+        </div>
+        
+        <div class="flow-container">
+            <div class="flow-step">
+                <span class="flow-level">LEVEL 1</span>
+                <h4>Giấc ngủ</h4>
+                <p>Nền tảng sức khỏe</p>
+                <span class="flow-arrow">→</span>
+            </div>
+            
+            <div class="flow-step">
+                <span class="flow-level">LEVEL 2</span>
+                <h4>Uống nước</h4>
+                <p>Cấp nước đúng cách</p>
+                <span class="flow-arrow">→</span>
+            </div>
+            
+            <div class="flow-step">
+                <span class="flow-level">LEVEL 3</span>
+                <h4>Tư thế</h4>
+                <p>Văn phòng lành mạnh</p>
+                <span class="flow-arrow">→</span>
+            </div>
+            
+            <div class="flow-step">
+                <span class="flow-level">LEVEL 4</span>
+                <h4>Stress</h4>
+                <p>Quản lý căng thẳng</p>
+                <span class="flow-arrow">→</span>
+            </div>
+            
+            <div class="flow-step">
+                <span class="flow-level">LEVEL 5</span>
+                <h4>Hormone</h4>
+                <p>Cân bằng nội tiết</p>
+                <span class="flow-arrow">→</span>
+            </div>
+            
+            <div class="flow-step">
+                <span class="flow-level">LEVEL 6</span>
+                <h4>Phục hồi</h4>
+                <p>Rest & Recovery</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Navigation Cards -->
+    <section class="section nav-section">
+        <div class="section-header">
+            <span class="section-eyebrow">Khám phá module</span>
+            <h2>6 khía cạnh lối sống</h2>
+            <p>Mỗi khía cạnh đều quan trọng và ảnh hưởng lẫn nhau. Bắt đầu với giấc ngủ hoặc chọn phần bạn quan tâm nhất.</p>
+        </div>
+        
+        <div class="nav-grid">
+            <!-- Sleep -->
+            <a href="lifestyle-sleep.html" class="nav-card card-sleep">
+                <div class="nav-card-header">
+                    <span class="nav-card-label">Foundation</span>
+                    <span class="nav-card-number">01</span>
+                </div>
+                <h3>Giấc ngủ chất lượng</h3>
+                <p>7-8h ngủ mỗi đêm là nền tảng cho hormone, phục hồi cơ bắp và sức khỏe tinh thần. Học cách tối ưu giấc ngủ cho phụ nữ 30+.</p>
+                <div class="nav-card-features">
+                    <span class="nav-feature">7-8h/ngày</span>
+                    <span class="nav-feature">Sleep hygiene</span>
+                    <span class="nav-feature">Chu kỳ ngủ</span>
+                </div>
+                <span class="nav-card-btn">Tối ưu giấc ngủ →</span>
+            </a>
+            
+            <!-- Posture -->
+            <a href="lifestyle-posture.html" class="nav-card card-posture">
+                <div class="nav-card-header">
+                    <span class="nav-card-label">Daily Habits</span>
+                    <span class="nav-card-number">02</span>
+                </div>
+                <h3>Tư thế văn phòng</h3>
+                <p>8-10h ngồi mỗi ngày gây đau lưng, cổ vai. Học cách setup workstation chuẩn và bài tập giãn cơ 5 phút mỗi giờ.</p>
+                <div class="nav-card-features">
+                    <span class="nav-feature">Setup chuẩn</span>
+                    <span class="nav-feature">Quy tắc 20-20-20</span>
+                    <span class="nav-feature">5'/giờ</span>
+                </div>
+                <span class="nav-card-btn">Cải thiện tư thế →</span>
+            </a>
+            
+            <!-- Stress -->
+            <a href="lifestyle-stress.html" class="nav-card card-stress">
+                <div class="nav-card-header">
+                    <span class="nav-card-label">Mental Health</span>
+                    <span class="nav-card-number">03</span>
+                </div>
+                <h3>Quản lý stress</h3>
+                <p>Stress mãn tính tăng cortisol → tích mỡ bụng, mất ngủ, lão hóa nhanh. Học thiền, breathing exercises và journaling.</p>
+                <div class="nav-card-features">
+                    <span class="nav-feature">Thiền 10'</span>
+                    <span class="nav-feature">4-7-8 Breathing</span>
+                    <span class="nav-feature">Journaling</span>
+                </div>
+                <span class="nav-card-btn">Giảm stress →</span>
+            </a>
+            
+            <!-- Water -->
+            <a href="lifestyle-water.html" class="nav-card card-water">
+                <div class="nav-card-header">
+                    <span class="nav-card-label">Hydration</span>
+                    <span class="nav-card-number">04</span>
+                </div>
+                <h3>Uống nước đúng cách</h3>
+                <p>2L nước mỗi ngày, phân bổ đều trong ngày. Nước ảnh hưởng đến năng lượng, da, tiêu hóa và hiệu suất tập luyện.</p>
+                <div class="nav-card-features">
+                    <span class="nav-feature">2L/ngày</span>
+                    <span class="nav-feature">Water tracker</span>
+                    <span class="nav-feature">Thời điểm vàng</span>
+                </div>
+                <span class="nav-card-btn">Theo dõi nước →</span>
+            </a>
+            
+            <!-- Recovery -->
+            <a href="lifestyle-recovery.html" class="nav-card card-recovery">
+                <div class="nav-card-header">
+                    <span class="nav-card-label">Recovery</span>
+                    <span class="nav-card-number">05</span>
+                </div>
+                <h3>Phục hồi chủ động</h3>
+                <p>Foam rolling, stretching, massage, active recovery. Phục hồi tốt = tập nặng hơn, tiến bộ nhanh hơn, ít chấn thương.</p>
+                <div class="nav-card-features">
+                    <span class="nav-feature">Foam rolling</span>
+                    <span class="nav-feature">Stretching</span>
+                    <span class="nav-feature">Rest days</span>
+                </div>
+                <span class="nav-card-btn">Phục hồi tốt hơn →</span>
+            </a>
+            
+            <!-- Hormones -->
+            <a href="lifestyle-hormones.html" class="nav-card card-hormones">
+                <div class="nav-card-header">
+                    <span class="nav-card-label">Women's Health</span>
+                    <span class="nav-card-number">06</span>
+                </div>
+                <h3>Cân bằng hormone</h3>
+                <p>Chu kỳ kinh nguyệt, tiền mãn kinh, thyroid. Hiểu về hormone giúp điều chỉnh tập luyện và dinh dưỡng theo từng giai đoạn.</p>
+                <div class="nav-card-features">
+                    <span class="nav-feature">Chu kỳ kinh</span>
+                    <span class="nav-feature">Tiền mãn kinh</span>
+                    <span class="nav-feature">Thực phẩm hỗ trợ</span>
+                </div>
+                <span class="nav-card-btn">Hiểu về hormone →</span>
+            </a>
+        </div>
+    </section>
+    
+    <!-- Daily Checklist -->
+    <section class="checklist-section">
+        <div class="checklist-card">
+            <div class="checklist-header">
+                <h2>✨ Checklist lối sống hàng ngày</h2>
+                <p>Click để đánh dấu hoàn thành — xây dựng thói quen tốt mỗi ngày</p>
+            </div>
+            
+            <div class="checklist-grid">
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-text">
+                        <div class="checklist-name">Ngủ 7-8h</div>
+                        <div class="checklist-desc">Trước 23h, phòng tối, không điện thoại</div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-text">
+                        <div class="checklist-name">Uống 2L nước</div>
+                        <div class="checklist-desc">8 ly, phân bổ đều trong ngày</div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-text">
+                        <div class="checklist-name">Giãn cơ 5'/giờ</div>
+                        <div class="checklist-desc">Đứng dậy, vươn vai, đi lại</div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-text">
+                        <div class="checklist-name">Thiền 10 phút</div>
+                        <div class="checklist-desc">Hít thở sâu, giảm stress</div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-text">
+                        <div class="checklist-name">Ăn đủ protein</div>
+                        <div class="checklist-desc">1.6-2g/kg cân nặng</div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-text">
+                        <div class="checklist-name">Vận động 30'</div>
+                        <div class="checklist-desc">Đi bộ, yoga, hoặc tập gym</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Sẵn sàng sống cân bằng?</h2>
+            <p>Bắt đầu với giấc ngủ — nền tảng quan trọng nhất cho sức khỏe phụ nữ 30+. Hoặc khám phá tất cả 6 khía cạnh lối sống.</p>
+            <div class="cta-buttons">
+                <a href="lifestyle-sleep.html" class="btn-cta">Bắt đầu với giấc ngủ</a>
+                <a href="lifestyle-hormones.html" class="btn-cta secondary">Tìm hiểu về hormone</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="gym-overview.html">Module GYM</a>
+            <a href="nutrition-overview.html">Module Dinh dưỡng</a>
+            <a href="lifestyle-sleep.html">Giấc ngủ</a>
+            <a href="lifestyle-hormones.html">Hormone nữ</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Checklist toggle
+        function toggleChecklist(el) {
+            el.classList.toggle('checked');
+            
+            // Save to localStorage
+            const checked = Array.from(document.querySelectorAll('.checklist-item')).map((item, idx) => 
+                item.classList.contains('checked')
+            );
+            localStorage.setItem('fit30_lifestyle_checklist', JSON.stringify({
+                date: new Date().toISOString().split('T')[0],
+                checked: checked
+            }));
+        }
+        
+        // Load checklist on init
+        document.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('fit30_lifestyle_checklist');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    const today = new Date().toISOString().split('T')[0];
+                    
+                    // Only restore if same day
+                    if (data.date === today && data.checked) {
+                        const items = document.querySelectorAll('.checklist-item');
+                        data.checked.forEach((isChecked, idx) => {
+                            if (items[idx] && isChecked) {
+                                items[idx].classList.add('checked');
+                            }
+                        });
+                    }
+                } catch (e) {
+                    console.error('Error loading checklist', e);
+                }
+            }
+        });
+        
+        // Smooth scroll & subtle entrance animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Apply fade-in to cards
+        document.querySelectorAll('.philosophy-card, .flow-step, .nav-card, .stat-card, .checklist-item').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = `opacity 0.6s ease ${index * 0.08}s, transform 0.6s ease ${index * 0.08}s`;
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
