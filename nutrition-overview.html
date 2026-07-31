@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tổng Quan Dinh Dưỡng - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Base palette */
+            --text-dark: #4A4A5A;
+            --text-medium: #7A7A8A;
+            --text-light: #A0A0B0;
+            --white: #FFFFFF;
+            --bg-primary: #FFFBFB;
+            --bg-soft: #FFF8F5;
+            --border-soft: #F0E8E6;
+            
+            /* Nutrition color - Sage Green */
+            --nutrition: #9AB89A;
+            --nutrition-soft: #E8F3E8;
+            --nutrition-dark: #7A9A7A;
+            --nutrition-gradient: linear-gradient(135deg, #E8F3E8 0%, #9AB89A 100%);
+            
+            /* Module colors */
+            --foodlib: #B8D4A8;
+            --foodlib-soft: #F0F8E8;
+            --foodlib-gradient: linear-gradient(135deg, #F0F8E8 0%, #B8D4A8 100%);
+            
+            --macro: #E8C87A;
+            --macro-soft: #FBF3E0;
+            --macro-gradient: linear-gradient(135deg, #FBF3E0 0%, #E8C87A 100%);
+            
+            --mealplan: #D4A8B8;
+            --mealplan-soft: #F8E8F0;
+            --mealplan-gradient: linear-gradient(135deg, #F8E8F0 0%, #D4A8B8 100%);
+            
+            --recipe: #A8C8D4;
+            --recipe-soft: #E8F3F8;
+            --recipe-gradient: linear-gradient(135deg, #E8F3F8 0%, #A8C8D4 100%);
+            
+            --logger: #C8A8D4;
+            --logger-soft: #F3E8F8;
+            --logger-gradient: linear-gradient(135deg, #F3E8F8 0%, #C8A8D4 100%);
+            
+            /* Main gradient */
+            --main-gradient: linear-gradient(135deg, #F4A698 0%, #B8A8E8 50%, #7FB5B5 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        body::before {
+            width: 500px;
+            height: 500px;
+            background: var(--nutrition);
+            top: -150px;
+            right: -150px;
+        }
+        
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: var(--foodlib);
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 18px 40px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .btn-header {
+            padding: 9px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-header.secondary {
+            background: var(--bg-soft);
+            color: var(--text-medium);
+        }
+        
+        .btn-header.secondary:hover {
+            background: var(--nutrition-soft);
+            color: var(--nutrition-dark);
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 80px 40px 60px;
+            text-align: center;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: var(--nutrition-gradient);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 28px;
+            box-shadow: 0 6px 20px rgba(154,184,154,0.25);
+            letter-spacing: 1.5px;
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: var(--nutrition-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.35rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-tag {
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 2px solid;
+        }
+        
+        .hero-tag.tag-1 {
+            background: var(--foodlib-soft);
+            color: var(--foodlib);
+            border-color: var(--foodlib);
+        }
+        
+        .hero-tag.tag-2 {
+            background: var(--macro-soft);
+            color: var(--macro);
+            border-color: var(--macro);
+        }
+        
+        .hero-tag.tag-3 {
+            background: var(--mealplan-soft);
+            color: var(--mealplan);
+            border-color: var(--mealplan);
+        }
+        
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            padding: 0 40px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 22px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            text-align: center;
+            border: 1px solid var(--border-soft);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--stat-accent);
+        }
+        
+        .stat-card:nth-child(1) { --stat-accent: var(--nutrition); }
+        .stat-card:nth-child(2) { --stat-accent: var(--foodlib); }
+        .stat-card:nth-child(3) { --stat-accent: var(--macro); }
+        .stat-card:nth-child(4) { --stat-accent: var(--mealplan); }
+        
+        .stat-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+        }
+        
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--stat-accent);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: var(--text-medium);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        /* Section Common */
+        .section {
+            padding: 60px 40px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+        
+        .section-eyebrow {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            padding: 6px 18px;
+            border-radius: 30px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.4rem;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        
+        .section-header p {
+            color: var(--text-medium);
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        
+        /* Philosophy Section */
+        .philosophy-section .section-eyebrow {
+            background: var(--nutrition-soft);
+            color: var(--nutrition-dark);
+        }
+        
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .philosophy-card {
+            background: white;
+            padding: 35px 30px;
+            border-radius: 24px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .philosophy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--card-accent);
+        }
+        
+        .philosophy-card:nth-child(1) { --card-accent: var(--nutrition); --card-soft: var(--nutrition-soft); }
+        .philosophy-card:nth-child(2) { --card-accent: var(--foodlib); --card-soft: var(--foodlib-soft); }
+        .philosophy-card:nth-child(3) { --card-accent: var(--macro); --card-soft: var(--macro-soft); }
+        
+        .philosophy-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: var(--card-soft);
+        }
+        
+        .philosophy-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: var(--card-soft);
+            color: var(--card-accent);
+            border-radius: 14px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 22px;
+        }
+        
+        .philosophy-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+        
+        .philosophy-card .compare {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .philosophy-card .compare .new {
+            color: var(--card-accent);
+        }
+        
+        .philosophy-card .compare .old {
+            color: var(--text-light);
+            text-decoration: line-through;
+            font-weight: 500;
+        }
+        
+        .philosophy-card p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        /* Flow Section - 6 Levels */
+        .flow-section {
+            background: linear-gradient(180deg, transparent 0%, var(--bg-soft) 50%, transparent 100%);
+        }
+        
+        .flow-section .section-eyebrow {
+            background: var(--foodlib-soft);
+            color: var(--foodlib);
+        }
+        
+        .flow-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 15px;
+            position: relative;
+        }
+        
+        .flow-step {
+            background: white;
+            padding: 28px 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: relative;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .flow-step:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+        
+        .flow-step:nth-child(1) { --step-color: var(--nutrition); --step-soft: var(--nutrition-soft); }
+        .flow-step:nth-child(2) { --step-color: var(--foodlib); --step-soft: var(--foodlib-soft); }
+        .flow-step:nth-child(3) { --step-color: var(--macro); --step-soft: var(--macro-soft); }
+        .flow-step:nth-child(4) { --step-color: var(--mealplan); --step-soft: var(--mealplan-soft); }
+        .flow-step:nth-child(5) { --step-color: var(--recipe); --step-soft: var(--recipe-soft); }
+        .flow-step:nth-child(6) { --step-color: var(--logger); --step-soft: var(--logger-soft); }
+        
+        .flow-step:hover {
+            border-color: var(--step-soft);
+        }
+        
+        .flow-level {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--step-color);
+            background: var(--step-soft);
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .flow-step h4 {
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+        }
+        
+        .flow-step p {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+        
+        .flow-arrow {
+            display: none;
+        }
+        
+        @media (min-width: 1200px) {
+            .flow-arrow {
+                display: block;
+                position: absolute;
+                right: -13px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: var(--step-color);
+                font-size: 1.2rem;
+                z-index: 2;
+                font-weight: 700;
+            }
+            
+            .flow-step:last-child .flow-arrow {
+                display: none;
+            }
+        }
+        
+        /* Navigation Cards - 6 modules */
+        .nav-section .section-eyebrow {
+            background: var(--macro-soft);
+            color: var(--macro);
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 25px;
+        }
+        
+        .nav-card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px 32px;
+            text-decoration: none;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            display: block;
+        }
+        
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--nav-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+        
+        .nav-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 18px 45px rgba(0,0,0,0.12);
+        }
+        
+        .nav-card.card-foodlib {
+            --nav-accent: var(--foodlib);
+            --nav-soft: var(--foodlib-soft);
+            --nav-gradient: var(--foodlib-gradient);
+        }
+        
+        .nav-card.card-macro {
+            --nav-accent: var(--macro);
+            --nav-soft: var(--macro-soft);
+            --nav-gradient: var(--macro-gradient);
+        }
+        
+        .nav-card.card-mealplan {
+            --nav-accent: var(--mealplan);
+            --nav-soft: var(--mealplan-soft);
+            --nav-gradient: var(--mealplan-gradient);
+        }
+        
+        .nav-card.card-recipe {
+            --nav-accent: var(--recipe);
+            --nav-soft: var(--recipe-soft);
+            --nav-gradient: var(--recipe-gradient);
+        }
+        
+        .nav-card.card-logger {
+            --nav-accent: var(--logger);
+            --nav-soft: var(--logger-soft);
+            --nav-gradient: var(--logger-gradient);
+        }
+        
+        .nav-card:hover {
+            border-color: var(--nav-soft);
+        }
+        
+        .nav-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .nav-card-label {
+            display: inline-block;
+            background: var(--nav-soft);
+            color: var(--nav-accent);
+            padding: 5px 14px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .nav-card-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--nav-soft);
+            line-height: 1;
+            transition: color 0.3s;
+        }
+        
+        .nav-card:hover .nav-card-number {
+            color: var(--nav-accent);
+        }
+        
+        .nav-card h3 {
+            font-size: 1.55rem;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+        
+        .nav-card p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 22px;
+        }
+        
+        .nav-card-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 22px;
+        }
+        
+        .nav-feature {
+            font-size: 0.78rem;
+            padding: 5px 12px;
+            background: var(--bg-soft);
+            color: var(--text-medium);
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        
+        .nav-card-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--nav-accent);
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: gap 0.3s;
+        }
+        
+        .nav-card:hover .nav-card-btn {
+            gap: 14px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            margin: 60px 40px 80px;
+            max-width: 1220px;
+            margin-left: auto;
+            margin-right: auto;
+            background: var(--nutrition-gradient);
+            border-radius: 32px;
+            padding: 70px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.4;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.6rem;
+            color: var(--text-dark);
+            margin-bottom: 18px;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            color: var(--text-medium);
+            margin-bottom: 35px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            display: inline-block;
+            padding: 16px 40px;
+            background: white;
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+        }
+        
+        .btn-cta.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.6);
+            box-shadow: none;
+        }
+        
+        .btn-cta.secondary:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: white;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 50px 40px 30px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 18px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            color: var(--nutrition);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 25px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero > * {
+            animation: fadeInUp 0.8s ease both;
+        }
+        
+        .hero > *:nth-child(1) { animation-delay: 0.1s; }
+        .hero > *:nth-child(2) { animation-delay: 0.2s; }
+        .hero > *:nth-child(3) { animation-delay: 0.3s; }
+        .hero > *:nth-child(4) { animation-delay: 0.4s; }
+        .hero > *:nth-child(5) { animation-delay: 0.5s; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .hero {
+                padding: 50px 20px 40px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .stats-row {
+                padding: 0 20px;
+                margin-bottom: 50px;
+            }
+            
+            .section {
+                padding: 40px 20px;
+            }
+            
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-section {
+                margin: 40px 20px 60px;
+                padding: 50px 25px;
+            }
+            
+            .cta-section h2 {
+                font-size: 1.9rem;
+            }
+            
+            .flow-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 9px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-soft);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--nutrition) 0%, var(--foodlib) 100%);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--macro) 0%, var(--mealplan) 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <div class="header-actions">
+            <a href="index.html" class="btn-header secondary">← Trang chủ</a>
+        </div>
+    </header>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <span class="hero-badge">MODULE DINH DƯỠNG</span>
+        <h1>Dinh dưỡng <span>thông minh</span></h1>
+        <div class="hero-subtitle">Database · Calculator · Meal Plans · Recipes</div>
+        <p>Không phải diet khắc nghiệt. Đây là hệ thống dinh dưỡng dạng "Lego" — bạn chọn thực phẩm, tính macro, và hệ thống sẽ tự động lắp ghép thành bữa ăn phù hợp với mục tiêu.</p>
+        
+        <div class="hero-tags">
+            <span class="hero-tag tag-1">100+ thực phẩm</span>
+            <span class="hero-tag tag-2">TDEE Calculator</span>
+            <span class="hero-tag tag-3">Meal Plans</span>
+        </div>
+    </section>
+    
+    <!-- Stats Row -->
+    <div class="stats-row">
+        <div class="stat-card">
+            <div class="stat-number">100+</div>
+            <div class="stat-label">Thực phẩm</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Công thức nấu</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">7</div>
+            <div class="stat-label">Ngày meal plan</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Mục tiêu dinh dưỡng</div>
+        </div>
+    </div>
+    
+    <!-- Philosophy Section -->
+    <section class="section philosophy-section">
+        <div class="section-header">
+            <span class="section-eyebrow">Triết lý dinh dưỡng</span>
+            <h2>Vì sao hệ thống này khác biệt?</h2>
+            <p>Chúng tôi không viết cứng "Ăn đúng 6 món này". Thay vào đó, mọi thứ được xây dựng như những mảnh ghép Lego có thể tái sử dụng.</p>
+        </div>
+        
+        <div class="philosophy-grid">
+            <div class="philosophy-card">
+                <div class="philosophy-number">1</div>
+                <h3>Database-first</h3>
+                <div class="compare">
+                    <span class="new">Thư viện thực phẩm</span>
+                    <span> > </span>
+                    <span class="old">Thực đơn cứng</span>
+                </div>
+                <p>Mọi thực phẩm được lưu trong một thư viện trung tâm với đầy đủ thông tin: calories, protein, carb, fat, micronutrients. Cập nhật một lần, dùng ở mọi nơi.</p>
+            </div>
+            
+            <div class="philosophy-card">
+                <div class="philosophy-number">2</div>
+                <h3>Calculator-driven</h3>
+                <div class="compare">
+                    <span class="new">Tính toán cá nhân</span>
+                    <span> > </span>
+                    <span class="old">Công thức chung</span>
+                </div>
+                <p>Bạn nhập cân nặng, chiều cao, mức vận động — hệ thống tự tính TDEE và đề xuất macro phù hợp. Không có con số chung cho tất cả mọi người.</p>
+            </div>
+            
+            <div class="philosophy-card">
+                <div class="philosophy-number">3</div>
+                <h3>Flexible-based</h3>
+                <div class="compare">
+                    <span class="new">Linh hoạt</span>
+                    <span> > </span>
+                    <span class="old">Kiêng khem</span>
+                </div>
+                <p>Không có thực phẩm "tốt" hay "xấu". Chỉ có cách phối hợp phù hợp với mục tiêu của bạn. Ăn uống bền vững > diet ngắn hạn.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Flow Section - 6 Levels -->
+    <section class="section flow-section">
+        <div class="section-header">
+            <span class="section-eyebrow">Cách hoạt động</span>
+            <h2>Hành trình 6 bước</h2>
+            <p>Từ thư viện thực phẩm đến bữa ăn hoàn chỉnh — mỗi bước xây dựng trên bước trước đó.</p>
+        </div>
+        
+        <div class="flow-container">
+            <div class="flow-step">
+                <span class="flow-level">LEVEL 1</span>
+                <h4>Food Library</h4>
+                <p>100+ thực phẩm</p>
+                <span class="flow-arrow">→</span>
+            </div>
+            
+            <div class="flow-step">
+                <span class="flow-level">LEVEL 2</span>
+                <h4>Macro Calculator</h4>
+                <p>Tính TDEE & macro</p>
+                <span class="flow-arrow">→</span>
+            </div>
+            
+            <div class="flow-step">
+                <span class="flow-level">LEVEL 3</span>
+                <h4>Meal Plans</h4>
+                <p>Thực đơn 7 ngày</p>
+                <span class="flow-arrow">→</span>
+            </div>
+            
+            <div class="flow-step">
+                <span class="flow-level">LEVEL 4</span>
+                <h4>Recipes</h4>
+                <p>50+ công thức</p>
+                <span class="flow-arrow">→</span>
+            </div>
+            
+            <div class="flow-step">
+                <span class="flow-level">LEVEL 5</span>
+                <h4>Food Logger</h4>
+                <p>Theo dõi ăn uống</p>
+                <span class="flow-arrow">→</span>
+            </div>
+            
+            <div class="flow-step">
+                <span class="flow-level">LEVEL 6</span>
+                <h4>Progress</h4>
+                <p>Đánh giá kết quả</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Navigation Cards -->
+    <section class="section nav-section">
+        <div class="section-header">
+            <span class="section-eyebrow">Khám phá module</span>
+            <h2>Chọn nơi bạn muốn bắt đầu</h2>
+            <p>Mỗi công cụ phục vụ một mục đích riêng. Bạn có thể đi theo thứ tự hoặc nhảy thẳng đến phần mình cần.</p>
+        </div>
+        
+        <div class="nav-grid">
+            <!-- Food Library -->
+            <a href="nutrition-food-library.html" class="nav-card card-foodlib">
+                <div class="nav-card-header">
+                    <span class="nav-card-label">Database</span>
+                    <span class="nav-card-number">01</span>
+                </div>
+                <h3>Thư viện thực phẩm</h3>
+                <p>Toàn bộ thực phẩm được phân loại theo nhóm: Protein, Carb, Fat, Vegetables, Fruits. Mỗi thực phẩm có đầy đủ thông tin dinh dưỡng.</p>
+                <div class="nav-card-features">
+                    <span class="nav-feature">100+ thực phẩm</span>
+                    <span class="nav-feature">Macro chi tiết</span>
+                    <span class="nav-feature">Filter thông minh</span>
+                </div>
+                <span class="nav-card-btn">Khám phá thư viện →</span>
+            </a>
+            
+            <!-- Macro Calculator -->
+            <a href="nutrition-macro-calculator.html" class="nav-card card-macro">
+                <div class="nav-card-header">
+                    <span class="nav-card-label">Calculator</span>
+                    <span class="nav-card-number">02</span>
+                </div>
+                <h3>Tính TDEE & Macro</h3>
+                <p>Nhập thông tin cá nhân để tính calories mục tiêu và phân bổ macro (Protein/Carb/Fat) phù hợp với mục tiêu của bạn.</p>
+                <div class="nav-card-features">
+                    <span class="nav-feature">TDEE Calculator</span>
+                    <span class="nav-feature">Macro Split</span>
+                    <span class="nav-feature">Goal-based</span>
+                </div>
+                <span class="nav-card-btn">Tính ngay →</span>
+            </a>
+            
+            <!-- Meal Plans -->
+            <a href="nutrition-meal-plans.html" class="nav-card card-mealplan">
+                <div class="nav-card-header">
+                    <span class="nav-card-label">Plans</span>
+                    <span class="nav-card-number">03</span>
+                </div>
+                <h3>Meal Plans</h3>
+                <p>Thực đơn 7 ngày được thiết kế sẵn cho 3 mục tiêu: Giảm mỡ, Tăng cơ, Cân bằng. Mỗi ngày 4 bữa: Sáng/Trưa/Chiều/Tối.</p>
+                <div class="nav-card-features">
+                    <span class="nav-feature">7 ngày</span>
+                    <span class="nav-feature">4 bữa/ngày</span>
+                    <span class="nav-feature">3 mục tiêu</span>
+                </div>
+                <span class="nav-card-btn">Xem meal plans →</span>
+            </a>
+            
+            <!-- Recipes -->
+            <a href="nutrition-recipes.html" class="nav-card card-recipe">
+                <div class="nav-card-header">
+                    <span class="nav-card-label">Recipes</span>
+                    <span class="nav-card-number">04</span>
+                </div>
+                <h3>Công thức nấu ăn</h3>
+                <p>50+ công thức nấu ăn đơn giản, nhanh gọn, phù hợp với người bận rộn. Filter theo: thời gian, calories, loại bữa ăn.</p>
+                <div class="nav-card-features">
+                    <span class="nav-feature">50+ recipes</span>
+                    <span class="nav-feature">Dưới 30 phút</span>
+                    <span class="nav-feature">High protein</span>
+                </div>
+                <span class="nav-card-btn">Xem công thức →</span>
+            </a>
+            
+            <!-- Food Logger -->
+            <a href="nutrition-food-logger.html" class="nav-card card-logger">
+                <div class="nav-card-header">
+                    <span class="nav-card-label">Logger</span>
+                    <span class="nav-card-number">05</span>
+                </div>
+                <h3>Theo dõi ăn uống</h3>
+                <p>Ghi lại bữa ăn hàng ngày, tính tổng calories và macro. So sánh với mục tiêu để biết bạn đang ăn đúng hay không.</p>
+                <div class="nav-card-features">
+                    <span class="nav-feature">Daily log</span>
+                    <span class="nav-feature">Macro tracking</span>
+                    <span class="nav-feature">Weekly report</span>
+                </div>
+                <span class="nav-card-btn">Bắt đầu theo dõi →</span>
+            </a>
+            
+            <!-- Progress -->
+            <a href="gym-tracker.html" class="nav-card card-foodlib">
+                <div class="nav-card-header">
+                    <span class="nav-card-label">Progress</span>
+                    <span class="nav-card-number">06</span>
+                </div>
+                <h3>Kết hợp với GYM</h3>
+                <p>Xem biểu đồ tiến độ cân nặng, số đo cơ thể và sức mạnh. Dinh dưỡng + Tập luyện = Kết quả tối ưu.</p>
+                <div class="nav-card-features">
+                    <span class="nav-feature">Weight chart</span>
+                    <span class="nav-feature">Body measurements</span>
+                    <span class="nav-feature">Strength progress</span>
+                </div>
+                <span class="nav-card-btn">Xem tiến độ →</span>
+            </a>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Sẵn sàng ăn uống thông minh?</h2>
+            <p>Bắt đầu với việc tính TDEE và macro, hoặc khám phá thư viện thực phẩm để biết nên ăn gì.</p>
+            <div class="cta-buttons">
+                <a href="nutrition-macro-calculator.html" class="btn-cta">Tính TDEE & Macro</a>
+                <a href="nutrition-food-library.html" class="btn-cta secondary">Khám phá thực phẩm</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="gym-overview.html">Module GYM</a>
+            <a href="nutrition-food-library.html">Thư viện thực phẩm</a>
+            <a href="nutrition-macro-calculator.html">TDEE Calculator</a>
+            <a href="nutrition-meal-plans.html">Meal Plans</a>
+            <a href="nutrition-recipes.html">Recipes</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Smooth scroll & subtle entrance animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Apply fade-in to cards
+        document.querySelectorAll('.philosophy-card, .flow-step, .nav-card, .stat-card').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = `opacity 0.6s ease ${index * 0.08}s, transform 0.6s ease ${index * 0.08}s`;
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
