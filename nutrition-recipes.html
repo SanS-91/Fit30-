@@ -1,0 +1,2538 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Công Thức Nấu Ăn - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Base palette */
+            --text-dark: #4A4A5A;
+            --text-medium: #7A7A8A;
+            --text-light: #A0A0B0;
+            --white: #FFFFFF;
+            --bg-primary: #FFFBFB;
+            --bg-soft: #FFF8F5;
+            --border-soft: #F0E8E6;
+            
+            /* Recipe color - Blue */
+            --recipe: #A8C8D4;
+            --recipe-soft: #E8F3F8;
+            --recipe-dark: #7AA8B8;
+            --recipe-gradient: linear-gradient(135deg, #E8F3F8 0%, #A8C8D4 100%);
+            
+            /* Meal type colors */
+            --breakfast: #E8C87A;
+            --breakfast-soft: #FBF3E0;
+            --breakfast-gradient: linear-gradient(135deg, #FBF3E0 0%, #E8C87A 100%);
+            
+            --lunch: #9AB89A;
+            --lunch-soft: #E8F3E8;
+            --lunch-gradient: linear-gradient(135deg, #E8F3E8 0%, #9AB89A 100%);
+            
+            --dinner: #D4A8B8;
+            --dinner-soft: #F8E8F0;
+            --dinner-gradient: linear-gradient(135deg, #F8E8F0 0%, #D4A8B8 100%);
+            
+            --snack: #E89A9A;
+            --snack-soft: #FCE8E8;
+            --snack-gradient: linear-gradient(135deg, #FCE8E8 0%, #E89A9A 100%);
+            
+            /* Macro colors */
+            --protein: #E89A9A;
+            --carb: #E8C87A;
+            --fat: #D4A8B8;
+            
+            /* Main gradient */
+            --main-gradient: linear-gradient(135deg, #9AB89A 0%, #E8C87A 50%, #D4A8B8 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        body::before {
+            width: 500px;
+            height: 500px;
+            background: var(--recipe);
+            top: -150px;
+            right: -150px;
+        }
+        
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: var(--breakfast);
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 18px 40px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            color: var(--recipe-dark);
+        }
+        
+        /* Page Hero */
+        .page-hero {
+            padding: 60px 40px 30px;
+            text-align: center;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+        
+        .page-badge {
+            display: inline-block;
+            background: var(--recipe-gradient);
+            color: white;
+            padding: 7px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 22px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(168,200,212,0.3);
+        }
+        
+        .page-hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .page-hero h1 span {
+            background: var(--recipe-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .page-hero p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-pill {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            font-weight: 600;
+            border: 1px solid var(--border-soft);
+        }
+        
+        .stat-pill strong {
+            font-weight: 700;
+            margin-right: 5px;
+        }
+        
+        .stat-pill:nth-child(1) strong { color: var(--recipe-dark); }
+        .stat-pill:nth-child(2) strong { color: var(--breakfast); }
+        .stat-pill:nth-child(3) strong { color: var(--lunch); }
+        .stat-pill:nth-child(4) strong { color: var(--dinner); }
+        
+        /* Filter Bar */
+        .filter-bar {
+            background: white;
+            padding: 25px 40px;
+            margin: 0 40px 25px;
+            border-radius: 22px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 76px;
+            z-index: 50;
+            border: 1px solid var(--border-soft);
+        }
+        
+        .search-box {
+            position: relative;
+            margin-bottom: 18px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 14px 20px 14px 52px;
+            border: 2px solid var(--border-soft);
+            border-radius: 14px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: var(--bg-soft);
+            font-weight: 500;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--recipe);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(168,200,212,0.1);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 1.2rem;
+        }
+        
+        .filter-groups {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+        }
+        
+        .filter-group h4 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.78rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+        
+        .filter-chip {
+            padding: 6px 14px;
+            background: var(--bg-soft);
+            border: 2px solid transparent;
+            border-radius: 18px;
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            user-select: none;
+        }
+        
+        .filter-chip:hover {
+            background: white;
+            border-color: var(--recipe);
+            color: var(--recipe-dark);
+            transform: translateY(-1px);
+        }
+        
+        .filter-chip.active {
+            background: var(--recipe-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 3px 10px rgba(168,200,212,0.3);
+        }
+        
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            gap: 10px;
+            padding: 0 40px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+        }
+        
+        .category-tab {
+            padding: 11px 20px;
+            background: white;
+            border: 2px solid var(--border-soft);
+            border-radius: 14px;
+            font-weight: 600;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Quicksand', sans-serif;
+        }
+        
+        .category-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        }
+        
+        .category-tab[data-category="all"].active {
+            background: var(--recipe-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(168,200,212,0.3);
+        }
+        
+        .category-tab[data-category="breakfast"].active {
+            background: var(--breakfast-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(232,200,122,0.3);
+        }
+        
+        .category-tab[data-category="lunch"].active {
+            background: var(--lunch-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(154,184,154,0.3);
+        }
+        
+        .category-tab[data-category="dinner"].active {
+            background: var(--dinner-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(212,168,184,0.3);
+        }
+        
+        .category-tab[data-category="snack"].active {
+            background: var(--snack-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(232,154,154,0.3);
+        }
+        
+        .tab-count {
+            display: inline-block;
+            background: rgba(255,255,255,0.35);
+            padding: 2px 9px;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+        
+        .category-tab:not(.active) .tab-count {
+            background: var(--bg-soft);
+            color: var(--text-light);
+        }
+        
+        /* Recipe Container */
+        .recipe-container {
+            padding: 0 40px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .category-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .category-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .category-header {
+            margin-bottom: 25px;
+            padding: 22px 28px;
+            border-radius: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-section[data-category="breakfast"] .category-header { background: var(--breakfast-gradient); }
+        .category-section[data-category="lunch"] .category-header { background: var(--lunch-gradient); }
+        .category-section[data-category="dinner"] .category-header { background: var(--dinner-gradient); }
+        .category-section[data-category="snack"] .category-header { background: var(--snack-gradient); }
+        
+        .category-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .category-header p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+            font-weight: 500;
+        }
+        
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 22px;
+        }
+        
+        /* Recipe Card */
+        .recipe-card {
+            background: white;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            position: relative;
+        }
+        
+        .recipe-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.1);
+            border-color: var(--card-soft);
+        }
+        
+        .recipe-card[data-category="breakfast"] { --card-accent: var(--breakfast); --card-soft: var(--breakfast-soft); }
+        .recipe-card[data-category="lunch"] { --card-accent: var(--lunch); --card-soft: var(--lunch-soft); }
+        .recipe-card[data-category="dinner"] { --card-accent: var(--dinner); --card-soft: var(--dinner-soft); }
+        .recipe-card[data-category="snack"] { --card-accent: var(--snack); --card-soft: var(--snack-soft); }
+        
+        .recipe-image {
+            height: 180px;
+            background: var(--card-gradient);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .recipe-card[data-category="breakfast"] .recipe-image { --card-gradient: var(--breakfast-gradient); }
+        .recipe-card[data-category="lunch"] .recipe-image { --card-gradient: var(--lunch-gradient); }
+        .recipe-card[data-category="dinner"] .recipe-image { --card-gradient: var(--dinner-gradient); }
+        .recipe-card[data-category="snack"] .recipe-image { --card-gradient: var(--snack-gradient); }
+        
+        .recipe-emoji {
+            font-size: 4rem;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+        }
+        
+        .recipe-badges {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        
+        .recipe-badge {
+            background: rgba(255,255,255,0.95);
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .recipe-time {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255,255,255,0.95);
+            padding: 5px 12px;
+            border-radius: 10px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            backdrop-filter: blur(10px);
+        }
+        
+        .recipe-content {
+            padding: 20px;
+        }
+        
+        .recipe-category-tag {
+            display: inline-block;
+            background: var(--card-soft);
+            color: var(--card-accent);
+            padding: 3px 10px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        
+        .recipe-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        .recipe-desc {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 14px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        /* Macro Bar */
+        .recipe-macro-bar {
+            display: flex;
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            background: var(--bg-soft);
+        }
+        
+        .recipe-macro-bar .p { background: var(--protein); }
+        .recipe-macro-bar .c { background: var(--carb); }
+        .recipe-macro-bar .f { background: var(--fat); }
+        
+        .recipe-macros {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+        
+        .recipe-macro-item {
+            text-align: center;
+            padding: 6px 4px;
+            background: var(--bg-soft);
+            border-radius: 8px;
+        }
+        
+        .recipe-macro-label {
+            font-size: 0.65rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        
+        .recipe-macro-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        .recipe-macro-item.cal .recipe-macro-value { color: var(--recipe-dark); }
+        .recipe-macro-item.p .recipe-macro-value { color: var(--protein); }
+        .recipe-macro-item.c .recipe-macro-value { color: var(--carb); }
+        .recipe-macro-item.f .recipe-macro-value { color: var(--fat); }
+        
+        .recipe-tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            font-size: 0.68rem;
+            padding: 3px 9px;
+            border-radius: 8px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        
+        .tag.high-protein { background: var(--snack-soft); color: var(--snack); }
+        .tag.low-cal { background: var(--lunch-soft); color: var(--lunch); }
+        .tag.quick { background: var(--recipe-soft); color: var(--recipe-dark); }
+        .tag.meal-prep { background: var(--breakfast-soft); color: #C8A850; }
+        .tag.high-fiber { background: var(--lunch-soft); color: var(--lunch); }
+        .tag.healthy-fat { background: var(--dinner-soft); color: var(--dinner); }
+        
+        .view-btn {
+            display: block;
+            padding: 10px;
+            background: var(--card-soft);
+            color: var(--card-accent);
+            text-align: center;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            transition: all 0.3s;
+        }
+        
+        .recipe-card:hover .view-btn {
+            background: var(--card-accent);
+            color: white;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(74, 74, 90, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal {
+            background: white;
+            border-radius: 26px;
+            max-width: 850px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-hero {
+            height: 200px;
+            background: var(--modal-gradient, var(--recipe-gradient));
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 26px 26px 0 0;
+        }
+        
+        .modal-emoji {
+            font-size: 6rem;
+            filter: drop-shadow(0 6px 18px rgba(0,0,0,0.2));
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.95);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            transition: all 0.3s;
+            z-index: 11;
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-close:hover {
+            background: white;
+            color: var(--text-dark);
+            transform: rotate(90deg);
+        }
+        
+        .modal-badges {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            display: flex;
+            gap: 6px;
+        }
+        
+        .modal-badge {
+            background: rgba(255,255,255,0.95);
+            padding: 5px 12px;
+            border-radius: 10px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-body {
+            padding: 30px 35px;
+        }
+        
+        .modal-category-tag {
+            display: inline-block;
+            background: var(--modal-soft, var(--recipe-soft));
+            color: var(--modal-color, var(--recipe-dark));
+            padding: 4px 12px;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        
+        .modal-subtitle {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        /* Modal Info Grid */
+        .modal-info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 25px;
+            padding: 18px;
+            background: var(--bg-soft);
+            border-radius: 16px;
+        }
+        
+        .modal-info-item {
+            text-align: center;
+            padding: 10px;
+            background: white;
+            border-radius: 12px;
+        }
+        
+        .modal-info-icon {
+            font-size: 1.3rem;
+            margin-bottom: 4px;
+        }
+        
+        .modal-info-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+        
+        .modal-info-label {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+        
+        /* Modal Macro Grid */
+        .modal-macro-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .modal-macro-card {
+            padding: 16px 10px;
+            border-radius: 14px;
+            text-align: center;
+            background: var(--bg-soft);
+            border-top: 3px solid var(--macro-color);
+        }
+        
+        .modal-macro-card.cal { --macro-color: var(--recipe); }
+        .modal-macro-card.p { --macro-color: var(--protein); }
+        .modal-macro-card.c { --macro-color: var(--carb); }
+        .modal-macro-card.f { --macro-color: var(--fat); }
+        .modal-macro-card.fiber { --macro-color: var(--lunch); }
+        
+        .modal-macro-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        
+        .modal-macro-label {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+        
+        .modal-macro-unit {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+        
+        /* Modal Section */
+        .modal-section {
+            margin-bottom: 28px;
+        }
+        
+        .modal-section h3 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-indicator {
+            width: 4px;
+            height: 22px;
+            background: var(--modal-color, var(--recipe));
+            border-radius: 2px;
+        }
+        
+        /* Ingredients */
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 8px;
+        }
+        
+        .ingredient-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 11px 14px;
+            background: var(--bg-soft);
+            border-radius: 12px;
+            border-left: 3px solid var(--modal-color, var(--recipe));
+        }
+        
+        .ingredient-name {
+            font-size: 0.88rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        
+        .ingredient-amount {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            font-weight: 700;
+        }
+        
+        /* Steps */
+        .steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .step-item {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 15px;
+            padding: 16px;
+            background: var(--bg-soft);
+            border-radius: 14px;
+            align-items: start;
+        }
+        
+        .step-number {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--modal-color, var(--recipe));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            font-size: 0.92rem;
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-top: 6px;
+        }
+        
+        /* Tips */
+        .tips-box {
+            background: linear-gradient(135deg, var(--bg-soft) 0%, white 100%);
+            padding: 18px;
+            border-radius: 14px;
+            border-left: 4px solid var(--modal-color, var(--recipe));
+        }
+        
+        .tips-box p {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        
+        .tips-box p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .tips-box strong {
+            color: var(--text-dark);
+        }
+        
+        /* Best For */
+        .best-for {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .best-for-chip {
+            padding: 7px 15px;
+            background: white;
+            border: 1.5px solid var(--border-soft);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            font-weight: 600;
+        }
+        
+        /* Modal Footer */
+        .modal-footer {
+            padding: 18px 35px 28px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--border-soft);
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--modal-color, var(--recipe));
+            color: white;
+            flex: 1;
+            box-shadow: 0 6px 20px rgba(168,200,212,0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(168,200,212,0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-soft);
+            color: var(--text-medium);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--recipe-soft);
+            color: var(--recipe-dark);
+        }
+        
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+            display: none;
+        }
+        
+        .no-results.active {
+            display: block;
+        }
+        
+        .no-results h3 {
+            color: var(--text-medium);
+            margin-bottom: 8px;
+        }
+        
+        /* Tips Section */
+        .tips-section {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 40px;
+        }
+        
+        .tips-card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .tips-header {
+            margin-bottom: 25px;
+        }
+        
+        .tips-header h2 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .tips-header p {
+            color: var(--text-medium);
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+        }
+        
+        .tip-item {
+            padding: 20px;
+            background: var(--bg-soft);
+            border-radius: 16px;
+            border-left: 4px solid var(--tip-color, var(--recipe));
+        }
+        
+        .tip-item:nth-child(1) { --tip-color: var(--breakfast); }
+        .tip-item:nth-child(2) { --tip-color: var(--lunch); }
+        .tip-item:nth-child(3) { --tip-color: var(--recipe); }
+        .tip-item:nth-child(4) { --tip-color: var(--dinner); }
+        
+        .tip-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tip-content {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+        
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: 14px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 2000;
+            transform: translateX(400px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 4px solid var(--recipe);
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--recipe-soft);
+            color: var(--recipe-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 40px 40px 25px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--recipe);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .page-hero {
+                padding: 40px 20px 25px;
+            }
+            
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .filter-bar {
+                margin: 0 20px 20px;
+                padding: 20px;
+                top: 66px;
+            }
+            
+            .category-tabs {
+                padding: 0 20px;
+            }
+            
+            .recipe-container,
+            .tips-section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            
+            .recipe-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal {
+                max-height: 95vh;
+                border-radius: 20px;
+            }
+            
+            .modal-body {
+                padding: 25px 22px;
+            }
+            
+            .modal-title {
+                font-size: 1.5rem;
+            }
+            
+            .modal-macro-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .modal-info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .tips-card {
+                padding: 25px 20px;
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-soft);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--recipe) 0%, var(--lunch) 100%);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--breakfast) 0%, var(--dinner) 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="nutrition-overview.html" class="back-link">← Quay lại Dinh dưỡng</a>
+    </header>
+    
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <span class="page-badge">RECIPES</span>
+        <h1>Công Thức <span>Nấu Ăn</span></h1>
+        <p>30+ công thức nấu ăn đơn giản, nhanh gọn, phù hợp với người bận rộn. Filter theo thời gian, calories, loại bữa ăn và mục tiêu.</p>
+        
+        <div class="stats-row">
+            <div class="stat-pill"><strong>30+</strong> Công thức</div>
+            <div class="stat-pill"><strong>8</strong> Bữa sáng</div>
+            <div class="stat-pill"><strong>8</strong> Bữa trưa</div>
+            <div class="stat-pill"><strong>8</strong> Bữa tối</div>
+        </div>
+    </section>
+    
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <div class="search-box">
+            <span class="search-icon">⌕</span>
+            <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm công thức... (ví dụ: yến mạch, gà, cá hồi)">
+        </div>
+        
+        <div class="filter-groups">
+            <div class="filter-group">
+                <h4>Thời gian</h4>
+                <div class="filter-options" id="timeFilter">
+                    <div class="filter-chip active" data-filter="all" data-type="time">Tất cả</div>
+                    <div class="filter-chip" data-filter="quick" data-type="time">Dưới 15'</div>
+                    <div class="filter-chip" data-filter="medium" data-type="time">15-30'</div>
+                    <div class="filter-chip" data-filter="long" data-type="time">Trên 30'</div>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h4>Calories</h4>
+                <div class="filter-options" id="calFilter">
+                    <div class="filter-chip active" data-filter="all" data-type="cal">Tất cả</div>
+                    <div class="filter-chip" data-filter="low" data-type="cal">Dưới 400</div>
+                    <div class="filter-chip" data-filter="medium" data-type="cal">400-600</div>
+                    <div class="filter-chip" data-filter="high" data-type="cal">Trên 600</div>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h4>Mục tiêu</h4>
+                <div class="filter-options" id="goalFilter">
+                    <div class="filter-chip active" data-filter="all" data-type="goal">Tất cả</div>
+                    <div class="filter-chip" data-filter="fatloss" data-type="goal">Giảm mỡ</div>
+                    <div class="filter-chip" data-filter="muscle" data-type="goal">Tăng cơ</div>
+                    <div class="filter-chip" data-filter="recomp" data-type="goal">Cân bằng</div>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h4>Đặc tính</h4>
+                <div class="filter-options" id="tagFilter">
+                    <div class="filter-chip active" data-filter="all" data-type="tag">Tất cả</div>
+                    <div class="filter-chip" data-filter="high-protein" data-type="tag">High Protein</div>
+                    <div class="filter-chip" data-filter="low-cal" data-type="tag">Low Cal</div>
+                    <div class="filter-chip" data-filter="meal-prep" data-type="tag">Meal Prep</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Category Tabs -->
+    <div class="category-tabs" id="categoryTabs">
+        <div class="category-tab active" data-category="all">Tất cả <span class="tab-count" id="count-all">30</span></div>
+        <div class="category-tab" data-category="breakfast">Bữa sáng <span class="tab-count" id="count-breakfast">8</span></div>
+        <div class="category-tab" data-category="lunch">Bữa trưa <span class="tab-count" id="count-lunch">8</span></div>
+        <div class="category-tab" data-category="dinner">Bữa tối <span class="tab-count" id="count-dinner">8</span></div>
+        <div class="category-tab" data-category="snack">Snack <span class="tab-count" id="count-snack">6</span></div>
+    </div>
+    
+    <!-- Recipe Container -->
+    <div class="recipe-container" id="recipeContainer"></div>
+    
+    <!-- No Results -->
+    <div class="no-results" id="noResults">
+        <h3>Không tìm thấy công thức phù hợp</h3>
+        <p>Hãy thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</p>
+    </div>
+    
+    <!-- Tips Section -->
+    <section class="tips-section">
+        <div class="tips-card">
+            <div class="tips-header">
+                <h2>💡 Mẹo nấu ăn thông minh</h2>
+                <p>Những bí quyết giúp bạn nấu ăn lành mạnh nhanh chóng và tiết kiệm.</p>
+            </div>
+            
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <div class="tip-title">🌅 Meal Prep Chủ nhật</div>
+                    <div class="tip-content">Dành 2-3h Chủ nhật để chuẩn bị nguyên liệu cho cả tuần: nấu gạo lứt, luộc trứng, rửa rau, ướp thịt. Tiết kiệm 1-2h mỗi ngày.</div>
+                </div>
+                
+                <div class="tip-item">
+                    <div class="tip-title">🥗 Công thức 10 phút</div>
+                    <div class="tip-content">Luôn có 3-5 công thức "cứu cánh" dưới 10 phút cho ngày bận: smoothie, salad, trứng ốp la, sandwich. Không bao giờ phải ăn fast food.</div>
+                </div>
+                
+                <div class="tip-item">
+                    <div class="tip-title">🧂 Gia vị lành mạnh</div>
+                    <div class="tip-content">Dùng herbs & spices thay vì muối/đường: tỏi, gừng, nghệ, quế, thì là, rau thơm. Vừa ngon vừa chống viêm, tốt cho sức khỏe.</div>
+                </div>
+                
+                <div class="tip-item">
+                    <div class="tip-title">🍳 Phương pháp nấu</div>
+                    <div class="tip-content">Ưu tiên: hấp, luộc, nướng, áp chảo ít dầu. Hạn chế chiên sâu. Dùng nồi chiên không dầu để giảm 70-80% lượng dầu.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="nutrition-overview.html">Dinh dưỡng</a>
+            <a href="nutrition-food-library.html">Thư viện thực phẩm</a>
+            <a href="nutrition-macro-calculator.html">TDEE Calculator</a>
+            <a href="nutrition-meal-plans.html">Meal Plans</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <div class="modal-hero" id="modalHero">
+                <button class="modal-close" id="modalClose">✕</button>
+                <div class="modal-badges" id="modalBadges"></div>
+                <div class="modal-emoji" id="modalEmoji">🍳</div>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="modalCloseBtn">Đóng</button>
+                <button class="btn btn-primary" onclick="addToMealPlan()">+ Thêm vào meal plan</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">✓</div>
+        <div class="toast-content" id="toastContent">Đã lưu!</div>
+    </div>
+    
+    <script>
+        // ==================== RECIPES DATABASE ====================
+        const recipeDatabase = [
+            // ===== BREAKFAST (8) =====
+            {
+                id: 1, name: "Overnight Oats Protein", nameEn: "Protein Overnight Oats",
+                category: "breakfast", emoji: "🥣",
+                time: 5, difficulty: 1, servings: 1,
+                calories: 420, protein: 32, carbs: 50, fat: 12, fiber: 8,
+                description: "Bữa sáng không cần nấu, chuẩn bị từ tối hôm trước. Giàu protein, no lâu đến trưa.",
+                tags: ["high-protein", "meal-prep", "quick"],
+                bestFor: ["fatloss", "recomp", "muscle"],
+                ingredients: [
+                    { name: "Yến mạch", amount: "60g" },
+                    { name: "Whey protein", amount: "1 scoop" },
+                    { name: "Sữa hạnh nhân", amount: "200ml" },
+                    { name: "Hạt chia", amount: "1 muỗng" },
+                    { name: "Việt quất", amount: "50g" },
+                    { name: "Mật ong", amount: "1 muỗng cà phê" }
+                ],
+                steps: [
+                    "Cho yến mạch, whey, hạt chia vào hũ thủy tinh.",
+                    "Đổ sữa hạnh nhân vào, khuấy đều.",
+                    "Đậy nắp, để tủ lạnh qua đêm (tối thiểu 4h).",
+                    "Sáng hôm sau, thêm việt quất và mật ong lên trên.",
+                    "Ăn lạnh hoặc hâm nhẹ 30 giây trong microwave."
+                ],
+                tips: "<strong>Mẹo meal prep:</strong> Chuẩn bị 3-5 hũ cùng lúc cho cả tuần.<br><strong>Biến tấu:</strong> Thay việt quất bằng chuối, dâu, xoài. Thêm bơ đậu phộng để tăng calo."
+            },
+            {
+                id: 2, name: "Trứng ốp la + Bánh mì nguyên cám", nameEn: "Egg Omelette on Whole Wheat",
+                category: "breakfast", emoji: "🍳",
+                time: 10, difficulty: 1, servings: 1,
+                calories: 450, protein: 28, carbs: 35, fat: 22, fiber: 5,
+                description: "Bữa sáng cổ điển, cân bằng macro, dễ làm và ngon miệng.",
+                tags: ["high-protein", "quick"],
+                bestFor: ["recomp", "muscle"],
+                ingredients: [
+                    { name: "Trứng gà", amount: "2 quả" },
+                    { name: "Bánh mì nguyên cám", amount: "2 lát" },
+                    { name: "Bơ trái", amount: "1/3 quả" },
+                    { name: "Rau chân vịt", amount: "50g" },
+                    { name: "Cà chua bi", amount: "50g" },
+                    { name: "Dầu olive", amount: "1 muỗng cà phê" }
+                ],
+                steps: [
+                    "Đun nóng dầu olive trong chảo chống dính.",
+                    "Đập trứng vào, thêm rau chân vịt và cà chua.",
+                    "Đảo nhẹ, đậy nắp 2-3 phút cho trứng chín.",
+                    "Nướng bánh mì 2-3 phút cho giòn.",
+                    "Phết bơ trái lên bánh mì, đặt trứng lên trên."
+                ],
+                tips: "<strong>Mẹo:</strong> Dùng chảo chống dính tốt để giảm dầu.<br><strong>Tăng protein:</strong> Thêm 1 lòng trắng trứng hoặc phô mai ít béo."
+            },
+            {
+                id: 3, name: "Smoothie Protein Xanh", nameEn: "Green Protein Smoothie",
+                category: "breakfast", emoji: "🥤",
+                time: 5, difficulty: 1, servings: 1,
+                calories: 320, protein: 30, carbs: 28, fat: 10, fiber: 6,
+                description: "Smoothie giàu dinh dưỡng, uống nhanh khi bận. Không có vị rau, rất dễ uống.",
+                tags: ["high-protein", "quick", "low-cal"],
+                bestFor: ["fatloss", "recomp"],
+                ingredients: [
+                    { name: "Whey protein", amount: "1 scoop" },
+                    { name: "Rau chân vịt", amount: "50g" },
+                    { name: "Chuối", amount: "1/2 quả" },
+                    { name: "Sữa hạnh nhân", amount: "250ml" },
+                    { name: "Hạt chia", amount: "1 muỗng" },
+                    { name: "Đá viên", amount: "5-6 viên" }
+                ],
+                steps: [
+                    "Cho tất cả nguyên liệu vào máy xay sinh tố.",
+                    "Xay tốc độ cao 30-45 giây đến khi mịn.",
+                    "Đổ ra ly, uống ngay.",
+                    "Nếu đặc quá, thêm chút sữa. Nếu lỏng, thêm đá."
+                ],
+                tips: "<strong>Mẹo:</strong> Chuối đông lạnh làm smoothie đặc và lạnh như kem.<br><strong>Biến tấu:</strong> Thêm 1 muỗng bơ đậu phộng để tăng calo cho muscle goal."
+            },
+            {
+                id: 4, name: "Pancake Yến Mạch Protein", nameEn: "Protein Oat Pancakes",
+                category: "breakfast", emoji: "🥞",
+                time: 15, difficulty: 2, servings: 2,
+                calories: 430, protein: 28, carbs: 52, fat: 12, fiber: 6,
+                description: "Pancake lành mạnh, không bột mì, giàu protein. Thơm ngon như pancake thường.",
+                tags: ["high-protein", "high-fiber"],
+                bestFor: ["recomp", "muscle"],
+                ingredients: [
+                    { name: "Yến mạch", amount: "60g" },
+                    { name: "Trứng", amount: "2 quả" },
+                    { name: "Whey protein", amount: "1/2 scoop" },
+                    { name: "Chuối chín", amount: "1/2 quả" },
+                    { name: "Baking powder", amount: "1/2 muỗng cà phê" },
+                    { name: "Việt quất", amount: "50g" }
+                ],
+                steps: [
+                    "Xay yến mạch thành bột mịn.",
+                    "Trộn với trứng, whey, chuối nghiền, baking powder.",
+                    "Đun nóng chảo chống dính, múc bột vào tạo hình tròn.",
+                    "Mỗi mặt nấu 2-3 phút đến khi vàng.",
+                    "Ăn kèm việt quất và mật ong."
+                ],
+                tips: "<strong>Mẹo:</strong> Lửa nhỏ để pancake chín đều trong ngoài.<br><strong>Meal prep:</strong> Làm nhiều, để tủ lạnh, hâm lại khi ăn."
+            },
+            {
+                id: 5, name: "Avocado Toast + Trứng", nameEn: "Avocado Toast with Egg",
+                category: "breakfast", emoji: "🥑",
+                time: 10, difficulty: 1, servings: 1,
+                calories: 480, protein: 25, carbs: 38, fat: 25, fiber: 8,
+                description: "Món ăn trendy, cân bằng macro, healthy fat từ bơ trái và protein từ trứng.",
+                tags: ["healthy-fat", "high-fiber"],
+                bestFor: ["recomp", "muscle"],
+                ingredients: [
+                    { name: "Bánh mì nguyên cám", amount: "2 lát" },
+                    { name: "Bơ trái chín", amount: "1/2 quả" },
+                    { name: "Trứng", amount: "2 quả" },
+                    { name: "Muối hồng", amount: "1 nhúm" },
+                    { name: "Tiêu đen", amount: "1 nhúm" },
+                    { name: "Hạt chia", amount: "1 muỗng cà phê" }
+                ],
+                steps: [
+                    "Nướng bánh mì đến khi vàng giòn.",
+                    "Nghiền bơ trái với muối và tiêu.",
+                    "Phết bơ lên bánh mì.",
+                    "Luộc trứng 6-7 phút (lòng đỏ chín vừa) hoặc ốp la.",
+                    "Đặt trứng lên bánh mì, rắc hạt chia."
+                ],
+                tips: "<strong>Chọn bơ:</strong> Bơ chín mềm khi ấn nhẹ lõm xuống.<br><strong>Tăng protein:</strong> Thêm cá hồi xông khói hoặc phô mai."
+            },
+            {
+                id: 6, name: "Yến mạch nấu chuối quế", nameEn: "Cinnamon Banana Oatmeal",
+                category: "breakfast", emoji: "🍌",
+                time: 10, difficulty: 1, servings: 1,
+                calories: 380, protein: 18, carbs: 58, fat: 9, fiber: 7,
+                description: "Bữa sáng ấm áp, ngọt tự nhiên từ chuối, thơm mùi quế. Tốt cho tiêu hóa.",
+                tags: ["high-fiber", "quick"],
+                bestFor: ["fatloss", "recomp"],
+                ingredients: [
+                    { name: "Yến mạch", amount: "50g" },
+                    { name: "Sữa tươi ít béo", amount: "200ml" },
+                    { name: "Chuối", amount: "1 quả" },
+                    { name: "Quế bột", amount: "1/2 muỗng cà phê" },
+                    { name: "Hạt chia", amount: "1 muỗng" },
+                    { name: "Hạnh nhân", amount: "10g" }
+                ],
+                steps: [
+                    "Đun sữa với yến mạch lửa nhỏ 5 phút.",
+                    "Thêm quế, khuấy đều.",
+                    "Nghiền 1/2 chuối vào cháo, 1/2 cắt lát để trang trí.",
+                    "Đổ ra tô, thêm hạnh nhân và hạt chia.",
+                    "Ăn nóng."
+                ],
+                tips: "<strong>Mẹo:</strong> Quế giúp ổn định đường huyết, rất tốt cho nữ 30+.<br><strong>Biến tấu:</strong> Thêm 1 scoop whey để tăng protein."
+            },
+            {
+                id: 7, name: "Sữa chua Hy Lạp + Granola", nameEn: "Greek Yogurt Parfait",
+                category: "breakfast", emoji: "🍨",
+                time: 5, difficulty: 1, servings: 1,
+                calories: 350, protein: 25, carbs: 38, fat: 12, fiber: 4,
+                description: "Bữa sáng nhanh, đẹp mắt, giàu probiotic tốt cho ruột. Không cần nấu.",
+                tags: ["high-protein", "quick"],
+                bestFor: ["fatloss", "recomp"],
+                ingredients: [
+                    { name: "Sữa chua Hy Lạp", amount: "180g" },
+                    { name: "Granola", amount: "30g" },
+                    { name: "Dâu tây", amount: "60g" },
+                    { name: "Mật ong", amount: "1 muỗng cà phê" },
+                    { name: "Hạt chia", amount: "1 muỗng cà phê" }
+                ],
+                steps: [
+                    "Xếp lớp: sữa chua → granola → dâu → lặp lại.",
+                    "Rắc hạt chia lên trên.",
+                    "Rưới mật ong.",
+                    "Ăn ngay hoặc để tủ lạnh 30 phút."
+                ],
+                tips: "<strong>Chọn granola:</strong> Loại ít đường (< 8g/serving).<br><strong>Meal prep:</strong> Chuẩn bị trong hũ, để tủ lạnh 2-3 ngày."
+            },
+            {
+                id: 8, name: "Smoothie Bowl", nameEn: "Acai-style Smoothie Bowl",
+                category: "breakfast", emoji: "🍓",
+                time: 10, difficulty: 1, servings: 1,
+                calories: 430, protein: 30, carbs: 52, fat: 12, fiber: 8,
+                description: "Bữa sáng đẹp mắt như Instagram, giàu dinh dưỡng, no lâu. Dùng thìa ăn.",
+                tags: ["high-protein", "high-fiber"],
+                bestFor: ["recomp", "muscle"],
+                ingredients: [
+                    { name: "Chuối đông lạnh", amount: "1 quả" },
+                    { name: "Quả mọng đông lạnh", amount: "80g" },
+                    { name: "Whey protein", amount: "1 scoop" },
+                    { name: "Sữa hạnh nhân", amount: "100ml" },
+                    { name: "Granola", amount: "30g" },
+                    { name: "Hạt chia + dừa nạo", amount: "1 muỗng mỗi loại" }
+                ],
+                steps: [
+                    "Xay chuối, quả mọng, whey và sữa đến khi đặc mịn.",
+                    "Đổ ra tô (phải đặc như kem, không lỏng).",
+                    "Xếp topping: granola, hạt chia, dừa nạo, quả tươi.",
+                    "Ăn ngay bằng thìa."
+                ],
+                tips: "<strong>Mẹo:</strong> Dùng ít sữa để smoothie đặc. Nếu lỏng, thêm chuối đông lạnh.<br><strong>Topping:</strong> Sáng tạo với các loại hạt, trái cây theo mùa."
+            },
+            
+            // ===== LUNCH (8) =====
+            {
+                id: 9, name: "Gà áp chảo + Gạo lứt + Rau", nameEn: "Pan-seared Chicken with Brown Rice",
+                category: "lunch", emoji: "🍗",
+                time: 25, difficulty: 2, servings: 1,
+                calories: 520, protein: 45, carbs: 50, fat: 15, fiber: 5,
+                description: "Bữa trưa cân bằng, đầy đủ macro. Món cơ bản trong mọi meal plan.",
+                tags: ["high-protein", "meal-prep"],
+                bestFor: ["fatloss", "recomp", "muscle"],
+                ingredients: [
+                    { name: "Ức gà", amount: "170g" },
+                    { name: "Gạo lứt (đã nấu)", amount: "100g" },
+                    { name: "Bông cải xanh", amount: "150g" },
+                    { name: "Tỏi", amount: "2 tép" },
+                    { name: "Dầu olive", amount: "1 muỗng" },
+                    { name: "Chanh", amount: "1/2 quả" }
+                ],
+                steps: [
+                    "Ướp gà với muối, tiêu, tỏi băm 10 phút.",
+                    "Đun nóng dầu, áp chảo gà 5-6 phút mỗi mặt.",
+                    "Hấp bông cải 5 phút.",
+                    "Nấu gạo lứt (hoặc dùng gạo đã nấu sẵn).",
+                    "Xếp ra đĩa, vắt chanh, ăn nóng."
+                ],
+                tips: "<strong>Meal prep:</strong> Nấu nhiều gà 1 lần, chia portions cho 3-4 ngày.<br><strong>Mẹo:</strong> Để gà nghỉ 5 phút sau khi nấu để giữ nước."
+            },
+            {
+                id: 10, name: "Salad Cá Ngừ", nameEn: "Tuna Salad",
+                category: "lunch", emoji: "🥗",
+                time: 10, difficulty: 1, servings: 1,
+                calories: 420, protein: 40, carbs: 25, fat: 18, fiber: 6,
+                description: "Salad nhanh, không cần nấu, giàu protein và omega-3. Hoàn hảo cho ngày bận.",
+                tags: ["high-protein", "quick", "healthy-fat"],
+                bestFor: ["fatloss", "recomp"],
+                ingredients: [
+                    { name: "Cá ngừ hộp (ngâm nước)", amount: "1 hộp" },
+                    { name: "Rau diếp", amount: "100g" },
+                    { name: "Cà chua bi", amount: "80g" },
+                    { name: "Dưa chuột", amount: "1/2 quả" },
+                    { name: "Dầu olive", amount: "1 muỗng" },
+                    { name: "Chanh", amount: "1/2 quả" }
+                ],
+                steps: [
+                    "Rửa và cắt rau, cà chua, dưa chuột.",
+                    "Mở hộp cá ngừ, để ráo nước.",
+                    "Xếp rau lên đĩa, thêm cá ngừ.",
+                    "Trộn dầu olive, chanh, muối, tiêu làm dressing.",
+                    "Rưới dressing lên salad, trộn đều."
+                ],
+                tips: "<strong>Chọn cá ngừ:</strong> Loại ngâm nước (ít calo) tốt hơn ngâm dầu.<br><strong>Biến tấu:</strong> Thêm trứng luộc, bơ trái, hạt."
+            },
+            {
+                id: 11, name: "Tôm xào Quinoa", nameEn: "Shrimp Quinoa Stir-fry",
+                category: "lunch", emoji: "🦐",
+                time: 20, difficulty: 2, servings: 1,
+                calories: 500, protein: 42, carbs: 48, fat: 14, fiber: 5,
+                description: "Món ăn lạ miệng với quinoa, giàu protein complete và omega-3 từ tôm.",
+                tags: ["high-protein", "high-fiber"],
+                bestFor: ["recomp", "muscle"],
+                ingredients: [
+                    { name: "Tôm", amount: "170g" },
+                    { name: "Quinoa (đã nấu)", amount: "90g" },
+                    { name: "Ớt chuông", amount: "100g" },
+                    { name: "Tỏi", amount: "2 tép" },
+                    { name: "Nước tương ít muối", amount: "1 muỗng" },
+                    { name: "Chanh", amount: "1/2 quả" }
+                ],
+                steps: [
+                    "Bóc vỏ tôm, rửa sạch.",
+                    "Phi tỏi với chút dầu, xào tôm 3-4 phút.",
+                    "Thêm ớt chuông cắt lát, xào 2 phút.",
+                    "Trộn quinoa vào, nêm nước tương.",
+                    "Vắt chanh, ăn nóng."
+                ],
+                tips: "<strong>Mẹo:</strong> Không xào tôm quá lâu để không bị dai.<br><strong>Biến tấu:</strong> Thêm bông cải, nấm, bí ngòi."
+            },
+            {
+                id: 12, name: "Bún gạo lứt thịt heo", nameEn: "Brown Rice Noodle Pork Soup",
+                category: "lunch", emoji: "🍜",
+                time: 20, difficulty: 2, servings: 1,
+                calories: 480, protein: 38, carbs: 55, fat: 12, fiber: 3,
+                description: "Món nước ấm nóng kiểu Việt, dùng bún gạo lứt thay bún thường. Thơm ngon, bổ dưỡng.",
+                tags: ["high-protein", "meal-prep"],
+                bestFor: ["recomp", "muscle"],
+                ingredients: [
+                    { name: "Bún gạo lứt", amount: "100g (khô)" },
+                    { name: "Thịt heo nạc", amount: "120g" },
+                    { name: "Rau sống", amount: "100g" },
+                    { name: "Hành lá", amount: "2 cây" },
+                    { name: "Nước dùng", amount: "500ml" },
+                    { name: "Gừng, hành tím", amount: "Vừa đủ" }
+                ],
+                steps: [
+                    "Nấu nước dùng với gừng, hành tím 15 phút.",
+                    "Thái mỏng thịt heo, chần qua nước sôi.",
+                    "Luộc bún gạo lứt 5-7 phút, xả lạnh.",
+                    "Xếp bún, thịt vào tô, chan nước dùng.",
+                    "Thêm rau sống, hành lá, ăn nóng."
+                ],
+                tips: "<strong>Mẹo:</strong> Nước dùng trong bằng cách không đậy nắp khi nấu.<br><strong>Meal prep:</strong> Nấu nước dùng nhiều, để tủ lạnh dùng cả tuần."
+            },
+            {
+                id: 13, name: "Bò xào ớt chuông", nameEn: "Beef Stir-fry with Bell Pepper",
+                category: "lunch", emoji: "🥩",
+                time: 20, difficulty: 2, servings: 1,
+                calories: 550, protein: 45, carbs: 55, fat: 18, fiber: 4,
+                description: "Món xào đậm đà, giàu sắt và kẽm - quan trọng cho phụ nữ 30+.",
+                tags: ["high-protein"],
+                bestFor: ["recomp", "muscle"],
+                ingredients: [
+                    { name: "Thịt bò nạc (thăn)", amount: "170g" },
+                    { name: "Ớt chuông 3 màu", amount: "150g" },
+                    { name: "Hành tây", amount: "1/2 củ" },
+                    { name: "Tỏi", amount: "3 tép" },
+                    { name: "Nước tương", amount: "1 muỗng" },
+                    { name: "Gạo lứt", amount: "100g (đã nấu)" }
+                ],
+                steps: [
+                    "Thái thịt bò mỏng ngang thớ.",
+                    "Ướp với nước tương, tỏi 10 phút.",
+                    "Phi tỏi, xào bò lửa lớn 2-3 phút.",
+                    "Thêm ớt chuông, hành tây, xào 2 phút.",
+                    "Ăn kèm gạo lứt."
+                ],
+                tips: "<strong>Mẹo:</strong> Xào lửa lớn, nhanh để thịt mềm.<br><strong>Chọn thịt:</strong> Thăn bò hoặc bắp bò ít mỡ."
+            },
+            {
+                id: 14, name: "Cá hồi nướng + Khoai lang", nameEn: "Baked Salmon with Sweet Potato",
+                category: "lunch", emoji: "🐟",
+                time: 30, difficulty: 2, servings: 1,
+                calories: 580, protein: 42, carbs: 55, fat: 22, fiber: 7,
+                description: "Bữa trưa giàu omega-3, tốt cho tim mạch và não. Khoai lang cung cấp carb phức hợp.",
+                tags: ["healthy-fat", "high-fiber"],
+                bestFor: ["recomp", "muscle"],
+                ingredients: [
+                    { name: "Cá hồi phi lê", amount: "170g" },
+                    { name: "Khoai lang", amount: "180g" },
+                    { name: "Măng tây", amount: "100g" },
+                    { name: "Chanh", amount: "1/2 quả" },
+                    { name: "Dầu olive", amount: "1 muỗng" },
+                    { name: "Thì là", amount: "Vài nhánh" }
+                ],
+                steps: [
+                    "Làm nóng lò 200°C.",
+                    "Cắt khoai lang thành miếng, trộn dầu olive, nướng 20 phút.",
+                    "Ướp cá hồi với chanh, thì là, muối tiêu.",
+                    "Thêm cá và măng tây vào khay, nướng 12-15 phút.",
+                    "Ăn nóng với chanh vắt."
+                ],
+                tips: "<strong>Tần suất:</strong> Ăn cá hồi 2-3 lần/tuần để có đủ omega-3.<br><strong>Mẹo:</strong> Cá hồi chín khi dễ dàng tách bằng nĩa."
+            },
+            {
+                id: 15, name: "Đậu phụ kho rau củ", nameEn: "Braised Tofu with Vegetables",
+                category: "lunch", emoji: "🍲",
+                time: 25, difficulty: 2, servings: 1,
+                calories: 450, protein: 28, carbs: 45, fat: 18, fiber: 8,
+                description: "Món chay giàu protein thực vật, isoflavone tốt cho hormone nữ. Đậm đà kiểu Việt.",
+                tags: ["high-protein", "high-fiber", "meal-prep"],
+                bestFor: ["fatloss", "recomp"],
+                ingredients: [
+                    { name: "Đậu phụ cứng", amount: "200g" },
+                    { name: "Nấm rơm", amount: "100g" },
+                    { name: "Cà rốt", amount: "1 củ" },
+                    { name: "Bông cải", amount: "100g" },
+                    { name: "Nước tương", amount: "2 muỗng" },
+                    { name: "Gừng, hành boa-rô", amount: "Vừa đủ" }
+                ],
+                steps: [
+                    "Cắt đậu phụ thành miếng vuông, chiên vàng 2 mặt.",
+                    "Phi gừng, xào nấm và cà rốt 3 phút.",
+                    "Thêm đậu phụ, nước tương, chút nước.",
+                    "Kho lửa nhỏ 10 phút cho thấm.",
+                    "Thêm bông cải, nấu thêm 3 phút. Rắc hành boa-rô."
+                ],
+                tips: "<strong>Mẹo:</strong> Ép đậu phụ ráo nước trước khi chiên để giòn hơn.<br><strong>Biến tấu:</strong> Thêm nước dừa để tạo vị béo."
+            },
+            {
+                id: 16, name: "Gà xé phay + Bánh đa", nameEn: "Shredded Chicken Salad",
+                category: "lunch", emoji: "🥙",
+                time: 20, difficulty: 2, servings: 1,
+                calories: 480, protein: 40, carbs: 45, fat: 15, fiber: 4,
+                description: "Món gỏi gà truyền thống Việt, thanh mát, ít dầu. Hoàn hảo cho ngày nóng.",
+                tags: ["high-protein", "low-cal"],
+                bestFor: ["fatloss", "recomp"],
+                ingredients: [
+                    { name: "Ức gà", amount: "150g" },
+                    { name: "Bắp cải tím", amount: "80g" },
+                    { name: "Cà rốt", amount: "1/2 củ" },
+                    { name: "Rau răm", amount: "1 nắm" },
+                    { name: "Đậu phộng rang", amount: "20g" },
+                    { name: "Nước mắm, chanh, tỏi", amount: "Vừa đủ" }
+                ],
+                steps: [
+                    "Luộc gà 15-20 phút, để nguội, xé sợi.",
+                    "Thái sợi bắp cải, cà rốt.",
+                    "Pha nước trộn: nước mắm, chanh, đường, tỏi.",
+                    "Trộn gà, rau, nước trộn.",
+                    "Rắc đậu phộng và rau răm lên trên."
+                ],
+                tips: "<strong>Mẹo:</strong> Luộc gà với gừng, hành để thơm hơn.<br><strong>Meal prep:</strong> Gà luộc để tủ lạnh 3-4 ngày, khi ăn mới trộn rau."
+            },
+            
+            // ===== DINNER (8) =====
+            {
+                id: 17, name: "Cá basa kho gừng", nameEn: "Ginger Braised Basa Fish",
+                category: "dinner", emoji: "🐠",
+                time: 25, difficulty: 2, servings: 1,
+                calories: 480, protein: 40, carbs: 45, fat: 14, fiber: 3,
+                description: "Món kho truyền thống Việt, ấm bụng, dễ tiêu hóa. Tốt cho bữa tối.",
+                tags: ["high-protein", "meal-prep"],
+                bestFor: ["recomp", "muscle"],
+                ingredients: [
+                    { name: "Cá basa", amount: "180g" },
+                    { name: "Gừng", amount: "1 củ nhỏ" },
+                    { name: "Hành tím", amount: "2 củ" },
+                    { name: "Nước mắm", amount: "1 muỗng" },
+                    { name: "Đường thốt nốt", amount: "1 muỗng cà phê" },
+                    { name: "Gạo lứt", amount: "100g (đã nấu)" }
+                ],
+                steps: [
+                    "Rửa cá, để ráo.",
+                    "Phi hành tím với chút dầu, thêm gừng thái sợi.",
+                    "Xếp cá vào, thêm nước mắm, đường, nước.",
+                    "Kho lửa nhỏ 15-20 phút, trở cá 1 lần.",
+                    "Ăn nóng với cơm gạo lứt và rau luộc."
+                ],
+                tips: "<strong>Mẹo:</strong> Kho với lửa nhỏ để cá không vỡ.<br><strong>Biến tấu:</strong> Thêm tiêu để ấm hơn."
+            },
+            {
+                id: 18, name: "Soup gà rau củ", nameEn: "Chicken Vegetable Soup",
+                category: "dinner", emoji: "🍲",
+                time: 30, difficulty: 2, servings: 2,
+                calories: 380, protein: 35, carbs: 38, fat: 10, fiber: 6,
+                description: "Soup ấm nóng, dễ tiêu hóa, tốt cho bữa tối. Làm 1 lần ăn 2-3 bữa.",
+                tags: ["high-protein", "low-cal", "meal-prep"],
+                bestFor: ["fatloss", "recomp"],
+                ingredients: [
+                    { name: "Ức gà", amount: "200g" },
+                    { name: "Cà rốt", amount: "1 củ" },
+                    { name: "Khoai tây", amount: "1 củ" },
+                    { name: "Cần tây", amount: "2 cây" },
+                    { name: "Hành tây", amount: "1/2 củ" },
+                    { name: "Nước dùng gà", amount: "800ml" }
+                ],
+                steps: [
+                    "Thái tất cả rau củ thành miếng vừa ăn.",
+                    "Luộc gà 15 phút, vớt ra xé sợi.",
+                    "Dùng nước luộc gà làm nước dùng.",
+                    "Xào hành tây, thêm rau củ, nước dùng.",
+                    "Nấu 15 phút, thêm gà xé, nêm nếm."
+                ],
+                tips: "<strong>Meal prep:</strong> Nấu nồi lớn, chia portions, để tủ lạnh 3-4 ngày.<br><strong>Mẹo:</strong> Soup ngon hơn sau 1 ngày vì gia vị thấm."
+            },
+            {
+                id: 19, name: "Tôm hấp + Rau luộc", nameEn: "Steamed Shrimp with Vegetables",
+                category: "dinner", emoji: "🦞",
+                time: 20, difficulty: 1, servings: 1,
+                calories: 350, protein: 38, carbs: 30, fat: 8, fiber: 6,
+                description: "Bữa tối nhẹ nhàng, ít calo, nhiều protein. Phương pháp hấp giữ nguyên dinh dưỡng.",
+                tags: ["high-protein", "low-cal"],
+                bestFor: ["fatloss", "recomp"],
+                ingredients: [
+                    { name: "Tôm sú", amount: "200g" },
+                    { name: "Bông cải xanh", amount: "150g" },
+                    { name: "Cà rốt", amount: "1/2 củ" },
+                    { name: "Gừng", amount: "Vài lát" },
+                    { name: "Chanh", amount: "1/2 quả" },
+                    { name: "Muối tiêu", amount: "Vừa đủ" }
+                ],
+                steps: [
+                    "Rửa sạch tôm, cắt râu.",
+                    "Xếp tôm, gừng lên đĩa hấp.",
+                    "Hấp tôm 5-7 phút đến khi đỏ.",
+                    "Hấp rau củ 5 phút.",
+                    "Ăn với nước mắm chanh tỏi."
+                ],
+                tips: "<strong>Mẹo:</strong> Không hấp quá lâu để tôm không bị khô.<br><strong>Chấm:</strong> Nước mắm chanh tỏi ớt hoặc muối tiêu chanh."
+            },
+            {
+                id: 20, name: "Thịt heo nạc kho trứng", nameEn: "Braised Pork with Eggs",
+                category: "dinner", emoji: "🍖",
+                time: 35, difficulty: 2, servings: 2,
+                calories: 520, protein: 42, carbs: 40, fat: 20, fiber: 3,
+                description: "Món kho đậm đà, đưa cơm. Dùng thịt thăn nạc để giảm mỡ.",
+                tags: ["high-protein", "meal-prep"],
+                bestFor: ["recomp", "muscle"],
+                ingredients: [
+                    { name: "Thịt heo thăn", amount: "250g" },
+                    { name: "Trứng cút", amount: "10 quả" },
+                    { name: "Nước dừa", amount: "200ml" },
+                    { name: "Nước màu dừa", amount: "1 muỗng" },
+                    { name: "Hành tím, tỏi", amount: "Vừa đủ" },
+                    { name: "Gạo lứt", amount: "150g (đã nấu)" }
+                ],
+                steps: [
+                    "Thái thịt thành miếng vuông.",
+                    "Phi hành tỏi, thêm thịt xào săn.",
+                    "Thêm nước màu, nước dừa, đun sôi.",
+                    "Kho lửa nhỏ 25 phút.",
+                    "Thêm trứng cút luộc đã bóc vỏ, kho thêm 5 phút."
+                ],
+                tips: "<strong>Chọn thịt:</strong> Thăn heo nạc nhất.<br><strong>Mẹo:</strong> Dùng nước dừa xiêm để món thơm hơn."
+            },
+            {
+                id: 21, name: "Cá hồi áp chảo + Măng tây", nameEn: "Pan-seared Salmon with Asparagus",
+                category: "dinner", emoji: "🐟",
+                time: 20, difficulty: 2, servings: 1,
+                calories: 520, protein: 42, carbs: 25, fat: 28, fiber: 5,
+                description: "Bữa tối sang trọng, giàu omega-3. Măng tây là superfood cho nữ giới.",
+                tags: ["healthy-fat", "high-protein"],
+                bestFor: ["recomp", "muscle"],
+                ingredients: [
+                    { name: "Cá hồi phi lê", amount: "170g" },
+                    { name: "Măng tây", amount: "150g" },
+                    { name: "Chanh", amount: "1/2 quả" },
+                    { name: "Tỏi", amount: "2 tép" },
+                    { name: "Dầu olive", amount: "1 muỗng" },
+                    { name: "Thì là", amount: "Vài nhánh" }
+                ],
+                steps: [
+                    "Thấm khô cá hồi, ướp muối tiêu.",
+                    "Đun nóng chảo, áp chảo cá 4 phút mỗi mặt (da giòn).",
+                    "Phi tỏi, xào măng tây 3-4 phút.",
+                    "Xếp ra đĩa, vắt chanh, rắc thì là.",
+                    "Ăn nóng."
+                ],
+                tips: "<strong>Mẹo:</strong> Bắt đầu với mặt da để da giòn.<br><strong>Biến tấu:</strong> Thêm khoai lang nghiền hoặc quinoa."
+            },
+            {
+                id: 22, name: "Salad gà Hy Lạp", nameEn: "Greek Chicken Salad",
+                category: "dinner", emoji: "🥗",
+                time: 15, difficulty: 1, servings: 1,
+                calories: 450, protein: 40, carbs: 25, fat: 22, fiber: 5,
+                description: "Salad kiểu Địa Trung Hải, tươi mát, không cần nấu nhiều. Giàu healthy fat.",
+                tags: ["high-protein", "healthy-fat", "quick"],
+                bestFor: ["fatloss", "recomp"],
+                ingredients: [
+                    { name: "Ức gà (đã luộc/nướng)", amount: "150g" },
+                    { name: "Dưa chuột", amount: "1/2 quả" },
+                    { name: "Cà chua", amount: "1 quả" },
+                    { name: "Phô mai feta", amount: "30g" },
+                    { name: "Ô liu đen", amount: "20g" },
+                    { name: "Dầu olive, chanh, oregano", amount: "Vừa đủ" }
+                ],
+                steps: [
+                    "Thái gà, dưa chuột, cà chua.",
+                    "Xếp rau lên đĩa, thêm gà.",
+                    "Rắc phô mai feta vụn và ô liu.",
+                    "Pha dressing: dầu olive, chanh, oregano, muối.",
+                    "Rưới dressing, trộn nhẹ."
+                ],
+                tips: "<strong>Mẹo:</strong> Dùng gà còn lại từ bữa trưa để tiết kiệm thời gian.<br><strong>Biến tấu:</strong> Thêm hạt diêm mạch để no hơn."
+            },
+            {
+                id: 23, name: "Đậu phụ sốt cà chua", nameEn: "Tofu in Tomato Sauce",
+                category: "dinner", emoji: "🍅",
+                time: 20, difficulty: 2, servings: 1,
+                calories: 380, protein: 25, carbs: 30, fat: 18, fiber: 6,
+                description: "Món chay đậm đà, giàu lycopene từ cà chua. Phù hợp bữa tối nhẹ.",
+                tags: ["high-protein", "low-cal", "high-fiber"],
+                bestFor: ["fatloss", "recomp"],
+                ingredients: [
+                    { name: "Đậu phụ", amount: "200g" },
+                    { name: "Cà chua", amount: "2 quả" },
+                    { name: "Hành lá", amount: "2 cây" },
+                    { name: "Tỏi", amount: "2 tép" },
+                    { name: "Nước tương", amount: "1 muỗng" },
+                    { name: "Gạo lứt", amount: "80g (đã nấu)" }
+                ],
+                steps: [
+                    "Cắt đậu phụ thành miếng, chiên vàng.",
+                    "Phi tỏi, xào cà chua cắt múi cau.",
+                    "Thêm chút nước, nước tương.",
+                    "Thêm đậu phụ, kho 5-7 phút cho thấm.",
+                    "Rắc hành lá, ăn với cơm gạo lứt."
+                ],
+                tips: "<strong>Mẹo:</strong> Nấu cà chua với dầu giúp hấp thu lycopene tốt hơn.<br><strong>Biến tấu:</strong> Thêm nấm để tăng vị umami."
+            },
+            {
+                id: 24, name: "Gà nướng mật ong + Rau", nameEn: "Honey Roasted Chicken",
+                category: "dinner", emoji: "🍗",
+                time: 35, difficulty: 2, servings: 2,
+                calories: 520, protein: 45, carbs: 40, fat: 18, fiber: 5,
+                description: "Gà nướng thơm lừng, vị ngọt tự nhiên từ mật ong. Bữa tối đặc biệt cuối tuần.",
+                tags: ["high-protein"],
+                bestFor: ["recomp", "muscle"],
+                ingredients: [
+                    { name: "Đùi gà", amount: "2 cái" },
+                    { name: "Mật ong", amount: "2 muỗng" },
+                    { name: "Tỏi", amount: "4 tép" },
+                    { name: "Khoai tây", amount: "200g" },
+                    { name: "Cà rốt", amount: "2 củ" },
+                    { name: "Rosemary", amount: "Vài nhánh" }
+                ],
+                steps: [
+                    "Ướp gà với mật ong, tỏi băm, muối tiêu 30 phút.",
+                    "Làm nóng lò 200°C.",
+                    "Xếp gà, khoai, cà rốt lên khay.",
+                    "Nướng 25-30 phút, trở 1 lần.",
+                    "Rắc rosemary, ăn nóng."
+                ],
+                tips: "<strong>Mẹo:</strong> Ướp qua đêm để gà thấm gia vị hơn.<br><strong>Biến tấu:</strong> Thêm bí ngòi, hành tây."
+            },
+            
+            // ===== SNACK (6) =====
+            {
+                id: 25, name: "Sữa chua Hy Lạp + Quả mọng", nameEn: "Greek Yogurt with Berries",
+                category: "snack", emoji: "🫐",
+                time: 2, difficulty: 1, servings: 1,
+                calories: 180, protein: 15, carbs: 20, fat: 5, fiber: 3,
+                description: "Snack nhanh, giàu protein và probiotic. Không cần chuẩn bị.",
+                tags: ["high-protein", "quick"],
+                bestFor: ["fatloss", "recomp"],
+                ingredients: [
+                    { name: "Sữa chua Hy Lạp", amount: "150g" },
+                    { name: "Việt quất", amount: "50g" },
+                    { name: "Mật ong", amount: "1 muỗng cà phê" }
+                ],
+                steps: [
+                    "Đổ sữa chua ra tô/hũ.",
+                    "Thêm việt quất lên trên.",
+                    "Rưới mật ong.",
+                    "Ăn ngay."
+                ],
+                tips: "<strong>Mẹo:</strong> Dùng quả mọng đông lạnh khi không có tươi.<br><strong>Biến tấu:</strong> Thêm granola hoặc hạt chia."
+            },
+            {
+                id: 26, name: "Táo + Bơ đậu phộng", nameEn: "Apple with Peanut Butter",
+                category: "snack", emoji: "🍎",
+                time: 2, difficulty: 1, servings: 1,
+                calories: 250, protein: 8, carbs: 32, fat: 12, fiber: 4,
+                description: "Snack cân bằng carb + fat + protein. No lâu, tiện lợi mang theo.",
+                tags: ["quick", "healthy-fat"],
+                bestFor: ["recomp", "muscle"],
+                ingredients: [
+                    { name: "Táo", amount: "1 quả vừa" },
+                    { name: "Bơ đậu phộng natural", amount: "1.5 muỗng" }
+                ],
+                steps: [
+                    "Rửa táo, cắt thành lát.",
+                    "Múc bơ đậu phộng ra đĩa nhỏ.",
+                    "Chấm táo vào bơ và ăn."
+                ],
+                tips: "<strong>Chọn bơ:</strong> Loại 100% đậu phộng, không đường.<br><strong>Biến tấu:</strong> Dùng bơ hạnh nhân hoặc bơ hạt điều."
+            },
+            {
+                id: 27, name: "Trứng luộc + Hạt bí", nameEn: "Hard-boiled Eggs with Pumpkin Seeds",
+                category: "snack", emoji: "🥚",
+                time: 10, difficulty: 1, servings: 1,
+                calories: 220, protein: 16, carbs: 8, fat: 14, fiber: 2,
+                description: "Snack protein cao, giàu kẽm và magie. Chuẩn bị 1 lần ăn cả tuần.",
+                tags: ["high-protein", "meal-prep"],
+                bestFor: ["fatloss", "recomp"],
+                ingredients: [
+                    { name: "Trứng gà", amount: "2 quả" },
+                    { name: "Hạt bí", amount: "20g" },
+                    { name: "Muối hồng", amount: "1 nhúm" }
+                ],
+                steps: [
+                    "Luộc trứng 6-7 phút (lòng đỏ chín vừa).",
+                    "Ngâm nước lạnh 2 phút để dễ bóc.",
+                    "Bóc vỏ, cắt đôi.",
+                    "Rắc muối hồng, ăn kèm hạt bí."
+                ],
+                tips: "<strong>Meal prep:</strong> Luộc 10-12 trứng 1 lần, để tủ lạnh ăn cả tuần.<br><strong>Mẹo:</strong> Thêm ít giấm vào nước luộc để dễ bóc."
+            },
+            {
+                id: 28, name: "Hạt hỗn hợp + Trái cây khô", nameEn: "Trail Mix",
+                category: "snack", emoji: "🥜",
+                time: 1, difficulty: 1, servings: 1,
+                calories: 280, protein: 8, carbs: 30, fat: 16, fiber: 4,
+                description: "Snack năng lượng cao, tiện lợi mang theo. Hoàn hảo trước/sau tập.",
+                tags: ["healthy-fat", "quick"],
+                bestFor: ["recomp", "muscle"],
+                ingredients: [
+                    { name: "Hạnh nhân", amount: "15g" },
+                    { name: "Óc chó", amount: "15g" },
+                    { name: "Nho khô", amount: "10g" },
+                    { name: "Hạt bí", amount: "10g" }
+                ],
+                steps: [
+                    "Trộn tất cả trong hũ nhỏ.",
+                    "Ăn ngay hoặc mang theo.",
+                    "Khẩu phần: 1 nắm tay (30-40g)."
+                ],
+                tips: "<strong>Khẩu phần:</strong> Không ăn quá 40g vì calo cao.<br><strong>Meal prep:</strong> Chia sẵn thành túi nhỏ cho cả tuần."
+            },
+            {
+                id: 29, name: "Hummus + Rau củ", nameEn: "Hummus with Veggie Sticks",
+                category: "snack", emoji: "🥕",
+                time: 5, difficulty: 1, servings: 1,
+                calories: 200, protein: 8, carbs: 22, fat: 10, fiber: 6,
+                description: "Snack kiểu Trung Đông, giàu fiber và protein thực vật. Chấm vui miệng.",
+                tags: ["high-fiber", "healthy-fat"],
+                bestFor: ["fatloss", "recomp"],
+                ingredients: [
+                    { name: "Hummus", amount: "60g" },
+                    { name: "Cà rốt", amount: "1/2 củ" },
+                    { name: "Dưa chuột", amount: "1/2 quả" },
+                    { name: "Ớt chuông", amount: "1/2 quả" }
+                ],
+                steps: [
+                    "Thái rau củ thành que dài.",
+                    "Múc hummus ra đĩa nhỏ.",
+                    "Chấm rau củ vào hummus và ăn."
+                ],
+                tips: "<strong>Tự làm hummus:</strong> Xay đậu gà, tahini, chanh, tỏi, dầu olive.<br><strong>Biến tấu:</strong> Dùng cần tây, bông cải thay thế."
+            },
+            {
+                id: 30, name: "Protein Energy Balls", nameEn: "No-bake Protein Balls",
+                category: "snack", emoji: "🍪",
+                time: 15, difficulty: 1, servings: 8,
+                calories: 120, protein: 6, carbs: 12, fat: 6, fiber: 2,
+                description: "Snack ngọt lành mạnh, không cần nướng. Chuẩn bị 1 lần ăn cả tuần.",
+                tags: ["high-protein", "meal-prep", "quick"],
+                bestFor: ["recomp", "muscle"],
+                ingredients: [
+                    { name: "Yến mạch", amount: "100g" },
+                    { name: "Bơ đậu phộng", amount: "80g" },
+                    { name: "Mật ong", amount: "60ml" },
+                    { name: "Whey protein", amount: "1 scoop" },
+                    { name: "Chocolate chip đen", amount: "30g" },
+                    { name: "Hạt chia", amount: "2 muỗng" }
+                ],
+                steps: [
+                    "Trộn tất cả nguyên liệu trong tô lớn.",
+                    "Để tủ lạnh 15 phút cho hỗn hợp đặc.",
+                    "Viên thành viên nhỏ (20g/viên).",
+                    "Lăn qua hạt chia hoặc dừa nạo.",
+                    "Để tủ lạnh, ăn trong 1 tuần."
+                ],
+                tips: "<strong>Meal prep:</strong> Làm 15-20 viên, để tủ lạnh ăn cả tuần.<br><strong>Biến tấu:</strong> Thêm cacao, coconut, hoặc các loại hạt khác."
+            }
+        ];
+        
+        // ==================== CATEGORY INFO ====================
+        const categoryInfo = {
+            breakfast: { name: 'Bữa sáng', desc: 'Năng lượng cho ngày mới · 8 công thức' },
+            lunch: { name: 'Bữa trưa', desc: 'Bữa chính, cân bằng macro · 8 công thức' },
+            dinner: { name: 'Bữa tối', desc: 'Nhẹ nhàng, dễ tiêu hóa · 8 công thức' },
+            snack: { name: 'Snack lành mạnh', desc: 'Ăn nhẹ thông minh giữa bữa · 6 công thức' }
+        };
+        
+        // ==================== STATE ====================
+        let currentFilters = {
+            category: 'all',
+            time: 'all',
+            cal: 'all',
+            goal: 'all',
+            tag: 'all',
+            search: ''
+        };
+        
+        // ==================== RENDER ====================
+        function renderRecipes() {
+            const container = document.getElementById('recipeContainer');
+            const filtered = recipeDatabase.filter(recipe => {
+                if (currentFilters.category !== 'all' && recipe.category !== currentFilters.category) return false;
+                
+                // Time filter
+                if (currentFilters.time !== 'all') {
+                    if (currentFilters.time === 'quick' && recipe.time > 15) return false;
+                    if (currentFilters.time === 'medium' && (recipe.time < 15 || recipe.time > 30)) return false;
+                    if (currentFilters.time === 'long' && recipe.time <= 30) return false;
+                }
+                
+                // Calories filter
+                if (currentFilters.cal !== 'all') {
+                    if (currentFilters.cal === 'low' && recipe.calories >= 400) return false;
+                    if (currentFilters.cal === 'medium' && (recipe.calories < 400 || recipe.calories > 600)) return false;
+                    if (currentFilters.cal === 'high' && recipe.calories <= 600) return false;
+                }
+                
+                // Goal filter
+                if (currentFilters.goal !== 'all' && !recipe.bestFor.includes(currentFilters.goal)) return false;
+                
+                // Tag filter
+                if (currentFilters.tag !== 'all' && !recipe.tags.includes(currentFilters.tag)) return false;
+                
+                // Search
+                if (currentFilters.search) {
+                    const search = currentFilters.search.toLowerCase();
+                    return recipe.name.toLowerCase().includes(search) || 
+                           recipe.nameEn.toLowerCase().includes(search) ||
+                           recipe.description.toLowerCase().includes(search);
+                }
+                
+                return true;
+            });
+            
+            if (filtered.length === 0) {
+                container.innerHTML = '';
+                document.getElementById('noResults').classList.add('active');
+                return;
+            }
+            
+            document.getElementById('noResults').classList.remove('active');
+            
+            // Group by category
+            const grouped = {};
+            filtered.forEach(recipe => {
+                if (!grouped[recipe.category]) grouped[recipe.category] = [];
+                grouped[recipe.category].push(recipe);
+            });
+            
+            let html = '';
+            Object.keys(grouped).forEach(category => {
+                const info = categoryInfo[category];
+                html += `
+                    <div class="category-section active" data-category="${category}">
+                        <div class="category-header">
+                            <h2>${info.name}</h2>
+                            <p>${info.desc}</p>
+                        </div>
+                        <div class="recipe-grid">
+                            ${grouped[category].map(recipe => renderRecipeCard(recipe)).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        function renderRecipeCard(recipe) {
+            const totalMacro = recipe.protein + recipe.carbs + recipe.fat;
+            const pPercent = totalMacro > 0 ? (recipe.protein / totalMacro * 100) : 0;
+            const cPercent = totalMacro > 0 ? (recipe.carbs / totalMacro * 100) : 0;
+            const fPercent = totalMacro > 0 ? (recipe.fat / totalMacro * 100) : 0;
+            
+            const categoryNames = {
+                breakfast: 'BỮA SÁNG',
+                lunch: 'BỮA TRƯA',
+                dinner: 'BỮA TỐI',
+                snack: 'SNACK'
+            };
+            
+            const tagLabels = {
+                'high-protein': 'High Protein',
+                'low-cal': 'Low Cal',
+                'quick': 'Quick',
+                'meal-prep': 'Meal Prep',
+                'high-fiber': 'High Fiber',
+                'healthy-fat': 'Healthy Fat'
+            };
+            
+            return `
+                <div class="recipe-card" data-category="${recipe.category}" onclick="openModal(${recipe.id})">
+                    <div class="recipe-image">
+                        <div class="recipe-badges">
+                            ${recipe.tags.slice(0, 2).map(tag => `<span class="recipe-badge">${tagLabels[tag] || tag}</span>`).join('')}
+                        </div>
+                        <div class="recipe-time">⏱️ ${recipe.time}'</div>
+                        <div class="recipe-emoji">${recipe.emoji}</div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-category-tag">${categoryNames[recipe.category]}</div>
+                        <div class="recipe-name">${recipe.name}</div>
+                        <div class="recipe-desc">${recipe.description}</div>
+                        
+                        <div class="recipe-macro-bar">
+                            <div class="p" style="width: ${pPercent}%"></div>
+                            <div class="c" style="width: ${cPercent}%"></div>
+                            <div class="f" style="width: ${fPercent}%"></div>
+                        </div>
+                        
+                        <div class="recipe-macros">
+                            <div class="recipe-macro-item cal">
+                                <div class="recipe-macro-label">Calo</div>
+                                <div class="recipe-macro-value">${recipe.calories}</div>
+                            </div>
+                            <div class="recipe-macro-item p">
+                                <div class="recipe-macro-label">Protein</div>
+                                <div class="recipe-macro-value">${recipe.protein}g</div>
+                            </div>
+                            <div class="recipe-macro-item c">
+                                <div class="recipe-macro-label">Carb</div>
+                                <div class="recipe-macro-value">${recipe.carbs}g</div>
+                            </div>
+                            <div class="recipe-macro-item f">
+                                <div class="recipe-macro-label">Fat</div>
+                                <div class="recipe-macro-value">${recipe.fat}g</div>
+                            </div>
+                        </div>
+                        
+                        <div class="recipe-tags">
+                            ${recipe.tags.slice(0, 3).map(tag => `<span class="tag ${tag}">${tagLabels[tag] || tag}</span>`).join('')}
+                        </div>
+                        
+                        <div class="view-btn">Xem công thức</div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function openModal(id) {
+            const recipe = recipeDatabase.find(r => r.id === id);
+            if (!recipe) return;
+            
+            const categoryColors = {
+                breakfast: { gradient: 'var(--breakfast-gradient)', soft: 'var(--breakfast-soft)', color: 'var(--breakfast)' },
+                lunch: { gradient: 'var(--lunch-gradient)', soft: 'var(--lunch-soft)', color: 'var(--lunch)' },
+                dinner: { gradient: 'var(--dinner-gradient)', soft: 'var(--dinner-soft)', color: 'var(--dinner)' },
+                snack: { gradient: 'var(--snack-gradient)', soft: 'var(--snack-soft)', color: 'var(--snack)' }
+            };
+            
+            const colors = categoryColors[recipe.category];
+            
+            const modal = document.getElementById('modal');
+            modal.style.setProperty('--modal-gradient', colors.gradient);
+            modal.style.setProperty('--modal-soft', colors.soft);
+            modal.style.setProperty('--modal-color', colors.color);
+            
+            document.getElementById('modalHero').style.background = colors.gradient;
+            document.getElementById('modalEmoji').textContent = recipe.emoji;
+            
+            const categoryNames = {
+                breakfast: 'BỮA SÁNG',
+                lunch: 'BỮA TRƯA',
+                dinner: 'BỮA TỐI',
+                snack: 'SNACK'
+            };
+            
+            document.getElementById('modalBadges').innerHTML = `
+                <span class="modal-badge">⏱️ ${recipe.time} phút</span>
+                <span class="modal-badge">👤 ${recipe.servings} phần</span>
+                <span class="modal-badge">⭐ ${['Dễ', 'Vừa', 'Khó'][recipe.difficulty - 1]}</span>
+            `;
+            
+            const ingredientsHtml = recipe.ingredients.map(ing => `
+                <div class="ingredient-item">
+                    <span class="ingredient-name">${ing.name}</span>
+                    <span class="ingredient-amount">${ing.amount}</span>
+                </div>
+            `).join('');
+            
+            const stepsHtml = recipe.steps.map((step, idx) => `
+                <div class="step-item">
+                    <div class="step-number">${idx + 1}</div>
+                    <div class="step-content">${step}</div>
+                </div>
+            `).join('');
+            
+            const goalNames = {
+                fatloss: '🔥 Giảm mỡ',
+                muscle: '💪 Tăng cơ',
+                recomp: '⚖️ Cân bằng'
+            };
+            
+            document.getElementById('modalBody').innerHTML = `
+                <span class="modal-category-tag">${categoryNames[recipe.category]}</span>
+                <h2 class="modal-title">${recipe.name}</h2>
+                <p class="modal-subtitle">${recipe.description}</p>
+                
+                <div class="modal-info-grid">
+                    <div class="modal-info-item">
+                        <div class="modal-info-icon">⏱️</div>
+                        <div class="modal-info-value">${recipe.time}'</div>
+                        <div class="modal-info-label">Thời gian</div>
+                    </div>
+                    <div class="modal-info-item">
+                        <div class="modal-info-icon">👤</div>
+                        <div class="modal-info-value">${recipe.servings}</div>
+                        <div class="modal-info-label">Phần ăn</div>
+                    </div>
+                    <div class="modal-info-item">
+                        <div class="modal-info-icon">⭐</div>
+                        <div class="modal-info-value">${['Dễ', 'Vừa', 'Khó'][recipe.difficulty - 1]}</div>
+                        <div class="modal-info-label">Độ khó</div>
+                    </div>
+                    <div class="modal-info-item">
+                        <div class="modal-info-icon">🌾</div>
+                        <div class="modal-info-value">${recipe.fiber}g</div>
+                        <div class="modal-info-label">Fiber</div>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Thông tin dinh dưỡng</h3>
+                    <div class="modal-macro-grid">
+                        <div class="modal-macro-card cal">
+                            <div class="modal-macro-value">${recipe.calories}</div>
+                            <div class="modal-macro-label">Calories</div>
+                            <div class="modal-macro-unit">kcal</div>
+                        </div>
+                        <div class="modal-macro-card p">
+                            <div class="modal-macro-value">${recipe.protein}</div>
+                            <div class="modal-macro-label">Protein</div>
+                            <div class="modal-macro-unit">gram</div>
+                        </div>
+                        <div class="modal-macro-card c">
+                            <div class="modal-macro-value">${recipe.carbs}</div>
+                            <div class="modal-macro-label">Carb</div>
+                            <div class="modal-macro-unit">gram</div>
+                        </div>
+                        <div class="modal-macro-card f">
+                            <div class="modal-macro-value">${recipe.fat}</div>
+                            <div class="modal-macro-label">Fat</div>
+                            <div class="modal-macro-unit">gram</div>
+                        </div>
+                        <div class="modal-macro-card fiber">
+                            <div class="modal-macro-value">${recipe.fiber}</div>
+                            <div class="modal-macro-label">Fiber</div>
+                            <div class="modal-macro-unit">gram</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Nguyên liệu (${recipe.ingredients.length})</h3>
+                    <div class="ingredients-grid">
+                        ${ingredientsHtml}
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Cách làm (${recipe.steps.length} bước)</h3>
+                    <div class="steps-list">
+                        ${stepsHtml}
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Mẹo & biến tấu</h3>
+                    <div class="tips-box">
+                        ${recipe.tips}
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Phù hợp cho mục tiêu</h3>
+                    <div class="best-for">
+                        ${recipe.bestFor.map(g => `<span class="best-for-chip">${goalNames[g]}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        function addToMealPlan() {
+            showToast('📖 Đang chuyển đến Meal Plans...');
+            setTimeout(() => {
+                window.location.href = 'nutrition-meal-plans.html';
+            }, 800);
+        }
+        
+        // ==================== EVENT LISTENERS ====================
+        // Filter chips
+        document.querySelectorAll('.filter-chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                const type = this.dataset.type;
+                const filter = this.dataset.filter;
+                
+                this.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                
+                currentFilters[type] = filter;
+                renderRecipes();
+            });
+        });
+        
+        // Category tabs
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                currentFilters.category = this.dataset.category;
+                renderRecipes();
+            });
+        });
+        
+        // Search
+        document.getElementById('searchInput').addEventListener('input', function() {
+            currentFilters.search = this.value;
+            renderRecipes();
+        });
+        
+        // Modal
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+        document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+        document.getElementById('modalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+        
+        // ==================== INIT ====================
+        renderRecipes();
+        
+        // ==================== TOAST ====================
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastContent').textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
