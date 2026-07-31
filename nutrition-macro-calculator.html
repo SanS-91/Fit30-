@@ -1,0 +1,2079 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính TDEE & Macro - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <style>
+        :root {
+            /* Base palette */
+            --text-dark: #4A4A5A;
+            --text-medium: #7A7A8A;
+            --text-light: #A0A0B0;
+            --white: #FFFFFF;
+            --bg-primary: #FFFBFB;
+            --bg-soft: #FFF8F5;
+            --border-soft: #F0E8E6;
+            
+            /* Macro color - Amber */
+            --macro: #E8C87A;
+            --macro-soft: #FBF3E0;
+            --macro-dark: #C8A850;
+            --macro-gradient: linear-gradient(135deg, #FBF3E0 0%, #E8C87A 100%);
+            
+            /* Nutrition base */
+            --nutrition: #9AB89A;
+            --nutrition-soft: #E8F3E8;
+            --nutrition-gradient: linear-gradient(135deg, #E8F3E8 0%, #9AB89A 100%);
+            
+            /* Macro component colors */
+            --protein: #E89A9A;
+            --protein-soft: #FCE8E8;
+            --carb: #E8C87A;
+            --carb-soft: #FBF3E0;
+            --fat: #D4A8B8;
+            --fat-soft: #F8E8F0;
+            --fiber: #9AB89A;
+            --fiber-soft: #E8F3E8;
+            
+            /* Goal colors */
+            --goal-fatloss: #F4A698;
+            --goal-muscle: #B8A8E8;
+            --goal-recomp: #7FB5B5;
+            --goal-maintenance: #8FC5A8;
+            
+            /* Main gradient */
+            --main-gradient: linear-gradient(135deg, #9AB89A 0%, #E8C87A 50%, #D4A8B8 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        body::before {
+            width: 500px;
+            height: 500px;
+            background: var(--macro);
+            top: -150px;
+            right: -150px;
+        }
+        
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: var(--nutrition);
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 18px 40px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .btn-header {
+            padding: 9px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-header.secondary {
+            background: var(--bg-soft);
+            color: var(--text-medium);
+        }
+        
+        .btn-header.secondary:hover {
+            background: var(--macro-soft);
+            color: var(--macro-dark);
+        }
+        
+        .btn-header.primary {
+            background: var(--macro-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(232,200,122,0.3);
+        }
+        
+        .btn-header.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(232,200,122,0.4);
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 60px 40px 30px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: var(--macro-gradient);
+            color: white;
+            padding: 7px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 22px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(232,200,122,0.3);
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: var(--macro-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        
+        /* Main Layout */
+        .main-container {
+            max-width: 1300px;
+            margin: 30px auto 60px;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 30px;
+            align-items: start;
+        }
+        
+        .calculator-column {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        /* Section Card */
+        .section-card {
+            background: white;
+            border-radius: 24px;
+            padding: 30px 32px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .section-header {
+            margin-bottom: 22px;
+        }
+        
+        .section-eyebrow {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            background: var(--macro-soft);
+            color: var(--macro-dark);
+        }
+        
+        .section-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-header p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+        }
+        
+        .step-indicator {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--macro-gradient);
+            color: white;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: 'Quicksand', sans-serif;
+        }
+        
+        /* Form Groups */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .form-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .form-label .required {
+            color: var(--protein);
+        }
+        
+        .form-input {
+            padding: 13px 16px;
+            border: 2px solid var(--border-soft);
+            border-radius: 12px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            background: var(--bg-soft);
+            transition: all 0.3s;
+            color: var(--text-dark);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--macro);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(232,200,122,0.1);
+        }
+        
+        .form-select {
+            padding: 13px 16px;
+            border: 2px solid var(--border-soft);
+            border-radius: 12px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            background: var(--bg-soft);
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237A7A8A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 16px;
+            padding-right: 40px;
+            transition: all 0.3s;
+            color: var(--text-dark);
+        }
+        
+        .form-select:focus {
+            outline: none;
+            border-color: var(--macro);
+            background-color: white;
+        }
+        
+        /* Gender Selector */
+        .gender-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+        
+        .gender-option {
+            padding: 18px;
+            border: 2px solid var(--border-soft);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            background: var(--bg-soft);
+        }
+        
+        .gender-option:hover {
+            border-color: var(--macro);
+            transform: translateY(-2px);
+        }
+        
+        .gender-option.active {
+            background: var(--macro-soft);
+            border-color: var(--macro);
+            box-shadow: 0 6px 18px rgba(232,200,122,0.2);
+        }
+        
+        .gender-icon {
+            font-size: 2rem;
+            margin-bottom: 6px;
+        }
+        
+        .gender-name {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+        
+        /* Activity Level Cards */
+        .activity-grid {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .activity-option {
+            padding: 16px 18px;
+            border: 2px solid var(--border-soft);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 14px;
+            align-items: center;
+            background: var(--bg-soft);
+        }
+        
+        .activity-option:hover {
+            border-color: var(--macro);
+            transform: translateX(3px);
+        }
+        
+        .activity-option.active {
+            background: var(--macro-soft);
+            border-color: var(--macro);
+            box-shadow: 0 4px 15px rgba(232,200,122,0.15);
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .activity-option.active .activity-icon {
+            background: var(--macro);
+        }
+        
+        .activity-info h4 {
+            font-size: 0.98rem;
+            margin-bottom: 2px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+        }
+        
+        .activity-info p {
+            font-size: 0.8rem;
+            color: var(--text-medium);
+            line-height: 1.4;
+        }
+        
+        .activity-multiplier {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--macro-dark);
+        }
+        
+        /* Goal Selector */
+        .goal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .goal-option {
+            padding: 16px;
+            border: 2px solid var(--border-soft);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            background: var(--bg-soft);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .goal-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--goal-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+        
+        .goal-option:hover {
+            transform: translateY(-2px);
+            border-color: var(--goal-color);
+        }
+        
+        .goal-option:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .goal-option.active {
+            background: var(--goal-soft);
+            border-color: var(--goal-color);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+        
+        .goal-option.active::before {
+            transform: scaleX(1);
+        }
+        
+        .goal-option[data-goal="fatloss"] {
+            --goal-color: var(--goal-fatloss);
+            --goal-soft: #FCEAE5;
+        }
+        
+        .goal-option[data-goal="muscle"] {
+            --goal-color: var(--goal-muscle);
+            --goal-soft: #EEE8F8;
+        }
+        
+        .goal-option[data-goal="recomp"] {
+            --goal-color: var(--goal-recomp);
+            --goal-soft: #E0F0F0;
+        }
+        
+        .goal-option[data-goal="maintenance"] {
+            --goal-color: var(--goal-maintenance);
+            --goal-soft: #E5F5EC;
+        }
+        
+        .goal-emoji {
+            font-size: 1.8rem;
+            margin-bottom: 6px;
+        }
+        
+        .goal-name {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            margin-bottom: 3px;
+        }
+        
+        .goal-desc {
+            font-size: 0.75rem;
+            color: var(--text-medium);
+            line-height: 1.4;
+        }
+        
+        /* Preview Panel (Sticky Right) */
+        .preview-panel {
+            background: white;
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+            position: sticky;
+            top: 90px;
+        }
+        
+        .preview-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 22px;
+            padding-bottom: 18px;
+            border-bottom: 1px dashed var(--border-soft);
+        }
+        
+        .preview-indicator {
+            width: 4px;
+            height: 28px;
+            background: var(--macro-gradient);
+            border-radius: 2px;
+        }
+        
+        .preview-title {
+            font-size: 1.2rem;
+        }
+        
+        .preview-subtitle {
+            font-size: 0.82rem;
+            color: var(--text-light);
+        }
+        
+        /* BMR & TDEE Display */
+        .bmr-tdee {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .bmr-card {
+            background: var(--bg-soft);
+            padding: 16px;
+            border-radius: 14px;
+            text-align: center;
+            border-top: 3px solid var(--nutrition);
+        }
+        
+        .tdee-card {
+            background: var(--macro-soft);
+            padding: 16px;
+            border-radius: 14px;
+            text-align: center;
+            border-top: 3px solid var(--macro);
+        }
+        
+        .bmr-card .label, .tdee-card .label {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .bmr-card .value, .tdee-card .value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 3px;
+        }
+        
+        .bmr-card .value { color: var(--nutrition); }
+        .tdee-card .value { color: var(--macro-dark); }
+        
+        .bmr-card .unit, .tdee-card .unit {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+        
+        /* Target Calories */
+        .target-calories {
+            background: linear-gradient(135deg, var(--macro-soft) 0%, white 100%);
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 2px dashed var(--macro);
+        }
+        
+        .target-label {
+            font-size: 0.78rem;
+            color: var(--text-medium);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        
+        .target-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--macro-dark);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        
+        .target-unit {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            font-weight: 600;
+        }
+        
+        .target-note {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        /* Macro Split */
+        .macro-split {
+            margin-bottom: 20px;
+        }
+        
+        .macro-split-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+        }
+        
+        .macro-chart-container {
+            position: relative;
+            height: 180px;
+            margin-bottom: 15px;
+        }
+        
+        .macro-bars {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .macro-bar-item {
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .macro-bar-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .macro-bar-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .macro-bar-track {
+            height: 10px;
+            background: var(--bg-soft);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .macro-bar-fill {
+            height: 100%;
+            border-radius: 5px;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .macro-bar-fill.protein { background: var(--protein); }
+        .macro-bar-fill.carb { background: var(--carb); }
+        .macro-bar-fill.fat { background: var(--fat); }
+        
+        .macro-bar-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            min-width: 60px;
+            text-align: right;
+        }
+        
+        .macro-bar-value small {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.72rem;
+            color: var(--text-light);
+            font-weight: 600;
+            margin-left: 3px;
+        }
+        
+        /* Meal Distribution */
+        .meal-distribution {
+            margin-bottom: 20px;
+        }
+        
+        .meal-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+        }
+        
+        .meal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        
+        .meal-item {
+            background: var(--bg-soft);
+            padding: 12px;
+            border-radius: 12px;
+            border-left: 3px solid var(--meal-color);
+            transition: all 0.3s;
+        }
+        
+        .meal-item:hover {
+            transform: translateX(3px);
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .meal-item.breakfast { --meal-color: var(--macro); }
+        .meal-item.lunch { --meal-color: var(--nutrition); }
+        .meal-item.snack { --meal-color: var(--protein); }
+        .meal-item.dinner { --meal-color: var(--fat); }
+        
+        .meal-name {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 3px;
+        }
+        
+        .meal-calories {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1;
+        }
+        
+        .meal-calories small {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.7rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        
+        /* Extra Info */
+        .extra-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .extra-card {
+            background: var(--bg-soft);
+            padding: 14px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .extra-label {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .extra-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1;
+        }
+        
+        .extra-value small {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.72rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        
+        /* Save Button */
+        .save-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .btn-save {
+            padding: 14px;
+            background: var(--macro-gradient);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            font-family: 'Quicksand', sans-serif;
+            box-shadow: 0 6px 20px rgba(232,200,122,0.3);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(232,200,122,0.4);
+        }
+        
+        .btn-secondary {
+            padding: 12px;
+            background: var(--bg-soft);
+            color: var(--text-medium);
+            border: none;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            font-family: 'Quicksand', sans-serif;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--macro-soft);
+            color: var(--macro-dark);
+        }
+        
+        /* Explanation Section */
+        .explanation-section {
+            max-width: 1300px;
+            margin: 0 auto 40px;
+            padding: 0 40px;
+        }
+        
+        .explanation-card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .explanation-header {
+            margin-bottom: 25px;
+        }
+        
+        .explanation-header h2 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .explanation-header p {
+            color: var(--text-medium);
+        }
+        
+        .formula-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+        }
+        
+        .formula-card {
+            background: var(--bg-soft);
+            padding: 22px;
+            border-radius: 16px;
+            border-left: 4px solid var(--formula-color);
+        }
+        
+        .formula-card.bmr { --formula-color: var(--nutrition); }
+        .formula-card.tdee { --formula-color: var(--macro); }
+        .formula-card.target { --formula-color: var(--protein); }
+        .formula-card.macro { --formula-color: var(--fat); }
+        
+        .formula-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .formula-content {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+        
+        .formula-content code {
+            display: block;
+            background: white;
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin: 8px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.82rem;
+            color: var(--text-dark);
+            border: 1px solid var(--border-soft);
+        }
+        
+        /* Tips Section */
+        .tips-section {
+            max-width: 1300px;
+            margin: 0 auto 50px;
+            padding: 0 40px;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+        }
+        
+        .tip-card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--macro);
+        }
+        
+        .tip-number {
+            display: inline-block;
+            background: var(--macro-soft);
+            color: var(--macro-dark);
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .tip-card h4 {
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+        
+        .tip-card p {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+        
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: 14px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 2000;
+            transform: translateX(400px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 4px solid var(--macro);
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--macro-soft);
+            color: var(--macro-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 40px 40px 25px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--macro);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+        
+        /* Info Banner */
+        .info-banner {
+            background: var(--macro-soft);
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 18px;
+            border-left: 3px solid var(--macro);
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            display: flex;
+            gap: 10px;
+            align-items: start;
+        }
+        
+        .info-banner-icon {
+            flex-shrink: 0;
+            font-size: 1.1rem;
+        }
+        
+        .info-banner strong {
+            color: var(--macro-dark);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .preview-panel {
+                position: static;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .hero {
+                padding: 40px 20px 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .main-container,
+            .explanation-section,
+            .tips-section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            
+            .section-card,
+            .explanation-card {
+                padding: 25px 22px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .goal-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .bmr-tdee {
+                grid-template-columns: 1fr;
+            }
+            
+            .meal-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .extra-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .macro-bar-item {
+                grid-template-columns: 70px 1fr auto;
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-soft);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--macro) 0%, var(--nutrition) 100%);
+            border-radius: 4px;
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-card {
+            animation: fadeIn 0.5s ease both;
+        }
+        
+        .section-card:nth-child(1) { animation-delay: 0.1s; }
+        .section-card:nth-child(2) { animation-delay: 0.2s; }
+        .section-card:nth-child(3) { animation-delay: 0.3s; }
+        .section-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <div class="header-actions">
+            <a href="nutrition-overview.html" class="btn-header secondary">← Dinh dưỡng</a>
+            <button class="btn-header primary" onclick="saveResults()">💾 Lưu kết quả</button>
+        </div>
+    </header>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <span class="hero-badge">MACRO CALCULATOR</span>
+        <h1>Tính <span>TDEE & Macro</span></h1>
+        <p>Nhập thông tin cá nhân để tính calories mục tiêu và phân bổ Protein/Carb/Fat phù hợp với mục tiêu của bạn.</p>
+    </section>
+    
+    <!-- Main Layout -->
+    <div class="main-container">
+        <!-- Left Column - Inputs -->
+        <div class="calculator-column">
+            
+            <!-- Step 1: Personal Info -->
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-eyebrow">Bước 1</span>
+                    <h2><span class="step-indicator">1</span>Thông tin cá nhân</h2>
+                    <p>Những thông số cơ bản để tính BMR (Basal Metabolic Rate).</p>
+                </div>
+                
+                <div class="info-banner">
+                    <span class="info-banner-icon">💡</span>
+                    <div>
+                        <strong>Mẹo:</strong> Nếu đã thiết lập mục tiêu ở Goal Settings, thông tin sẽ được tự động điền. Bạn có thể chỉnh sửa tại đây.
+                    </div>
+                </div>
+                
+                <label class="form-label" style="margin-bottom: 10px;">Giới tính <span class="required">*</span></label>
+                <div class="gender-selector">
+                    <div class="gender-option active" data-gender="female" onclick="selectGender('female')">
+                        <div class="gender-icon">♀</div>
+                        <div class="gender-name">Nữ</div>
+                    </div>
+                    <div class="gender-option" data-gender="male" onclick="selectGender('male')">
+                        <div class="gender-icon">♂</div>
+                        <div class="gender-name">Nam</div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Tuổi <span class="required">*</span></label>
+                        <input type="number" class="form-input" id="age" value="35" min="15" max="100" oninput="calculate()">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Cân nặng (kg) <span class="required">*</span></label>
+                        <input type="number" class="form-input" id="weight" value="58" min="30" max="250" step="0.1" oninput="calculate()">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Chiều cao (cm) <span class="required">*</span></label>
+                        <input type="number" class="form-input" id="height" value="160" min="100" max="250" oninput="calculate()">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">% Body Fat (optional)</label>
+                        <input type="number" class="form-input" id="bodyFat" value="" min="5" max="60" step="0.1" placeholder="Nếu biết" oninput="calculate()">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 2: Activity Level -->
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-eyebrow">Bước 2</span>
+                    <h2><span class="step-indicator">2</span>Mức độ vận động</h2>
+                    <p>Chọn mức độ phù hợp nhất với lối sống hàng ngày của bạn (bao gồm cả tập luyện).</p>
+                </div>
+                
+                <div class="activity-grid">
+                    <div class="activity-option" data-level="1.2" onclick="selectActivity(this)">
+                        <div class="activity-icon">🛋️</div>
+                        <div class="activity-info">
+                            <h4>Ít vận động</h4>
+                            <p>Văn phòng, ít hoặc không tập thể dục</p>
+                        </div>
+                        <div class="activity-multiplier">×1.2</div>
+                    </div>
+                    
+                    <div class="activity-option" data-level="1.375" onclick="selectActivity(this)">
+                        <div class="activity-icon">🚶</div>
+                        <div class="activity-info">
+                            <h4>Vận động nhẹ</h4>
+                            <p>Tập nhẹ 1-3 ngày/tuần, đi bộ nhiều</p>
+                        </div>
+                        <div class="activity-multiplier">×1.375</div>
+                    </div>
+                    
+                    <div class="activity-option active" data-level="1.55" onclick="selectActivity(this)">
+                        <div class="activity-icon">🏃</div>
+                        <div class="activity-info">
+                            <h4>Vận động vừa</h4>
+                            <p>Tập vừa 3-5 ngày/tuần (4 buổi GYM)</p>
+                        </div>
+                        <div class="activity-multiplier">×1.55</div>
+                    </div>
+                    
+                    <div class="activity-option" data-level="1.725" onclick="selectActivity(this)">
+                        <div class="activity-icon">💪</div>
+                        <div class="activity-info">
+                            <h4>Vận động nhiều</h4>
+                            <p>Tập nặng 6-7 ngày/tuần, công việc lao động</p>
+                        </div>
+                        <div class="activity-multiplier">×1.725</div>
+                    </div>
+                    
+                    <div class="activity-option" data-level="1.9" onclick="selectActivity(this)">
+                        <div class="activity-icon">🏋️</div>
+                        <div class="activity-info">
+                            <h4>Vận động rất nhiều</h4>
+                            <p>Vận động viên, tập 2 lần/ngày</p>
+                        </div>
+                        <div class="activity-multiplier">×1.9</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 3: Goal -->
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-eyebrow">Bước 3</span>
+                    <h2><span class="step-indicator">3</span>Mục tiêu dinh dưỡng</h2>
+                    <p>Mục tiêu sẽ quyết định calories mục tiêu và tỉ lệ macro.</p>
+                </div>
+                
+                <div class="goal-grid">
+                    <div class="goal-option" data-goal="fatloss" onclick="selectGoal('fatloss')">
+                        <div class="goal-emoji">🔥</div>
+                        <div class="goal-name">Giảm mỡ</div>
+                        <div class="goal-desc">-500 kcal · Protein cao</div>
+                    </div>
+                    
+                    <div class="goal-option" data-goal="muscle" onclick="selectGoal('muscle')">
+                        <div class="goal-emoji">💪</div>
+                        <div class="goal-name">Tăng cơ</div>
+                        <div class="goal-desc">+300 kcal · Protein rất cao</div>
+                    </div>
+                    
+                    <div class="goal-option active" data-goal="recomp" onclick="selectGoal('recomp')">
+                        <div class="goal-emoji">⚖️</div>
+                        <div class="goal-name">Tái cấu trúc</div>
+                        <div class="goal-desc">Maintenance · Protein cao</div>
+                    </div>
+                    
+                    <div class="goal-option" data-goal="maintenance" onclick="selectGoal('maintenance')">
+                        <div class="goal-emoji">🌿</div>
+                        <div class="goal-name">Duy trì</div>
+                        <div class="goal-desc">TDEE · Cân bằng</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 4: Preferences -->
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-eyebrow">Bước 4</span>
+                    <h2><span class="step-indicator">4</span>Tùy chỉnh nâng cao</h2>
+                    <p>Điều chỉnh chi tiết hơn theo nhu cầu cá nhân.</p>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Số bữa / ngày</label>
+                        <select class="form-select" id="mealsPerDay" onchange="calculate()">
+                            <option value="3">3 bữa chính</option>
+                            <option value="4" selected>3 bữa + 1 snack</option>
+                            <option value="5">3 bữa + 2 snacks</option>
+                            <option value="6">6 bữa nhỏ</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Protein (g/kg)</label>
+                        <select class="form-select" id="proteinPerKg" onchange="calculate()">
+                            <option value="1.2">1.2g/kg (ít vận động)</option>
+                            <option value="1.6">1.6g/kg (vận động vừa)</option>
+                            <option value="2.0" selected>2.0g/kg (tăng cơ)</option>
+                            <option value="2.4">2.4g/kg (cutting)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Tỉ lệ Fat (% calo)</label>
+                        <select class="form-select" id="fatPercent" onchange="calculate()">
+                            <option value="20">20% (Low fat)</option>
+                            <option value="25" selected>25% (Cân bằng)</option>
+                            <option value="30">30% (Moderate)</option>
+                            <option value="35">35% (High fat)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tốc độ giảm cân</label>
+                        <select class="form-select" id="weightLossRate" onchange="calculate()">
+                            <option value="250">Chậm (-250 kcal)</option>
+                            <option value="500" selected>Vừa (-500 kcal)</option>
+                            <option value="750">Nhanh (-750 kcal)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Column - Preview (Sticky) -->
+        <aside class="preview-panel">
+            <div class="preview-header">
+                <div class="preview-indicator"></div>
+                <div>
+                    <div class="preview-title">Kết quả của bạn</div>
+                    <div class="preview-subtitle">Cập nhật realtime</div>
+                </div>
+            </div>
+            
+            <!-- BMR & TDEE -->
+            <div class="bmr-tdee">
+                <div class="bmr-card">
+                    <div class="label">BMR</div>
+                    <div class="value" id="bmrValue">1326</div>
+                    <div class="unit">kcal / ngày</div>
+                </div>
+                <div class="tdee-card">
+                    <div class="label">TDEE</div>
+                    <div class="value" id="tdeeValue">2055</div>
+                    <div class="unit">kcal / ngày</div>
+                </div>
+            </div>
+            
+            <!-- Target Calories -->
+            <div class="target-calories">
+                <div class="target-label">Calories mục tiêu</div>
+                <div class="target-value" id="targetCalories">2055</div>
+                <div class="target-unit">kcal / ngày</div>
+                <div class="target-note" id="targetNote">⚖️ Tái cấu trúc cơ thể</div>
+            </div>
+            
+            <!-- Macro Split -->
+            <div class="macro-split">
+                <div class="macro-split-title">Phân bổ Macro</div>
+                
+                <div class="macro-chart-container">
+                    <canvas id="macroChart"></canvas>
+                </div>
+                
+                <div class="macro-bars">
+                    <div class="macro-bar-item">
+                        <div class="macro-bar-label">
+                            <span class="macro-bar-dot" style="background: var(--protein)"></span>
+                            Protein
+                        </div>
+                        <div class="macro-bar-track">
+                            <div class="macro-bar-fill protein" id="proteinBar" style="width: 35%"></div>
+                        </div>
+                        <div class="macro-bar-value"><span id="proteinGrams">128</span>g<small id="proteinPercent">· 35%</small></div>
+                    </div>
+                    
+                    <div class="macro-bar-item">
+                        <div class="macro-bar-label">
+                            <span class="macro-bar-dot" style="background: var(--carb)"></span>
+                            Carb
+                        </div>
+                        <div class="macro-bar-track">
+                            <div class="macro-bar-fill carb" id="carbBar" style="width: 40%"></div>
+                        </div>
+                        <div class="macro-bar-value"><span id="carbGrams">205</span>g<small id="carbPercent">· 40%</small></div>
+                    </div>
+                    
+                    <div class="macro-bar-item">
+                        <div class="macro-bar-label">
+                            <span class="macro-bar-dot" style="background: var(--fat)"></span>
+                            Fat
+                        </div>
+                        <div class="macro-bar-track">
+                            <div class="macro-bar-fill fat" id="fatBar" style="width: 25%"></div>
+                        </div>
+                        <div class="macro-bar-value"><span id="fatGrams">57</span>g<small id="fatPercent">· 25%</small></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Meal Distribution -->
+            <div class="meal-distribution">
+                <div class="meal-title">Phân chia bữa ăn</div>
+                <div class="meal-grid" id="mealGrid">
+                    <div class="meal-item breakfast">
+                        <div class="meal-name">Bữa sáng</div>
+                        <div class="meal-calories">514 <small>kcal</small></div>
+                    </div>
+                    <div class="meal-item lunch">
+                        <div class="meal-name">Bữa trưa</div>
+                        <div class="meal-calories">617 <small>kcal</small></div>
+                    </div>
+                    <div class="meal-item snack">
+                        <div class="meal-name">Snack</div>
+                        <div class="meal-calories">308 <small>kcal</small></div>
+                    </div>
+                    <div class="meal-item dinner">
+                        <div class="meal-name">Bữa tối</div>
+                        <div class="meal-calories">617 <small>kcal</small></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Extra Info -->
+            <div class="extra-info">
+                <div class="extra-card">
+                    <div class="extra-label">Nước / ngày</div>
+                    <div class="extra-value" id="waterIntake">2.3 <small>lít</small></div>
+                </div>
+                <div class="extra-card">
+                    <div class="extra-label">Fiber / ngày</div>
+                    <div class="extra-value" id="fiberIntake">28 <small>g</small></div>
+                </div>
+            </div>
+            
+            <!-- Save Actions -->
+            <div class="save-section">
+                <button class="btn-save" onclick="saveResults()">💾 Lưu kết quả</button>
+                <button class="btn-secondary" onclick="resetForm()">↺ Reset về mặc định</button>
+            </div>
+        </aside>
+    </div>
+    
+    <!-- Explanation Section -->
+    <section class="explanation-section">
+        <div class="explanation-card">
+            <div class="explanation-header">
+                <h2>
+                    <span class="step-indicator" style="background: var(--nutrition-gradient)">?</span>
+                    Công thức tính toán
+                </h2>
+                <p>Hiểu rõ cách hệ thống tính toán để bạn tự tin điều chỉnh.</p>
+            </div>
+            
+            <div class="formula-grid">
+                <div class="formula-card bmr">
+                    <div class="formula-title">🔥 BMR - Mifflin-St Jeor</div>
+                    <div class="formula-content">
+                        Công thức chính xác nhất hiện nay để tính năng lượng nền.
+                        <code id="bmrFormula">Nữ: (10 × 58) + (6.25 × 160) - (5 × 35) - 161 = 1326 kcal</code>
+                    </div>
+                </div>
+                
+                <div class="formula-card tdee">
+                    <div class="formula-title">⚡ TDEE - Total Daily Energy</div>
+                    <div class="formula-content">
+                        BMR nhân với hệ số vận động.
+                        <code id="tdeeFormula">1326 × 1.55 = 2055 kcal</code>
+                    </div>
+                </div>
+                
+                <div class="formula-card target">
+                    <div class="formula-title">🎯 Calories mục tiêu</div>
+                    <div class="formula-content">
+                        Điều chỉnh TDEE theo mục tiêu.
+                        <code id="targetFormula">Tái cấu trúc: TDEE ± 0 = 2055 kcal</code>
+                    </div>
+                </div>
+                
+                <div class="formula-card macro">
+                    <div class="formula-title">📊 Macro Split</div>
+                    <div class="formula-content">
+                        Protein tính theo kg, Fat theo %, Carb phần còn lại.
+                        <code id="macroFormula">P: 58×2.0=116g · F: 25%×2055÷9=57g · C: còn lại</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Tips Section -->
+    <section class="tips-section">
+        <div class="tips-grid">
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <h4>Calories là vua, Macro là nữ hoàng</h4>
+                <p>Total calories quyết định tăng/giảm cân. Macro quyết định chất lượng cơ thể (mỡ vs cơ). Cả hai đều quan trọng.</p>
+            </div>
+            
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <h4>Protein ưu tiên hàng đầu</h4>
+                <p>Phụ nữ 30+ cần 1.6-2.2g protein/kg để duy trì cơ bắp, đặc biệt khi giảm mỡ. Protein cũng giúp no lâu hơn.</p>
+            </div>
+            
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <h4>Đừng sợ fat</h4>
+                <p>Chất béo tốt (avocado, olive oil, hạt) cần thiết cho hormone nữ. Không nên giảm xuống dưới 20% tổng calo.</p>
+            </div>
+            
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <h4>Linh hoạt là chìa khóa</h4>
+                <p>Con số chỉ là hướng dẫn. Theo dõi cân nặng và số đo 2 tuần, điều chỉnh nếu cần. Không có con số "hoàn hảo" cho tất cả.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="nutrition-overview.html">Dinh dưỡng</a>
+            <a href="nutrition-food-library.html">Thư viện thực phẩm</a>
+            <a href="nutrition-meal-plans.html">Meal Plans</a>
+            <a href="nutrition-food-logger.html">Food Logger</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">✓</div>
+        <div class="toast-content" id="toastContent">Đã lưu!</div>
+    </div>
+    
+    <script>
+        // ==================== STATE ====================
+        let state = {
+            gender: 'female',
+            age: 35,
+            weight: 58,
+            height: 160,
+            bodyFat: null,
+            activityLevel: 1.55,
+            goal: 'recomp',
+            mealsPerDay: 4,
+            proteinPerKg: 2.0,
+            fatPercent: 25,
+            weightLossRate: 500
+        };
+        
+        let macroChart = null;
+        
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load saved settings from goal-settings
+            loadSavedSettings();
+            
+            // Load saved calculator state
+            const savedCalc = localStorage.getItem('fit30_macro_calc');
+            if (savedCalc) {
+                try {
+                    const parsed = JSON.parse(savedCalc);
+                    state = { ...state, ...parsed };
+                    restoreUI();
+                } catch (e) {
+                    console.error('Error loading calculator state', e);
+                }
+            }
+            
+            // Init chart
+            initMacroChart();
+            
+            // Calculate
+            calculate();
+        });
+        
+        function loadSavedSettings() {
+            const saved = localStorage.getItem('fit30_goal_settings');
+            if (saved) {
+                try {
+                    const settings = JSON.parse(saved);
+                    if (settings.age) state.age = settings.age;
+                    if (settings.gender) state.gender = settings.gender;
+                    
+                    // Map goal to calculator goal
+                    if (settings.goal) {
+                        const goalMap = {
+                            'fatloss': 'fatloss',
+                            'muscle': 'muscle',
+                            'recomp': 'recomp',
+                            'strength': 'maintenance',
+                            'fitness': 'maintenance'
+                        };
+                        state.goal = goalMap[settings.goal] || 'recomp';
+                    }
+                    
+                    // Map workouts per week to activity level
+                    if (settings.workoutsPerWeek) {
+                        const activityMap = {
+                            3: 1.55,
+                            4: 1.55,
+                            5: 1.725
+                        };
+                        state.activityLevel = activityMap[settings.workoutsPerWeek] || 1.55;
+                    }
+                    
+                    // Map protein per kg based on goal
+                    if (settings.goal === 'muscle') {
+                        state.proteinPerKg = 2.0;
+                    } else if (settings.goal === 'fatloss') {
+                        state.proteinPerKg = 2.2;
+                    }
+                } catch (e) {
+                    console.error('Error loading goal settings', e);
+                }
+            }
+        }
+        
+        function restoreUI() {
+            // Restore gender
+            document.querySelectorAll('.gender-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.gender === state.gender);
+            });
+            
+            // Restore inputs
+            document.getElementById('age').value = state.age;
+            document.getElementById('weight').value = state.weight;
+            document.getElementById('height').value = state.height;
+            if (state.bodyFat) document.getElementById('bodyFat').value = state.bodyFat;
+            
+            // Restore activity
+            document.querySelectorAll('.activity-option').forEach(opt => {
+                opt.classList.toggle('active', parseFloat(opt.dataset.level) === state.activityLevel);
+            });
+            
+            // Restore goal
+            document.querySelectorAll('.goal-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.goal === state.goal);
+            });
+            
+            // Restore preferences
+            document.getElementById('mealsPerDay').value = state.mealsPerDay;
+            document.getElementById('proteinPerKg').value = state.proteinPerKg;
+            document.getElementById('fatPercent').value = state.fatPercent;
+            document.getElementById('weightLossRate').value = state.weightLossRate;
+        }
+        
+        // ==================== SELECTORS ====================
+        function selectGender(gender) {
+            state.gender = gender;
+            document.querySelectorAll('.gender-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.gender === gender);
+            });
+            calculate();
+        }
+        
+        function selectActivity(el) {
+            document.querySelectorAll('.activity-option').forEach(opt => opt.classList.remove('active'));
+            el.classList.add('active');
+            state.activityLevel = parseFloat(el.dataset.level);
+            calculate();
+        }
+        
+        function selectGoal(goal) {
+            state.goal = goal;
+            document.querySelectorAll('.goal-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.goal === goal);
+            });
+            calculate();
+        }
+        
+        // ==================== CALCULATION ====================
+        function calculate() {
+            // Get inputs
+            state.age = parseInt(document.getElementById('age').value) || 35;
+            state.weight = parseFloat(document.getElementById('weight').value) || 58;
+            state.height = parseFloat(document.getElementById('height').value) || 160;
+            state.bodyFat = parseFloat(document.getElementById('bodyFat').value) || null;
+            state.mealsPerDay = parseInt(document.getElementById('mealsPerDay').value);
+            state.proteinPerKg = parseFloat(document.getElementById('proteinPerKg').value);
+            state.fatPercent = parseInt(document.getElementById('fatPercent').value);
+            state.weightLossRate = parseInt(document.getElementById('weightLossRate').value);
+            
+            // Calculate BMR (Mifflin-St Jeor)
+            let bmr;
+            if (state.gender === 'female') {
+                bmr = (10 * state.weight) + (6.25 * state.height) - (5 * state.age) - 161;
+            } else {
+                bmr = (10 * state.weight) + (6.25 * state.height) - (5 * state.age) + 5;
+            }
+            
+            // If body fat is known, use Katch-McArdle (more accurate)
+            if (state.bodyFat) {
+                const lbm = state.weight * (1 - state.bodyFat / 100);
+                bmr = 370 + (21.6 * lbm);
+            }
+            
+            bmr = Math.round(bmr);
+            
+            // Calculate TDEE
+            const tdee = Math.round(bmr * state.activityLevel);
+            
+            // Calculate target calories
+            let targetCal = tdee;
+            let targetNote = '';
+            
+            switch (state.goal) {
+                case 'fatloss':
+                    targetCal = tdee - state.weightLossRate;
+                    targetNote = '🔥 Giảm mỡ (-' + state.weightLossRate + ' kcal)';
+                    break;
+                case 'muscle':
+                    targetCal = tdee + 300;
+                    targetNote = '💪 Tăng cơ (+300 kcal)';
+                    break;
+                case 'recomp':
+                    targetCal = tdee;
+                    targetNote = '⚖️ Tái cấu trúc cơ thể';
+                    break;
+                case 'maintenance':
+                    targetCal = tdee;
+                    targetNote = '🌿 Duy trì cân nặng';
+                    break;
+            }
+            
+            // Calculate macros
+            const proteinGrams = Math.round(state.weight * state.proteinPerKg);
+            const proteinCalories = proteinGrams * 4;
+            
+            const fatCalories = Math.round(targetCal * (state.fatPercent / 100));
+            const fatGrams = Math.round(fatCalories / 9);
+            
+            const carbCalories = targetCal - proteinCalories - fatCalories;
+            const carbGrams = Math.round(carbCalories / 4);
+            
+            const proteinPercent = Math.round((proteinCalories / targetCal) * 100);
+            const fatPercent = Math.round((fatCalories / targetCal) * 100);
+            const carbPercent = 100 - proteinPercent - fatPercent;
+            
+            // Update UI
+            document.getElementById('bmrValue').textContent = bmr;
+            document.getElementById('tdeeValue').textContent = tdee;
+            document.getElementById('targetCalories').textContent = targetCal;
+            document.getElementById('targetNote').textContent = targetNote;
+            
+            document.getElementById('proteinGrams').textContent = proteinGrams;
+            document.getElementById('proteinPercent').textContent = '· ' + proteinPercent + '%';
+            document.getElementById('carbGrams').textContent = carbGrams;
+            document.getElementById('carbPercent').textContent = '· ' + carbPercent + '%';
+            document.getElementById('fatGrams').textContent = fatGrams;
+            document.getElementById('fatPercent').textContent = '· ' + fatPercent + '%';
+            
+            // Update bars
+            document.getElementById('proteinBar').style.width = proteinPercent + '%';
+            document.getElementById('carbBar').style.width = carbPercent + '%';
+            document.getElementById('fatBar').style.width = fatPercent + '%';
+            
+            // Update chart
+            updateMacroChart(proteinPercent, carbPercent, fatPercent);
+            
+            // Meal distribution
+            updateMealDistribution(targetCal);
+            
+            // Water & Fiber
+            const water = (state.weight * 0.035 + (state.goal === 'fatloss' ? 0.5 : 0)).toFixed(1);
+            const fiber = Math.round(targetCal / 1000 * 14);
+            document.getElementById('waterIntake').innerHTML = water + ' <small>lít</small>';
+            document.getElementById('fiberIntake').innerHTML = fiber + ' <small>g</small>';
+            
+            // Update formula displays
+            updateFormulas(bmr, tdee, targetCal, proteinGrams, fatGrams, carbGrams);
+        }
+        
+        function updateMealDistribution(totalCal) {
+            const mealGrid = document.getElementById('mealGrid');
+            let meals = [];
+            
+            switch (state.mealsPerDay) {
+                case 3:
+                    meals = [
+                        { name: 'Bữa sáng', cal: Math.round(totalCal * 0.30), class: 'breakfast' },
+                        { name: 'Bữa trưa', cal: Math.round(totalCal * 0.40), class: 'lunch' },
+                        { name: 'Bữa tối', cal: Math.round(totalCal * 0.30), class: 'dinner' }
+                    ];
+                    break;
+                case 4:
+                    meals = [
+                        { name: 'Bữa sáng', cal: Math.round(totalCal * 0.25), class: 'breakfast' },
+                        { name: 'Bữa trưa', cal: Math.round(totalCal * 0.30), class: 'lunch' },
+                        { name: 'Snack', cal: Math.round(totalCal * 0.15), class: 'snack' },
+                        { name: 'Bữa tối', cal: Math.round(totalCal * 0.30), class: 'dinner' }
+                    ];
+                    break;
+                case 5:
+                    meals = [
+                        { name: 'Bữa sáng', cal: Math.round(totalCal * 0.22), class: 'breakfast' },
+                        { name: 'Bữa trưa', cal: Math.round(totalCal * 0.28), class: 'lunch' },
+                        { name: 'Snack 1', cal: Math.round(totalCal * 0.12), class: 'snack' },
+                        { name: 'Snack 2', cal: Math.round(totalCal * 0.12), class: 'snack' },
+                        { name: 'Bữa tối', cal: Math.round(totalCal * 0.26), class: 'dinner' }
+                    ];
+                    break;
+                case 6:
+                    meals = [
+                        { name: 'Bữa 1', cal: Math.round(totalCal * 0.18), class: 'breakfast' },
+                        { name: 'Bữa 2', cal: Math.round(totalCal * 0.17), class: 'lunch' },
+                        { name: 'Bữa 3', cal: Math.round(totalCal * 0.17), class: 'snack' },
+                        { name: 'Bữa 4', cal: Math.round(totalCal * 0.16), class: 'snack' },
+                        { name: 'Bữa 5', cal: Math.round(totalCal * 0.16), class: 'dinner' },
+                        { name: 'Bữa 6', cal: Math.round(totalCal * 0.16), class: 'dinner' }
+                    ];
+                    break;
+            }
+            
+            mealGrid.innerHTML = meals.map(m => `
+                <div class="meal-item ${m.class}">
+                    <div class="meal-name">${m.name}</div>
+                    <div class="meal-calories">${m.cal} <small>kcal</small></div>
+                </div>
+            `).join('');
+            
+            // Adjust grid columns
+            if (state.mealsPerDay === 3 || state.mealsPerDay === 5) {
+                mealGrid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(140px, 1fr))';
+            } else {
+                mealGrid.style.gridTemplateColumns = '1fr 1fr';
+            }
+        }
+        
+        function updateFormulas(bmr, tdee, targetCal, protein, fat, carb) {
+            const genderText = state.gender === 'female' ? 'Nữ' : 'Nam';
+            const genderConst = state.gender === 'female' ? '- 161' : '+ 5';
+            
+            document.getElementById('bmrFormula').textContent = 
+                `${genderText}: (10 × ${state.weight}) + (6.25 × ${state.height}) - (5 × ${state.age}) ${genderConst} = ${bmr} kcal`;
+            
+            document.getElementById('tdeeFormula').textContent = 
+                `${bmr} × ${state.activityLevel} = ${tdee} kcal`;
+            
+            const goalText = {
+                fatloss: `TDEE - ${state.weightLossRate}`,
+                muscle: 'TDEE + 300',
+                recomp: 'TDEE ± 0',
+                maintenance: 'TDEE'
+            };
+            document.getElementById('targetFormula').textContent = 
+                `${goalText[state.goal]} = ${targetCal} kcal`;
+            
+            document.getElementById('macroFormula').textContent = 
+                `P: ${state.weight}×${state.proteinPerKg}=${protein}g · F: ${state.fatPercent}%×${targetCal}÷9=${fat}g · C: ${carb}g`;
+        }
+        
+        // ==================== CHART ====================
+        function initMacroChart() {
+            const ctx = document.getElementById('macroChart').getContext('2d');
+            macroChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Protein', 'Carb', 'Fat'],
+                    datasets: [{
+                        data: [35, 40, 25],
+                        backgroundColor: ['#E89A9A', '#E8C87A', '#D4A8B8'],
+                        borderWidth: 0,
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '65%',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(74, 74, 90, 0.95)',
+                            padding: 12,
+                            titleFont: { family: 'Quicksand', weight: '700', size: 13 },
+                            bodyFont: { family: 'Quicksand', size: 12 },
+                            cornerRadius: 10,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.parsed + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function updateMacroChart(protein, carb, fat) {
+            if (macroChart) {
+                macroChart.data.datasets[0].data = [protein, carb, fat];
+                macroChart.update();
+            }
+        }
+        
+        // ==================== SAVE / RESET ====================
+        function saveResults() {
+            // Save calculator state
+            localStorage.setItem('fit30_macro_calc', JSON.stringify(state));
+            
+            // Save to nutrition results
+            const bmr = parseInt(document.getElementById('bmrValue').textContent);
+            const tdee = parseInt(document.getElementById('tdeeValue').textContent);
+            const targetCal = parseInt(document.getElementById('targetCalories').textContent);
+            
+            const results = {
+                ...state,
+                bmr: bmr,
+                tdee: tdee,
+                targetCalories: targetCal,
+                proteinGrams: parseInt(document.getElementById('proteinGrams').textContent),
+                carbGrams: parseInt(document.getElementById('carbGrams').textContent),
+                fatGrams: parseInt(document.getElementById('fatGrams').textContent),
+                savedAt: new Date().toISOString()
+            };
+            
+            localStorage.setItem('fit30_nutrition_results', JSON.stringify(results));
+            
+            // Also sync with goal settings
+            const goalSettings = JSON.parse(localStorage.getItem('fit30_goal_settings') || '{}');
+            goalSettings.nutritionResults = results;
+            localStorage.setItem('fit30_goal_settings', JSON.stringify(goalSettings));
+            
+            showToast('✓ Đã lưu kết quả macro!');
+        }
+        
+        function resetForm() {
+            if (!confirm('Reset về giá trị mặc định?')) return;
+            
+            state = {
+                gender: 'female',
+                age: 35,
+                weight: 58,
+                height: 160,
+                bodyFat: null,
+                activityLevel: 1.55,
+                goal: 'recomp',
+                mealsPerDay: 4,
+                proteinPerKg: 2.0,
+                fatPercent: 25,
+                weightLossRate: 500
+            };
+            
+            restoreUI();
+            calculate();
+            showToast('Đã reset về mặc định');
+        }
+        
+        // ==================== TOAST ====================
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastContent').textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
