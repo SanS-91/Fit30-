@@ -1,0 +1,1794 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mục Tiêu Cá Nhân - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Base palette */
+            --text-dark: #4A4A5A;
+            --text-medium: #7A7A8A;
+            --text-light: #A0A0B0;
+            --white: #FFFFFF;
+            --bg-primary: #FFFBFB;
+            --bg-soft: #FFF8F5;
+            --border-soft: #F0E8E6;
+            
+            /* Goal color - Mauve */
+            --goal: #D8A8D8;
+            --goal-soft: #F5E8F5;
+            --goal-dark: #B888B8;
+            --goal-gradient: linear-gradient(135deg, #F5E8F5 0%, #D8A8D8 100%);
+            
+            /* Goal type colors */
+            --fatloss: #F4A698;
+            --fatloss-soft: #FCEAE5;
+            --fatloss-gradient: linear-gradient(135deg, #FCEAE5 0%, #F4A698 100%);
+            
+            --muscle: #B8A8E8;
+            --muscle-soft: #EEE8F8;
+            --muscle-gradient: linear-gradient(135deg, #EEE8F8 0%, #B8A8E8 100%);
+            
+            --recomp: #7FB5B5;
+            --recomp-soft: #E0F0F0;
+            --recomp-gradient: linear-gradient(135deg, #E0F0F0 0%, #7FB5B5 100%);
+            
+            --strength: #E88A9A;
+            --strength-soft: #FBE5EA;
+            --strength-gradient: linear-gradient(135deg, #FBE5EA 0%, #E88A9A 100%);
+            
+            --fitness: #8FC5A8;
+            --fitness-soft: #E5F5EC;
+            --fitness-gradient: linear-gradient(135deg, #E5F5EC 0%, #8FC5A8 100%);
+            
+            /* Main gradient */
+            --main-gradient: linear-gradient(135deg, #F4A698 0%, #B8A8E8 50%, #7FB5B5 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        body::before {
+            width: 500px;
+            height: 500px;
+            background: var(--goal);
+            top: -150px;
+            right: -150px;
+        }
+        
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: var(--muscle);
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 18px 40px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .btn-header {
+            padding: 9px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-header.secondary {
+            background: var(--bg-soft);
+            color: var(--text-medium);
+        }
+        
+        .btn-header.secondary:hover {
+            background: var(--goal-soft);
+            color: var(--goal-dark);
+        }
+        
+        .btn-header.primary {
+            background: var(--goal-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(216,168,216,0.3);
+        }
+        
+        .btn-header.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(216,168,216,0.4);
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 60px 40px 30px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: var(--goal-gradient);
+            color: white;
+            padding: 7px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 22px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(216,168,216,0.3);
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: var(--goal-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        
+        /* Main Layout */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px 40px 60px;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 30px;
+            align-items: start;
+        }
+        
+        .settings-column {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        /* Section Card */
+        .section-card {
+            background: white;
+            border-radius: 24px;
+            padding: 30px 32px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .section-header {
+            margin-bottom: 22px;
+        }
+        
+        .section-eyebrow {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            background: var(--goal-soft);
+            color: var(--goal-dark);
+        }
+        
+        .section-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+        }
+        
+        .section-header p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+        }
+        
+        /* Step Indicator */
+        .step-indicator {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--goal-gradient);
+            color: white;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-right: 12px;
+            vertical-align: middle;
+        }
+        
+        /* Goal Selection */
+        .goal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        
+        .goal-option {
+            background: white;
+            border: 2px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 20px 18px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .goal-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--opt-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+        
+        .goal-option:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-color: var(--opt-color);
+        }
+        
+        .goal-option:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .goal-option.active {
+            border-color: var(--opt-color);
+            background: var(--opt-soft);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .goal-option.active::before {
+            transform: scaleX(1);
+        }
+        
+        .goal-option[data-goal="fatloss"] {
+            --opt-color: var(--fatloss);
+            --opt-soft: var(--fatloss-soft);
+            --opt-gradient: var(--fatloss-gradient);
+        }
+        
+        .goal-option[data-goal="muscle"] {
+            --opt-color: var(--muscle);
+            --opt-soft: var(--muscle-soft);
+            --opt-gradient: var(--muscle-gradient);
+        }
+        
+        .goal-option[data-goal="recomp"] {
+            --opt-color: var(--recomp);
+            --opt-soft: var(--recomp-soft);
+            --opt-gradient: var(--recomp-gradient);
+        }
+        
+        .goal-option[data-goal="strength"] {
+            --opt-color: var(--strength);
+            --opt-soft: var(--strength-soft);
+            --opt-gradient: var(--strength-gradient);
+        }
+        
+        .goal-option[data-goal="fitness"] {
+            --opt-color: var(--fitness);
+            --opt-soft: var(--fitness-soft);
+            --opt-gradient: var(--fitness-gradient);
+        }
+        
+        .goal-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: var(--opt-soft);
+            color: var(--opt-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            transition: all 0.3s;
+        }
+        
+        .goal-option.active .goal-icon {
+            background: var(--opt-color);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .goal-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+        
+        .goal-desc {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        .goal-check {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--opt-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s;
+        }
+        
+        .goal-option.active .goal-check {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Level Selection */
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        
+        .level-option {
+            background: var(--bg-soft);
+            border: 2px solid transparent;
+            border-radius: 16px;
+            padding: 22px 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .level-option:hover {
+            background: white;
+            border-color: var(--goal);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+        
+        .level-option.active {
+            background: var(--goal-soft);
+            border-color: var(--goal);
+            box-shadow: 0 8px 25px rgba(216,168,216,0.2);
+        }
+        
+        .level-badge {
+            display: inline-block;
+            background: var(--goal-soft);
+            color: var(--goal-dark);
+            padding: 4px 12px;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .level-option.active .level-badge {
+            background: var(--goal);
+            color: white;
+        }
+        
+        .level-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        
+        .level-period {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .level-desc {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        .level-priority {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--border-soft);
+            font-size: 0.78rem;
+            color: var(--text-light);
+        }
+        
+        .level-priority strong {
+            color: var(--goal-dark);
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Constraints */
+        .constraints-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 22px;
+        }
+        
+        .constraint-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .constraint-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        
+        .constraint-input {
+            padding: 12px 16px;
+            border: 2px solid var(--border-soft);
+            border-radius: 12px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            background: var(--bg-soft);
+            transition: all 0.3s;
+        }
+        
+        .constraint-input:focus {
+            outline: none;
+            border-color: var(--goal);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(216,168,216,0.1);
+        }
+        
+        .constraint-select {
+            padding: 12px 16px;
+            border: 2px solid var(--border-soft);
+            border-radius: 12px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            background: var(--bg-soft);
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237A7A8A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 16px;
+            padding-right: 40px;
+            transition: all 0.3s;
+        }
+        
+        .constraint-select:focus {
+            outline: none;
+            border-color: var(--goal);
+            background-color: white;
+        }
+        
+        /* Equipment Checkboxes */
+        .equipment-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+            display: block;
+        }
+        
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+        
+        .equipment-check {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            background: var(--bg-soft);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-medium);
+            user-select: none;
+        }
+        
+        .equipment-check:hover {
+            background: white;
+            border-color: var(--goal-soft);
+        }
+        
+        .equipment-check.active {
+            background: var(--goal-soft);
+            border-color: var(--goal);
+            color: var(--goal-dark);
+        }
+        
+        .equipment-check-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            background: white;
+            border: 2px solid var(--border-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: transparent;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+        
+        .equipment-check.active .equipment-check-icon {
+            background: var(--goal);
+            border-color: var(--goal);
+            color: white;
+        }
+        
+        /* Health Issues */
+        .health-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+            display: block;
+        }
+        
+        .health-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+        
+        .health-check {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            background: var(--bg-soft);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-medium);
+            user-select: none;
+        }
+        
+        .health-check:hover {
+            background: white;
+        }
+        
+        .health-check.active {
+            background: #FFF0F0;
+            border-color: #F4A698;
+            color: #C87060;
+        }
+        
+        .health-check-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            background: white;
+            border: 2px solid var(--border-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: transparent;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+        
+        .health-check.active .health-check-icon {
+            background: #F4A698;
+            border-color: #F4A698;
+            color: white;
+        }
+        
+        /* Preview Panel (Sticky Right) */
+        .preview-panel {
+            background: white;
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+            position: sticky;
+            top: 90px;
+        }
+        
+        .preview-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 22px;
+            padding-bottom: 18px;
+            border-bottom: 1px dashed var(--border-soft);
+        }
+        
+        .preview-indicator {
+            width: 4px;
+            height: 28px;
+            background: var(--goal-gradient);
+            border-radius: 2px;
+        }
+        
+        .preview-title {
+            font-size: 1.2rem;
+        }
+        
+        .preview-subtitle {
+            font-size: 0.82rem;
+            color: var(--text-light);
+        }
+        
+        /* Generated Parameters */
+        .params-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+        
+        .param-card {
+            background: var(--bg-soft);
+            padding: 14px;
+            border-radius: 14px;
+            text-align: center;
+            border-left: 3px solid var(--goal);
+            transition: all 0.3s;
+        }
+        
+        .param-card.highlight {
+            background: var(--goal-soft);
+            border-left-color: var(--goal-dark);
+        }
+        
+        .param-label {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .param-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--goal-dark);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .param-note {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            margin-top: 3px;
+        }
+        
+        /* Priority List */
+        .priority-section {
+            margin-bottom: 22px;
+        }
+        
+        .priority-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+        }
+        
+        .priority-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .priority-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: var(--bg-soft);
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: all 0.3s;
+        }
+        
+        .priority-rank {
+            width: 24px;
+            height: 24px;
+            border-radius: 8px;
+            background: var(--goal);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+        
+        .priority-item:nth-child(1) .priority-rank { background: var(--goal-dark); }
+        .priority-item:nth-child(2) .priority-rank { background: var(--goal); opacity: 0.85; }
+        .priority-item:nth-child(3) .priority-rank { background: var(--goal); opacity: 0.7; }
+        .priority-item:nth-child(4) .priority-rank { background: var(--goal); opacity: 0.55; }
+        
+        /* Sample Workout Preview */
+        .sample-preview {
+            background: linear-gradient(135deg, var(--goal-soft) 0%, white 100%);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 22px;
+            border: 1.5px dashed var(--goal);
+        }
+        
+        .sample-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--goal-dark);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .sample-exercise {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--border-soft);
+            font-size: 0.85rem;
+        }
+        
+        .sample-exercise:last-child {
+            border-bottom: none;
+        }
+        
+        .sample-ex-name {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        
+        .sample-ex-config {
+            color: var(--goal-dark);
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+        
+        /* Save Button */
+        .save-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .btn-save {
+            padding: 14px;
+            background: var(--goal-gradient);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            font-family: 'Quicksand', sans-serif;
+            box-shadow: 0 6px 20px rgba(216,168,216,0.3);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(216,168,216,0.4);
+        }
+        
+        .btn-reset {
+            padding: 12px;
+            background: var(--bg-soft);
+            color: var(--text-medium);
+            border: none;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            font-family: 'Quicksand', sans-serif;
+            transition: all 0.3s;
+        }
+        
+        .btn-reset:hover {
+            background: #FFF0F0;
+            color: #E88A8A;
+        }
+        
+        /* Info Banner */
+        .info-banner {
+            background: var(--goal-soft);
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 22px;
+            border-left: 3px solid var(--goal);
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        .info-banner strong {
+            color: var(--goal-dark);
+        }
+        
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: 14px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 2000;
+            transform: translateX(400px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 4px solid var(--goal);
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--goal-soft);
+            color: var(--goal-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 40px 40px 25px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--goal);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .preview-panel {
+                position: static;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .hero {
+                padding: 40px 20px 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .main-container {
+                padding: 20px 20px 40px;
+            }
+            
+            .section-card {
+                padding: 25px 22px;
+            }
+            
+            .goal-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .level-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .constraints-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .params-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-soft);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--goal) 0%, var(--muscle) 100%);
+            border-radius: 4px;
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-card {
+            animation: fadeIn 0.5s ease both;
+        }
+        
+        .section-card:nth-child(1) { animation-delay: 0.1s; }
+        .section-card:nth-child(2) { animation-delay: 0.2s; }
+        .section-card:nth-child(3) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <div class="header-actions">
+            <a href="gym-overview.html" class="btn-header secondary">← Overview</a>
+            <button class="btn-header primary" onclick="saveSettings()">💾 Lưu cài đặt</button>
+        </div>
+    </header>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <span class="hero-badge">GOAL MODIFIER</span>
+        <h1>Cá nhân hóa <span>mục tiêu</span></h1>
+        <p>Chọn mục tiêu, trình độ và ràng buộc của bạn. Toàn bộ chương trình sẽ tự động điều chỉnh để phù hợp với nhu cầu riêng.</p>
+    </section>
+    
+    <!-- Main Layout -->
+    <div class="main-container">
+        <!-- Left Column - Settings -->
+        <div class="settings-column">
+            
+            <!-- Step 1: Goal Selection -->
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-eyebrow">Bước 1</span>
+                    <h2><span class="step-indicator">1</span>Chọn mục tiêu chính</h2>
+                    <p>Mục tiêu sẽ quyết định cardio, thời gian nghỉ, rep range và loại bài tập ưu tiên.</p>
+                </div>
+                
+                <div class="goal-grid">
+                    <div class="goal-option active" data-goal="fatloss" onclick="selectGoal('fatloss')">
+                        <div class="goal-check">✓</div>
+                        <div class="goal-icon">🔥</div>
+                        <div class="goal-name">Giảm mỡ</div>
+                        <div class="goal-desc">Ưu tiên đốt calories, cardio nhiều, rep cao</div>
+                    </div>
+                    
+                    <div class="goal-option" data-goal="muscle" onclick="selectGoal('muscle')">
+                        <div class="goal-check">✓</div>
+                        <div class="goal-icon">💪</div>
+                        <div class="goal-name">Tăng cơ</div>
+                        <div class="goal-desc">Volume cao, rest dài, giảm cardio</div>
+                    </div>
+                    
+                    <div class="goal-option" data-goal="recomp" onclick="selectGoal('recomp')">
+                        <div class="goal-check">✓</div>
+                        <div class="goal-icon">⚖️</div>
+                        <div class="goal-name">Tái cấu trúc</div>
+                        <div class="goal-desc">Cân bằng giữa giảm mỡ và tăng cơ</div>
+                    </div>
+                    
+                    <div class="goal-option" data-goal="strength" onclick="selectGoal('strength')">
+                        <div class="goal-check">✓</div>
+                        <div class="goal-icon">🏋️</div>
+                        <div class="goal-name">Sức mạnh</div>
+                        <div class="goal-desc">Tạ nặng, rep thấp, rest rất dài</div>
+                    </div>
+                    
+                    <div class="goal-option" data-goal="fitness" onclick="selectGoal('fitness')">
+                        <div class="goal-check">✓</div>
+                        <div class="goal-icon">🌿</div>
+                        <div class="goal-name">Sức khỏe tổng thể</div>
+                        <div class="goal-desc">Cân bằng, bền vững, duy trì lâu dài</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 2: Experience Level -->
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-eyebrow">Bước 2</span>
+                    <h2><span class="step-indicator">2</span>Trình độ hiện tại</h2>
+                    <p>Trình độ sẽ quyết định loại thiết bị ưu tiên và độ phức tạp của bài tập.</p>
+                </div>
+                
+                <div class="level-grid">
+                    <div class="level-option" data-level="beginner" onclick="selectLevel('beginner')">
+                        <span class="level-badge">LEVEL 1</span>
+                        <div class="level-name">Beginner</div>
+                        <div class="level-period">0-6 tháng</div>
+                        <div class="level-desc">Mới bắt đầu, cần học kỹ thuật cơ bản</div>
+                        <div class="level-priority">
+                            <strong>Ưu tiên thiết bị:</strong>
+                            Machine → Dumbbell → Cable → Barbell
+                        </div>
+                    </div>
+                    
+                    <div class="level-option active" data-level="intermediate" onclick="selectLevel('intermediate')">
+                        <span class="level-badge">LEVEL 2</span>
+                        <div class="level-name">Intermediate</div>
+                        <div class="level-period">6-18 tháng</div>
+                        <div class="level-desc">Đã nắm kỹ thuật, sẵn sàng tăng cường độ</div>
+                        <div class="level-priority">
+                            <strong>Ưu tiên thiết bị:</strong>
+                            Dumbbell → Machine → Cable → Barbell
+                        </div>
+                    </div>
+                    
+                    <div class="level-option" data-level="advanced" onclick="selectLevel('advanced')">
+                        <span class="level-badge">LEVEL 3</span>
+                        <div class="level-name">Advanced</div>
+                        <div class="level-period">18+ tháng</div>
+                        <div class="level-desc">Có kinh nghiệm, muốn tối ưu hiệu quả</div>
+                        <div class="level-priority">
+                            <strong>Ưu tiên thiết bị:</strong>
+                            Barbell → Dumbbell → Cable → Machine
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 3: Constraints -->
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="section-eyebrow">Bước 3</span>
+                    <h2><span class="step-indicator">3</span>Ràng buộc cá nhân</h2>
+                    <p>Thời gian, thiết bị và vấn đề sức khỏe — giúp hệ thống đề xuất phù hợp.</p>
+                </div>
+                
+                <div class="constraints-grid">
+                    <div class="constraint-group">
+                        <label class="constraint-label">Thời gian / buổi</label>
+                        <select class="constraint-select" id="timePerWorkout" onchange="updatePreview()">
+                            <option value="60">60 phút</option>
+                            <option value="75">75 phút</option>
+                            <option value="90" selected>90 phút</option>
+                            <option value="105">105 phút</option>
+                            <option value="120">120 phút</option>
+                        </select>
+                    </div>
+                    
+                    <div class="constraint-group">
+                        <label class="constraint-label">Số buổi / tuần</label>
+                        <select class="constraint-select" id="workoutsPerWeek" onchange="updatePreview()">
+                            <option value="3">3 buổi</option>
+                            <option value="4" selected>4 buổi</option>
+                            <option value="5">5 buổi</option>
+                        </select>
+                    </div>
+                    
+                    <div class="constraint-group">
+                        <label class="constraint-label">Tuổi</label>
+                        <input type="number" class="constraint-input" id="age" value="35" min="18" max="80" onchange="updatePreview()">
+                    </div>
+                    
+                    <div class="constraint-group">
+                        <label class="constraint-label">Giới tính</label>
+                        <select class="constraint-select" id="gender" onchange="updatePreview()">
+                            <option value="female" selected>Nữ</option>
+                            <option value="male">Nam</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <label class="equipment-label">Thiết bị có sẵn tại phòng gym</label>
+                <div class="equipment-grid">
+                    <div class="equipment-check active" data-equip="machine" onclick="toggleEquipment(this)">
+                        <span class="equipment-check-icon">✓</span>
+                        Machine
+                    </div>
+                    <div class="equipment-check active" data-equip="dumbbell" onclick="toggleEquipment(this)">
+                        <span class="equipment-check-icon">✓</span>
+                        Dumbbell
+                    </div>
+                    <div class="equipment-check active" data-equip="barbell" onclick="toggleEquipment(this)">
+                        <span class="equipment-check-icon">✓</span>
+                        Barbell
+                    </div>
+                    <div class="equipment-check active" data-equip="cable" onclick="toggleEquipment(this)">
+                        <span class="equipment-check-icon">✓</span>
+                        Cable
+                    </div>
+                    <div class="equipment-check" data-equip="kettlebell" onclick="toggleEquipment(this)">
+                        <span class="equipment-check-icon">✓</span>
+                        Kettlebell
+                    </div>
+                    <div class="equipment-check" data-equip="band" onclick="toggleEquipment(this)">
+                        <span class="equipment-check-icon">✓</span>
+                        Resistance Band
+                    </div>
+                </div>
+                
+                <label class="health-label">Vấn đề sức khỏe (nếu có)</label>
+                <div class="health-grid">
+                    <div class="health-check" data-issue="back" onclick="toggleHealth(this)">
+                        <span class="health-check-icon">✓</span>
+                        Đau lưng dưới
+                    </div>
+                    <div class="health-check" data-issue="shoulder" onclick="toggleHealth(this)">
+                        <span class="health-check-icon">✓</span>
+                        Đau vai
+                    </div>
+                    <div class="health-check" data-issue="knee" onclick="toggleHealth(this)">
+                        <span class="health-check-icon">✓</span>
+                        Đau đầu gối
+                    </div>
+                    <div class="health-check" data-issue="wrist" onclick="toggleHealth(this)">
+                        <span class="health-check-icon">✓</span>
+                        Đau cổ tay
+                    </div>
+                    <div class="health-check" data-issue="none" onclick="toggleHealth(this)">
+                        <span class="health-check-icon">✓</span>
+                        Không có
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Column - Preview (Sticky) -->
+        <aside class="preview-panel">
+            <div class="preview-header">
+                <div class="preview-indicator"></div>
+                <div>
+                    <div class="preview-title">Kết quả đề xuất</div>
+                    <div class="preview-subtitle">Cập nhật realtime theo lựa chọn</div>
+                </div>
+            </div>
+            
+            <div class="info-banner" id="goalBanner">
+                <strong>🔥 Giảm mỡ:</strong> Cardio 40', nghỉ ngắn 60", rep cao 12-15, ưu tiên compound và superset.
+            </div>
+            
+            <!-- Generated Parameters -->
+            <div class="params-grid" id="paramsGrid">
+                <div class="param-card highlight">
+                    <div class="param-label">Cardio</div>
+                    <div class="param-value" id="paramCardio">40'</div>
+                    <div class="param-note">LISS / cuối buổi</div>
+                </div>
+                <div class="param-card highlight">
+                    <div class="param-label">Rest</div>
+                    <div class="param-value" id="paramRest">60"</div>
+                    <div class="param-note">Giữa các hiệp</div>
+                </div>
+                <div class="param-card">
+                    <div class="param-label">Reps</div>
+                    <div class="param-value" id="paramReps">12-15</div>
+                    <div class="param-note">Range mục tiêu</div>
+                </div>
+                <div class="param-card">
+                    <div class="param-label">Sets</div>
+                    <div class="param-value" id="paramSets">3-4</div>
+                    <div class="param-note">Mỗi bài tập</div>
+                </div>
+                <div class="param-card">
+                    <div class="param-label">Tempo</div>
+                    <div class="param-value" id="paramTempo">2-0-1-0</div>
+                    <div class="param-note">Tốc độ tập</div>
+                </div>
+                <div class="param-card">
+                    <div class="param-label">Intensity</div>
+                    <div class="param-value" id="paramIntensity">65-75%</div>
+                    <div class="param-note">% 1RM</div>
+                </div>
+            </div>
+            
+            <!-- Priority List -->
+            <div class="priority-section">
+                <div class="priority-title">Chiến lược ưu tiên</div>
+                <ul class="priority-list" id="priorityList">
+                    <li class="priority-item">
+                        <span class="priority-rank">1</span>
+                        Compound exercises nhiều
+                    </li>
+                    <li class="priority-item">
+                        <span class="priority-rank">2</span>
+                        Superset 2 lần / tuần
+                    </li>
+                    <li class="priority-item">
+                        <span class="priority-rank">3</span>
+                        HIIT 1 buổi / tuần
+                    </li>
+                    <li class="priority-item">
+                        <span class="priority-rank">4</span>
+                        NEAT cao (đi bộ nhiều)
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Sample Workout Preview -->
+            <div class="sample-preview">
+                <div class="sample-title">💡 Preview: Buổi Upper Push</div>
+                <div id="sampleWorkout">
+                    <div class="sample-exercise">
+                        <span class="sample-ex-name">Machine Chest Press</span>
+                        <span class="sample-ex-config">4×12</span>
+                    </div>
+                    <div class="sample-exercise">
+                        <span class="sample-ex-name">Incline DB Press</span>
+                        <span class="sample-ex-config">3×12</span>
+                    </div>
+                    <div class="sample-exercise">
+                        <span class="sample-ex-name">Shoulder Press</span>
+                        <span class="sample-ex-config">3×12</span>
+                    </div>
+                    <div class="sample-exercise">
+                        <span class="sample-ex-name">Lateral Raise</span>
+                        <span class="sample-ex-config">3×15</span>
+                    </div>
+                    <div class="sample-exercise">
+                        <span class="sample-ex-name">Tricep Pushdown</span>
+                        <span class="sample-ex-config">3×15</span>
+                    </div>
+                    <div class="sample-exercise">
+                        <span class="sample-ex-name">Incline Walk</span>
+                        <span class="sample-ex-config">40'</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Save Actions -->
+            <div class="save-section">
+                <button class="btn-save" onclick="saveSettings()">💾 Lưu & áp dụng cài đặt</button>
+                <button class="btn-reset" onclick="resetSettings()">↺ Khôi phục mặc định</button>
+            </div>
+        </aside>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="gym-overview.html">GYM Overview</a>
+            <a href="gym-templates.html">Lịch tập mẫu</a>
+            <a href="gym-roadmap.html">Lộ trình 12 tuần</a>
+            <a href="gym-tracker.html">Progress Tracker</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">✓</div>
+        <div class="toast-content" id="toastContent">Đã lưu cài đặt!</div>
+    </div>
+    
+    <script>
+        // ==================== GOAL PRESETS ====================
+        const goalPresets = {
+            fatloss: {
+                name: 'Giảm mỡ',
+                emoji: '🔥',
+                banner: '<strong>🔥 Giảm mỡ:</strong> Cardio 40\', nghỉ ngắn 60", rep cao 12-15, ưu tiên compound và superset.',
+                params: {
+                    cardio: '40\'',
+                    cardioNote: 'LISS + 1 HIIT/tuần',
+                    rest: '60"',
+                    reps: '12-15',
+                    sets: '3-4',
+                    tempo: '2-0-1-0',
+                    intensity: '65-75%'
+                },
+                priorities: [
+                    'Compound exercises nhiều',
+                    'Superset 2 lần / tuần',
+                    'HIIT 1 buổi / tuần',
+                    'NEAT cao (đi bộ nhiều)'
+                ],
+                sample: [
+                    { name: 'Machine Chest Press', config: '4×12' },
+                    { name: 'Incline DB Press', config: '3×12' },
+                    { name: 'Shoulder Press', config: '3×12' },
+                    { name: 'Lateral Raise', config: '3×15' },
+                    { name: 'Tricep Pushdown', config: '3×15' },
+                    { name: 'Incline Walk', config: '40\'' }
+                ]
+            },
+            muscle: {
+                name: 'Tăng cơ',
+                emoji: '💪',
+                banner: '<strong>💪 Tăng cơ:</strong> Cardio giảm 20\', nghỉ dài 120", rep 8-10, volume cao, progressive overload.',
+                params: {
+                    cardio: '20\'',
+                    cardioNote: 'LISS nhẹ',
+                    rest: '120"',
+                    reps: '8-10',
+                    sets: '4-5',
+                    tempo: '2-1-1-0',
+                    intensity: '75-85%'
+                },
+                priorities: [
+                    'Progressive overload',
+                    'Volume cao (15-20 sets/buổi)',
+                    'Compound nặng đầu buổi',
+                    'Ăn đủ protein 1.6-2g/kg'
+                ],
+                sample: [
+                    { name: 'Barbell Bench Press', config: '5×8' },
+                    { name: 'Incline DB Press', config: '4×10' },
+                    { name: 'Shoulder Press', config: '4×8' },
+                    { name: 'Lateral Raise', config: '4×12' },
+                    { name: 'Overhead Tricep Ext', config: '4×10' },
+                    { name: 'Light Walk', config: '20\'' }
+                ]
+            },
+            recomp: {
+                name: 'Tái cấu trúc',
+                emoji: '⚖️',
+                banner: '<strong>⚖️ Tái cấu trúc:</strong> Cân bằng giữa giảm mỡ và tăng cơ. Cardio 30\', rep 10-12, rest 90".',
+                params: {
+                    cardio: '30\'',
+                    cardioNote: 'LISS đều',
+                    rest: '90"',
+                    reps: '10-12',
+                    sets: '3-4',
+                    tempo: '2-0-1-0',
+                    intensity: '70-80%'
+                },
+                priorities: [
+                    'Cân bằng compound & isolation',
+                    'Protein cao (2g/kg)',
+                    'Calories maintenance',
+                    'Ngủ đủ 7-8h/đêm'
+                ],
+                sample: [
+                    { name: 'DB Bench Press', config: '4×10' },
+                    { name: 'Incline DB Press', config: '3×12' },
+                    { name: 'Shoulder Press', config: '4×10' },
+                    { name: 'Lateral Raise', config: '3×15' },
+                    { name: 'Tricep Pushdown', config: '3×12' },
+                    { name: 'Incline Walk', config: '30\'' }
+                ]
+            },
+            strength: {
+                name: 'Sức mạnh',
+                emoji: '🏋️',
+                banner: '<strong>🏋️ Sức mạnh:</strong> Tạ nặng, rep thấp 3-5, rest rất dài 180", ưu tiên barbell compound.',
+                params: {
+                    cardio: '15\'',
+                    cardioNote: 'Warm-up only',
+                    rest: '180"',
+                    reps: '3-5',
+                    sets: '5-6',
+                    tempo: '2-0-X-0',
+                    intensity: '85-95%'
+                },
+                priorities: [
+                    'Barbell compound (Squat, Bench, Deadlift)',
+                    'Progressive overload mỗi tuần',
+                    'Sleep & recovery tối ưu',
+                    'Calories surplus nhẹ'
+                ],
+                sample: [
+                    { name: 'Barbell Bench Press', config: '5×5' },
+                    { name: 'Overhead Press', config: '5×5' },
+                    { name: 'Close Grip Bench', config: '4×6' },
+                    { name: 'Weighted Dip', config: '4×6' },
+                    { name: 'Tricep Pushdown', config: '3×8' },
+                    { name: 'Warm-down Walk', config: '15\'' }
+                ]
+            },
+            fitness: {
+                name: 'Sức khỏe tổng thể',
+                emoji: '🌿',
+                banner: '<strong>🌿 Sức khỏe tổng thể:</strong> Cân bằng, bền vững. Cardio 30\', rep 10-12, đa dạng bài tập.',
+                params: {
+                    cardio: '30\'',
+                    cardioNote: 'LISS + mobility',
+                    rest: '90"',
+                    reps: '10-12',
+                    sets: '3',
+                    tempo: '2-0-1-0',
+                    intensity: '65-75%'
+                },
+                priorities: [
+                    'Đa dạng bài tập, tránh nhàm chán',
+                    'Mobility & flexibility',
+                    'Consistency > Intensity',
+                    'Stress management'
+                ],
+                sample: [
+                    { name: 'Machine Chest Press', config: '3×12' },
+                    { name: 'Lat Pulldown', config: '3×12' },
+                    { name: 'Goblet Squat', config: '3×12' },
+                    { name: 'Lateral Raise', config: '3×15' },
+                    { name: 'Plank', config: '3×45"' },
+                    { name: 'Cycling', config: '30\'' }
+                ]
+            }
+        };
+        
+        // ==================== LEVEL PRIORITIES ====================
+        const levelEquipmentPriority = {
+            beginner: ['Machine', 'Dumbbell', 'Cable', 'Barbell'],
+            intermediate: ['Dumbbell', 'Machine', 'Cable', 'Barbell'],
+            advanced: ['Barbell', 'Dumbbell', 'Cable', 'Machine']
+        };
+        
+        // ==================== STATE ====================
+        let currentState = {
+            goal: 'fatloss',
+            level: 'intermediate',
+            timePerWorkout: 90,
+            workoutsPerWeek: 4,
+            age: 35,
+            gender: 'female',
+            equipment: ['machine', 'dumbbell', 'barbell', 'cable'],
+            healthIssues: []
+        };
+        
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load saved settings
+            const saved = localStorage.getItem('fit30_goal_settings');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    currentState = { ...currentState, ...parsed };
+                    restoreUI();
+                } catch (e) {
+                    console.error('Error loading settings', e);
+                }
+            }
+            
+            updatePreview();
+        });
+        
+        function restoreUI() {
+            // Restore goal
+            document.querySelectorAll('.goal-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.goal === currentState.goal);
+            });
+            
+            // Restore level
+            document.querySelectorAll('.level-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.level === currentState.level);
+            });
+            
+            // Restore constraints
+            document.getElementById('timePerWorkout').value = currentState.timePerWorkout;
+            document.getElementById('workoutsPerWeek').value = currentState.workoutsPerWeek;
+            document.getElementById('age').value = currentState.age;
+            document.getElementById('gender').value = currentState.gender;
+            
+            // Restore equipment
+            document.querySelectorAll('.equipment-check').forEach(el => {
+                el.classList.toggle('active', currentState.equipment.includes(el.dataset.equip));
+            });
+            
+            // Restore health
+            document.querySelectorAll('.health-check').forEach(el => {
+                el.classList.toggle('active', currentState.healthIssues.includes(el.dataset.issue));
+            });
+        }
+        
+        // ==================== GOAL SELECTION ====================
+        function selectGoal(goal) {
+            currentState.goal = goal;
+            
+            document.querySelectorAll('.goal-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.goal === goal);
+            });
+            
+            updatePreview();
+        }
+        
+        // ==================== LEVEL SELECTION ====================
+        function selectLevel(level) {
+            currentState.level = level;
+            
+            document.querySelectorAll('.level-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.level === level);
+            });
+            
+            updatePreview();
+        }
+        
+        // ==================== EQUIPMENT TOGGLE ====================
+        function toggleEquipment(el) {
+            el.classList.toggle('active');
+            
+            const equip = el.dataset.equip;
+            if (el.classList.contains('active')) {
+                if (!currentState.equipment.includes(equip)) {
+                    currentState.equipment.push(equip);
+                }
+            } else {
+                currentState.equipment = currentState.equipment.filter(e => e !== equip);
+            }
+            
+            updatePreview();
+        }
+        
+        // ==================== HEALTH TOGGLE ====================
+        function toggleHealth(el) {
+            const issue = el.dataset.issue;
+            
+            // If clicking "none", clear all others
+            if (issue === 'none') {
+                document.querySelectorAll('.health-check').forEach(h => {
+                    if (h.dataset.issue !== 'none') h.classList.remove('active');
+                });
+                el.classList.add('active');
+                currentState.healthIssues = ['none'];
+            } else {
+                // Remove "none" if selecting specific issue
+                const noneEl = document.querySelector('.health-check[data-issue="none"]');
+                if (noneEl) noneEl.classList.remove('active');
+                currentState.healthIssues = currentState.healthIssues.filter(i => i !== 'none');
+                
+                el.classList.toggle('active');
+                
+                if (el.classList.contains('active')) {
+                    if (!currentState.healthIssues.includes(issue)) {
+                        currentState.healthIssues.push(issue);
+                    }
+                } else {
+                    currentState.healthIssues = currentState.healthIssues.filter(i => i !== issue);
+                }
+            }
+            
+            updatePreview();
+        }
+        
+        // ==================== UPDATE PREVIEW ====================
+        function updatePreview() {
+            // Update constraints from inputs
+            currentState.timePerWorkout = parseInt(document.getElementById('timePerWorkout').value);
+            currentState.workoutsPerWeek = parseInt(document.getElementById('workoutsPerWeek').value);
+            currentState.age = parseInt(document.getElementById('age').value);
+            currentState.gender = document.getElementById('gender').value;
+            
+            const preset = goalPresets[currentState.goal];
+            
+            // Update banner
+            document.getElementById('goalBanner').innerHTML = preset.banner;
+            
+            // Update params
+            document.getElementById('paramCardio').textContent = preset.params.cardio;
+            document.getElementById('paramCardio').nextElementSibling.textContent = preset.params.cardioNote;
+            document.getElementById('paramRest').textContent = preset.params.rest;
+            document.getElementById('paramReps').textContent = preset.params.reps;
+            document.getElementById('paramSets').textContent = preset.params.sets;
+            document.getElementById('paramTempo').textContent = preset.params.tempo;
+            document.getElementById('paramIntensity').textContent = preset.params.intensity;
+            
+            // Update priorities
+            const priorityList = document.getElementById('priorityList');
+            priorityList.innerHTML = preset.priorities.map((p, i) => `
+                <li class="priority-item">
+                    <span class="priority-rank">${i + 1}</span>
+                    ${p}
+                </li>
+            `).join('');
+            
+            // Update sample workout
+            const sampleWorkout = document.getElementById('sampleWorkout');
+            sampleWorkout.innerHTML = preset.sample.map(s => `
+                <div class="sample-exercise">
+                    <span class="sample-ex-name">${s.name}</span>
+                    <span class="sample-ex-config">${s.config}</span>
+                </div>
+            `).join('');
+        }
+        
+        // ==================== SAVE / RESET ====================
+        function saveSettings() {
+            localStorage.setItem('fit30_goal_settings', JSON.stringify(currentState));
+            
+            // Also save to roadmap if exists
+            const roadmap = JSON.parse(localStorage.getItem('fit30_roadmap') || '{}');
+            roadmap.settings = currentState;
+            localStorage.setItem('fit30_roadmap', JSON.stringify(roadmap));
+            
+            showToast('Đã lưu & áp dụng cài đặt!');
+        }
+        
+        function resetSettings() {
+            if (!confirm('Khôi phục cài đặt mặc định?')) return;
+            
+            currentState = {
+                goal: 'fatloss',
+                level: 'intermediate',
+                timePerWorkout: 90,
+                workoutsPerWeek: 4,
+                age: 35,
+                gender: 'female',
+                equipment: ['machine', 'dumbbell', 'barbell', 'cable'],
+                healthIssues: []
+            };
+            
+            restoreUI();
+            updatePreview();
+            showToast('Đã khôi phục mặc định');
+        }
+        
+        // ==================== TOAST ====================
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastContent').textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
