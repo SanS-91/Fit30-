@@ -1,0 +1,2095 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Tracker - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <style>
+        :root {
+            /* Base palette */
+            --text-dark: #4A4A5A;
+            --text-medium: #7A7A8A;
+            --text-light: #A0A0B0;
+            --white: #FFFFFF;
+            --bg-primary: #FFFBFB;
+            --bg-soft: #FFF8F5;
+            --border-soft: #F0E8E6;
+            
+            /* Tracker color - Mint */
+            --tracker: #8FC5A8;
+            --tracker-soft: #E5F5EC;
+            --tracker-dark: #6BA888;
+            --tracker-gradient: linear-gradient(135deg, #E5F5EC 0%, #8FC5A8 100%);
+            
+            /* Chart colors */
+            --chart-1: #8FC5A8;
+            --chart-2: #B8A8E8;
+            --chart-3: #F4A698;
+            --chart-4: #E88A9A;
+            --chart-5: #7FB5B5;
+            
+            /* Main gradient */
+            --main-gradient: linear-gradient(135deg, #F4A698 0%, #B8A8E8 50%, #7FB5B5 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        body::before {
+            width: 500px;
+            height: 500px;
+            background: var(--tracker);
+            top: -150px;
+            right: -150px;
+        }
+        
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: var(--chart-2);
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 18px 40px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .btn-header {
+            padding: 9px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-header.secondary {
+            background: var(--bg-soft);
+            color: var(--text-medium);
+        }
+        
+        .btn-header.secondary:hover {
+            background: var(--tracker-soft);
+            color: var(--tracker-dark);
+        }
+        
+        .btn-header.primary {
+            background: var(--tracker-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(143,197,168,0.3);
+        }
+        
+        .btn-header.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(143,197,168,0.4);
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 50px 40px 25px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: var(--tracker-gradient);
+            color: white;
+            padding: 7px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(143,197,168,0.3);
+        }
+        
+        .hero h1 {
+            font-size: 2.6rem;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: var(--tracker-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.05rem;
+            color: var(--text-medium);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Stats Overview */
+        .stats-overview {
+            max-width: 1300px;
+            margin: 25px auto 30px;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--stat-color, var(--tracker-gradient));
+        }
+        
+        .stat-card:nth-child(1) { --stat-color: var(--tracker); }
+        .stat-card:nth-child(2) { --stat-color: var(--chart-2); }
+        .stat-card:nth-child(3) { --stat-color: var(--chart-3); }
+        .stat-card:nth-child(4) { --stat-color: var(--chart-4); }
+        .stat-card:nth-child(5) { --stat-color: var(--chart-5); }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        
+        .stat-change {
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .stat-change.positive { color: var(--tracker-dark); }
+        .stat-change.negative { color: var(--chart-4); }
+        .stat-change.neutral { color: var(--text-light); }
+        
+        /* Tab Navigation */
+        .tab-nav {
+            max-width: 1300px;
+            margin: 0 auto 25px;
+            padding: 0 40px;
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        
+        .tab-nav::-webkit-scrollbar { display: none; }
+        
+        .tab-btn {
+            padding: 12px 22px;
+            background: white;
+            border: 2px solid var(--border-soft);
+            border-radius: 14px;
+            font-weight: 600;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.92rem;
+            white-space: nowrap;
+            font-family: 'Quicksand', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tab-btn:hover {
+            border-color: var(--tracker);
+            color: var(--tracker-dark);
+            transform: translateY(-2px);
+        }
+        
+        .tab-btn.active {
+            background: var(--tracker-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(143,197,168,0.3);
+        }
+        
+        .tab-count {
+            background: rgba(255,255,255,0.3);
+            padding: 2px 9px;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+        
+        .tab-btn:not(.active) .tab-count {
+            background: var(--tracker-soft);
+            color: var(--tracker-dark);
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px 60px;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Card Base */
+        .card {
+            background: white;
+            border-radius: 22px;
+            padding: 28px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+            margin-bottom: 20px;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .card-title {
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-indicator {
+            width: 4px;
+            height: 22px;
+            background: var(--tracker-gradient);
+            border-radius: 2px;
+        }
+        
+        /* Today's Workout Tab */
+        .today-header {
+            background: var(--tracker-gradient);
+            border-radius: 18px;
+            padding: 22px 25px;
+            margin-bottom: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .today-info h3 {
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            margin-bottom: 4px;
+        }
+        
+        .today-info p {
+            color: var(--text-medium);
+            font-size: 0.9rem;
+        }
+        
+        .today-progress {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .progress-ring {
+            position: relative;
+            width: 70px;
+            height: 70px;
+        }
+        
+        .progress-ring svg {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring-bg {
+            fill: none;
+            stroke: rgba(255,255,255,0.3);
+            stroke-width: 6;
+        }
+        
+        .progress-ring-fill {
+            fill: none;
+            stroke: white;
+            stroke-width: 6;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.6s ease;
+        }
+        
+        .progress-ring-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        /* Workout Log Form */
+        .workout-log {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .log-exercise {
+            background: var(--bg-soft);
+            border-radius: 16px;
+            padding: 18px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .log-exercise.completed {
+            background: var(--tracker-soft);
+            border-color: var(--tracker);
+        }
+        
+        .log-exercise-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .log-exercise-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .log-check {
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            background: white;
+            border: 2px solid var(--border-soft);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            color: transparent;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        
+        .log-check.checked {
+            background: var(--tracker);
+            border-color: var(--tracker);
+            color: white;
+        }
+        
+        .log-sets {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+        }
+        
+        .set-input-group {
+            background: white;
+            padding: 10px 12px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .set-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            min-width: 45px;
+        }
+        
+        .set-input {
+            flex: 1;
+            padding: 6px 10px;
+            border: 1.5px solid var(--border-soft);
+            border-radius: 8px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            background: var(--bg-soft);
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .set-input:focus {
+            outline: none;
+            border-color: var(--tracker);
+            background: white;
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--tracker-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(143,197,168,0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(143,197,168,0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-soft);
+            color: var(--text-medium);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--tracker-soft);
+            color: var(--tracker-dark);
+        }
+        
+        .btn-danger {
+            background: #FFF0F0;
+            color: #E88A8A;
+        }
+        
+        .btn-danger:hover {
+            background: #FFE5E5;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+        
+        /* History Tab */
+        .history-filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-chip {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid var(--border-soft);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-chip:hover {
+            border-color: var(--tracker);
+            color: var(--tracker-dark);
+        }
+        
+        .filter-chip.active {
+            background: var(--tracker-gradient);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .history-list {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .history-item {
+            background: var(--bg-soft);
+            border-radius: 16px;
+            padding: 18px 22px;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 18px;
+            align-items: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .history-item:hover {
+            background: white;
+            border-color: var(--tracker-soft);
+            transform: translateX(3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+        }
+        
+        .history-date {
+            text-align: center;
+            min-width: 60px;
+        }
+        
+        .history-day {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--tracker-dark);
+            line-height: 1;
+        }
+        
+        .history-month {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin-top: 3px;
+        }
+        
+        .history-info h4 {
+            font-size: 1.05rem;
+            margin-bottom: 4px;
+        }
+        
+        .history-meta {
+            display: flex;
+            gap: 12px;
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            font-weight: 600;
+            flex-wrap: wrap;
+        }
+        
+        .history-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .history-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: white;
+            border: 1.5px solid var(--border-soft);
+            cursor: pointer;
+            color: var(--text-medium);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        
+        .btn-icon:hover {
+            background: var(--tracker-soft);
+            border-color: var(--tracker);
+            color: var(--tracker-dark);
+        }
+        
+        .btn-icon.delete:hover {
+            background: #FFF0F0;
+            border-color: #F4A698;
+            color: #E88A8A;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+        }
+        
+        .empty-state-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--tracker-soft);
+            color: var(--tracker);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            margin: 0 auto 18px;
+        }
+        
+        .empty-state h3 {
+            color: var(--text-medium);
+            margin-bottom: 8px;
+        }
+        
+        /* Measurements Tab */
+        .measurement-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .form-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        
+        .form-input {
+            padding: 11px 14px;
+            border: 2px solid var(--border-soft);
+            border-radius: 12px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+            background: var(--bg-soft);
+            transition: all 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--tracker);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(143,197,168,0.1);
+        }
+        
+        .measurement-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .measurement-table th {
+            padding: 14px 16px;
+            text-align: left;
+            background: var(--bg-soft);
+            font-size: 0.78rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 700;
+            border-bottom: 2px solid var(--border-soft);
+        }
+        
+        .measurement-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-soft);
+            font-size: 0.92rem;
+            color: var(--text-dark);
+        }
+        
+        .measurement-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .measurement-table tr:hover td {
+            background: var(--bg-soft);
+        }
+        
+        .change-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        
+        .change-badge.down {
+            background: var(--tracker-soft);
+            color: var(--tracker-dark);
+        }
+        
+        .change-badge.up {
+            background: #FBE5EA;
+            color: #C87080;
+        }
+        
+        .change-badge.same {
+            background: var(--bg-soft);
+            color: var(--text-light);
+        }
+        
+        /* Charts Tab */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+        }
+        
+        .chart-card {
+            background: white;
+            border-radius: 22px;
+            padding: 25px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .chart-title {
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .chart-range {
+            display: flex;
+            gap: 6px;
+        }
+        
+        .range-btn {
+            padding: 5px 12px;
+            background: var(--bg-soft);
+            border: none;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Quicksand', sans-serif;
+        }
+        
+        .range-btn:hover {
+            background: var(--tracker-soft);
+            color: var(--tracker-dark);
+        }
+        
+        .range-btn.active {
+            background: var(--tracker);
+            color: white;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 280px;
+        }
+        
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: 14px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 2000;
+            transform: translateX(400px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 4px solid var(--tracker);
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--tracker-soft);
+            color: var(--tracker-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 40px 40px 25px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--tracker);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .hero {
+                padding: 35px 20px 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .stats-overview,
+            .tab-nav,
+            .main-container {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            
+            .card {
+                padding: 22px 20px;
+            }
+            
+            .history-item {
+                grid-template-columns: auto 1fr;
+            }
+            
+            .history-actions {
+                grid-column: 1 / -1;
+                justify-content: flex-end;
+            }
+            
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-container {
+                height: 220px;
+            }
+            
+            .measurement-table {
+                font-size: 0.85rem;
+            }
+            
+            .measurement-table th,
+            .measurement-table td {
+                padding: 10px 8px;
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-soft);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--tracker) 0%, var(--chart-2) 100%);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <div class="header-actions">
+            <a href="gym-overview.html" class="btn-header secondary">← Overview</a>
+            <button class="btn-header primary" onclick="exportData()">📥 Export</button>
+        </div>
+    </header>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <span class="hero-badge">PROGRESS TRACKER</span>
+        <h1>Theo dõi <span>tiến độ</span></h1>
+        <p>Ghi lại buổi tập, số đo cơ thể và xem biểu đồ tiến triển. Dữ liệu được lưu trên thiết bị của bạn.</p>
+    </section>
+    
+    <!-- Stats Overview -->
+    <div class="stats-overview">
+        <div class="stat-card">
+            <div class="stat-label">Buổi tập tháng này</div>
+            <div class="stat-value" id="statWorkouts">0</div>
+            <div class="stat-change positive" id="statWorkoutsChange">↑ 0% so với tháng trước</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Tổng volume</div>
+            <div class="stat-value" id="statVolume">0</div>
+            <div class="stat-change neutral">sets × reps</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Cân nặng hiện tại</div>
+            <div class="stat-value" id="statWeight">--</div>
+            <div class="stat-change neutral" id="statWeightChange">Chưa có dữ liệu</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Streak</div>
+            <div class="stat-value" id="statStreak">0</div>
+            <div class="stat-change neutral">ngày liên tiếp</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Tuần hiện tại</div>
+            <div class="stat-value" id="statWeek">1</div>
+            <div class="stat-change neutral">trong lộ trình 12 tuần</div>
+        </div>
+    </div>
+    
+    <!-- Tab Navigation -->
+    <div class="tab-nav">
+        <button class="tab-btn active" data-tab="today">
+            🏋️ Hôm nay
+        </button>
+        <button class="tab-btn" data-tab="history">
+            📚 Lịch sử <span class="tab-count" id="historyCount">0</span>
+        </button>
+        <button class="tab-btn" data-tab="measurements">
+            📏 Số đo cơ thể
+        </button>
+        <button class="tab-btn" data-tab="charts">
+            📊 Biểu đồ
+        </button>
+    </div>
+    
+    <!-- Main Container -->
+    <div class="main-container">
+        
+        <!-- Tab 1: Today's Workout -->
+        <div class="tab-content active" id="tab-today">
+            <div class="card">
+                <div class="today-header">
+                    <div class="today-info">
+                        <h3 id="todayWorkoutName">Upper Push - Tuần 1</h3>
+                        <p id="todayDate">Thứ 2, 31/07/2026</p>
+                    </div>
+                    <div class="today-progress">
+                        <div class="progress-ring">
+                            <svg width="70" height="70">
+                                <circle class="progress-ring-bg" cx="35" cy="35" r="28"></circle>
+                                <circle class="progress-ring-fill" id="progressRing" cx="35" cy="35" r="28" 
+                                    stroke-dasharray="175.9" stroke-dashoffset="175.9"></circle>
+                            </svg>
+                            <div class="progress-ring-text" id="progressText">0%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="workout-log" id="workoutLog">
+                    <!-- Rendered by JS -->
+                </div>
+                
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="completeWorkout()">✓ Hoàn thành buổi tập</button>
+                    <button class="btn btn-secondary" onclick="addExercise()">+ Thêm bài tập</button>
+                    <button class="btn btn-secondary" onclick="resetToday()">↺ Reset</button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <span class="card-indicator"></span>
+                        Ghi chú hôm nay
+                    </h3>
+                </div>
+                <textarea id="todayNotes" class="form-input" style="width:100%; min-height:100px; resize:vertical;" placeholder="Cảm nhận, mức năng lượng, vấn đề gặp phải..."></textarea>
+            </div>
+        </div>
+        
+        <!-- Tab 2: History -->
+        <div class="tab-content" id="tab-history">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <span class="card-indicator"></span>
+                        Lịch sử buổi tập
+                    </h3>
+                    <div class="history-filters">
+                        <button class="filter-chip active" data-filter="all">Tất cả</button>
+                        <button class="filter-chip" data-filter="week">Tuần này</button>
+                        <button class="filter-chip" data-filter="month">Tháng này</button>
+                    </div>
+                </div>
+                
+                <div class="history-list" id="historyList">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tab 3: Measurements -->
+        <div class="tab-content" id="tab-measurements">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <span class="card-indicator"></span>
+                        Thêm số đo mới
+                    </h3>
+                </div>
+                
+                <div class="measurement-form">
+                    <div class="form-group">
+                        <label class="form-label">Ngày</label>
+                        <input type="date" class="form-input" id="measureDate">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Cân nặng (kg)</label>
+                        <input type="number" step="0.1" class="form-input" id="measureWeight" placeholder="60.5">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Vòng eo (cm)</label>
+                        <input type="number" step="0.1" class="form-input" id="measureWaist" placeholder="70">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Vòng hông (cm)</label>
+                        <input type="number" step="0.1" class="form-input" id="measureHip" placeholder="95">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Vòng ngực (cm)</label>
+                        <input type="number" step="0.1" class="form-input" id="measureChest" placeholder="88">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Vòng tay (cm)</label>
+                        <input type="number" step="0.1" class="form-input" id="measureArm" placeholder="28">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Vòng đùi (cm)</label>
+                        <input type="number" step="0.1" class="form-input" id="measureThigh" placeholder="55">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">% Body Fat (optional)</label>
+                        <input type="number" step="0.1" class="form-input" id="measureBF" placeholder="25">
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" onclick="saveMeasurement()">💾 Lưu số đo</button>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <span class="card-indicator"></span>
+                        Lịch sử số đo
+                    </h3>
+                </div>
+                
+                <div style="overflow-x: auto;">
+                    <table class="measurement-table" id="measurementTable">
+                        <thead>
+                            <tr>
+                                <th>Ngày</th>
+                                <th>Cân nặng</th>
+                                <th>Eo</th>
+                                <th>Hông</th>
+                                <th>Ngực</th>
+                                <th>Tay</th>
+                                <th>Đùi</th>
+                                <th>%BF</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="measurementBody">
+                            <!-- Rendered by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tab 4: Charts -->
+        <div class="tab-content" id="tab-charts">
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">
+                            <span class="card-indicator"></span>
+                            Cân nặng
+                        </h3>
+                        <div class="chart-range">
+                            <button class="range-btn active" data-range="4w">4 tuần</button>
+                            <button class="range-btn" data-range="12w">12 tuần</button>
+                            <button class="range-btn" data-range="all">Tất cả</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="weightChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">
+                            <span class="card-indicator"></span>
+                            Số đo vòng eo & hông
+                        </h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="measurementChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">
+                            <span class="card-indicator"></span>
+                            Sức mạnh (Machine Chest Press)
+                        </h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="strengthChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">
+                            <span class="card-indicator"></span>
+                            Volume tập luyện theo tuần
+                        </h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="volumeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="gym-overview.html">GYM Overview</a>
+            <a href="gym-templates.html">Lịch tập mẫu</a>
+            <a href="gym-roadmap.html">Lộ trình 12 tuần</a>
+            <a href="gym-goal-settings.html">Mục tiêu</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">✓</div>
+        <div class="toast-content" id="toastContent">Đã lưu!</div>
+    </div>
+    
+    <script>
+        // ==================== STATE ====================
+        let state = {
+            history: [],
+            measurements: [],
+            todayWorkout: null,
+            currentWeek: 1
+        };
+        
+        // Sample today's workout (Upper Push)
+        const defaultTodayWorkout = {
+            name: 'Upper Push - Tuần 1',
+            date: new Date().toISOString().split('T')[0],
+            exercises: [
+                { id: 1, name: 'Machine Chest Press', target: 'Pectoralis', sets: [{weight: 20, reps: 12}, {weight: 20, reps: 12}, {weight: 20, reps: 12}, {weight: 20, reps: 10}], completed: false },
+                { id: 2, name: 'Incline Dumbbell Press', target: 'Upper Chest', sets: [{weight: 10, reps: 12}, {weight: 10, reps: 12}, {weight: 10, reps: 10}], completed: false },
+                { id: 3, name: 'Seated Shoulder Press', target: 'Anterior Deltoid', sets: [{weight: 12, reps: 12}, {weight: 12, reps: 12}, {weight: 12, reps: 10}], completed: false },
+                { id: 4, name: 'Lateral Raise', target: 'Lateral Deltoid', sets: [{weight: 4, reps: 15}, {weight: 4, reps: 15}, {weight: 4, reps: 12}], completed: false },
+                { id: 5, name: 'Tricep Pushdown', target: 'Triceps', sets: [{weight: 15, reps: 15}, {weight: 15, reps: 15}, {weight: 15, reps: 12}], completed: false },
+                { id: 6, name: 'Incline Walk (Cardio)', target: 'Cardio', sets: [{duration: 30}], completed: false }
+            ],
+            notes: ''
+        };
+        
+        // Sample data for demo
+        const sampleHistory = [
+            {
+                id: 1,
+                date: '2026-07-29',
+                name: 'Lower Body - Tuần 1',
+                duration: 125,
+                exercises: 8,
+                sets: 25,
+                volume: 320,
+                calories: 580
+            },
+            {
+                id: 2,
+                date: '2026-07-28',
+                name: 'Upper Pull - Tuần 1',
+                duration: 120,
+                exercises: 7,
+                sets: 22,
+                volume: 280,
+                calories: 520
+            },
+            {
+                id: 3,
+                date: '2026-07-26',
+                name: 'Glutes + Core - Tuần 1',
+                duration: 130,
+                exercises: 8,
+                sets: 24,
+                volume: 310,
+                calories: 600
+            },
+            {
+                id: 4,
+                date: '2026-07-25',
+                name: 'Upper Push - Tuần 1',
+                duration: 120,
+                exercises: 7,
+                sets: 22,
+                volume: 290,
+                calories: 540
+            }
+        ];
+        
+        const sampleMeasurements = [
+            { date: '2026-07-01', weight: 62.0, waist: 72, hip: 96, chest: 88, arm: 28, thigh: 55, bf: 28 },
+            { date: '2026-07-15', weight: 61.2, waist: 71, hip: 95, chest: 88, arm: 28.2, thigh: 55, bf: 27 },
+            { date: '2026-07-31', weight: 60.5, waist: 70, hip: 94, chest: 88.5, arm: 28.5, thigh: 55.5, bf: 26 }
+        ];
+        
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load state
+            loadState();
+            
+            // Init today's date
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('vi-VN', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' });
+            document.getElementById('todayDate').textContent = dateStr;
+            document.getElementById('measureDate').valueAsDate = today;
+            
+            // Render
+            renderTodayWorkout();
+            renderHistory();
+            renderMeasurements();
+            updateStats();
+            initCharts();
+            
+            // Tab listeners
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    this.classList.add('active');
+                    document.getElementById('tab-' + this.dataset.tab).classList.add('active');
+                    
+                    if (this.dataset.tab === 'charts') {
+                        setTimeout(updateCharts, 100);
+                    }
+                });
+            });
+            
+            // History filter
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    renderHistory(this.dataset.filter);
+                });
+            });
+            
+            // Chart range
+            document.querySelectorAll('.range-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    updateCharts();
+                });
+            });
+        });
+        
+        // ==================== STATE MANAGEMENT ====================
+        function loadState() {
+            const saved = localStorage.getItem('fit30_tracker');
+            if (saved) {
+                try {
+                    state = JSON.parse(saved);
+                } catch (e) {
+                    console.error('Error loading state', e);
+                }
+            }
+            
+            // Init with sample data if empty
+            if (!state.history || state.history.length === 0) {
+                state.history = sampleHistory;
+            }
+            if (!state.measurements || state.measurements.length === 0) {
+                state.measurements = sampleMeasurements;
+            }
+            if (!state.todayWorkout) {
+                state.todayWorkout = defaultTodayWorkout;
+            }
+            
+            // Load current week from roadmap
+            const roadmapWeek = localStorage.getItem('fit30_roadmap_week');
+            if (roadmapWeek) {
+                state.currentWeek = parseInt(roadmapWeek);
+            }
+        }
+        
+        function saveState() {
+            localStorage.setItem('fit30_tracker', JSON.stringify(state));
+        }
+        
+        // ==================== TODAY'S WORKOUT ====================
+        function renderTodayWorkout() {
+            const workout = state.todayWorkout;
+            document.getElementById('todayWorkoutName').textContent = workout.name;
+            document.getElementById('todayNotes').value = workout.notes || '';
+            
+            const log = document.getElementById('workoutLog');
+            log.innerHTML = workout.exercises.map((ex, exIdx) => {
+                const setsHtml = ex.sets.map((set, setIdx) => {
+                    if (set.duration) {
+                        return `
+                            <div class="set-input-group">
+                                <span class="set-label">Time</span>
+                                <input type="number" class="set-input" value="${set.duration}" 
+                                    onchange="updateSet(${exIdx}, ${setIdx}, 'duration', this.value)" 
+                                    placeholder="phút">
+                            </div>
+                        `;
+                    }
+                    return `
+                        <div class="set-input-group">
+                            <span class="set-label">Set ${setIdx + 1}</span>
+                            <input type="number" class="set-input" value="${set.weight}" step="0.5"
+                                onchange="updateSet(${exIdx}, ${setIdx}, 'weight', this.value)" 
+                                placeholder="kg" title="Kg">
+                            <span style="color:var(--text-light); font-size:0.8rem;">×</span>
+                            <input type="number" class="set-input" value="${set.reps}"
+                                onchange="updateSet(${exIdx}, ${setIdx}, 'reps', this.value)" 
+                                placeholder="reps" title="Reps">
+                        </div>
+                    `;
+                }).join('');
+                
+                return `
+                    <div class="log-exercise ${ex.completed ? 'completed' : ''}" data-ex-idx="${exIdx}">
+                        <div class="log-exercise-header">
+                            <div class="log-exercise-name">
+                                <div class="log-check ${ex.completed ? 'checked' : ''}" onclick="toggleExercise(${exIdx})">✓</div>
+                                <div>
+                                    <div>${ex.name}</div>
+                                    <div style="font-size:0.78rem; color:var(--text-light); font-family:'Quicksand',sans-serif; font-weight:500;">${ex.target}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="log-sets">${setsHtml}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            updateProgress();
+        }
+        
+        function updateSet(exIdx, setIdx, field, value) {
+            state.todayWorkout.exercises[exIdx].sets[setIdx][field] = parseFloat(value) || 0;
+            saveState();
+            updateProgress();
+        }
+        
+        function toggleExercise(exIdx) {
+            state.todayWorkout.exercises[exIdx].completed = !state.todayWorkout.exercises[exIdx].completed;
+            saveState();
+            renderTodayWorkout();
+        }
+        
+        function updateProgress() {
+            const total = state.todayWorkout.exercises.length;
+            const completed = state.todayWorkout.exercises.filter(e => e.completed).length;
+            const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+            
+            const circumference = 175.9;
+            const offset = circumference - (percent / 100) * circumference;
+            
+            document.getElementById('progressRing').style.strokeDashoffset = offset;
+            document.getElementById('progressText').textContent = percent + '%';
+        }
+        
+        function addExercise() {
+            const name = prompt('Tên bài tập:');
+            if (!name) return;
+            
+            state.todayWorkout.exercises.push({
+                id: Date.now(),
+                name: name,
+                target: 'Custom',
+                sets: [{weight: 0, reps: 12}, {weight: 0, reps: 12}, {weight: 0, reps: 10}],
+                completed: false
+            });
+            
+            saveState();
+            renderTodayWorkout();
+            showToast('Đã thêm bài tập');
+        }
+        
+        function resetToday() {
+            if (!confirm('Reset buổi tập hôm nay?')) return;
+            state.todayWorkout = defaultTodayWorkout;
+            saveState();
+            renderTodayWorkout();
+            showToast('Đã reset buổi tập');
+        }
+        
+        function completeWorkout() {
+            const workout = state.todayWorkout;
+            const completedCount = workout.exercises.filter(e => e.completed).length;
+            
+            if (completedCount === 0) {
+                showToast('Hãy hoàn thành ít nhất 1 bài tập!');
+                return;
+            }
+            
+            // Calculate stats
+            let totalSets = 0;
+            let totalVolume = 0;
+            workout.exercises.forEach(ex => {
+                if (ex.completed) {
+                    ex.sets.forEach(set => {
+                        if (set.weight && set.reps) {
+                            totalSets++;
+                            totalVolume += set.weight * set.reps;
+                        }
+                    });
+                }
+            });
+            
+            const historyItem = {
+                id: Date.now(),
+                date: new Date().toISOString().split('T')[0],
+                name: workout.name,
+                duration: Math.round(totalVolume / 5 + 60), // estimate
+                exercises: completedCount,
+                sets: totalSets,
+                volume: totalVolume,
+                calories: Math.round(totalVolume / 5 + 200),
+                notes: document.getElementById('todayNotes').value
+            };
+            
+            state.history.unshift(historyItem);
+            
+            // Reset today
+            state.todayWorkout = { ...defaultTodayWorkout };
+            state.todayWorkout.exercises = defaultTodayWorkout.exercises.map(e => ({...e, sets: e.sets.map(s => ({...s}))}));
+            
+            saveState();
+            
+            // Update UI
+            renderTodayWorkout();
+            renderHistory();
+            updateStats();
+            updateCharts();
+            
+            showToast(`✓ Đã lưu buổi tập! Volume: ${totalVolume}`);
+        }
+        
+        // ==================== HISTORY ====================
+        function renderHistory(filter = 'all') {
+            const list = document.getElementById('historyList');
+            let items = [...state.history];
+            
+            const now = new Date();
+            if (filter === 'week') {
+                const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+                items = items.filter(i => new Date(i.date) >= weekAgo);
+            } else if (filter === 'month') {
+                const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+                items = items.filter(i => new Date(i.date) >= monthAgo);
+            }
+            
+            document.getElementById('historyCount').textContent = state.history.length;
+            
+            if (items.length === 0) {
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📚</div>
+                        <h3>Chưa có buổi tập nào</h3>
+                        <p>Hoàn thành buổi tập hôm nay để bắt đầu lịch sử của bạn!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            list.innerHTML = items.map(item => {
+                const date = new Date(item.date);
+                const day = date.getDate().toString().padStart(2, '0');
+                const month = date.toLocaleDateString('vi-VN', { month: 'short' });
+                
+                return `
+                    <div class="history-item">
+                        <div class="history-date">
+                            <div class="history-day">${day}</div>
+                            <div class="history-month">${month}</div>
+                        </div>
+                        <div class="history-info">
+                            <h4>${item.name}</h4>
+                            <div class="history-meta">
+                                <span>⏱️ ${item.duration}'</span>
+                                <span>💪 ${item.exercises} bài</span>
+                                <span>🔥 ${item.sets} sets</span>
+                                <span>📊 ${item.volume} vol</span>
+                                <span>🔥 ${item.calories} kcal</span>
+                            </div>
+                        </div>
+                        <div class="history-actions">
+                            <button class="btn-icon" onclick="viewWorkout(${item.id})" title="Xem chi tiết">👁️</button>
+                            <button class="btn-icon delete" onclick="deleteWorkout(${item.id})" title="Xóa">✕</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function viewWorkout(id) {
+            const item = state.history.find(h => h.id === id);
+            if (!item) return;
+            alert(`${item.name}\nNgày: ${item.date}\nThời gian: ${item.duration}'\nBài tập: ${item.exercises}\nSets: ${item.sets}\nVolume: ${item.volume}\nCalories: ${item.calories}\n\nGhi chú: ${item.notes || 'Không có'}`);
+        }
+        
+        function deleteWorkout(id) {
+            if (!confirm('Xóa buổi tập này?')) return;
+            state.history = state.history.filter(h => h.id !== id);
+            saveState();
+            renderHistory();
+            updateStats();
+            updateCharts();
+            showToast('Đã xóa buổi tập');
+        }
+        
+        // ==================== MEASUREMENTS ====================
+        function renderMeasurements() {
+            const tbody = document.getElementById('measurementBody');
+            
+            if (state.measurements.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding:40px; color:var(--text-light);">Chưa có số đo nào</td></tr>`;
+                return;
+            }
+            
+            const sorted = [...state.measurements].sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            tbody.innerHTML = sorted.map((m, idx) => {
+                const prev = sorted[idx + 1];
+                const weightChange = prev ? (m.weight - prev.weight).toFixed(1) : null;
+                const weightBadge = weightChange === null ? '' :
+                    weightChange < 0 ? `<span class="change-badge down">${weightChange}kg</span>` :
+                    weightChange > 0 ? `<span class="change-badge up">+${weightChange}kg</span>` :
+                    `<span class="change-badge same">0</span>`;
+                
+                const date = new Date(m.date);
+                const dateStr = date.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: '2-digit' });
+                
+                return `
+                    <tr>
+                        <td><strong>${dateStr}</strong></td>
+                        <td>${m.weight || '--'} kg ${weightBadge}</td>
+                        <td>${m.waist || '--'}</td>
+                        <td>${m.hip || '--'}</td>
+                        <td>${m.chest || '--'}</td>
+                        <td>${m.arm || '--'}</td>
+                        <td>${m.thigh || '--'}</td>
+                        <td>${m.bf || '--'}%</td>
+                        <td><button class="btn-icon delete" onclick="deleteMeasurement('${m.date}')">✕</button></td>
+                    </tr>
+                `;
+            }).join('');
+        }
+        
+        function saveMeasurement() {
+            const date = document.getElementById('measureDate').value;
+            const weight = parseFloat(document.getElementById('measureWeight').value);
+            
+            if (!date || !weight) {
+                showToast('Vui lòng nhập ngày và cân nặng!');
+                return;
+            }
+            
+            const measurement = {
+                date: date,
+                weight: weight,
+                waist: parseFloat(document.getElementById('measureWaist').value) || null,
+                hip: parseFloat(document.getElementById('measureHip').value) || null,
+                chest: parseFloat(document.getElementById('measureChest').value) || null,
+                arm: parseFloat(document.getElementById('measureArm').value) || null,
+                thigh: parseFloat(document.getElementById('measureThigh').value) || null,
+                bf: parseFloat(document.getElementById('measureBF').value) || null
+            };
+            
+            // Remove existing measurement for same date
+            state.measurements = state.measurements.filter(m => m.date !== date);
+            state.measurements.push(measurement);
+            state.measurements.sort((a, b) => new Date(a.date) - new Date(b.date));
+            
+            saveState();
+            renderMeasurements();
+            updateStats();
+            updateCharts();
+            
+            // Clear form
+            ['measureWeight', 'measureWaist', 'measureHip', 'measureChest', 'measureArm', 'measureThigh', 'measureBF'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            
+            showToast('✓ Đã lưu số đo!');
+        }
+        
+        function deleteMeasurement(date) {
+            if (!confirm('Xóa số đo này?')) return;
+            state.measurements = state.measurements.filter(m => m.date !== date);
+            saveState();
+            renderMeasurements();
+            updateStats();
+            updateCharts();
+            showToast('Đã xóa số đo');
+        }
+        
+        // ==================== STATS ====================
+        function updateStats() {
+            const now = new Date();
+            const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+            const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+            
+            const thisMonth = state.history.filter(h => new Date(h.date) >= monthStart);
+            const lastMonth = state.history.filter(h => new Date(h.date) >= lastMonthStart && new Date(h.date) < monthStart);
+            
+            // Workouts this month
+            document.getElementById('statWorkouts').textContent = thisMonth.length;
+            const change = lastMonth.length > 0 ? Math.round(((thisMonth.length - lastMonth.length) / lastMonth.length) * 100) : 0;
+            const changeEl = document.getElementById('statWorkoutsChange');
+            if (change > 0) {
+                changeEl.textContent = `↑ ${change}% so với tháng trước`;
+                changeEl.className = 'stat-change positive';
+            } else if (change < 0) {
+                changeEl.textContent = `↓ ${Math.abs(change)}% so với tháng trước`;
+                changeEl.className = 'stat-change negative';
+            } else {
+                changeEl.textContent = 'Bằng tháng trước';
+                changeEl.className = 'stat-change neutral';
+            }
+            
+            // Total volume
+            const totalVolume = thisMonth.reduce((sum, h) => sum + (h.volume || 0), 0);
+            document.getElementById('statVolume').textContent = totalVolume.toLocaleString();
+            
+            // Current weight
+            if (state.measurements.length > 0) {
+                const latest = state.measurements[state.measurements.length - 1];
+                document.getElementById('statWeight').textContent = latest.weight + ' kg';
+                
+                if (state.measurements.length > 1) {
+                    const first = state.measurements[0];
+                    const diff = (latest.weight - first.weight).toFixed(1);
+                    const weightChangeEl = document.getElementById('statWeightChange');
+                    if (diff < 0) {
+                        weightChangeEl.textContent = `↓ ${Math.abs(diff)}kg từ đầu`;
+                        weightChangeEl.className = 'stat-change positive';
+                    } else if (diff > 0) {
+                        weightChangeEl.textContent = `↑ ${diff}kg từ đầu`;
+                        weightChangeEl.className = 'stat-change negative';
+                    } else {
+                        weightChangeEl.textContent = 'Không đổi';
+                        weightChangeEl.className = 'stat-change neutral';
+                    }
+                }
+            }
+            
+            // Streak
+            let streak = 0;
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            for (let i = 0; i < 30; i++) {
+                const checkDate = new Date(today);
+                checkDate.setDate(checkDate.getDate() - i);
+                const dateStr = checkDate.toISOString().split('T')[0];
+                if (state.history.some(h => h.date === dateStr)) {
+                    streak++;
+                } else if (i > 0) {
+                    break;
+                }
+            }
+            document.getElementById('statStreak').textContent = streak;
+            
+            // Current week
+            document.getElementById('statWeek').textContent = state.currentWeek;
+        }
+        
+        // ==================== CHARTS ====================
+        let charts = {};
+        
+        function initCharts() {
+            const chartDefaults = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: { family: 'Quicksand', weight: '600', size: 12 },
+                            color: '#7A7A8A'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(0,0,0,0.04)' },
+                        ticks: { font: { family: 'Quicksand', size: 11 }, color: '#A0A0B0' }
+                    },
+                    y: {
+                        grid: { color: 'rgba(0,0,0,0.04)' },
+                        ticks: { font: { family: 'Quicksand', size: 11 }, color: '#A0A0B0' }
+                    }
+                }
+            };
+            
+            // Weight Chart
+            charts.weight = new Chart(document.getElementById('weightChart'), {
+                type: 'line',
+                data: { labels: [], datasets: [] },
+                options: {
+                    ...chartDefaults,
+                    plugins: {
+                        ...chartDefaults.plugins,
+                        legend: { display: false }
+                    }
+                }
+            });
+            
+            // Measurement Chart
+            charts.measurement = new Chart(document.getElementById('measurementChart'), {
+                type: 'line',
+                data: { labels: [], datasets: [] },
+                options: chartDefaults
+            });
+            
+            // Strength Chart
+            charts.strength = new Chart(document.getElementById('strengthChart'), {
+                type: 'line',
+                data: { labels: [], datasets: [] },
+                options: {
+                    ...chartDefaults,
+                    plugins: {
+                        ...chartDefaults.plugins,
+                        legend: { display: false }
+                    }
+                }
+            });
+            
+            // Volume Chart
+            charts.volume = new Chart(document.getElementById('volumeChart'), {
+                type: 'bar',
+                data: { labels: [], datasets: [] },
+                options: {
+                    ...chartDefaults,
+                    plugins: {
+                        ...chartDefaults.plugins,
+                        legend: { display: false }
+                    }
+                }
+            });
+            
+            updateCharts();
+        }
+        
+        function updateCharts() {
+            const range = document.querySelector('.range-btn.active')?.dataset.range || '4w';
+            
+            // Filter measurements by range
+            let measurements = [...state.measurements];
+            if (range !== 'all') {
+                const weeks = range === '4w' ? 4 : 12;
+                const cutoff = new Date();
+                cutoff.setDate(cutoff.getDate() - weeks * 7);
+                measurements = measurements.filter(m => new Date(m.date) >= cutoff);
+            }
+            
+            // Weight Chart
+            const weightLabels = measurements.map(m => {
+                const d = new Date(m.date);
+                return d.getDate() + '/' + (d.getMonth() + 1);
+            });
+            
+            charts.weight.data.labels = weightLabels;
+            charts.weight.data.datasets = [{
+                label: 'Cân nặng (kg)',
+                data: measurements.map(m => m.weight),
+                borderColor: '#8FC5A8',
+                backgroundColor: 'rgba(143, 197, 168, 0.1)',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: '#8FC5A8',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: 5,
+                pointHoverRadius: 7
+            }];
+            charts.weight.update();
+            
+            // Measurement Chart
+            charts.measurement.data.labels = weightLabels;
+            charts.measurement.data.datasets = [
+                {
+                    label: 'Vòng eo (cm)',
+                    data: measurements.map(m => m.waist),
+                    borderColor: '#F4A698',
+                    backgroundColor: 'rgba(244, 166, 152, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    pointRadius: 4
+                },
+                {
+                    label: 'Vòng hông (cm)',
+                    data: measurements.map(m => m.hip),
+                    borderColor: '#B8A8E8',
+                    backgroundColor: 'rgba(184, 168, 232, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    pointRadius: 4
+                }
+            ];
+            charts.measurement.update();
+            
+            // Strength Chart (simulate based on history)
+            const strengthData = state.history.slice(0, 8).reverse().map((h, i) => ({
+                date: h.date,
+                weight: 20 + i * 0.5 + Math.random() * 1
+            }));
+            
+            charts.strength.data.labels = strengthData.map(d => {
+                const date = new Date(d.date);
+                return date.getDate() + '/' + (date.getMonth() + 1);
+            });
+            charts.strength.data.datasets = [{
+                label: 'Machine Chest Press (kg)',
+                data: strengthData.map(d => d.weight.toFixed(1)),
+                borderColor: '#E88A9A',
+                backgroundColor: 'rgba(232, 138, 154, 0.1)',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4,
+                pointRadius: 5,
+                pointBackgroundColor: '#E88A9A'
+            }];
+            charts.strength.update();
+            
+            // Volume Chart (by week)
+            const weeklyVolume = {};
+            state.history.forEach(h => {
+                const d = new Date(h.date);
+                const weekKey = d.getFullYear() + '-W' + Math.ceil(d.getDate() / 7);
+                if (!weeklyVolume[weekKey]) weeklyVolume[weekKey] = 0;
+                weeklyVolume[weekKey] += h.volume || 0;
+            });
+            
+            const volumeLabels = Object.keys(weeklyVolume).slice(-8);
+            charts.volume.data.labels = volumeLabels;
+            charts.volume.data.datasets = [{
+                label: 'Volume',
+                data: volumeLabels.map(k => weeklyVolume[k]),
+                backgroundColor: 'rgba(127, 181, 181, 0.7)',
+                borderColor: '#7FB5B5',
+                borderWidth: 2,
+                borderRadius: 8
+            }];
+            charts.volume.update();
+        }
+        
+        // ==================== EXPORT ====================
+        function exportData() {
+            const data = {
+                exportedAt: new Date().toISOString(),
+                history: state.history,
+                measurements: state.measurements,
+                settings: JSON.parse(localStorage.getItem('fit30_goal_settings') || '{}'),
+                roadmap: JSON.parse(localStorage.getItem('fit30_roadmap') || '{}')
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `fit30-data-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showToast('📥 Đã export dữ liệu!');
+        }
+        
+        // ==================== TOAST ====================
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastContent').textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
