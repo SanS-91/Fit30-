@@ -1,0 +1,2082 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch Tập Mẫu - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Base palette */
+            --text-dark: #4A4A5A;
+            --text-medium: #7A7A8A;
+            --text-light: #A0A0B0;
+            --white: #FFFFFF;
+            --bg-primary: #FFFBFB;
+            --bg-soft: #FFF8F5;
+            --border-soft: #F0E8E6;
+            
+            /* Template color - Teal */
+            --template: #7FB5B5;
+            --template-soft: #E0F0F0;
+            --template-dark: #5A9A9A;
+            --template-gradient: linear-gradient(135deg, #E0F0F0 0%, #7FB5B5 100%);
+            
+            /* Muscle group colors */
+            --chest: #F4A698;
+            --chest-soft: #FCEAE5;
+            --shoulder: #B8A8E8;
+            --shoulder-soft: #EEE8F8;
+            --back: #7FB5B5;
+            --back-soft: #E0F0F0;
+            --arms: #E88A9A;
+            --arms-soft: #FBE5EA;
+            --glutes: #D8A8D8;
+            --glutes-soft: #F5E8F5;
+            --legs: #8FC5A8;
+            --legs-soft: #E5F5EC;
+            --core: #E8B87A;
+            --core-soft: #FBF0E0;
+            
+            /* Main gradient */
+            --main-gradient: linear-gradient(135deg, #F4A698 0%, #B8A8E8 50%, #7FB5B5 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        body::before {
+            width: 500px;
+            height: 500px;
+            background: var(--template);
+            top: -150px;
+            right: -150px;
+        }
+        
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: var(--glutes);
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 18px 40px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .btn-header {
+            padding: 9px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-header.secondary {
+            background: var(--bg-soft);
+            color: var(--text-medium);
+        }
+        
+        .btn-header.secondary:hover {
+            background: var(--template-soft);
+            color: var(--template-dark);
+        }
+        
+        .btn-header.primary {
+            background: var(--template-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(127,181,181,0.3);
+        }
+        
+        .btn-header.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(127,181,181,0.4);
+        }
+        
+        /* Page Hero */
+        .page-hero {
+            padding: 60px 40px 30px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .page-badge {
+            display: inline-block;
+            background: var(--template-gradient);
+            color: white;
+            padding: 7px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(127,181,181,0.3);
+        }
+        
+        .page-hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .page-hero h1 span {
+            background: var(--template-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .page-hero p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        
+        /* Template Tabs */
+        .template-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 40px auto 20px;
+            padding: 0 40px;
+            max-width: 900px;
+            flex-wrap: wrap;
+        }
+        
+        .template-tab {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid var(--border-soft);
+            border-radius: 14px;
+            font-weight: 600;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .template-tab:hover {
+            border-color: var(--template);
+            color: var(--template-dark);
+            transform: translateY(-2px);
+        }
+        
+        .template-tab.active {
+            background: var(--template-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(127,181,181,0.3);
+        }
+        
+        .tab-badge {
+            background: rgba(255,255,255,0.3);
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        
+        .template-tab:not(.active) .tab-badge {
+            background: var(--template-soft);
+            color: var(--template-dark);
+        }
+        
+        .tab-recommend {
+            font-size: 0.7rem;
+            background: #FFD700;
+            color: #8B6914;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px 40px 80px;
+        }
+        
+        /* Template Info Card */
+        .template-info {
+            background: white;
+            border-radius: 24px;
+            padding: 30px 35px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-soft);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .template-info-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .template-info-content p {
+            color: var(--text-medium);
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+        
+        .template-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .template-tag {
+            padding: 5px 14px;
+            background: var(--template-soft);
+            color: var(--template-dark);
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        
+        .template-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .btn-action {
+            padding: 13px 28px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+            text-decoration: none;
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        
+        .btn-action.primary {
+            background: var(--template-gradient);
+            color: white;
+            box-shadow: 0 6px 20px rgba(127,181,181,0.3);
+        }
+        
+        .btn-action.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(127,181,181,0.4);
+        }
+        
+        .btn-action.secondary {
+            background: var(--bg-soft);
+            color: var(--text-medium);
+        }
+        
+        .btn-action.secondary:hover {
+            background: var(--template-soft);
+            color: var(--template-dark);
+        }
+        
+        /* Weekly Calendar */
+        .week-calendar {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-soft);
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .calendar-header h3 {
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .calendar-indicator {
+            width: 4px;
+            height: 22px;
+            background: var(--template-gradient);
+            border-radius: 2px;
+        }
+        
+        .calendar-legend {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        
+        .calendar-day {
+            background: var(--bg-soft);
+            border-radius: 16px;
+            padding: 18px 14px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .calendar-day.workout {
+            background: white;
+            cursor: pointer;
+            border-color: var(--border-soft);
+        }
+        
+        .calendar-day.workout:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border-color: var(--day-color);
+        }
+        
+        .calendar-day.rest {
+            background: var(--bg-soft);
+            opacity: 0.7;
+        }
+        
+        .day-name {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .day-workout-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            line-height: 1.3;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .calendar-day.rest .day-workout-name {
+            color: var(--text-light);
+            font-style: italic;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.9rem;
+        }
+        
+        .day-meta {
+            font-size: 0.75rem;
+            color: var(--text-medium);
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .day-meta-pill {
+            padding: 3px 8px;
+            background: var(--day-color-soft);
+            color: var(--day-color);
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        
+        .calendar-day[data-day="1"] { --day-color: var(--chest); --day-color-soft: var(--chest-soft); }
+        .calendar-day[data-day="2"] { --day-color: var(--legs); --day-color-soft: var(--legs-soft); }
+        .calendar-day[data-day="3"] { --day-color: var(--back); --day-color-soft: var(--back-soft); }
+        .calendar-day[data-day="4"] { --day-color: var(--glutes); --day-color-soft: var(--glutes-soft); }
+        
+        /* Workout Detail Cards */
+        .workout-details {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .workout-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+            transition: all 0.3s;
+        }
+        
+        .workout-card:hover {
+            box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+        }
+        
+        .workout-card-header {
+            padding: 25px 30px;
+            background: var(--workout-gradient);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .workout-card[data-day="1"] { --workout-color: var(--chest); --workout-soft: var(--chest-soft); --workout-gradient: linear-gradient(135deg, #FCEAE5 0%, #F4A698 100%); }
+        .workout-card[data-day="2"] { --workout-color: var(--legs); --workout-soft: var(--legs-soft); --workout-gradient: linear-gradient(135deg, #E5F5EC 0%, #8FC5A8 100%); }
+        .workout-card[data-day="3"] { --workout-color: var(--back); --workout-soft: var(--back-soft); --workout-gradient: linear-gradient(135deg, #E0F0F0 0%, #7FB5B5 100%); }
+        .workout-card[data-day="4"] { --workout-color: var(--glutes); --workout-soft: var(--glutes-soft); --workout-gradient: linear-gradient(135deg, #F5E8F5 0%, #D8A8D8 100%); }
+        
+        .workout-card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .workout-day-info {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .workout-day-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        
+        .workout-day-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        .workout-day-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            margin-top: 3px;
+        }
+        
+        .workout-day-meta {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .workout-meta-pill {
+            padding: 6px 14px;
+            background: rgba(255,255,255,0.85);
+            color: var(--text-dark);
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Workout Body */
+        .workout-card-body {
+            padding: 30px;
+        }
+        
+        .workout-phase {
+            margin-bottom: 28px;
+        }
+        
+        .workout-phase:last-child {
+            margin-bottom: 0;
+        }
+        
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .phase-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--workout-soft);
+            color: var(--workout-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        
+        .phase-title {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+        
+        .phase-duration {
+            margin-left: auto;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        
+        /* Exercise List */
+        .exercise-list {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .exercise-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 15px;
+            padding: 14px 18px;
+            background: var(--bg-soft);
+            border-radius: 14px;
+            align-items: center;
+            transition: all 0.3s;
+            border: 1.5px solid transparent;
+        }
+        
+        .exercise-item:hover {
+            background: white;
+            border-color: var(--workout-soft);
+            transform: translateX(3px);
+        }
+        
+        .exercise-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: var(--workout-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        
+        .exercise-info {
+            min-width: 0;
+        }
+        
+        .exercise-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.02rem;
+            color: var(--text-dark);
+            margin-bottom: 3px;
+            line-height: 1.3;
+        }
+        
+        .exercise-target {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        
+        .exercise-config {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        
+        .config-pill {
+            padding: 4px 10px;
+            background: white;
+            border: 1px solid var(--border-soft);
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-medium);
+        }
+        
+        .config-pill strong {
+            color: var(--workout-color);
+        }
+        
+        /* Cardio Section */
+        .cardio-section {
+            background: linear-gradient(135deg, var(--workout-soft) 0%, white 100%);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1.5px dashed var(--workout-color);
+        }
+        
+        .cardio-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 12px;
+        }
+        
+        .cardio-option {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: 1.5px solid var(--border-soft);
+            transition: all 0.3s;
+        }
+        
+        .cardio-option:hover {
+            border-color: var(--workout-color);
+            transform: translateY(-2px);
+        }
+        
+        .cardio-name {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .cardio-specs {
+            font-size: 0.78rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        /* Workout Footer */
+        .workout-card-footer {
+            padding: 20px 30px;
+            background: var(--bg-soft);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            border-top: 1px solid var(--border-soft);
+        }
+        
+        .workout-stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .workout-stat {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            font-weight: 600;
+        }
+        
+        .workout-stat strong {
+            color: var(--workout-color);
+            font-size: 1rem;
+        }
+        
+        .btn-workout-action {
+            padding: 10px 20px;
+            background: white;
+            color: var(--workout-color);
+            border: 2px solid var(--workout-color);
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Quicksand', sans-serif;
+        }
+        
+        .btn-workout-action:hover {
+            background: var(--workout-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+        }
+        
+        /* Notes Section */
+        .notes-section {
+            background: white;
+            border-radius: 24px;
+            padding: 30px 35px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            margin-top: 30px;
+            border: 1px solid var(--border-soft);
+        }
+        
+        .notes-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+        }
+        
+        .note-item {
+            padding: 18px;
+            background: var(--bg-soft);
+            border-radius: 14px;
+            border-left: 4px solid var(--template);
+        }
+        
+        .note-title {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+        
+        .note-content {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            margin: 50px 0 0;
+            background: var(--template-gradient);
+            border-radius: 28px;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.4;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+        
+        .cta-section p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            margin-bottom: 28px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 40px 40px 25px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--template);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+        
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: 14px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 2000;
+            transform: translateX(400px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 4px solid var(--template);
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--template-soft);
+            color: var(--template-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .calendar-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .template-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .template-actions {
+                flex-direction: row;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .page-hero {
+                padding: 40px 20px 20px;
+            }
+            
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 20px 20px 60px;
+            }
+            
+            .template-tabs {
+                padding: 0 20px;
+            }
+            
+            .calendar-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .workout-card-header {
+                padding: 20px;
+            }
+            
+            .workout-day-title {
+                font-size: 1.4rem;
+            }
+            
+            .workout-card-body {
+                padding: 20px;
+            }
+            
+            .exercise-item {
+                grid-template-columns: auto 1fr;
+            }
+            
+            .exercise-config {
+                grid-column: 1 / -1;
+                justify-content: flex-start;
+            }
+            
+            .template-info {
+                padding: 25px;
+            }
+            
+            .template-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn-action {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .calendar-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .calendar-day {
+                min-height: auto;
+                flex-direction: row;
+                padding: 15px;
+                gap: 15px;
+            }
+            
+            .day-name {
+                margin-bottom: 0;
+                min-width: 50px;
+            }
+            
+            .day-workout-name {
+                justify-content: flex-start;
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-soft);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--template) 0%, var(--legs) 100%);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <div class="header-actions">
+            <a href="gym-overview.html" class="btn-header secondary">← Overview</a>
+            <a href="gym-workout-builder.html" class="btn-header primary">+ Tự xây dựng</a>
+        </div>
+    </header>
+    
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <span class="page-badge">TEMPLATES</span>
+        <h1>Lịch tập <span>mẫu</span></h1>
+        <p>Các buổi tập được thiết kế sẵn bởi chuyên gia, tối ưu cho phụ nữ 30-40 tuổi. Chọn template phù hợp và bắt đầu ngay hôm nay.</p>
+    </section>
+    
+    <!-- Template Tabs -->
+    <div class="template-tabs">
+        <button class="template-tab active" data-template="4days">
+            4 buổi / tuần
+            <span class="tab-recommend">KHUYẾN NGHỊ</span>
+        </button>
+        <button class="template-tab" data-template="3days">
+            3 buổi / tuần
+            <span class="tab-badge">Bận rộn</span>
+        </button>
+        <button class="template-tab" data-template="5days">
+            5 buổi / tuần
+            <span class="tab-badge">Nâng cao</span>
+        </button>
+    </div>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Template Info -->
+        <div class="template-info">
+            <div class="template-info-content">
+                <h2 id="templateTitle">Chương trình 4 buổi / tuần</h2>
+                <p id="templateDesc">Lịch tập Upper/Lower kết hợp Glute focus — cân bằng giữa phát triển cơ bắp toàn thân và ưu tiên vòng 3. Phù hợp cho người có 4 ngày tập cố định trong tuần.</p>
+                <div class="template-tags" id="templateTags">
+                    <span class="template-tag">4 buổi / tuần</span>
+                    <span class="template-tag">90' GYM + 30-40' Cardio</span>
+                    <span class="template-tag">Upper / Lower Split</span>
+                    <span class="template-tag">Glute Focus</span>
+                </div>
+            </div>
+            <div class="template-actions">
+                <button class="btn-action primary" onclick="useTemplate()">💪 Sử dụng template này</button>
+                <a href="gym-workout-builder.html" class="btn-action secondary">✏️ Tùy chỉnh trong Builder</a>
+            </div>
+        </div>
+        
+        <!-- Weekly Calendar -->
+        <div class="week-calendar">
+            <div class="calendar-header">
+                <h3>
+                    <span class="calendar-indicator"></span>
+                    Lịch tuần
+                </h3>
+                <div class="calendar-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: var(--template)"></div>
+                        <span>Ngày tập</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: var(--border-soft)"></div>
+                        <span>Ngày nghỉ</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="calendar-grid" id="calendarGrid">
+                <!-- Rendered by JS -->
+            </div>
+        </div>
+        
+        <!-- Workout Details -->
+        <div class="workout-details" id="workoutDetails">
+            <!-- Rendered by JS -->
+        </div>
+        
+        <!-- Notes Section -->
+        <div class="notes-section">
+            <h3>
+                <span class="calendar-indicator"></span>
+                Lưu ý khi áp dụng
+            </h3>
+            <div class="notes-grid">
+                <div class="note-item">
+                    <div class="note-title">Linh hoạt lịch tập</div>
+                    <div class="note-content">Nếu bận, bạn có thể dời buổi nhưng giữ thứ tự. Ví dụ: Thứ 2 → Thứ 3, Thứ 4 → Thứ 5. Quan trọng là có ngày nghỉ giữa các buổi nặng.</div>
+                </div>
+                <div class="note-item">
+                    <div class="note-title">Điều chỉnh theo cơ thể</div>
+                    <div class="note-content">Nếu quá mệt, giảm 1 set mỗi bài hoặc giảm tạ 10-20%. Nếu đau khớp, đổi sang bài tập thay thế trong thư viện.</div>
+                </div>
+                <div class="note-item">
+                    <div class="note-title">Chu kỳ kinh nguyệt</div>
+                    <div class="note-content">Tuần 1-2 (sau hành kinh): tập nặng được. Tuần 3-4 (trước hành kinh): giảm cường độ 20%, ưu tiên kỹ thuật.</div>
+                </div>
+                <div class="note-item">
+                    <div class="note-title">Progressive Overload</div>
+                    <div class="note-content">Mỗi tuần cố gắng tăng 1 trong 3: tạ nặng hơn, thêm reps, hoặc thêm sets. Không tăng tất cả cùng lúc.</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Sẵn sàng bắt đầu?</h2>
+                <p>Lưu template này vào buổi tập của bạn và bắt đầu theo dõi tiến độ ngay hôm nay.</p>
+                <div class="cta-buttons">
+                    <button class="btn-action primary" onclick="useTemplate()">💪 Sử dụng template</button>
+                    <a href="gym-roadmap.html" class="btn-action secondary">📅 Xem lộ trình 12 tuần</a>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="gym-overview.html">GYM Overview</a>
+            <a href="gym-muscle-library.html">Thư viện bài tập</a>
+            <a href="gym-workout-builder.html">Workout Builder</a>
+            <a href="gym-roadmap.html">Lộ trình 12 tuần</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">✓</div>
+        <div class="toast-content" id="toastContent">Đã lưu template!</div>
+    </div>
+    
+    <script>
+        // ==================== TEMPLATES DATABASE ====================
+        const templates = {
+            '4days': {
+                title: 'Chương trình 4 buổi / tuần',
+                description: 'Lịch tập Upper/Lower kết hợp Glute focus — cân bằng giữa phát triển cơ bắp toàn thân và ưu tiên vòng 3. Phù hợp cho người có 4 ngày tập cố định trong tuần.',
+                tags: ['4 buổi / tuần', '90\' GYM + 30-40\' Cardio', 'Upper / Lower Split', 'Glute Focus'],
+                week: [
+                    { day: 1, name: 'Thứ 2', workout: 'Upper Push', type: 'workout', muscles: ['Ngực', 'Vai', 'Tay sau'], duration: '120\'' },
+                    { day: 2, name: 'Thứ 3', workout: 'Nghỉ / Đi bộ nhẹ', type: 'rest' },
+                    { day: 3, name: 'Thứ 4', workout: 'Lower Body', type: 'workout', muscles: ['Đùi', 'Mông', 'Bắp chân'], duration: '125\'' },
+                    { day: 4, name: 'Thứ 5', workout: 'Nghỉ / Yoga', type: 'rest' },
+                    { day: 5, name: 'Thứ 6', workout: 'Upper Pull', type: 'workout', muscles: ['Lưng', 'Vai sau', 'Tay trước'], duration: '120\'' },
+                    { day: 6, name: 'Thứ 7', workout: 'Glutes + Core', type: 'workout', muscles: ['Mông', 'Bụng'], duration: '130\'' },
+                    { day: 7, name: 'CN', workout: 'Nghỉ hoàn toàn', type: 'rest' }
+                ],
+                workouts: [
+                    {
+                        day: 1,
+                        title: 'Upper Push',
+                        subtitle: 'Ngực · Vai trước · Tay sau',
+                        gymDuration: 90,
+                        cardioDuration: 30,
+                        totalExercises: 7,
+                        totalSets: 22,
+                        phases: [
+                            {
+                                name: 'Khởi động',
+                                icon: '🔥',
+                                duration: '10 phút',
+                                exercises: [
+                                    { name: 'Cardio nhẹ (đi bộ nhanh / elliptical)', target: 'Toàn thân', sets: 1, reps: '5\'', rest: '-' },
+                                    { name: 'Arm Circles', target: 'Vai', sets: 2, reps: '20', rest: '-' },
+                                    { name: 'Band Pull-aparts', target: 'Vai sau', sets: 2, reps: '15', rest: '-' },
+                                    { name: 'Chest Opener Stretch', target: 'Ngực', sets: 1, reps: '30"', rest: '-' }
+                                ]
+                            },
+                            {
+                                name: 'Bài tập chính',
+                                icon: '💪',
+                                duration: '70 phút',
+                                exercises: [
+                                    { name: 'Machine Chest Press', target: 'Pectoralis Major', sets: 4, reps: '10-12', rest: '90"' },
+                                    { name: 'Incline Dumbbell Press', target: 'Upper Chest', sets: 3, reps: '10-12', rest: '90"' },
+                                    { name: 'Seated Shoulder Press', target: 'Anterior Deltoid', sets: 4, reps: '10-12', rest: '90"' },
+                                    { name: 'Lateral Raise', target: 'Lateral Deltoid', sets: 3, reps: '12-15', rest: '60"' },
+                                    { name: 'Tricep Pushdown', target: 'Triceps', sets: 3, reps: '12-15', rest: '60"' },
+                                    { name: 'Overhead Tricep Extension', target: 'Triceps (Long Head)', sets: 3, reps: '10-12', rest: '60"' }
+                                ]
+                            },
+                            {
+                                name: 'Cardio cuối buổi',
+                                icon: '🏃',
+                                duration: '30 phút',
+                                isCardio: true,
+                                options: [
+                                    { name: 'Incline Walk', specs: 'Speed 5.5 · Incline 6% · 30\'' },
+                                    { name: 'Elliptical', specs: 'Resistance 6 · RPM 65 · 30\'' },
+                                    { name: 'Stair Master', specs: 'Level 7 · 25\'' }
+                                ]
+                            },
+                            {
+                                name: 'Giãn cơ',
+                                icon: '🧘',
+                                duration: '10 phút',
+                                exercises: [
+                                    { name: 'Chest Stretch', target: 'Ngực', sets: 1, reps: '30"/bên', rest: '-' },
+                                    { name: 'Shoulder Stretch', target: 'Vai', sets: 1, reps: '30"/bên', rest: '-' },
+                                    { name: 'Tricep Stretch', target: 'Tay sau', sets: 1, reps: '30"/bên', rest: '-' },
+                                    { name: 'Child\'s Pose', target: 'Toàn thân', sets: 1, reps: '1\'', rest: '-' }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        day: 3,
+                        title: 'Lower Body',
+                        subtitle: 'Đùi trước · Đùi sau · Mông · Bắp chân',
+                        gymDuration: 90,
+                        cardioDuration: 35,
+                        totalExercises: 8,
+                        totalSets: 25,
+                        phases: [
+                            {
+                                name: 'Khởi động',
+                                icon: '🔥',
+                                duration: '10 phút',
+                                exercises: [
+                                    { name: 'Cardio nhẹ', target: 'Toàn thân', sets: 1, reps: '5\'', rest: '-' },
+                                    { name: 'Leg Swings', target: 'Hông', sets: 2, reps: '15/bên', rest: '-' },
+                                    { name: 'Bodyweight Squat', target: 'Chân', sets: 2, reps: '15', rest: '-' },
+                                    { name: 'Hip Circles', target: 'Hông', sets: 2, reps: '10/hướng', rest: '-' }
+                                ]
+                            },
+                            {
+                                name: 'Bài tập chính',
+                                icon: '💪',
+                                duration: '70 phút',
+                                exercises: [
+                                    { name: 'Goblet Squat', target: 'Quads, Glutes', sets: 4, reps: '10-12', rest: '90"' },
+                                    { name: 'Romanian Deadlift', target: 'Hamstrings, Glutes', sets: 4, reps: '10-12', rest: '90"' },
+                                    { name: 'Leg Press', target: 'Quads', sets: 3, reps: '12-15', rest: '90"' },
+                                    { name: 'Walking Lunge', target: 'Quads, Glutes', sets: 3, reps: '12 bước/bên', rest: '75"' },
+                                    { name: 'Leg Curl', target: 'Hamstrings', sets: 3, reps: '12-15', rest: '60"' },
+                                    { name: 'Leg Extension', target: 'Quadriceps', sets: 3, reps: '12-15', rest: '60"' },
+                                    { name: 'Hip Thrust', target: 'Glutes', sets: 3, reps: '12-15', rest: '75"' },
+                                    { name: 'Calf Raise', target: 'Calves', sets: 4, reps: '15-20', rest: '60"' }
+                                ]
+                            },
+                            {
+                                name: 'Cardio cuối buổi',
+                                icon: '🏃',
+                                duration: '35 phút',
+                                isCardio: true,
+                                options: [
+                                    { name: 'Incline Walk', specs: 'Speed 5.5 · Incline 8% · 35\'' },
+                                    { name: 'Cycling', specs: 'Resistance 7 · 65 RPM · 35\'' },
+                                    { name: 'Rowing Machine', specs: 'Level 6 · 30\'' }
+                                ]
+                            },
+                            {
+                                name: 'Giãn cơ',
+                                icon: '🧘',
+                                duration: '10 phút',
+                                exercises: [
+                                    { name: 'Quad Stretch', target: 'Đùi trước', sets: 1, reps: '30"/bên', rest: '-' },
+                                    { name: 'Hamstring Stretch', target: 'Đùi sau', sets: 1, reps: '30"/bên', rest: '-' },
+                                    { name: 'Glute Stretch', target: 'Mông', sets: 1, reps: '30"/bên', rest: '-' },
+                                    { name: 'Calf Stretch', target: 'Bắp chân', sets: 1, reps: '30"/bên', rest: '-' }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        day: 5,
+                        title: 'Upper Pull',
+                        subtitle: 'Lưng · Vai sau · Tay trước',
+                        gymDuration: 90,
+                        cardioDuration: 30,
+                        totalExercises: 7,
+                        totalSets: 22,
+                        phases: [
+                            {
+                                name: 'Khởi động',
+                                icon: '🔥',
+                                duration: '10 phút',
+                                exercises: [
+                                    { name: 'Cardio nhẹ', target: 'Toàn thân', sets: 1, reps: '5\'', rest: '-' },
+                                    { name: 'Cat-Cow Stretch', target: 'Cột sống', sets: 2, reps: '10', rest: '-' },
+                                    { name: 'Band Pull-aparts', target: 'Vai sau', sets: 2, reps: '15', rest: '-' },
+                                    { name: 'Scapular Retraction', target: 'Lưng giữa', sets: 2, reps: '12', rest: '-' }
+                                ]
+                            },
+                            {
+                                name: 'Bài tập chính',
+                                icon: '💪',
+                                duration: '70 phút',
+                                exercises: [
+                                    { name: 'Lat Pulldown', target: 'Latissimus Dorsi', sets: 4, reps: '10-12', rest: '90"' },
+                                    { name: 'Seated Cable Row', target: 'Mid Back', sets: 4, reps: '10-12', rest: '90"' },
+                                    { name: 'Dumbbell Row', target: 'Lats', sets: 3, reps: '10-12/bên', rest: '75"' },
+                                    { name: 'Face Pull', target: 'Rear Deltoid', sets: 3, reps: '15-20', rest: '60"' },
+                                    { name: 'Reverse Pec Deck', target: 'Rear Deltoid', sets: 3, reps: '12-15', rest: '60"' },
+                                    { name: 'Barbell Curl', target: 'Biceps', sets: 3, reps: '10-12', rest: '60"' },
+                                    { name: 'Hammer Curl', target: 'Brachialis', sets: 3, reps: '12-15', rest: '60"' }
+                                ]
+                            },
+                            {
+                                name: 'Cardio cuối buổi',
+                                icon: '🏃',
+                                duration: '30 phút',
+                                isCardio: true,
+                                options: [
+                                    { name: 'Incline Walk', specs: 'Speed 5.5 · Incline 6% · 30\'' },
+                                    { name: 'Stair Master', specs: 'Level 7 · 30\'' },
+                                    { name: 'Elliptical', specs: 'Resistance 6 · 30\'' }
+                                ]
+                            },
+                            {
+                                name: 'Giãn cơ',
+                                icon: '🧘',
+                                duration: '10 phút',
+                                exercises: [
+                                    { name: 'Lat Stretch', target: 'Lưng rộng', sets: 1, reps: '30"/bên', rest: '-' },
+                                    { name: 'Upper Back Stretch', target: 'Lưng giữa', sets: 1, reps: '30"', rest: '-' },
+                                    { name: 'Bicep Stretch', target: 'Tay trước', sets: 1, reps: '30"/bên', rest: '-' },
+                                    { name: 'Child\'s Pose', target: 'Toàn thân', sets: 1, reps: '1\'', rest: '-' }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        day: 6,
+                        title: 'Glutes + Core',
+                        subtitle: 'Mông · Bụng · Core sâu',
+                        gymDuration: 90,
+                        cardioDuration: 40,
+                        totalExercises: 8,
+                        totalSets: 24,
+                        phases: [
+                            {
+                                name: 'Khởi động',
+                                icon: '🔥',
+                                duration: '10 phút',
+                                exercises: [
+                                    { name: 'Cardio nhẹ', target: 'Toàn thân', sets: 1, reps: '5\'', rest: '-' },
+                                    { name: 'Glute Activation (Clamshell)', target: 'Glute Med', sets: 2, reps: '15/bên', rest: '-' },
+                                    { name: 'Bodyweight Glute Bridge', target: 'Glutes', sets: 2, reps: '15', rest: '-' },
+                                    { name: 'Cat-Cow', target: 'Core, cột sống', sets: 2, reps: '10', rest: '-' }
+                                ]
+                            },
+                            {
+                                name: 'Bài tập chính',
+                                icon: '💪',
+                                duration: '70 phút',
+                                exercises: [
+                                    { name: 'Hip Thrust', target: 'Gluteus Maximus', sets: 4, reps: '12-15', rest: '90"' },
+                                    { name: 'Bulgarian Split Squat', target: 'Glutes, Quads', sets: 3, reps: '10-12/bên', rest: '75"' },
+                                    { name: 'Cable Kickback', target: 'Gluteus Maximus', sets: 3, reps: '15-20/bên', rest: '60"' },
+                                    { name: 'Cable Abduction', target: 'Gluteus Medius', sets: 3, reps: '15-20/bên', rest: '60"' },
+                                    { name: 'Glute Bridge (weighted)', target: 'Glutes', sets: 3, reps: '15-20', rest: '60"' },
+                                    { name: 'Plank', target: 'Transverse Abdominis', sets: 3, reps: '45-60"', rest: '45"' },
+                                    { name: 'Russian Twist', target: 'Obliques', sets: 3, reps: '20', rest: '45"' },
+                                    { name: 'Leg Raise', target: 'Lower Abs', sets: 3, reps: '12-15', rest: '45"' }
+                                ]
+                            },
+                            {
+                                name: 'Cardio cuối buổi',
+                                icon: '🏃',
+                                duration: '40 phút',
+                                isCardio: true,
+                                options: [
+                                    { name: 'Incline Walk', specs: 'Speed 5.5 · Incline 8% · 40\'' },
+                                    { name: 'Cycling', specs: 'Resistance 7 · 35\'' },
+                                    { name: 'Stair Master', specs: 'Level 8 · 35\'' }
+                                ]
+                            },
+                            {
+                                name: 'Giãn cơ',
+                                icon: '🧘',
+                                duration: '10 phút',
+                                exercises: [
+                                    { name: 'Pigeon Pose', target: 'Mông, hông', sets: 1, reps: '45"/bên', rest: '-' },
+                                    { name: 'Hip Flexor Stretch', target: 'Hông', sets: 1, reps: '30"/bên', rest: '-' },
+                                    { name: 'Cobra Stretch', target: 'Bụng', sets: 1, reps: '30"', rest: '-' },
+                                    { name: 'Child\'s Pose', target: 'Toàn thân', sets: 1, reps: '1\'', rest: '-' }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            
+            '3days': {
+                title: 'Chương trình 3 buổi / tuần',
+                description: 'Lịch Full Body 3 buổi — phù hợp cho người bận rộn, chỉ có 3 ngày cố định trong tuần. Mỗi buổi tập toàn thân với cường độ vừa phải.',
+                tags: ['3 buổi / tuần', '80\' GYM + 25\' Cardio', 'Full Body', 'Linh hoạt'],
+                week: [
+                    { day: 1, name: 'Thứ 2', workout: 'Full Body A', type: 'workout', muscles: ['Toàn thân'], duration: '105\'' },
+                    { day: 2, name: 'Thứ 3', workout: 'Nghỉ', type: 'rest' },
+                    { day: 3, name: 'Thứ 4', workout: 'Full Body B', type: 'workout', muscles: ['Toàn thân'], duration: '105\'' },
+                    { day: 4, name: 'Thứ 5', workout: 'Nghỉ', type: 'rest' },
+                    { day: 5, name: 'Thứ 6', workout: 'Full Body C', type: 'workout', muscles: ['Toàn thân'], duration: '105\'' },
+                    { day: 6, name: 'Thứ 7', workout: 'Nghỉ / Đi bộ', type: 'rest' },
+                    { day: 7, name: 'CN', workout: 'Nghỉ hoàn toàn', type: 'rest' }
+                ],
+                workouts: [
+                    {
+                        day: 1,
+                        title: 'Full Body A',
+                        subtitle: 'Squat Pattern · Push · Pull',
+                        gymDuration: 80,
+                        cardioDuration: 25,
+                        totalExercises: 6,
+                        totalSets: 18,
+                        phases: [
+                            {
+                                name: 'Khởi động',
+                                icon: '🔥',
+                                duration: '10 phút',
+                                exercises: [
+                                    { name: 'Cardio nhẹ', target: 'Toàn thân', sets: 1, reps: '5\'', rest: '-' },
+                                    { name: 'Dynamic Stretching', target: 'Toàn thân', sets: 1, reps: '5\'', rest: '-' }
+                                ]
+                            },
+                            {
+                                name: 'Bài tập chính',
+                                icon: '💪',
+                                duration: '60 phút',
+                                exercises: [
+                                    { name: 'Goblet Squat', target: 'Quads, Glutes', sets: 3, reps: '10-12', rest: '90"' },
+                                    { name: 'Machine Chest Press', target: 'Pectoralis', sets: 3, reps: '10-12', rest: '90"' },
+                                    { name: 'Lat Pulldown', target: 'Lats', sets: 3, reps: '10-12', rest: '90"' },
+                                    { name: 'Leg Curl', target: 'Hamstrings', sets: 3, reps: '12-15', rest: '60"' },
+                                    { name: 'Lateral Raise', target: 'Side Deltoid', sets: 3, reps: '12-15', rest: '60"' },
+                                    { name: 'Plank', target: 'Core', sets: 3, reps: '45"', rest: '45"' }
+                                ]
+                            },
+                            {
+                                name: 'Cardio cuối buổi',
+                                icon: '🏃',
+                                duration: '25 phút',
+                                isCardio: true,
+                                options: [
+                                    { name: 'Incline Walk', specs: 'Speed 5.5 · Incline 6% · 25\'' },
+                                    { name: 'Elliptical', specs: 'Resistance 6 · 25\'' }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        day: 3,
+                        title: 'Full Body B',
+                        subtitle: 'Hinge Pattern · Vertical Push · Horizontal Pull',
+                        gymDuration: 80,
+                        cardioDuration: 25,
+                        totalExercises: 6,
+                        totalSets: 18,
+                        phases: [
+                            {
+                                name: 'Khởi động',
+                                icon: '🔥',
+                                duration: '10 phút',
+                                exercises: [
+                                    { name: 'Cardio nhẹ', target: 'Toàn thân', sets: 1, reps: '5\'', rest: '-' },
+                                    { name: 'Dynamic Stretching', target: 'Toàn thân', sets: 1, reps: '5\'', rest: '-' }
+                                ]
+                            },
+                            {
+                                name: 'Bài tập chính',
+                                icon: '💪',
+                                duration: '60 phút',
+                                exercises: [
+                                    { name: 'Romanian Deadlift', target: 'Hamstrings, Glutes', sets: 3, reps: '10-12', rest: '90"' },
+                                    { name: 'Seated Shoulder Press', target: 'Anterior Deltoid', sets: 3, reps: '10-12', rest: '90"' },
+                                    { name: 'Seated Cable Row', target: 'Mid Back', sets: 3, reps: '10-12', rest: '90"' },
+                                    { name: 'Leg Extension', target: 'Quads', sets: 3, reps: '12-15', rest: '60"' },
+                                    { name: 'Face Pull', target: 'Rear Deltoid', sets: 3, reps: '15-20', rest: '60"' },
+                                    { name: 'Dead Bug', target: 'Core', sets: 3, reps: '10/bên', rest: '45"' }
+                                ]
+                            },
+                            {
+                                name: 'Cardio cuối buổi',
+                                icon: '🏃',
+                                duration: '25 phút',
+                                isCardio: true,
+                                options: [
+                                    { name: 'Incline Walk', specs: 'Speed 5.5 · Incline 6% · 25\'' },
+                                    { name: 'Cycling', specs: 'Resistance 6 · 25\'' }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        day: 5,
+                        title: 'Full Body C',
+                        subtitle: 'Glute Focus · Arms · Core',
+                        gymDuration: 80,
+                        cardioDuration: 25,
+                        totalExercises: 6,
+                        totalSets: 18,
+                        phases: [
+                            {
+                                name: 'Khởi động',
+                                icon: '🔥',
+                                duration: '10 phút',
+                                exercises: [
+                                    { name: 'Cardio nhẹ', target: 'Toàn thân', sets: 1, reps: '5\'', rest: '-' },
+                                    { name: 'Glute Activation', target: 'Mông', sets: 2, reps: '15', rest: '-' }
+                                ]
+                            },
+                            {
+                                name: 'Bài tập chính',
+                                icon: '💪',
+                                duration: '60 phút',
+                                exercises: [
+                                    { name: 'Hip Thrust', target: 'Glutes', sets: 4, reps: '12-15', rest: '90"' },
+                                    { name: 'Walking Lunge', target: 'Quads, Glutes', sets: 3, reps: '12/bên', rest: '75"' },
+                                    { name: 'Incline Dumbbell Press', target: 'Upper Chest', sets: 3, reps: '10-12', rest: '75"' },
+                                    { name: 'Dumbbell Row', target: 'Lats', sets: 3, reps: '10-12/bên', rest: '75"' },
+                                    { name: 'Hammer Curl', target: 'Biceps', sets: 3, reps: '12-15', rest: '60"' },
+                                    { name: 'Russian Twist', target: 'Obliques', sets: 3, reps: '20', rest: '45"' }
+                                ]
+                            },
+                            {
+                                name: 'Cardio cuối buổi',
+                                icon: '🏃',
+                                duration: '25 phút',
+                                isCardio: true,
+                                options: [
+                                    { name: 'Incline Walk', specs: 'Speed 5.5 · Incline 6% · 25\'' },
+                                    { name: 'Stair Master', specs: 'Level 6 · 20\'' }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            
+            '5days': {
+                title: 'Chương trình 5 buổi / tuần',
+                description: 'Lịch Push/Pull/Legs/Upper/Glute — dành cho người nâng cao, muốn tối đa hóa kết quả với 5 ngày tập trong tuần.',
+                tags: ['5 buổi / tuần', '90\' GYM + 30\' Cardio', 'PPL + Upper + Glute', 'Nâng cao'],
+                week: [
+                    { day: 1, name: 'Thứ 2', workout: 'Push', type: 'workout', muscles: ['Ngực', 'Vai', 'Tay sau'], duration: '120\'' },
+                    { day: 2, name: 'Thứ 3', workout: 'Pull', type: 'workout', muscles: ['Lưng', 'Tay trước'], duration: '120\'' },
+                    { day: 3, name: 'Thứ 4', workout: 'Legs', type: 'workout', muscles: ['Đùi', 'Bắp chân'], duration: '125\'' },
+                    { day: 4, name: 'Thứ 5', workout: 'Upper', type: 'workout', muscles: ['Thân trên'], duration: '120\'' },
+                    { day: 5, name: 'Thứ 6', workout: 'Glutes', type: 'workout', muscles: ['Mông', 'Core'], duration: '130\'' },
+                    { day: 6, name: 'Thứ 7', workout: 'Nghỉ / Cardio nhẹ', type: 'rest' },
+                    { day: 7, name: 'CN', workout: 'Nghỉ hoàn toàn', type: 'rest' }
+                ],
+                workouts: [
+                    {
+                        day: 1,
+                        title: 'Push Day',
+                        subtitle: 'Ngực · Vai trước/giữa · Tay sau',
+                        gymDuration: 90,
+                        cardioDuration: 30,
+                        totalExercises: 7,
+                        totalSets: 23,
+                        phases: [
+                            {
+                                name: 'Khởi động',
+                                icon: '🔥',
+                                duration: '10 phút',
+                                exercises: [
+                                    { name: 'Cardio nhẹ', target: 'Toàn thân', sets: 1, reps: '5\'', rest: '-' },
+                                    { name: 'Dynamic Stretching', target: 'Vai, ngực', sets: 1, reps: '5\'', rest: '-' }
+                                ]
+                            },
+                            {
+                                name: 'Bài tập chính',
+                                icon: '💪',
+                                duration: '70 phút',
+                                exercises: [
+                                    { name: 'Dumbbell Bench Press', target: 'Pectoralis', sets: 4, reps: '8-10', rest: '90"' },
+                                    { name: 'Incline Dumbbell Press', target: 'Upper Chest', sets: 4, reps: '10-12', rest: '90"' },
+                                    { name: 'Seated Shoulder Press', target: 'Anterior Deltoid', sets: 4, reps: '10-12', rest: '90"' },
+                                    { name: 'Lateral Raise', target: 'Lateral Deltoid', sets: 4, reps: '12-15', rest: '60"' },
+                                    { name: 'Pec Deck Fly', target: 'Pectoralis', sets: 3, reps: '12-15', rest: '60"' },
+                                    { name: 'Tricep Pushdown', target: 'Triceps', sets: 3, reps: '12-15', rest: '60"' },
+                                    { name: 'Overhead Tricep Extension', target: 'Triceps', sets: 3, reps: '10-12', rest: '60"' }
+                                ]
+                            },
+                            {
+                                name: 'Cardio cuối buổi',
+                                icon: '🏃',
+                                duration: '30 phút',
+                                isCardio: true,
+                                options: [
+                                    { name: 'Incline Walk', specs: 'Speed 5.5 · Incline 6% · 30\'' },
+                                    { name: 'Elliptical', specs: 'Resistance 6 · 30\'' }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        day: 2,
+                        title: 'Pull Day',
+                        subtitle: 'Lưng · Vai sau · Tay trước',
+                        gymDuration: 90,
+                        cardioDuration: 30,
+                        totalExercises: 7,
+                        totalSets: 23,
+                        phases: [
+                            {
+                                name: 'Khởi động',
+                                icon: '🔥',
+                                duration: '10 phút',
+                                exercises: [
+                                    { name: 'Cardio nhẹ', target: 'Toàn thân', sets: 1, reps: '5\'', rest: '-' },
+                                    { name: 'Band Pull-aparts', target: 'Vai sau', sets: 2, reps: '15', rest: '-' }
+                                ]
+                            },
+                            {
+                                name: 'Bài tập chính',
+                                icon: '💪',
+                                duration: '70 phút',
+                                exercises: [
+                                    { name: 'Assisted Pull-up', target: 'Lats', sets: 4, reps: '8-10', rest: '90"' },
+                                    { name: 'Seated Cable Row', target: 'Mid Back', sets: 4, reps: '10-12', rest: '90"' },
+                                    { name: 'Lat Pulldown', target: 'Lats', sets: 3, reps: '10-12', rest: '90"' },
+                                    { name: 'Dumbbell Row', target: 'Lats', sets: 3, reps: '10-12/bên', rest: '75"' },
+                                    { name: 'Face Pull', target: 'Rear Deltoid', sets: 4, reps: '15-20', rest: '60"' },
+                                    { name: 'Barbell Curl', target: 'Biceps', sets: 3, reps: '10-12', rest: '60"' },
+                                    { name: 'Hammer Curl', target: 'Brachialis', sets: 3, reps: '12-15', rest: '60"' }
+                                ]
+                            },
+                            {
+                                name: 'Cardio cuối buổi',
+                                icon: '🏃',
+                                duration: '30 phút',
+                                isCardio: true,
+                                options: [
+                                    { name: 'Incline Walk', specs: 'Speed 5.5 · Incline 6% · 30\'' },
+                                    { name: 'Stair Master', specs: 'Level 7 · 25\'' }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        day: 3,
+                        title: 'Legs Day',
+                        subtitle: 'Đùi trước · Đùi sau · Bắp chân',
+                        gymDuration: 90,
+                        cardioDuration: 30,
+                        totalExercises: 7,
+                        totalSets: 23,
+                        phases: [
+                            {
+                                name: 'Khởi động',
+                                icon: '🔥',
+                                duration: '10 phút',
+                                exercises: [
+                                    { name: 'Cardio nhẹ', target: 'Toàn thân', sets: 1, reps: '5\'', rest: '-' },
+                                    { name: 'Leg Swings', target: 'Hông', sets: 2, reps: '15/bên', rest: '-' }
+                                ]
+                            },
+                            {
+                                name: 'Bài tập chính',
+                                icon: '💪',
+                                duration: '70 phút',
+                                exercises: [
+                                    { name: 'Goblet Squat', target: 'Quads, Glutes', sets: 4, reps: '8-10', rest: '120"' },
+                                    { name: 'Romanian Deadlift', target: 'Hamstrings', sets: 4, reps: '10-12', rest: '90"' },
+                                    { name: 'Leg Press', target: 'Quads', sets: 4, reps: '10-12', rest: '90"' },
+                                    { name: 'Walking Lunge', target: 'Quads, Glutes', sets: 3, reps: '12/bên', rest: '75"' },
+                                    { name: 'Leg Curl', target: 'Hamstrings', sets: 3, reps: '12-15', rest: '60"' },
+                                    { name: 'Leg Extension', target: 'Quads', sets: 3, reps: '12-15', rest: '60"' },
+                                    { name: 'Calf Raise', target: 'Calves', sets: 4, reps: '15-20', rest: '60"' }
+                                ]
+                            },
+                            {
+                                name: 'Cardio cuối buổi',
+                                icon: '🏃',
+                                duration: '30 phút',
+                                isCardio: true,
+                                options: [
+                                    { name: 'Cycling', specs: 'Resistance 6 · 30\'' },
+                                    { name: 'Incline Walk', specs: 'Speed 5 · Incline 6% · 30\'' }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        day: 4,
+                        title: 'Upper Day',
+                        subtitle: 'Thân trên tổng hợp',
+                        gymDuration: 90,
+                        cardioDuration: 30,
+                        totalExercises: 7,
+                        totalSets: 21,
+                        phases: [
+                            {
+                                name: 'Khởi động',
+                                icon: '🔥',
+                                duration: '10 phút',
+                                exercises: [
+                                    { name: 'Cardio nhẹ', target: 'Toàn thân', sets: 1, reps: '5\'', rest: '-' },
+                                    { name: 'Dynamic Stretching', target: 'Thân trên', sets: 1, reps: '5\'', rest: '-' }
+                                ]
+                            },
+                            {
+                                name: 'Bài tập chính',
+                                icon: '💪',
+                                duration: '70 phút',
+                                exercises: [
+                                    { name: 'Machine Chest Press', target: 'Pectoralis', sets: 3, reps: '10-12', rest: '90"' },
+                                    { name: 'Lat Pulldown', target: 'Lats', sets: 3, reps: '10-12', rest: '90"' },
+                                    { name: 'Seated Shoulder Press', target: 'Anterior Deltoid', sets: 3, reps: '10-12', rest: '90"' },
+                                    { name: 'Seated Cable Row', target: 'Mid Back', sets: 3, reps: '10-12', rest: '90"' },
+                                    { name: 'Lateral Raise', target: 'Lateral Deltoid', sets: 3, reps: '12-15', rest: '60"' },
+                                    { name: 'Tricep Pushdown', target: 'Triceps', sets: 3, reps: '12-15', rest: '60"' },
+                                    { name: 'Barbell Curl', target: 'Biceps', sets: 3, reps: '10-12', rest: '60"' }
+                                ]
+                            },
+                            {
+                                name: 'Cardio cuối buổi',
+                                icon: '🏃',
+                                duration: '30 phút',
+                                isCardio: true,
+                                options: [
+                                    { name: 'Incline Walk', specs: 'Speed 5.5 · Incline 6% · 30\'' },
+                                    { name: 'Elliptical', specs: 'Resistance 6 · 30\'' }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        day: 5,
+                        title: 'Glute Day',
+                        subtitle: 'Mông · Core · Hip',
+                        gymDuration: 90,
+                        cardioDuration: 40,
+                        totalExercises: 8,
+                        totalSets: 26,
+                        phases: [
+                            {
+                                name: 'Khởi động',
+                                icon: '🔥',
+                                duration: '10 phút',
+                                exercises: [
+                                    { name: 'Cardio nhẹ', target: 'Toàn thân', sets: 1, reps: '5\'', rest: '-' },
+                                    { name: 'Glute Activation', target: 'Mông', sets: 2, reps: '15/bên', rest: '-' }
+                                ]
+                            },
+                            {
+                                name: 'Bài tập chính',
+                                icon: '💪',
+                                duration: '70 phút',
+                                exercises: [
+                                    { name: 'Hip Thrust', target: 'Gluteus Maximus', sets: 5, reps: '10-12', rest: '90"' },
+                                    { name: 'Bulgarian Split Squat', target: 'Glutes, Quads', sets: 4, reps: '10-12/bên', rest: '75"' },
+                                    { name: 'Romanian Deadlift', target: 'Glutes, Hamstrings', sets: 3, reps: '10-12', rest: '90"' },
+                                    { name: 'Cable Kickback', target: 'Glutes', sets: 3, reps: '15-20/bên', rest: '60"' },
+                                    { name: 'Cable Abduction', target: 'Glute Medius', sets: 3, reps: '15-20/bên', rest: '60"' },
+                                    { name: 'Glute Bridge', target: 'Glutes', sets: 3, reps: '15-20', rest: '60"' },
+                                    { name: 'Plank', target: 'Core', sets: 3, reps: '60"', rest: '45"' },
+                                    { name: 'Russian Twist', target: 'Obliques', sets: 3, reps: '20', rest: '45"' }
+                                ]
+                            },
+                            {
+                                name: 'Cardio cuối buổi',
+                                icon: '🏃',
+                                duration: '40 phút',
+                                isCardio: true,
+                                options: [
+                                    { name: 'Incline Walk', specs: 'Speed 5.5 · Incline 8% · 40\'' },
+                                    { name: 'Stair Master', specs: 'Level 8 · 35\'' }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
+        
+        // ==================== STATE ====================
+        let currentTemplate = '4days';
+        
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTemplate();
+            
+            // Tab listeners
+            document.querySelectorAll('.template-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.template-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    currentTemplate = this.dataset.template;
+                    renderTemplate();
+                });
+            });
+        });
+        
+        // ==================== RENDER ====================
+        function renderTemplate() {
+            const template = templates[currentTemplate];
+            
+            // Update info
+            document.getElementById('templateTitle').textContent = template.title;
+            document.getElementById('templateDesc').textContent = template.description;
+            document.getElementById('templateTags').innerHTML = template.tags.map(tag => 
+                `<span class="template-tag">${tag}</span>`
+            ).join('');
+            
+            // Render calendar
+            renderCalendar(template.week);
+            
+            // Render workout details
+            renderWorkouts(template.workouts);
+        }
+        
+        function renderCalendar(week) {
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = week.map(day => {
+                if (day.type === 'workout') {
+                    const musclePills = day.muscles.slice(0, 2).map(m => 
+                        `<span class="day-meta-pill">${m}</span>`
+                    ).join('');
+                    
+                    return `
+                        <div class="calendar-day workout" data-day="${day.day}" onclick="scrollToWorkout(${day.day})">
+                            <div class="day-name">${day.name}</div>
+                            <div class="day-workout-name">${day.workout}</div>
+                            <div class="day-meta">
+                                ${musclePills}
+                                <span class="day-meta-pill">${day.duration}</span>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    return `
+                        <div class="calendar-day rest" data-day="${day.day}">
+                            <div class="day-name">${day.name}</div>
+                            <div class="day-workout-name">${day.workout}</div>
+                        </div>
+                    `;
+                }
+            }).join('');
+        }
+        
+        function renderWorkouts(workouts) {
+            const container = document.getElementById('workoutDetails');
+            container.innerHTML = workouts.map(workout => {
+                const phasesHtml = workout.phases.map(phase => {
+                    if (phase.isCardio) {
+                        return `
+                            <div class="workout-phase">
+                                <div class="phase-header">
+                                    <div class="phase-icon">${phase.icon}</div>
+                                    <div class="phase-title">${phase.name}</div>
+                                    <div class="phase-duration">${phase.duration}</div>
+                                </div>
+                                <div class="cardio-section">
+                                    <div style="font-size: 0.9rem; color: var(--text-medium); font-weight: 600;">
+                                        Chọn 1 trong các bài cardio sau:
+                                    </div>
+                                    <div class="cardio-options">
+                                        ${phase.options.map(opt => `
+                                            <div class="cardio-option">
+                                                <div class="cardio-name">${opt.name}</div>
+                                                <div class="cardio-specs">${opt.specs}</div>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    return `
+                        <div class="workout-phase">
+                            <div class="phase-header">
+                                <div class="phase-icon">${phase.icon}</div>
+                                <div class="phase-title">${phase.name}</div>
+                                <div class="phase-duration">${phase.duration}</div>
+                            </div>
+                            <div class="exercise-list">
+                                ${phase.exercises.map((ex, idx) => `
+                                    <div class="exercise-item">
+                                        <div class="exercise-number">${idx + 1}</div>
+                                        <div class="exercise-info">
+                                            <div class="exercise-name">${ex.name}</div>
+                                            <div class="exercise-target">${ex.target}</div>
+                                        </div>
+                                        <div class="exercise-config">
+                                            <span class="config-pill"><strong>${ex.sets}</strong> sets</span>
+                                            <span class="config-pill"><strong>${ex.reps}</strong> reps</span>
+                                            ${ex.rest !== '-' ? `<span class="config-pill">Nghỉ <strong>${ex.rest}</strong></span>` : ''}
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                return `
+                    <div class="workout-card" data-day="${workout.day}" id="workout-${workout.day}">
+                        <div class="workout-card-header">
+                            <div class="workout-day-info">
+                                <div class="workout-day-label">Buổi ${workout.day}</div>
+                                <div class="workout-day-title">${workout.title}</div>
+                                <div class="workout-day-subtitle">${workout.subtitle}</div>
+                            </div>
+                            <div class="workout-day-meta">
+                                <span class="workout-meta-pill">💪 ${workout.gymDuration}' GYM</span>
+                                <span class="workout-meta-pill">🏃 ${workout.cardioDuration}' Cardio</span>
+                            </div>
+                        </div>
+                        <div class="workout-card-body">
+                            ${phasesHtml}
+                        </div>
+                        <div class="workout-card-footer">
+                            <div class="workout-stats">
+                                <div class="workout-stat"><strong>${workout.totalExercises}</strong> bài tập</div>
+                                <div class="workout-stat"><strong>${workout.totalSets}</strong> sets</div>
+                                <div class="workout-stat"><strong>${workout.gymDuration + workout.cardioDuration}'</strong> tổng</div>
+                            </div>
+                            <button class="btn-workout-action" onclick="customizeWorkout(${workout.day})">
+                                ✏️ Tùy chỉnh buổi này
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // ==================== ACTIONS ====================
+        function scrollToWorkout(day) {
+            const el = document.getElementById(`workout-${day}`);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                el.style.animation = 'none';
+                setTimeout(() => {
+                    el.style.animation = 'pulse 0.6s ease';
+                }, 10);
+            }
+        }
+        
+        function customizeWorkout(day) {
+            showToast('Đang chuyển sang Builder để tùy chỉnh...');
+            setTimeout(() => {
+                // In real app: redirect to builder with preloaded workout
+                window.location.href = 'gym-workout-builder.html';
+            }, 800);
+        }
+        
+        function useTemplate() {
+            const template = templates[currentTemplate];
+            
+            // Save to localStorage
+            const data = {
+                template: currentTemplate,
+                templateName: template.title,
+                savedAt: new Date().toISOString(),
+                workouts: template.workouts
+            };
+            
+            localStorage.setItem('fit30_selected_template', JSON.stringify(data));
+            
+            showToast(`Đã chọn "${template.title}"!`);
+            
+            setTimeout(() => {
+                window.location.href = 'gym-tracker.html';
+            }, 1000);
+        }
+        
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastContent').textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Add pulse animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0%, 100% { box-shadow: 0 5px 25px rgba(0,0,0,0.05); }
+                50% { box-shadow: 0 10px 40px rgba(127,181,181,0.3); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
