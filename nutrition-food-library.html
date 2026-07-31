@@ -1,0 +1,2414 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư Viện Thực Phẩm - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Base palette */
+            --text-dark: #4A4A5A;
+            --text-medium: #7A7A8A;
+            --text-light: #A0A0B0;
+            --white: #FFFFFF;
+            --bg-primary: #FFFBFB;
+            --bg-soft: #FFF8F5;
+            --border-soft: #F0E8E6;
+            
+            /* Nutrition base - Sage Green */
+            --nutrition: #9AB89A;
+            --nutrition-soft: #E8F3E8;
+            --nutrition-gradient: linear-gradient(135deg, #E8F3E8 0%, #9AB89A 100%);
+            
+            /* Food category colors */
+            --protein: #E89A9A;
+            --protein-soft: #FCE8E8;
+            --protein-gradient: linear-gradient(135deg, #FCE8E8 0%, #E89A9A 100%);
+            
+            --carb: #E8C87A;
+            --carb-soft: #FBF3E0;
+            --carb-gradient: linear-gradient(135deg, #FBF3E0 0%, #E8C87A 100%);
+            
+            --fat: #D4A8B8;
+            --fat-soft: #F8E8F0;
+            --fat-gradient: linear-gradient(135deg, #F8E8F0 0%, #D4A8B8 100%);
+            
+            --vegetable: #9AB89A;
+            --vegetable-soft: #E8F3E8;
+            --vegetable-gradient: linear-gradient(135deg, #E8F3E8 0%, #9AB89A 100%);
+            
+            --fruit: #E8A8B8;
+            --fruit-soft: #F8E8EE;
+            --fruit-gradient: linear-gradient(135deg, #F8E8EE 0%, #E8A8B8 100%);
+            
+            --dairy: #B8A8D4;
+            --dairy-soft: #F0E8F8;
+            --dairy-gradient: linear-gradient(135deg, #F0E8F8 0%, #B8A8D4 100%);
+            
+            --snack: #A8C8D4;
+            --snack-soft: #E8F3F8;
+            --snack-gradient: linear-gradient(135deg, #E8F3F8 0%, #A8C8D4 100%);
+            
+            /* Main gradient */
+            --main-gradient: linear-gradient(135deg, #9AB89A 0%, #E8C87A 50%, #D4A8B8 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        body::before {
+            width: 500px;
+            height: 500px;
+            background: var(--nutrition);
+            top: -150px;
+            right: -150px;
+        }
+        
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: var(--carb);
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 18px 40px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            color: var(--nutrition);
+        }
+        
+        /* Page Hero */
+        .page-hero {
+            padding: 60px 40px 30px;
+            text-align: center;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+        
+        .page-badge {
+            display: inline-block;
+            background: var(--nutrition-gradient);
+            color: white;
+            padding: 7px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 22px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(154,184,154,0.3);
+        }
+        
+        .page-hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .page-hero h1 span {
+            background: var(--nutrition-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .page-hero p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-pill {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            font-weight: 600;
+            border: 1px solid var(--border-soft);
+        }
+        
+        .stat-pill strong {
+            font-weight: 700;
+            margin-right: 5px;
+        }
+        
+        .stat-pill:nth-child(1) strong { color: var(--protein); }
+        .stat-pill:nth-child(2) strong { color: var(--carb); }
+        .stat-pill:nth-child(3) strong { color: var(--vegetable); }
+        .stat-pill:nth-child(4) strong { color: var(--fruit); }
+        
+        /* Filter Bar */
+        .filter-bar {
+            background: white;
+            padding: 25px 40px;
+            margin: 0 40px 25px;
+            border-radius: 22px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 76px;
+            z-index: 50;
+            border: 1px solid var(--border-soft);
+        }
+        
+        .search-box {
+            position: relative;
+            margin-bottom: 18px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 14px 20px 14px 52px;
+            border: 2px solid var(--border-soft);
+            border-radius: 14px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: var(--bg-soft);
+            font-weight: 500;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--nutrition);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(154,184,154,0.1);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 1.2rem;
+        }
+        
+        .filter-groups {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+        }
+        
+        .filter-group h4 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.78rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+        
+        .filter-chip {
+            padding: 6px 14px;
+            background: var(--bg-soft);
+            border: 2px solid transparent;
+            border-radius: 18px;
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            user-select: none;
+        }
+        
+        .filter-chip:hover {
+            background: white;
+            border-color: var(--nutrition);
+            color: var(--nutrition);
+            transform: translateY(-1px);
+        }
+        
+        .filter-chip.active {
+            background: var(--nutrition-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 3px 10px rgba(154,184,154,0.3);
+        }
+        
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            gap: 10px;
+            padding: 0 40px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+        }
+        
+        .category-tab {
+            padding: 11px 20px;
+            background: white;
+            border: 2px solid var(--border-soft);
+            border-radius: 14px;
+            font-weight: 600;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-size: 0.92rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .category-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        }
+        
+        .category-tab[data-category="all"].active {
+            background: var(--nutrition-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(154,184,154,0.3);
+        }
+        
+        .category-tab[data-category="protein"].active {
+            background: var(--protein-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(232,154,154,0.3);
+        }
+        
+        .category-tab[data-category="carb"].active {
+            background: var(--carb-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(232,200,122,0.3);
+        }
+        
+        .category-tab[data-category="fat"].active {
+            background: var(--fat-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(212,168,184,0.3);
+        }
+        
+        .category-tab[data-category="vegetable"].active {
+            background: var(--vegetable-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(154,184,154,0.3);
+        }
+        
+        .category-tab[data-category="fruit"].active {
+            background: var(--fruit-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(232,168,184,0.3);
+        }
+        
+        .category-tab[data-category="dairy"].active {
+            background: var(--dairy-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(184,168,212,0.3);
+        }
+        
+        .category-tab[data-category="snack"].active {
+            background: var(--snack-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(168,200,212,0.3);
+        }
+        
+        .tab-count {
+            display: inline-block;
+            background: rgba(255,255,255,0.35);
+            padding: 2px 9px;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+        
+        .category-tab:not(.active) .tab-count {
+            background: var(--bg-soft);
+            color: var(--text-light);
+        }
+        
+        /* Food Container */
+        .food-container {
+            padding: 0 40px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .category-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .category-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .category-header {
+            margin-bottom: 25px;
+            padding: 22px 28px;
+            border-radius: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-section[data-category="protein"] .category-header { background: var(--protein-gradient); }
+        .category-section[data-category="carb"] .category-header { background: var(--carb-gradient); }
+        .category-section[data-category="fat"] .category-header { background: var(--fat-gradient); }
+        .category-section[data-category="vegetable"] .category-header { background: var(--vegetable-gradient); }
+        .category-section[data-category="fruit"] .category-header { background: var(--fruit-gradient); }
+        .category-section[data-category="dairy"] .category-header { background: var(--dairy-gradient); }
+        .category-section[data-category="snack"] .category-header { background: var(--snack-gradient); }
+        
+        .category-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .category-header p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+            font-weight: 500;
+        }
+        
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 20px;
+        }
+        
+        /* Food Card */
+        .food-card {
+            background: white;
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .food-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--card-accent);
+            transition: height 0.3s;
+        }
+        
+        .food-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: var(--card-soft);
+        }
+        
+        .food-card:hover::before {
+            height: 6px;
+        }
+        
+        .food-card[data-category="protein"] { --card-accent: var(--protein); --card-soft: var(--protein-soft); }
+        .food-card[data-category="carb"] { --card-accent: var(--carb); --card-soft: var(--carb-soft); }
+        .food-card[data-category="fat"] { --card-accent: var(--fat); --card-soft: var(--fat-soft); }
+        .food-card[data-category="vegetable"] { --card-accent: var(--vegetable); --card-soft: var(--vegetable-soft); }
+        .food-card[data-category="fruit"] { --card-accent: var(--fruit); --card-soft: var(--fruit-soft); }
+        .food-card[data-category="dairy"] { --card-accent: var(--dairy); --card-soft: var(--dairy-soft); }
+        .food-card[data-category="snack"] { --card-accent: var(--snack); --card-soft: var(--snack-soft); }
+        
+        .food-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            gap: 10px;
+        }
+        
+        .food-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            line-height: 1.3;
+            flex: 1;
+        }
+        
+        .food-calories {
+            background: var(--card-soft);
+            color: var(--card-accent);
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        
+        .food-serving {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            margin-bottom: 14px;
+            font-weight: 500;
+        }
+        
+        /* Macro Bar */
+        .macro-bar {
+            display: flex;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            background: var(--bg-soft);
+        }
+        
+        .macro-segment {
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+        
+        .macro-segment.protein { background: var(--protein); }
+        .macro-segment.carb { background: var(--carb); }
+        .macro-segment.fat { background: var(--fat); }
+        
+        .macro-values {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+        
+        .macro-item {
+            text-align: center;
+            padding: 6px 4px;
+            background: var(--bg-soft);
+            border-radius: 8px;
+        }
+        
+        .macro-label {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        
+        .macro-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        .macro-item.p .macro-value { color: var(--protein); }
+        .macro-item.c .macro-value { color: var(--carb); }
+        .macro-item.f .macro-value { color: var(--fat); }
+        
+        .food-tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            font-size: 0.7rem;
+            padding: 3px 9px;
+            border-radius: 8px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        
+        .tag.high-protein { background: var(--protein-soft); color: var(--protein); }
+        .tag.low-cal { background: var(--vegetable-soft); color: var(--vegetable); }
+        .tag.high-fiber { background: var(--carb-soft); color: #C8A850; }
+        .tag.healthy-fat { background: var(--fat-soft); color: var(--fat); }
+        .tag.quick { background: var(--snack-soft); color: #7AA8B8; }
+        .tag.hormone { background: var(--dairy-soft); color: var(--dairy); }
+        
+        .view-btn {
+            display: block;
+            margin-top: 10px;
+            padding: 10px;
+            background: var(--card-soft);
+            color: var(--card-accent);
+            text-align: center;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            transition: all 0.3s;
+        }
+        
+        .food-card:hover .view-btn {
+            background: var(--card-accent);
+            color: white;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(74, 74, 90, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal {
+            background: white;
+            border-radius: 26px;
+            max-width: 850px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-header {
+            padding: 32px 35px 22px;
+            border-bottom: 1px solid var(--border-soft);
+            position: sticky;
+            top: 0;
+            background: white;
+            border-radius: 26px 26px 0 0;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .modal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--modal-accent, var(--nutrition-gradient));
+            border-radius: 26px 26px 0 0;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-soft);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            transition: all 0.3s;
+            z-index: 11;
+        }
+        
+        .modal-close:hover {
+            background: var(--nutrition-soft);
+            color: var(--nutrition);
+            transform: rotate(90deg);
+        }
+        
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            padding-right: 55px;
+            line-height: 1.2;
+        }
+        
+        .modal-subtitle {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .modal-meta {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .modal-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: var(--bg-soft);
+            border-radius: 10px;
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            font-weight: 600;
+        }
+        
+        .modal-body {
+            padding: 30px 35px;
+        }
+        
+        .modal-section {
+            margin-bottom: 28px;
+        }
+        
+        .modal-section h3 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            margin-bottom: 14px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-indicator {
+            width: 4px;
+            height: 20px;
+            background: var(--modal-accent, var(--nutrition-gradient));
+            border-radius: 2px;
+        }
+        
+        /* Macro Grid in Modal */
+        .macro-grid-modal {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .macro-card-modal {
+            padding: 16px 10px;
+            border-radius: 14px;
+            text-align: center;
+            background: var(--bg-soft);
+            border-top: 3px solid var(--macro-color);
+        }
+        
+        .macro-card-modal.calories { --macro-color: var(--nutrition); }
+        .macro-card-modal.protein { --macro-color: var(--protein); }
+        .macro-card-modal.carb { --macro-color: var(--carb); }
+        .macro-card-modal.fat { --macro-color: var(--fat); }
+        .macro-card-modal.fiber { --macro-color: var(--vegetable); }
+        
+        .macro-card-modal .value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        
+        .macro-card-modal .label {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+        
+        .macro-card-modal .unit {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+        
+        /* Micronutrients */
+        .micro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+        }
+        
+        .micro-item {
+            padding: 12px;
+            background: var(--bg-soft);
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .micro-name {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            font-weight: 600;
+        }
+        
+        .micro-value {
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+        
+        /* Benefits */
+        .benefits-list {
+            list-style: none;
+            display: grid;
+            gap: 8px;
+        }
+        
+        .benefits-list li {
+            padding: 11px 14px 11px 42px;
+            background: var(--bg-soft);
+            border-radius: 12px;
+            position: relative;
+            color: var(--text-dark);
+            font-size: 0.92rem;
+            font-weight: 500;
+        }
+        
+        .benefits-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--nutrition);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.72rem;
+        }
+        
+        /* Tips */
+        .tips-section {
+            background: linear-gradient(135deg, var(--bg-soft) 0%, white 100%);
+            padding: 18px;
+            border-radius: 14px;
+            border-left: 4px solid var(--modal-accent-color, var(--nutrition));
+        }
+        
+        .tips-section p {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        
+        .tips-section p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .tips-section strong {
+            color: var(--text-dark);
+        }
+        
+        /* Alternatives */
+        .alternatives-section {
+            background: var(--bg-soft);
+            padding: 20px;
+            border-radius: 16px;
+        }
+        
+        .alternative-group {
+            margin-bottom: 14px;
+        }
+        
+        .alternative-group:last-child {
+            margin-bottom: 0;
+        }
+        
+        .alternative-label {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .alternative-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .alternative-chip {
+            padding: 6px 14px;
+            background: white;
+            border: 1.5px solid var(--border-soft);
+            border-radius: 10px;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .alternative-chip:hover {
+            border-color: var(--nutrition);
+            color: var(--nutrition);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        
+        /* Best For */
+        .best-for {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .best-for-chip {
+            padding: 7px 15px;
+            background: white;
+            border: 1.5px solid var(--border-soft);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            font-weight: 600;
+        }
+        
+        .modal-footer {
+            padding: 18px 35px 28px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+        }
+        
+        .btn-primary {
+            background: var(--nutrition-gradient);
+            color: white;
+            flex: 1;
+            box-shadow: 0 6px 20px rgba(154,184,154,0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(154,184,154,0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-soft);
+            color: var(--text-medium);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--nutrition-soft);
+            color: var(--nutrition);
+        }
+        
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+            display: none;
+        }
+        
+        .no-results.active {
+            display: block;
+        }
+        
+        .no-results h3 {
+            color: var(--text-medium);
+            margin-bottom: 8px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .page-hero {
+                padding: 40px 20px 25px;
+            }
+            
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .filter-bar {
+                margin: 0 20px 20px;
+                padding: 20px;
+                top: 66px;
+            }
+            
+            .category-tabs {
+                padding: 0 20px;
+            }
+            
+            .food-container {
+                padding: 0 20px 50px;
+            }
+            
+            .food-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal {
+                max-height: 95vh;
+                border-radius: 20px;
+            }
+            
+            .modal-header, .modal-body, .modal-footer {
+                padding-left: 22px;
+                padding-right: 22px;
+            }
+            
+            .modal-title {
+                font-size: 1.5rem;
+            }
+            
+            .macro-grid-modal {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-soft);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--nutrition) 0%, var(--carb) 100%);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--protein) 0%, var(--fat) 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="nutrition-overview.html" class="back-link">← Quay lại Dinh dưỡng</a>
+    </header>
+    
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <span class="page-badge">DATABASE</span>
+        <h1>Thư Viện <span>Thực Phẩm</span></h1>
+        <p>Database trung tâm với hơn 50 thực phẩm Việt Nam phổ biến, phân loại theo nhóm dinh dưỡng. Nền tảng để xây dựng bữa ăn cá nhân hóa.</p>
+        
+        <div class="stats-row">
+            <div class="stat-pill"><strong>50+</strong> Thực phẩm</div>
+            <div class="stat-pill"><strong>7</strong> Nhóm chính</div>
+            <div class="stat-pill"><strong>100%</strong> Thông tin macro</div>
+            <div class="stat-pill"><strong>Phù hợp</strong> Phụ nữ 30+</div>
+        </div>
+    </section>
+    
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <div class="search-box">
+            <span class="search-icon">⌕</span>
+            <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm thực phẩm... (ví dụ: ức gà, yến mạch, bơ)">
+        </div>
+        
+        <div class="filter-groups">
+            <div class="filter-group">
+                <h4>Mục tiêu</h4>
+                <div class="filter-options" id="goalFilter">
+                    <div class="filter-chip active" data-filter="all" data-type="goal">Tất cả</div>
+                    <div class="filter-chip" data-filter="high-protein" data-type="goal">High Protein</div>
+                    <div class="filter-chip" data-filter="low-cal" data-type="goal">Low Calorie</div>
+                    <div class="filter-chip" data-filter="high-fiber" data-type="goal">High Fiber</div>
+                    <div class="filter-chip" data-filter="healthy-fat" data-type="goal">Healthy Fat</div>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h4>Loại bữa ăn</h4>
+                <div class="filter-options" id="mealFilter">
+                    <div class="filter-chip active" data-filter="all" data-type="meal">Tất cả</div>
+                    <div class="filter-chip" data-filter="breakfast" data-type="meal">Bữa sáng</div>
+                    <div class="filter-chip" data-filter="lunch" data-type="meal">Bữa trưa</div>
+                    <div class="filter-chip" data-filter="dinner" data-type="meal">Bữa tối</div>
+                    <div class="filter-chip" data-filter="snack" data-type="meal">Snack</div>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h4>Nguồn gốc</h4>
+                <div class="filter-options" id="sourceFilter">
+                    <div class="filter-chip active" data-filter="all" data-type="source">Tất cả</div>
+                    <div class="filter-chip" data-filter="animal" data-type="source">Động vật</div>
+                    <div class="filter-chip" data-filter="plant" data-type="source">Thực vật</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Category Tabs -->
+    <div class="category-tabs" id="categoryTabs">
+        <div class="category-tab active" data-category="all">Tất cả <span class="tab-count" id="count-all">50</span></div>
+        <div class="category-tab" data-category="protein">Protein <span class="tab-count" id="count-protein">10</span></div>
+        <div class="category-tab" data-category="carb">Carb <span class="tab-count" id="count-carb">8</span></div>
+        <div class="category-tab" data-category="fat">Chất béo <span class="tab-count" id="count-fat">6</span></div>
+        <div class="category-tab" data-category="vegetable">Rau củ <span class="tab-count" id="count-vegetable">8</span></div>
+        <div class="category-tab" data-category="fruit">Trái cây <span class="tab-count" id="count-fruit">7</span></div>
+        <div class="category-tab" data-category="dairy">Sữa <span class="tab-count" id="count-dairy">5</span></div>
+        <div class="category-tab" data-category="snack">Snack <span class="tab-count" id="count-snack">6</span></div>
+    </div>
+    
+    <!-- Food Container -->
+    <div class="food-container" id="foodContainer"></div>
+    
+    <!-- No Results -->
+    <div class="no-results" id="noResults">
+        <h3>Không tìm thấy thực phẩm phù hợp</h3>
+        <p>Hãy thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</p>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <button class="modal-close" id="modalClose">✕</button>
+                <h2 class="modal-title" id="modalTitle">Food Name</h2>
+                <div class="modal-subtitle" id="modalSubtitle"></div>
+                <div class="modal-meta" id="modalMeta"></div>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="modalCloseBtn">Đóng</button>
+                <button class="btn btn-primary" onclick="addToMeal()">+ Thêm vào bữa ăn</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // ==================== DATABASE ====================
+        const foodDatabase = [
+            // ===== PROTEIN (10) =====
+            {
+                id: 1, name: "Ức gà", nameEn: "Chicken Breast",
+                category: "protein", source: "animal",
+                serving: "100g (đã nấu)",
+                calories: 165, protein: 31, carbs: 0, fat: 3.6, fiber: 0,
+                gi: null,
+                micros: { "Sắt": "1mg", "Kẽm": "1mg", "Vitamin B6": "0.6mg", "Niacin": "14mg" },
+                tags: ["high-protein", "low-cal"],
+                bestFor: ["breakfast", "lunch", "dinner"],
+                benefits: ["Giàu protein, ít fat", "Hỗ trợ tăng cơ, giảm mỡ", "Dễ chế biến, linh hoạt", "Phù hợp cho phụ nữ 30+ cần protein"],
+                tips: "<strong>Cách chế biến tốt nhất:</strong> Áp chảo, nướng, luộc. Tránh chiên nhiều dầu.<br><strong>Lưu ý:</strong> Nên ăn cả ức và đùi để có cả fat tốt.",
+                alternatives: {
+                    "Không có ức gà": ["Thịt heo nạc", "Cá trắng", "Đậu phụ"],
+                    "Ăn chay": ["Đậu phụ", "Tempeh", "Seitan"],
+                    "Ngán ức gà": ["Cá hồi", "Tôm", "Thịt bò nạc"]
+                }
+            },
+            {
+                id: 2, name: "Trứng gà", nameEn: "Chicken Egg",
+                category: "protein", source: "animal",
+                serving: "1 quả lớn (50g)",
+                calories: 72, protein: 6.3, carbs: 0.4, fat: 5, fiber: 0,
+                gi: null,
+                micros: { "Vitamin D": "1µg", "Choline": "147mg", "Selenium": "15µg", "Vitamin B12": "0.4µg" },
+                tags: ["high-protein", "quick", "hormone"],
+                bestFor: ["breakfast", "snack"],
+                benefits: ["Protein chất lượng cao (complete protein)", "Giàu choline tốt cho não", "Chứa vitamin D quan trọng cho nữ 30+", "Giá rẻ, dễ mua"],
+                tips: "<strong>Cách ăn tốt nhất:</strong> Luộc chín vừa (6-7 phút) giữ được nhiều dinh dưỡng nhất.<br><strong>Lưu ý:</strong> Ăn cả lòng đỏ - chứa hầu hết vitamin và choline.",
+                alternatives: {
+                    "Không ăn trứng": ["Đậu phụ scramble", "Ức gà xé"],
+                    "Ăn chay": ["Đậu phụ", "Tempeh"],
+                    "Ngán trứng luộc": ["Trứng ốp la ít dầu", "Trứng chưng"]
+                }
+            },
+            {
+                id: 3, name: "Cá hồi", nameEn: "Salmon",
+                category: "protein", source: "animal",
+                serving: "100g (đã nấu)",
+                calories: 208, protein: 20, carbs: 0, fat: 13, fiber: 0,
+                gi: null,
+                micros: { "Omega-3": "2.3g", "Vitamin D": "11µg", "Vitamin B12": "3.2µg", "Selenium": "31µg" },
+                tags: ["high-protein", "healthy-fat", "hormone"],
+                bestFor: ["lunch", "dinner"],
+                benefits: ["Giàu omega-3 chống viêm", "Tốt cho tim mạch và não", "Hỗ trợ cân bằng hormone nữ", "Vitamin D cao - quan trọng cho nữ 30+"],
+                tips: "<strong>Cách chế biến:</strong> Nướng lò, áp chảo, hấp. Không nên chiên sâu.<br><strong>Tần suất:</strong> Ăn 2-3 lần/tuần để có đủ omega-3.",
+                alternatives: {
+                    "Đắt quá": ["Cá thu", "Cá trích", "Cá basa"],
+                    "Không thích cá": ["Hạt chia + hạt lanh", "Ức gà + dầu olive"],
+                    "Ăn chay": ["Hạt chia", "Quả óc chó", "Tảo spirulina"]
+                }
+            },
+            {
+                id: 4, name: "Tôm", nameEn: "Shrimp",
+                category: "protein", source: "animal",
+                serving: "100g (đã nấu)",
+                calories: 99, protein: 24, carbs: 0.2, fat: 0.3, fiber: 0,
+                gi: null,
+                micros: { "Selenium": "38µg", "Vitamin B12": "1.1µg", "Kẽm": "1.6mg", "I-ốt": "35µg" },
+                tags: ["high-protein", "low-cal"],
+                bestFor: ["lunch", "dinner"],
+                benefits: ["Rất ít calo, nhiều protein", "Giàu selenium chống oxy hóa", "Nguồn i-ốt tốt cho tuyến giáp", "Ít thủy ngân hơn cá lớn"],
+                tips: "<strong>Cách chế biến:</strong> Luộc, hấp, xào ít dầu. Tránh chiên bột.<br><strong>Lưu ý:</strong> Người dị ứng hải sản cần thận trọng.",
+                alternatives: {
+                    "Dị ứng tôm": ["Cá trắng", "Ức gà", "Mực"],
+                    "Không có tôm tươi": ["Tôm đông lạnh", "Cá basa"],
+                    "Ăn chay": ["Đậu phụ", "Nấm"]
+                }
+            },
+            {
+                id: 5, name: "Thịt bò nạc", nameEn: "Lean Beef",
+                category: "protein", source: "animal",
+                serving: "100g (đã nấu)",
+                calories: 250, protein: 26, carbs: 0, fat: 15, fiber: 0,
+                gi: null,
+                micros: { "Sắt": "2.6mg", "Kẽm": "6mg", "Vitamin B12": "2.5µg", "Creatine": "0.5g" },
+                tags: ["high-protein", "hormone"],
+                bestFor: ["lunch", "dinner"],
+                benefits: ["Nguồn sắt heme dễ hấp thu", "Giàu kẽm tốt cho hormone nữ", "Chứa creatine tự nhiên", "Vitamin B12 cao"],
+                tips: "<strong>Chọn thịt:</strong> Chọn thăn, bắp bò (ít mỡ).<br><strong>Tần suất:</strong> 2-3 lần/tuần, xen kẽ với cá và gia cầm.",
+                alternatives: {
+                    "Không ăn bò": ["Thịt heo nạc", "Thịt gà sẫm màu", "Cừu"],
+                    "Ăn chay": ["Đậu lăng", "Đậu đen", "Tempeh"],
+                    "Ngán thịt": ["Cá", "Trứng", "Đậu phụ"]
+                }
+            },
+            {
+                id: 6, name: "Đậu phụ", nameEn: "Tofu",
+                category: "protein", source: "plant",
+                serving: "100g",
+                calories: 76, protein: 8, carbs: 1.9, fat: 4.8, fiber: 0.3,
+                gi: 15,
+                micros: { "Canxi": "350mg", "Sắt": "5.4mg", "Magie": "30mg", "Isoflavone": "25mg" },
+                tags: ["high-protein", "low-cal", "hormone"],
+                bestFor: ["breakfast", "lunch", "dinner"],
+                benefits: ["Protein thực vật complete", "Giàu canxi tốt cho xương nữ 30+", "Isoflavone hỗ trợ hormone", "Ít calo, no lâu"],
+                tips: "<strong>Cách chế biến:</strong> Áp chảo, kho, nấu canh. Ép ráo nước trước khi nấu.<br><strong>Lưu ý:</strong> Isoflavone trong đậu phụ an toàn và có lợi cho nữ giới.",
+                alternatives: {
+                    "Không thích đậu phụ": ["Tempeh", "Đậu nành edamame", "Ức gà"],
+                    "Dị ứng đậu nành": ["Đậu lăng", "Đậu gà", "Hạt diêm mạch"],
+                    "Cần nhiều protein hơn": ["Tempeh", "Seitan", "Ức gà"]
+                }
+            },
+            {
+                id: 7, name: "Cá ngừ (đóng hộp)", nameEn: "Canned Tuna",
+                category: "protein", source: "animal",
+                serving: "1 hộp (80g, đã ráo)",
+                calories: 116, protein: 26, carbs: 0, fat: 1, fiber: 0,
+                gi: null,
+                micros: { "Omega-3": "0.5g", "Selenium": "65µg", "Vitamin D": "2µg", "Niacin": "14mg" },
+                tags: ["high-protein", "low-cal", "quick"],
+                bestFor: ["lunch", "snack"],
+                benefits: ["Tiện lợi, dễ bảo quản", "Rất nhiều protein, ít calo", "Nguồn omega-3 tốt", "Giá rẻ"],
+                tips: "<strong>Chọn loại:</strong> Ngừ ngâm nước (ít calo) hoặc dầu olive (có fat tốt).<br><strong>Lưu ý:</strong> Không ăn quá 3-4 lần/tuần vì thủy ngân.",
+                alternatives: {
+                    "Ngán cá ngừ": ["Cá hồi", "Ức gà", "Trứng"],
+                    "Không có hộp": ["Cá tươi", "Thịt gà"],
+                    "Ăn chay": ["Đậu phụ", "Đậu lăng"]
+                }
+            },
+            {
+                id: 8, name: "Whey Protein", nameEn: "Whey Protein Powder",
+                category: "protein", source: "animal",
+                serving: "1 scoop (30g)",
+                calories: 120, protein: 24, carbs: 3, fat: 1.5, fiber: 0,
+                gi: null,
+                micros: { "Canxi": "160mg", "BCAA": "5g", "Leucine": "2.5g", "Kali": "150mg" },
+                tags: ["high-protein", "quick"],
+                bestFor: ["snack", "breakfast"],
+                benefits: ["Protein hấp thu nhanh", "Tiện lợi sau tập", "Giàu BCAA phục hồi cơ", "Dễ thêm vào sinh tố"],
+                tips: "<strong>Cách dùng:</strong> Pha với nước hoặc sữa, thêm vào sinh tố, yến mạch.<br><strong>Thời điểm tốt nhất:</strong> Sau tập 30 phút hoặc khi thiếu protein trong bữa.",
+                alternatives: {
+                    "Không dùng whey": ["Casein protein", "Plant protein", "Sữa Hy Lạp"],
+                    "Dị ứng sữa": ["Pea protein", "Rice protein", "Hemp protein"],
+                    "Thích ăn thật": ["Ức gà", "Trứng", "Cá"]
+                }
+            },
+            {
+                id: 9, name: "Thịt heo nạc (thăn)", nameEn: "Lean Pork",
+                category: "protein", source: "animal",
+                serving: "100g (đã nấu)",
+                calories: 143, protein: 26, carbs: 0, fat: 3.5, fiber: 0,
+                gi: null,
+                micros: { "Thiamine (B1)": "0.7mg", "Kẽm": "2mg", "Selenium": "33µg", "Vitamin B6": "0.5mg" },
+                tags: ["high-protein", "low-cal"],
+                bestFor: ["lunch", "dinner"],
+                benefits: ["Giàu thiamine (B1) - hiếm ở thực phẩm khác", "Protein cao, fat thấp", "Giá rẻ, dễ mua ở VN", "Linh hoạt trong chế biến"],
+                tips: "<strong>Chọn thịt:</strong> Thăn heo là phần nạc nhất.<br><strong>Chế biến:</strong> Áp chảo, nướng, kho. Bỏ mỡ thấy được.",
+                alternatives: {
+                    "Không ăn heo": ["Thịt gà", "Thịt bò", "Cá"],
+                    "Ăn chay": ["Đậu phụ", "Tempeh", "Seitan"],
+                    "Thăn heo đắt": ["Thịt heo xay nạc", "Ức gà"]
+                }
+            },
+            {
+                id: 10, name: "Đậu nành edamame", nameEn: "Edamame",
+                category: "protein", source: "plant",
+                serving: "100g (đã luộc)",
+                calories: 121, protein: 11, carbs: 9, fat: 5, fiber: 5,
+                gi: 18,
+                micros: { "Folate": "312µg", "Sắt": "2.3mg", "Magie": "64mg", "Vitamin K": "33µg" },
+                tags: ["high-protein", "high-fiber", "hormone"],
+                bestFor: ["snack", "lunch"],
+                benefits: ["Protein thực vật complete", "Rất giàu fiber", "Isoflavone hỗ trợ hormone", "Folate cao - tốt cho nữ"],
+                tips: "<strong>Cách ăn:</strong> Luộc với muối, ăn như snack hoặc thêm vào salad.<br><strong>Lưu ý:</strong> Edamame đông lạnh vẫn giữ được dinh dưỡng.",
+                alternatives: {
+                    "Không có edamame": ["Đậu nành luộc", "Đậu xanh", "Đậu lăng"],
+                    "Ăn chay khác": ["Đậu phụ", "Tempeh"],
+                    "Cần nhiều protein": ["Whey", "Ức gà", "Tempeh"]
+                }
+            },
+            
+            // ===== CARB (8) =====
+            {
+                id: 11, name: "Yến mạch", nameEn: "Oats",
+                category: "carb", source: "plant",
+                serving: "40g (khô)",
+                calories: 150, protein: 5, carbs: 27, fat: 2.5, fiber: 4,
+                gi: 55,
+                micros: { "Magie": "60mg", "Sắt": "2mg", "Kẽm": "1.5mg", "Beta-glucan": "2g" },
+                tags: ["high-fiber", "low-cal"],
+                bestFor: ["breakfast", "snack"],
+                benefits: ["Beta-glucan giảm cholesterol", "Fiber cao, no lâu", "Giải phóng năng lượng chậm", "Tốt cho tim mạch"],
+                tips: "<strong>Chọn loại:</strong> Rolled oats hoặc steel-cut oats tốt hơn instant.<br><strong>Cách ăn:</strong> Overnight oats, nấu cháo, thêm vào sinh tố.",
+                alternatives: {
+                    "Dị ứng gluten": ["Yến mạch không gluten", "Quinoa", "Gạo lứt"],
+                    "Ngán yến mạch": ["Chia pudding", "Bánh mì nguyên cám"],
+                    "Không có yến mạch": ["Mì nguyên cám", "Khoai lang"]
+                }
+            },
+            {
+                id: 12, name: "Gạo lứt", nameEn: "Brown Rice",
+                category: "carb", source: "plant",
+                serving: "100g (đã nấu)",
+                calories: 123, protein: 2.7, carbs: 26, fat: 1, fiber: 1.8,
+                gi: 50,
+                micros: { "Magie": "44mg", "Mangan": "0.8mg", "Selenium": "10µg", "Vitamin B6": "0.1mg" },
+                tags: ["high-fiber"],
+                bestFor: ["lunch", "dinner"],
+                benefits: ["GI thấp hơn gạo trắng", "Giàu magie và mineral", "Fiber cao hơn gạo trắng 3 lần", "Phù hợp với người VN"],
+                tips: "<strong>Nấu:</strong> Ngâm 30 phút trước khi nấu, dùng nồi cơm chế độ brown rice.<br><strong>Kết hợp:</strong> Ăn với protein và rau để cân bằng bữa ăn.",
+                alternatives: {
+                    "Không có gạo lứt": ["Gạo lứt đỏ", "Gạo đen", "Quinoa"],
+                    "Ngán gạo lứt": ["Khoai lang", "Bún gạo lứt"],
+                    "Cần carb nhanh (sau tập)": ["Gạo trắng", "Khoai tây"]
+                }
+            },
+            {
+                id: 13, name: "Khoai lang", nameEn: "Sweet Potato",
+                category: "carb", source: "plant",
+                serving: "100g (đã nấu)",
+                calories: 86, protein: 1.6, carbs: 20, fat: 0.1, fiber: 3,
+                gi: 44,
+                micros: { "Vitamin A": "709µg", "Vitamin C": "2.4mg", "Kali": "337mg", "Mangan": "0.3mg" },
+                tags: ["high-fiber", "low-cal"],
+                bestFor: ["breakfast", "lunch", "dinner"],
+                benefits: ["GI rất thấp (44)", "Giàu vitamin A (beta-carotene)", "Fiber cao, no lâu", "Vị ngọt tự nhiên, dễ ăn"],
+                tips: "<strong>Cách chế biến:</strong> Luộc, nướng, hấp. Tránh chiên.<br><strong>Lưu ý:</strong> Khoai lang tím có nhiều anthocyanin chống oxy hóa hơn.",
+                alternatives: {
+                    "Ngán khoai lang": ["Khoai tây", "Bí đỏ", "Khoai môn"],
+                    "Cần carb nhanh": ["Khoai tây", "Gạo trắng"],
+                    "Không có khoai": ["Bắp ngô", "Củ dền"]
+                }
+            },
+            {
+                id: 14, name: "Bánh mì nguyên cám", nameEn: "Whole Wheat Bread",
+                category: "carb", source: "plant",
+                serving: "1 lát (30g)",
+                calories: 75, protein: 3.5, carbs: 13, fat: 1, fiber: 2,
+                gi: 55,
+                micros: { "Sắt": "1mg", "Vitamin B": "Nhiều", "Magie": "20mg", "Fiber": "2g" },
+                tags: ["high-fiber", "quick"],
+                bestFor: ["breakfast", "snack"],
+                benefits: ["Tiện lợi, nhanh gọn", "Fiber cao hơn bánh mì trắng", "Dễ kết hợp với nhiều món", "Phù hợp người bận rộn"],
+                tips: "<strong>Chọn loại:</strong> Đọc nhãn - 'whole wheat' hoặc 'whole grain' phải ở đầu danh sách.<br><strong>Kết hợp tốt:</strong> Với bơ, trứng, ức gà, bơ trái.",
+                alternatives: {
+                    "Dị ứng gluten": ["Bánh mì gạo lứt", "Bánh mì không gluten"],
+                    "Ngán bánh mì": ["Yến mạch", "Bánh quy nguyên cám"],
+                    "Cần low-carb": ["Lettuce wrap", "Bánh mì cloud"]
+                }
+            },
+            {
+                id: 15, name: "Quinoa (Hạt diêm mạch)", nameEn: "Quinoa",
+                category: "carb", source: "plant",
+                serving: "100g (đã nấu)",
+                calories: 120, protein: 4.4, carbs: 21, fat: 1.9, fiber: 2.8,
+                gi: 53,
+                micros: { "Sắt": "1.5mg", "Magie": "64mg", "Folate": "42µg", "Mangan": "0.6mg" },
+                tags: ["high-protein", "high-fiber"],
+                bestFor: ["lunch", "dinner"],
+                benefits: ["Protein complete (hiếm ở thực vật)", "Không gluten", "Giàu mineral", "GI thấp"],
+                tips: "<strong>Nấu:</strong> Rửa sạch trước khi nấu, tỉ lệ 1:2 (quinoa:nước), nấu 15 phút.<br><strong>Kết hợp:</strong> Thay cơm, thêm vào salad, bowl.",
+                alternatives: {
+                    "Đắt quá": ["Gạo lứt", "Kê", "Couscous nguyên cám"],
+                    "Không có quinoa": ["Gạo lứt", "Bulgur"],
+                    "Cần protein cao hơn": ["Đậu lăng + gạo lứt"]
+                }
+            },
+            {
+                id: 16, name: "Bún gạo lứt", nameEn: "Brown Rice Noodles",
+                category: "carb", source: "plant",
+                serving: "100g (đã nấu)",
+                calories: 110, protein: 2, carbs: 24, fat: 0.5, fiber: 1.5,
+                gi: 55,
+                micros: { "Mangan": "0.4mg", "Selenium": "8µg", "Magie": "18mg", "Vitamin B": "Ít" },
+                tags: ["high-fiber"],
+                bestFor: ["lunch", "dinner"],
+                benefits: ["Thay thế bún trắng truyền thống", "GI thấp hơn bún thường", "Phù hợp món VN", "Dễ nấu"],
+                tips: "<strong>Nấu:</strong> Ngâm nước ấm 10 phút trước khi nấu, nấu 5-7 phút.<br><strong>Kết hợp:</strong> Phở, bún xào, bún salad.",
+                alternatives: {
+                    "Không có bún gạo lứt": ["Bún gạo thường", "Mì nguyên cám", "Shirataki"],
+                    "Low-carb": ["Mì konjac", "Zucchini noodles"],
+                    "Ngán bún": ["Gạo lứt", "Khoai lang"]
+                }
+            },
+            {
+                id: 17, name: "Bắp ngô", nameEn: "Corn",
+                category: "carb", source: "plant",
+                serving: "1 bắp vừa (90g)",
+                calories: 85, protein: 3, carbs: 18, fat: 1, fiber: 2,
+                gi: 52,
+                micros: { "Vitamin C": "5mg", "Folate": "38µg", "Magie": "25mg", "Lutein": "0.3mg" },
+                tags: ["high-fiber"],
+                bestFor: ["breakfast", "snack"],
+                benefits: ["Giàu lutein tốt cho mắt", "Fiber cao", "Vị ngọt tự nhiên", "Dễ mua ở VN"],
+                tips: "<strong>Cách ăn:</strong> Luộc, nướng. Tránh bắp rang bơ nhiều đường.<br><strong>Lưu ý:</strong> Bắp ngọt (sweet corn) có nhiều đường hơn bắp thường.",
+                alternatives: {
+                    "Ngán bắp": ["Khoai lang", "Bí đỏ", "Khoai môn"],
+                    "Low-carb": ["Bông cải xanh", "Cà rốt"],
+                    "Không có bắp tươi": ["Bắp đông lạnh", "Bắp hộp"]
+                }
+            },
+            {
+                id: 18, name: "Khoai tây", nameEn: "Potato",
+                category: "carb", source: "plant",
+                serving: "100g (đã nấu)",
+                calories: 87, protein: 1.9, carbs: 20, fat: 0.1, fiber: 2,
+                gi: 78,
+                micros: { "Kali": "328mg", "Vitamin C": "14mg", "Vitamin B6": "0.2mg", "Magie": "20mg" },
+                tags: ["low-cal"],
+                bestFor: ["lunch", "dinner"],
+                benefits: ["Rất giàu kali", "No lâu (high satiety index)", "Vitamin C cao", "Rẻ và dễ mua"],
+                tips: "<strong>Cách chế biến tốt nhất:</strong> Luộc, nướng, hấp. Để nguội tạo resistant starch tốt cho ruột.<br><strong>Tránh:</strong> Khoai tây chiên, khoai tây nghiền nhiều bơ.",
+                alternatives: {
+                    "Low-GI hơn": ["Khoai lang", "Khoai môn"],
+                    "Ngán khoai tây": ["Bắp ngô", "Bí đỏ"],
+                    "Sau tập (cần carb nhanh)": ["Cơm trắng", "Bánh mì trắng"]
+                }
+            },
+            
+            // ===== FAT (6) =====
+            {
+                id: 19, name: "Quả bơ", nameEn: "Avocado",
+                category: "fat", source: "plant",
+                serving: "1/2 quả (75g)",
+                calories: 120, protein: 1.5, carbs: 6, fat: 11, fiber: 5,
+                gi: 15,
+                micros: { "Kali": "345mg", "Vitamin E": "1.5mg", "Folate": "60µg", "Vitamin K": "15µg" },
+                tags: ["healthy-fat", "high-fiber"],
+                bestFor: ["breakfast", "lunch", "snack"],
+                benefits: ["Chất béo không bão hòa đơn tốt cho tim", "Rất giàu kali", "Fiber cao", "Hỗ trợ hấp thu vitamin tan trong fat"],
+                tips: "<strong>Cách ăn:</strong> Thêm vào salad, sandwich, sinh tố, ăn với trứng.<br><strong>Lưu ý:</strong> 1/2 quả/ngày là đủ, calo cao.",
+                alternatives: {
+                    "Đắt quá": ["Dầu olive", "Hạt chia", "Các loại hạt"],
+                    "Không có bơ": ["Hạt bơ (nếu có)", "Dầu olive + hạt"],
+                    "Ngán bơ": ["Hummus", "Nut butter"]
+                }
+            },
+            {
+                id: 20, name: "Dầu olive nguyên chất", nameEn: "Extra Virgin Olive Oil",
+                category: "fat", source: "plant",
+                serving: "1 muỗng canh (15ml)",
+                calories: 120, protein: 0, carbs: 0, fat: 14, fiber: 0,
+                gi: null,
+                micros: { "Vitamin E": "1.9mg", "Vitamin K": "8µg", "Polyphenol": "Nhiều", "Omega-9": "10g" },
+                tags: ["healthy-fat"],
+                bestFor: ["breakfast", "lunch", "dinner"],
+                benefits: ["Chất béo tốt nhất cho tim mạch", "Chống viêm mạnh", "Polyphenol chống oxy hóa", "Dùng được cho salad và nấu ăn"],
+                tips: "<strong>Cách dùng:</strong> Rưới lên salad, rau sau nấu, ướp thịt. Không nên chiên ở nhiệt độ cao.<br><strong>Liều lượng:</strong> 1-2 muỗng canh/ngày.",
+                alternatives: {
+                    "Đắt quá": ["Dầu cải", "Dầu hạt nho", "Dầu hạnh nhân"],
+                    "Không có dầu olive": ["Dầu avocado", "Dầu macadamia"],
+                    "Nấu nhiệt độ cao": ["Dầu avocado", "Dầu dừa"]
+                }
+            },
+            {
+                id: 21, name: "Hạt chia", nameEn: "Chia Seeds",
+                category: "fat", source: "plant",
+                serving: "1 muỗng canh (12g)",
+                calories: 58, protein: 2, carbs: 5, fat: 3.7, fiber: 4,
+                gi: 1,
+                micros: { "Omega-3": "2.5g", "Canxi": "76mg", "Magie": "36mg", "Sắt": "0.9mg" },
+                tags: ["healthy-fat", "high-fiber", "high-protein"],
+                bestFor: ["breakfast", "snack"],
+                benefits: ["Nguồn omega-3 thực vật tốt nhất", "Rất giàu fiber", "Canxi cao hơn sữa (theo weight)", "No rất lâu"],
+                tips: "<strong>Cách dùng:</strong> Ngâm nước/sữa 15 phút trước khi ăn, thêm vào sinh tố, yogurt, overnight oats.<br><strong>Liều lượng:</strong> 1-2 muỗng canh/ngày.",
+                alternatives: {
+                    "Không có hạt chia": ["Hạt lanh (xay)", "Hạt quế", "Hạt cây gai dầu"],
+                    "Cần omega-3 nhiều hơn": ["Cá hồi", "Hạt lanh"],
+                    "Ngán hạt chia": ["Pudding hạt lanh", "Sinh tố bơ"]
+                }
+            },
+            {
+                id: 22, name: "Hạt hạnh nhân", nameEn: "Almonds",
+                category: "fat", source: "plant",
+                serving: "30g (khoảng 23 hạt)",
+                calories: 170, protein: 6, carbs: 6, fat: 15, fiber: 3.5,
+                gi: 0,
+                micros: { "Vitamin E": "7.3mg", "Magie": "76mg", "Canxi": "76mg", "Riboflavin": "0.3mg" },
+                tags: ["healthy-fat", "high-fiber"],
+                bestFor: ["snack", "breakfast"],
+                benefits: ["Vitamin E rất cao - chống oxy hóa", "Magie tốt cho nữ 30+", "Giúp giảm cholesterol", "Snack no lâu"],
+                tips: "<strong>Cách ăn:</strong> Ăn nguyên hạt, không muối. Ngâm qua đêm dễ tiêu hóa hơn.<br><strong>Liều lượng:</strong> 30g/ngày (1 nắm tay).",
+                alternatives: {
+                    "Đắt quá": ["Hạt điều", "Lạc (đậu phộng)", "Hạt hướng dương"],
+                    "Dị ứng hạt": ["Hạt bí", "Hạt dưa"],
+                    "Ngán hạt nguyên": ["Bơ hạnh nhân", "Sữa hạnh nhân"]
+                }
+            },
+            {
+                id: 23, name: "Quả óc chó", nameEn: "Walnuts",
+                category: "fat", source: "plant",
+                serving: "30g (khoảng 7 nhân)",
+                calories: 185, protein: 4.3, carbs: 3.9, fat: 18.5, fiber: 1.9,
+                gi: 0,
+                micros: { "Omega-3": "2.5g", "Magie": "44mg", "Đồng": "0.5mg", "Mangan": "1mg" },
+                tags: ["healthy-fat"],
+                bestFor: ["snack", "breakfast"],
+                benefits: ["Nguồn omega-3 ALA cao nhất trong các hạt", "Tốt cho não bộ", "Chống viêm", "Cải thiện cholesterol"],
+                tips: "<strong>Cách ăn:</strong> Ăn nguyên hạt, thêm vào salad, yogurt, overnight oats.<br><strong>Bảo quản:</strong> Để trong tủ lạnh/tủ đông để tránh ôi.",
+                alternatives: {
+                    "Đắt quá": ["Hạt lanh", "Hạt chia", "Hạt hướng dương"],
+                    "Không thích vị": ["Hạnh nhân", "Hạt điều"],
+                    "Dị ứng hạt": ["Hạt bí", "Hạt dưa"]
+                }
+            },
+            {
+                id: 24, name: "Bơ đậu phộng (natural)", nameEn: "Natural Peanut Butter",
+                category: "fat", source: "plant",
+                serving: "2 muỗng canh (32g)",
+                calories: 190, protein: 7, carbs: 7, fat: 16, fiber: 2,
+                gi: 14,
+                micros: { "Vitamin E": "1.5mg", "Magie": "50mg", "Niacin": "4mg", "Kali": "200mg" },
+                tags: ["healthy-fat", "high-protein"],
+                bestFor: ["breakfast", "snack"],
+                benefits: ["Protein thực vật tốt", "Giá rẻ, dễ mua", "No lâu", "Linh hoạt trong chế biến"],
+                tips: "<strong>Chọn loại:</strong> 100% đậu phộng, không thêm đường/dầu.<br><strong>Cách ăn:</strong> Phết lên bánh mì, thêm vào sinh tố, ăn với chuối.",
+                alternatives: {
+                    "Dị ứng đậu phộng": ["Bơ hạnh nhân", "Bơ hạt điều", "Bơ hướng dương"],
+                    "Cần ít calo": ["Hummus", "Bơ trái"],
+                    "Ngán bơ đậu phộng": ["Bơ hạnh nhân", "Bơ hạt điều"]
+                }
+            },
+            
+            // ===== VEGETABLE (8) =====
+            {
+                id: 25, name: "Bông cải xanh", nameEn: "Broccoli",
+                category: "vegetable", source: "plant",
+                serving: "100g (đã nấu)",
+                calories: 35, protein: 2.4, carbs: 7, fat: 0.4, fiber: 2.6,
+                gi: 10,
+                micros: { "Vitamin C": "65mg", "Vitamin K": "102µg", "Folate": "63µg", "Sulforaphane": "Nhiều" },
+                tags: ["low-cal", "high-fiber"],
+                bestFor: ["lunch", "dinner"],
+                benefits: ["Sulforaphane chống ung thư", "Vitamin C cao hơn cam", "Vitamin K tốt cho xương nữ 30+", "Rất ít calo"],
+                tips: "<strong>Cách chế biến tốt nhất:</strong> Hấp 3-5 phút giữ được nhiều dinh dưỡng nhất.<br><strong>Tránh:</strong> Luộc quá lâu (mất vitamin).",
+                alternatives: {
+                    "Ngán bông cải xanh": ["Bông cải trắng", "Cải xoăn", "Cải Brussels"],
+                    "Không có tươi": ["Đông lạnh vẫn tốt", "Bông cải trắng"],
+                    "Cần rau khác": ["Cải ngọt", "Rau chân vịt"]
+                }
+            },
+            {
+                id: 26, name: "Rau chân vịt (Spinach)", nameEn: "Spinach",
+                category: "vegetable", source: "plant",
+                serving: "100g (tươi)",
+                calories: 23, protein: 2.9, carbs: 3.6, fat: 0.4, fiber: 2.2,
+                gi: 15,
+                micros: { "Sắt": "2.7mg", "Vitamin K": "483µg", "Folate": "194µg", "Vitamin A": "469µg" },
+                tags: ["low-cal", "high-fiber", "hormone"],
+                bestFor: ["breakfast", "lunch", "dinner"],
+                benefits: ["Folate rất cao - tốt cho nữ", "Sắt thực vật dồi dào", "Vitamin K cao nhất trong rau", "Rất ít calo, ăn thoải mái"],
+                tips: "<strong>Cách ăn:</strong> Salad tươi, xào nhẹ, thêm vào sinh tố, soup.<br><strong>Lưu ý:</strong> Ăn với vitamin C (chanh) để hấp thu sắt tốt hơn.",
+                alternatives: {
+                    "Ngán rau chân vịt": ["Cải xoăn", "Rau diếp", "Cải Thụy Sĩ"],
+                    "Không có tươi": ["Đông lạnh vẫn tốt", "Rau khác màu xanh đậm"],
+                    "Cần ít oxalate": ["Cải xoăn", "Bông cải xanh"]
+                }
+            },
+            {
+                id: 27, name: "Cà rốt", nameEn: "Carrot",
+                category: "vegetable", source: "plant",
+                serving: "100g",
+                calories: 41, protein: 0.9, carbs: 10, fat: 0.2, fiber: 2.8,
+                gi: 35,
+                micros: { "Vitamin A": "835µg", "Vitamin K": "13µg", "Kali": "320mg", "Beta-carotene": "8.3mg" },
+                tags: ["low-cal", "high-fiber"],
+                bestFor: ["snack", "lunch", "dinner"],
+                benefits: ["Beta-carotene cao nhất trong rau", "Tốt cho mắt và da", "Vị ngọt tự nhiên", "Dễ ăn, dễ chế biến"],
+                tips: "<strong>Cách ăn tốt nhất:</strong> Ăn với fat (dầu olive, bơ) để hấp thu beta-carotene.<br><strong>Chế biến:</strong> Snack sống, nấu soup, nướng, xào.",
+                alternatives: {
+                    "Ngán cà rốt": ["Bí đỏ", "Khoai lang", "Bắp"],
+                    "Cần ít carb": ["Dưa chuột", "Cần tây"],
+                    "Không có cà rốt": ["Bí đỏ", "Ớt chuông"]
+                }
+            },
+            {
+                id: 28, name: "Cà chua", nameEn: "Tomato",
+                category: "vegetable", source: "plant",
+                serving: "1 quả vừa (120g)",
+                calories: 22, protein: 1.1, carbs: 4.8, fat: 0.2, fiber: 1.5,
+                gi: 15,
+                micros: { "Lycopene": "2.6mg", "Vitamin C": "17mg", "Kali": "284mg", "Vitamin K": "9µg" },
+                tags: ["low-cal"],
+                bestFor: ["breakfast", "lunch", "dinner"],
+                benefits: ["Lycopene chống oxy hóa mạnh", "Tốt cho tim mạch", "Vitamin C cao", "Rất ít calo"],
+                tips: "<strong>Cách ăn tốt nhất:</strong> Nấu chín với dầu olive tăng hấp thu lycopene gấp 4 lần.<br><strong>Kết hợp:</strong> Salad, soup, sốt cà chua.",
+                alternatives: {
+                    "Ngán cà chua": ["Ớt chuông", "Dưa chuột"],
+                    "Mùa không có": ["Cà chua hộp (vẫn tốt)", "Cà chua bi"],
+                    "Cần ít acid": ["Dưa chuột", "Bí ngòi"]
+                }
+            },
+            {
+                id: 29, name: "Dưa chuột", nameEn: "Cucumber",
+                category: "vegetable", source: "plant",
+                serving: "1 quả vừa (200g)",
+                calories: 30, protein: 1.3, carbs: 6, fat: 0.2, fiber: 1,
+                gi: 15,
+                micros: { "Vitamin K": "16µg", "Kali": "294mg", "Vitamin C": "6mg", "Nước": "96%" },
+                tags: ["low-cal"],
+                bestFor: ["breakfast", "lunch", "snack"],
+                benefits: ["Rất ít calo, ăn thoải mái", "Nhiều nước, cấp nước", "Giúp giảm cân", "Dễ ăn, dễ chế biến"],
+                tips: "<strong>Cách ăn:</strong> Ăn cả vỏ để có nhiều fiber và vitamin.<br><strong>Kết hợp:</strong> Salad, sandwich, ăn với hummus.",
+                alternatives: {
+                    "Ngán dưa chuột": ["Cần tây", "Ớt chuông", "Củ đậu"],
+                    "Cần nhiều dinh dưỡng hơn": ["Rau chân vịt", "Bông cải xanh"],
+                    "Không có dưa chuột": ["Bí ngòi sống", "Củ đậu"]
+                }
+            },
+            {
+                id: 30, name: "Cải xoăn (Kale)", nameEn: "Kale",
+                category: "vegetable", source: "plant",
+                serving: "100g (tươi)",
+                calories: 49, protein: 4.3, carbs: 9, fat: 0.9, fiber: 3.6,
+                gi: 10,
+                micros: { "Vitamin K": "390µg", "Vitamin C": "120mg", "Vitamin A": "500µg", "Canxi": "150mg" },
+                tags: ["low-cal", "high-fiber", "high-protein"],
+                bestFor: ["breakfast", "lunch", "dinner"],
+                benefits: ["Superfood - dinh dưỡng đậm đặc", "Vitamin C cao hơn cam", "Canxi cao cho xương nữ 30+", "Chống oxy hóa mạnh"],
+                tips: "<strong>Cách ăn:</strong> Massage với dầu olive để mềm, làm kale chips, thêm vào sinh tố.<br><strong>Lưu ý:</strong> Người dùng thuốc loãng máu cần hỏi bác sĩ.",
+                alternatives: {
+                    "Ngán kale": ["Rau chân vịt", "Cải Thụy Sĩ", "Bông cải xanh"],
+                    "Khó tìm": ["Rau chân vịt", "Cải xoong"],
+                    "Cần mềm hơn": ["Rau chân vịt nấu chín"]
+                }
+            },
+            {
+                id: 31, name: "Ớt chuông", nameEn: "Bell Pepper",
+                category: "vegetable", source: "plant",
+                serving: "1 quả vừa (120g)",
+                calories: 37, protein: 1.2, carbs: 7, fat: 0.4, fiber: 2.5,
+                gi: 40,
+                micros: { "Vitamin C": "117mg", "Vitamin A": "157µg", "Vitamin B6": "0.3mg", "Folate": "46µg" },
+                tags: ["low-cal", "high-fiber"],
+                bestFor: ["breakfast", "lunch", "dinner", "snack"],
+                benefits: ["Vitamin C cao nhất trong rau", "Vị ngọt tự nhiên, dễ ăn", "Nhiều màu sắc đẹp mắt", "Giàu antioxidant"],
+                tips: "<strong>Cách ăn:</strong> Ớt đỏ có nhiều vitamin nhất, sau đó đến vàng, xanh.<br><strong>Chế biến:</strong> Ăn sống, xào, nướng, nhồi thịt.",
+                alternatives: {
+                    "Ngán ớt chuông": ["Cà chua", "Dưa chuột", "Cà rốt"],
+                    "Cần ít carb": ["Dưa chuột", "Cần tây"],
+                    "Không có ớt chuông": ["Cà chua", "Bí ngòi"]
+                }
+            },
+            {
+                id: 32, name: "Nấm hương", nameEn: "Shiitake Mushroom",
+                category: "vegetable", source: "plant",
+                serving: "100g (đã nấu)",
+                calories: 34, protein: 2.2, carbs: 7, fat: 0.5, fiber: 2.5,
+                gi: 10,
+                micros: { "Vitamin D": "0.5µg", "Selenium": "5µg", "Đồng": "0.3mg", "Beta-glucan": "Nhiều" },
+                tags: ["low-cal", "high-fiber"],
+                bestFor: ["lunch", "dinner"],
+                benefits: ["Beta-glucan tăng cường miễn dịch", "Vitamin D (hiếm trong thực vật)", "Vị umami ngon", "Rất ít calo"],
+                tips: "<strong>Cách chế biến:</strong> Xào, nấu soup, kho. Phơi nắng 30 phút trước khi nấu tăng vitamin D.<br><strong>Kết hợp:</strong> Với tỏi, hành, rau xanh.",
+                alternatives: {
+                    "Không có nấm hương": ["Nấm rơm", "Nấm mỡ", "Nấm kim châm"],
+                    "Ngán nấm": ["Đậu phụ", "Bí ngòi"],
+                    "Cần nhiều protein": ["Đậu phụ", "Ức gà"]
+                }
+            },
+            
+            // ===== FRUIT (7) =====
+            {
+                id: 33, name: "Táo", nameEn: "Apple",
+                category: "fruit", source: "plant",
+                serving: "1 quả vừa (180g)",
+                calories: 95, protein: 0.5, carbs: 25, fat: 0.3, fiber: 4.4,
+                gi: 36,
+                micros: { "Vitamin C": "8mg", "Kali": "195mg", "Vitamin K": "4µg", "Quercetin": "Nhiều" },
+                tags: ["high-fiber", "quick"],
+                bestFor: ["snack", "breakfast"],
+                benefits: ["Fiber cao (pectin)", "Quercetin chống oxy hóa", "No lâu, tốt cho giảm cân", "Tiện lợi, dễ mang theo"],
+                tips: "<strong>Cách ăn:</strong> Ăn cả vỏ để có nhiều fiber và antioxidant.<br><strong>Kết hợp:</strong> Với bơ đậu phộng, yogurt để cân bằng.",
+                alternatives: {
+                    "Ngán táo": ["Lê", "Ổi", "Cam"],
+                    "Cần ít đường": ["Quả mọng", "Bưởi"],
+                    "Không có táo": ["Lê", "Ổi"]
+                }
+            },
+            {
+                id: 34, name: "Chuối", nameEn: "Banana",
+                category: "fruit", source: "plant",
+                serving: "1 quả vừa (120g)",
+                calories: 105, protein: 1.3, carbs: 27, fat: 0.4, fiber: 3.1,
+                gi: 51,
+                micros: { "Kali": "422mg", "Vitamin B6": "0.4mg", "Vitamin C": "10mg", "Magie": "32mg" },
+                tags: ["quick"],
+                bestFor: ["breakfast", "snack"],
+                benefits: ["Nguồn kali tuyệt vời", "Năng lượng nhanh (tốt trước/sau tập)", "Tryptophan giúp ngủ ngon", "Dễ tiêu hóa"],
+                tips: "<strong>Thời điểm tốt nhất:</strong> Trước tập 30-60 phút hoặc sau tập.<br><strong>Mẹo:</strong> Chuối xanh có resistant starch tốt hơn.",
+                alternatives: {
+                    "Cần ít carb": ["Quả mọng", "Bưởi"],
+                    "Ngán chuối": ["Khoai lang", "Táo"],
+                    "Sau tập": ["Chuối", "Dates"]
+                }
+            },
+            {
+                id: 35, name: "Cam", nameEn: "Orange",
+                category: "fruit", source: "plant",
+                serving: "1 quả vừa (130g)",
+                calories: 62, protein: 1.2, carbs: 15, fat: 0.2, fiber: 3.1,
+                gi: 40,
+                micros: { "Vitamin C": "70mg", "Folate": "40µg", "Kali": "237mg", "Thiamine": "0.1mg" },
+                tags: ["high-fiber", "quick"],
+                bestFor: ["breakfast", "snack"],
+                benefits: ["Vitamin C rất cao", "Folate tốt cho nữ", "Fiber cao (ăn cả múi)", "Tăng hấp thu sắt từ thực vật"],
+                tips: "<strong>Cách ăn tốt nhất:</strong> Ăn cả múi, không ép nước (mất fiber).<br><strong>Kết hợp:</strong> Ăn với thực phẩm giàu sắt để tăng hấp thu.",
+                alternatives: {
+                    "Ngán cam": ["Quýt", "Bưởi", "Ổi"],
+                    "Cần ít đường": ["Bưởi", "Quả mọng"],
+                    "Không có cam": ["Ổi (còn nhiều vitamin C hơn)"]
+                }
+            },
+            {
+                id: 36, name: "Việt quất (Blueberry)", nameEn: "Blueberry",
+                category: "fruit", source: "plant",
+                serving: "100g",
+                calories: 57, protein: 0.7, carbs: 14, fat: 0.3, fiber: 2.4,
+                gi: 25,
+                micros: { "Vitamin C": "10mg", "Vitamin K": "19µg", "Anthocyanin": "Rất nhiều", "Mangan": "0.3mg" },
+                tags: ["high-fiber", "low-cal"],
+                bestFor: ["breakfast", "snack"],
+                benefits: ["Anthocyanin chống oxy hóa mạnh nhất", "Tốt cho não và trí nhớ", "GI rất thấp", "Chống lão hóa"],
+                tips: "<strong>Cách ăn:</strong> Ăn tươi, đông lạnh vẫn tốt, thêm vào yogurt, sinh tố, overnight oats.<br><strong>Lưu ý:</strong> Đắt nhưng rất đáng giá.",
+                alternatives: {
+                    "Đắt quá": ["Dâu tây", "Mâm xôi", "Nho đen"],
+                    "Không có việt quất": ["Các loại quả mọng khác"],
+                    "Quanh năm": ["Đông lạnh (rẻ hơn)"]
+                }
+            },
+            {
+                id: 37, name: "Dâu tây", nameEn: "Strawberry",
+                category: "fruit", source: "plant",
+                serving: "100g",
+                calories: 32, protein: 0.7, carbs: 7.7, fat: 0.3, fiber: 2,
+                gi: 40,
+                micros: { "Vitamin C": "59mg", "Mangan": "0.4mg", "Folate": "24µg", "Kali": "153mg" },
+                tags: ["low-cal", "high-fiber"],
+                bestFor: ["breakfast", "snack"],
+                benefits: ["Vitamin C cao", "Rất ít calo", "Chống oxy hóa mạnh", "Vị ngon, dễ ăn"],
+                tips: "<strong>Cách ăn:</strong> Ăn tươi, thêm vào salad, yogurt, sinh tố.<br><strong>Bảo quản:</strong> Rửa trước khi ăn, không rửa trước khi bảo quản.",
+                alternatives: {
+                    "Không có dâu tây": ["Dâu ta", "Mâm xôi", "Việt quất"],
+                    "Mùa không có": ["Đông lạnh", "Quả mọng khác"],
+                    "Cần rẻ hơn": ["Táo", "Chuối"]
+                }
+            },
+            {
+                id: 38, name: "Bưởi", nameEn: "Grapefruit",
+                category: "fruit", source: "plant",
+                serving: "1/2 quả (150g)",
+                calories: 52, protein: 0.8, carbs: 13, fat: 0.2, fiber: 2,
+                gi: 25,
+                micros: { "Vitamin C": "50mg", "Vitamin A": "58µg", "Kali": "162mg", "Lycopene": "1.5mg" },
+                tags: ["low-cal", "high-fiber"],
+                bestFor: ["breakfast", "snack"],
+                benefits: ["GI rất thấp (25)", "Hỗ trợ giảm cân", "Nhiều nước, ít calo", "Tốt cho insulin sensitivity"],
+                tips: "<strong>Cảnh báo:</strong> Bưởi tương tác với nhiều thuốc (statin, huyết áp). Hỏi bác sĩ nếu đang dùng thuốc.<br><strong>Cách ăn:</strong> Ăn múi, không ép nước.",
+                alternatives: {
+                    "Đang dùng thuốc": ["Cam", "Quýt", "Táo"],
+                    "Ngán bưởi": ["Cam", "Quýt"],
+                    "Cần ngọt hơn": ["Cam", "Táo"]
+                }
+            },
+            {
+                id: 39, name: "Ổi", nameEn: "Guava",
+                category: "fruit", source: "plant",
+                serving: "1 quả vừa (100g)",
+                calories: 68, protein: 2.6, carbs: 14, fat: 1, fiber: 5.4,
+                gi: 12,
+                micros: { "Vitamin C": "228mg", "Fiber": "5.4g", "Kali": "417mg", "Folate": "49µg" },
+                tags: ["high-fiber", "low-cal"],
+                bestFor: ["snack", "breakfast"],
+                benefits: ["Vitamin C cao nhất trong trái cây (gấp 4 lần cam)", "Fiber rất cao", "Rẻ, dễ mua ở VN", "GI cực thấp"],
+                tips: "<strong>Cách ăn:</strong> Ăn cả vỏ để có nhiều dinh dưỡng. Ăn với muối ớt hoặc mắm ruốc.<br><strong>Lưu ý:</strong> Hạt ổi có thể gây táo bón với một số người.",
+                alternatives: {
+                    "Ngán ổi": ["Cam", "Táo", "Lê"],
+                    "Không có ổi": ["Cam", "Kiwi"],
+                    "Cần ít fiber": ["Táo bỏ vỏ"]
+                }
+            },
+            
+            // ===== DAIRY (5) =====
+            {
+                id: 40, name: "Sữa chua Hy Lạp", nameEn: "Greek Yogurt",
+                category: "dairy", source: "animal",
+                serving: "100g (không đường)",
+                calories: 59, protein: 10, carbs: 3.6, fat: 0.4, fiber: 0,
+                gi: 11,
+                micros: { "Canxi": "110mg", "Probiotic": "Nhiều", "Vitamin B12": "0.8µg", "Kali": "141mg" },
+                tags: ["high-protein", "low-cal"],
+                bestFor: ["breakfast", "snack"],
+                benefits: ["Protein cao gấp đôi sữa chua thường", "Probiotic tốt cho ruột", "Canxi cao cho xương nữ 30+", "Ít đường lactose"],
+                tips: "<strong>Chọn loại:</strong> Không đường, ít béo hoặc full-fat tùy mục tiêu.<br><strong>Kết hợp:</strong> Với trái cây, hạt, mật ong.",
+                alternatives: {
+                    "Không dung nạp lactose": ["Sữa chua dừa", "Sữa chua hạt"],
+                    "Đắt quá": ["Sữa chua thường (lọc qua vải)", "Skyr"],
+                    "Ăn chay": ["Sữa chua dừa", "Sữa chua đậu nành"]
+                }
+            },
+            {
+                id: 41, name: "Sữa tươi ít béo", nameEn: "Low-fat Milk",
+                category: "dairy", source: "animal",
+                serving: "1 ly (240ml)",
+                calories: 102, protein: 8, carbs: 12, fat: 2.4, fiber: 0,
+                gi: 30,
+                micros: { "Canxi": "300mg", "Vitamin D": "3µg", "Vitamin B12": "1.2µg", "Kali": "366mg" },
+                tags: ["high-protein"],
+                bestFor: ["breakfast", "snack"],
+                benefits: ["Nguồn canxi tốt nhất", "Protein chất lượng cao", "Vitamin D (hiếm trong thực phẩm)", "Tiện lợi"],
+                tips: "<strong>Thời điểm tốt nhất:</strong> Sau tập, trước khi ngủ (casein protein).<br><strong>Lưu ý:</strong> Người không dung nạp lactose cần chọn sữa không lactose.",
+                alternatives: {
+                    "Không dung nạp lactose": ["Sữa không lactose", "Sữa hạt (đậu nành, hạnh nhân)"],
+                    "Ăn chay": ["Sữa đậu nành", "Sữa hạnh nhân bổ sung canxi"],
+                    "Cần ít calo": ["Sữa hạnh nhân không đường"]
+                }
+            },
+            {
+                id: 42, name: "Phô mai (Mozzarella)", nameEn: "Mozzarella Cheese",
+                category: "dairy", source: "animal",
+                serving: "30g",
+                calories: 85, protein: 6, carbs: 0.7, fat: 6.3, fiber: 0,
+                gi: 0,
+                micros: { "Canxi": "143mg", "Protein": "6g", "Vitamin B12": "0.6µg", "Phosphorus": "95mg" },
+                tags: ["high-protein"],
+                bestFor: ["lunch", "dinner", "snack"],
+                benefits: ["Canxi rất cao", "Protein chất lượng cao", "Ít lactose", "Vị ngon, dễ kết hợp"],
+                tips: "<strong>Liều lượng:</strong> 30g/ngày (bằng 2 ngón tay).<br><strong>Chọn loại:</strong> Mozzarella ít béo, phô mai tươi.",
+                alternatives: {
+                    "Cần ít calo": ["Phô mai tươi (cottage cheese)", "Phô mai ricotta"],
+                    "Không dung nạp lactose": ["Phô mai cứng (Parmesan)", "Phô mai thực vật"],
+                    "Ngán phô mai": ["Đậu phụ", "Trứng"]
+                }
+            },
+            {
+                id: 43, name: "Sữa đậu nành", nameEn: "Soy Milk",
+                category: "dairy", source: "plant",
+                serving: "1 ly (240ml, không đường)",
+                calories: 80, protein: 7, carbs: 4, fat: 4, fiber: 1,
+                gi: 30,
+                micros: { "Canxi": "300mg (bổ sung)", "Vitamin D": "3µg", "Vitamin B12": "1µg", "Isoflavone": "30mg" },
+                tags: ["high-protein", "hormone"],
+                bestFor: ["breakfast", "snack"],
+                benefits: ["Protein thực vật complete", "Canxi bổ sung bằng sữa bò", "Isoflavone hỗ trợ hormone nữ", "Không lactose"],
+                tips: "<strong>Chọn loại:</strong> Không đường, bổ sung canxi và vitamin D.<br><strong>Lưu ý:</strong> Isoflavone an toàn và có lợi cho nữ giới.",
+                alternatives: {
+                    "Dị ứng đậu nành": ["Sữa hạnh nhân", "Sữa yến mạch", "Sữa đậu"],
+                    "Cần ít calo": ["Sữa hạnh nhân không đường"],
+                    "Cần nhiều protein": ["Sữa đậu", "Sữa bò"]
+                }
+            },
+            {
+                id: 44, name: "Phô mai tươi (Cottage cheese)", nameEn: "Cottage Cheese",
+                category: "dairy", source: "animal",
+                serving: "100g",
+                calories: 98, protein: 11, carbs: 3.4, fat: 4.3, fiber: 0,
+                gi: 0,
+                micros: { "Canxi": "83mg", "Casein": "Nhiều", "Selenium": "15µg", "Phosphorus": "159mg" },
+                tags: ["high-protein", "low-cal"],
+                bestFor: ["breakfast", "snack"],
+                benefits: ["Casein protein tiêu hóa chậm (no lâu)", "Protein rất cao", "Ít carb", "Linh hoạt trong chế biến"],
+                tips: "<strong>Cách ăn:</strong> Ăn với trái cây, phết lên bánh mì, thêm vào salad.<br><strong>Thời điểm tốt nhất:</strong> Trước khi ngủ (casein).",
+                alternatives: {
+                    "Không có cottage cheese": ["Sữa chua Hy Lạp", "Ricotta"],
+                    "Ăn chay": ["Đậu phụ mềm", "Sữa chua đậu nành"],
+                    "Ngán cottage cheese": ["Sữa chua Hy Lạp"]
+                }
+            },
+            
+            // ===== SNACK (6) =====
+            {
+                id: 45, name: "Sữa chua kết hợp hạt", nameEn: "Yogurt with Nuts",
+                category: "snack", source: "mixed",
+                serving: "1 hũ (150g)",
+                calories: 180, protein: 12, carbs: 15, fat: 8, fiber: 2,
+                gi: 20,
+                micros: { "Canxi": "150mg", "Probiotic": "Nhiều", "Omega-3": "1g", "Vitamin E": "2mg" },
+                tags: ["high-protein", "quick"],
+                bestFor: ["breakfast", "snack"],
+                benefits: ["Cân bằng macro hoàn hảo", "No rất lâu", "Probiotic + healthy fat", "Tiện lợi"],
+                tips: "<strong>Cách làm:</strong> Sữa chua Hy Lạp + hạt chia + hạnh nhân + quả mọng.<br><strong>Lưu ý:</strong> Tự làm rẻ và lành mạnh hơn mua sẵn.",
+                alternatives: {
+                    "Không có thời gian": ["Protein bar", "Trái cây + bơ đậu phộng"],
+                    "Ăn chay": ["Sữa chua dừa + hạt"],
+                    "Cần ít calo": ["Trái cây tươi"]
+                }
+            },
+            {
+                id: 46, name: "Hạt bí", nameEn: "Pumpkin Seeds",
+                category: "snack", source: "plant",
+                serving: "30g",
+                calories: 170, protein: 9, carbs: 5, fat: 14, fiber: 2,
+                gi: 10,
+                micros: { "Kẽm": "2.5mg", "Magie": "150mg", "Sắt": "2.5mg", "Tryptophan": "Nhiều" },
+                tags: ["high-protein", "healthy-fat"],
+                bestFor: ["snack", "breakfast"],
+                benefits: ["Kẽm cao - tốt cho hormone nữ", "Magie rất cao", "Tryptophan giúp ngủ ngon", "Sắt thực vật"],
+                tips: "<strong>Cách ăn:</strong> Ăn nguyên hạt, rang với gia vị, rắc lên salad.<br><strong>Liều lượng:</strong> 30g/ngày (1 nắm tay).",
+                alternatives: {
+                    "Không có hạt bí": ["Hạt hướng dương", "Hạt dưa", "Hạt hạnh nhân"],
+                    "Cần ít calo": ["Hạt chia", "Hạt lanh"],
+                    "Ngán hạt": ["Bơ hạt", "Hummus"]
+                }
+            },
+            {
+                id: 47, name: "Hummus", nameEn: "Hummus",
+                category: "snack", source: "plant",
+                serving: "2 muỗng canh (30g)",
+                calories: 70, protein: 2, carbs: 6, fat: 4.5, fiber: 1.5,
+                gi: 6,
+                micros: { "Sắt": "1mg", "Folate": "20µg", "Magie": "20mg", "Fiber": "1.5g" },
+                tags: ["high-fiber", "healthy-fat"],
+                bestFor: ["snack", "lunch"],
+                benefits: ["Protein thực vật từ đậu gà", "Healthy fat từ tahini", "Fiber cao", "Vị ngon, linh hoạt"],
+                tips: "<strong>Cách ăn:</strong> Chấm với rau củ (cà rốt, dưa chuột, ớt chuông), phết lên bánh mì.<br><strong>Tự làm:</strong> Rẻ hơn và kiểm soát được thành phần.",
+                alternatives: {
+                    "Không có hummus": ["Bơ đậu phộng", "Guacamole", "Bơ trái"],
+                    "Dị ứng sesame": ["Baba ganoush", "Đậu nghiền"],
+                    "Cần nhiều protein": ["Sữa chua Hy Lạp", "Trứng luộc"]
+                }
+            },
+            {
+                id: 48, name: "Trứng luộc", nameEn: "Hard-boiled Egg",
+                category: "snack", source: "animal",
+                serving: "1 quả",
+                calories: 72, protein: 6.3, carbs: 0.4, fat: 5, fiber: 0,
+                gi: 0,
+                micros: { "Choline": "147mg", "Vitamin D": "1µg", "Vitamin B12": "0.4µg", "Selenium": "15µg" },
+                tags: ["high-protein", "quick"],
+                bestFor: ["snack", "breakfast"],
+                benefits: ["Snack protein hoàn hảo", "Tiện lợi, dễ chuẩn bị", "No lâu", "Rẻ"],
+                tips: "<strong>Cách làm:</strong> Luộc 6-7 phút cho lòng đỏ chín vừa.<br><strong>Bảo quản:</strong> Để tủ lạnh được 1 tuần, tiện cho cả tuần.",
+                alternatives: {
+                    "Ăn chay": ["Đậu phụ", "Edamame"],
+                    "Ngán trứng": ["Sữa chua Hy Lạp", "Phô mai que"],
+                    "Cần ít cholesterol": ["Lòng trắng trứng"]
+                }
+            },
+            {
+                id: 49, name: "Protein bar (loại tốt)", nameEn: "Protein Bar",
+                category: "snack", source: "mixed",
+                serving: "1 thanh (60g)",
+                calories: 200, protein: 20, carbs: 22, fat: 7, fiber: 5,
+                gi: null,
+                micros: { "Protein": "20g", "Fiber": "5g", "Vitamin": "Bổ sung", "Mineral": "Bổ sung" },
+                tags: ["high-protein", "quick"],
+                bestFor: ["snack"],
+                benefits: ["Tiện lợi nhất", "Protein cao", "Dễ mang theo", "Thỏa mãn vị ngọt"],
+                tips: "<strong>Chọn loại:</strong> Protein > 15g, đường < 10g, fiber > 3g. Đọc kỹ nhãn.<br><strong>Lưu ý:</strong> Không thay thế bữa ăn thật, chỉ dùng khi cần.",
+                alternatives: {
+                    "Muốn tự nhiên hơn": ["Trái cây + bơ đậu phộng", "Sữa chua + hạt"],
+                    "Cần ít đường": ["Trứng luộc", "Hạt hỗn hợp"],
+                    "Rẻ hơn": ["Trứng luộc", "Sữa chua Hy Lạp"]
+                }
+            },
+            {
+                id: 50, name: "Quả bơ + bánh mì nguyên cám", nameEn: "Avocado Toast",
+                category: "snack", source: "plant",
+                serving: "1 lát bánh + 1/4 bơ",
+                calories: 220, protein: 5, carbs: 20, fat: 14, fiber: 6,
+                gi: 45,
+                micros: { "Fiber": "6g", "Kali": "400mg", "Vitamin E": "2mg", "Folate": "50µg" },
+                tags: ["healthy-fat", "high-fiber"],
+                bestFor: ["breakfast", "snack"],
+                benefits: ["Cân bằng macro tuyệt vời", "Healthy fat + complex carb", "No rất lâu", "Vị ngon, trendy"],
+                tips: "<strong>Cách làm:</strong> Bánh mì nguyên cám nướng + bơ nghiền + muối + tiêu. Thêm trứng, hạt chia, cà chua.<br><strong>Thời điểm tốt nhất:</strong> Bữa sáng hoặc snack trưa.",
+                alternatives: {
+                    "Cần ít calo": ["Bánh mì + hummus", "Bơ trái nguyên chất"],
+                    "Low-carb": ["Bơ trái + rau củ"],
+                    "Ngán avocado toast": ["Sữa chua + trái cây", "Overnight oats"]
+                }
+            }
+        ];
+        
+        // ==================== CATEGORY INFO ====================
+        const categoryInfo = {
+            protein: {
+                name: 'Protein',
+                desc: 'Nguồn protein động vật và thực vật - xây dựng cơ bắp, no lâu, hỗ trợ giảm cân'
+            },
+            carb: {
+                name: 'Tinh bột (Carb)',
+                desc: 'Carb phức hợp cung cấp năng lượng bền vững, fiber và vitamin nhóm B'
+            },
+            fat: {
+                name: 'Chất béo tốt',
+                desc: 'Chất béo không bão hòa - tốt cho tim mạch, hormone và hấp thu vitamin'
+            },
+            vegetable: {
+                name: 'Rau củ',
+                desc: 'Rất ít calo, nhiều fiber, vitamin và khoáng chất - ăn thoải mái'
+            },
+            fruit: {
+                name: 'Trái cây',
+                desc: 'Vitamin, antioxidant và fiber tự nhiên - ngọt ngào và lành mạnh'
+            },
+            dairy: {
+                name: 'Sữa & Chế phẩm sữa',
+                desc: 'Canxi, protein chất lượng cao và probiotic - quan trọng cho xương nữ 30+'
+            },
+            snack: {
+                name: 'Snack lành mạnh',
+                desc: 'Ăn nhẹ thông minh giữa các bữa - no lâu, cân bằng macro'
+            }
+        };
+        
+        // ==================== STATE ====================
+        let currentFilters = {
+            category: 'all',
+            goal: 'all',
+            meal: 'all',
+            source: 'all',
+            search: ''
+        };
+        
+        // ==================== RENDER ====================
+        function renderFoods() {
+            const container = document.getElementById('foodContainer');
+            const filtered = foodDatabase.filter(food => {
+                if (currentFilters.category !== 'all' && food.category !== currentFilters.category) return false;
+                if (currentFilters.goal !== 'all' && !food.tags.includes(currentFilters.goal)) return false;
+                if (currentFilters.meal !== 'all' && !food.bestFor.includes(currentFilters.meal)) return false;
+                if (currentFilters.source !== 'all' && food.source !== currentFilters.source) return false;
+                if (currentFilters.search) {
+                    const search = currentFilters.search.toLowerCase();
+                    return food.name.toLowerCase().includes(search) || 
+                           food.nameEn.toLowerCase().includes(search);
+                }
+                return true;
+            });
+            
+            if (filtered.length === 0) {
+                container.innerHTML = '';
+                document.getElementById('noResults').classList.add('active');
+                return;
+            }
+            
+            document.getElementById('noResults').classList.remove('active');
+            
+            // Group by category
+            const grouped = {};
+            filtered.forEach(food => {
+                if (!grouped[food.category]) grouped[food.category] = [];
+                grouped[food.category].push(food);
+            });
+            
+            let html = '';
+            Object.keys(grouped).forEach(category => {
+                const info = categoryInfo[category];
+                html += `
+                    <div class="category-section active" data-category="${category}">
+                        <div class="category-header">
+                            <h2>${info.name}</h2>
+                            <p>${info.desc}</p>
+                        </div>
+                        <div class="food-grid">
+                            ${grouped[category].map(food => renderFoodCard(food)).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        function renderFoodCard(food) {
+            const totalMacro = food.protein + food.carbs + food.fat;
+            const pPercent = totalMacro > 0 ? (food.protein / totalMacro * 100) : 0;
+            const cPercent = totalMacro > 0 ? (food.carbs / totalMacro * 100) : 0;
+            const fPercent = totalMacro > 0 ? (food.fat / totalMacro * 100) : 0;
+            
+            const tagLabels = {
+                'high-protein': 'High Protein',
+                'low-cal': 'Low Cal',
+                'high-fiber': 'High Fiber',
+                'healthy-fat': 'Healthy Fat',
+                'quick': 'Quick',
+                'hormone': 'Hormone+'
+            };
+            
+            return `
+                <div class="food-card" data-category="${food.category}" onclick="openModal(${food.id})">
+                    <div class="food-header">
+                        <div class="food-name">${food.name}</div>
+                        <div class="food-calories">${food.calories} kcal</div>
+                    </div>
+                    <div class="food-serving">${food.serving}</div>
+                    
+                    <div class="macro-bar">
+                        <div class="macro-segment protein" style="width: ${pPercent}%"></div>
+                        <div class="macro-segment carb" style="width: ${cPercent}%"></div>
+                        <div class="macro-segment fat" style="width: ${fPercent}%"></div>
+                    </div>
+                    
+                    <div class="macro-values">
+                        <div class="macro-item p">
+                            <div class="macro-label">Protein</div>
+                            <div class="macro-value">${food.protein}g</div>
+                        </div>
+                        <div class="macro-item c">
+                            <div class="macro-label">Carb</div>
+                            <div class="macro-value">${food.carbs}g</div>
+                        </div>
+                        <div class="macro-item f">
+                            <div class="macro-label">Fat</div>
+                            <div class="macro-value">${food.fat}g</div>
+                        </div>
+                    </div>
+                    
+                    <div class="food-tags">
+                        ${food.tags.slice(0, 3).map(tag => `<span class="tag ${tag}">${tagLabels[tag] || tag}</span>`).join('')}
+                    </div>
+                    
+                    <div class="view-btn">Xem chi tiết</div>
+                </div>
+            `;
+        }
+        
+        function openModal(id) {
+            const food = foodDatabase.find(f => f.id === id);
+            if (!food) return;
+            
+            const categoryColors = {
+                protein: 'var(--protein-gradient)',
+                carb: 'var(--carb-gradient)',
+                fat: 'var(--fat-gradient)',
+                vegetable: 'var(--vegetable-gradient)',
+                fruit: 'var(--fruit-gradient)',
+                dairy: 'var(--dairy-gradient)',
+                snack: 'var(--snack-gradient)'
+            };
+            
+            const categoryAccent = {
+                protein: 'var(--protein)',
+                carb: 'var(--carb)',
+                fat: 'var(--fat)',
+                vegetable: 'var(--vegetable)',
+                fruit: 'var(--fruit)',
+                dairy: 'var(--dairy)',
+                snack: 'var(--snack)'
+            };
+            
+            const modal = document.getElementById('modal');
+            modal.style.setProperty('--modal-accent', categoryColors[food.category]);
+            modal.style.setProperty('--modal-accent-color', categoryAccent[food.category]);
+            
+            document.getElementById('modalTitle').textContent = food.name;
+            document.getElementById('modalSubtitle').textContent = food.nameEn + ' · ' + food.serving;
+            
+            const mealNames = {
+                breakfast: 'Bữa sáng',
+                lunch: 'Bữa trưa',
+                dinner: 'Bữa tối',
+                snack: 'Snack'
+            };
+            
+            document.getElementById('modalMeta').innerHTML = `
+                <div class="modal-meta-item">📊 ${categoryInfo[food.category].name}</div>
+                <div class="modal-meta-item">🌱 ${food.source === 'animal' ? 'Động vật' : 'Thực vật'}</div>
+                ${food.gi ? `<div class="modal-meta-item">📈 GI: ${food.gi}</div>` : ''}
+            `;
+            
+            const microsHtml = Object.keys(food.micros).map(key => `
+                <div class="micro-item">
+                    <span class="micro-name">${key}</span>
+                    <span class="micro-value">${food.micros[key]}</span>
+                </div>
+            `).join('');
+            
+            const bestForHtml = food.bestFor.map(bf => `
+                <span class="best-for-chip">${mealNames[bf]}</span>
+            `).join('');
+            
+            const alternativesHtml = Object.keys(food.alternatives).map(situation => `
+                <div class="alternative-group">
+                    <div class="alternative-label">${situation}</div>
+                    <div class="alternative-options">
+                        ${food.alternatives[situation].map(alt => 
+                            `<div class="alternative-chip">${alt}</div>`
+                        ).join('')}
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('modalBody').innerHTML = `
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Thông tin dinh dưỡng</h3>
+                    <div class="macro-grid-modal">
+                        <div class="macro-card-modal calories">
+                            <div class="value">${food.calories}</div>
+                            <div class="label">Calories</div>
+                            <div class="unit">kcal</div>
+                        </div>
+                        <div class="macro-card-modal protein">
+                            <div class="value">${food.protein}</div>
+                            <div class="label">Protein</div>
+                            <div class="unit">gram</div>
+                        </div>
+                        <div class="macro-card-modal carb">
+                            <div class="value">${food.carbs}</div>
+                            <div class="label">Carb</div>
+                            <div class="unit">gram</div>
+                        </div>
+                        <div class="macro-card-modal fat">
+                            <div class="value">${food.fat}</div>
+                            <div class="label">Fat</div>
+                            <div class="unit">gram</div>
+                        </div>
+                        <div class="macro-card-modal fiber">
+                            <div class="value">${food.fiber}</div>
+                            <div class="label">Fiber</div>
+                            <div class="unit">gram</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Micronutrients nổi bật</h3>
+                    <div class="micro-grid">
+                        ${microsHtml}
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Lợi ích cho phụ nữ 30+</h3>
+                    <ul class="benefits-list">
+                        ${food.benefits.map(b => `<li>${b}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Cách dùng & lưu ý</h3>
+                    <div class="tips-section">
+                        ${food.tips}
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Phù hợp cho bữa</h3>
+                    <div class="best-for">
+                        ${bestForHtml}
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Thay thế linh hoạt</h3>
+                    <div class="alternatives-section">
+                        ${alternativesHtml}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        function addToMeal() {
+            alert('Tính năng "Thêm vào bữa ăn" sẽ được kết nối với Food Logger!');
+            closeModal();
+        }
+        
+        // ==================== EVENT LISTENERS ====================
+        // Filter chips
+        document.querySelectorAll('.filter-chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                const type = this.dataset.type;
+                const filter = this.dataset.filter;
+                
+                this.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                
+                currentFilters[type] = filter;
+                renderFoods();
+            });
+        });
+        
+        // Category tabs
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                currentFilters.category = this.dataset.category;
+                renderFoods();
+            });
+        });
+        
+        // Search
+        document.getElementById('searchInput').addEventListener('input', function() {
+            currentFilters.search = this.value;
+            renderFoods();
+        });
+        
+        // Modal
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+        document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+        document.getElementById('modalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+        
+        // ==================== INIT ====================
+        renderFoods();
+    </script>
+</body>
+</html>
