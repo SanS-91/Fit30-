@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giấc Ngủ Chất Lượng - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Base palette */
+            --text-dark: #4A4A5A;
+            --text-medium: #7A7A8A;
+            --text-light: #A0A0B0;
+            --white: #FFFFFF;
+            --bg-primary: #FFFBFB;
+            --bg-soft: #FFF8F5;
+            --border-soft: #F0E8E6;
+            
+            /* Sleep colors - Night Blue palette */
+            --sleep: #A8B8D8;
+            --sleep-soft: #E8F0F8;
+            --sleep-dark: #7A98C0;
+            --sleep-deep: #5A78A0;
+            --sleep-gradient: linear-gradient(135deg, #E8F0F8 0%, #A8B8D8 100%);
+            --sleep-night: linear-gradient(135deg, #5A78A0 0%, #3A5880 50%, #2A4870 100%);
+            
+            /* Sleep cycle colors */
+            --awake: #E8C87A;
+            --rem: #A8B8D8;
+            --light: #B8C8E0;
+            --deep: #7A98C0;
+            
+            /* Hormone colors */
+            --melatonin: #B8A8D8;
+            --cortisol: #E8B8A8;
+            --growth: #A8D4C8;
+            --estrogen: #E8B8C8;
+            
+            /* Main gradient */
+            --main-gradient: linear-gradient(135deg, #B8A8D8 0%, #A8C8E8 50%, #A8D4C8 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        body::before {
+            width: 500px;
+            height: 500px;
+            background: var(--sleep);
+            top: -150px;
+            right: -150px;
+        }
+        
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: var(--melatonin);
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 18px 40px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            color: var(--sleep-dark);
+        }
+        
+        /* Hero Section - Night Theme */
+        .hero {
+            padding: 80px 40px 70px;
+            text-align: center;
+            max-width: 950px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .hero-stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+        
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--sleep-dark);
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: var(--sleep-gradient);
+            color: white;
+            padding: 7px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 22px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(168,184,216,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-moon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 15px rgba(168,184,216,0.4));
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 18px;
+            line-height: 1.2;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 span {
+            background: var(--sleep-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            max-width: 680px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 35px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-stat {
+            background: white;
+            padding: 14px 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid var(--border-soft);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .hero-stat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--sleep-soft);
+            color: var(--sleep-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+        
+        .hero-stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--sleep-dark);
+            line-height: 1;
+        }
+        
+        .hero-stat-label {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+        
+        /* Section Common */
+        .section {
+            padding: 60px 40px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+        
+        .section-eyebrow {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            padding: 6px 18px;
+            border-radius: 30px;
+            background: var(--sleep-soft);
+            color: var(--sleep-dark);
+        }
+        
+        .section-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        
+        .section-header p {
+            color: var(--text-medium);
+            font-size: 1.05rem;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        
+        /* Why Sleep Matters */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 22px;
+        }
+        
+        .why-card {
+            background: white;
+            padding: 30px 28px;
+            border-radius: 22px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .why-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--card-accent);
+        }
+        
+        .why-card:nth-child(1) { --card-accent: var(--sleep); }
+        .why-card:nth-child(2) { --card-accent: var(--melatonin); }
+        .why-card:nth-child(3) { --card-accent: var(--growth); }
+        .why-card:nth-child(4) { --card-accent: var(--estrogen); }
+        
+        .why-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: var(--card-accent);
+        }
+        
+        .why-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: var(--card-accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 18px;
+        }
+        
+        .why-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+        
+        .why-card p {
+            color: var(--text-medium);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+        
+        /* Sleep Cycle Visual */
+        .cycle-section {
+            background: linear-gradient(180deg, transparent 0%, var(--sleep-soft) 50%, transparent 100%);
+        }
+        
+        .cycle-card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .cycle-visual {
+            margin: 25px 0;
+            position: relative;
+        }
+        
+        .cycle-chart {
+            width: 100%;
+            height: 200px;
+            background: var(--bg-soft);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cycle-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .cycle-stage {
+            position: absolute;
+            bottom: 0;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 10px;
+            color: white;
+            font-weight: 700;
+            font-size: 0.78rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .cycle-legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            font-weight: 600;
+        }
+        
+        .legend-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+        }
+        
+        .cycle-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .cycle-info-item {
+            padding: 18px;
+            background: var(--bg-soft);
+            border-radius: 14px;
+            border-left: 4px solid var(--info-color);
+        }
+        
+        .cycle-info-item:nth-child(1) { --info-color: var(--awake); }
+        .cycle-info-item:nth-child(2) { --info-color: var(--rem); }
+        .cycle-info-item:nth-child(3) { --info-color: var(--light); }
+        .cycle-info-item:nth-child(4) { --info-color: var(--deep); }
+        
+        .cycle-info-title {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .cycle-info-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        
+        .cycle-info-desc {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        /* Hormones Section */
+        .hormones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .hormone-card {
+            background: white;
+            padding: 28px;
+            border-radius: 22px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hormone-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--hormone-color);
+        }
+        
+        .hormone-card:nth-child(1) { --hormone-color: var(--melatonin); }
+        .hormone-card:nth-child(2) { --hormone-color: var(--cortisol); }
+        .hormone-card:nth-child(3) { --hormone-color: var(--growth); }
+        .hormone-card:nth-child(4) { --hormone-color: var(--estrogen); }
+        
+        .hormone-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            background: var(--hormone-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        
+        .hormone-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        
+        .hormone-time {
+            display: inline-block;
+            background: var(--hormone-color);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 8px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .hormone-card p {
+            color: var(--text-medium);
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+        
+        /* Sleep Hygiene Checklist */
+        .hygiene-section {
+            background: linear-gradient(180deg, transparent 0%, var(--sleep-soft) 50%, transparent 100%);
+        }
+        
+        .hygiene-card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .hygiene-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 12px;
+        }
+        
+        .hygiene-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 18px;
+            background: var(--bg-soft);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            user-select: none;
+        }
+        
+        .hygiene-item:hover {
+            background: white;
+            border-color: var(--sleep);
+            transform: translateX(3px);
+        }
+        
+        .hygiene-item.checked {
+            background: var(--sleep);
+            color: white;
+        }
+        
+        .hygiene-item.checked .hygiene-text,
+        .hygiene-item.checked .hygiene-desc {
+            color: white;
+        }
+        
+        .hygiene-check {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: white;
+            border: 2px solid var(--border-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: transparent;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+        
+        .hygiene-item.checked .hygiene-check {
+            background: white;
+            border-color: white;
+            color: var(--sleep-dark);
+        }
+        
+        .hygiene-text {
+            flex: 1;
+        }
+        
+        .hygiene-name {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+        
+        .hygiene-desc {
+            font-size: 0.78rem;
+            color: var(--text-light);
+        }
+        
+        /* Sleep Score Calculator */
+        .calculator-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 40px 60px;
+        }
+        
+        .calculator-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .calculator-header {
+            padding: 30px 35px;
+            background: var(--sleep-gradient);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .calculator-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+        }
+        
+        .calculator-title {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+        }
+        
+        .calculator-subtitle {
+            color: var(--text-medium);
+            font-size: 0.9rem;
+        }
+        
+        .calculator-body {
+            padding: 35px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+        }
+        
+        .calc-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        
+        .calc-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .calc-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        
+        .calc-input {
+            padding: 13px 16px;
+            border: 2px solid var(--border-soft);
+            border-radius: 12px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            background: var(--bg-soft);
+            transition: all 0.3s;
+            color: var(--text-dark);
+        }
+        
+        .calc-input:focus {
+            outline: none;
+            border-color: var(--sleep);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(168,184,216,0.1);
+        }
+        
+        .calc-select {
+            padding: 13px 16px;
+            border: 2px solid var(--border-soft);
+            border-radius: 12px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            background: var(--bg-soft);
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237A7A8A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 16px;
+            padding-right: 40px;
+            transition: all 0.3s;
+            color: var(--text-dark);
+        }
+        
+        .calc-results {
+            background: var(--bg-soft);
+            border-radius: 18px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        
+        .score-display {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 16px;
+        }
+        
+        .score-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 5px;
+            transition: color 0.3s;
+        }
+        
+        .score-value.excellent { color: var(--growth); }
+        .score-value.good { color: var(--sleep-dark); }
+        .score-value.fair { color: var(--awake); }
+        .score-value.poor { color: var(--cortisol); }
+        
+        .score-label {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .score-rating {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+        
+        .score-rating.excellent { background: var(--growth); color: white; }
+        .score-rating.good { background: var(--sleep); color: white; }
+        .score-rating.fair { background: var(--awake); color: white; }
+        .score-rating.poor { background: var(--cortisol); color: white; }
+        
+        .score-details {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .score-detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            background: white;
+            border-radius: 10px;
+            font-size: 0.85rem;
+        }
+        
+        .score-detail-label {
+            color: var(--text-medium);
+            font-weight: 600;
+        }
+        
+        .score-detail-value {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        /* Bedtime Calculator */
+        .bedtime-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 40px 60px;
+        }
+        
+        .bedtime-card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .bedtime-input-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 15px;
+            align-items: end;
+            margin-bottom: 25px;
+        }
+        
+        .bedtime-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+        
+        .bedtime-option {
+            padding: 20px;
+            background: var(--bg-soft);
+            border-radius: 16px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .bedtime-option:hover {
+            border-color: var(--sleep);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+        
+        .bedtime-option.recommended {
+            background: var(--sleep);
+            color: white;
+            border-color: var(--sleep-dark);
+        }
+        
+        .bedtime-option.recommended .bedtime-time,
+        .bedtime-option.recommended .bedtime-hours,
+        .bedtime-option.recommended .bedtime-note {
+            color: white;
+        }
+        
+        .bedtime-recommend-badge {
+            display: inline-block;
+            background: white;
+            color: var(--sleep-dark);
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .bedtime-time {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        
+        .bedtime-hours {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .bedtime-note {
+            font-size: 0.72rem;
+            color: var(--text-light);
+        }
+        
+        /* Evening Routine */
+        .routine-section {
+            background: linear-gradient(180deg, transparent 0%, var(--sleep-soft) 50%, transparent 100%);
+        }
+        
+        .routine-card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .routine-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            position: relative;
+        }
+        
+        .routine-timeline::before {
+            content: '';
+            position: absolute;
+            left: 23px;
+            top: 30px;
+            bottom: 30px;
+            width: 2px;
+            background: linear-gradient(180deg, var(--sleep) 0%, var(--sleep-dark) 100%);
+            opacity: 0.3;
+        }
+        
+        .routine-step {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 18px;
+            align-items: center;
+            padding: 16px 20px;
+            background: var(--bg-soft);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .routine-step:hover {
+            background: white;
+            border-color: var(--sleep);
+            transform: translateX(3px);
+        }
+        
+        .routine-step.checked {
+            background: var(--sleep);
+            color: white;
+        }
+        
+        .routine-step.checked .routine-name,
+        .routine-step.checked .routine-desc {
+            color: white;
+        }
+        
+        .routine-time {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--sleep);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--sleep-dark);
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+        
+        .routine-step.checked .routine-time {
+            background: white;
+            color: var(--sleep-dark);
+        }
+        
+        .routine-info {
+            flex: 1;
+        }
+        
+        .routine-name {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 1rem;
+            margin-bottom: 3px;
+        }
+        
+        .routine-desc {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+        }
+        
+        .routine-duration {
+            background: white;
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--sleep-dark);
+            white-space: nowrap;
+        }
+        
+        .routine-step.checked .routine-duration {
+            background: white;
+            color: var(--sleep-dark);
+        }
+        
+        /* Tips Section */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+        }
+        
+        .tip-card {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--tip-color, var(--sleep));
+        }
+        
+        .tip-card:nth-child(1) { --tip-color: var(--sleep); }
+        .tip-card:nth-child(2) { --tip-color: var(--melatonin); }
+        .tip-card:nth-child(3) { --tip-color: var(--growth); }
+        .tip-card:nth-child(4) { --tip-color: var(--estrogen); }
+        
+        .tip-number {
+            display: inline-block;
+            background: var(--tip-color);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .tip-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        
+        .tip-card p {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+        
+        /* CTA */
+        .cta-section {
+            max-width: 1220px;
+            margin: 60px auto;
+            padding: 0 40px;
+        }
+        
+        .cta-card {
+            background: var(--sleep-night);
+            border-radius: 32px;
+            padding: 70px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+        
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.5;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-card h2 {
+            font-size: 2.4rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .cta-card p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 30px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            display: inline-block;
+            padding: 15px 38px;
+            background: white;
+            color: var(--sleep-deep);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.02rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+        }
+        
+        .btn-cta.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.5);
+            box-shadow: none;
+        }
+        
+        .btn-cta.secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 40px 40px 25px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--sleep);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+        
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: 14px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 2000;
+            transform: translateX(400px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 4px solid var(--sleep);
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--sleep-soft);
+            color: var(--sleep-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .hero {
+                padding: 50px 20px 40px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.05rem;
+            }
+            
+            .hero-moon {
+                font-size: 3rem;
+            }
+            
+            .section,
+            .calculator-section,
+            .bedtime-section,
+            .cta-section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            
+            .cycle-card,
+            .hygiene-card,
+            .bedtime-card,
+            .routine-card {
+                padding: 25px 20px;
+            }
+            
+            .calculator-body {
+                grid-template-columns: 1fr;
+                padding: 25px 20px;
+            }
+            
+            .bedtime-input-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .routine-step {
+                grid-template-columns: auto 1fr;
+            }
+            
+            .routine-duration {
+                grid-column: 2;
+                justify-self: start;
+            }
+            
+            .cta-card {
+                padding: 50px 25px;
+            }
+            
+            .cta-card h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-soft);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--sleep) 0%, var(--melatonin) 100%);
+            border-radius: 4px;
+        }
+        
+        /* Animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="lifestyle-overview.html" class="back-link">← Lối sống</a>
+    </header>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-stars">
+            <div class="star" style="top: 10%; left: 15%; animation-delay: 0s;"></div>
+            <div class="star" style="top: 25%; left: 75%; animation-delay: 0.5s;"></div>
+            <div class="star" style="top: 40%; left: 25%; animation-delay: 1s;"></div>
+            <div class="star" style="top: 15%; left: 60%; animation-delay: 1.5s;"></div>
+            <div class="star" style="top: 50%; left: 85%; animation-delay: 2s;"></div>
+            <div class="star" style="top: 35%; left: 45%; animation-delay: 2.5s;"></div>
+        </div>
+        
+        <span class="hero-badge">LEVEL 1 · FOUNDATION</span>
+        <div class="hero-moon">🌙</div>
+        <h1>Giấc ngủ <span>chất lượng</span></h1>
+        <div class="hero-subtitle">Nền tảng cho hormone, phục hồi và sức khỏe tinh thần</div>
+        <p>70% phụ nữ 30+ ngủ không đủ giấc. Hậu quả: tăng cân, lão hóa nhanh, stress, mất cân bằng hormone. Đây là guide đầy đủ để bạn ngủ ngon mỗi đêm.</p>
+        
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-icon">🛌</div>
+                <div>
+                    <div class="hero-stat-value">7-8h</div>
+                    <div class="hero-stat-label">Mỗi đêm</div>
+                </div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-icon">🌡️</div>
+                <div>
+                    <div class="hero-stat-value">18-20°C</div>
+                    <div class="hero-stat-label">Nhiệt độ phòng</div>
+                </div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-icon">📵</div>
+                <div>
+                    <div class="hero-stat-value">30'</div>
+                    <div class="hero-stat-label">Không màn hình</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Why Sleep Matters -->
+    <section class="section">
+        <div class="section-header">
+            <span class="section-eyebrow">TẠI SAO QUAN TRỌNG</span>
+            <h2>Giấc ngủ ảnh hưởng đến mọi thứ</h2>
+            <p>Đặc biệt với phụ nữ 30+, giấc ngủ không chỉ là nghỉ ngơi — đó là quá trình phục hồi hormone, tái tạo cơ bắp và cân bằng cảm xúc.</p>
+        </div>
+        
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-icon">⚖️</div>
+                <h3>Cân bằng hormone</h3>
+                <p>Ngủ đủ giúp cân bằng estrogen, progesterone, cortisol. Thiếu ngủ làm rối loạn chu kỳ kinh nguyệt, tăng nguy cơ tiền mãn kinh sớm.</p>
+            </div>
+            
+            <div class="why-card">
+                <div class="why-icon">🔥</div>
+                <h3>Kiểm soát cân nặng</h3>
+                <p>Thiếu ngủ tăng ghrelin (đói), giảm leptin (no). Nghiên cứu: ngủ < 6h/ngày tăng 30% nguy cơ béo phì.</p>
+            </div>
+            
+            <div class="why-card">
+                <div class="why-icon">💪</div>
+                <h3>Phục hồi cơ bắp</h3>
+                <p>Growth hormone tiết ra nhiều nhất trong giấc ngủ sâu (11pm-2am). Thiếu ngủ = giảm phục hồi sau tập, chậm tiến bộ.</p>
+            </div>
+            
+            <div class="why-card">
+                <div class="why-icon">🧠</div>
+                <h3>Sức khỏe tinh thần</h3>
+                <p>Giấc ngủ REM xử lý cảm xúc, củng cố trí nhớ. Thiếu ngủ tăng 40% nguy cơ lo âu, trầm cảm, đặc biệt ở phụ nữ.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sleep Cycle -->
+    <section class="section cycle-section">
+        <div class="section-header">
+            <span class="section-eyebrow">HIỂU VỀ GIẤC NGỦ</span>
+            <h2>Chu kỳ ngủ 90 phút</h2>
+            <p>Một đêm ngủ gồm 4-6 chu kỳ, mỗi chu kỳ ~90 phút. Hiểu chu kỳ giúp bạn thức dậy sảng khoái hơn.</p>
+        </div>
+        
+        <div class="cycle-card">
+            <div class="cycle-visual">
+                <div class="cycle-chart">
+                    <svg class="cycle-wave" viewBox="0 0 800 200" preserveAspectRatio="none">
+                        <path d="M0,180 Q50,160 100,140 T200,100 T300,160 T400,80 T500,140 T600,60 T700,120 T800,40" 
+                              fill="none" stroke="#A8B8D8" stroke-width="3" opacity="0.5"/>
+                        <path d="M0,180 Q50,160 100,140 T200,100 T300,160 T400,80 T500,140 T600,60 T700,120 T800,40 L800,200 L0,200 Z" 
+                              fill="url(#sleepGradient)" opacity="0.3"/>
+                        <defs>
+                            <linearGradient id="sleepGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#A8B8D8"/>
+                                <stop offset="100%" style="stop-color:#7A98C0"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    
+                    <div class="cycle-stage" style="left: 5%; width: 15%; height: 40%; background: var(--awake);">Thức</div>
+                    <div class="cycle-stage" style="left: 22%; width: 15%; height: 60%; background: var(--light);">Nông</div>
+                    <div class="cycle-stage" style="left: 39%; width: 15%; height: 85%; background: var(--deep);">Sâu</div>
+                    <div class="cycle-stage" style="left: 56%; width: 15%; height: 55%; background: var(--rem);">REM</div>
+                    <div class="cycle-stage" style="left: 73%; width: 15%; height: 70%; background: var(--light);">Nông</div>
+                </div>
+                
+                <div class="cycle-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: var(--awake);"></div>
+                        Thức ngắn
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: var(--rem);"></div>
+                        REM (mơ)
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: var(--light);"></div>
+                        Ngủ nông
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: var(--deep);"></div>
+                        Ngủ sâu
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cycle-info-grid">
+                <div class="cycle-info-item">
+                    <div class="cycle-info-title">Giai đoạn 1-2</div>
+                    <div class="cycle-info-value">Ngủ nông</div>
+                    <div class="cycle-info-desc">50% thời gian ngủ. Cơ thể thả lỏng, dễ đánh thức.</div>
+                </div>
+                
+                <div class="cycle-info-item">
+                    <div class="cycle-info-title">Giai đoạn 3</div>
+                    <div class="cycle-info-value">Ngủ sâu</div>
+                    <div class="cycle-info-desc">Phục hồi thể chất, tiết growth hormone. Khó đánh thức.</div>
+                </div>
+                
+                <div class="cycle-info-item">
+                    <div class="cycle-info-title">Giai đoạn REM</div>
+                    <div class="cycle-info-value">Mơ & Cảm xúc</div>
+                    <div class="cycle-info-desc">Xử lý cảm xúc, củng cố trí nhớ. Mắt chuyển động nhanh.</div>
+                </div>
+                
+                <div class="cycle-info-item">
+                    <div class="cycle-info-title">Chu kỳ</div>
+                    <div class="cycle-info-value">~90 phút</div>
+                    <div class="cycle-info-desc">4-6 chu kỳ/đêm. Thức dậy cuối chu kỳ = sảng khoái nhất.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Hormones & Sleep -->
+    <section class="section">
+        <div class="section-header">
+            <span class="section-eyebrow">CHO PHỤ NỮ 30+</span>
+            <h2>Hormone & Giấc ngủ</h2>
+            <p>4 hormone chính bị ảnh hưởng bởi giấc ngủ — hiểu để tối ưu sức khỏe.</p>
+        </div>
+        
+        <div class="hormones-grid">
+            <div class="hormone-card">
+                <div class="hormone-icon">🌙</div>
+                <h3>Melatonin</h3>
+                <div class="hormone-time">Tiết 21h-2h</div>
+                <p>Hormone gây buồn ngủ. Ánh sáng xanh (điện thoại) ức chế melatonin. Phòng tối hoàn toàn giúp tiết tối đa.</p>
+            </div>
+            
+            <div class="hormone-card">
+                <div class="hormone-icon">⚡</div>
+                <h3>Cortisol</h3>
+                <div class="hormone-time">Cao nhất 6-8h sáng</div>
+                <p>Hormone stress. Thiếu ngủ làm cortisol cao cả ngày → tích mỡ bụng, lo âu, mất cơ. Ngủ đủ giúp cortisol về bình thường.</p>
+            </div>
+            
+            <div class="hormone-card">
+                <div class="hormone-icon">💪</div>
+                <h3>Growth Hormone</h3>
+                <div class="hormone-time">Cao nhất 23h-2h</div>
+                <p>Hormone tăng trưởng, phục hồi cơ. Tiết nhiều trong ngủ sâu. Thiếu ngủ = giảm phục hồi sau tập, lão hóa nhanh.</p>
+            </div>
+            
+            <div class="hormone-card">
+                <div class="hormone-icon">♀️</div>
+                <h3>Estrogen & Progesterone</h3>
+                <div class="hormone-time">Cân bằng qua ngủ</div>
+                <p>Thiếu ngủ làm rối loạn 2 hormone nữ → kinh nguyệt không đều, PMS nặng, nguy cơ tiền mãn kinh sớm.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sleep Hygiene Checklist -->
+    <section class="section hygiene-section">
+        <div class="section-header">
+            <span class="section-eyebrow">VỆ SINH GIẤC NGỦ</span>
+            <h2>10 thói quen ngủ ngon</h2>
+            <p>Click để đánh dấu những gì bạn đã làm — xây dựng routine hàng đêm.</p>
+        </div>
+        
+        <div class="hygiene-card">
+            <div class="hygiene-grid">
+                <div class="hygiene-item" onclick="toggleHygiene(this)">
+                    <div class="hygiene-check">✓</div>
+                    <div class="hygiene-text">
+                        <div class="hygiene-name">Đi ngủ cùng giờ</div>
+                        <div class="hygiene-desc">Cùng 1 giờ mỗi ngày, kể cả cuối tuần</div>
+                    </div>
+                </div>
+                
+                <div class="hygiene-item" onclick="toggleHygiene(this)">
+                    <div class="hygiene-check">✓</div>
+                    <div class="hygiene-text">
+                        <div class="hygiene-name">Phòng tối hoàn toàn</div>
+                        <div class="hygiene-desc">Rèm cản sáng, tắt hết đèn</div>
+                    </div>
+                </div>
+                
+                <div class="hygiene-item" onclick="toggleHygiene(this)">
+                    <div class="hygiene-check">✓</div>
+                    <div class="hygiene-text">
+                        <div class="hygiene-name">Nhiệt độ 18-20°C</div>
+                        <div class="hygiene-desc">Mát mẻ giúp ngủ sâu hơn</div>
+                    </div>
+                </div>
+                
+                <div class="hygiene-item" onclick="toggleHygiene(this)">
+                    <div class="hygiene-check">✓</div>
+                    <div class="hygiene-text">
+                        <div class="hygiene-name">Không cafe sau 14h</div>
+                        <div class="hygiene-desc">Cafein tồn tại 6-8h trong cơ thể</div>
+                    </div>
+                </div>
+                
+                <div class="hygiene-item" onclick="toggleHygiene(this)">
+                    <div class="hygiene-check">✓</div>
+                    <div class="hygiene-text">
+                        <div class="hygiene-name">Không điện thoại 30' trước ngủ</div>
+                        <div class="hygiene-desc">Ánh sáng xanh ức chế melatonin</div>
+                    </div>
+                </div>
+                
+                <div class="hygiene-item" onclick="toggleHygiene(this)">
+                    <div class="hygiene-check">✓</div>
+                    <div class="hygiene-text">
+                        <div class="hygiene-name">Không ăn nặng trước ngủ 2-3h</div>
+                        <div class="hygiene-desc">Tiêu hóa làm gián đoạn ngủ sâu</div>
+                    </div>
+                </div>
+                
+                <div class="hygiene-item" onclick="toggleHygiene(this)">
+                    <div class="hygiene-check">✓</div>
+                    <div class="hygiene-text">
+                        <div class="hygiene-name">Tập thể dục (nhưng không sát giờ ngủ)</div>
+                        <div class="hygiene-desc">Tập xong trước ngủ 3h</div>
+                    </div>
+                </div>
+                
+                <div class="hygiene-item" onclick="toggleHygiene(this)">
+                    <div class="hygiene-check">✓</div>
+                    <div class="hygiene-text">
+                        <div class="hygiene-name">Tắm nước ấm trước ngủ</div>
+                        <div class="hygiene-desc">Giúp thả lỏng cơ thể, dễ ngủ</div>
+                    </div>
+                </div>
+                
+                <div class="hygiene-item" onclick="toggleHygiene(this)">
+                    <div class="hygiene-check">✓</div>
+                    <div class="hygiene-text">
+                        <div class="hygiene-name">Giường chỉ để ngủ</div>
+                        <div class="hygiene-desc">Không làm việc, xem phim trên giường</div>
+                    </div>
+                </div>
+                
+                <div class="hygiene-item" onclick="toggleHygiene(this)">
+                    <div class="hygiene-check">✓</div>
+                    <div class="hygiene-text">
+                        <div class="hygiene-name">Thiền/hít thở 5-10 phút</div>
+                        <div class="hygiene-desc">Giúp tâm trí yên tĩnh trước ngủ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sleep Score Calculator -->
+    <section class="calculator-section">
+        <div class="calculator-card">
+            <div class="calculator-header">
+                <div class="calculator-icon">📊</div>
+                <div>
+                    <h3 class="calculator-title">Sleep Score Calculator</h3>
+                    <p class="calculator-subtitle">Tính điểm chất lượng giấc ngủ đêm qua của bạn</p>
+                </div>
+            </div>
+            
+            <div class="calculator-body">
+                <div class="calc-inputs">
+                    <div class="calc-group">
+                        <label class="calc-label">Giờ đi ngủ</label>
+                        <input type="time" class="calc-input" id="bedtime" value="23:00" onchange="calculateSleepScore()">
+                    </div>
+                    
+                    <div class="calc-group">
+                        <label class="calc-label">Giờ thức dậy</label>
+                        <input type="time" class="calc-input" id="waketime" value="07:00" onchange="calculateSleepScore()">
+                    </div>
+                    
+                    <div class="calc-group">
+                        <label class="calc-label">Số lần thức giữa đêm</label>
+                        <select class="calc-select" id="wakeups" onchange="calculateSleepScore()">
+                            <option value="0">0 lần (ngủ xuyên đêm)</option>
+                            <option value="1" selected>1 lần</option>
+                            <option value="2">2 lần</option>
+                            <option value="3">3 lần</option>
+                            <option value="4">4+ lần</option>
+                        </select>
+                    </div>
+                    
+                    <div class="calc-group">
+                        <label class="calc-label">Cảm giác khi thức dậy</label>
+                        <select class="calc-select" id="feeling" onchange="calculateSleepScore()">
+                            <option value="excellent">Rất sảng khoái</option>
+                            <option value="good" selected>Khá ổn</option>
+                            <option value="fair">Hơi mệt</option>
+                            <option value="poor">Rất mệt, uể oải</option>
+                        </select>
+                    </div>
+                    
+                    <div class="calc-group">
+                        <label class="calc-label">Có dùng điện thoại trước ngủ?</label>
+                        <select class="calc-select" id="phone" onchange="calculateSleepScore()">
+                            <option value="no">Không (tốt nhất)</option>
+                            <option value="short">Dưới 15 phút</option>
+                            <option value="medium" selected>15-30 phút</option>
+                            <option value="long">Trên 30 phút</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="calc-results">
+                    <div class="score-display">
+                        <div class="score-label">Điểm giấc ngủ</div>
+                        <div class="score-value good" id="scoreValue">75</div>
+                        <div class="score-rating good" id="scoreRating">Khá tốt</div>
+                    </div>
+                    
+                    <div class="score-details">
+                        <div class="score-detail-item">
+                            <span class="score-detail-label">Thời gian ngủ</span>
+                            <span class="score-detail-value" id="sleepDuration">8h</span>
+                        </div>
+                        <div class="score-detail-item">
+                            <span class="score-detail-label">Chu kỳ ngủ</span>
+                            <span class="score-detail-value" id="sleepCycles">5.3</span>
+                        </div>
+                        <div class="score-detail-item">
+                            <span class="score-detail-label">Khuyến nghị</span>
+                            <span class="score-detail-value" id="sleepAdvice">Cải thiện nhẹ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Bedtime Calculator -->
+    <section class="bedtime-section">
+        <div class="bedtime-card">
+            <div class="section-header" style="margin-bottom: 25px;">
+                <span class="section-eyebrow">BEDTIME CALCULATOR</span>
+                <h2 style="font-size: 1.6rem;">Nên đi ngủ lúc mấy giờ?</h2>
+                <p>Nhập giờ thức dậy mong muốn — hệ thống tính giờ ngủ lý tưởng dựa trên chu kỳ 90 phút.</p>
+            </div>
+            
+            <div class="bedtime-input-row">
+                <div class="calc-group">
+                    <label class="calc-label">Giờ thức dậy mong muốn</label>
+                    <input type="time" class="calc-input" id="wakeUpTime" value="06:30" onchange="calculateBedtime()">
+                </div>
+                <button class="btn-cta" style="padding: 13px 28px; font-size: 0.92rem;" onclick="calculateBedtime()">Tính giờ ngủ</button>
+            </div>
+            
+            <div class="bedtime-results" id="bedtimeResults">
+                <!-- Rendered by JS -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Evening Routine -->
+    <section class="section routine-section">
+        <div class="section-header">
+            <span class="section-eyebrow">ROUTINE HÀNG ĐÊM</span>
+            <h2>60 phút trước khi ngủ</h2>
+            <p>Click để đánh dấu các bước bạn đã làm — xây dựng thói quen ngủ ngon.</p>
+        </div>
+        
+        <div class="routine-card">
+            <div class="routine-timeline">
+                <div class="routine-step" onclick="toggleRoutine(this)">
+                    <div class="routine-time">-60'</div>
+                    <div class="routine-info">
+                        <div class="routine-name">Tắt thiết bị điện tử</div>
+                        <div class="routine-desc">Điện thoại, TV, laptop — ánh sáng xanh ức chế melatonin</div>
+                    </div>
+                    <div class="routine-duration">5 phút</div>
+                </div>
+                
+                <div class="routine-step" onclick="toggleRoutine(this)">
+                    <div class="routine-time">-55'</div>
+                    <div class="routine-info">
+                        <div class="routine-name">Tắm nước ấm hoặc rửa mặt</div>
+                        <div class="routine-desc">Giúp thả lỏng cơ thể, báo hiệu giờ ngủ</div>
+                    </div>
+                    <div class="routine-duration">10 phút</div>
+                </div>
+                
+                <div class="routine-step" onclick="toggleRoutine(this)">
+                    <div class="routine-time">-45'</div>
+                    <div class="routine-info">
+                        <div class="routine-name">Stretching nhẹ hoặc yoga</div>
+                        <div class="routine-desc">Child's pose, cat-cow, legs up the wall</div>
+                    </div>
+                    <div class="routine-duration">10 phút</div>
+                </div>
+                
+                <div class="routine-step" onclick="toggleRoutine(this)">
+                    <div class="routine-time">-35'</div>
+                    <div class="routine-info">
+                        <div class="routine-name">Đọc sách giấy hoặc journaling</div>
+                        <div class="routine-desc">Viết 3 điều biết ơn, hoặc đọc sách nhẹ nhàng</div>
+                    </div>
+                    <div class="routine-duration">15 phút</div>
+                </div>
+                
+                <div class="routine-step" onclick="toggleRoutine(this)">
+                    <div class="routine-time">-20'</div>
+                    <div class="routine-info">
+                        <div class="routine-name">Thiền hoặc breathing 4-7-8</div>
+                        <div class="routine-desc">Hít 4s, giữ 7s, thở ra 8s — làm 4 lần</div>
+                    </div>
+                    <div class="routine-duration">10 phút</div>
+                </div>
+                
+                <div class="routine-step" onclick="toggleRoutine(this)">
+                    <div class="routine-time">-10'</div>
+                    <div class="routine-info">
+                        <div class="routine-name">Chuẩn bị phòng ngủ</div>
+                        <div class="routine-desc">Tắt đèn, chỉnh nhiệt độ, kéo rèm, chuẩn bị nước</div>
+                    </div>
+                    <div class="routine-duration">5 phút</div>
+                </div>
+                
+                <div class="routine-step" onclick="toggleRoutine(this)">
+                    <div class="routine-time">-5'</div>
+                    <div class="routine-info">
+                        <div class="routine-name">Lên giường, nhắm mắt</div>
+                        <div class="routine-desc">Tập trung vào hơi thở, không suy nghĩ</div>
+                    </div>
+                    <div class="routine-duration">5 phút</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Tips -->
+    <section class="section">
+        <div class="section-header">
+            <span class="section-eyebrow">MẸO THỰC TẾ</span>
+            <h2>4 mẹo cho phụ nữ 30+ bận rộn</h2>
+            <p>Áp dụng ngay hôm nay để cải thiện giấc ngủ.</p>
+        </div>
+        
+        <div class="tips-grid">
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <h4>Quy tắc 10-3-2-1-0</h4>
+                <p><strong>10h</strong> trước ngủ: không cafein · <strong>3h</strong>: không ăn nặng · <strong>2h</strong>: không làm việc · <strong>1h</strong>: không màn hình · <strong>0</strong>: không snooze buổi sáng.</p>
+            </div>
+            
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <h4>Chu kỳ kinh nguyệt</h4>
+                <p>Tuần trước hành kinh (luteal phase): nhiệt độ cơ thể tăng, khó ngủ sâu. Chấp nhận, không ép bản thân. Tập nhẹ, ngủ sớm hơn 30 phút.</p>
+            </div>
+            
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <h4>Nếu không ngủ được sau 20'</h4>
+                <p>Ra khỏi giường, làm gì đó nhẹ (đọc sách, nghe nhạc) trong ánh sáng mờ. Chỉ quay lại khi buồn ngủ. Đừng nằm trằn trọc.</p>
+            </div>
+            
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <h4>Supplements hỗ trợ (hỏi bác sĩ)</h4>
+                <p>Magnesium glycinate (200-400mg), L-theanine (200mg), Melatonin (0.3-1mg, không dùng dài hạn). Luôn tham khảo ý kiến bác sĩ trước khi dùng.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-card">
+            <div class="cta-content">
+                <h2>🌙 Chúc bạn ngủ ngon!</h2>
+                <p>Giấc ngủ là foundation — khi ngủ tốt, mọi thứ khác (tập luyện, dinh dưỡng, tinh thần) đều tốt hơn.</p>
+                <div class="cta-buttons">
+                    <a href="lifestyle-overview.html" class="btn-cta">← Quay lại Lối sống</a>
+                    <a href="lifestyle-stress.html" class="btn-cta secondary">Tiếp theo: Stress →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="lifestyle-overview.html">Lối sống</a>
+            <a href="gym-overview.html">GYM</a>
+            <a href="nutrition-overview.html">Dinh dưỡng</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">✓</div>
+        <div class="toast-content" id="toastContent">Đã lưu!</div>
+    </div>
+    
+    <script>
+        // ==================== STATE ====================
+        let hygieneState = {};
+        let routineState = {};
+        
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            loadStates();
+            calculateSleepScore();
+            calculateBedtime();
+        });
+        
+        function loadStates() {
+            const hygiene = localStorage.getItem('fit30_sleep_hygiene');
+            const routine = localStorage.getItem('fit30_sleep_routine');
+            
+            if (hygiene) {
+                try {
+                    hygieneState = JSON.parse(hygiene);
+                    const today = new Date().toISOString().split('T')[0];
+                    if (hygieneState.date === today) {
+                        const items = document.querySelectorAll('.hygiene-item');
+                        hygieneState.checked.forEach((isChecked, idx) => {
+                            if (items[idx] && isChecked) items[idx].classList.add('checked');
+                        });
+                    }
+                } catch (e) {}
+            }
+            
+            if (routine) {
+                try {
+                    routineState = JSON.parse(routine);
+                    const today = new Date().toISOString().split('T')[0];
+                    if (routineState.date === today) {
+                        const steps = document.querySelectorAll('.routine-step');
+                        routineState.checked.forEach((isChecked, idx) => {
+                            if (steps[idx] && isChecked) steps[idx].classList.add('checked');
+                        });
+                    }
+                } catch (e) {}
+            }
+        }
+        
+        // ==================== TOGGLES ====================
+        function toggleHygiene(el) {
+            el.classList.toggle('checked');
+            
+            const checked = Array.from(document.querySelectorAll('.hygiene-item')).map(item => 
+                item.classList.contains('checked')
+            );
+            
+            hygieneState = {
+                date: new Date().toISOString().split('T')[0],
+                checked: checked
+            };
+            localStorage.setItem('fit30_sleep_hygiene', JSON.stringify(hygieneState));
+        }
+        
+        function toggleRoutine(el) {
+            el.classList.toggle('checked');
+            
+            const checked = Array.from(document.querySelectorAll('.routine-step')).map(step => 
+                step.classList.contains('checked')
+            );
+            
+            routineState = {
+                date: new Date().toISOString().split('T')[0],
+                checked: checked
+            };
+            localStorage.setItem('fit30_sleep_routine', JSON.stringify(routineState));
+        }
+        
+        // ==================== SLEEP SCORE CALCULATOR ====================
+        function calculateSleepScore() {
+            const bedtime = document.getElementById('bedtime').value;
+            const waketime = document.getElementById('waketime').value;
+            const wakeups = parseInt(document.getElementById('wakeups').value);
+            const feeling = document.getElementById('feeling').value;
+            const phone = document.getElementById('phone').value;
+            
+            // Calculate duration
+            const [bH, bM] = bedtime.split(':').map(Number);
+            const [wH, wM] = waketime.split(':').map(Number);
+            
+            let durationMinutes = (wH * 60 + wM) - (bH * 60 + bM);
+            if (durationMinutes < 0) durationMinutes += 24 * 60;
+            
+            const durationHours = durationMinutes / 60;
+            const cycles = (durationMinutes / 90).toFixed(1);
+            
+            // Calculate score (0-100)
+            let score = 100;
+            
+            // Duration score (max 30 points)
+            if (durationHours >= 7 && durationHours <= 9) {
+                score += 0; // perfect
+            } else if (durationHours >= 6 && durationHours < 7) {
+                score -= 10;
+            } else if (durationHours > 9 && durationHours <= 10) {
+                score -= 5;
+            } else {
+                score -= 20;
+            }
+            
+            // Wakeups score (max 20 points)
+            score -= wakeups * 8;
+            
+            // Feeling score (max 25 points)
+            const feelingScores = { excellent: 0, good: -5, fair: -15, poor: -25 };
+            score += feelingScores[feeling];
+            
+            // Phone score (max 15 points)
+            const phoneScores = { no: 0, short: -3, medium: -8, long: -15 };
+            score += phoneScores[phone];
+            
+            // Optimal bedtime bonus (22h-23h is best)
+            if (bH >= 22 && bH < 23) score += 5;
+            else if (bH >= 21 && bH < 22) score += 3;
+            else if (bH >= 23 && bH < 24) score -= 3;
+            
+            score = Math.max(0, Math.min(100, score));
+            
+            // Determine rating
+            let rating, ratingClass, advice;
+            if (score >= 85) {
+                rating = 'Xuất sắc';
+                ratingClass = 'excellent';
+                advice = 'Duy trì!';
+            } else if (score >= 70) {
+                rating = 'Khá tốt';
+                ratingClass = 'good';
+                advice = 'Cải thiện nhẹ';
+            } else if (score >= 50) {
+                rating = 'Trung bình';
+                ratingClass = 'fair';
+                advice = 'Cần cải thiện';
+            } else {
+                rating = 'Cần cải thiện';
+                ratingClass = 'poor';
+                advice = 'Ưu tiên cao';
+            }
+            
+            // Update UI
+            const scoreEl = document.getElementById('scoreValue');
+            scoreEl.textContent = Math.round(score);
+            scoreEl.className = 'score-value ' + ratingClass;
+            
+            const ratingEl = document.getElementById('scoreRating');
+            ratingEl.textContent = rating;
+            ratingEl.className = 'score-rating ' + ratingClass;
+            
+            document.getElementById('sleepDuration').textContent = durationHours.toFixed(1) + 'h';
+            document.getElementById('sleepCycles').textContent = cycles + ' chu kỳ';
+            document.getElementById('sleepAdvice').textContent = advice;
+        }
+        
+        // ==================== BEDTIME CALCULATOR ====================
+        function calculateBedtime() {
+            const wakeTime = document.getElementById('wakeUpTime').value;
+            const [wH, wM] = wakeTime.split(':').map(Number);
+            const wakeMinutes = wH * 60 + wM;
+            
+            // Options: 6, 5, 4 cycles (90 min each) + 15 min to fall asleep
+            const fallAsleepTime = 15;
+            const cycles = [
+                { count: 6, hours: 9, recommended: false, note: 'Lý tưởng cho recovery' },
+                { count: 5, hours: 7.5, recommended: true, note: 'Khuyến nghị' },
+                { count: 4, hours: 6, recommended: false, note: 'Tối thiểu' }
+            ];
+            
+            const results = cycles.map(cycle => {
+                const sleepMinutes = wakeMinutes - (cycle.count * 90) - fallAsleepTime;
+                const adjustedMinutes = sleepMinutes < 0 ? sleepMinutes + 24 * 60 : sleepMinutes;
+                const hours = Math.floor(adjustedMinutes / 60);
+                const minutes = adjustedMinutes % 60;
+                
+                return {
+                    time: `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`,
+                    hours: cycle.hours,
+                    cycles: cycle.count,
+                    recommended: cycle.recommended,
+                    note: cycle.note
+                };
+            });
+            
+            const container = document.getElementById('bedtimeResults');
+            container.innerHTML = results.map(r => `
+                <div class="bedtime-option ${r.recommended ? 'recommended' : ''}">
+                    ${r.recommended ? '<div class="bedtime-recommend-badge">KHUYẾN NGHỊ</div>' : ''}
+                    <div class="bedtime-time">${r.time}</div>
+                    <div class="bedtime-hours">${r.hours}h · ${r.cycles} chu kỳ</div>
+                    <div class="bedtime-note">${r.note}</div>
+                </div>
+            `).join('');
+        }
+        
+        // ==================== TOAST ====================
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastContent').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+    </script>
+</body>
+</html>
