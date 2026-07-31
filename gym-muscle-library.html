@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư Viện Bài Tập - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Base palette */
+            --text-dark: #4A4A5A;
+            --text-medium: #7A7A8A;
+            --text-light: #A0A0B0;
+            --white: #FFFFFF;
+            --bg-primary: #FFFBFB;
+            --bg-soft: #FFF8F5;
+            --border-soft: #F0E8E6;
+            
+            /* Muscle group colors - Pastel harmony */
+            --chest: #F4A698;
+            --chest-soft: #FCEAE5;
+            --chest-gradient: linear-gradient(135deg, #FCEAE5 0%, #F4A698 100%);
+            
+            --shoulder: #B8A8E8;
+            --shoulder-soft: #EEE8F8;
+            --shoulder-gradient: linear-gradient(135deg, #EEE8F8 0%, #B8A8E8 100%);
+            
+            --back: #7FB5B5;
+            --back-soft: #E0F0F0;
+            --back-gradient: linear-gradient(135deg, #E0F0F0 0%, #7FB5B5 100%);
+            
+            --arms: #E88A9A;
+            --arms-soft: #FBE5EA;
+            --arms-gradient: linear-gradient(135deg, #FBE5EA 0%, #E88A9A 100%);
+            
+            --glutes: #D8A8D8;
+            --glutes-soft: #F5E8F5;
+            --glutes-gradient: linear-gradient(135deg, #F5E8F5 0%, #D8A8D8 100%);
+            
+            --legs: #8FC5A8;
+            --legs-soft: #E5F5EC;
+            --legs-gradient: linear-gradient(135deg, #E5F5EC 0%, #8FC5A8 100%);
+            
+            --core: #E8B87A;
+            --core-soft: #FBF0E0;
+            --core-gradient: linear-gradient(135deg, #FBF0E0 0%, #E8B87A 100%);
+            
+            /* Main gradient */
+            --main-gradient: linear-gradient(135deg, #F4A698 0%, #B8A8E8 50%, #7FB5B5 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Decorative background blobs */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        body::before {
+            width: 500px;
+            height: 500px;
+            background: var(--chest);
+            top: -150px;
+            right: -150px;
+        }
+        
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: var(--shoulder);
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 20px 40px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            color: var(--chest);
+        }
+        
+        /* Page Hero */
+        .page-hero {
+            padding: 70px 40px 50px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .page-badge {
+            display: inline-block;
+            background: var(--main-gradient);
+            color: white;
+            padding: 8px 22px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 25px;
+            box-shadow: 0 6px 20px rgba(244,166,152,0.25);
+            letter-spacing: 0.5px;
+        }
+        
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 18px;
+            line-height: 1.2;
+        }
+        
+        .page-hero h1 span {
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .page-hero p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 35px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-pill {
+            background: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            font-weight: 600;
+            border: 1px solid var(--border-soft);
+            transition: all 0.3s;
+        }
+        
+        .stat-pill:nth-child(1) strong { color: var(--chest); }
+        .stat-pill:nth-child(2) strong { color: var(--shoulder); }
+        .stat-pill:nth-child(3) strong { color: var(--back); }
+        
+        .stat-pill:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+        
+        .stat-pill strong {
+            font-weight: 700;
+            margin-right: 5px;
+            font-size: 1.1rem;
+        }
+        
+        /* Filter Bar */
+        .filter-bar {
+            background: white;
+            padding: 28px 40px;
+            margin: 0 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 78px;
+            z-index: 50;
+            border: 1px solid var(--border-soft);
+        }
+        
+        .search-box {
+            position: relative;
+            margin-bottom: 22px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 22px 15px 55px;
+            border: 2px solid var(--border-soft);
+            border-radius: 16px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: var(--bg-soft);
+            font-weight: 500;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--chest);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(244,166,152,0.1);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 1.2rem;
+        }
+        
+        .filter-groups {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 22px;
+        }
+        
+        .filter-group h4 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .filter-chip {
+            padding: 7px 16px;
+            background: var(--bg-soft);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            user-select: none;
+        }
+        
+        .filter-chip:hover {
+            background: white;
+            border-color: var(--chest);
+            color: var(--chest);
+            transform: translateY(-1px);
+        }
+        
+        .filter-chip.active {
+            background: var(--main-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(244,166,152,0.3);
+        }
+        
+        /* Muscle Tabs - Mỗi tab có màu riêng */
+        .muscle-tabs {
+            display: flex;
+            gap: 10px;
+            padding: 0 40px;
+            margin-bottom: 35px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+        }
+        
+        .muscle-tab {
+            padding: 12px 22px;
+            background: white;
+            border: 2px solid var(--border-soft);
+            border-radius: 16px;
+            font-weight: 600;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-size: 0.95rem;
+            position: relative;
+        }
+        
+        .muscle-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        }
+        
+        /* Tab colors khi active */
+        .muscle-tab[data-muscle="all"].active {
+            background: var(--main-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(244,166,152,0.3);
+        }
+        .muscle-tab[data-muscle="chest"].active {
+            background: var(--chest-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(244,166,152,0.3);
+        }
+        .muscle-tab[data-muscle="shoulder"].active {
+            background: var(--shoulder-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(184,168,232,0.3);
+        }
+        .muscle-tab[data-muscle="back"].active {
+            background: var(--back-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(127,181,181,0.3);
+        }
+        .muscle-tab[data-muscle="arms"].active {
+            background: var(--arms-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(232,138,154,0.3);
+        }
+        .muscle-tab[data-muscle="glutes"].active {
+            background: var(--glutes-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(216,168,216,0.3);
+        }
+        .muscle-tab[data-muscle="legs"].active {
+            background: var(--legs-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(143,197,168,0.3);
+        }
+        .muscle-tab[data-muscle="core"].active {
+            background: var(--core-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(232,184,122,0.3);
+        }
+        
+        .tab-count {
+            display: inline-block;
+            background: rgba(255,255,255,0.35);
+            padding: 2px 9px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-left: 6px;
+            font-weight: 700;
+        }
+        
+        .muscle-tab:not(.active) .tab-count {
+            background: var(--bg-soft);
+            color: var(--text-light);
+        }
+        
+        /* Exercise Container */
+        .exercise-container {
+            padding: 0 40px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .muscle-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .muscle-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .muscle-header {
+            margin-bottom: 28px;
+            padding: 25px 30px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Header color theo nhóm cơ */
+        .muscle-section[data-muscle="chest"] .muscle-header {
+            background: var(--chest-gradient);
+        }
+        .muscle-section[data-muscle="shoulder"] .muscle-header {
+            background: var(--shoulder-gradient);
+        }
+        .muscle-section[data-muscle="back"] .muscle-header {
+            background: var(--back-gradient);
+        }
+        .muscle-section[data-muscle="arms"] .muscle-header {
+            background: var(--arms-gradient);
+        }
+        .muscle-section[data-muscle="glutes"] .muscle-header {
+            background: var(--glutes-gradient);
+        }
+        .muscle-section[data-muscle="legs"] .muscle-header {
+            background: var(--legs-gradient);
+        }
+        .muscle-section[data-muscle="core"] .muscle-header {
+            background: var(--core-gradient);
+        }
+        
+        .muscle-header h2 {
+            font-size: 2rem;
+            margin-bottom: 6px;
+            color: var(--text-dark);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .muscle-header p {
+            color: var(--text-medium);
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+            font-weight: 500;
+        }
+        
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 22px;
+        }
+        
+        /* Exercise Card - có accent color theo nhóm cơ */
+        .exercise-card {
+            background: white;
+            border-radius: 22px;
+            padding: 26px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .exercise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--card-accent);
+            transition: height 0.3s;
+        }
+        
+        .exercise-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: var(--card-accent-soft);
+        }
+        
+        .exercise-card:hover::before {
+            height: 8px;
+        }
+        
+        /* Card accent colors */
+        .exercise-card[data-muscle="chest"] {
+            --card-accent: var(--chest);
+            --card-accent-soft: var(--chest-soft);
+        }
+        .exercise-card[data-muscle="shoulder"] {
+            --card-accent: var(--shoulder);
+            --card-accent-soft: var(--shoulder-soft);
+        }
+        .exercise-card[data-muscle="back"] {
+            --card-accent: var(--back);
+            --card-accent-soft: var(--back-soft);
+        }
+        .exercise-card[data-muscle="arms"] {
+            --card-accent: var(--arms);
+            --card-accent-soft: var(--arms-soft);
+        }
+        .exercise-card[data-muscle="glutes"] {
+            --card-accent: var(--glutes);
+            --card-accent-soft: var(--glutes-soft);
+        }
+        .exercise-card[data-muscle="legs"] {
+            --card-accent: var(--legs);
+            --card-accent-soft: var(--legs-soft);
+        }
+        .exercise-card[data-muscle="core"] {
+            --card-accent: var(--core);
+            --card-accent-soft: var(--core-soft);
+        }
+        
+        .exercise-target {
+            display: inline-block;
+            background: var(--card-accent-soft);
+            color: var(--card-accent);
+            padding: 5px 14px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            letter-spacing: 0.3px;
+        }
+        
+        .exercise-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        
+        .exercise-meta {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .meta-tag {
+            font-size: 0.8rem;
+            color: var(--text-medium);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 600;
+        }
+        
+        .difficulty {
+            display: flex;
+            gap: 3px;
+        }
+        
+        .difficulty-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border-soft);
+        }
+        
+        .difficulty-dot.filled {
+            background: var(--card-accent);
+        }
+        
+        .exercise-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+        
+        .tag {
+            font-size: 0.72rem;
+            padding: 4px 11px;
+            border-radius: 10px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        
+        .tag.compound { background: #FFE5E5; color: #D87070; }
+        .tag.isolation { background: #E5F0FF; color: #7090D8; }
+        .tag.machine { background: #E5FFE8; color: #60B870; }
+        .tag.dumbbell { background: #FFF0E0; color: #D89860; }
+        .tag.barbell { background: #F0E5FF; color: #9070D8; }
+        .tag.cable { background: #E0F8F8; color: #50A8A8; }
+        .tag.bodyweight { background: #F5F5F5; color: #808080; }
+        
+        .view-btn {
+            display: block;
+            margin-top: 18px;
+            padding: 11px;
+            background: var(--card-accent-soft);
+            color: var(--card-accent);
+            text-align: center;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            letter-spacing: 0.3px;
+        }
+        
+        .exercise-card:hover .view-btn {
+            background: var(--card-accent);
+            color: white;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(74, 74, 90, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal {
+            background: white;
+            border-radius: 28px;
+            max-width: 820px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-header {
+            padding: 38px 38px 25px;
+            border-bottom: 1px solid var(--border-soft);
+            position: sticky;
+            top: 0;
+            background: white;
+            border-radius: 28px 28px 0 0;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .modal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--modal-accent, var(--main-gradient));
+            border-radius: 28px 28px 0 0;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 22px;
+            right: 22px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--bg-soft);
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-medium);
+            transition: all 0.3s;
+            z-index: 11;
+        }
+        
+        .modal-close:hover {
+            background: var(--chest-soft);
+            color: var(--chest);
+            transform: rotate(90deg);
+        }
+        
+        .modal-title {
+            font-size: 2.1rem;
+            margin-bottom: 12px;
+            padding-right: 55px;
+            line-height: 1.2;
+        }
+        
+        .modal-meta {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+        
+        .modal-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 15px;
+            background: var(--bg-soft);
+            border-radius: 12px;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            font-weight: 600;
+        }
+        
+        .modal-body {
+            padding: 32px 38px;
+        }
+        
+        .modal-section {
+            margin-bottom: 32px;
+        }
+        
+        .modal-section h3 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-indicator {
+            width: 5px;
+            height: 22px;
+            background: var(--modal-accent, var(--main-gradient));
+            border-radius: 3px;
+        }
+        
+        .video-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--modal-accent, var(--main-gradient));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .cue-list {
+            list-style: none;
+        }
+        
+        .cue-list li {
+            padding: 13px 16px 13px 48px;
+            background: var(--bg-soft);
+            border-radius: 13px;
+            margin-bottom: 9px;
+            position: relative;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .cue-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 22px;
+            height: 22px;
+            background: var(--legs);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+        
+        .mistake-list li {
+            background: #FFF0F0;
+        }
+        
+        .mistake-list li::before {
+            content: '✕';
+            background: var(--arms);
+            color: white;
+        }
+        
+        .alternatives-section {
+            background: var(--bg-soft);
+            padding: 22px;
+            border-radius: 18px;
+        }
+        
+        .alternative-group {
+            margin-bottom: 16px;
+        }
+        
+        .alternative-group:last-child {
+            margin-bottom: 0;
+        }
+        
+        .alternative-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .alternative-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .alternative-chip {
+            padding: 7px 15px;
+            background: white;
+            border: 1.5px solid var(--border-soft);
+            border-radius: 11px;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .alternative-chip:hover {
+            border-color: var(--chest);
+            color: var(--chest);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(244,166,152,0.15);
+        }
+        
+        .modal-footer {
+            padding: 22px 38px 32px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 13px 26px;
+            border-radius: 13px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+            letter-spacing: 0.3px;
+        }
+        
+        .btn-primary {
+            background: var(--main-gradient);
+            color: white;
+            flex: 1;
+            box-shadow: 0 6px 20px rgba(244,166,152,0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(244,166,152,0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-soft);
+            color: var(--text-medium);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--chest-soft);
+            color: var(--chest);
+        }
+        
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 70px 20px;
+            color: var(--text-light);
+            display: none;
+        }
+        
+        .no-results.active {
+            display: block;
+        }
+        
+        .no-results h3 {
+            color: var(--text-medium);
+            margin-bottom: 10px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .page-hero {
+                padding: 45px 20px 35px;
+            }
+            
+            .page-hero h1 {
+                font-size: 2.1rem;
+            }
+            
+            .filter-bar {
+                margin: 0 20px 20px;
+                padding: 22px;
+                top: 68px;
+            }
+            
+            .muscle-tabs {
+                padding: 0 20px;
+            }
+            
+            .exercise-container {
+                padding: 0 20px 50px;
+            }
+            
+            .exercise-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .muscle-header {
+                padding: 20px;
+            }
+            
+            .muscle-header h2 {
+                font-size: 1.6rem;
+            }
+            
+            .modal {
+                max-height: 95vh;
+                border-radius: 22px;
+            }
+            
+            .modal-header, .modal-body, .modal-footer {
+                padding-left: 25px;
+                padding-right: 25px;
+            }
+            
+            .modal-title {
+                font-size: 1.6rem;
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 9px;
+            height: 9px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-soft);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--chest) 0%, var(--shoulder) 100%);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--arms) 0%, var(--glutes) 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="gym-overview.html" class="back-link">← Quay lại GYM</a>
+    </header>
+    
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <span class="page-badge">DATABASE</span>
+        <h1>Thư Viện <span>Bài Tập</span></h1>
+        <p>Database trung tâm với hơn 40 bài tập được phân loại theo nhóm cơ, thiết bị và trình độ. Nền tảng để xây dựng buổi tập cá nhân hóa.</p>
+        
+        <div class="stats-row">
+            <div class="stat-pill"><strong>40+</strong> Bài tập</div>
+            <div class="stat-pill"><strong>7</strong> Nhóm cơ</div>
+            <div class="stat-pill"><strong>5</strong> Loại thiết bị</div>
+        </div>
+    </section>
+    
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <div class="search-box">
+            <span class="search-icon">⌕</span>
+            <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm bài tập... (ví dụ: Hip Thrust, Squat)">
+        </div>
+        
+        <div class="filter-groups">
+            <div class="filter-group">
+                <h4>Thiết bị</h4>
+                <div class="filter-options" id="equipmentFilter">
+                    <div class="filter-chip active" data-filter="all" data-type="equipment">Tất cả</div>
+                    <div class="filter-chip" data-filter="machine" data-type="equipment">Machine</div>
+                    <div class="filter-chip" data-filter="dumbbell" data-type="equipment">Dumbbell</div>
+                    <div class="filter-chip" data-filter="barbell" data-type="equipment">Barbell</div>
+                    <div class="filter-chip" data-filter="cable" data-type="equipment">Cable</div>
+                    <div class="filter-chip" data-filter="bodyweight" data-type="equipment">Bodyweight</div>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h4>Trình độ</h4>
+                <div class="filter-options" id="levelFilter">
+                    <div class="filter-chip active" data-filter="all" data-type="level">Tất cả</div>
+                    <div class="filter-chip" data-filter="beginner" data-type="level">Beginner</div>
+                    <div class="filter-chip" data-filter="intermediate" data-type="level">Intermediate</div>
+                    <div class="filter-chip" data-filter="advanced" data-type="level">Advanced</div>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h4>Loại</h4>
+                <div class="filter-options" id="typeFilter">
+                    <div class="filter-chip active" data-filter="all" data-type="type">Tất cả</div>
+                    <div class="filter-chip" data-filter="compound" data-type="type">Compound</div>
+                    <div class="filter-chip" data-filter="isolation" data-type="type">Isolation</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Muscle Tabs -->
+    <div class="muscle-tabs" id="muscleTabs">
+        <div class="muscle-tab active" data-muscle="all">Tất cả <span class="tab-count" id="count-all">40</span></div>
+        <div class="muscle-tab" data-muscle="chest">Ngực <span class="tab-count" id="count-chest">6</span></div>
+        <div class="muscle-tab" data-muscle="shoulder">Vai <span class="tab-count" id="count-shoulder">6</span></div>
+        <div class="muscle-tab" data-muscle="back">Lưng <span class="tab-count" id="count-back">6</span></div>
+        <div class="muscle-tab" data-muscle="arms">Tay <span class="tab-count" id="count-arms">6</span></div>
+        <div class="muscle-tab" data-muscle="glutes">Mông <span class="tab-count" id="count-glutes">6</span></div>
+        <div class="muscle-tab" data-muscle="legs">Chân <span class="tab-count" id="count-legs">6</span></div>
+        <div class="muscle-tab" data-muscle="core">Bụng <span class="tab-count" id="count-core">4</span></div>
+    </div>
+    
+    <!-- Exercise Container -->
+    <div class="exercise-container" id="exerciseContainer"></div>
+    
+    <!-- No Results -->
+    <div class="no-results" id="noResults">
+        <h3>Không tìm thấy bài tập phù hợp</h3>
+        <p>Hãy thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</p>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <button class="modal-close" id="modalClose">✕</button>
+                <h2 class="modal-title" id="modalTitle">Exercise Name</h2>
+                <div class="modal-meta" id="modalMeta"></div>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="modalCloseBtn">Đóng</button>
+                <button class="btn btn-primary">Thêm vào buổi tập</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // ==================== DATABASE ====================
+        const exerciseDatabase = [
+            // ===== CHEST =====
+            {
+                id: 1, name: "Machine Chest Press", nameEn: "Machine Chest Press",
+                muscle: "chest", target: "Pectoralis Major", equipment: "machine",
+                level: "beginner", difficulty: 1, type: "compound", tags: ["Push", "Horizontal"],
+                cues: ["Ngồi thẳng lưng, áp sát vào ghế", "Điều chỉnh ghế sao cho tay cầm ngang ngực", "Đẩy tay cầm về phía trước, không khóa khuỷu tay", "Hạ xuống chậm 2-3 giây, kiểm soát"],
+                mistakes: ["Cong lưng hoặc nhấc mông khỏi ghế", "Khóa khuỷu tay hoàn toàn ở đỉnh", "Hạ tạ quá nhanh, mất kiểm soát"],
+                alternatives: { "Phòng gym đông": ["Smith Machine Press", "Dumbbell Floor Press"], "Đau vai": ["Neutral Grip Press", "Floor Press"], "Không có machine": ["Dumbbell Bench Press", "Push-ups"] }
+            },
+            {
+                id: 2, name: "Incline Dumbbell Press", nameEn: "Incline Dumbbell Press",
+                muscle: "chest", target: "Upper Pectoralis", equipment: "dumbbell",
+                level: "intermediate", difficulty: 2, type: "compound", tags: ["Push", "Incline"],
+                cues: ["Điều chỉnh ghế nghiêng 30-45 độ", "Giữ tạ ngang ngực, khuỷu tay mở 45 độ", "Đẩy tạ lên theo hình vòng cung nhẹ", "Siết ngực ở đỉnh chuyển động"],
+                mistakes: ["Ghế nghiêng quá cao (chuyển sang vai)", "Mở khuỷu tay quá rộng (90 độ)", "Hạ tạ quá thấp, căng vai quá mức"],
+                alternatives: { "Phòng gym đông": ["Incline Smith Press", "Incline Machine Press"], "Đau vai": ["Neutral Grip Incline Press", "Low Incline (15°)"], "Không có tạ": ["Incline Push-ups", "Band Incline Press"] }
+            },
+            {
+                id: 3, name: "Pec Deck Fly", nameEn: "Pec Deck Fly",
+                muscle: "chest", target: "Pectoralis Major", equipment: "machine",
+                level: "beginner", difficulty: 1, type: "isolation", tags: ["Fly", "Isolation"],
+                cues: ["Điều chỉnh ghế sao cho khuỷu tay ngang ngực", "Giữ khuỷu tay hơi cong cố định", "Đưa tay vào giữa theo hình vòng cung", "Siết ngực 1 giây ở điểm giữa"],
+                mistakes: ["Duỗi thẳng tay hoàn toàn", "Dùng lực cánh tay thay vì ngực", "Di chuyển quá nhanh"],
+                alternatives: { "Phòng gym đông": ["Cable Crossover", "Dumbbell Fly"], "Đau vai": ["Limited ROM Fly", "Floor Fly"], "Không có machine": ["Dumbbell Fly", "Cable Fly"] }
+            },
+            {
+                id: 4, name: "Dumbbell Bench Press", nameEn: "Dumbbell Bench Press",
+                muscle: "chest", target: "Pectoralis Major", equipment: "dumbbell",
+                level: "intermediate", difficulty: 2, type: "compound", tags: ["Push", "Horizontal"],
+                cues: ["Nằm trên ghế phẳng, chân chạm đất", "Giữ tạ ngang ngực, khuỷu tay 45 độ", "Đẩy tạ lên theo đường thẳng", "Hạ xuống chậm, kiểm soát"],
+                mistakes: ["Cong lưng quá mức (arch quá nhiều)", "Tạ không đối xứng hai bên", "Hạ tạ quá nhanh"],
+                alternatives: { "Phòng gym đông": ["Machine Chest Press", "Smith Press"], "Đau vai": ["Neutral Grip Press", "Floor Press"], "Không có tạ": ["Push-ups", "Band Press"] }
+            },
+            {
+                id: 5, name: "Cable Crossover", nameEn: "Cable Crossover",
+                muscle: "chest", target: "Pectoralis Major", equipment: "cable",
+                level: "intermediate", difficulty: 2, type: "isolation", tags: ["Fly", "Cable"],
+                cues: ["Đứng giữa 2 cáp, bước chân trước lên", "Hơi nghiêng người về phía trước", "Đưa 2 tay vào giữa theo hình vòng cung", "Siết ngực 1 giây ở điểm giữa"],
+                mistakes: ["Đứng thẳng người (giảm hiệu quả)", "Dùng lực vai thay vì ngực", "Khóa khuỷu tay"],
+                alternatives: { "Phòng gym đông": ["Pec Deck", "Dumbbell Fly"], "Đau vai": ["Low Cable Fly", "Limited ROM"], "Không có cable": ["Dumbbell Fly", "Band Fly"] }
+            },
+            {
+                id: 6, name: "Push-ups", nameEn: "Push-ups",
+                muscle: "chest", target: "Pectoralis Major", equipment: "bodyweight",
+                level: "beginner", difficulty: 1, type: "compound", tags: ["Push", "Bodyweight"],
+                cues: ["Hai tay rộng hơn vai một chút", "Giữ người thẳng từ đầu đến chân", "Hạ người xuống đến khi ngực gần chạm đất", "Đẩy lên về vị trí ban đầu"],
+                mistakes: ["Hông bị võng xuống hoặc nhô lên", "Khuỷu tay mở quá rộng", "Không hạ đủ sâu"],
+                alternatives: { "Quá khó": ["Incline Push-ups", "Knee Push-ups"], "Quá dễ": ["Decline Push-ups", "Weighted Push-ups"], "Đau cổ tay": ["Push-up Handles", "Fist Push-ups"] }
+            },
+            
+            // ===== SHOULDER =====
+            {
+                id: 7, name: "Seated Shoulder Press", nameEn: "Seated Dumbbell Shoulder Press",
+                muscle: "shoulder", target: "Anterior Deltoid", equipment: "dumbbell",
+                level: "intermediate", difficulty: 2, type: "compound", tags: ["Push", "Vertical"],
+                cues: ["Ngồi trên ghế có tựa lưng 90 độ", "Giữ tạ ngang vai, khuỷu tay hướng xuống", "Đẩy tạ lên, không khóa khuỷu tay", "Hạ xuống chậm, kiểm soát"],
+                mistakes: ["Cong lưng quá mức", "Đẩy tạ bằng lực đẩy quá nhiều", "Hạ tạ quá nhanh"],
+                alternatives: { "Phòng gym đông": ["Machine Shoulder Press", "Smith Press"], "Đau lưng": ["Standing Press", "Seated with Back Support"], "Đau vai": ["Arnold Press", "Neutral Grip Press"] }
+            },
+            {
+                id: 8, name: "Lateral Raise", nameEn: "Dumbbell Lateral Raise",
+                muscle: "shoulder", target: "Lateral Deltoid", equipment: "dumbbell",
+                level: "beginner", difficulty: 1, type: "isolation", tags: ["Isolation", "Side"],
+                cues: ["Đứng thẳng, tạ hai bên hông", "Nâng tạ sang hai bên đến ngang vai", "Giữ khuỷu tay hơi cong", "Hạ xuống chậm, kiểm soát"],
+                mistakes: ["Nâng tạ quá cao (trên vai)", "Dùng lực lắc người (momentum)", "Nâng bằng lực bẫy vai (traps)"],
+                alternatives: { "Phòng gym đông": ["Cable Lateral Raise", "Machine Lateral Raise"], "Đau vai": ["Light Weight High Reps", "Lean-away Lateral Raise"], "Không có tạ": ["Band Lateral Raise", "Water Bottle Raise"] }
+            },
+            {
+                id: 9, name: "Face Pull", nameEn: "Cable Face Pull",
+                muscle: "shoulder", target: "Rear Deltoid", equipment: "cable",
+                level: "beginner", difficulty: 1, type: "isolation", tags: ["Pull", "Rear"],
+                cues: ["Đặt cáp ngang tầm mắt", "Cầm rope, kéo về phía mặt", "Mở rộng tay ra hai bên ở cuối chuyển động", "Siết vai sau 1 giây"],
+                mistakes: ["Kéo quá thấp (thành bài row)", "Dùng lực cánh tay quá nhiều", "Ngửa người ra sau"],
+                alternatives: { "Phòng gym đông": ["Reverse Pec Deck", "Band Face Pull"], "Không có cable": ["Reverse Fly", "Band Face Pull"], "Đau vai": ["Light Weight", "Limited ROM"] }
+            },
+            {
+                id: 10, name: "Arnold Press", nameEn: "Arnold Press",
+                muscle: "shoulder", target: "All Deltoids", equipment: "dumbbell",
+                level: "intermediate", difficulty: 3, type: "compound", tags: ["Push", "Vertical", "Rotation"],
+                cues: ["Bắt đầu với tạ trước mặt, lòng bàn tay hướng vào người", "Xoay cổ tay và đẩy tạ lên cùng lúc", "Ở đỉnh: lòng bàn tay hướng ra ngoài", "Hạ xuống và xoay ngược lại"],
+                mistakes: ["Xoay quá nhanh, mất kiểm soát", "Dùng lực lắc người", "Tạ quá nặng"],
+                alternatives: { "Đau vai": ["Regular Shoulder Press", "Neutral Grip Press"], "Quá khó": ["Seated Shoulder Press", "Machine Press"], "Không có tạ": ["Band Arnold Press"] }
+            },
+            {
+                id: 11, name: "Reverse Pec Deck", nameEn: "Reverse Pec Deck",
+                muscle: "shoulder", target: "Rear Deltoid", equipment: "machine",
+                level: "beginner", difficulty: 1, type: "isolation", tags: ["Isolation", "Rear"],
+                cues: ["Ngồi ngược trên máy Pec Deck", "Giữ tay thẳng, mở rộng ra hai bên", "Siết vai sau ở điểm cuối", "Hạ xuống chậm, kiểm soát"],
+                mistakes: ["Cong khuỷu tay quá nhiều", "Dùng lực lưng thay vì vai sau", "Mở quá rộng, căng vai"],
+                alternatives: { "Phòng gym đông": ["Bent-over Reverse Fly", "Cable Reverse Fly"], "Không có machine": ["Reverse Fly", "Band Reverse Fly"], "Đau vai": ["Light Weight", "Limited ROM"] }
+            },
+            {
+                id: 12, name: "Front Raise", nameEn: "Dumbbell Front Raise",
+                muscle: "shoulder", target: "Anterior Deltoid", equipment: "dumbbell",
+                level: "beginner", difficulty: 1, type: "isolation", tags: ["Isolation", "Front"],
+                cues: ["Đứng thẳng, tạ trước hông", "Nâng tạ thẳng lên trước đến ngang vai", "Giữ khuỷu tay hơi cong", "Hạ xuống chậm"],
+                mistakes: ["Lắc người lấy đà", "Nâng quá cao (trên vai)", "Dùng lực bẫy vai"],
+                alternatives: { "Phòng gym đông": ["Cable Front Raise", "Plate Front Raise"], "Đau vai": ["Light Weight", "Alternate Arms"], "Không có tạ": ["Band Front Raise"] }
+            },
+            
+            // ===== BACK =====
+            {
+                id: 13, name: "Lat Pulldown", nameEn: "Lat Pulldown",
+                muscle: "back", target: "Latissimus Dorsi", equipment: "cable",
+                level: "beginner", difficulty: 1, type: "compound", tags: ["Pull", "Vertical"],
+                cues: ["Ngồi thẳng, đùi cố định dưới đệm", "Kéo thanh xuống ngang ngực trên", "Siết lưng ở điểm cuối", "Đưa lên chậm, kiểm soát"],
+                mistakes: ["Kéo sau đầu (giảm hiệu quả, nguy hiểm)", "Dùng lực cánh tay quá nhiều", "Ngửa người ra sau quá nhiều"],
+                alternatives: { "Phòng gym đông": ["Assisted Pull-up", "Single Arm Pulldown"], "Không có cable": ["Pull-ups", "Band Pulldown"], "Đau vai": ["Neutral Grip Pulldown", "Close Grip"] }
+            },
+            {
+                id: 14, name: "Seated Cable Row", nameEn: "Seated Cable Row",
+                muscle: "back", target: "Mid Back", equipment: "cable",
+                level: "beginner", difficulty: 1, type: "compound", tags: ["Pull", "Horizontal"],
+                cues: ["Ngồi thẳng, chân đặt trên bàn để", "Kéo tay cầm về phía bụng dưới", "Siết lưng giữa ở điểm cuối", "Đưa tay về chậm, kiểm soát"],
+                mistakes: ["Ngửa người ra sau quá nhiều", "Kéo bằng cánh tay thay vì lưng", "Thả tay quá nhanh"],
+                alternatives: { "Phòng gym đông": ["Single Arm Row", "T-Bar Row"], "Không có cable": ["Dumbbell Row", "Band Row"], "Đau lưng": ["Chest Supported Row", "Machine Row"] }
+            },
+            {
+                id: 15, name: "Dumbbell Row", nameEn: "Single Arm Dumbbell Row",
+                muscle: "back", target: "Latissimus Dorsi", equipment: "dumbbell",
+                level: "intermediate", difficulty: 2, type: "compound", tags: ["Pull", "Horizontal", "Unilateral"],
+                cues: ["Chống 1 tay và 1 gối trên ghế", "Tay còn lại cầm tạ, thả xuôi", "Kéo tạ lên ngang hông, khuỷu tay sát người", "Hạ xuống chậm, kiểm soát"],
+                mistakes: ["Xoay người khi kéo", "Kéo tạ lên quá cao (về phía ngực)", "Dùng lực lắc người"],
+                alternatives: { "Phòng gym đông": ["Single Arm Cable Row", "Meadows Row"], "Đau lưng": ["Chest Supported Row", "Incline Row"], "Không có tạ": ["Band Row", "Backpack Row"] }
+            },
+            {
+                id: 16, name: "Assisted Pull-up", nameEn: "Assisted Pull-up Machine",
+                muscle: "back", target: "Latissimus Dorsi", equipment: "machine",
+                level: "beginner", difficulty: 2, type: "compound", tags: ["Pull", "Vertical", "Bodyweight"],
+                cues: ["Chọn mức trợ lực phù hợp", "Nắm thanh rộng hơn vai", "Kéo người lên đến khi cằm qua thanh", "Hạ xuống chậm, kiểm soát"],
+                mistakes: ["Kéo bằng cánh tay thay vì lưng", "Lắc người lấy đà", "Không hạ xuống hết tầm"],
+                alternatives: { "Quá dễ": ["Pull-ups", "Weighted Pull-ups"], "Đau vai": ["Neutral Grip Pull-up", "Close Grip"], "Không có machine": ["Band Assisted Pull-up", "Lat Pulldown"] }
+            },
+            {
+                id: 17, name: "T-Bar Row", nameEn: "T-Bar Row",
+                muscle: "back", target: "Mid Back", equipment: "barbell",
+                level: "intermediate", difficulty: 3, type: "compound", tags: ["Pull", "Horizontal"],
+                cues: ["Đứng hai bên thanh, hông đẩy ra sau", "Giữ lưng thẳng, ngực ưỡn", "Kéo thanh về phía bụng dưới", "Siết lưng ở điểm cuối"],
+                mistakes: ["Cong lưng (rất nguy hiểm)", "Đứng quá thẳng (mất góc kéo)", "Kéo bằng cánh tay"],
+                alternatives: { "Đau lưng": ["Chest Supported T-Bar Row", "Seated Row"], "Quá khó": ["Seated Cable Row", "Machine Row"], "Không có T-Bar": ["Dumbbell Row", "Barbell Row"] }
+            },
+            {
+                id: 18, name: "Straight Arm Pulldown", nameEn: "Straight Arm Cable Pulldown",
+                muscle: "back", target: "Latissimus Dorsi", equipment: "cable",
+                level: "intermediate", difficulty: 2, type: "isolation", tags: ["Pull", "Isolation"],
+                cues: ["Đứng trước cáp, tay cầm thanh thẳng", "Giữ khuỷu tay hơi cong cố định", "Kéo thanh xuống bằng lực lưng", "Đưa lên chậm, kiểm soát"],
+                mistakes: ["Cong khuỷu tay (thành bài tricep)", "Dùng lực cánh tay", "Ngửa người ra sau"],
+                alternatives: { "Phòng gym đông": ["Dumbbell Pullover", "Band Pulldown"], "Không có cable": ["Dumbbell Pullover", "Band Straight Arm Pulldown"], "Đau vai": ["Light Weight", "Limited ROM"] }
+            },
+            
+            // ===== ARMS =====
+            {
+                id: 19, name: "Barbell Curl", nameEn: "Barbell Bicep Curl",
+                muscle: "arms", target: "Biceps", equipment: "barbell",
+                level: "beginner", difficulty: 1, type: "isolation", tags: ["Pull", "Biceps"],
+                cues: ["Đứng thẳng, tạ trước hông", "Giữ khuỷu tay sát người", "Cuộn tạ lên bằng lực bicep", "Hạ xuống chậm, kiểm soát"],
+                mistakes: ["Lắc người lấy đà", "Đưa khuỷu tay ra trước", "Hạ tạ quá nhanh"],
+                alternatives: { "Phòng gym đông": ["Dumbbell Curl", "EZ Bar Curl"], "Đau cổ tay": ["EZ Bar Curl", "Neutral Grip Curl"], "Không có tạ": ["Band Curl", "Backpack Curl"] }
+            },
+            {
+                id: 20, name: "Hammer Curl", nameEn: "Dumbbell Hammer Curl",
+                muscle: "arms", target: "Brachialis, Biceps", equipment: "dumbbell",
+                level: "beginner", difficulty: 1, type: "isolation", tags: ["Pull", "Biceps", "Forearm"],
+                cues: ["Cầm tạ với lòng bàn tay hướng vào nhau", "Giữ khuỷu tay sát người", "Cuộn tạ lên, giữ nguyên tư thế cổ tay", "Hạ xuống chậm"],
+                mistakes: ["Xoay cổ tay khi cuốn", "Lắc người lấy đà", "Đưa khuỷu tay ra trước"],
+                alternatives: { "Phòng gym đông": ["Cable Hammer Curl", "Cross Body Hammer Curl"], "Đau cổ tay": ["Rope Cable Curl", "Neutral Grip"], "Không có tạ": ["Band Hammer Curl"] }
+            },
+            {
+                id: 21, name: "Tricep Pushdown", nameEn: "Cable Tricep Pushdown",
+                muscle: "arms", target: "Triceps", equipment: "cable",
+                level: "beginner", difficulty: 1, type: "isolation", tags: ["Push", "Triceps"],
+                cues: ["Đứng trước cáp, tay cầm thanh ngang", "Giữ khuỷu tay sát người", "Đẩy thanh xuống bằng lực tricep", "Đưa lên chậm, kiểm soát"],
+                mistakes: ["Đưa khuỷu tay ra trước", "Dùng lực ngực hoặc vai", "Không khóa ở điểm cuối"],
+                alternatives: { "Phòng gym đông": ["Rope Pushdown", "Single Arm Pushdown"], "Đau cổ tay": ["Rope Pushdown", "V-Bar Pushdown"], "Không có cable": ["Band Pushdown", "Dumbbell Kickback"] }
+            },
+            {
+                id: 22, name: "Overhead Tricep Extension", nameEn: "Overhead Dumbbell Tricep Extension",
+                muscle: "arms", target: "Triceps (Long Head)", equipment: "dumbbell",
+                level: "intermediate", difficulty: 2, type: "isolation", tags: ["Push", "Triceps", "Overhead"],
+                cues: ["Ngồi hoặc đứng, giữ 1 tạ trên đầu", "Hạ tạ ra sau đầu bằng cách gập khuỷu tay", "Giữ khuỷu tay sát đầu", "Duỗi tay về vị trí ban đầu"],
+                mistakes: ["Mở khuỷu tay quá rộng", "Cong lưng", "Hạ tạ quá thấp"],
+                alternatives: { "Đau vai": ["Tricep Kickback", "Skull Crushers"], "Phòng gym đông": ["Cable Overhead Extension", "Rope Overhead Extension"], "Không có tạ": ["Band Overhead Extension"] }
+            },
+            {
+                id: 23, name: "Incline Dumbbell Curl", nameEn: "Incline Dumbbell Curl",
+                muscle: "arms", target: "Biceps (Long Head)", equipment: "dumbbell",
+                level: "intermediate", difficulty: 2, type: "isolation", tags: ["Pull", "Biceps", "Stretch"],
+                cues: ["Ngồi trên ghế nghiêng 45 độ", "Thả tạ xuôi, tay duỗi hoàn toàn", "Cuộn tạ lên, giữ khuỷu tay cố định", "Hạ xuống chậm, cảm nhận căng"],
+                mistakes: ["Đưa khuỷu tay ra trước", "Lắc người lấy đà", "Không duỗi tay hoàn toàn"],
+                alternatives: { "Đau vai": ["Seated Curl", "Regular Curl"], "Phòng gym đông": ["Bayesian Curl", "Cable Curl"], "Không có tạ": ["Band Incline Curl"] }
+            },
+            {
+                id: 24, name: "Skull Crushers", nameEn: "Lying Tricep Extension",
+                muscle: "arms", target: "Triceps", equipment: "barbell",
+                level: "intermediate", difficulty: 3, type: "isolation", tags: ["Push", "Triceps"],
+                cues: ["Nằm trên ghế phẳng, giữ tạ thẳng trên ngực", "Hạ tạ về phía trán bằng cách gập khuỷu tay", "Giữ khuỷu tay cố định, hướng lên trần", "Duỗi tay về vị trí ban đầu"],
+                mistakes: ["Mở khuỷu tay quá rộng", "Hạ tạ quá thấp (chạm trán)", "Dùng tạ quá nặng"],
+                alternatives: { "Đau khuỷu tay": ["Rope Pushdown", "Dumbbell Kickback"], "Phòng gym đông": ["Dumbbell Skull Crushers", "Cable Overhead Extension"], "Không có tạ": ["Band Skull Crushers"] }
+            },
+            
+            // ===== GLUTES =====
+            {
+                id: 25, name: "Hip Thrust", nameEn: "Barbell Hip Thrust",
+                muscle: "glutes", target: "Gluteus Maximus", equipment: "barbell",
+                level: "intermediate", difficulty: 3, type: "compound", tags: ["Push", "Hip Extension"],
+                cues: ["Tựa lưng trên ghế, thanh杠 ngang hông", "Đẩy hông lên đến khi người thẳng hàng", "Siết mông ở đỉnh 1-2 giây", "Hạ xuống chậm, kiểm soát"],
+                mistakes: ["Vươn cổ quá mức", "Đẩy hông quá cao (cong lưng)", "Đầu gối mở quá rộng"],
+                alternatives: { "Phòng gym đông": ["Smith Hip Thrust", "Machine Hip Thrust"], "Đau lưng": ["Glute Bridge", "Cable Pull-through"], "Không có tạ": ["Single Leg Hip Thrust", "Frog Pump"] }
+            },
+            {
+                id: 26, name: "Bulgarian Split Squat", nameEn: "Bulgarian Split Squat",
+                muscle: "glutes", target: "Glutes, Quads", equipment: "dumbbell",
+                level: "intermediate", difficulty: 3, type: "compound", tags: ["Push", "Unilateral"],
+                cues: ["Đặt chân sau trên ghế", "Hạ người xuống đến khi đùi trước song song đất", "Giữ ngực thẳng, đầu gối trước không vượt mũi chân", "Đẩy lên bằng gót chân trước"],
+                mistakes: ["Mất thăng bằng", "Đầu gối trước vượt quá nhiều", "Nghiêng người quá nhiều"],
+                alternatives: { "Quá khó": ["Reverse Lunge", "Step-up"], "Đau đầu gối": ["Glute Bridge", "Hip Thrust"], "Không có tạ": ["Bodyweight Split Squat"] }
+            },
+            {
+                id: 27, name: "Cable Kickback", nameEn: "Cable Glute Kickback",
+                muscle: "glutes", target: "Gluteus Maximus", equipment: "cable",
+                level: "beginner", difficulty: 1, type: "isolation", tags: ["Push", "Isolation"],
+                cues: ["Đứng trước máy cable, đeo cổ chân", "Đẩy chân ra sau bằng lực mông", "Giữ người thẳng, không ngửa lưng", "Hạ xuống chậm, kiểm soát"],
+                mistakes: ["Ngửa lưng quá mức", "Đá chân quá cao", "Dùng lực lưng thay vì mông"],
+                alternatives: { "Phòng gym đông": ["Band Kickback", "Machine Kickback"], "Không có cable": ["Band Kickback", "Donkey Kick"], "Đau lưng": ["Glute Bridge", "Clamshell"] }
+            },
+            {
+                id: 28, name: "Glute Bridge", nameEn: "Glute Bridge",
+                muscle: "glutes", target: "Gluteus Maximus", equipment: "bodyweight",
+                level: "beginner", difficulty: 1, type: "compound", tags: ["Push", "Hip Extension"],
+                cues: ["Nằm ngửa, hai chân co, bàn chân chạm đất", "Đẩy hông lên bằng lực mông", "Siết mông ở đỉnh 1-2 giây", "Hạ xuống chậm"],
+                mistakes: ["Đẩy hông quá cao (cong lưng)", "Dùng lực đùi thay vì mông", "Đầu gối mở quá rộng"],
+                alternatives: { "Quá dễ": ["Single Leg Bridge", "Hip Thrust"], "Đau lưng": ["Marching Glute Bridge", "Clamshell"], "Không có không gian": ["Band Glute Bridge"] }
+            },
+            {
+                id: 29, name: "Cable Abduction", nameEn: "Cable Hip Abduction",
+                muscle: "glutes", target: "Gluteus Medius", equipment: "cable",
+                level: "beginner", difficulty: 1, type: "isolation", tags: ["Abduction", "Isolation"],
+                cues: ["Đứng bên máy cable, đeo cổ chân", "Đẩy chân ra xa (sang ngang)", "Giữ người thẳng, không nghiêng", "Hạ xuống chậm, kiểm soát"],
+                mistakes: ["Nghiêng người sang bên", "Đá chân quá nhanh", "Xoay hông"],
+                alternatives: { "Phòng gym đông": ["Band Abduction", "Machine Abduction"], "Không có cable": ["Band Abduction", "Side Lying Leg Raise"], "Đau lưng": ["Clamshell", "Side Lying Abduction"] }
+            },
+            {
+                id: 30, name: "Romanian Deadlift", nameEn: "Romanian Deadlift",
+                muscle: "glutes", target: "Glutes, Hamstrings", equipment: "barbell",
+                level: "intermediate", difficulty: 3, type: "compound", tags: ["Hinge", "Posterior Chain"],
+                cues: ["Đứng thẳng, giữ tạ trước người", "Đẩy hông ra sau, hạ tạ dọc theo chân", "Giữ lưng thẳng, ngực ưỡn", "Đẩy hông về trước để đứng lên"],
+                mistakes: ["Cong lưng (rất nguy hiểm)", "Hạ tạ quá thấp (vượt quá tầm)", "Cong gối quá nhiều"],
+                alternatives: { "Đau lưng": ["Glute Bridge", "Hip Thrust"], "Quá khó": ["Dumbbell RDL", "Good Morning"], "Không có tạ": ["Single Leg RDL", "Band RDL"] }
+            },
+            
+            // ===== LEGS =====
+            {
+                id: 31, name: "Goblet Squat", nameEn: "Goblet Squat",
+                muscle: "legs", target: "Quads, Glutes", equipment: "dumbbell",
+                level: "beginner", difficulty: 1, type: "compound", tags: ["Squat", "Compound"],
+                cues: ["Giữ tạ trước ngực, hai tay cup tạ", "Đứng rộng hơn vai, mũi chân hơi mở", "Hạ xuống như ngồi ghế, đầu gối theo hướng mũi chân", "Đẩy lên bằng gót chân"],
+                mistakes: ["Đầu gối khép vào trong", "Nhón gót khi hạ xuống", "Cong lưng quá mức"],
+                alternatives: { "Quá khó": ["Bodyweight Squat", "Box Squat"], "Đau đầu gối": ["Wall Sit", "Leg Press"], "Không có tạ": ["Bodyweight Squat", "Sumo Squat"] }
+            },
+            {
+                id: 32, name: "Leg Press", nameEn: "Leg Press Machine",
+                muscle: "legs", target: "Quads, Glutes", equipment: "machine",
+                level: "beginner", difficulty: 1, type: "compound", tags: ["Push", "Machine"],
+                cues: ["Ngồi trên máy, chân đặt trên bàn đạp", "Hạ bàn đạp xuống đến khi gối 90 độ", "Đẩy lên bằng gót chân, không khóa gối", "Giữ lưng áp sát ghế"],
+                mistakes: ["Khóa gối hoàn toàn (nguy hiểm)", "Nhấc mông khỏi ghế", "Hạ quá sâu, cong lưng"],
+                alternatives: { "Phòng gym đông": ["Hack Squat", "Smith Squat"], "Đau lưng": ["Goblet Squat", "Leg Extension"], "Không có machine": ["Squat", "Lunge"] }
+            },
+            {
+                id: 33, name: "Leg Curl", nameEn: "Lying Leg Curl",
+                muscle: "legs", target: "Hamstrings", equipment: "machine",
+                level: "beginner", difficulty: 1, type: "isolation", tags: ["Pull", "Isolation"],
+                cues: ["Nằm sấp trên máy, cổ chân dưới đệm", "Cuộn chân về phía mông", "Siết đùi sau ở điểm cuối", "Hạ xuống chậm, kiểm soát"],
+                mistakes: ["Nhấc hông khỏi ghế", "Cuộn quá nhanh", "Không hạ xuống hết tầm"],
+                alternatives: { "Phòng gym đông": ["Seated Leg Curl", "Standing Leg Curl"], "Không có machine": ["Nordic Curl", "Swiss Ball Curl"], "Đau lưng": ["Seated Leg Curl"] }
+            },
+            {
+                id: 34, name: "Leg Extension", nameEn: "Leg Extension Machine",
+                muscle: "legs", target: "Quadriceps", equipment: "machine",
+                level: "beginner", difficulty: 1, type: "isolation", tags: ["Push", "Isolation"],
+                cues: ["Ngồi trên máy, cổ chân dưới đệm", "Duỗi chân thẳng bằng lực đùi trước", "Siết đùi trước ở điểm cuối", "Hạ xuống chậm, kiểm soát"],
+                mistakes: ["Đạp quá nhanh", "Giữ hơi khi đẩy", "Khóa gối quá mạnh"],
+                alternatives: { "Phòng gym đông": ["Step-up", "Lunge"], "Đau đầu gối": ["Light Weight High Reps", "Wall Sit"], "Không có machine": ["Squat", "Lunge"] }
+            },
+            {
+                id: 35, name: "Walking Lunge", nameEn: "Walking Lunge",
+                muscle: "legs", target: "Quads, Glutes", equipment: "dumbbell",
+                level: "intermediate", difficulty: 2, type: "compound", tags: ["Unilateral", "Compound"],
+                cues: ["Đứng thẳng, tạ hai bên", "Bước chân trước lên, hạ người xuống", "Đầu gối sau gần chạm đất", "Đẩy lên và bước chân kia lên"],
+                mistakes: ["Bước quá ngắn", "Đầu gối trước vượt quá nhiều", "Nghiêng người"],
+                alternatives: { "Quá khó": ["Static Lunge", "Split Squat"], "Đau đầu gối": ["Reverse Lunge", "Step-up"], "Không có không gian": ["Reverse Lunge", "Stationary Lunge"] }
+            },
+            {
+                id: 36, name: "Calf Raise", nameEn: "Standing Calf Raise",
+                muscle: "legs", target: "Calves", equipment: "machine",
+                level: "beginner", difficulty: 1, type: "isolation", tags: ["Isolation", "Calves"],
+                cues: ["Đứng trên máy, vai dưới đệm", "Nhón gót lên cao nhất có thể", "Giữ 1 giây ở đỉnh", "Hạ gót xuống thấp, căng bắp chân"],
+                mistakes: ["Nhón quá nhanh", "Không hạ xuống hết tầm", "Cong gối"],
+                alternatives: { "Phòng gym đông": ["Seated Calf Raise", "Smith Calf Raise"], "Không có machine": ["Single Leg Calf Raise", "Step Calf Raise"], "Đau lưng": ["Seated Calf Raise"] }
+            },
+            
+            // ===== CORE =====
+            {
+                id: 37, name: "Plank", nameEn: "Forearm Plank",
+                muscle: "core", target: "Transverse Abdominis", equipment: "bodyweight",
+                level: "beginner", difficulty: 1, type: "isolation", tags: ["Core", "Stability"],
+                cues: ["Chống khuỷu tay và mũi chân", "Giữ người thẳng từ đầu đến chân", "Siết bụng và mông", "Hít thở đều, giữ tư thế"],
+                mistakes: ["Võng lưng xuống", "Nhô hông lên cao", "Nín thở"],
+                alternatives: { "Quá khó": ["Knee Plank", "Incline Plank"], "Quá dễ": ["Plank with Leg Lift", "Weighted Plank"], "Đau lưng": ["Dead Bug", "Bird Dog"] }
+            },
+            {
+                id: 38, name: "Dead Bug", nameEn: "Dead Bug",
+                muscle: "core", target: "Transverse Abdominis", equipment: "bodyweight",
+                level: "beginner", difficulty: 1, type: "isolation", tags: ["Core", "Stability"],
+                cues: ["Nằm ngửa, tay đưa lên trần, chân co 90 độ", "Hạ tay và chân đối diện xuống chậm", "Giữ lưng áp sát đất", "Đưa về vị trí ban đầu và đổi bên"],
+                mistakes: ["Nhấc lưng khỏi đất", "Hạ quá nhanh", "Không giữ chân 90 độ"],
+                alternatives: { "Quá khó": ["Plank", "Bird Dog"], "Quá dễ": ["Dead Bug with Band", "Hollow Hold"], "Đau lưng": ["Pelvic Tilt", "Heel Slide"] }
+            },
+            {
+                id: 39, name: "Russian Twist", nameEn: "Russian Twist",
+                muscle: "core", target: "Obliques", equipment: "bodyweight",
+                level: "intermediate", difficulty: 2, type: "isolation", tags: ["Core", "Rotation"],
+                cues: ["Ngồi, chân hơi nhấc khỏi đất", "Ngả người ra sau 45 độ", "Xoay người sang hai bên", "Giữ bụng siết chặt"],
+                mistakes: ["Chỉ xoay tay, không xoay người", "Cong lưng", "Đạp chân xuống đất"],
+                alternatives: { "Quá khó": ["Seated Russian Twist", "Bicycle Crunch"], "Đau lưng": ["Side Plank", "Pallof Press"], "Không có không gian": ["Side Plank", "Standing Rotation"] }
+            },
+            {
+                id: 40, name: "Leg Raise", nameEn: "Lying Leg Raise",
+                muscle: "core", target: "Lower Abs", equipment: "bodyweight",
+                level: "intermediate", difficulty: 2, type: "isolation", tags: ["Core", "Flexion"],
+                cues: ["Nằm ngửa, tay dưới mông", "Nâng chân thẳng lên đến 90 độ", "Hạ chân xuống chậm, không chạm đất", "Giữ lưng áp sát đất"],
+                mistakes: ["Nhấc lưng khỏi đất", "Cong gối khi nâng", "Hạ quá nhanh"],
+                alternatives: { "Quá khó": ["Hanging Leg Raise", "Knee Raise"], "Đau lưng": ["Dead Bug", "Heel Slide"], "Không có không gian": ["Seated Leg Raise", "Reverse Crunch"] }
+            }
+        ];
+        
+        // ==================== COLOR MAP ====================
+        const muscleColors = {
+            chest: { accent: '#F4A698', soft: '#FCEAE5', name: 'Ngực' },
+            shoulder: { accent: '#B8A8E8', soft: '#EEE8F8', name: 'Vai' },
+            back: { accent: '#7FB5B5', soft: '#E0F0F0', name: 'Lưng' },
+            arms: { accent: '#E88A9A', soft: '#FBE5EA', name: 'Tay' },
+            glutes: { accent: '#D8A8D8', soft: '#F5E8F5', name: 'Mông' },
+            legs: { accent: '#8FC5A8', soft: '#E5F5EC', name: 'Chân' },
+            core: { accent: '#E8B87A', soft: '#FBF0E0', name: 'Bụng' }
+        };
+        
+        const muscleDescriptions = {
+            chest: 'Pectoralis Major & Minor',
+            shoulder: 'Deltoid (Trước, Giữa, Sau)',
+            back: 'Lats, Traps, Rhomboids',
+            arms: 'Biceps & Triceps',
+            glutes: 'Gluteus Max, Med, Min',
+            legs: 'Quads, Hamstrings, Calves',
+            core: 'Rectus, Obliques, Transverse'
+        };
+        
+        // ==================== STATE ====================
+        let currentFilters = {
+            muscle: 'all',
+            equipment: 'all',
+            level: 'all',
+            type: 'all',
+            search: ''
+        };
+        
+        // ==================== RENDER FUNCTIONS ====================
+        function renderExercises() {
+            const container = document.getElementById('exerciseContainer');
+            const filtered = exerciseDatabase.filter(ex => {
+                if (currentFilters.muscle !== 'all' && ex.muscle !== currentFilters.muscle) return false;
+                if (currentFilters.equipment !== 'all' && ex.equipment !== currentFilters.equipment) return false;
+                if (currentFilters.level !== 'all' && ex.level !== currentFilters.level) return false;
+                if (currentFilters.type !== 'all' && ex.type !== currentFilters.type) return false;
+                if (currentFilters.search) {
+                    const search = currentFilters.search.toLowerCase();
+                    return ex.name.toLowerCase().includes(search) || 
+                           ex.nameEn.toLowerCase().includes(search) ||
+                           ex.target.toLowerCase().includes(search);
+                }
+                return true;
+            });
+            
+            if (filtered.length === 0) {
+                container.innerHTML = '';
+                document.getElementById('noResults').classList.add('active');
+                return;
+            }
+            
+            document.getElementById('noResults').classList.remove('active');
+            
+            const grouped = {};
+            filtered.forEach(ex => {
+                if (!grouped[ex.muscle]) grouped[ex.muscle] = [];
+                grouped[ex.muscle].push(ex);
+            });
+            
+            let html = '';
+            Object.keys(grouped).forEach(muscle => {
+                const color = muscleColors[muscle];
+                html += `
+                    <div class="muscle-section active" data-muscle="${muscle}">
+                        <div class="muscle-header">
+                            <h2>${color.name}</h2>
+                            <p>${muscleDescriptions[muscle]}</p>
+                        </div>
+                        <div class="exercise-grid">
+                            ${grouped[muscle].map(ex => renderExerciseCard(ex)).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        function renderExerciseCard(ex) {
+            const difficultyDots = Array(3).fill(0).map((_, i) => 
+                `<div class="difficulty-dot ${i < ex.difficulty ? 'filled' : ''}"></div>`
+            ).join('');
+            
+            const equipmentNames = {
+                machine: 'Machine', dumbbell: 'Dumbbell', barbell: 'Barbell',
+                cable: 'Cable', bodyweight: 'Bodyweight'
+            };
+            
+            return `
+                <div class="exercise-card" data-muscle="${ex.muscle}" onclick="openModal(${ex.id})">
+                    <div class="exercise-target">${ex.target}</div>
+                    <h3 class="exercise-name">${ex.name}</h3>
+                    <div class="exercise-meta">
+                        <span class="meta-tag">${equipmentNames[ex.equipment]}</span>
+                        <span class="meta-tag">
+                            <span class="difficulty">${difficultyDots}</span>
+                        </span>
+                    </div>
+                    <div class="exercise-tags">
+                        <span class="tag ${ex.type}">${ex.type}</span>
+                        <span class="tag ${ex.equipment}">${equipmentNames[ex.equipment]}</span>
+                        ${ex.tags.slice(0, 1).map(t => `<span class="tag">${t}</span>`).join('')}
+                    </div>
+                    <div class="view-btn">Xem chi tiết</div>
+                </div>
+            `;
+        }
+        
+        function openModal(id) {
+            const ex = exerciseDatabase.find(e => e.id === id);
+            if (!ex) return;
+            
+            const color = muscleColors[ex.muscle];
+            const modal = document.getElementById('modal');
+            modal.style.setProperty('--modal-accent', `linear-gradient(135deg, ${color.soft} 0%, ${color.accent} 100%)`);
+            
+            document.getElementById('modalTitle').textContent = ex.name;
+            
+            const equipmentNames = {
+                machine: 'Machine', dumbbell: 'Dumbbell', barbell: 'Barbell',
+                cable: 'Cable', bodyweight: 'Bodyweight'
+            };
+            
+            const levelNames = {
+                beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced'
+            };
+            
+            document.getElementById('modalMeta').innerHTML = `
+                <div class="modal-meta-item">🎯 ${ex.target}</div>
+                <div class="modal-meta-item">🔧 ${equipmentNames[ex.equipment]}</div>
+                <div class="modal-meta-item">⭐ ${levelNames[ex.level]}</div>
+                <div class="modal-meta-item">📊 ${ex.type}</div>
+            `;
+            
+            const alternativesHtml = Object.keys(ex.alternatives).map(situation => `
+                <div class="alternative-group">
+                    <div class="alternative-label">${situation}</div>
+                    <div class="alternative-options">
+                        ${ex.alternatives[situation].map(alt => 
+                            `<div class="alternative-chip">${alt}</div>`
+                        ).join('')}
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('modalBody').innerHTML = `
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Video hướng dẫn</h3>
+                    <div class="video-placeholder">▶ Video Demo</div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Kỹ thuật chính</h3>
+                    <ul class="cue-list">
+                        ${ex.cues.map(c => `<li>${c}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Lỗi thường gặp</h3>
+                    <ul class="cue-list mistake-list">
+                        ${ex.mistakes.map(m => `<li>${m}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Bài tập thay thế</h3>
+                    <div class="alternatives-section">
+                        ${alternativesHtml}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // ==================== EVENT LISTENERS ====================
+        document.querySelectorAll('.filter-chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                const type = this.dataset.type;
+                const filter = this.dataset.filter;
+                
+                this.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                
+                currentFilters[type] = filter;
+                renderExercises();
+            });
+        });
+        
+        document.querySelectorAll('.muscle-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.muscle-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                currentFilters.muscle = this.dataset.muscle;
+                renderExercises();
+            });
+        });
+        
+        document.getElementById('searchInput').addEventListener('input', function() {
+            currentFilters.search = this.value;
+            renderExercises();
+        });
+        
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+        document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+        document.getElementById('modalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+        
+        // ==================== INIT ====================
+        renderExercises();
+    </script>
+</body>
+</html>

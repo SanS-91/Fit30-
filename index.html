@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fit30+ - Hành Trình Sức Khỏe Sau Tuổi 30</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Soft pastel colors */
+            --primary-soft: #F4A698;
+            --secondary-soft: #E8B4B8;
+            --accent-peach: #F9D5C5;
+            --accent-lavender: #E8D5F0;
+            --accent-mint: #D5E8DC;
+            --accent-blue: #D5E0E8;
+            
+            /* Gradients - softer version */
+            --gradient-gym: linear-gradient(135deg, #F9D5C5 0%, #F4A698 100%);
+            --gradient-nutrition: linear-gradient(135deg, #D5E8DC 0%, #B8D4C4 100%);
+            --gradient-lifestyle: linear-gradient(135deg, #E8D5F0 0%, #D8B8D8 100%);
+            
+            /* Text colors */
+            --text-dark: #5A5A5A;
+            --text-medium: #8A8A8A;
+            --text-light: #AAAAAA;
+            --white: #FFFFFF;
+            
+            /* Backgrounds */
+            --bg-primary: #FFF9F9;
+            --bg-secondary: #FFF5F7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(180deg, #FFF9F9 0%, #FFF5F7 50%, #FFFFFF 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Floating Shapes Background - softer */
+        .bg-shapes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.08;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .shape-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary-soft);
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+        
+        .shape-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--secondary-soft);
+            bottom: -50px;
+            left: -50px;
+            animation-delay: 5s;
+        }
+        
+        .shape-3 {
+            width: 200px;
+            height: 200px;
+            background: #D8B8D8;
+            top: 50%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -50px) rotate(120deg); }
+            66% { transform: translate(-20px, 30px) rotate(240deg); }
+        }
+        
+        /* Header - softer */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #F4A698 0%, #D8B8D8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-medium);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary-soft);
+        }
+        
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #F4A698 0%, #D8B8D8 100%);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 40px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #F9D5C5 0%, #F4A698 100%);
+            color: white;
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(244,166,152,0.25);
+            animation: fadeInDown 0.8s ease;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            line-height: 1.2;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+        
+        .hero h1 span {
+            background: linear-gradient(135deg, #F4A698 0%, #D8B8D8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-medium);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+        
+        /* Audience Selector - softer */
+        .audience-section {
+            padding: 60px 40px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            margin: 40px auto;
+            max-width: 1200px;
+            border-radius: 30px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--text-dark);
+        }
+        
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .audience-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 35px 30px;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .audience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--card-gradient);
+        }
+        
+        .audience-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+            border-color: var(--card-color);
+        }
+        
+        .audience-card.active {
+            --card-color: var(--primary-soft);
+            --card-gradient: linear-gradient(135deg, #F9D5C5 0%, #F4A698 100%);
+        }
+        
+        .audience-card.coming {
+            --card-color: #B8C8D8;
+            --card-gradient: linear-gradient(135deg, #D8E0E8 0%, #B8C8D8 100%);
+            opacity: 0.75;
+        }
+        
+        .audience-content h3 {
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .audience-card p {
+            color: var(--text-medium);
+            text-align: center;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .badge-soon {
+            display: inline-block;
+            background: linear-gradient(135deg, #D8E0E8 0%, #B8C8D8 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        
+        /* Main Categories - SOFTER COLORS */
+        .categories-section {
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
+            margin-top: 50px;
+        }
+        
+        .category-card {
+            background: var(--white);
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.12);
+        }
+        
+        .category-card.gym { 
+            border-color: var(--accent-peach); 
+        }
+        .category-card.nutrition { 
+            border-color: var(--accent-mint); 
+        }
+        .category-card.lifestyle { 
+            border-color: var(--accent-lavender); 
+        }
+        
+        .category-header {
+            padding: 45px 30px;
+            background: var(--cat-bg);
+            color: var(--text-dark);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .category-card.gym .category-header {
+            --cat-bg: linear-gradient(135deg, #F9D5C5 0%, #F4A698 100%);
+        }
+        
+        .category-card.nutrition .category-header {
+            --cat-bg: linear-gradient(135deg, #D5E8DC 0%, #B8D4C4 100%);
+        }
+        
+        .category-card.lifestyle .category-header {
+            --cat-bg: linear-gradient(135deg, #E8D5F0 0%, #D8B8D8 100%);
+        }
+        
+        .category-header h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        
+        .category-header p {
+            opacity: 0.9;
+            font-size: 1.05rem;
+            color: var(--text-medium);
+        }
+        
+        .category-content {
+            padding: 35px 30px;
+        }
+        
+        .category-content h3 {
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+        
+        .category-content p {
+            color: var(--text-medium);
+            margin-bottom: 25px;
+            line-height: 1.75;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .feature-list li {
+            padding: 12px 0;
+            padding-left: 32px;
+            position: relative;
+            color: var(--text-medium);
+            border-bottom: 1px dashed #f0e6e6;
+            font-size: 0.95rem;
+        }
+        
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 22px;
+            height: 22px;
+            background: var(--feature-bg);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+        
+        .category-card.gym .feature-list li::before {
+            --feature-bg: #F4A698;
+        }
+        
+        .category-card.nutrition .feature-list li::before {
+            --feature-bg: #9AC4A4;
+        }
+        
+        .category-card.lifestyle .feature-list li::before {
+            --feature-bg: #C8A8C8;
+        }
+        
+        .btn-explore {
+            display: inline-block;
+            width: 100%;
+            padding: 16px;
+            background: var(--btn-bg);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .category-card.gym .btn-explore {
+            --btn-bg: linear-gradient(135deg, #F4A698 0%, #E89688 100%);
+        }
+        
+        .category-card.nutrition .btn-explore {
+            --btn-bg: linear-gradient(135deg, #9AC4A4 0%, #8AB894 100%);
+        }
+        
+        .category-card.lifestyle .btn-explore {
+            --btn-bg: linear-gradient(135deg, #C8A8C8 0%, #B898B8 100%);
+        }
+        
+        .btn-explore:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        /* Quick Stats - softer */
+        .stats-section {
+            padding: 60px 40px;
+            background: linear-gradient(135deg, #FFF5F7 0%, #F5F0FF 100%);
+            margin: 60px auto;
+            max-width: 1200px;
+            border-radius: 30px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 30px 25px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+        
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #F4A698 0%, #D8B8D8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: var(--text-medium);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        /* CTA Section - softer */
+        .cta-section {
+            padding: 100px 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #F9D5C5 0%, #F4A698 50%, #E8D5F0 100%);
+            color: var(--text-dark);
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.4;
+        }
+        
+        .cta-section h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            color: var(--text-dark);
+        }
+        
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            color: var(--text-medium);
+        }
+        
+        .btn-cta {
+            display: inline-block;
+            padding: 20px 50px;
+            background: white;
+            color: var(--primary-soft);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        /* Footer - softer */
+        .footer {
+            background: linear-gradient(135deg, #5A5A5A 0%, #4A4A4A 100%);
+            color: white;
+            padding: 60px 40px 30px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-soft);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero {
+                padding: 50px 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .audience-section,
+            .categories-section,
+            .stats-section {
+                padding: 40px 20px;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Shapes -->
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="#audience">Đối tượng</a></li>
+                <li><a href="#gym">GYM</a></li>
+                <li><a href="#nutrition">Dinh dưỡng</a></li>
+                <li><a href="#lifestyle">Lối sống</a></li>
+                <li><a href="#tools">Công cụ</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-badge">Chào mừng bạn đến với Fit30+</div>
+        <h1>Strong Body.<br><span>Better Life.</span></h1>
+        <p>Hành trình chăm sóc sức khỏe, vóc dáng và cân bằng cuộc sống dành riêng cho tuổi 30+</p>
+    </section>
+    
+    <!-- Audience Selector -->
+    <section id="audience" class="audience-section">
+        <h2 class="section-title">Chọn hành trình của bạn</h2>
+        <div class="audience-grid">
+            <a href="#women-content" class="audience-card active">
+                <div class="audience-content">
+                    <h3>Nữ tuổi 30-40</h3>
+                    <p>Giảm mỡ, tăng cơ, cân bằng hormone và lối sống lành mạnh</p>
+                </div>
+            </a>
+            
+            <a href="#" class="audience-card coming" onclick="alert('Sắp ra mắt!'); return false;">
+                <div class="audience-content">
+                    <h3>Nam tuổi 30-40 <span class="badge-soon">SOON</span></h3>
+                    <p>Tăng cơ, sức bền, năng lượng và thể lực vượt trội</p>
+                </div>
+            </a>
+            
+            <a href="#" class="audience-card coming" onclick="alert('Sắp ra mắt!'); return false;">
+                <div class="audience-content">
+                    <h3>Khác <span class="badge-soon">SOON</span></h3>
+                    <p>Chương trình cá nhân hóa theo nhu cầu riêng của bạn</p>
+                </div>
+            </a>
+        </div>
+    </section>
+    
+    <!-- Main Categories -->
+    <section id="women-content" class="categories-section">
+        <h2 class="section-title">Ba trụ cột chính</h2>
+        
+        <div class="categories-grid">
+            <!-- GYM Card -->
+            <div class="category-card gym" id="gym">
+                <div class="category-header">
+                    <h2>Tập luyện GYM</h2>
+                    <p>Lộ trình khoa học 4 buổi/tuần</p>
+                </div>
+                <div class="category-content">
+                    <h3>Chi tiết chương trình</h3>
+                    <p>Lịch tập được thiết kế riêng cho phụ nữ 30-40 tuổi, kết hợp hoàn hảo giữa GYM và Cardio để tối ưu giảm mỡ và tăng cơ.</p>
+                    
+                    <ul class="feature-list">
+                        <li>4 buổi/tuần (90 phút GYM + 30-40 phút Cardio)</li>
+                        <li>Lịch luân phiên: Upper Push - Lower - Upper Pull - Glutes & Core</li>
+                        <li>Bài tập phù hợp với người bận rộn, văn phòng</li>
+                        <li>Hướng dẫn kỹ thuật chi tiết từng nhóm cơ</li>
+                        <li>Lộ trình 12 tuần từ cơ bản đến nâng cao</li>
+                    </ul>
+                    
+                    <a href="gym-overview.html" class="btn-explore">
+                        Khám phá GYM
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Nutrition Card -->
+            <div class="category-card nutrition" id="nutrition">
+                <div class="category-header">
+                    <h2>Dinh dưỡng</h2>
+                    <p>Ăn uống khoa học & bền vững</p>
+                </div>
+                <div class="category-content">
+                    <h3>Chi tiết chương trình</h3>
+                    <p>Chế độ dinh dưỡng cân bằng, không nhịn ăn, không cắt carb cực đoan. Tập trung vào protein và thực phẩm sạch.</p>
+                    
+                    <ul class="feature-list">
+                        <li>Tính calories & macro phù hợp mục tiêu</li>
+                        <li>Thực đơn 7 ngày đa dạng, dễ áp dụng</li>
+                        <li>Công thức nấu ăn giàu protein</li>
+                        <li>Hướng dẫn chọn thực phẩm & supplements</li>
+                        <li>Tư vấn dinh dưỡng theo chu kỳ kinh nguyệt</li>
+                    </ul>
+                    
+                    <a href="nutrition-overview.html" class="btn-explore">
+                        Khám phá Dinh dưỡng
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Lifestyle Card -->
+            <div class="category-card lifestyle" id="lifestyle">
+                <div class="category-header">
+                    <h2>Lối sống</h2>
+                    <p>Cân bằng & phục hồi toàn diện</p>
+                </div>
+                <div class="category-content">
+                    <h3>Chi tiết chương trình</h3>
+                    <p>Chăm sóc toàn diện: giấc ngủ, tư thế, stress, hormone. Dành riêng cho phụ nữ văn phòng bận rộn.</p>
+                    
+                    <ul class="feature-list">
+                        <li>Giấc ngủ chất lượng 7.5-8h/ngày</li>
+                        <li>Tư thế chuẩn cho người ngồi văn phòng</li>
+                        <li>Quản lý stress & cân bằng hormone</li>
+                        <li>Bài tập stretching & foam rolling</li>
+                        <li>Uống nước đúng cách & detox cơ thể</li>
+                    </ul>
+                    
+                    <a href="lifestyle-overview.html" class="btn-explore">
+                        Khám phá Lối sống
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Quick Stats -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Tuần lộ trình</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Buổi tập/tuần</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">90</div>
+                <div class="stat-label">Phút GYM/buổi</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">30+</div>
+                <div class="stat-label">Bài tập chi tiết</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Bạn đã sẵn sàng thay đổi?</h2>
+        <p>Bắt đầu hành trình của bạn ngay hôm nay - Strong Body, Better Life!</p>
+        <a href="#gym" class="btn-cta">
+            Bắt đầu ngay
+        </a>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="#">Về chúng tôi</a>
+            <a href="#">FAQ</a>
+            <a href="#">Liên hệ</a>
+            <a href="#">Chính sách bảo mật</a>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Fit30+. All rights reserved. | Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <!-- Smooth Scroll Script -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 4px 30px rgba(0,0,0,0.08)';
+            } else {
+                header.style.boxShadow = '0 2px 15px rgba(0,0,0,0.04)';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Builder - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Base palette */
+            --text-dark: #4A4A5A;
+            --text-medium: #7A7A8A;
+            --text-light: #A0A0B0;
+            --white: #FFFFFF;
+            --bg-primary: #FFFBFB;
+            --bg-soft: #FFF8F5;
+            --border-soft: #F0E8E6;
+            
+            /* Builder color - Lavender */
+            --builder: #B8A8E8;
+            --builder-soft: #EEE8F8;
+            --builder-dark: #9888D8;
+            --builder-gradient: linear-gradient(135deg, #EEE8F8 0%, #B8A8E8 100%);
+            
+            /* Muscle group colors */
+            --chest: #F4A698;
+            --chest-soft: #FCEAE5;
+            --shoulder: #B8A8E8;
+            --shoulder-soft: #EEE8F8;
+            --back: #7FB5B5;
+            --back-soft: #E0F0F0;
+            --arms: #E88A9A;
+            --arms-soft: #FBE5EA;
+            --glutes: #D8A8D8;
+            --glutes-soft: #F5E8F5;
+            --legs: #8FC5A8;
+            --legs-soft: #E5F5EC;
+            --core: #E8B87A;
+            --core-soft: #FBF0E0;
+            
+            /* Main gradient */
+            --main-gradient: linear-gradient(135deg, #F4A698 0%, #B8A8E8 50%, #7FB5B5 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        body::before {
+            width: 500px;
+            height: 500px;
+            background: var(--builder);
+            top: -150px;
+            right: -150px;
+        }
+        
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: var(--chest);
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 18px 40px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .btn-header {
+            padding: 9px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-header.secondary {
+            background: var(--bg-soft);
+            color: var(--text-medium);
+        }
+        
+        .btn-header.secondary:hover {
+            background: var(--builder-soft);
+            color: var(--builder-dark);
+        }
+        
+        .btn-header.primary {
+            background: var(--builder-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(184,168,232,0.3);
+        }
+        
+        .btn-header.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(184,168,232,0.4);
+        }
+        
+        /* Page Hero */
+        .page-hero {
+            padding: 50px 40px 30px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .page-badge {
+            display: inline-block;
+            background: var(--builder-gradient);
+            color: white;
+            padding: 7px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(184,168,232,0.3);
+        }
+        
+        .page-hero h1 {
+            font-size: 2.6rem;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+        
+        .page-hero h1 span {
+            background: var(--builder-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .page-hero p {
+            font-size: 1.05rem;
+            color: var(--text-medium);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Main Layout */
+        .builder-layout {
+            display: grid;
+            grid-template-columns: 360px 1fr 320px;
+            gap: 25px;
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 20px 40px 60px;
+            align-items: start;
+        }
+        
+        /* Left Panel - Config */
+        .config-panel {
+            background: white;
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 90px;
+            border: 1px solid var(--border-soft);
+        }
+        
+        .panel-title {
+            font-size: 1.15rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .panel-title-indicator {
+            width: 4px;
+            height: 20px;
+            background: var(--builder-gradient);
+            border-radius: 2px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 8px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border-soft);
+            border-radius: 12px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            background: var(--bg-soft);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--builder);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(184,168,232,0.1);
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border-soft);
+            border-radius: 12px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            background: var(--bg-soft);
+            cursor: pointer;
+            transition: all 0.3s;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237A7A8A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+        
+        .form-select:focus {
+            outline: none;
+            border-color: var(--builder);
+            background-color: white;
+        }
+        
+        /* Goal Selector */
+        .goal-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        
+        .goal-option {
+            padding: 10px;
+            border: 2px solid var(--border-soft);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-medium);
+            background: var(--bg-soft);
+        }
+        
+        .goal-option:hover {
+            border-color: var(--builder);
+            color: var(--builder-dark);
+        }
+        
+        .goal-option.active {
+            background: var(--builder-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(184,168,232,0.3);
+        }
+        
+        /* Muscle Selector */
+        .muscle-selector {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px dashed var(--border-soft);
+        }
+        
+        .muscle-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        
+        .muscle-btn {
+            padding: 12px 10px;
+            border: 2px solid var(--border-soft);
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .muscle-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--muscle-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+        
+        .muscle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+        
+        .muscle-btn:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .muscle-btn[data-muscle="chest"] { --muscle-color: var(--chest); }
+        .muscle-btn[data-muscle="shoulder"] { --muscle-color: var(--shoulder); }
+        .muscle-btn[data-muscle="back"] { --muscle-color: var(--back); }
+        .muscle-btn[data-muscle="arms"] { --muscle-color: var(--arms); }
+        .muscle-btn[data-muscle="glutes"] { --muscle-color: var(--glutes); }
+        .muscle-btn[data-muscle="legs"] { --muscle-color: var(--legs); }
+        .muscle-btn[data-muscle="core"] { --muscle-color: var(--core); }
+        
+        .muscle-btn:hover {
+            border-color: var(--muscle-color);
+            color: var(--muscle-color);
+        }
+        
+        .muscle-count {
+            display: inline-block;
+            background: var(--muscle-color);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            margin-left: 5px;
+            font-weight: 700;
+        }
+        
+        /* Center Panel - Workout Slots */
+        .workout-panel {
+            min-height: 600px;
+        }
+        
+        .workout-header {
+            background: white;
+            border-radius: 24px;
+            padding: 25px 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border: 1px solid var(--border-soft);
+        }
+        
+        .workout-title-display {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--text-dark);
+        }
+        
+        .workout-meta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .workout-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: var(--bg-soft);
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-medium);
+        }
+        
+        .workout-meta-item strong {
+            color: var(--builder-dark);
+        }
+        
+        /* Muscle Group Section */
+        .muscle-section {
+            background: white;
+            border-radius: 22px;
+            padding: 25px;
+            margin-bottom: 18px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+            position: relative;
+            overflow: hidden;
+            animation: slideIn 0.4s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .muscle-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--section-color);
+        }
+        
+        .muscle-section[data-muscle="chest"] { --section-color: var(--chest); }
+        .muscle-section[data-muscle="shoulder"] { --section-color: var(--shoulder); }
+        .muscle-section[data-muscle="back"] { --section-color: var(--back); }
+        .muscle-section[data-muscle="arms"] { --section-color: var(--arms); }
+        .muscle-section[data-muscle="glutes"] { --section-color: var(--glutes); }
+        .muscle-section[data-muscle="legs"] { --section-color: var(--legs); }
+        .muscle-section[data-muscle="core"] { --section-color: var(--core); }
+        
+        .muscle-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+        
+        .muscle-section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .muscle-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: var(--section-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .muscle-section-title h3 {
+            font-size: 1.25rem;
+        }
+        
+        .muscle-section-title .subtitle {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-weight: 500;
+            font-family: 'Quicksand', sans-serif;
+        }
+        
+        .btn-remove-muscle {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--bg-soft);
+            border: none;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        
+        .btn-remove-muscle:hover {
+            background: #FFE5E5;
+            color: #E88A8A;
+        }
+        
+        /* Exercise Slots */
+        .exercise-slots {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .exercise-slot {
+            background: var(--bg-soft);
+            border-radius: 16px;
+            padding: 18px;
+            border: 2px dashed var(--border-soft);
+            transition: all 0.3s;
+        }
+        
+        .exercise-slot.filled {
+            background: white;
+            border: 2px solid var(--border-soft);
+            border-style: solid;
+        }
+        
+        .exercise-slot.filled:hover {
+            border-color: var(--section-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .slot-empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+            color: var(--text-light);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .slot-empty:hover {
+            color: var(--section-color);
+        }
+        
+        .slot-empty-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--section-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        /* Filled Slot */
+        .slot-filled {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 18px;
+            align-items: start;
+        }
+        
+        .exercise-info {
+            display: flex;
+            gap: 14px;
+            align-items: start;
+        }
+        
+        .exercise-thumb {
+            width: 54px;
+            height: 54px;
+            border-radius: 12px;
+            background: var(--section-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .exercise-details {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .exercise-name-display {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+        
+        .exercise-target-display {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        /* Config Inputs */
+        .config-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        
+        .config-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .config-label {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .config-input {
+            padding: 8px 10px;
+            border: 1.5px solid var(--border-soft);
+            border-radius: 10px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            background: white;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .config-input:focus {
+            outline: none;
+            border-color: var(--section-color);
+            box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+        }
+        
+        .slot-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .btn-slot-action {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: var(--bg-soft);
+            border: none;
+            cursor: pointer;
+            color: var(--text-medium);
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-slot-action:hover {
+            background: var(--section-color);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .btn-slot-action.delete:hover {
+            background: #E88A8A;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            background: white;
+            border-radius: 24px;
+            padding: 80px 40px;
+            text-align: center;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 2px dashed var(--border-soft);
+        }
+        
+        .empty-state-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--builder-soft);
+            color: var(--builder);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 20px;
+        }
+        
+        .empty-state h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        
+        .empty-state p {
+            color: var(--text-medium);
+            margin-bottom: 25px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn-start {
+            padding: 14px 32px;
+            background: var(--builder-gradient);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            font-family: 'Quicksand', sans-serif;
+            box-shadow: 0 6px 20px rgba(184,168,232,0.3);
+            transition: all 0.3s;
+        }
+        
+        .btn-start:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(184,168,232,0.4);
+        }
+        
+        /* Right Panel - Summary */
+        .summary-panel {
+            background: white;
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 90px;
+            border: 1px solid var(--border-soft);
+        }
+        
+        .summary-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .summary-stat {
+            background: var(--bg-soft);
+            padding: 15px;
+            border-radius: 14px;
+            text-align: center;
+        }
+        
+        .summary-stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--builder-dark);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        
+        .summary-stat-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .summary-breakdown {
+            margin-bottom: 25px;
+        }
+        
+        .breakdown-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+        }
+        
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--border-soft);
+        }
+        
+        .breakdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .breakdown-muscle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .breakdown-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--dot-color);
+        }
+        
+        .breakdown-count {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+        
+        .summary-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .btn-summary {
+            padding: 13px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+            text-align: center;
+        }
+        
+        .btn-summary.primary {
+            background: var(--builder-gradient);
+            color: white;
+            box-shadow: 0 6px 20px rgba(184,168,232,0.3);
+        }
+        
+        .btn-summary.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(184,168,232,0.4);
+        }
+        
+        .btn-summary.secondary {
+            background: var(--bg-soft);
+            color: var(--text-medium);
+        }
+        
+        .btn-summary.secondary:hover {
+            background: var(--builder-soft);
+            color: var(--builder-dark);
+        }
+        
+        .btn-summary.danger {
+            background: #FFF0F0;
+            color: #E88A8A;
+        }
+        
+        .btn-summary.danger:hover {
+            background: #FFE5E5;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(74, 74, 90, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal {
+            background: white;
+            border-radius: 28px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 85vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-header {
+            padding: 28px 32px 20px;
+            border-bottom: 1px solid var(--border-soft);
+            position: relative;
+        }
+        
+        .modal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--modal-accent, var(--builder-gradient));
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--bg-soft);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            transition: all 0.3s;
+        }
+        
+        .modal-close:hover {
+            background: var(--builder-soft);
+            color: var(--builder-dark);
+            transform: rotate(90deg);
+        }
+        
+        .modal-title {
+            font-size: 1.6rem;
+            margin-bottom: 6px;
+            padding-right: 50px;
+        }
+        
+        .modal-subtitle {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+        }
+        
+        .modal-search {
+            padding: 18px 32px;
+            border-bottom: 1px solid var(--border-soft);
+            background: var(--bg-soft);
+        }
+        
+        .modal-search-input {
+            width: 100%;
+            padding: 12px 18px;
+            border: 2px solid var(--border-soft);
+            border-radius: 12px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.95rem;
+            background: white;
+            transition: all 0.3s;
+        }
+        
+        .modal-search-input:focus {
+            outline: none;
+            border-color: var(--builder);
+        }
+        
+        .modal-body {
+            padding: 20px 32px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        
+        .modal-exercise-list {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .modal-exercise-item {
+            padding: 16px 18px;
+            background: var(--bg-soft);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .modal-exercise-item:hover {
+            background: white;
+            border-color: var(--modal-accent-color, var(--builder));
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+        
+        .modal-exercise-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .modal-exercise-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        
+        .modal-exercise-meta {
+            display: flex;
+            gap: 10px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-weight: 600;
+            flex-wrap: wrap;
+        }
+        
+        .modal-exercise-add {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--modal-accent-color, var(--builder));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+        
+        .modal-exercise-item:hover .modal-exercise-add {
+            transform: scale(1.1) rotate(90deg);
+        }
+        
+        .modal-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+        }
+        
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: 14px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 2000;
+            transform: translateX(400px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 4px solid var(--builder);
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--builder-soft);
+            color: var(--builder-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        .toast-content {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .builder-layout {
+                grid-template-columns: 320px 1fr;
+            }
+            
+            .summary-panel {
+                grid-column: 1 / -1;
+                position: static;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .builder-layout {
+                grid-template-columns: 1fr;
+                padding: 15px 20px 40px;
+            }
+            
+            .config-panel, .summary-panel {
+                position: static;
+            }
+            
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .page-hero {
+                padding: 35px 20px 20px;
+            }
+            
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .slot-filled {
+                grid-template-columns: 1fr;
+            }
+            
+            .slot-actions {
+                flex-direction: row;
+                justify-content: flex-end;
+            }
+            
+            .config-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 500px) {
+            .muscle-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .summary-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-actions {
+                gap: 8px;
+            }
+            
+            .btn-header {
+                padding: 8px 14px;
+                font-size: 0.82rem;
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-soft);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--builder) 0%, var(--chest) 100%);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <div class="header-actions">
+            <a href="gym-overview.html" class="btn-header secondary">← Overview</a>
+            <button class="btn-header primary" onclick="saveWorkout()">💾 Lưu buổi tập</button>
+        </div>
+    </header>
+    
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <span class="page-badge">WORKOUT BUILDER</span>
+        <h1>Lắp ghép <span>buổi tập</span> của bạn</h1>
+        <p>Chọn nhóm cơ, chọn số bài, và tự do phối hợp từ thư viện 40+ bài tập. Không giới hạn, không cứng nhắc.</p>
+    </section>
+    
+    <!-- Main Layout -->
+    <div class="builder-layout">
+        <!-- Left Panel - Config -->
+        <aside class="config-panel">
+            <h3 class="panel-title">
+                <span class="panel-title-indicator"></span>
+                Cấu hình buổi tập
+            </h3>
+            
+            <div class="form-group">
+                <label class="form-label">Tên buổi tập</label>
+                <input type="text" class="form-input" id="workoutName" value="Buổi tập của tôi" placeholder="VD: Upper Push">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Thời lượng GYM</label>
+                <select class="form-select" id="workoutDuration">
+                    <option value="60">60 phút</option>
+                    <option value="75">75 phút</option>
+                    <option value="90" selected>90 phút</option>
+                    <option value="105">105 phút</option>
+                    <option value="120">120 phút</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Cardio cuối buổi</label>
+                <select class="form-select" id="cardioDuration">
+                    <option value="0">Không có</option>
+                    <option value="20">20 phút</option>
+                    <option value="30" selected>30 phút</option>
+                    <option value="40">40 phút</option>
+                    <option value="45">45 phút</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Mục tiêu</label>
+                <div class="goal-selector">
+                    <div class="goal-option active" data-goal="balance">Cân bằng</div>
+                    <div class="goal-option" data-goal="fatloss">Giảm mỡ</div>
+                    <div class="goal-option" data-goal="muscle">Tăng cơ</div>
+                    <div class="goal-option" data-goal="strength">Sức mạnh</div>
+                </div>
+            </div>
+            
+            <div class="muscle-selector">
+                <label class="form-label">Thêm nhóm cơ</label>
+                <div class="muscle-grid">
+                    <button class="muscle-btn" data-muscle="chest" onclick="addMuscleSection('chest')">
+                        Ngực <span class="muscle-count" id="count-chest" style="display:none">0</span>
+                    </button>
+                    <button class="muscle-btn" data-muscle="shoulder" onclick="addMuscleSection('shoulder')">
+                        Vai <span class="muscle-count" id="count-shoulder" style="display:none">0</span>
+                    </button>
+                    <button class="muscle-btn" data-muscle="back" onclick="addMuscleSection('back')">
+                        Lưng <span class="muscle-count" id="count-back" style="display:none">0</span>
+                    </button>
+                    <button class="muscle-btn" data-muscle="arms" onclick="addMuscleSection('arms')">
+                        Tay <span class="muscle-count" id="count-arms" style="display:none">0</span>
+                    </button>
+                    <button class="muscle-btn" data-muscle="glutes" onclick="addMuscleSection('glutes')">
+                        Mông <span class="muscle-count" id="count-glutes" style="display:none">0</span>
+                    </button>
+                    <button class="muscle-btn" data-muscle="legs" onclick="addMuscleSection('legs')">
+                        Chân <span class="muscle-count" id="count-legs" style="display:none">0</span>
+                    </button>
+                    <button class="muscle-btn" data-muscle="core" onclick="addMuscleSection('core')">
+                        Bụng <span class="muscle-count" id="count-core" style="display:none">0</span>
+                    </button>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Center Panel - Workout -->
+        <main class="workout-panel" id="workoutPanel">
+            <div class="empty-state" id="emptyState">
+                <div class="empty-state-icon">🧩</div>
+                <h3>Bắt đầu lắp ghép buổi tập</h3>
+                <p>Chọn một nhóm cơ từ panel bên trái để thêm bài tập vào buổi tập của bạn.</p>
+                <button class="btn-start" onclick="addMuscleSection('chest')">+ Thêm nhóm cơ đầu tiên</button>
+            </div>
+        </main>
+        
+        <!-- Right Panel - Summary -->
+        <aside class="summary-panel">
+            <h3 class="panel-title">
+                <span class="panel-title-indicator"></span>
+                Tổng kết
+            </h3>
+            
+            <div class="summary-stats">
+                <div class="summary-stat">
+                    <div class="summary-stat-value" id="totalExercises">0</div>
+                    <div class="summary-stat-label">Bài tập</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="summary-stat-value" id="totalSets">0</div>
+                    <div class="summary-stat-label">Tổng sets</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="summary-stat-value" id="totalTime">0'</div>
+                    <div class="summary-stat-label">Thời gian</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="summary-stat-value" id="totalVolume">0</div>
+                    <div class="summary-stat-label">Volume</div>
+                </div>
+            </div>
+            
+            <div class="summary-breakdown">
+                <div class="breakdown-title">Phân bổ theo nhóm cơ</div>
+                <div id="breakdownList">
+                    <div style="text-align:center; padding:20px; color:var(--text-light); font-size:0.9rem;">
+                        Chưa có bài tập nào
+                    </div>
+                </div>
+            </div>
+            
+            <div class="summary-actions">
+                <button class="btn-summary primary" onclick="saveWorkout()">💾 Lưu buổi tập</button>
+                <button class="btn-summary secondary" onclick="loadWorkout()">📂 Tải buổi đã lưu</button>
+                <button class="btn-summary secondary" onclick="printWorkout()">🖨️ In / Export</button>
+                <button class="btn-summary danger" onclick="resetWorkout()">🗑️ Xóa tất cả</button>
+            </div>
+        </aside>
+    </div>
+    
+    <!-- Modal - Exercise Picker -->
+    <div class="modal-overlay" id="exerciseModal">
+        <div class="modal">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal()">✕</button>
+                <h2 class="modal-title" id="modalTitle">Chọn bài tập</h2>
+                <div class="modal-subtitle" id="modalSubtitle">Chọn 1 bài tập cho nhóm cơ này</div>
+            </div>
+            <div class="modal-search">
+                <input type="text" class="modal-search-input" id="modalSearch" placeholder="Tìm kiếm bài tập...">
+            </div>
+            <div class="modal-body">
+                <div class="modal-exercise-list" id="modalExerciseList"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">✓</div>
+        <div class="toast-content" id="toastContent">Đã lưu thành công!</div>
+    </div>
+    
+    <script>
+        // ==================== EXERCISE DATABASE ====================
+        const exerciseDatabase = [
+            // CHEST
+            { id: 1, name: "Machine Chest Press", muscle: "chest", target: "Pectoralis Major", equipment: "machine", type: "compound" },
+            { id: 2, name: "Incline Dumbbell Press", muscle: "chest", target: "Upper Pectoralis", equipment: "dumbbell", type: "compound" },
+            { id: 3, name: "Pec Deck Fly", muscle: "chest", target: "Pectoralis Major", equipment: "machine", type: "isolation" },
+            { id: 4, name: "Dumbbell Bench Press", muscle: "chest", target: "Pectoralis Major", equipment: "dumbbell", type: "compound" },
+            { id: 5, name: "Cable Crossover", muscle: "chest", target: "Pectoralis Major", equipment: "cable", type: "isolation" },
+            { id: 6, name: "Push-ups", muscle: "chest", target: "Pectoralis Major", equipment: "bodyweight", type: "compound" },
+            
+            // SHOULDER
+            { id: 7, name: "Seated Shoulder Press", muscle: "shoulder", target: "Anterior Deltoid", equipment: "dumbbell", type: "compound" },
+            { id: 8, name: "Lateral Raise", muscle: "shoulder", target: "Lateral Deltoid", equipment: "dumbbell", type: "isolation" },
+            { id: 9, name: "Face Pull", muscle: "shoulder", target: "Rear Deltoid", equipment: "cable", type: "isolation" },
+            { id: 10, name: "Arnold Press", muscle: "shoulder", target: "All Deltoids", equipment: "dumbbell", type: "compound" },
+            { id: 11, name: "Reverse Pec Deck", muscle: "shoulder", target: "Rear Deltoid", equipment: "machine", type: "isolation" },
+            { id: 12, name: "Front Raise", muscle: "shoulder", target: "Anterior Deltoid", equipment: "dumbbell", type: "isolation" },
+            
+            // BACK
+            { id: 13, name: "Lat Pulldown", muscle: "back", target: "Latissimus Dorsi", equipment: "cable", type: "compound" },
+            { id: 14, name: "Seated Cable Row", muscle: "back", target: "Mid Back", equipment: "cable", type: "compound" },
+            { id: 15, name: "Dumbbell Row", muscle: "back", target: "Latissimus Dorsi", equipment: "dumbbell", type: "compound" },
+            { id: 16, name: "Assisted Pull-up", muscle: "back", target: "Latissimus Dorsi", equipment: "machine", type: "compound" },
+            { id: 17, name: "T-Bar Row", muscle: "back", target: "Mid Back", equipment: "barbell", type: "compound" },
+            { id: 18, name: "Straight Arm Pulldown", muscle: "back", target: "Latissimus Dorsi", equipment: "cable", type: "isolation" },
+            
+            // ARMS
+            { id: 19, name: "Barbell Curl", muscle: "arms", target: "Biceps", equipment: "barbell", type: "isolation" },
+            { id: 20, name: "Hammer Curl", muscle: "arms", target: "Brachialis", equipment: "dumbbell", type: "isolation" },
+            { id: 21, name: "Tricep Pushdown", muscle: "arms", target: "Triceps", equipment: "cable", type: "isolation" },
+            { id: 22, name: "Overhead Tricep Extension", muscle: "arms", target: "Triceps", equipment: "dumbbell", type: "isolation" },
+            { id: 23, name: "Incline Dumbbell Curl", muscle: "arms", target: "Biceps", equipment: "dumbbell", type: "isolation" },
+            { id: 24, name: "Skull Crushers", muscle: "arms", target: "Triceps", equipment: "barbell", type: "isolation" },
+            
+            // GLUTES
+            { id: 25, name: "Hip Thrust", muscle: "glutes", target: "Gluteus Maximus", equipment: "barbell", type: "compound" },
+            { id: 26, name: "Bulgarian Split Squat", muscle: "glutes", target: "Glutes, Quads", equipment: "dumbbell", type: "compound" },
+            { id: 27, name: "Cable Kickback", muscle: "glutes", target: "Gluteus Maximus", equipment: "cable", type: "isolation" },
+            { id: 28, name: "Glute Bridge", muscle: "glutes", target: "Gluteus Maximus", equipment: "bodyweight", type: "compound" },
+            { id: 29, name: "Cable Abduction", muscle: "glutes", target: "Gluteus Medius", equipment: "cable", type: "isolation" },
+            { id: 30, name: "Romanian Deadlift", muscle: "glutes", target: "Glutes, Hamstrings", equipment: "barbell", type: "compound" },
+            
+            // LEGS
+            { id: 31, name: "Goblet Squat", muscle: "legs", target: "Quads, Glutes", equipment: "dumbbell", type: "compound" },
+            { id: 32, name: "Leg Press", muscle: "legs", target: "Quads, Glutes", equipment: "machine", type: "compound" },
+            { id: 33, name: "Leg Curl", muscle: "legs", target: "Hamstrings", equipment: "machine", type: "isolation" },
+            { id: 34, name: "Leg Extension", muscle: "legs", target: "Quadriceps", equipment: "machine", type: "isolation" },
+            { id: 35, name: "Walking Lunge", muscle: "legs", target: "Quads, Glutes", equipment: "dumbbell", type: "compound" },
+            { id: 36, name: "Calf Raise", muscle: "legs", target: "Calves", equipment: "machine", type: "isolation" },
+            
+            // CORE
+            { id: 37, name: "Plank", muscle: "core", target: "Transverse Abdominis", equipment: "bodyweight", type: "isolation" },
+            { id: 38, name: "Dead Bug", muscle: "core", target: "Transverse Abdominis", equipment: "bodyweight", type: "isolation" },
+            { id: 39, name: "Russian Twist", muscle: "core", target: "Obliques", equipment: "bodyweight", type: "isolation" },
+            { id: 40, name: "Leg Raise", muscle: "core", target: "Lower Abs", equipment: "bodyweight", type: "isolation" }
+        ];
+        
+        // ==================== STATE ====================
+        const muscleNames = {
+            chest: 'Ngực', shoulder: 'Vai', back: 'Lưng',
+            arms: 'Tay', glutes: 'Mông', legs: 'Chân', core: 'Bụng'
+        };
+        
+        const muscleLetters = {
+            chest: 'N', shoulder: 'V', back: 'L',
+            arms: 'T', glutes: 'M', legs: 'C', core: 'B'
+        };
+        
+        const muscleColors = {
+            chest: '#F4A698', shoulder: '#B8A8E8', back: '#7FB5B5',
+            arms: '#E88A9A', glutes: '#D8A8D8', legs: '#8FC5A8', core: '#E8B87A'
+        };
+        
+        let workoutState = {
+            name: 'Buổi tập của tôi',
+            duration: 90,
+            cardio: 30,
+            goal: 'balance',
+            sections: [] // { id, muscle, slots: [{exerciseId, sets, reps, rest, tempo}] }
+        };
+        
+        let currentSlotContext = null; // { sectionId, slotIndex }
+        let sectionIdCounter = 0;
+        
+        // ==================== DEFAULT PRESETS BY GOAL ====================
+        const goalPresets = {
+            balance: { sets: 3, reps: '10-12', rest: 90, tempo: '2-0-1-0' },
+            fatloss: { sets: 3, reps: '12-15', rest: 60, tempo: '2-0-1-0' },
+            muscle: { sets: 4, reps: '8-12', rest: 90, tempo: '2-1-1-0' },
+            strength: { sets: 5, reps: '5-6', rest: 120, tempo: '2-0-X-0' }
+        };
+        
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load saved workout name
+            const savedName = localStorage.getItem('fit30_workout_name');
+            if (savedName) {
+                document.getElementById('workoutName').value = savedName;
+                workoutState.name = savedName;
+            }
+            
+            // Event listeners
+            document.getElementById('workoutName').addEventListener('input', (e) => {
+                workoutState.name = e.target.value;
+                updateWorkoutHeader();
+            });
+            
+            document.getElementById('workoutDuration').addEventListener('change', (e) => {
+                workoutState.duration = parseInt(e.target.value);
+                updateSummary();
+            });
+            
+            document.getElementById('cardioDuration').addEventListener('change', (e) => {
+                workoutState.cardio = parseInt(e.target.value);
+                updateSummary();
+            });
+            
+            document.querySelectorAll('.goal-option').forEach(opt => {
+                opt.addEventListener('click', function() {
+                    document.querySelectorAll('.goal-option').forEach(o => o.classList.remove('active'));
+                    this.classList.add('active');
+                    workoutState.goal = this.dataset.goal;
+                });
+            });
+            
+            document.getElementById('modalSearch').addEventListener('input', renderModalExercises);
+            
+            document.getElementById('exerciseModal').addEventListener('click', (e) => {
+                if (e.target.id === 'exerciseModal') closeModal();
+            });
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeModal();
+            });
+        });
+        
+        // ==================== MUSCLE SECTION MANAGEMENT ====================
+        function addMuscleSection(muscle) {
+            // Check if already exists
+            if (workoutState.sections.find(s => s.muscle === muscle)) {
+                showToast(`Nhóm cơ ${muscleNames[muscle]} đã có trong buổi tập`);
+                return;
+            }
+            
+            sectionIdCounter++;
+            const section = {
+                id: sectionIdCounter,
+                muscle: muscle,
+                slots: [null, null] // Default 2 empty slots
+            };
+            
+            workoutState.sections.push(section);
+            renderMuscleSection(section);
+            updateEmptyState();
+            updateMuscleCounts();
+            updateSummary();
+        }
+        
+        function removeMuscleSection(sectionId) {
+            if (!confirm('Xóa nhóm cơ này khỏi buổi tập?')) return;
+            
+            workoutState.sections = workoutState.sections.filter(s => s.id !== sectionId);
+            const sectionEl = document.querySelector(`[data-section-id="${sectionId}"]`);
+            if (sectionEl) {
+                sectionEl.style.animation = 'fadeIn 0.3s ease reverse';
+                setTimeout(() => {
+                    sectionEl.remove();
+                    updateEmptyState();
+                    updateMuscleCounts();
+                    updateSummary();
+                }, 250);
+            }
+        }
+        
+        function addSlot(sectionId) {
+            const section = workoutState.sections.find(s => s.id === sectionId);
+            if (!section) return;
+            if (section.slots.length >= 5) {
+                showToast('Tối đa 5 bài cho mỗi nhóm cơ');
+                return;
+            }
+            section.slots.push(null);
+            renderMuscleSection(section);
+            updateSummary();
+        }
+        
+        function removeSlot(sectionId, slotIndex) {
+            const section = workoutState.sections.find(s => s.id === sectionId);
+            if (!section) return;
+            section.slots.splice(slotIndex, 1);
+            if (section.slots.length === 0) {
+                removeMuscleSection(sectionId);
+            } else {
+                renderMuscleSection(section);
+                updateSummary();
+            }
+        }
+        
+        // ==================== RENDER ====================
+        function renderMuscleSection(section) {
+            const existing = document.querySelector(`[data-section-id="${section.id}"]`);
+            if (existing) existing.remove();
+            
+            const panel = document.getElementById('workoutPanel');
+            const sectionEl = document.createElement('div');
+            sectionEl.className = 'muscle-section';
+            sectionEl.dataset.muscle = section.muscle;
+            sectionEl.dataset.sectionId = section.id;
+            
+            const filledCount = section.slots.filter(s => s !== null).length;
+            
+            sectionEl.innerHTML = `
+                <div class="muscle-section-header">
+                    <div class="muscle-section-title">
+                        <div class="muscle-icon" style="background:${muscleColors[section.muscle]}">${muscleLetters[section.muscle]}</div>
+                        <div>
+                            <h3>${muscleNames[section.muscle]}</h3>
+                            <div class="subtitle">${filledCount}/${section.slots.length} bài đã chọn</div>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:6px;">
+                        <button class="btn-remove-muscle" onclick="addSlot(${section.id})" title="Thêm bài">+</button>
+                        <button class="btn-remove-muscle" onclick="removeMuscleSection(${section.id})" title="Xóa nhóm cơ">✕</button>
+                    </div>
+                </div>
+                <div class="exercise-slots">
+                    ${section.slots.map((slot, idx) => renderSlot(section, slot, idx)).join('')}
+                </div>
+            `;
+            
+            panel.appendChild(sectionEl);
+        }
+        
+        function renderSlot(section, slot, slotIndex) {
+            if (slot === null) {
+                return `
+                    <div class="exercise-slot" data-slot-index="${slotIndex}">
+                        <div class="slot-empty" onclick="openExercisePicker(${section.id}, ${slotIndex})">
+                            <div class="slot-empty-icon" style="background:${muscleColors[section.muscle]}">+</div>
+                            <span>Chọn bài tập</span>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            const exercise = exerciseDatabase.find(e => e.id === slot.exerciseId);
+            if (!exercise) return '';
+            
+            return `
+                <div class="exercise-slot filled" data-slot-index="${slotIndex}">
+                    <div class="slot-filled">
+                        <div class="exercise-info">
+                            <div class="exercise-thumb" style="background:${muscleColors[section.muscle]}">${muscleLetters[section.muscle]}</div>
+                            <div class="exercise-details">
+                                <div class="exercise-name-display">${exercise.name}</div>
+                                <div class="exercise-target-display">${exercise.target} · ${exercise.equipment}</div>
+                                <div class="config-row">
+                                    <div class="config-input-group">
+                                        <span class="config-label">Sets</span>
+                                        <input type="number" class="config-input" value="${slot.sets}" min="1" max="10" onchange="updateSlot(${section.id}, ${slotIndex}, 'sets', this.value)">
+                                    </div>
+                                    <div class="config-input-group">
+                                        <span class="config-label">Reps</span>
+                                        <input type="text" class="config-input" value="${slot.reps}" onchange="updateSlot(${section.id}, ${slotIndex}, 'reps', this.value)">
+                                    </div>
+                                    <div class="config-input-group">
+                                        <span class="config-label">Rest"</span>
+                                        <input type="number" class="config-input" value="${slot.rest}" min="0" max="300" step="15" onchange="updateSlot(${section.id}, ${slotIndex}, 'rest', this.value)">
+                                    </div>
+                                    <div class="config-input-group">
+                                        <span class="config-label">Tempo</span>
+                                        <input type="text" class="config-input" value="${slot.tempo}" onchange="updateSlot(${section.id}, ${slotIndex}, 'tempo', this.value)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slot-actions">
+                            <button class="btn-slot-action" onclick="openExercisePicker(${section.id}, ${slotIndex})" title="Đổi bài">↻</button>
+                            <button class="btn-slot-action delete" onclick="removeSlot(${section.id}, ${slotIndex})" title="Xóa bài">✕</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function updateSlot(sectionId, slotIndex, field, value) {
+            const section = workoutState.sections.find(s => s.id === sectionId);
+            if (!section || !section.slots[slotIndex]) return;
+            
+            if (field === 'sets' || field === 'rest') {
+                value = parseInt(value) || 0;
+            }
+            section.slots[slotIndex][field] = value;
+            updateSummary();
+        }
+        
+        // ==================== EXERCISE PICKER MODAL ====================
+        function openExercisePicker(sectionId, slotIndex) {
+            const section = workoutState.sections.find(s => s.id === sectionId);
+            if (!section) return;
+            
+            currentSlotContext = { sectionId, slotIndex };
+            
+            document.getElementById('modalTitle').textContent = `Chọn bài cho ${muscleNames[section.muscle]}`;
+            document.getElementById('modalSubtitle').textContent = `${exerciseDatabase.filter(e => e.muscle === section.muscle).length} bài tập có sẵn`;
+            document.getElementById('modalSearch').value = '';
+            
+            const modal = document.getElementById('exerciseModal');
+            modal.style.setProperty('--modal-accent-color', muscleColors[section.muscle]);
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            renderModalExercises();
+            
+            setTimeout(() => document.getElementById('modalSearch').focus(), 300);
+        }
+        
+        function renderModalExercises() {
+            if (!currentSlotContext) return;
+            
+            const section = workoutState.sections.find(s => s.id === currentSlotContext.sectionId);
+            if (!section) return;
+            
+            const search = document.getElementById('modalSearch').value.toLowerCase();
+            const exercises = exerciseDatabase.filter(e => {
+                if (e.muscle !== section.muscle) return false;
+                if (search && !e.name.toLowerCase().includes(search) && !e.target.toLowerCase().includes(search)) return false;
+                return true;
+            });
+            
+            const list = document.getElementById('modalExerciseList');
+            
+            if (exercises.length === 0) {
+                list.innerHTML = `<div class="modal-empty">Không tìm thấy bài tập phù hợp</div>`;
+                return;
+            }
+            
+            list.innerHTML = exercises.map(ex => `
+                <div class="modal-exercise-item" onclick="selectExercise(${ex.id})">
+                    <div class="modal-exercise-info">
+                        <div class="modal-exercise-name">${ex.name}</div>
+                        <div class="modal-exercise-meta">
+                            <span>🎯 ${ex.target}</span>
+                            <span>🔧 ${ex.equipment}</span>
+                            <span>📊 ${ex.type}</span>
+                        </div>
+                    </div>
+                    <div class="modal-exercise-add" style="background:${muscleColors[section.muscle]}">+</div>
+                </div>
+            `).join('');
+        }
+        
+        function selectExercise(exerciseId) {
+            if (!currentSlotContext) return;
+            
+            const section = workoutState.sections.find(s => s.id === currentSlotContext.sectionId);
+            if (!section) return;
+            
+            const preset = goalPresets[workoutState.goal];
+            
+            section.slots[currentSlotContext.slotIndex] = {
+                exerciseId: exerciseId,
+                sets: preset.sets,
+                reps: preset.reps,
+                rest: preset.rest,
+                tempo: preset.tempo
+            };
+            
+            closeModal();
+            renderMuscleSection(section);
+            updateSummary();
+            showToast('Đã thêm bài tập');
+        }
+        
+        function closeModal() {
+            document.getElementById('exerciseModal').classList.remove('active');
+            document.body.style.overflow = '';
+            currentSlotContext = null;
+        }
+        
+        // ==================== SUMMARY & UPDATES ====================
+        function updateSummary() {
+            let totalExercises = 0;
+            let totalSets = 0;
+            let totalTime = 0;
+            let totalVolume = 0;
+            const breakdown = {};
+            
+            workoutState.sections.forEach(section => {
+                const muscleCount = section.slots.filter(s => s !== null).length;
+                if (muscleCount > 0) {
+                    breakdown[section.muscle] = muscleCount;
+                }
+                
+                section.slots.forEach(slot => {
+                    if (slot !== null) {
+                        totalExercises++;
+                        const repsNum = parseInt(slot.reps) || 10;
+                        totalSets += slot.sets;
+                        totalVolume += slot.sets * repsNum;
+                        // Estimate time: sets * (repTime + rest)
+                        const repTime = 4; // seconds per rep
+                        totalTime += slot.sets * (repsNum * repTime + slot.rest);
+                    }
+                });
+            });
+            
+            // Add cardio time
+            totalTime += workoutState.cardio * 60;
+            // Add warmup/transition buffer
+            totalTime += 600; // 10 min buffer
+            
+            const minutes = Math.round(totalTime / 60);
+            
+            document.getElementById('totalExercises').textContent = totalExercises;
+            document.getElementById('totalSets').textContent = totalSets;
+            document.getElementById('totalTime').textContent = minutes + '\'';
+            document.getElementById('totalVolume').textContent = totalVolume;
+            
+            // Breakdown
+            const breakdownList = document.getElementById('breakdownList');
+            if (Object.keys(breakdown).length === 0) {
+                breakdownList.innerHTML = `<div style="text-align:center; padding:20px; color:var(--text-light); font-size:0.9rem;">Chưa có bài tập nào</div>`;
+            } else {
+                breakdownList.innerHTML = Object.keys(breakdown).map(muscle => `
+                    <div class="breakdown-item">
+                        <div class="breakdown-muscle">
+                            <div class="breakdown-dot" style="--dot-color:${muscleColors[muscle]}; background:${muscleColors[muscle]}"></div>
+                            ${muscleNames[muscle]}
+                        </div>
+                        <div class="breakdown-count">${breakdown[muscle]} bài</div>
+                    </div>
+                `).join('');
+            }
+            
+            updateWorkoutHeader();
+        }
+        
+        function updateWorkoutHeader() {
+            let header = document.querySelector('.workout-header');
+            if (!header) {
+                header = document.createElement('div');
+                header.className = 'workout-header';
+                document.getElementById('workoutPanel').prepend(header);
+            }
+            
+            const totalExercises = workoutState.sections.reduce((sum, s) => sum + s.slots.filter(sl => sl !== null).length, 0);
+            
+            header.innerHTML = `
+                <div class="workout-title-display">${workoutState.name || 'Buổi tập của tôi'}</div>
+                <div class="workout-meta">
+                    <div class="workout-meta-item">⏱️ <strong>${workoutState.duration}'</strong> GYM</div>
+                    ${workoutState.cardio > 0 ? `<div class="workout-meta-item">🏃 <strong>${workoutState.cardio}'</strong> Cardio</div>` : ''}
+                    <div class="workout-meta-item">🎯 <strong>${totalExercises}</strong> bài tập</div>
+                </div>
+            `;
+        }
+        
+        function updateEmptyState() {
+            const empty = document.getElementById('emptyState');
+            const hasSections = workoutState.sections.length > 0;
+            
+            if (hasSections) {
+                if (empty) empty.style.display = 'none';
+            } else {
+                if (empty) empty.style.display = 'block';
+            }
+        }
+        
+        function updateMuscleCounts() {
+            Object.keys(muscleNames).forEach(muscle => {
+                const countEl = document.getElementById(`count-${muscle}`);
+                const section = workoutState.sections.find(s => s.muscle === muscle);
+                if (section) {
+                    const count = section.slots.filter(s => s !== null).length;
+                    countEl.textContent = count;
+                    countEl.style.display = 'inline-block';
+                } else {
+                    countEl.style.display = 'none';
+                }
+            });
+        }
+        
+        // ==================== SAVE / LOAD / RESET ====================
+        function saveWorkout() {
+            const data = {
+                ...workoutState,
+                savedAt: new Date().toISOString()
+            };
+            localStorage.setItem('fit30_workout_current', JSON.stringify(data));
+            
+            // Also save to history
+            const history = JSON.parse(localStorage.getItem('fit30_workout_history') || '[]');
+            history.unshift(data);
+            if (history.length > 10) history.pop();
+            localStorage.setItem('fit30_workout_history', JSON.stringify(history));
+            
+            showToast('Đã lưu buổi tập thành công!');
+        }
+        
+        function loadWorkout() {
+            const data = localStorage.getItem('fit30_workout_current');
+            if (!data) {
+                showToast('Chưa có buổi tập nào được lưu');
+                return;
+            }
+            
+            try {
+                const parsed = JSON.parse(data);
+                workoutState = parsed;
+                
+                // Restore UI
+                document.getElementById('workoutName').value = workoutState.name;
+                document.getElementById('workoutDuration').value = workoutState.duration;
+                document.getElementById('cardioDuration').value = workoutState.cardio;
+                
+                document.querySelectorAll('.goal-option').forEach(o => {
+                    o.classList.toggle('active', o.dataset.goal === workoutState.goal);
+                });
+                
+                // Re-render sections
+                const panel = document.getElementById('workoutPanel');
+                panel.querySelectorAll('.muscle-section').forEach(el => el.remove());
+                
+                workoutState.sections.forEach(section => {
+                    renderMuscleSection(section);
+                });
+                
+                updateEmptyState();
+                updateMuscleCounts();
+                updateSummary();
+                
+                showToast('Đã tải buổi tập');
+            } catch (e) {
+                showToast('Lỗi khi tải buổi tập');
+            }
+        }
+        
+        function resetWorkout() {
+            if (!confirm('Xóa toàn bộ buổi tập hiện tại?')) return;
+            
+            workoutState = {
+                name: 'Buổi tập của tôi',
+                duration: 90,
+                cardio: 30,
+                goal: 'balance',
+                sections: []
+            };
+            
+            document.getElementById('workoutName').value = workoutState.name;
+            document.getElementById('workoutDuration').value = workoutState.duration;
+            document.getElementById('cardioDuration').value = workoutState.cardio;
+            
+            document.querySelectorAll('.goal-option').forEach(o => {
+                o.classList.toggle('active', o.dataset.goal === 'balance');
+            });
+            
+            document.querySelectorAll('.muscle-section').forEach(el => el.remove());
+            
+            updateEmptyState();
+            updateMuscleCounts();
+            updateSummary();
+            
+            showToast('Đã xóa buổi tập');
+        }
+        
+        function printWorkout() {
+            window.print();
+        }
+        
+        // ==================== TOAST ====================
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastContent').textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
