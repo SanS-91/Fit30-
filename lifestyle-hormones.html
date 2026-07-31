@@ -1,0 +1,2601 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cân Bằng Hormone Nữ 30+ - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Base palette */
+            --text-dark: #4A4A5A;
+            --text-medium: #7A7A8A;
+            --text-light: #A0A0B0;
+            --white: #FFFFFF;
+            --bg-primary: #FFFBFB;
+            --bg-soft: #FFF8F5;
+            --border-soft: #F0E8E6;
+            
+            /* Hormones color - Soft Rose */
+            --hormones: #E8B8C8;
+            --hormones-soft: #FBE8F0;
+            --hormones-dark: #C898A8;
+            --hormones-deep: #A87888;
+            --hormones-gradient: linear-gradient(135deg, #FBE8F0 0%, #E8B8C8 100%);
+            --hormones-deep-gradient: linear-gradient(135deg, #E8B8C8 0%, #C898A8 100%);
+            
+            /* 4 Main hormones */
+            --estrogen: #E8B8C8;
+            --progesterone: #D8A8D8;
+            --cortisol: #E8C87A;
+            --thyroid: #A8D4C8;
+            
+            /* Cycle phases */
+            --menstrual: #E8A8A8;
+            --follicular: #E8C8A8;
+            --ovulatory: #E8D87A;
+            --luteal: #D8A8C8;
+            
+            /* Status colors */
+            --balanced: #A8D4C8;
+            --mild: #E8D87A;
+            --moderate: #E8C8A8;
+            --severe: #E8A8A8;
+            
+            /* Main gradient */
+            --main-gradient: linear-gradient(135deg, #B8A8D8 0%, #A8C8E8 50%, #A8D4C8 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        body::before {
+            width: 500px;
+            height: 500px;
+            background: var(--hormones);
+            top: -150px;
+            right: -150px;
+        }
+        
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: var(--progesterone);
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 18px 40px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            color: var(--hormones-dark);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 70px 40px 60px;
+            text-align: center;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: var(--hormones-gradient);
+            color: white;
+            padding: 7px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 22px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(232,184,200,0.3);
+        }
+        
+        .hero-emoji {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 15px rgba(232,184,200,0.4));
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 18px;
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: var(--hormones-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 35px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-stat {
+            background: white;
+            padding: 14px 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid var(--border-soft);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .hero-stat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--hormones-soft);
+            color: var(--hormones-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+        
+        .hero-stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--hormones-dark);
+            line-height: 1;
+        }
+        
+        .hero-stat-label {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+        
+        /* Medical Disclaimer */
+        .disclaimer-section {
+            max-width: 1000px;
+            margin: 0 auto 40px;
+            padding: 0 40px;
+        }
+        
+        .disclaimer-card {
+            background: linear-gradient(135deg, #FFF5E5 0%, #FFFBF0 100%);
+            border-radius: 18px;
+            padding: 22px 28px;
+            border-left: 5px solid var(--cortisol);
+            display: flex;
+            gap: 15px;
+            align-items: start;
+        }
+        
+        .disclaimer-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--cortisol);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        
+        .disclaimer-text h4 {
+            font-size: 1rem;
+            color: #A88850;
+            margin-bottom: 6px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+        }
+        
+        .disclaimer-text p {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+        
+        .disclaimer-text strong {
+            color: #A88850;
+        }
+        
+        /* Section Common */
+        .section {
+            padding: 60px 40px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+        
+        .section-eyebrow {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            padding: 6px 18px;
+            border-radius: 30px;
+            background: var(--hormones-soft);
+            color: var(--hormones-dark);
+        }
+        
+        .section-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        
+        .section-header p {
+            color: var(--text-medium);
+            font-size: 1.05rem;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        
+        /* 4 Main Hormones */
+        .hormones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 22px;
+        }
+        
+        .hormone-card {
+            background: white;
+            padding: 30px 28px;
+            border-radius: 22px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hormone-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--hormone-color);
+        }
+        
+        .hormone-card:nth-child(1) { --hormone-color: var(--estrogen); }
+        .hormone-card:nth-child(2) { --hormone-color: var(--progesterone); }
+        .hormone-card:nth-child(3) { --hormone-color: var(--cortisol); }
+        .hormone-card:nth-child(4) { --hormone-color: var(--thyroid); }
+        
+        .hormone-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: var(--hormone-color);
+        }
+        
+        .hormone-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: var(--hormone-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 18px;
+        }
+        
+        .hormone-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 6px;
+        }
+        
+        .hormone-role {
+            display: inline-block;
+            background: var(--hormone-color);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 8px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .hormone-card p {
+            color: var(--text-medium);
+            font-size: 0.88rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .hormone-signs {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--border-soft);
+        }
+        
+        .hormone-signs-title {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        
+        .hormone-signs-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        
+        .hormone-signs-list li {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            padding-left: 16px;
+            position: relative;
+        }
+        
+        .hormone-signs-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--hormone-color);
+            font-weight: 700;
+        }
+        
+        /* Cycle Phases */
+        .cycle-section {
+            background: linear-gradient(180deg, transparent 0%, var(--hormones-soft) 50%, transparent 100%);
+        }
+        
+        .cycle-card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .cycle-intro {
+            text-align: center;
+            padding: 20px;
+            background: var(--hormones-soft);
+            border-radius: 16px;
+            margin-bottom: 25px;
+        }
+        
+        .cycle-intro p {
+            color: var(--text-medium);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+        
+        /* Cycle Visual */
+        .cycle-visual {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .phase-btn {
+            padding: 22px 15px;
+            background: var(--bg-soft);
+            border: 2px solid transparent;
+            border-radius: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-family: 'Quicksand', sans-serif;
+            position: relative;
+        }
+        
+        .phase-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+        
+        .phase-btn.active {
+            color: white;
+            border-color: var(--phase-color-dark);
+        }
+        
+        .phase-btn.active .phase-days,
+        .phase-btn.active .phase-subtitle {
+            color: rgba(255,255,255,0.85);
+        }
+        
+        .phase-btn[data-phase="menstrual"] {
+            --phase-color: var(--menstrual);
+            --phase-color-dark: #C88888;
+        }
+        
+        .phase-btn[data-phase="follicular"] {
+            --phase-color: var(--follicular);
+            --phase-color-dark: #C8A888;
+        }
+        
+        .phase-btn[data-phase="ovulatory"] {
+            --phase-color: var(--ovulatory);
+            --phase-color-dark: #C8B850;
+        }
+        
+        .phase-btn[data-phase="luteal"] {
+            --phase-color: var(--luteal);
+            --phase-color-dark: #B888A8;
+        }
+        
+        .phase-btn.active {
+            background: var(--phase-color);
+        }
+        
+        .phase-emoji {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        .phase-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 3px;
+        }
+        
+        .phase-days {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            margin-bottom: 3px;
+        }
+        
+        .phase-subtitle {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+        
+        /* Phase Details */
+        .phase-details {
+            background: var(--bg-soft);
+            border-radius: 18px;
+            padding: 28px;
+            border-left: 5px solid var(--phase-color, var(--hormones));
+            transition: all 0.3s;
+        }
+        
+        .phase-details[data-phase="menstrual"] { --phase-color: var(--menstrual); }
+        .phase-details[data-phase="follicular"] { --phase-color: var(--follicular); }
+        .phase-details[data-phase="ovulatory"] { --phase-color: var(--ovulatory); }
+        .phase-details[data-phase="luteal"] { --phase-color: var(--luteal); }
+        
+        .phase-details-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .phase-details-title {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+        
+        .phase-hormone-badge {
+            padding: 5px 14px;
+            background: var(--phase-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        
+        .phase-description {
+            color: var(--text-medium);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .phase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+        }
+        
+        .phase-block {
+            padding: 18px;
+            background: white;
+            border-radius: 14px;
+            border-top: 3px solid var(--phase-color);
+        }
+        
+        .phase-block-title {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .phase-block-content {
+            font-size: 0.88rem;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        .phase-block-content strong {
+            color: var(--phase-color);
+        }
+        
+        .phase-block-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .phase-block-list li {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            padding-left: 16px;
+            position: relative;
+        }
+        
+        .phase-block-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--phase-color);
+            font-weight: 700;
+        }
+        
+        /* Cycle Tracker */
+        .tracker-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 40px 60px;
+        }
+        
+        .tracker-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .tracker-header {
+            padding: 30px 35px;
+            background: var(--hormones-gradient);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .tracker-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+        }
+        
+        .tracker-title {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+        }
+        
+        .tracker-subtitle {
+            color: var(--text-medium);
+            font-size: 0.9rem;
+        }
+        
+        .tracker-body {
+            padding: 35px;
+        }
+        
+        .tracker-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+        
+        .tracker-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .tracker-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        
+        .tracker-input {
+            padding: 13px 16px;
+            border: 2px solid var(--border-soft);
+            border-radius: 12px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            background: var(--bg-soft);
+            transition: all 0.3s;
+            color: var(--text-dark);
+        }
+        
+        .tracker-input:focus {
+            outline: none;
+            border-color: var(--hormones);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(232,184,200,0.1);
+        }
+        
+        .tracker-result {
+            background: linear-gradient(135deg, var(--hormones-soft) 0%, white 100%);
+            border-radius: 18px;
+            padding: 25px;
+            text-align: center;
+            border: 2px dashed var(--hormones);
+        }
+        
+        .tracker-phase-emoji {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .tracker-phase-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+        
+        .tracker-phase-day {
+            font-size: 0.92rem;
+            color: var(--text-medium);
+            margin-bottom: 15px;
+        }
+        
+        .tracker-recommendations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 18px;
+        }
+        
+        .tracker-rec {
+            padding: 14px;
+            background: white;
+            border-radius: 12px;
+            text-align: left;
+            border-left: 3px solid var(--hormones);
+        }
+        
+        .tracker-rec-title {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .tracker-rec-value {
+            font-size: 0.88rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        /* Perimenopause */
+        .peri-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 22px;
+        }
+        
+        .peri-card {
+            background: white;
+            padding: 28px;
+            border-radius: 22px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .peri-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--peri-color, var(--hormones));
+        }
+        
+        .peri-card:nth-child(1) { --peri-color: var(--estrogen); }
+        .peri-card:nth-child(2) { --peri-color: var(--progesterone); }
+        .peri-card:nth-child(3) { --peri-color: var(--cortisol); }
+        .peri-card:nth-child(4) { --peri-color: var(--thyroid); }
+        
+        .peri-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: var(--peri-color);
+        }
+        
+        .peri-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: var(--peri-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .peri-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+        }
+        
+        .peri-card p {
+            color: var(--text-medium);
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+        
+        /* Symptom Checker */
+        .checker-section {
+            background: linear-gradient(180deg, transparent 0%, var(--hormones-soft) 50%, transparent 100%);
+        }
+        
+        .checker-card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .symptoms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .symptom-item {
+            padding: 14px 16px;
+            background: var(--bg-soft);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            user-select: none;
+        }
+        
+        .symptom-item:hover {
+            background: white;
+            border-color: var(--hormones);
+            transform: translateX(3px);
+        }
+        
+        .symptom-item.checked {
+            background: var(--hormones);
+            color: white;
+            border-color: var(--hormones-dark);
+        }
+        
+        .symptom-check {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            background: white;
+            border: 2px solid var(--border-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: transparent;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+        
+        .symptom-item.checked .symptom-check {
+            background: white;
+            border-color: white;
+            color: var(--hormones-dark);
+        }
+        
+        .symptom-name {
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+        
+        .checker-result {
+            background: var(--bg-soft);
+            border-radius: 18px;
+            padding: 25px;
+            text-align: center;
+            display: none;
+        }
+        
+        .checker-result.visible {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .checker-score {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .checker-score.balanced { color: var(--balanced); }
+        .checker-score.mild { color: var(--mild); }
+        .checker-score.moderate { color: var(--moderate); }
+        .checker-score.severe { color: var(--severe); }
+        
+        .checker-level {
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: white;
+        }
+        
+        .checker-level.balanced { background: var(--balanced); }
+        .checker-level.mild { background: var(--mild); }
+        .checker-level.moderate { background: var(--moderate); }
+        .checker-level.severe { background: var(--severe); }
+        
+        .checker-recommendation {
+            font-size: 0.92rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Food Recommendations */
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .food-card {
+            background: white;
+            padding: 25px;
+            border-radius: 22px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .food-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--food-color, var(--hormones));
+        }
+        
+        .food-card:nth-child(1) { --food-color: var(--estrogen); }
+        .food-card:nth-child(2) { --food-color: var(--progesterone); }
+        .food-card:nth-child(3) { --food-color: var(--cortisol); }
+        .food-card:nth-child(4) { --food-color: var(--thyroid); }
+        
+        .food-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: var(--food-color);
+        }
+        
+        .food-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+        
+        .food-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+        }
+        
+        .food-hormone {
+            display: inline-block;
+            background: var(--food-color);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 8px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .food-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .food-list li {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .food-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--food-color);
+            font-weight: 700;
+        }
+        
+        /* Lifestyle Support */
+        .lifestyle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .lifestyle-card {
+            background: white;
+            padding: 28px;
+            border-radius: 22px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+            transition: all 0.3s;
+        }
+        
+        .lifestyle-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: var(--hormones);
+        }
+        
+        .lifestyle-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: var(--hormones-soft);
+            color: var(--hormones-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .lifestyle-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+        }
+        
+        .lifestyle-card p {
+            color: var(--text-medium);
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+        
+        .lifestyle-frequency {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 4px 12px;
+            background: var(--hormones-soft);
+            color: var(--hormones-dark);
+            border-radius: 8px;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+        
+        /* When to See Doctor */
+        .doctor-section {
+            background: linear-gradient(180deg, transparent 0%, #FFF5E5 50%, transparent 100%);
+        }
+        
+        .doctor-card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 2px solid var(--cortisol);
+        }
+        
+        .doctor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        
+        .doctor-item {
+            display: flex;
+            gap: 12px;
+            padding: 18px;
+            background: var(--bg-soft);
+            border-radius: 14px;
+            border-left: 4px solid var(--cortisol);
+            transition: all 0.3s;
+        }
+        
+        .doctor-item:hover {
+            background: white;
+            transform: translateX(3px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        }
+        
+        .doctor-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--cortisol);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .doctor-info h4 {
+            font-size: 0.98rem;
+            margin-bottom: 4px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+        }
+        
+        .doctor-info p {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        /* Checklist */
+        .checklist-section {
+            background: linear-gradient(180deg, transparent 0%, var(--hormones-soft) 50%, transparent 100%);
+        }
+        
+        .checklist-card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 12px;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 18px;
+            background: var(--bg-soft);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            user-select: none;
+        }
+        
+        .checklist-item:hover {
+            background: white;
+            border-color: var(--hormones);
+            transform: translateX(3px);
+        }
+        
+        .checklist-item.checked {
+            background: var(--hormones);
+            color: white;
+        }
+        
+        .checklist-item.checked .checklist-text,
+        .checklist-item.checked .checklist-desc {
+            color: white;
+        }
+        
+        .checklist-check {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: white;
+            border: 2px solid var(--border-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: transparent;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+        
+        .checklist-item.checked .checklist-check {
+            background: white;
+            border-color: white;
+            color: var(--hormones-dark);
+        }
+        
+        .checklist-text {
+            flex: 1;
+        }
+        
+        .checklist-name {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+        
+        .checklist-desc {
+            font-size: 0.78rem;
+            color: var(--text-light);
+        }
+        
+        /* Tips */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+        }
+        
+        .tip-card {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--tip-color, var(--hormones));
+        }
+        
+        .tip-card:nth-child(1) { --tip-color: var(--estrogen); }
+        .tip-card:nth-child(2) { --tip-color: var(--progesterone); }
+        .tip-card:nth-child(3) { --tip-color: var(--cortisol); }
+        .tip-card:nth-child(4) { --tip-color: var(--thyroid); }
+        
+        .tip-number {
+            display: inline-block;
+            background: var(--tip-color);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .tip-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        
+        .tip-card p {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+        
+        /* CTA */
+        .cta-section {
+            max-width: 1220px;
+            margin: 60px auto;
+            padding: 0 40px;
+        }
+        
+        .cta-card {
+            background: var(--hormones-deep-gradient);
+            border-radius: 32px;
+            padding: 70px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+        
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.5;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-card h2 {
+            font-size: 2.4rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .cta-card p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 30px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            display: inline-block;
+            padding: 15px 38px;
+            background: white;
+            color: var(--hormones-deep);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.02rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+        }
+        
+        .btn-cta.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.5);
+            box-shadow: none;
+        }
+        
+        .btn-cta.secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 40px 40px 25px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--hormones);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+        
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: 14px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 2000;
+            transform: translateX(400px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 4px solid var(--hormones);
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--hormones-soft);
+            color: var(--hormones-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .hero {
+                padding: 45px 20px 35px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-emoji {
+                font-size: 3rem;
+            }
+            
+            .section,
+            .tracker-section,
+            .disclaimer-section,
+            .cta-section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            
+            .tracker-body,
+            .cycle-card,
+            .checker-card,
+            .doctor-card,
+            .checklist-card {
+                padding: 25px 20px;
+            }
+            
+            .tracker-inputs {
+                grid-template-columns: 1fr;
+            }
+            
+            .cycle-visual {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .phase-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .phase-details-header {
+                flex-direction: column;
+            }
+            
+            .cta-card {
+                padding: 50px 25px;
+            }
+            
+            .cta-card h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-soft);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--hormones) 0%, var(--progesterone) 100%);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="lifestyle-overview.html" class="back-link">← Lối sống</a>
+    </header>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <span class="hero-badge">LEVEL 5 · WOMEN'S HEALTH</span>
+        <div class="hero-emoji">🌸</div>
+        <h1>Cân bằng <span>hormone</span></h1>
+        <div class="hero-subtitle">Hiểu về cơ thể bạn - Tập luyện và dinh dưỡng theo chu kỳ</div>
+        <p>Phụ nữ 30+ trải qua những thay đổi hormone quan trọng: chu kỳ kinh nguyệt, tiền mãn kinh, stress mãn tính. Hiểu về hormone giúp bạn tập luyện thông minh hơn, ăn uống đúng cách hơn, và sống khỏe mạnh hơn.</p>
+        
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-icon">🌙</div>
+                <div>
+                    <div class="hero-stat-value">4 phases</div>
+                    <div class="hero-stat-label">Chu kỳ kinh</div>
+                </div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-icon">⚖️</div>
+                <div>
+                    <div class="hero-stat-value">4 hormones</div>
+                    <div class="hero-stat-label">Chính cần cân bằng</div>
+                </div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-icon">🍎</div>
+                <div>
+                    <div class="hero-stat-value">20+ foods</div>
+                    <div class="hero-stat-label">Hỗ trợ hormone</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Medical Disclaimer -->
+    <div class="disclaimer-section">
+        <div class="disclaimer-card">
+            <div class="disclaimer-icon">⚕️</div>
+            <div class="disclaimer-text">
+                <h4>Thông tin mang tính tham khảo</h4>
+                <p>Nội dung trong trang này <strong>không thay thế lời khuyên y tế chuyên nghiệp</strong>. Nếu bạn có triệu chứng nghiêm trọng, rối loạn kinh nguyệt kéo dài, hoặc nghi ngờ mất cân bằng hormone, hãy <strong>tham khảo ý kiến bác sĩ phụ khoa hoặc nội tiết</strong>. Mỗi cơ thể là duy nhất — hãy lắng nghe cơ thể bạn.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 4 Main Hormones -->
+    <section class="section">
+        <div class="section-header">
+            <span class="section-eyebrow">4 HORMONE CHÍNH</span>
+            <h2>Hiểu về hormone của bạn</h2>
+            <p>4 hormone chính ảnh hưởng đến mọi khía cạnh sức khỏe phụ nữ 30+: cân nặng, năng lượng, tâm trạng, giấc ngủ, kinh nguyệt.</p>
+        </div>
+        
+        <div class="hormones-grid">
+            <div class="hormone-card">
+                <div class="hormone-icon">♀️</div>
+                <h3>Estrogen</h3>
+                <div class="hormone-role">Hormone "nữ tính"</div>
+                <p>Quyết định đặc tính nữ, chu kỳ kinh, da dẻ, xương, tâm trạng. Cao nhất ở phase follicular và ovulatory.</p>
+                <div class="hormone-signs">
+                    <div class="hormone-signs-title">Dấu hiệu mất cân bằng</div>
+                    <ul class="hormone-signs-list">
+                        <li>Kinh nguyệt không đều</li>
+                        <li>Tăng cân, đặc biệt ở hông, đùi</li>
+                        <li>Da xấu, mụn nội tiết</li>
+                        <li>Thay đổi tâm trạng mạnh</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="hormone-card">
+                <div class="hormone-icon">🌙</div>
+                <h3>Progesterone</h3>
+                <div class="hormone-role">Hormone "calm"</div>
+                <p>Chuẩn bị cho thai kỳ, giúp ngủ ngon, giảm lo âu. Cao nhất ở phase luteal (sau rụng trứng).</p>
+                <div class="hormone-signs">
+                    <div class="hormone-signs-title">Dấu hiệu mất cân bằng</div>
+                    <ul class="hormone-signs-list">
+                        <li>Mất ngủ, khó ngủ sâu</li>
+                        <li>Lo âu, căng thẳng</li>
+                        <li>PMS nặng (đau ngực, đầy hơi)</li>
+                        <li>Kinh nguyệt nhiều, kéo dài</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="hormone-card">
+                <div class="hormone-icon">⚡</div>
+                <h3>Cortisol</h3>
+                <div class="hormone-role">Hormone "stress"</div>
+                <p>Phản ứng với stress, điều chỉnh năng lượng, đường huyết. Cao mãn tính = tích mỡ bụng, mất cơ, lão hóa.</p>
+                <div class="hormone-signs">
+                    <div class="hormone-signs-title">Dấu hiệu mất cân bằng</div>
+                    <ul class="hormone-signs-list">
+                        <li>Mỡ bụng khó giảm</li>
+                        <li>Mệt mỏi nhưng khó ngủ</li>
+                        <li>Thèm đường, carb</li>
+                        <li>Hay ốm, miễn dịch kém</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="hormone-card">
+                <div class="hormone-icon">🔥</div>
+                <h3>Thyroid (T3, T4)</h3>
+                <div class="hormone-role">Hormone "trao đổi chất"</div>
+                <p>Điều chỉnh tốc độ trao đổi chất, năng lượng, nhiệt độ cơ thể. Suy giáp phổ biến ở phụ nữ 30+.</p>
+                <div class="hormone-signs">
+                    <div class="hormone-signs-title">Dấu hiệu mất cân bằng</div>
+                    <ul class="hormone-signs-list">
+                        <li>Mệt mỏi kéo dài</li>
+                        <li>Tăng cân không rõ lý do</li>
+                        <li>Lạnh tay chân, rụng tóc</li>
+                        <li>Táo bón, da khô</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Cycle Phases -->
+    <section class="section cycle-section">
+        <div class="section-header">
+            <span class="section-eyebrow">CHU KỲ KINH NGUYỆT</span>
+            <h2>4 phases - Tập luyện & dinh dưỡng theo phase</h2>
+            <p>Chu kỳ kinh ~28 ngày chia thành 4 phases. Mỗi phase có hormone khác nhau → cần tập luyện và ăn uống khác nhau.</p>
+        </div>
+        
+        <div class="cycle-card">
+            <div class="cycle-intro">
+                <p>💡 <strong>Nguyên tắc:</strong> Không ép cơ thể theo kế hoạch cứng. Khi cảm thấy mệt, đau, hãy điều chỉnh. Lắng nghe cơ thể quan trọng hơn tuân theo lịch.</p>
+            </div>
+            
+            <div class="cycle-visual">
+                <div class="phase-btn active" data-phase="menstrual" onclick="selectPhase('menstrual')">
+                    <div class="phase-emoji">🌺</div>
+                    <div class="phase-name">Kinh nguyệt</div>
+                    <div class="phase-days">Ngày 1-5</div>
+                    <div class="phase-subtitle">Winter phase</div>
+                </div>
+                
+                <div class="phase-btn" data-phase="follicular" onclick="selectPhase('follicular')">
+                    <div class="phase-emoji">🌱</div>
+                    <div class="phase-name">Nang noãn</div>
+                    <div class="phase-days">Ngày 6-13</div>
+                    <div class="phase-subtitle">Spring phase</div>
+                </div>
+                
+                <div class="phase-btn" data-phase="ovulatory" onclick="selectPhase('ovulatory')">
+                    <div class="phase-emoji">🌸</div>
+                    <div class="phase-name">Rụng trứng</div>
+                    <div class="phase-days">Ngày 14-16</div>
+                    <div class="phase-subtitle">Summer phase</div>
+                </div>
+                
+                <div class="phase-btn" data-phase="luteal" onclick="selectPhase('luteal')">
+                    <div class="phase-emoji">🍂</div>
+                    <div class="phase-name">Hoàng thể</div>
+                    <div class="phase-days">Ngày 17-28</div>
+                    <div class="phase-subtitle">Autumn phase</div>
+                </div>
+            </div>
+            
+            <div class="phase-details" id="phaseDetails">
+                <!-- Rendered by JS -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Cycle Tracker -->
+    <section class="tracker-section">
+        <div class="tracker-card">
+            <div class="tracker-header">
+                <div class="tracker-icon">📅</div>
+                <div>
+                    <h3 class="tracker-title">Cycle Tracker</h3>
+                    <p class="tracker-subtitle">Theo dõi chu kỳ - Nhận đề xuất tập luyện & dinh dưỡng</p>
+                </div>
+            </div>
+            
+            <div class="tracker-body">
+                <div class="tracker-inputs">
+                    <div class="tracker-group">
+                        <label class="tracker-label">Ngày đầu tiên của kỳ kinh cuối</label>
+                        <input type="date" class="tracker-input" id="lastPeriod" onchange="calculatePhase()">
+                    </div>
+                    
+                    <div class="tracker-group">
+                        <label class="tracker-label">Độ dài chu kỳ (ngày)</label>
+                        <input type="number" class="tracker-input" id="cycleLength" value="28" min="21" max="35" onchange="calculatePhase()">
+                    </div>
+                </div>
+                
+                <div class="tracker-result" id="trackerResult">
+                    <div class="tracker-phase-emoji" id="trackerEmoji">🌸</div>
+                    <div class="tracker-phase-name" id="trackerPhaseName">Nhập thông tin để bắt đầu</div>
+                    <div class="tracker-phase-day" id="trackerPhaseDay">Hệ thống sẽ tính phase hiện tại của bạn</div>
+                    
+                    <div class="tracker-recommendations" id="trackerRecs" style="display: none;">
+                        <div class="tracker-rec">
+                            <div class="tracker-rec-title">🏋️ Tập luyện</div>
+                            <div class="tracker-rec-value" id="recWorkout">-</div>
+                        </div>
+                        <div class="tracker-rec">
+                            <div class="tracker-rec-title">🥗 Dinh dưỡng</div>
+                            <div class="tracker-rec-value" id="recNutrition">-</div>
+                        </div>
+                        <div class="tracker-rec">
+                            <div class="tracker-rec-title">🧘 Lifestyle</div>
+                            <div class="tracker-rec-value" id="recLifestyle">-</div>
+                        </div>
+                        <div class="tracker-rec">
+                            <div class="tracker-rec-title">💡 Lưu ý</div>
+                            <div class="tracker-rec-value" id="recNote">-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Perimenopause -->
+    <section class="section">
+        <div class="section-header">
+            <span class="section-eyebrow">TIỀN MÃN KINH</span>
+            <h2>Perimenopause: 35-45 tuổi</h2>
+            <p>Giai đoạn chuyển tiếp trước mãn kinh, thường bắt đầu từ 35-45 tuổi. Hiểu để chuẩn bị tinh thần và thể chất.</p>
+        </div>
+        
+        <div class="peri-grid">
+            <div class="peri-card">
+                <div class="peri-icon">🌡️</div>
+                <h3>Bốc hỏa & đổ mồ hôi đêm</h3>
+                <p>Estrogen dao động → nhiệt độ cơ thể không ổn định. Tránh caffeine, alcohol, đồ cay. Phòng ngủ mát, mặc đồ thoáng.</p>
+            </div>
+            
+            <div class="peri-card">
+                <div class="peri-icon">😴</div>
+                <h3>Rối loạn giấc ngủ</h3>
+                <p>Progesterone giảm → khó ngủ, thức giữa đêm. Ưu tiên sleep hygiene, magie trước ngủ, tránh màn hình 1h trước ngủ.</p>
+            </div>
+            
+            <div class="peri-card">
+                <div class="peri-icon">⚖️</div>
+                <h3>Tăng cân, đặc biệt mỡ bụng</h3>
+                <p>Trao đổi chất chậm, cortisol cao. Tập strength training 3-4 lần/tuần, protein cao (1.8-2.2g/kg), giảm carb tinh chế.</p>
+            </div>
+            
+            <div class="peri-card">
+                <div class="peri-icon">💭</div>
+                <h3>Thay đổi tâm trạng</h3>
+                <p>Estrogen ảnh hưởng đến serotonin. Thiền, journaling, kết nối xã hội. Nếu trầm cảm kéo dài → gặp bác sĩ.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Symptom Checker -->
+    <section class="section checker-section">
+        <div class="section-header">
+            <span class="section-eyebrow">KIỂM TRA TRIỆU CHỨNG</span>
+            <h2>Bạn có đang mất cân bằng hormone?</h2>
+            <p>Chọn các triệu chứng bạn đang gặp phải — hệ thống sẽ đánh giá mức độ và đề xuất hành động.</p>
+        </div>
+        
+        <div class="checker-card">
+            <div class="symptoms-grid" id="symptomsGrid">
+                <!-- Rendered by JS -->
+            </div>
+            
+            <div class="checker-result" id="checkerResult">
+                <div class="checker-score" id="checkerScore">0</div>
+                <div class="checker-level" id="checkerLevel">Chọn triệu chứng</div>
+                <p class="checker-recommendation" id="checkerRecommendation">Chọn các triệu chứng bạn đang gặp để nhận đánh giá.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Food Recommendations -->
+    <section class="section">
+        <div class="section-header">
+            <span class="section-eyebrow">DINH DƯỠNG</span>
+            <h2>Thực phẩm hỗ trợ hormone</h2>
+            <p>Mỗi hormone cần dinh dưỡng khác nhau. Ăn đúng thực phẩm = hỗ trợ cân bằng tự nhiên.</p>
+        </div>
+        
+        <div class="food-grid">
+            <div class="food-card">
+                <div class="food-emoji">🥦</div>
+                <h3>Hỗ trợ Estrogen</h3>
+                <div class="food-hormone">Estrogen balance</div>
+                <ul class="food-list">
+                    <li>Rau họ cải (bông cải, cải xoăn)</li>
+                    <li>Hạt lanh (lignans)</li>
+                    <li>Đậu nành (isoflavones)</li>
+                    <li>Quả mọng (antioxidants)</li>
+                    <li>Cá béo (omega-3)</li>
+                </ul>
+            </div>
+            
+            <div class="food-card">
+                <div class="food-emoji">🥜</div>
+                <h3>Hỗ trợ Progesterone</h3>
+                <div class="food-hormone">Progesterone support</div>
+                <ul class="food-list">
+                    <li>Thực phẩm giàu vitamin B6</li>
+                    <li>Kẽm (hàu, hạt bí)</li>
+                    <li>Magie (rau xanh đậm, hạt)</li>
+                    <li>Vitamin C (cam, dâu, ớt chuông)</li>
+                    <li>Chất béo lành mạnh (bơ, olive)</li>
+                </ul>
+            </div>
+            
+            <div class="food-card">
+                <div class="food-emoji">🍵</div>
+                <h3>Giảm Cortisol</h3>
+                <div class="food-hormone">Stress management</div>
+                <ul class="food-list">
+                    <li>Trà xanh (L-theanine)</li>
+                    <li>Chocolate đen 70%+ (magie)</li>
+                    <li>Chuối (tryptophan)</li>
+                    <li>Sữa chua (probiotics)</li>
+                    <li>Hạt hạnh nhân, óc chó</li>
+                </ul>
+            </div>
+            
+            <div class="food-card">
+                <div class="food-emoji">🐟</div>
+                <h3>Hỗ trợ Thyroid</h3>
+                <div class="food-hormone">Thyroid function</div>
+                <ul class="food-list">
+                    <li>I-ốt (rong biển, cá biển)</li>
+                    <li>Selen (hạt Brazil, cá ngừ)</li>
+                    <li>Kẽm (thịt, hạt)</li>
+                    <li>Sắt (thịt đỏ, rau xanh)</li>
+                    <li>Tyrosine (protein chất lượng)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Lifestyle Support -->
+    <section class="section">
+        <div class="section-header">
+            <span class="section-eyebrow">LIFESTYLE</span>
+            <h2>Thói quen hỗ trợ hormone</h2>
+            <p>Ngoài dinh dưỡng, lối sống hàng ngày ảnh hưởng mạnh đến cân bằng hormone.</p>
+        </div>
+        
+        <div class="lifestyle-grid">
+            <div class="lifestyle-card">
+                <div class="lifestyle-icon">🌙</div>
+                <h3>Ngủ 7-8h chất lượng</h3>
+                <p>Melatonin và growth hormone tiết nhiều nhất khi ngủ sâu. Phòng tối, mát (18-20°C), không màn hình 30' trước ngủ.</p>
+                <span class="lifestyle-frequency">Mỗi đêm</span>
+            </div>
+            
+            <div class="lifestyle-card">
+                <div class="lifestyle-icon">🧘</div>
+                <h3>Quản lý stress</h3>
+                <p>Cortisol cao = rối loạn mọi hormone khác. Thiền 10'/ngày, breathing exercises, journaling, nói chuyện với ai đó.</p>
+                <span class="lifestyle-frequency">Mỗi ngày</span>
+            </div>
+            
+            <div class="lifestyle-card">
+                <div class="lifestyle-icon">🏋️</div>
+                <h3>Tập luyện thông minh</h3>
+                <p>Strength training 3-4 lần/tuần tăng testosterone, growth hormone. Tránh overtraining (tăng cortisol). Tập theo chu kỳ.</p>
+                <span class="lifestyle-frequency">3-4 lần/tuần</span>
+            </div>
+            
+            <div class="lifestyle-card">
+                <div class="lifestyle-icon">☀️</div>
+                <h3>Ánh sáng mặt trời</h3>
+                <p>15-20 phút nắng sáng giúp điều chỉnh circadian rhythm, tăng vitamin D (hỗ trợ estrogen, thyroid).</p>
+                <span class="lifestyle-frequency">Mỗi sáng</span>
+            </div>
+            
+            <div class="lifestyle-card">
+                <div class="lifestyle-icon">🚫</div>
+                <h3>Hạn chế chất gây rối</h3>
+                <p>Giảm caffeine (≤2 ly/ngày), alcohol, đường tinh luyện, thực phẩm chế biến. Chúng gây viêm và rối loạn hormone.</p>
+                <span class="lifestyle-frequency">Hàng ngày</span>
+            </div>
+            
+            <div class="lifestyle-card">
+                <div class="lifestyle-icon">🌿</div>
+                <h3>Giảm tiếp xúc endocrine disruptors</h3>
+                <p>Hạn chế nhựa (BPA), mỹ phẩm có paraben, thuốc trừ sâu. Dùng đồ thủy tinh, thực phẩm hữu cơ khi có thể.</p>
+                <span class="lifestyle-frequency">Lifestyle</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- When to See Doctor -->
+    <section class="section doctor-section">
+        <div class="section-header">
+            <span class="section-eyebrow">KHI NÀO GẶP BÁC SĨ</span>
+            <h2>6 dấu hiệu cần tham khảo ý kiến chuyên gia</h2>
+            <p>Những triệu chứng này có thể chỉ ra vấn đề hormone nghiêm trọng cần điều trị y tế.</p>
+        </div>
+        
+        <div class="doctor-card">
+            <div class="doctor-grid">
+                <div class="doctor-item">
+                    <div class="doctor-icon">🩸</div>
+                    <div class="doctor-info">
+                        <h4>Kinh nguyệt rất không đều hoặc mất kinh</h4>
+                        <p>Chu kỳ < 21 ngày hoặc > 35 ngày, hoặc mất kinh 3+ tháng (không do mang thai). Có thể do PCOS, thyroid, hoặc stress nặng.</p>
+                    </div>
+                </div>
+                
+                <div class="doctor-item">
+                    <div class="doctor-icon">💔</div>
+                    <div class="doctor-info">
+                        <h4>Đau dữ dội khi hành kinh</h4>
+                        <p>Đau không giảm bằng thuốc giảm đau thông thường, ảnh hưởng đến sinh hoạt. Có thể do endometriosis, fibroids.</p>
+                    </div>
+                </div>
+                
+                <div class="doctor-item">
+                    <div class="doctor-icon">⚖️</div>
+                    <div class="doctor-info">
+                        <h4>Tăng/giảm cân không rõ lý do</h4>
+                        <p>Thay đổi > 5kg trong thời gian ngắn không do thay đổi ăn uống/tập luyện. Có thể do thyroid, insulin resistance.</p>
+                    </div>
+                </div>
+                
+                <div class="doctor-item">
+                    <div class="doctor-icon">😰</div>
+                    <div class="doctor-info">
+                        <h4>Lo âu hoặc trầm cảm kéo dài</h4>
+                        <p>Triệu chứng > 2 tuần, ảnh hưởng đến công việc, mối quan hệ. Có thể do hormone, cần đánh giá chuyên khoa.</p>
+                    </div>
+                </div>
+                
+                <div class="doctor-item">
+                    <div class="doctor-icon">💇</div>
+                    <div class="doctor-info">
+                        <h4>Rụng tóc nhiều, da xấu đột ngột</h4>
+                        <p>Rụng tóc bất thường, mụn nội tiết nặng, da khô/dầu bất thường. Có thể do thyroid, androgen cao.</p>
+                    </div>
+                </div>
+                
+                <div class="doctor-item">
+                    <div class="doctor-icon">🔥</div>
+                    <div class="doctor-info">
+                        <h4>Bốc hỏa, đổ mồ hôi đêm thường xuyên</h4>
+                        <p>Đặc biệt nếu < 40 tuổi, có thể là dấu hiệu mãn kinh sớm. Cần đánh giá hormone và có thể điều trị.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Checklist -->
+    <section class="section checklist-section">
+        <div class="section-header">
+            <span class="section-eyebrow">CHECKLIST HÀNG NGÀY</span>
+            <h2>Thói quen cân bằng hormone</h2>
+            <p>Click để đánh dấu — xây dựng nền tảng hormone khỏe mạnh mỗi ngày.</p>
+        </div>
+        
+        <div class="checklist-card">
+            <div class="checklist-grid">
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-text">
+                        <div class="checklist-name">Ngủ 7-8h chất lượng</div>
+                        <div class="checklist-desc">Trước 23h, phòng tối, mát</div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-text">
+                        <div class="checklist-name">Ăn đủ protein (1.6-2g/kg)</div>
+                        <div class="checklist-desc">Nguyên liệu cho hormone</div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-text">
+                        <div class="checklist-name">Ăn rau họ cải + chất béo tốt</div>
+                        <div class="checklist-desc">Hỗ trợ estrogen balance</div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-text">
+                        <div class="checklist-name">Tập strength training</div>
+                        <div class="checklist-desc">3-4 lần/tuần</div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-text">
+                        <div class="checklist-name">Quản lý stress</div>
+                        <div class="checklist-desc">Thiền, breathing, journaling</div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-text">
+                        <div class="checklist-name">15-20 phút nắng sáng</div>
+                        <div class="checklist-desc">Vitamin D + circadian rhythm</div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-text">
+                        <div class="checklist-name">Hạn chế caffeine, alcohol</div>
+                        <div class="checklist-desc">≤2 ly cà phê, tránh rượu</div>
+                    </div>
+                </div>
+                
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checklist-check">✓</div>
+                    <div class="checklist-text">
+                        <div class="checklist-name">Theo dõi chu kỳ kinh</div>
+                        <div class="checklist-desc">Dùng app hoặc lịch</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Tips -->
+    <section class="section">
+        <div class="section-header">
+            <span class="section-eyebrow">NGUYÊN TẮC VÀNG</span>
+            <h2>4 nguyên tắc cân bằng hormone</h2>
+            <p>Áp dụng những nguyên tắc này để hỗ trợ hormone tự nhiên của cơ thể.</p>
+        </div>
+        
+        <div class="tips-grid">
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <h4>Cơ thể bạn không phải robot</h4>
+                <p>Hormone thay đổi mỗi ngày, mỗi chu kỳ. Không có "lịch tập hoàn hảo" cho mọi phụ nữ. Lắng nghe cơ thể quan trọng hơn tuân theo kế hoạch cứng.</p>
+            </div>
+            
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <h4>Ngủ là foundation của hormone</h4>
+                <p>70% hormone được điều chỉnh trong giấc ngủ. Không ngủ đủ = rối loạn mọi hormone khác. Ưu tiên ngủ hơn mọi thứ khác.</p>
+            </div>
+            
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <h4>Stress là kẻ thù #1 của hormone</h4>
+                <p>Cortisol cao kéo dài = rối loạn estrogen, progesterone, thyroid. Quản lý stress không phải luxury — đó là necessity cho phụ nữ 30+.</p>
+            </div>
+            
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <h4>Seek help là mạnh mẽ</h4>
+                <p>Nếu triệu chứng kéo dài, ảnh hưởng cuộc sống → gặp bác sĩ. Giống như đi khám khi đau răng. Hormone health là sức khỏe, không phải "chuyện phụ nữ".</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-card">
+            <div class="cta-content">
+                <h2>🌸 Bạn là duy nhất</h2>
+                <p>Không có công thức chung cho hormone. Cơ thể bạn, chu kỳ của bạn, câu chuyện của bạn. Hãy lắng nghe, tôn trọng và yêu thương bản thân.</p>
+                <div class="cta-buttons">
+                    <a href="lifestyle-overview.html" class="btn-cta">← Quay lại Lối sống</a>
+                    <a href="index.html" class="btn-cta secondary">Về trang chủ</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="lifestyle-overview.html">Lối sống</a>
+            <a href="lifestyle-sleep.html">Giấc ngủ</a>
+            <a href="lifestyle-stress.html">Stress</a>
+            <a href="lifestyle-recovery.html">Phục hồi</a>
+            <a href="gym-overview.html">GYM</a>
+            <a href="nutrition-overview.html">Dinh dưỡng</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">✓</div>
+        <div class="toast-content" id="toastContent">Đã lưu!</div>
+    </div>
+    
+    <script>
+        // ==================== CYCLE PHASES DATA ====================
+        const phasesData = {
+            menstrual: {
+                name: '🌺 Phase Kinh nguyệt',
+                subtitle: 'Ngày 1-5 · Winter Phase · Nghỉ ngơi & phục hồi',
+                hormones: 'Estrogen & Progesterone thấp nhất',
+                description: 'Cơ thể đang "dọn dẹp" - tử cung loại bỏ niêm mạc. Năng lượng thấp, có thể đau bụng, mệt. Đây là thời gian để nghỉ ngơi, không ép bản thân.',
+                workout: {
+                    title: '🏋️ Tập luyện',
+                    items: [
+                        'Yoga nhẹ, stretching',
+                        'Đi bộ chậm 20-30 phút',
+                        'Pilates nhẹ',
+                        'Tránh HIIT, tập nặng',
+                        'Nghe theo cơ thể - nếu mệt, nghỉ'
+                    ]
+                },
+                nutrition: {
+                    title: '🥗 Dinh dưỡng',
+                    items: [
+                        'Thực phẩm giàu sắt (thịt đỏ, rau xanh)',
+                        'Magie (chuối, hạt, chocolate đen)',
+                        'Omega-3 (cá hồi, hạt lanh)',
+                        'Tránh caffeine, alcohol',
+                        'Uống trà gừng ấm giảm đau'
+                    ]
+                },
+                lifestyle: {
+                    title: '🧘 Lifestyle',
+                    items: [
+                        'Ngủ nhiều hơn bình thường',
+                        'Chườm ấm bụng',
+                        'Tắm nước ấm',
+                        'Journaling về cảm xúc',
+                        'Hạn chế stress, nói "không" khi cần'
+                    ]
+                },
+                note: '💡 Đây là thời gian "winter" - cơ thể cần nghỉ ngơi. Đừng cảm thấy tội lỗi khi tập nhẹ hoặc nghỉ. Đây là sinh học, không phải lười biếng.'
+            },
+            follicular: {
+                name: '🌱 Phase Nang noãn',
+                subtitle: 'Ngày 6-13 · Spring Phase · Năng lượng tăng dần',
+                hormones: 'Estrogen tăng dần, năng lượng cao',
+                description: 'Estrogen tăng → năng lượng, tâm trạng, sự sáng tạo đều tăng. Đây là thời điểm tốt nhất để bắt đầu dự án mới, tập luyện thử thách.',
+                workout: {
+                    title: '🏋️ Tập luyện',
+                    items: [
+                        'Thử bài tập mới, kỹ thuật mới',
+                        'Strength training nặng hơn',
+                        'HIIT, cardio cường độ cao',
+                        'Class nhóm (zumba, cycling)',
+                        'Tăng dần intensity'
+                    ]
+                },
+                nutrition: {
+                    title: '🥗 Dinh dưỡng',
+                    items: [
+                        'Thực phẩm lên men (dưa muối, kim chi)',
+                        'Rau tươi, trái cây theo mùa',
+                        'Protein chất lượng cao',
+                        'Hạt lanh (hỗ trợ estrogen)',
+                        'Uống đủ nước'
+                    ]
+                },
+                lifestyle: {
+                    title: '🧘 Lifestyle',
+                    items: [
+                        'Bắt đầu dự án mới',
+                        'Gặp gỡ bạn bè, networking',
+                        'Sáng tạo, học kỹ năng mới',
+                        'Ra ngoài nhiều hơn',
+                        'Tận dụng năng lượng cao'
+                    ]
+                },
+                note: '💡 Đây là "spring" - thời điểm của sự khởi đầu. Tận dụng năng lượng cao để đạt được nhiều thứ. Cơ thể bạn đang ở đỉnh cao sức mạnh.'
+            },
+            ovulatory: {
+                name: '🌸 Phase Rụng trứng',
+                subtitle: 'Ngày 14-16 · Summer Phase · Đỉnh cao năng lượng',
+                hormones: 'Estrogen cao nhất, testosterone tăng nhẹ',
+                description: 'Đỉnh cao của năng lượng, sức mạnh, sự tự tin. Giao tiếp tốt, sáng tạo cao. Cơ thể sẵn sàng cho hiệu suất cao nhất.',
+                workout: {
+                    title: '🏋️ Tập luyện',
+                    items: [
+                        'PR (Personal Record) attempts',
+                        'Heavy lifting, compound movements',
+                        'HIIT, sprint intervals',
+                        'Group classes cường độ cao',
+                        'Thử thách bản thân'
+                    ]
+                },
+                nutrition: {
+                    title: '🥗 Dinh dưỡng',
+                    items: [
+                        'Rau họ cải (detox estrogen)',
+                        'Chất xơ cao (ngũ cốc nguyên hạt)',
+                        'Protein nạc',
+                        'Trái cây giàu antioxidant',
+                        'Tránh đường tinh luyện'
+                    ]
+                },
+                lifestyle: {
+                    title: '🧘 Lifestyle',
+                    items: [
+                        'Networking, gặp gỡ đối tác',
+                        'Thuyết trình, public speaking',
+                        'Date nights, social events',
+                        'Tận dụng sự tự tin cao',
+                        'Ra quyết định quan trọng'
+                    ]
+                },
+                note: '💡 Đây là "summer" - đỉnh cao năng lượng. Tận dụng cho những việc quan trọng, thử thách. Nhưng nhớ: một số người cảm thấy đầy hơi, nhạy cảm - lắng nghe cơ thể.'
+            },
+            luteal: {
+                name: '🍂 Phase Hoàng thể',
+                subtitle: 'Ngày 17-28 · Autumn Phase · Năng lượng giảm dần',
+                hormones: 'Progesterone tăng, estrogen giảm',
+                description: 'Progesterone tăng → cơ thể giữ nước, thèm ăn, tâm trạng thay đổi. PMS có thể xuất hiện. Đây là thời gian để chậm lại, tập trung vào self-care.',
+                workout: {
+                    title: '🏋️ Tập luyện',
+                    items: [
+                        'Giảm intensity dần',
+                        'Strength training moderate weight',
+                        'Yoga, Pilates',
+                        'Đi bộ, bơi nhẹ',
+                        'Tuần trước kinh: chỉ đi bộ, stretching'
+                    ]
+                },
+                nutrition: {
+                    title: '🥗 Dinh dưỡng',
+                    items: [
+                        'Complex carbs (khoai lang, gạo lứt)',
+                        'Magie (chuối, hạt, rau xanh)',
+                        'Vitamin B6 (gà, cá, chuối)',
+                        'Tránh caffeine, muối, đường',
+                        'Trà raspberry leaf (giảm PMS)'
+                    ]
+                },
+                lifestyle: {
+                    title: '🧘 Lifestyle',
+                    items: [
+                        'Self-care: massage, bath',
+                        'Journaling, reflection',
+                        'Dọn dẹp, tổ chức',
+                        'Ngủ nhiều hơn',
+                        'Hạn chế commitments xã hội'
+                    ]
+                },
+                note: '💡 Đây là "autumn" - thời gian thu hoạch và chuẩn bị. Đừng ép bản thân quá mức. PMS là bình thường, nhưng nếu nặng → gặp bác sĩ.'
+            }
+        };
+        
+        // ==================== SYMPTOMS DATA ====================
+        const symptoms = [
+            { id: 1, name: 'Kinh nguyệt không đều', severity: 3 },
+            { id: 2, name: 'PMS nặng (đau, đầy hơi)', severity: 2 },
+            { id: 3, name: 'Mất ngủ hoặc ngủ không ngon', severity: 2 },
+            { id: 4, name: 'Mệt mỏi kéo dài', severity: 2 },
+            { id: 5, name: 'Tăng cân không rõ lý do', severity: 3 },
+            { id: 6, name: 'Khó giảm cân dù ăn ít', severity: 3 },
+            { id: 7, name: 'Da xấu, mụn nội tiết', severity: 2 },
+            { id: 8, name: 'Rụng tóc nhiều', severity: 3 },
+            { id: 9, name: 'Thay đổi tâm trạng mạnh', severity: 2 },
+            { id: 10, name: 'Lo âu, căng thẳng', severity: 2 },
+            { id: 11, name: 'Thèm đường, carb', severity: 1 },
+            { id: 12, name: 'Đầy hơi, khó tiêu', severity: 1 },
+            { id: 13, name: 'Lạnh tay chân', severity: 2 },
+            { id: 14, name: 'Giảm ham muốn', severity: 2 },
+            { id: 15, name: 'Khó tập trung, brain fog', severity: 2 },
+            { id: 16, name: 'Bốc hỏa, đổ mồ hôi đêm', severity: 3 }
+        ];
+        
+        // ==================== STATE ====================
+        let currentPhase = 'menstrual';
+        let checkedSymptoms = new Set();
+        
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPhaseDetails('menstrual');
+            renderSymptoms();
+            loadChecklist();
+            loadTracker();
+        });
+        
+        // ==================== CYCLE PHASES ====================
+        function selectPhase(phase) {
+            currentPhase = phase;
+            
+            document.querySelectorAll('.phase-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.phase === phase);
+            });
+            
+            renderPhaseDetails(phase);
+        }
+        
+        function renderPhaseDetails(phase) {
+            const data = phasesData[phase];
+            const container = document.getElementById('phaseDetails');
+            
+            container.dataset.phase = phase;
+            
+            container.innerHTML = `
+                <div class="phase-details-header">
+                    <div>
+                        <h3 class="phase-details-title">${data.name}</h3>
+                        <p style="font-size: 0.88rem; color: var(--text-medium); margin-bottom: 5px;">${data.subtitle}</p>
+                    </div>
+                    <div class="phase-hormone-badge">${data.hormones}</div>
+                </div>
+                
+                <p class="phase-description">${data.description}</p>
+                
+                <div class="phase-grid">
+                    <div class="phase-block">
+                        <div class="phase-block-title">🏋️ ${data.workout.title}</div>
+                        <ul class="phase-block-list">
+                            ${data.workout.items.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="phase-block">
+                        <div class="phase-block-title">🥗 ${data.nutrition.title}</div>
+                        <ul class="phase-block-list">
+                            ${data.nutrition.items.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="phase-block">
+                        <div class="phase-block-title">🧘 ${data.lifestyle.title}</div>
+                        <ul class="phase-block-list">
+                            ${data.lifestyle.items.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: white; border-radius: 12px; border-left: 4px solid var(--phase-color);">
+                    <p style="font-size: 0.92rem; color: var(--text-dark); line-height: 1.6; margin: 0;">${data.note}</p>
+                </div>
+            `;
+        }
+        
+        // ==================== CYCLE TRACKER ====================
+        function calculatePhase() {
+            const lastPeriod = document.getElementById('lastPeriod').value;
+            const cycleLength = parseInt(document.getElementById('cycleLength').value) || 28;
+            
+            if (!lastPeriod) {
+                document.getElementById('trackerEmoji').textContent = '🌸';
+                document.getElementById('trackerPhaseName').textContent = 'Nhập thông tin để bắt đầu';
+                document.getElementById('trackerPhaseDay').textContent = 'Hệ thống sẽ tính phase hiện tại của bạn';
+                document.getElementById('trackerRecs').style.display = 'none';
+                return;
+            }
+            
+            const lastDate = new Date(lastPeriod);
+            const today = new Date();
+            const daysSince = Math.floor((today - lastDate) / (1000 * 60 * 60 * 24));
+            const cycleDay = ((daysSince % cycleLength) + cycleLength) % cycleLength + 1;
+            
+            let phase, phaseName, emoji;
+            
+            if (cycleDay <= 5) {
+                phase = 'menstrual';
+                phaseName = 'Phase Kinh nguyệt';
+                emoji = '🌺';
+            } else if (cycleDay <= 13) {
+                phase = 'follicular';
+                phaseName = 'Phase Nang noãn';
+                emoji = '🌱';
+            } else if (cycleDay <= 16) {
+                phase = 'ovulatory';
+                phaseName = 'Phase Rụng trứng';
+                emoji = '🌸';
+            } else {
+                phase = 'luteal';
+                phaseName = 'Phase Hoàng thể';
+                emoji = '🍂';
+            }
+            
+            document.getElementById('trackerEmoji').textContent = emoji;
+            document.getElementById('trackerPhaseName').textContent = phaseName;
+            document.getElementById('trackerPhaseDay').textContent = `Ngày ${cycleDay} của chu kỳ · ${cycleLength} ngày/chu kỳ`;
+            
+            // Show recommendations
+            const data = phasesData[phase];
+            document.getElementById('recWorkout').textContent = data.workout.items.slice(0, 2).join(' · ');
+            document.getElementById('recNutrition').textContent = data.nutrition.items.slice(0, 2).join(' · ');
+            document.getElementById('recLifestyle').textContent = data.lifestyle.items.slice(0, 2).join(' · ');
+            document.getElementById('recNote').textContent = data.note.substring(0, 80) + '...';
+            
+            document.getElementById('trackerRecs').style.display = 'grid';
+            
+            // Save to localStorage
+            localStorage.setItem('fit30_cycle_tracker', JSON.stringify({
+                lastPeriod: lastPeriod,
+                cycleLength: cycleLength
+            }));
+        }
+        
+        function loadTracker() {
+            const saved = localStorage.getItem('fit30_cycle_tracker');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    if (data.lastPeriod) {
+                        document.getElementById('lastPeriod').value = data.lastPeriod;
+                        document.getElementById('cycleLength').value = data.cycleLength || 28;
+                        calculatePhase();
+                    }
+                } catch (e) {}
+            }
+        }
+        
+        // ==================== SYMPTOM CHECKER ====================
+        function renderSymptoms() {
+            const container = document.getElementById('symptomsGrid');
+            container.innerHTML = symptoms.map(s => `
+                <div class="symptom-item" data-id="${s.id}" onclick="toggleSymptom(${s.id})">
+                    <div class="symptom-check">✓</div>
+                    <div class="symptom-name">${s.name}</div>
+                </div>
+            `).join('');
+        }
+        
+        function toggleSymptom(id) {
+            const el = document.querySelector(`.symptom-item[data-id="${id}"]`);
+            
+            if (checkedSymptoms.has(id)) {
+                checkedSymptoms.delete(id);
+                el.classList.remove('checked');
+            } else {
+                checkedSymptoms.add(id);
+                el.classList.add('checked');
+            }
+            
+            calculateSymptomScore();
+        }
+        
+        function calculateSymptomScore() {
+            const resultEl = document.getElementById('checkerResult');
+            
+            if (checkedSymptoms.size === 0) {
+                resultEl.classList.remove('visible');
+                return;
+            }
+            
+            let totalSeverity = 0;
+            checkedSymptoms.forEach(id => {
+                const symptom = symptoms.find(s => s.id === id);
+                if (symptom) totalSeverity += symptom.severity;
+            });
+            
+            const maxSeverity = symptoms.reduce((sum, s) => sum + s.severity, 0);
+            const percent = (totalSeverity / maxSeverity) * 100;
+            
+            let level, levelText, recommendation;
+            
+            if (percent <= 15) {
+                level = 'balanced';
+                levelText = 'Cân bằng tốt';
+                recommendation = 'Tuyệt vời! Hormone của bạn có vẻ cân bằng. Tiếp tục duy trì lối sống lành mạnh hiện tại: ngủ đủ, ăn uống tốt, tập luyện đều đặn, quản lý stress.';
+            } else if (percent <= 35) {
+                level = 'mild';
+                levelText = 'Mất cân bằng nhẹ';
+                recommendation = 'Một số triệu chứng nhẹ. Ưu tiên: ngủ 7-8h, giảm caffeine, ăn nhiều rau họ cải, tập yoga, quản lý stress. Theo dõi trong 2-4 tuần.';
+            } else if (percent <= 60) {
+                level = 'moderate';
+                levelText = 'Mất cân bằng vừa';
+                recommendation = 'Nhiều triệu chứng ảnh hưởng đến cuộc sống. Cần điều chỉnh mạnh: sleep hygiene, dinh dưỡng chống viêm, strength training, gặp bác sĩ nếu kéo dài > 1 tháng.';
+            } else {
+                level = 'severe';
+                levelText = 'Cần tham khảo bác sĩ';
+                recommendation = 'Nhiều triệu chứng nghiêm trọng. Hãy đặt lịch khám bác sĩ phụ khoa hoặc nội tiết. Có thể cần xét nghiệm hormone (estrogen, progesterone, thyroid, cortisol). Đừng chần chừ - sức khỏe là ưu tiên.';
+            }
+            
+            const scoreEl = document.getElementById('checkerScore');
+            scoreEl.textContent = Math.round(percent) + '%';
+            scoreEl.className = 'checker-score ' + level;
+            
+            const levelEl = document.getElementById('checkerLevel');
+            levelEl.textContent = levelText;
+            levelEl.className = 'checker-level ' + level;
+            
+            document.getElementById('checkerRecommendation').textContent = recommendation;
+            
+            resultEl.classList.add('visible');
+        }
+        
+        // ==================== CHECKLIST ====================
+        function toggleChecklist(el) {
+            el.classList.toggle('checked');
+            
+            const checked = Array.from(document.querySelectorAll('.checklist-item')).map(item => 
+                item.classList.contains('checked')
+            );
+            
+            localStorage.setItem('fit30_hormones_checklist', JSON.stringify({
+                date: new Date().toISOString().split('T')[0],
+                checked: checked
+            }));
+        }
+        
+        function loadChecklist() {
+            const saved = localStorage.getItem('fit30_hormones_checklist');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    const today = new Date().toISOString().split('T')[0];
+                    
+                    if (data.date === today && data.checked) {
+                        const items = document.querySelectorAll('.checklist-item');
+                        data.checked.forEach((isChecked, idx) => {
+                            if (items[idx] && isChecked) {
+                                items[idx].classList.add('checked');
+                            }
+                        });
+                    }
+                } catch (e) {}
+            }
+        }
+        
+        // ==================== TOAST ====================
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastContent').textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
