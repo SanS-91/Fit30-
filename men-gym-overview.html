@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GYM Overview - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #4A90E2;
+            --primary-purple: #9B59B6;
+            --primary-orange: #F39C12;
+            --primary-green: #50C878;
+            --primary-red: #E74C3C;
+            --primary-teal: #1ABC9C;
+            
+            --text-dark: #1A202C;
+            --text-medium: #4A5568;
+            --text-light: #718096;
+            --bg-main: #F7FAFC;
+            --bg-card: #FFFFFF;
+            --border-soft: #E2E8F0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 16px 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover { color: var(--primary-blue); }
+        
+        /* Hero */
+        .hero {
+            padding: 60px 40px 40px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 100%);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.78rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 16px;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        
+        .hero p {
+            font-size: 1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+        
+        .stat-item:nth-child(1) .stat-value { color: var(--primary-blue); }
+        .stat-item:nth-child(2) .stat-value { color: var(--primary-purple); }
+        .stat-item:nth-child(3) .stat-value { color: var(--primary-orange); }
+        
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px 50px;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .section-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+        }
+        
+        /* Philosophy Section */
+        .philosophy-section {
+            margin-bottom: 50px;
+        }
+        
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .philosophy-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-top: 3px solid;
+        }
+        
+        .philosophy-card:nth-child(1) { border-top-color: var(--primary-blue); }
+        .philosophy-card:nth-child(2) { border-top-color: var(--primary-purple); }
+        .philosophy-card:nth-child(3) { border-top-color: var(--primary-orange); }
+        
+        .philosophy-number {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            color: white;
+        }
+        
+        .philosophy-card:nth-child(1) .philosophy-number { background: var(--primary-blue); }
+        .philosophy-card:nth-child(2) .philosophy-number { background: var(--primary-purple); }
+        .philosophy-card:nth-child(3) .philosophy-number { background: var(--primary-orange); }
+        
+        .philosophy-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        
+        .philosophy-compare {
+            font-size: 0.88rem;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        
+        .philosophy-compare .new {
+            font-weight: 600;
+        }
+        
+        .philosophy-card:nth-child(1) .new { color: var(--primary-blue); }
+        .philosophy-card:nth-child(2) .new { color: var(--primary-purple); }
+        .philosophy-card:nth-child(3) .new { color: var(--primary-orange); }
+        
+        .philosophy-compare .old {
+            color: var(--text-light);
+            text-decoration: line-through;
+        }
+        
+        .philosophy-card p {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        /* Flow Section */
+        .flow-section {
+            margin-bottom: 50px;
+        }
+        
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+        }
+        
+        .flow-step {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 18px 14px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            transition: all 0.2s;
+            border-bottom: 3px solid;
+        }
+        
+        .flow-step:nth-child(1) { border-bottom-color: var(--primary-blue); }
+        .flow-step:nth-child(2) { border-bottom-color: var(--primary-purple); }
+        .flow-step:nth-child(3) { border-bottom-color: var(--primary-orange); }
+        .flow-step:nth-child(4) { border-bottom-color: var(--primary-green); }
+        .flow-step:nth-child(5) { border-bottom-color: var(--primary-red); }
+        .flow-step:nth-child(6) { border-bottom-color: var(--primary-teal); }
+        
+        .flow-step:hover {
+            transform: translateY(-3px);
+        }
+        
+        .flow-number {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            color: white;
+        }
+        
+        .flow-step:nth-child(1) .flow-number { background: var(--primary-blue); }
+        .flow-step:nth-child(2) .flow-number { background: var(--primary-purple); }
+        .flow-step:nth-child(3) .flow-number { background: var(--primary-orange); }
+        .flow-step:nth-child(4) .flow-number { background: var(--primary-green); }
+        .flow-step:nth-child(5) .flow-number { background: var(--primary-red); }
+        .flow-step:nth-child(6) .flow-number { background: var(--primary-teal); }
+        
+        .flow-step h4 {
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+        
+        .flow-step p {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+        
+        /* Navigation Cards */
+        .nav-section {
+            margin-bottom: 50px;
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .nav-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            border-left: 4px solid;
+        }
+        
+        .nav-card:nth-child(1) { border-left-color: var(--primary-blue); }
+        .nav-card:nth-child(2) { border-left-color: var(--primary-purple); }
+        .nav-card:nth-child(3) { border-left-color: var(--primary-orange); }
+        .nav-card:nth-child(4) { border-left-color: var(--primary-green); }
+        .nav-card:nth-child(5) { border-left-color: var(--primary-red); }
+        .nav-card:nth-child(6) { border-left-color: var(--primary-teal); }
+        
+        .nav-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        }
+        
+        .nav-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .nav-card-number {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-card:nth-child(1) .nav-card-number { color: var(--primary-blue); }
+        .nav-card:nth-child(2) .nav-card-number { color: var(--primary-purple); }
+        .nav-card:nth-child(3) .nav-card-number { color: var(--primary-orange); }
+        .nav-card:nth-child(4) .nav-card-number { color: var(--primary-green); }
+        .nav-card:nth-child(5) .nav-card-number { color: var(--primary-red); }
+        .nav-card:nth-child(6) .nav-card-number { color: var(--primary-teal); }
+        
+        .nav-card-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+        
+        .nav-card:nth-child(1) .nav-card-arrow { color: var(--primary-blue); }
+        .nav-card:nth-child(2) .nav-card-arrow { color: var(--primary-purple); }
+        .nav-card:nth-child(3) .nav-card-arrow { color: var(--primary-orange); }
+        .nav-card:nth-child(4) .nav-card-arrow { color: var(--primary-green); }
+        .nav-card:nth-child(5) .nav-card-arrow { color: var(--primary-red); }
+        .nav-card:nth-child(6) .nav-card-arrow { color: var(--primary-teal); }
+        
+        .nav-card:hover .nav-card-arrow {
+            transform: translateX(4px);
+        }
+        
+        .nav-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+        
+        .nav-card p {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        
+        .nav-card-features {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        
+        .feature-tag {
+            font-size: 0.72rem;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+        
+        .nav-card:nth-child(1) .feature-tag { background: #E8F0FF; color: var(--primary-blue); }
+        .nav-card:nth-child(2) .feature-tag { background: #F0E8FF; color: var(--primary-purple); }
+        .nav-card:nth-child(3) .feature-tag { background: #FFF3E0; color: var(--primary-orange); }
+        .nav-card:nth-child(4) .feature-tag { background: #E8F8EE; color: var(--primary-green); }
+        .nav-card:nth-child(5) .feature-tag { background: #FFE8E8; color: var(--primary-red); }
+        .nav-card:nth-child(6) .feature-tag { background: #E8F8F5; color: var(--primary-teal); }
+        
+        .nav-card-link {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .nav-card:nth-child(1) .nav-card-link { color: var(--primary-blue); }
+        .nav-card:nth-child(2) .nav-card-link { color: var(--primary-purple); }
+        .nav-card:nth-child(3) .nav-card-link { color: var(--primary-orange); }
+        .nav-card:nth-child(4) .nav-card-link { color: var(--primary-green); }
+        .nav-card:nth-child(5) .nav-card-link { color: var(--primary-red); }
+        .nav-card:nth-child(6) .nav-card-link { color: var(--primary-teal); }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            color: white;
+        }
+        
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+        
+        .cta-section p {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 24px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            padding: 12px 28px;
+            background: white;
+            color: var(--primary-blue);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            border: 2px solid white;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        .btn-cta.secondary {
+            background: transparent;
+            color: white;
+        }
+        
+        .btn-cta.secondary:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-soft);
+            padding: 36px 40px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 14px;
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-blue);
+        }
+        
+        .footer-bottom {
+            color: var(--text-light);
+            font-size: 0.82rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+            .flow-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 14px 20px; }
+            .hero { padding: 40px 20px 30px; }
+            .hero h1 { font-size: 2rem; }
+            .main-container { padding: 0 20px 40px; }
+            .flow-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .cta-section { padding: 40px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="men-30-40.html" class="back-link">← Quay lại Hub</a>
+    </header>
+    
+    <section class="hero">
+        <span class="hero-badge">GYM MODULE</span>
+        <h1>Chương trình <span>GYM</span></h1>
+        <div class="hero-subtitle">Lắp ghép · Linh hoạt · Cá nhân hóa</div>
+        <p>Hệ thống tập luyện modular với 200+ bài tập, từ warm-up đến 12-week program. Thiết kế để bạn mạnh hơn mỗi ngày.</p>
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-value">200+</div>
+                <div class="stat-label">Bài tập</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">12</div>
+                <div class="stat-label">Tuần program</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">7</div>
+                <div class="stat-label">Body goals</div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="main-container">
+        
+        <!-- Philosophy Section -->
+        <div class="philosophy-section">
+            <div class="section-header">
+                <h2 class="section-title">Triết lý thiết kế</h2>
+                <p class="section-subtitle">Vì sao hệ thống này khác biệt?</p>
+            </div>
+            
+            <div class="philosophy-grid">
+                <div class="philosophy-card">
+                    <div class="philosophy-number">1</div>
+                    <h3>Database-first</h3>
+                    <div class="philosophy-compare">
+                        <span class="new">Exercise Library</span> > <span class="old">Fixed Workouts</span>
+                    </div>
+                    <p>200+ bài tập với đầy đủ metadata: tempo, RPE, regression, progression. Cập nhật 1 lần, dùng ở mọi nơi.</p>
+                </div>
+                
+                <div class="philosophy-card">
+                    <div class="philosophy-number">2</div>
+                    <h3>Builder-driven</h3>
+                    <div class="philosophy-compare">
+                        <span class="new">Tự lắp ghép</span> > <span class="old">Template cố định</span>
+                    </div>
+                    <p>Bạn chọn bài tập, hệ thống tính volume, intensity. Hoặc dùng templates có sẵn nếu không muốn tự build.</p>
+                </div>
+                
+                <div class="philosophy-card">
+                    <div class="philosophy-number">3</div>
+                    <h3>Progression-based</h3>
+                    <div class="philosophy-compare">
+                        <span class="new">Lộ trình khoa học</span> > <span class="old">Tập ngẫu nhiên</span>
+                    </div>
+                    <p>12 tuần với RPE, deload weeks, assessment. Không cần đoán — hệ thống hướng dẫn từng bước.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Flow Section -->
+        <div class="flow-section">
+            <div class="section-header">
+                <h2 class="section-title">Hành trình 6 bước</h2>
+                <p class="section-subtitle">Từ warm-up đến knowledge — mỗi bước xây dựng trên bước trước đó</p>
+            </div>
+            
+            <div class="flow-grid">
+                <div class="flow-step">
+                    <div class="flow-number">STEP 1</div>
+                    <h4>Warm-up</h4>
+                    <p>25+ moves</p>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="flow-number">STEP 2</div>
+                    <h4>Exercise Library</h4>
+                    <p>200+ bài tập</p>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="flow-number">STEP 3</div>
+                    <h4>Workout Planner</h4>
+                    <p>Builder + Roadmap</p>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="flow-number">STEP 4</div>
+                    <h4>Progress Tracker</h4>
+                    <p>Theo dõi tiến độ</p>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="flow-number">STEP 5</div>
+                    <h4>Recovery</h4>
+                    <p>Stretch & Mobility</p>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="flow-number">STEP 6</div>
+                    <h4>Knowledge</h4>
+                    <p>Hiểu vì sao tập</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation Cards -->
+        <div class="nav-section">
+            <div class="section-header">
+                <h2 class="section-title">Khám phá module GYM</h2>
+                <p class="section-subtitle">6 công cụ phục vụ từng mục đích riêng</p>
+            </div>
+            
+            <div class="nav-grid">
+                <a href="men-gym-warmup.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <span class="nav-card-number">01 · Warm-up</span>
+                        <span class="nav-card-arrow">→</span>
+                    </div>
+                    <h3>Warm-up Library</h3>
+                    <p>25+ bài khởi động phân loại theo nhóm cơ: Upper, Lower, Full Body, Mobility, Quick.</p>
+                    <div class="nav-card-features">
+                        <span class="feature-tag">25+ moves</span>
+                        <span class="feature-tag">5 categories</span>
+                        <span class="feature-tag">Progress tracker</span>
+                    </div>
+                    <div class="nav-card-link">Bắt đầu warm-up →</div>
+                </a>
+                
+                <a href="men-gym-library.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <span class="nav-card-number">02 · Database</span>
+                        <span class="nav-card-arrow">→</span>
+                    </div>
+                    <h3>Exercise Library</h3>
+                    <p>200+ bài tập với đầy đủ metadata: tempo, RPE, breathing cues, regression/progression, body goals tags.</p>
+                    <div class="nav-card-features">
+                        <span class="feature-tag">200+ exercises</span>
+                        <span class="feature-tag">7 body goals</span>
+                        <span class="feature-tag">Smart filters</span>
+                    </div>
+                    <div class="nav-card-link">Khám phá thư viện →</div>
+                </a>
+                
+                <a href="men-gym-planner.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <span class="nav-card-number">03 · Planner</span>
+                        <span class="nav-card-arrow">→</span>
+                    </div>
+                    <h3>Workout Planner</h3>
+                    <p>Workout Builder tự lắp ghép buổi tập + 12-Week Roadmap với RPE, deload weeks, assessment.</p>
+                    <div class="nav-card-features">
+                        <span class="feature-tag">Drag & drop builder</span>
+                        <span class="feature-tag">RPE/RIR guide</span>
+                        <span class="feature-tag">Deload weeks</span>
+                    </div>
+                    <div class="nav-card-link">Lên kế hoạch tập →</div>
+                </a>
+                
+                <a href="men-gym-tracker.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <span class="nav-card-number">04 · Tracker</span>
+                        <span class="nav-card-arrow">→</span>
+                    </div>
+                    <h3>Goal & Tracker</h3>
+                    <p>Cài đặt mục tiêu (Fat Loss, Muscle Gain...), theo dõi buổi tập, số đo cơ thể, habit tracker.</p>
+                    <div class="nav-card-features">
+                        <span class="feature-tag">6 goals</span>
+                        <span class="feature-tag">Workout log</span>
+                        <span class="feature-tag">Habit tracker</span>
+                    </div>
+                    <div class="nav-card-link">Theo dõi tiến độ →</div>
+                </a>
+                
+                <a href="men-gym-recovery.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <span class="nav-card-number">05 · Recovery</span>
+                        <span class="nav-card-arrow">→</span>
+                    </div>
+                    <h3>Stretch & Mobility</h3>
+                    <p>20-25 bài stretching sau tập + 15-20 mobility drills cho khớp. Daily routines cho hip, shoulder, ankle.</p>
+                    <div class="nav-card-features">
+                        <span class="feature-tag">20+ stretches</span>
+                        <span class="feature-tag">15+ mobility drills</span>
+                        <span class="feature-tag">Daily routines</span>
+                    </div>
+                    <div class="nav-card-link">Cải thiện recovery →</div>
+                </a>
+                
+                <a href="men-gym-knowledge.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <span class="nav-card-number">06 · Knowledge</span>
+                        <span class="nav-card-arrow">→</span>
+                    </div>
+                    <h3>Gym Knowledge</h3>
+                    <p>30+ thuật ngữ gym, 12 lỗi beginner, 6 khái niệm khoa học fitness. Hiểu vì sao program được thiết kế như vậy.</p>
+                    <div class="nav-card-features">
+                        <span class="feature-tag">30+ terms</span>
+                        <span class="feature-tag">12 mistakes</span>
+                        <span class="feature-tag">6 science concepts</span>
+                    </div>
+                    <div class="nav-card-link">Học kiến thức →</div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>Sẵn sàng bắt đầu?</h2>
+            <p>Bắt đầu với Exercise Library hoặc Workout Planner. Hệ thống sẽ hướng dẫn bạn từng bước.</p>
+            <div class="cta-buttons">
+                <a href="men-gym-library.html" class="btn-cta">Khám phá Library</a>
+                <a href="men-gym-planner.html" class="btn-cta secondary">Xem Planner</a>
+            </div>
+        </div>
+        
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="men-30-40.html">Nam 30-40</a>
+            <a href="men-gym-library.html">Exercise Library</a>
+            <a href="men-gym-planner.html">Workout Planner</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+</body>
+</html>
