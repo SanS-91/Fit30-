@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Knowledge - Fit30+</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #4A90E2;
+            --primary-purple: #9B59B6;
+            --primary-orange: #F39C12;
+            --primary-green: #50C878;
+            --primary-red: #E74C3C;
+            --primary-teal: #1ABC9C;
+            --text-dark: #1A202C;
+            --text-medium: #4A5568;
+            --text-light: #718096;
+            --bg-main: #F7FAFC;
+            --bg-card: #FFFFFF;
+            --border-soft: #E2E8F0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        /* Header */
+        .header {
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(15px);
+            padding: 16px 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+        }
+        .back-link:hover { color: var(--primary-blue); }
+        
+        /* Hero */
+        .hero {
+            padding: 60px 40px 50px;
+            text-align: center;
+            background: linear-gradient(135deg, #E8F0FF 0%, #F0E8FF 50%, #FFF3E0 100%);
+            border-bottom: 1px solid var(--border-soft);
+        }
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 100%);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.78rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            color: var(--text-dark);
+        }
+        .hero h1 span {
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-medium);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        .hero p {
+            font-size: 1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            background: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            text-align: center;
+            min-width: 120px;
+        }
+        .stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            line-height: 1;
+        }
+        .stat-item:nth-child(2) .stat-value { color: var(--primary-orange); }
+        .stat-item:nth-child(3) .stat-value { color: var(--primary-green); }
+        .stat-label {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            margin-top: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        /* Main Layout */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 40px 50px;
+        }
+        
+        /* Sidebar Navigation */
+        .sidebar {
+            position: sticky;
+            top: 90px;
+            height: fit-content;
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+        }
+        .sidebar-title {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .sidebar-link {
+            padding: 10px 14px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text-medium);
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .sidebar-link:hover {
+            background: var(--bg-main);
+            color: var(--text-dark);
+        }
+        .sidebar-link.active {
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 100%);
+            color: white;
+            font-weight: 600;
+        }
+        .sidebar-link-icon {
+            font-size: 1.1rem;
+        }
+        .sidebar-section {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-soft);
+        }
+        
+        /* Content Area */
+        .content {
+            min-width: 0;
+        }
+        
+        /* Section Styles */
+        .content-section {
+            margin-bottom: 40px;
+            scroll-margin-top: 100px;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--border-soft);
+        }
+        .section-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+        .section-icon.blue { background: linear-gradient(135deg, #E8F0FF 0%, #C4D4FA 100%); }
+        .section-icon.purple { background: linear-gradient(135deg, #F0E8FF 0%, #D4C4FA 100%); }
+        .section-icon.orange { background: linear-gradient(135deg, #FFF3E0 0%, #FAE4C4 100%); }
+        .section-icon.green { background: linear-gradient(135deg, #E8F8EE 0%, #C4FAD4 100%); }
+        .section-icon.red { background: linear-gradient(135deg, #FFE8E8 0%, #FAD4D4 100%); }
+        .section-icon.teal { background: linear-gradient(135deg, #E8F8F5 0%, #C4FAE8 100%); }
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        .section-subtitle {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        /* Terminology - Compact Grid */
+        .terminology-category {
+            margin-bottom: 28px;
+        }
+        .category-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .category-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-soft);
+        }
+        .term-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 12px;
+        }
+        .term-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid var(--border-soft);
+            border-left: 4px solid var(--term-color);
+            transition: all 0.2s;
+            cursor: default;
+        }
+        .term-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+            border-color: var(--term-color);
+        }
+        .term-card:nth-child(6n+1) { --term-color: var(--primary-blue); }
+        .term-card:nth-child(6n+2) { --term-color: var(--primary-purple); }
+        .term-card:nth-child(6n+3) { --term-color: var(--primary-orange); }
+        .term-card:nth-child(6n+4) { --term-color: var(--primary-green); }
+        .term-card:nth-child(6n+5) { --term-color: var(--primary-red); }
+        .term-card:nth-child(6n+6) { --term-color: var(--primary-teal); }
+        .term-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+        .term-abbr {
+            font-size: 0.72rem;
+            color: var(--term-color);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .term-desc {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        /* Mistakes - Timeline Layout */
+        .mistakes-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        .mistakes-timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary-red) 0%, var(--primary-orange) 50%, var(--primary-green) 100%);
+        }
+        .mistake-item {
+            position: relative;
+            background: white;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border-soft);
+            transition: all 0.2s;
+        }
+        .mistake-item:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+            transform: translateX(4px);
+        }
+        .mistake-item::before {
+            content: attr(data-number);
+            position: absolute;
+            left: -38px;
+            top: 20px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--mistake-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.88rem;
+            border: 3px solid var(--bg-main);
+        }
+        .mistake-item:nth-child(12n+1) { --mistake-color: var(--primary-red); }
+        .mistake-item:nth-child(12n+2) { --mistake-color: var(--primary-orange); }
+        .mistake-item:nth-child(12n+3) { --mistake-color: var(--primary-purple); }
+        .mistake-item:nth-child(12n+4) { --mistake-color: var(--primary-blue); }
+        .mistake-item:nth-child(12n+5) { --mistake-color: var(--primary-green); }
+        .mistake-item:nth-child(12n+6) { --mistake-color: var(--primary-teal); }
+        .mistake-item:nth-child(12n+7) { --mistake-color: #E74C3C; }
+        .mistake-item:nth-child(12n+8) { --mistake-color: #F39C12; }
+        .mistake-item:nth-child(12n+9) { --mistake-color: #9B59B6; }
+        .mistake-item:nth-child(12n+10) { --mistake-color: #4A90E2; }
+        .mistake-item:nth-child(12n+11) { --mistake-color: #50C878; }
+        .mistake-item:nth-child(12n+12) { --mistake-color: #1ABC9C; }
+        .mistake-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .mistake-desc {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        .mistake-fix {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 10px 14px;
+            background: #E8F8EE;
+            border-radius: 10px;
+            border-left: 3px solid var(--primary-green);
+        }
+        .mistake-fix-icon {
+            color: var(--primary-green);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .mistake-fix-text {
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        .mistake-fix-text strong {
+            color: var(--primary-green);
+        }
+        
+        /* Science - Featured Cards */
+        .science-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 20px;
+        }
+        .science-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-soft);
+            transition: all 0.3s;
+        }
+        .science-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+        }
+        .science-card-header {
+            padding: 24px;
+            background: var(--science-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .science-card:nth-child(1) { --science-gradient: linear-gradient(135deg, #4A90E2 0%, #74B9FF 100%); }
+        .science-card:nth-child(2) { --science-gradient: linear-gradient(135deg, #50C878 0%, #81ECEC 100%); }
+        .science-card:nth-child(3) { --science-gradient: linear-gradient(135deg, #9B59B6 0%, #C39BD3 100%); }
+        .science-card:nth-child(4) { --science-gradient: linear-gradient(135deg, #F39C12 0%, #FDCB6E 100%); }
+        .science-card:nth-child(5) { --science-gradient: linear-gradient(135deg, #E74C3C 0%, #F1948A 100%); }
+        .science-card:nth-child(6) { --science-gradient: linear-gradient(135deg, #1ABC9C 0%, #48C9B0 100%); }
+        .science-card-icon {
+            font-size: 2rem;
+        }
+        .science-card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .science-card-body {
+            padding: 24px;
+        }
+        .science-section {
+            margin-bottom: 14px;
+        }
+        .science-section-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        .science-section-text {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+        .science-section-text strong {
+            color: var(--text-dark);
+        }
+        .science-key-point {
+            background: var(--bg-main);
+            padding: 12px 14px;
+            border-radius: 10px;
+            border-left: 3px solid var(--science-gradient);
+            margin-top: 16px;
+        }
+        .science-key-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .science-key-text {
+            font-size: 0.88rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        
+        /* Info Callout */
+        .info-callout {
+            padding: 16px 18px;
+            border-radius: 12px;
+            margin-top: 20px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .info-callout.tip { background: #E8F8EE; border-left: 4px solid var(--primary-green); }
+        .info-callout.warning { background: #FFF3E0; border-left: 4px solid var(--primary-orange); }
+        .info-callout.important { background: #FFE8E8; border-left: 4px solid var(--primary-red); }
+        .info-callout-icon { font-size: 1.3rem; flex-shrink: 0; }
+        .info-callout-text { font-size: 0.88rem; color: var(--text-dark); line-height: 1.5; }
+        .info-callout-text strong { font-weight: 600; }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-soft);
+            padding: 36px 40px;
+            text-align: center;
+        }
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 14px;
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .footer-links a:hover { color: var(--primary-blue); }
+        .footer-bottom {
+            color: var(--text-light);
+            font-size: 0.82rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            .sidebar {
+                position: relative;
+                top: 0;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+            .sidebar-nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            .sidebar-section {
+                margin-top: 0;
+                padding-top: 0;
+                border-top: none;
+            }
+            .science-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .header { padding: 14px 20px; }
+            .hero { padding: 40px 20px; }
+            .hero h1 { font-size: 2rem; }
+            .term-grid { grid-template-columns: 1fr; }
+            .mistakes-timeline { padding-left: 24px; }
+            .mistake-item::before { left: -32px; width: 28px; height: 28px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="men-gym-overview.html" class="back-link">← Quay lại GYM Overview</a>
+    </header>
+    
+    <section class="hero">
+        <span class="hero-badge">KNOWLEDGE BASE</span>
+        <h1>Gym <span>Knowledge</span></h1>
+        <div class="hero-subtitle">Hiểu rõ để tập thông minh hơn</div>
+        <p>Kiến thức là foundation của progress. Hiểu thuật ngữ, tránh mistakes phổ biến, và nắm vững science đằng sau program.</p>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-value">30+</div>
+                <div class="stat-label">Terms</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">12</div>
+                <div class="stat-label">Mistakes</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">6</div>
+                <div class="stat-label">Science Concepts</div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="main-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-title">Thuật Ngữ</div>
+            <nav class="sidebar-nav">
+                <a href="#basic" class="sidebar-link active">
+                    <span class="sidebar-link-icon">🔢</span>
+                    <span>Basic Terms</span>
+                </a>
+                <a href="#intensity" class="sidebar-link">
+                    <span class="sidebar-link-icon">💪</span>
+                    <span>Intensity</span>
+                </a>
+                <a href="#volume" class="sidebar-link">
+                    <span class="sidebar-link-icon">📊</span>
+                    <span>Volume</span>
+                </a>
+                <a href="#technique" class="sidebar-link">
+                    <span class="sidebar-link-icon">🎯</span>
+                    <span>Technique</span>
+                </a>
+                <a href="#types" class="sidebar-link">
+                    <span class="sidebar-link-icon">🏋️</span>
+                    <span>Exercise Types</span>
+                </a>
+                <a href="#physiology" class="sidebar-link">
+                    <span class="sidebar-link-icon">🧬</span>
+                    <span>Physiology</span>
+                </a>
+                <a href="#programming" class="sidebar-link">
+                    <span class="sidebar-link-icon">📅</span>
+                    <span>Programming</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">Khác</div>
+                <nav class="sidebar-nav">
+                    <a href="#mistakes" class="sidebar-link">
+                        <span class="sidebar-link-icon">⚠️</span>
+                        <span>12 Mistakes</span>
+                    </a>
+                    <a href="#science" class="sidebar-link">
+                        <span class="sidebar-link-icon">🔬</span>
+                        <span>Fitness Science</span>
+                    </a>
+                </nav>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="content">
+            
+            <!-- TERMINOLOGY SECTIONS -->
+            <section id="basic" class="content-section">
+                <div class="section-header">
+                    <div class="section-icon blue">🔢</div>
+                    <div>
+                        <h2 class="section-title">Basic Terms</h2>
+                        <div class="section-subtitle">Những khái niệm cơ bản nhất</div>
+                    </div>
+                </div>
+                <div class="term-grid">
+                    <div class="term-card">
+                        <div class="term-name">Set</div>
+                        <div class="term-abbr">Hiệp tập</div>
+                        <div class="term-desc">Một chuỗi reps liên tiếp không nghỉ. 3 sets × 10 reps = tập 10 reps, nghỉ, lặp 3 lần.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-name">Rep</div>
+                        <div class="term-abbr">Repetition · Lần lặp</div>
+                        <div class="term-desc">Một lần thực hiện đầy đủ movement. 1 rep squat = hạ xuống + đẩy lên.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-name">Failure</div>
+                        <div class="term-abbr">Thất bại cơ bắp</div>
+                        <div class="term-desc">Không thể thực hiện thêm rep với form đúng. Technical failure (form sai) vs Muscular failure (không lift nổi).</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-name">Rest</div>
+                        <div class="term-abbr">Thời gian nghỉ</div>
+                        <div class="term-desc">Nghỉ giữa sets. Compound nặng: 2-3 phút. Isolation: 60-90 giây. Rest đủ = performance tốt hơn.</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="intensity" class="content-section">
+                <div class="section-header">
+                    <div class="section-icon purple">💪</div>
+                    <div>
+                        <h2 class="section-title">Intensity Terms</h2>
+                        <div class="section-subtitle">Đo lường mức độ khó</div>
+                    </div>
+                </div>
+                <div class="term-grid">
+                    <div class="term-card">
+                        <div class="term-name">RPE</div>
+                        <div class="term-abbr">Rate of Perceived Exertion</div>
+                        <div class="term-desc">Thang 1-10 về mức độ khó. RPE 10 = max effort. RPE 8 = còn 2 reps "trong kho".</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-name">RIR</div>
+                        <div class="term-abbr">Reps in Reserve</div>
+                        <div class="term-desc">Số reps còn lại trước failure. RIR 2 = còn 2 reps nữa. RPE + RIR = 10.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-name">1RM</div>
+                        <div class="term-abbr">One Rep Max</div>
+                        <div class="term-desc">Mức tạ nặng nhất lift 1 rep với form đúng. Dùng tính % intensity.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-name">%1RM</div>
+                        <div class="term-abbr">Phần trăm 1RM</div>
+                        <div class="term-desc">Intensity theo % 1RM. 1RM=100kg, tập 75% = 75kg. 85%+ = strength, 70-80% = hypertrophy.</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="volume" class="content-section">
+                <div class="section-header">
+                    <div class="section-icon orange">📊</div>
+                    <div>
+                        <h2 class="section-title">Volume Terms</h2>
+                        <div class="section-subtitle">Tổng khối lượng tập luyện</div>
+                    </div>
+                </div>
+                <div class="term-grid">
+                    <div class="term-card">
+                        <div class="term-name">Total Volume</div>
+                        <div class="term-abbr">Tổng volume</div>
+                        <div class="term-desc">Sets × Reps × Weight. 3×10×80kg = 2,400kg. Metric quan trọng để track progress.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-name">Working Sets</div>
+                        <div class="term-abbr">Sets tập chính</div>
+                        <div class="term-desc">Các sets tính vào volume (không counting warm-up). Thường là sets gần failure (RPE 7+).</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="technique" class="content-section">
+                <div class="section-header">
+                    <div class="section-icon green">🎯</div>
+                    <div>
+                        <h2 class="section-title">Technique Terms</h2>
+                        <div class="section-subtitle">Kỹ thuật tập luyện nâng cao</div>
+                    </div>
+                </div>
+                <div class="term-grid">
+                    <div class="term-card">
+                        <div class="term-name">Tempo</div>
+                        <div class="term-abbr">Nhịp điệu</div>
+                        <div class="term-desc">Tốc độ reps. Format: Eccentric-Isometric-Concentric. 3-1-1-0 = 3s hạ, 1s pause, 1s đẩy.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-name">TUT</div>
+                        <div class="term-abbr">Time Under Tension</div>
+                        <div class="term-desc">Tổng thời gian cơ chịu tension trong 1 set. TUT cao = metabolic stress cao = hypertrophy tốt.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-name">Drop Set</div>
+                        <div class="term-abbr">Giảm tạ</div>
+                        <div class="term-desc">Sau failure, giảm weight 20-30% và tiếp tục không nghỉ. Tăng volume và metabolic stress.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-name">Superset</div>
+                        <div class="term-abbr">Tập liên hợp</div>
+                        <div class="term-desc">2 bài liên tiếp không nghỉ. Same muscle (compound + isolation) hoặc opposing muscles (chest + back).</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="types" class="content-section">
+                <div class="section-header">
+                    <div class="section-icon red">🏋️</div>
+                    <div>
+                        <h2 class="section-title">Exercise Types</h2>
+                        <div class="section-subtitle">Phân loại bài tập</div>
+                    </div>
+                </div>
+                <div class="term-grid">
+                    <div class="term-card">
+                        <div class="term-name">Compound</div>
+                        <div class="term-abbr">Đa khớp</div>
+                        <div class="term-desc">Nhiều khớp + nhóm cơ. Squat, Bench, Deadlift. Hiệu quả cao, nên tập trước.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-name">Isolation</div>
+                        <div class="term-abbr">Đơn khớp</div>
+                        <div class="term-desc">1 khớp, 1 muscle group. Bicep curl, leg extension. Finisher hoặc rehab.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-name">Unilateral</div>
+                        <div class="term-abbr">Một bên</div>
+                        <div class="term-desc">Tập 1 bên. Bulgarian split squat, single arm row. Fix imbalances, tăng core.</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="physiology" class="content-section">
+                <div class="section-header">
+                    <div class="section-icon teal">🧬</div>
+                    <div>
+                        <h2 class="section-title">Physiology Terms</h2>
+                        <div class="section-subtitle">Thuật ngữ sinh lý học</div>
+                    </div>
+                </div>
+                <div class="term-grid">
+                    <div class="term-card">
+                        <div class="term-name">DOMS</div>
+                        <div class="term-abbr">Delayed Onset Muscle Soreness</div>
+                        <div class="term-desc">Đau cơ 24-72h sau tập. Nguyên nhân: micro-tears. KHÔNG phải indicator của good workout.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-name">Hypertrophy</div>
+                        <div class="term-abbr">Phì đại cơ bắp</div>
+                        <div class="term-desc">Tăng kích thước muscle fibers. 3 mechanisms: mechanical tension, metabolic stress, muscle damage.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-name">ATP</div>
+                        <div class="term-abbr">Adenosine Triphosphate</div>
+                        <div class="term-desc">Nguồn năng lượng chính cho muscle contraction. Rest giữa sets = replenish ATP.</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="programming" class="content-section">
+                <div class="section-header">
+                    <div class="section-icon purple">📅</div>
+                    <div>
+                        <h2 class="section-title">Programming Terms</h2>
+                        <div class="section-subtitle">Lập trình tập luyện</div>
+                    </div>
+                </div>
+                <div class="term-grid">
+                    <div class="term-card">
+                        <div class="term-name">Periodization</div>
+                        <div class="term-abbr">Chu kỳ hóa</div>
+                        <div class="term-desc">Chia program thành phases với goals khác nhau. Prevents plateaus và overtraining.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-name">Deload</div>
+                        <div class="term-abbr">Giảm tải</div>
+                        <div class="term-desc">Tuần giảm volume/intensity để recovery. Sau 4-8 tuần. Giảm 30-40% volume, 10-20% intensity.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-name">Mesocycle</div>
+                        <div class="term-abbr">Chu kỳ trung bình</div>
+                        <div class="term-desc">Block 4-8 tuần với specific goal. VD: 4 weeks hypertrophy → 4 weeks strength → deload.</div>
+                    </div>
+                </div>
+                <div class="info-callout tip">
+                    <div class="info-callout-icon">💡</div>
+                    <div class="info-callout-text">
+                        <strong>Pro tip:</strong> Không cần nhớ tất cả terms ngay. Focus vào understanding concepts, terminology sẽ tự nhiên theo thời gian.
+                    </div>
+                </div>
+            </section>
+            
+            <!-- MISTAKES SECTION -->
+            <section id="mistakes" class="content-section">
+                <div class="section-header">
+                    <div class="section-icon red">⚠️</div>
+                    <div>
+                        <h2 class="section-title">12 Beginner Mistakes</h2>
+                        <div class="section-subtitle">Những lỗi phổ biến nhất và cách khắc phục</div>
+                    </div>
+                </div>
+                
+                <div class="mistakes-timeline">
+                    <div class="mistake-item" data-number="1">
+                        <div class="mistake-title">Không Progressive Overload</div>
+                        <div class="mistake-desc">Tập cùng weight, cùng reps trong nhiều tuần. Cơ thể không có reason để adapt và grow.</div>
+                        <div class="mistake-fix">
+                            <span class="mistake-fix-icon">✅</span>
+                            <span class="mistake-fix-text"><strong>Fix:</strong> Tăng weight 2.5-5kg khi hoàn thành tất cả reps với form tốt.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mistake-item" data-number="2">
+                        <div class="mistake-title">Tập Quá Nhiều Cardio</div>
+                        <div class="mistake-desc">1-2 tiếng cardio/ngày + strength = overtraining, muscle loss, fatigue.</div>
+                        <div class="mistake-fix">
+                            <span class="mistake-fix-icon">✅</span>
+                            <span class="mistake-fix-text"><strong>Fix:</strong> 2-3 buổi cardio 20-30 phút/tuần là đủ.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mistake-item" data-number="3">
+                        <div class="mistake-title">Ăn Quá Ít Protein</div>
+                        <div class="mistake-desc">Chỉ 0.8-1g protein/kg (RDA cho người không tập). Không đủ để repair và build muscle.</div>
+                        <div class="mistake-fix">
+                            <span class="mistake-fix-icon">✅</span>
+                            <span class="mistake-fix-text"><strong>Fix:</strong> 1.6-2.4g protein/kg. 75kg → 120-180g/ngày.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mistake-item" data-number="4">
+                        <div class="mistake-title">Không Ngủ Đủ</div>
+                        <div class="mistake-desc">Ngủ 5-6 tiếng/đêm. Muscle growth và hormone optimization xảy ra trong sleep.</div>
+                        <div class="mistake-fix">
+                            <span class="mistake-fix-icon">✅</span>
+                            <span class="mistake-fix-text"><strong>Fix:</strong> 7-9 tiếng/đêm. Sleep là khi body repair và grow.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mistake-item" data-number="5">
+                        <div class="mistake-title">Ego Lifting</div>
+                        <div class="mistake-desc">Chọn weight quá nặng để impress. Form xấu, injury risk cao, không effective.</div>
+                        <div class="mistake-fix">
+                            <span class="mistake-fix-icon">✅</span>
+                            <span class="mistake-fix-text"><strong>Fix:</strong> Leave ego at the door. Form > Weight. Luôn.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mistake-item" data-number="6">
+                        <div class="mistake-title">Bỏ Qua Warm-up</div>
+                        <div class="mistake-desc">Vào gym là bench ngay với working weight. Injury waiting to happen.</div>
+                        <div class="mistake-fix">
+                            <span class="mistake-fix-icon">✅</span>
+                            <span class="mistake-fix-text"><strong>Fix:</strong> 5-10 phút dynamic warm-up + 2-3 warm-up sets.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mistake-item" data-number="7">
+                        <div class="mistake-title">Hy Sinh Form Để Lift Nặng</div>
+                        <div class="mistake-desc">Ngắn hạn có vẻ progress, dài hạn = injury và bad habits.</div>
+                        <div class="mistake-fix">
+                            <span class="mistake-fix-icon">✅</span>
+                            <span class="mistake-fix-text"><strong>Fix:</strong> Master form với light weight trước. Chỉ tăng khi form perfect.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mistake-item" data-number="8">
+                        <div class="mistake-title">Không Deload</div>
+                        <div class="mistake-desc">Tập hard 3-6 tháng không break. CNS fatigue, joint pain, performance decline.</div>
+                        <div class="mistake-fix">
+                            <span class="mistake-fix-icon">✅</span>
+                            <span class="mistake-fix-text"><strong>Fix:</strong> Deload mỗi 4-8 tuần. Giảm 30-40% volume, 10-20% intensity.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mistake-item" data-number="9">
+                        <div class="mistake-title">Tập Cùng Bài Mãi</div>
+                        <div class="mistake-desc">Chỉ bench, squat, deadlift mỗi tuần. Muscle adaptation, boredom, imbalances.</div>
+                        <div class="mistake-fix">
+                            <span class="mistake-fix-icon">✅</span>
+                            <span class="mistake-fix-text"><strong>Fix:</strong> Rotate exercises mỗi 4-8 weeks. Thêm variations.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mistake-item" data-number="10">
+                        <div class="mistake-title">Không Ghi Chép</div>
+                        <div class="mistake-desc">Không track workouts. Không biết tuần trước tập bao nhiêu, không thể progressive overload.</div>
+                        <div class="mistake-fix">
+                            <span class="mistake-fix-icon">✅</span>
+                            <span class="mistake-fix-text"><strong>Fix:</strong> Log mọi workout. What gets measured gets managed.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mistake-item" data-number="11">
+                        <div class="mistake-title">So Sánh Với Người Khác</div>
+                        <div class="mistake-desc">Nhìn người bên cạnh lift nặng hơn và feel inadequate. Genetics, experience khác nhau.</div>
+                        <div class="mistake-fix">
+                            <span class="mistake-fix-icon">✅</span>
+                            <span class="mistake-fix-text"><strong>Fix:</strong> So sánh với chính mình của tuần trước. That's the only comparison.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mistake-item" data-number="12">
+                        <div class="mistake-title">Thiếu Kiên Nhẫn</div>
+                        <div class="mistake-desc">Bỏ cuộc sau 4-8 tuần. Muscle building là marathon, không phải sprint.</div>
+                        <div class="mistake-fix">
+                            <span class="mistake-fix-icon">✅</span>
+                            <span class="mistake-fix-text"><strong>Fix:</strong> Commit tối thiểu 12 weeks trước khi evaluate. Consistency > Intensity.</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-callout important">
+                    <div class="info-callout-icon">🎯</div>
+                    <div class="info-callout-text">
+                        <strong>Remember:</strong> Mắc mistakes là normal. Quan trọng là learn và không lặp lại. Every advanced lifter was once a beginner.
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SCIENCE SECTION -->
+            <section id="science" class="content-section">
+                <div class="section-header">
+                    <div class="section-icon teal">🔬</div>
+                    <div>
+                        <h2 class="section-title">Fitness Science</h2>
+                        <div class="section-subtitle">6 concepts khoa học đằng sau program design</div>
+                    </div>
+                </div>
+                
+                <div class="science-grid">
+                    <div class="science-card">
+                        <div class="science-card-header">
+                            <div class="science-card-icon">📈</div>
+                            <div class="science-card-title">Progressive Overload</div>
+                        </div>
+                        <div class="science-card-body">
+                            <div class="science-section">
+                                <div class="science-section-label">Definition</div>
+                                <div class="science-section-text">Gradually increasing stress placed on body during training.</div>
+                            </div>
+                            <div class="science-section">
+                                <div class="science-section-label">Mechanism</div>
+                                <div class="science-section-text">Lift nặng hơn → muscle fibers bị damage nhiều hơn → body repair và grow stronger để handle future stress.</div>
+                            </div>
+                            <div class="science-section">
+                                <div class="science-section-label">Application</div>
+                                <div class="science-section-text">Tăng weight 2.5-5kg khi hoàn thành reps. Hoặc tăng reps, sets, hoặc giảm rest.</div>
+                            </div>
+                            <div class="science-key-point">
+                                <div class="science-key-label">Key Point</div>
+                                <div class="science-key-text">Không có progressive overload = không có progress. Period.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="science-card">
+                        <div class="science-card-header">
+                            <div class="science-card-icon">🧬</div>
+                            <div class="science-card-title">Muscle Protein Synthesis</div>
+                        </div>
+                        <div class="science-card-body">
+                            <div class="science-section">
+                                <div class="science-section-label">Definition</div>
+                                <div class="science-section-text">Quá trình build new muscle proteins để repair và grow.</div>
+                            </div>
+                            <div class="science-section">
+                                <div class="science-section-label">Window</div>
+                                <div class="science-section-text">MPS elevated 24-48h sau tập. Peak trong 24h đầu. Protein intake trong window này critical.</div>
+                            </div>
+                            <div class="science-section">
+                                <div class="science-section-label">Duration</div>
+                                <div class="science-section-text">Mỗi bữa protein (20-40g) kích thích MPS trong 2-3h. Cần 4-5 meals/ngày.</div>
+                            </div>
+                            <div class="science-key-point">
+                                <div class="science-key-label">Key Point</div>
+                                <div class="science-key-text">Protein timing matters less than total daily intake. Focus on 1.6-2.4g/kg/day.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="science-card">
+                        <div class="science-card-header">
+                            <div class="science-card-icon">😣</div>
+                            <div class="science-card-title">DOMS & Recovery</div>
+                        </div>
+                        <div class="science-card-body">
+                            <div class="science-section">
+                                <div class="science-section-label">Definition</div>
+                                <div class="science-section-text">Delayed Onset Muscle Soreness - đau cơ 24-72h sau tập.</div>
+                            </div>
+                            <div class="science-section">
+                                <div class="science-section-label">Causes</div>
+                                <div class="science-section-text">Micro-tears trong muscle fibers, inflammation, metabolic waste accumulation.</div>
+                            </div>
+                            <div class="science-section">
+                                <div class="science-section-label">Treatment</div>
+                                <div class="science-section-text">Active recovery, sleep, nutrition, hydration. DOMS ≠ good workout indicator.</div>
+                            </div>
+                            <div class="science-key-point">
+                                <div class="science-key-label">Key Point</div>
+                                <div class="science-key-text">DOMS giảm sau 2-3 tuần khi body adapt. Không chase DOMS.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="science-card">
+                        <div class="science-card-header">
+                            <div class="science-card-icon">💪</div>
+                            <div class="science-card-title">Hypertrophy Mechanisms</div>
+                        </div>
+                        <div class="science-card-body">
+                            <div class="science-section">
+                                <div class="science-section-label">3 Mechanisms</div>
+                                <div class="science-section-text">
+                                    <strong>1. Mechanical Tension:</strong> Force từ muscle contraction. Heavy weights, full ROM.<br>
+                                    <strong>2. Metabolic Stress:</strong> "Burn" từ metabolite accumulation. High reps, short rest.<br>
+                                    <strong>3. Muscle Damage:</strong> Micro-tears từ eccentric loading.
+                                </div>
+                            </div>
+                            <div class="science-key-point">
+                                <div class="science-key-label">Key Point</div>
+                                <div class="science-key-text">Program tốt balance cả 3 mechanisms. Không chỉ focus vào 1.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="science-card">
+                        <div class="science-card-header">
+                            <div class="science-card-icon">🔥</div>
+                            <div class="science-card-title">Fat Loss Science</div>
+                        </div>
+                        <div class="science-card-body">
+                            <div class="science-section">
+                                <div class="science-section-label">Caloric Deficit</div>
+                                <div class="science-section-text">Burn nhiều hơn consume. 500 kcal deficit = 0.5kg fat loss/tuần.</div>
+                            </div>
+                            <div class="science-section">
+                                <div class="science-section-label">NEAT</div>
+                                <div class="science-section-text">Non-Exercise Activity Thermogenesis. Walking, daily movement. Tăng NEAT = tăng calorie burn không cần cardio.</div>
+                            </div>
+                            <div class="science-section">
+                                <div class="science-section-label">EPOC</div>
+                                <div class="science-section-text">"Afterburn effect" từ HIIT và strength. Tăng 6-15% calorie burn sau tập.</div>
+                            </div>
+                            <div class="science-key-point">
+                                <div class="science-key-label">Key Point</div>
+                                <div class="science-key-text">Deficit quá lớn (>1000 kcal) = muscle loss. Keep it moderate (300-500 kcal).</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="science-card">
+                        <div class="science-card-header">
+                            <div class="science-card-icon">📋</div>
+                            <div class="science-card-title">Why 12-Week Program?</div>
+                        </div>
+                        <div class="science-card-body">
+                            <div class="science-section">
+                                <div class="science-section-label">Periodization Logic</div>
+                                <div class="science-section-text">12 weeks = optimal mesocycle length cho natural lifters.</div>
+                            </div>
+                            <div class="science-section">
+                                <div class="science-section-label">3 Phases</div>
+                                <div class="science-section-text">
+                                    <strong>Phase 1:</strong> Foundation - build capacity, master form<br>
+                                    <strong>Phase 2:</strong> Volume - maximize hypertrophy<br>
+                                    <strong>Phase 3:</strong> Intensity - maximize strength, peak và test
+                                </div>
+                            </div>
+                            <div class="science-key-point">
+                                <div class="science-key-label">Key Point</div>
+                                <div class="science-key-text">Sau 12 weeks, deload và bắt đầu cycle mới với higher baseline.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-callout tip">
+                    <div class="info-callout-icon">🎓</div>
+                    <div class="info-callout-text">
+                        <strong>Further Learning:</strong> Research: Brad Schoenfeld (hypertrophy), Mike Israetel (periodization), Eric Helms (nutrition).
+                    </div>
+                </div>
+            </section>
+            
+        </main>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="men-30-40.html">Nam 30-40</a>
+            <a href="men-gym-overview.html">GYM Overview</a>
+            <a href="men-gym-library.html">Exercise Library</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Sidebar active state on scroll
+        const sections = document.querySelectorAll('.content-section');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= sectionTop - 120) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Smooth scroll
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
