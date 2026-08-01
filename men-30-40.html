@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nam 30-40 - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --text-dark: #2D3436;
+            --text-medium: #636E72;
+            --text-light: #95A5A6;
+            --white: #FFFFFF;
+            --bg-primary: #F8F9FA;
+            --bg-soft: #F1F3F5;
+            --border-soft: #DFE4E8;
+            
+            /* Male palette - Strong & Professional */
+            --primary: #2C5F8A;
+            --primary-soft: #D4E4F4;
+            --primary-dark: #1E4263;
+            --primary-gradient: linear-gradient(135deg, #D4E4F4 0%, #2C5F8A 100%);
+            
+            --secondary: #6B7B8C;
+            --secondary-soft: #E8ECEF;
+            --secondary-gradient: linear-gradient(135deg, #E8ECEF 0%, #6B7B8C 100%);
+            
+            --accent: #D4A850;
+            --accent-soft: #F5ECD4;
+            --accent-gradient: linear-gradient(135deg, #F5ECD4 0%, #D4A850 100%);
+            
+            --success: #4A7C59;
+            --success-soft: #D4E8D8;
+            --success-gradient: linear-gradient(135deg, #D4E8D8 0%, #4A7C59 100%);
+            
+            --main-gradient: linear-gradient(135deg, #2C5F8A 0%, #6B7B8C 50%, #D4A850 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(180deg, #F8F9FA 0%, #E8ECEF 50%, #F5ECD4 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 18px 40px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            color: var(--primary);
+        }
+        
+        .hero {
+            padding: 70px 40px 50px;
+            text-align: center;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 7px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 22px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(44,95,138,0.3);
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 18px;
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.35rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        
+        .main-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        /* Module Cards */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .module-card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--module-gradient);
+        }
+        
+        .module-card.gym { --module-color: var(--primary); --module-soft: var(--primary-soft); --module-gradient: var(--primary-gradient); }
+        .module-card.nutrition { --module-color: var(--accent); --module-soft: var(--accent-soft); --module-gradient: var(--accent-gradient); }
+        .module-card.lifestyle { --module-color: var(--success); --module-soft: var(--success-soft); --module-gradient: var(--success-gradient); }
+        
+        .module-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            border-color: var(--module-soft);
+        }
+        
+        .module-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            background: var(--module-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .module-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+        
+        .module-card > p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        
+        .module-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+            padding: 18px;
+            background: var(--bg-soft);
+            border-radius: 14px;
+        }
+        
+        .module-stat {
+            text-align: center;
+        }
+        
+        .module-stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--module-color);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        
+        .module-stat-label {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+        
+        .module-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .module-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--bg-soft);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.92rem;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .module-link:hover {
+            background: white;
+            border-color: var(--module-color);
+            transform: translateX(5px);
+        }
+        
+        .module-link-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--module-soft);
+            color: var(--module-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        
+        /* Quick Nav Section */
+        .quick-nav-section {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            margin-bottom: 50px;
+        }
+        
+        .quick-nav-section h3 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        
+        .quick-nav-section > p {
+            color: var(--text-medium);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .quick-nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        
+        .quick-nav-item {
+            padding: 16px;
+            background: var(--bg-soft);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quick-nav-item:hover {
+            background: white;
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+        
+        .quick-nav-icon {
+            font-size: 1.2rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            margin: 60px 0;
+        }
+        
+        .cta-card {
+            background: var(--primary-gradient);
+            border-radius: 32px;
+            padding: 70px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.4;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-card h2 {
+            font-size: 2.4rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .cta-card p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 30px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            display: inline-block;
+            padding: 15px 38px;
+            background: white;
+            color: var(--primary-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+        }
+        
+        .btn-cta.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.6);
+            box-shadow: none;
+        }
+        
+        .btn-cta.secondary:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: white;
+        }
+        
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 40px 40px 25px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 15px 20px; }
+            .hero { padding: 45px 20px 35px; }
+            .hero h1 { font-size: 2rem; }
+            .main-wrapper { padding: 0 20px; }
+            .modules-grid { grid-template-columns: 1fr; }
+            .module-stats { grid-template-columns: 1fr; }
+            .quick-nav-grid { grid-template-columns: 1fr; }
+            .cta-card { padding: 50px 25px; }
+            .cta-card h2 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="index.html" class="back-link">← Chọn đối tượng</a>
+    </header>
+    
+    <section class="hero">
+        <span class="hero-badge">NAM 30-40 TUỔI</span>
+        <h1>Strong. <span>Powerful.</span> Built to Last.</h1>
+        <div class="hero-subtitle">Tối ưu sức mạnh, xây dựng cơ bắp, bảo vệ khớp</div>
+        <p>Chương trình toàn diện cho nam giới 30-40 tuổi: từ tập luyện, dinh dưỡng đến lối sống. Thiết kế để bạn mạnh hơn hôm nay và khỏe mạnh đến 60+.</p>
+    </section>
+    
+    <div class="main-wrapper">
+        
+        <!-- 3 Module Cards -->
+        <div class="modules-grid">
+            
+            <!-- GYM Module -->
+            <div class="module-card gym">
+                <div class="module-icon">️</div>
+                <h2>GYM</h2>
+                <p>Hệ thống tập luyện modular với 250+ bài tập, workout builder, 12-week program với RPE và deload weeks. Từ beginner đến advanced.</p>
+                
+                <div class="module-stats">
+                    <div class="module-stat">
+                        <div class="module-stat-value">250+</div>
+                        <div class="module-stat-label">Bài tập</div>
+                    </div>
+                    <div class="module-stat">
+                        <div class="module-stat-value">12</div>
+                        <div class="module-stat-label">Tuần program</div>
+                    </div>
+                    <div class="module-stat">
+                        <div class="module-stat-value">7</div>
+                        <div class="module-stat-label">Body goals</div>
+                    </div>
+                </div>
+                
+                <div class="module-links">
+                    <a href="gym-overview.html" class="module-link">
+                        <div class="module-link-icon">📚</div>
+                        <span>Overview & Exercise Library</span>
+                    </a>
+                    <a href="gym-planner.html" class="module-link">
+                        <div class="module-link-icon">📅</div>
+                        <span>Workout Builder & Roadmap</span>
+                    </a>
+                    <a href="gym-tracker.html" class="module-link">
+                        <div class="module-link-icon">📊</div>
+                        <span>Goal Settings & Tracker</span>
+                    </a>
+                    <a href="gym-recovery.html" class="module-link">
+                        <div class="module-link-icon">🧘</div>
+                        <span>Stretch & Mobility</span>
+                    </a>
+                    <a href="gym-knowledge.html" class="module-link">
+                        <div class="module-link-icon">🧠</div>
+                        <span>Terms, Mistakes & Science</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Nutrition Module -->
+            <div class="module-card nutrition">
+                <div class="module-icon">🥗</div>
+                <h2>Dinh Dưỡng</h2>
+                <p>Hệ thống dinh dưỡng evidence-based: 100+ thực phẩm, meal timing, eating out guide cho người Việt, và supplement recommendations.</p>
+                
+                <div class="module-stats">
+                    <div class="module-stat">
+                        <div class="module-stat-value">100+</div>
+                        <div class="module-stat-label">Thực phẩm</div>
+                    </div>
+                    <div class="module-stat">
+                        <div class="module-stat-value">15</div>
+                        <div class="module-stat-label">Eating scenarios</div>
+                    </div>
+                    <div class="module-stat">
+                        <div class="module-stat-value">20+</div>
+                        <div class="module-stat-label">Quick meals</div>
+                    </div>
+                </div>
+                
+                <div class="module-links">
+                    <a href="nutrition-overview.html" class="module-link">
+                        <div class="module-link-icon">📖</div>
+                        <span>Tổng quan dinh dưỡng</span>
+                    </a>
+                    <a href="nutrition-calculator.html" class="module-link">
+                        <div class="module-link-icon">🧮</div>
+                        <span>TDEE & Macro Calculator</span>
+                    </a>
+                    <a href="nutrition-food-library.html" class="module-link">
+                        <div class="module-link-icon">🍗</div>
+                        <span>Food Library (100+ foods)</span>
+                    </a>
+                    <a href="nutrition-guide.html" class="module-link">
+                        <div class="module-link-icon">🍜</div>
+                        <span>Nutrition Guide (Meal Plans, Timing, Eating Out)</span>
+                    </a>
+                    <a href="nutrition-recipes.html" class="module-link">
+                        <div class="module-link-icon">👨‍🍳</div>
+                        <span>Recipes</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Lifestyle Module -->
+            <div class="module-card lifestyle">
+                <div class="module-icon">🌿</div>
+                <h2>Lối Sống</h2>
+                <p>Quản lý stress, tối ưu giấc ngủ, cải thiện tư thế văn phòng, và xây dựng daily habits bền vững cho sức khỏe dài hạn.</p>
+                
+                <div class="module-stats">
+                    <div class="module-stat">
+                        <div class="module-stat-value">10</div>
+                        <div class="module-stat-label">Daily habits</div>
+                    </div>
+                    <div class="module-stat">
+                        <div class="module-stat-value">7-8h</div>
+                        <div class="module-stat-label">Sleep target</div>
+                    </div>
+                    <div class="module-stat">
+                        <div class="module-stat-value">21</div>
+                        <div class="module-stat-label">Day challenge</div>
+                    </div>
+                </div>
+                
+                <div class="module-links">
+                    <a href="lifestyle-overview.html" class="module-link">
+                        <div class="module-link-icon">📋</div>
+                        <span>Tổng quan lối sống</span>
+                    </a>
+                    <a href="lifestyle-sleep.html" class="module-link">
+                        <div class="module-link-icon">🌙</div>
+                        <span>Giấc ngủ (Deep Dive)</span>
+                    </a>
+                    <a href="lifestyle-posture.html" class="module-link">
+                        <div class="module-link-icon">🪑</div>
+                        <span>Tư thế văn phòng</span>
+                    </a>
+                    <a href="lifestyle-stress.html" class="module-link">
+                        <div class="module-link-icon">🧘</div>
+                        <span>Quản lý stress</span>
+                    </a>
+                    <a href="lifestyle-water.html" class="module-link">
+                        <div class="module-link-icon">💧</div>
+                        <span>Uống nước</span>
+                    </a>
+                    <a href="lifestyle-recovery.html" class="module-link">
+                        <div class="module-link-icon">🧊</div>
+                        <span>Phục hồi (Sauna, Ice bath)</span>
+                    </a>
+                    <a href="lifestyle-hormones.html" class="module-link">
+                        <div class="module-link-icon">⚗️</div>
+                        <span>Hormone health</span>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- Quick Navigation -->
+        <div class="quick-nav-section">
+            <h3>🎯 Điều hướng nhanh</h3>
+            <p>Truy cập nhanh các công cụ và tài nguyên phổ biến</p>
+            
+            <div class="quick-nav-grid">
+                <a href="gym-overview.html" class="quick-nav-item">
+                    <span class="quick-nav-icon">📚</span>
+                    <span>Exercise Library</span>
+                </a>
+                <a href="gym-planner.html" class="quick-nav-item">
+                    <span class="quick-nav-icon">📅</span>
+                    <span>Workout Planner</span>
+                </a>
+                <a href="gym-tracker.html" class="quick-nav-item">
+                    <span class="quick-nav-icon">📊</span>
+                    <span>Progress Tracker</span>
+                </a>
+                <a href="gym-recovery.html" class="quick-nav-item">
+                    <span class="quick-nav-icon">🧘</span>
+                    <span>Recovery</span>
+                </a>
+                <a href="gym-knowledge.html" class="quick-nav-item">
+                    <span class="quick-nav-icon"></span>
+                    <span>Knowledge Base</span>
+                </a>
+                <a href="nutrition-calculator.html" class="quick-nav-item">
+                    <span class="quick-nav-icon">🧮</span>
+                    <span>Macro Calculator</span>
+                </a>
+                <a href="nutrition-food-library.html" class="quick-nav-item">
+                    <span class="quick-nav-icon">🍗</span>
+                    <span>Food Library</span>
+                </a>
+                <a href="nutrition-guide.html" class="quick-nav-item">
+                    <span class="quick-nav-icon">📖</span>
+                    <span>Nutrition Guide</span>
+                </a>
+                <a href="nutrition-recipes.html" class="quick-nav-item">
+                    <span class="quick-nav-icon">👨‍🍳</span>
+                    <span>Recipes</span>
+                </a>
+                <a href="lifestyle-sleep.html" class="quick-nav-item">
+                    <span class="quick-nav-icon">😴</span>
+                    <span>Sleep Guide</span>
+                </a>
+                <a href="lifestyle-posture.html" class="quick-nav-item">
+                    <span class="quick-nav-icon">🪑</span>
+                    <span>Office Posture</span>
+                </a>
+                <a href="lifestyle-habits.html" class="quick-nav-item">
+                    <span class="quick-nav-icon">✅</span>
+                    <span>Daily Habits</span>
+                </a>
+            </div>
+        </div>
+        
+    </div>
+    
+    <div class="cta-section">
+        <div class="cta-card">
+            <div class="cta-content">
+                <h2>Bắt đầu hành trình của bạn</h2>
+                <p>Chọn module phù hợp và bắt đầu ngay hôm nay. Hệ thống sẽ hướng dẫn bạn từng bước.</p>
+                <div class="cta-buttons">
+                    <a href="gym-overview.html" class="btn-cta">Bắt đầu với GYM</a>
+                    <a href="nutrition-overview.html" class="btn-cta secondary">Khám phá Dinh dưỡng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="women-30-40.html">Nữ 30-40</a>
+            <a href="gym-overview.html">GYM</a>
+            <a href="nutrition-overview.html">Dinh dưỡng</a>
+            <a href="lifestyle-overview.html">Lối sống</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+</body>
+</html>
