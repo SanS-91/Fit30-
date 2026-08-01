@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recovery Library - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #4A90E2;
+            --primary-purple: #9B59B6;
+            --primary-orange: #F39C12;
+            --primary-green: #50C878;
+            --primary-red: #E74C3C;
+            --primary-teal: #1ABC9C;
+            
+            --text-dark: #1A202C;
+            --text-medium: #4A5568;
+            --text-light: #718096;
+            --bg-main: #F7FAFC;
+            --bg-card: #FFFFFF;
+            --border-soft: #E2E8F0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 16px 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover { color: var(--primary-blue); }
+        
+        /* Hero */
+        .hero {
+            padding: 60px 40px 40px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 100%);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.78rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 16px;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        
+        .hero p {
+            font-size: 1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: white;
+            padding: 14px 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            margin-top: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px 50px;
+        }
+        
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            padding: 14px 28px;
+            background: var(--bg-card);
+            border: 2px solid var(--border-soft);
+            border-radius: 12px;
+            font-weight: 600;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .tab-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 100%);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .tab-content { display: none; }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Filter Bar */
+        .filter-bar {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            margin-bottom: 24px;
+        }
+        
+        .filter-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+        
+        .filter-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 8px 18px;
+            background: var(--bg-main);
+            border: 2px solid var(--border-soft);
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .filter-btn:hover {
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+        
+        .filter-btn.active {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+        
+        /* Guide Sections */
+        .guide-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            margin-bottom: 24px;
+        }
+        
+        .guide-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--border-soft);
+        }
+        
+        .guide-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .guide-icon.blue { background: #E8F0FF; }
+        .guide-icon.purple { background: #F0E8FF; }
+        .guide-icon.orange { background: #FFF3E0; }
+        .guide-icon.green { background: #E8F8EE; }
+        .guide-icon.red { background: #FFE8E8; }
+        .guide-icon.teal { background: #E8F8F5; }
+        
+        .guide-title {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        
+        .guide-subtitle {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        .guide-content {
+            color: var(--text-medium);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+        
+        .guide-content p { margin-bottom: 12px; }
+        .guide-content strong { color: var(--text-dark); font-weight: 600; }
+        
+        /* Exercise Grid */
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        
+        .exercise-card {
+            background: var(--bg-main);
+            border-radius: 14px;
+            padding: 20px;
+            border: 2px solid transparent;
+            border-left: 4px solid var(--card-color);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .exercise-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            border-color: var(--border-soft);
+        }
+        
+        .exercise-card[data-muscle="upper"] { --card-color: var(--primary-blue); }
+        .exercise-card[data-muscle="lower"] { --card-color: var(--primary-green); }
+        .exercise-card[data-muscle="full"] { --card-color: var(--primary-purple); }
+        .exercise-card[data-muscle="specific"] { --card-color: var(--primary-orange); }
+        
+        .exercise-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .exercise-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            flex: 1;
+            line-height: 1.3;
+        }
+        
+        .exercise-name-vi {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-top: 2px;
+        }
+        
+        .exercise-duration {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: var(--card-color);
+            color: white;
+            border-radius: 6px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        
+        .exercise-target {
+            display: inline-block;
+            font-size: 0.78rem;
+            color: var(--card-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .exercise-desc {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        
+        .exercise-benefits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .benefit-tag {
+            font-size: 0.72rem;
+            padding: 3px 10px;
+            background: white;
+            border-radius: 6px;
+            color: var(--text-medium);
+            font-weight: 600;
+        }
+        
+        /* Routine Section */
+        .routine-section {
+            background: linear-gradient(135deg, #E8F0FF 0%, #F0E8FF 100%);
+            border-radius: 16px;
+            padding: 28px;
+            margin-top: 24px;
+        }
+        
+        .routine-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .routine-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .routine-title {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        
+        .routine-subtitle {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        .routine-list {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .routine-item {
+            display: grid;
+            grid-template-columns: 40px 1fr auto;
+            gap: 14px;
+            align-items: center;
+            padding: 16px;
+            background: white;
+            border-radius: 12px;
+            border-left: 4px solid var(--routine-color);
+        }
+        
+        .routine-item:nth-child(1) { --routine-color: var(--primary-blue); }
+        .routine-item:nth-child(2) { --routine-color: var(--primary-purple); }
+        .routine-item:nth-child(3) { --routine-color: var(--primary-orange); }
+        .routine-item:nth-child(4) { --routine-color: var(--primary-green); }
+        .routine-item:nth-child(5) { --routine-color: var(--primary-teal); }
+        .routine-item:nth-child(6) { --routine-color: var(--primary-red); }
+        .routine-item:nth-child(7) { --routine-color: #3498DB; }
+        .routine-item:nth-child(8) { --routine-color: #9B59B6; }
+        .routine-item:nth-child(9) { --routine-color: #F39C12; }
+        .routine-item:nth-child(10) { --routine-color: #50C878; }
+        
+        .routine-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--routine-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        
+        .routine-info {
+            flex: 1;
+        }
+        
+        .routine-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 3px;
+        }
+        
+        .routine-duration {
+            font-size: 0.78rem;
+            color: var(--text-light);
+        }
+        
+        .routine-time {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--routine-color);
+        }
+        
+        .routine-total {
+            margin-top: 20px;
+            padding: 16px;
+            background: white;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .routine-total-label {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+        
+        .routine-total-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        /* Info Callout */
+        .info-callout {
+            padding: 16px 18px;
+            border-radius: 12px;
+            margin-top: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        
+        .info-callout.tip {
+            background: #E8F8EE;
+            border-left: 4px solid var(--primary-green);
+        }
+        
+        .info-callout.warning {
+            background: #FFF3E0;
+            border-left: 4px solid var(--primary-orange);
+        }
+        
+        .info-callout.important {
+            background: #FFE8E8;
+            border-left: 4px solid var(--primary-red);
+        }
+        
+        .info-callout-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .info-callout-text {
+            font-size: 0.88rem;
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+        
+        .info-callout-text strong { font-weight: 600; }
+        
+        /* Progress Tracker */
+        .progress-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .progress-info {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .progress-label {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: var(--bg-main);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            border-radius: 5px;
+            transition: width 0.4s ease;
+        }
+        
+        .progress-stats {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .progress-stat {
+            text-align: center;
+        }
+        
+        .progress-stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .progress-stat-label {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        .btn-reset {
+            padding: 10px 20px;
+            background: var(--bg-main);
+            border: 1px solid var(--border-soft);
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            transition: all 0.2s;
+        }
+        
+        .btn-reset:hover {
+            background: var(--border-soft);
+            color: var(--text-dark);
+        }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-soft);
+            padding: 36px 40px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 14px;
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover { color: var(--primary-blue); }
+        
+        .footer-bottom {
+            color: var(--text-light);
+            font-size: 0.82rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .exercise-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 14px 20px; }
+            .hero { padding: 40px 20px 30px; }
+            .hero h1 { font-size: 2rem; }
+            .main-container { padding: 0 20px 40px; }
+            .exercise-grid { grid-template-columns: 1fr; }
+            .guide-section { padding: 20px; }
+            .tab-btn { padding: 12px 20px; font-size: 0.88rem; }
+            .progress-section { flex-direction: column; align-items: stretch; }
+            .progress-stats { justify-content: space-around; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="men-gym-overview.html" class="back-link">← Quay lại GYM Overview</a>
+    </header>
+    
+    <section class="hero">
+        <span class="hero-badge">RECOVERY LIBRARY</span>
+        <h1>Stretch & <span>Mobility</span></h1>
+        <div class="hero-subtitle">38+ bài tập phục hồi cho khớp và cơ bắp</div>
+        <p>Recovery không phải là optional - nó là foundation. Stretching và mobility giúp bạn tập nặng hơn, chấn thương ít hơn, và tiến bộ nhanh hơn.</p>
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-value">18</div>
+                <div class="stat-label">Stretches</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">20</div>
+                <div class="stat-label">Mobility Drills</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">3</div>
+                <div class="stat-label">Daily Routines</div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="main-container">
+        
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('stretching')">🧘 Stretching</button>
+            <button class="tab-btn" onclick="switchTab('mobility')">🔄 Mobility</button>
+            <button class="tab-btn" onclick="switchTab('routines')">📋 Routines</button>
+        </div>
+        
+        <!-- ============ STRETCHING TAB ============ -->
+        <div class="tab-content active" id="tab-stretching">
+            
+            <div class="guide-section">
+                <div class="guide-header">
+                    <div class="guide-icon blue">🧘</div>
+                    <div>
+                        <h2 class="guide-title">Tại Sao Stretching Quan Trọng?</h2>
+                        <div class="guide-subtitle">Flexibility = Freedom of movement</div>
+                    </div>
+                </div>
+                
+                <div class="guide-content">
+                    <p>Stretching không chỉ là "cool down" - nó là <strong>investment vào chất lượng movement</strong> của bạn. Cơ bắp linh hoạt giúp:</p>
+                    <p>• <strong>Tăng ROM (Range of Motion):</strong> Squat sâu hơn, bench press smoother<br>
+                    • <strong>Giảm chấn thương:</strong> Cơ đàn hồi tốt hơn chịu được stress<br>
+                    • <strong>Cải thiện posture:</strong> Counteract sitting, desk work<br>
+                    • <strong>Tăng blood flow:</strong> Recovery nhanh hơn sau tập</p>
+                </div>
+                
+                <div class="info-callout tip">
+                    <div class="info-callout-icon">💡</div>
+                    <div class="info-callout-text">
+                        <strong>Static vs Dynamic:</strong> Static stretching (giữ 20-30s) tốt nhất SAU tập hoặc riêng biệt. Dynamic stretching (chuyển động) tốt nhất TRƯỚC tập để warm-up.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+                <div class="filter-title">Lọc theo nhóm cơ</div>
+                <div class="filter-options">
+                    <button class="filter-btn active" onclick="filterExercises('all', this)">Tất cả</button>
+                    <button class="filter-btn" onclick="filterExercises('upper', this)">Upper Body</button>
+                    <button class="filter-btn" onclick="filterExercises('lower', this)">Lower Body</button>
+                </div>
+            </div>
+            
+            <!-- Progress Tracker -->
+            <div class="progress-section">
+                <div class="progress-info">
+                    <div class="progress-label">Tiến độ stretching hôm nay</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <div class="progress-stats">
+                    <div class="progress-stat">
+                        <div class="progress-stat-value" id="completedCount">0</div>
+                        <div class="progress-stat-label">Đã làm</div>
+                    </div>
+                    <div class="progress-stat">
+                        <div class="progress-stat-value" id="totalCount">18</div>
+                        <div class="progress-stat-label">Tổng</div>
+                    </div>
+                    <div class="progress-stat">
+                        <div class="progress-stat-value" id="percentComplete">0%</div>
+                        <div class="progress-stat-label">Hoàn thành</div>
+                    </div>
+                </div>
+                
+                <button class="btn-reset" onclick="resetProgress()">Reset hôm nay</button>
+            </div>
+            
+            <!-- Upper Body Stretches -->
+            <div class="guide-section" id="upperBodySection">
+                <div class="guide-header">
+                    <div class="guide-icon blue">💪</div>
+                    <div>
+                        <h2 class="guide-title">Upper Body Stretches</h2>
+                        <div class="guide-subtitle">8 bài stretching cho ngực, vai, lưng trên, tay</div>
+                    </div>
+                </div>
+                
+                <div class="exercise-grid" id="upperBodyGrid">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+            
+            <!-- Lower Body Stretches -->
+            <div class="guide-section" id="lowerBodySection">
+                <div class="guide-header">
+                    <div class="guide-icon green">🦵</div>
+                    <div>
+                        <h2 class="guide-title">Lower Body Stretches</h2>
+                        <div class="guide-subtitle">10 bài stretching cho hông, đùi, mông, bắp chân</div>
+                    </div>
+                </div>
+                
+                <div class="exercise-grid" id="lowerBodyGrid">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+            
+            <div class="info-callout warning">
+                <div class="info-callout-icon">⚠️</div>
+                <div class="info-callout-text">
+                    <strong>Đừng stretch quá mức!</strong> Cảm giác căng nhẹ là đủ. Nếu đau, giảm intensity. Stretching nên cảm thấy "good pain", không phải "bad pain".
+                </div>
+            </div>
+        </div>
+        
+        <!-- ============ MOBILITY TAB ============ -->
+        <div class="tab-content" id="tab-mobility">
+            
+            <div class="guide-section">
+                <div class="guide-header">
+                    <div class="guide-icon purple">🔄</div>
+                    <div>
+                        <h2 class="guide-title">Mobility vs Flexibility</h2>
+                        <div class="guide-subtitle">Hiểu sự khác biệt để tập đúng</div>
+                    </div>
+                </div>
+                
+                <div class="guide-content">
+                    <p><strong>Flexibility</strong> = khả năng kéo dãn cơ bắp (passive). <strong>Mobility</strong> = khả năng di chuyển khớp qua full ROM với control (active).</p>
+                    <p>Bạn có thể flexible nhưng không mobile (có thể kéo dãn nhưng không control được chuyển động). Mobility là thứ bạn cần cho performance và injury prevention.</p>
+                </div>
+                
+                <div class="info-callout tip">
+                    <div class="info-callout-icon">💡</div>
+                    <div class="info-callout-text">
+                        <strong>Khi nào tập mobility:</strong> Trước tập luyện (pre-lift mobility), ngày rest (daily mobility routine), hoặc khi cảm thấy stiff/joint pain.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+                <div class="filter-title">Lọc theo khớp</div>
+                <div class="filter-options">
+                    <button class="filter-btn active" onclick="filterMobility('all', this)">Tất cả</button>
+                    <button class="filter-btn" onclick="filterMobility('hip', this)">Hip</button>
+                    <button class="filter-btn" onclick="filterMobility('shoulder', this)">Shoulder</button>
+                    <button class="filter-btn" onclick="filterMobility('ankle', this)">Ankle</button>
+                    <button class="filter-btn" onclick="filterMobility('thoracic', this)">Thoracic</button>
+                </div>
+            </div>
+            
+            <!-- Hip Mobility -->
+            <div class="guide-section" id="hipMobilitySection">
+                <div class="guide-header">
+                    <div class="guide-icon orange">🦴</div>
+                    <div>
+                        <h2 class="guide-title">Hip Mobility</h2>
+                        <div class="guide-subtitle">6 drills cho khớp hông - quan trọng nhất cho squat, deadlift</div>
+                    </div>
+                </div>
+                
+                <div class="exercise-grid" id="hipMobilityGrid">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+            
+            <!-- Shoulder Mobility -->
+            <div class="guide-section" id="shoulderMobilitySection">
+                <div class="guide-header">
+                    <div class="guide-icon blue"></div>
+                    <div>
+                        <h2 class="guide-title">Shoulder Mobility</h2>
+                        <div class="guide-subtitle">6 drills cho vai - essential cho overhead press, pull-ups</div>
+                    </div>
+                </div>
+                
+                <div class="exercise-grid" id="shoulderMobilityGrid">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+            
+            <!-- Ankle Mobility -->
+            <div class="guide-section" id="ankleMobilitySection">
+                <div class="guide-header">
+                    <div class="guide-icon green">🦶</div>
+                    <div>
+                        <h2 class="guide-title">Ankle Mobility</h2>
+                        <div class="guide-subtitle">4 drills cho cổ chân - key cho squat depth</div>
+                    </div>
+                </div>
+                
+                <div class="exercise-grid" id="ankleMobilityGrid">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+            
+            <!-- Thoracic Mobility -->
+            <div class="guide-section" id="thoracicMobilitySection">
+                <div class="guide-header">
+                    <div class="guide-icon purple">🌀</div>
+                    <div>
+                        <h2 class="guide-title">Thoracic Spine Mobility</h2>
+                        <div class="guide-subtitle">4 drills cho cột sống ngực - cải thiện posture, overhead movement</div>
+                    </div>
+                </div>
+                
+                <div class="exercise-grid" id="thoracicMobilityGrid">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+            
+            <div class="info-callout important">
+                <div class="info-callout-icon">🎯</div>
+                <div class="info-callout-text">
+                    <strong>Mobility Assessment:</strong> Test khả năng mobility của bạn: Deep squat hold (30s), Shoulder CARs, Hip 90/90. Nếu không làm được, focus vào mobility drills tương ứng.
+                </div>
+            </div>
+        </div>
+        
+        <!-- ============ ROUTINES TAB ============ -->
+        <div class="tab-content" id="tab-routines">
+            
+            <div class="guide-section">
+                <div class="guide-header">
+                    <div class="guide-icon green">📋</div>
+                    <div>
+                        <h2 class="guide-title">Daily Routines</h2>
+                        <div class="guide-subtitle">3 routines cho các tình huống khác nhau</div>
+                    </div>
+                </div>
+                
+                <div class="guide-content">
+                    <p>Không cần nhớ từng bài tập riêng lẻ. Use these <strong>pre-built routines</strong> cho các tình huống cụ thể. Mỗi routine được thiết kế để flow smoothly từ bài này sang bài khác.</p>
+                </div>
+            </div>
+            
+            <!-- Cooldown Routine -->
+            <div class="routine-section">
+                <div class="routine-header">
+                    <div class="routine-icon">🧊</div>
+                    <div>
+                        <div class="routine-title">Cooldown Routine</div>
+                        <div class="routine-subtitle">10 phút sau tập luyện - giảm muscle soreness, tăng recovery</div>
+                    </div>
+                </div>
+                
+                <div class="routine-list" id="cooldownRoutine">
+                    <!-- Rendered by JS -->
+                </div>
+                
+                <div class="routine-total">
+                    <div class="routine-total-label">Tổng thời gian</div>
+                    <div class="routine-total-value">10 phút</div>
+                </div>
+            </div>
+            
+            <!-- Bedtime Routine -->
+            <div class="routine-section" style="background: linear-gradient(135deg, #F0E8FF 0%, #E8F0FF 100%);">
+                <div class="routine-header">
+                    <div class="routine-icon">🌙</div>
+                    <div>
+                        <div class="routine-title">Bedtime Routine</div>
+                        <div class="routine-subtitle">10 phút trước ngủ - giảm căng thẳng, cải thiện sleep quality</div>
+                    </div>
+                </div>
+                
+                <div class="routine-list" id="bedtimeRoutine">
+                    <!-- Rendered by JS -->
+                </div>
+                
+                <div class="routine-total">
+                    <div class="routine-total-label">Tổng thời gian</div>
+                    <div class="routine-total-value">10 phút</div>
+                </div>
+            </div>
+            
+            <!-- Office Desk Routine -->
+            <div class="routine-section" style="background: linear-gradient(135deg, #FFF3E0 0%, #FFE8E8 100%);">
+                <div class="routine-header">
+                    <div class="routine-icon">💼</div>
+                    <div>
+                        <div class="routine-title">Office Desk Stretches</div>
+                        <div class="routine-subtitle">5 phút tại văn phòng - counteract sitting, giảm back pain</div>
+                    </div>
+                </div>
+                
+                <div class="routine-list" id="officeRoutine">
+                    <!-- Rendered by JS -->
+                </div>
+                
+                <div class="routine-total">
+                    <div class="routine-total-label">Tổng thời gian</div>
+                    <div class="routine-total-value">5 phút</div>
+                </div>
+            </div>
+            
+            <div class="info-callout tip">
+                <div class="info-callout-icon"></div>
+                <div class="info-callout-text">
+                    <strong>Consistency > Intensity:</strong> 5-10 phút mỗi ngày tốt hơn 30 phút 1 lần/tuần. Build the habit first, then increase duration.
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="men-30-40.html">Nam 30-40</a>
+            <a href="men-gym-overview.html">GYM Overview</a>
+            <a href="men-gym-library.html">Exercise Library</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // ==================== DATA ====================
+        const stretchingExercises = [
+            // Upper Body (8)
+            { id: 's1', name: "Chest Doorway Stretch", nameVi: "Stretch ngực cửa sổ", muscle: "upper", target: "Pectoralis", duration: "30s", desc: "Đứng trong cửa sổ, tay đặt lên khung cửa. Nghiêng người về trước đến khi cảm thấy căng ngực.", benefits: ["Chest flexibility", "Posture improvement"] },
+            { id: 's2', name: "Tricep Overhead Stretch", nameVi: "Stretch tay sau qua đầu", muscle: "upper", target: "Triceps", duration: "30s", desc: "Đưa 1 tay qua đầu, gập khuỷu tay. Tay kia kéo khuỷu tay về sau nhẹ nhàng.", benefits: ["Tricep flexibility", "Shoulder mobility"] },
+            { id: 's3', name: "Shoulder Cross-Body Stretch", nameVi: "Stretch vai chéo", muscle: "upper", target: "Posterior Deltoid", duration: "30s", desc: "Đưa 1 tay chéo qua ngực. Tay kia kéo nhẹ về phía người.", benefits: ["Rear delt stretch", "Shoulder health"] },
+            { id: 's4', name: "Upper Trap Stretch", nameVi: "Stretch cầu vai trên", muscle: "upper", target: "Upper Trapezius", duration: "30s", desc: "Nghiêng đầu sang 1 bên, tay cùng bên kéo nhẹ đầu xuống. Giữ vai thẳng.", benefits: ["Neck relief", "Tension release"] },
+            { id: 's5', name: "Levator Scapulae Stretch", nameVi: "Stretch cơ nâng bả vai", muscle: "upper", target: "Levator Scapulae", duration: "30s", desc: "Xoay đầu 45°, cúi xuống nhìn nách. Tay kéo nhẹ đầu về phía trước.", benefits: ["Neck pain relief", "Posture correction"] },
+            { id: 's6', name: "Lat Stretch", nameVi: "Stretch lưng xô", muscle: "upper", target: "Latissimus Dorsi", duration: "30s", desc: "Quỳ gối, tay đưa lên cao, nghiêng người sang 1 bên. Cảm thấy căng bên sườn.", benefits: ["Lat flexibility", "Overhead mobility"] },
+            { id: 's7', name: "Wrist Flexor/Extensor Stretch", nameVi: "Stretch cổ tay", muscle: "upper", target: "Forearms", duration: "30s", desc: "Duỗi tay, kéo ngón tay về phía người (flexor). Sau đó kéo mu tay xuống (extensor).", benefits: ["Wrist health", "Grip strength"] },
+            { id: 's8', name: "Child's Pose", nameVi: "Tư thế em bé", muscle: "upper", target: "Lower Back, Lats", duration: "60s", desc: "Quỳ gối, ngồi lên gót chân, tay đưa về trước, trán chạm sàn. Thở sâu.", benefits: ["Full back stretch", "Relaxation"] },
+            
+            // Lower Body (10)
+            { id: 's9', name: "Hip Flexor Stretch", nameVi: "Stretch hông trước", muscle: "lower", target: "Hip Flexors", duration: "30s", desc: "Quỳ gối 1 chân, chân kia bước về trước. Đẩy hông về trước, giữ lưng thẳng.", benefits: ["Hip flexibility", "Squat depth"] },
+            { id: 's10', name: "Hamstring Stretch", nameVi: "Stretch đùi sau", muscle: "lower", target: "Hamstrings", duration: "30s", desc: "Ngồi, 1 chân duỗi, 1 chân co. Nghiêng người về phía chân duỗi, giữ lưng thẳng.", benefits: ["Hamstring flexibility", "Deadlift form"] },
+            { id: 's11', name: "Quad Stretch", nameVi: "Stretch đùi trước", muscle: "lower", target: "Quadriceps", duration: "30s", desc: "Đứng, kéo gót chân về phía mông. Giữ 2 đầu gối sát nhau, đẩy hông về trước.", benefits: ["Quad flexibility", "Knee health"] },
+            { id: 's12', name: "Glute Stretch (Pigeon)", nameVi: "Stretch mông (bồ câu)", muscle: "lower", target: "Glutes", duration: "30s", desc: "Từ plank, đưa 1 chân ra trước gập gối. Chân sau duỗi thẳng. Hạ hông xuống.", benefits: ["Glute flexibility", "Hip mobility"] },
+            { id: 's13', name: "Calf Stretch", nameVi: "Stretch bắp chân", muscle: "lower", target: "Calves", duration: "30s", desc: "Đứng dựa tường, 1 chân ra sau, gót chân chạm đất. Đẩy hông về trước.", benefits: ["Ankle mobility", "Calf flexibility"] },
+            { id: 's14', name: "IT Band Stretch", nameVi: "Stretch dải chậu chày", muscle: "lower", target: "IT Band", duration: "30s", desc: "Đứng, chéo 1 chân ra sau. Nghiêng người sang bên chân trước. Cảm thấy căng bên hông.", benefits: ["Hip stability", "Knee pain relief"] },
+            { id: 's15', name: "Adductor Stretch", nameVi: "Stretch đùi trong", muscle: "lower", target: "Adductors", duration: "30s", desc: "Ngồi, 2 lòng bàn chân áp vào nhau, gối mở ra ngoài. Đẩy gối xuống nhẹ nhàng.", benefits: ["Inner thigh flexibility", "Squat form"] },
+            { id: 's16', name: "Piriformis Stretch", nameVi: "Stretch cơ lê", muscle: "lower", target: "Piriformis", duration: "30s", desc: "Nằm ngửa, chéo 1 chân lên chân kia. Kéo chân dưới về phía ngực.", benefits: ["Sciatica relief", "Hip mobility"] },
+            { id: 's17', name: "Lower Back Stretch", nameVi: "Stretch lưng dưới", muscle: "lower", target: "Lower Back", duration: "30s", desc: "Nằm ngửa, co 2 chân, xoay sang 1 bên. Giữ vai chạm sàn, nhìn về phía tay.", benefits: ["Back pain relief", "Spinal mobility"] },
+            { id: 's18', name: "Full Body Stretch", nameVi: "Stretch toàn thân", muscle: "lower", target: "Full Body", duration: "60s", desc: "Nằm ngửa, duỗi thẳng tay chân. Kéo dài toàn bộ cơ thể. Thở sâu và thư giãn.", benefits: ["Full body relaxation", "Recovery"] }
+        ];
+        
+        const mobilityExercises = [
+            // Hip Mobility (6)
+            { id: 'm1', name: "90/90 Hip Switch", nameVi: "Chuyển đổi hông 90/90", joint: "hip", target: "Hip Internal/External Rotation", duration: "8 reps", desc: "Ngồi, 2 chân tạo góc 90°. Xoay gối từ bên này sang bên kia. Giữ lưng thẳng.", benefits: ["Hip rotation", "Mobility"] },
+            { id: 'm2', name: "Hip CARs", nameVi: "Xoay khớp hông có kiểm soát", joint: "hip", target: "Hip Joint", duration: "5 reps", desc: "Đứng 1 chân, chân kia vẽ vòng tròn lớn nhất có thể. Chậm và kiểm soát.", benefits: ["Hip health", "Joint lubrication"] },
+            { id: 'm3', name: "World's Greatest Stretch", nameVi: "Stretch vĩ đại nhất", joint: "hip", target: "Hips, Thoracic", duration: "5 reps", desc: "Lunge sâu, tay cùng bên chạm sàn. Tay kia vươn lên trần. Xoay thân trên.", benefits: ["Full body mobility", "Dynamic stretch"] },
+            { id: 'm4', name: "Cossack Squat", nameVi: "Squat Cossack", joint: "hip", target: "Adductors, Ankles", duration: "6 reps", desc: "Đứng rộng, hạ sang 1 bên, chân kia duỗi. Giữ gót chân trụ trên sàn.", benefits: ["Lateral mobility", "Squat depth"] },
+            { id: 'm5', name: "Deep Squat Hold", nameVi: "Giữ squat sâu", joint: "hip", target: "Hips, Ankles", duration: "30s", desc: "Ngồi xổm sâu, gót trên sàn. Tay đẩy gối ra ngoài. Giữ lưng thẳng.", benefits: ["Squat mobility", "Ankle dorsiflexion"] },
+            { id: 'm6', name: "Hip Flexor CARs", nameVi: "Xoay hông trước có kiểm soát", joint: "hip", target: "Hip Flexors", duration: "5 reps", desc: "Quỳ gối, đẩy hông về trước chậm. Kiểm soát toàn bộ ROM.", benefits: ["Hip flexor mobility", "Squat form"] },
+            
+            // Shoulder Mobility (6)
+            { id: 'm7', name: "Shoulder CARs", nameVi: "Xoay vai có kiểm soát", joint: "shoulder", target: "Shoulder Joint", duration: "5 reps", desc: "Đứng, vẽ vòng tròn lớn nhất bằng cánh tay. Chậm và kiểm soát. Đổi chiều.", benefits: ["Shoulder health", "Mobility"] },
+            { id: 'm8', name: "Wall Slides", nameVi: "Trượt tay trên tường", joint: "shoulder", target: "Shoulders, Upper Back", duration: "10 reps", desc: "Dựa lưng vào tường, tay hình W. Trượt lên thành Y, giữ contact tường.", benefits: ["Overhead mobility", "Posture"] },
+            { id: 'm9', name: "Band Pull-aparts", nameVi: "Kéo band ngang", joint: "shoulder", target: "Rear Delts", duration: "15 reps", desc: "Giữ band trước ngực, kéo ra 2 bên. Siết bả vai.", benefits: ["Shoulder stability", "Posture"] },
+            { id: 'm10', name: "External Rotation", nameVi: "Xoay ngoài vai", joint: "shoulder", target: "Rotator Cuff", duration: "10 reps", desc: "Khuỷu tay sát người 90°. Xoay cẳng tay ra ngoài bằng lực rotator cuff.", benefits: ["Rotator cuff strength", "Injury prevention"] },
+            { id: 'm11', name: "Y-T-W Raises", nameVi: "Nâng tay hình Y-T-W", joint: "shoulder", target: "Rear Delts, Traps", duration: "8 reps", desc: "Cúi người, nâng tay thành hình Y, T, W. Siết bả vai.", benefits: ["Upper back strength", "Posture"] },
+            { id: 'm12', name: "Scaption Raise", nameVi: "Nâng tay chếch 30°", joint: "shoulder", target: "Supraspinatus", duration: "10 reps", desc: "Nâng tay chếch 30° về trước (scapular plane). Ngón cái hướng lên.", benefits: ["Rotator cuff health", "Shoulder stability"] },
+            
+            // Ankle Mobility (4)
+            { id: 'm13', name: "Ankle CARs", nameVi: "Xoay cổ chân có kiểm soát", joint: "ankle", target: "Ankle Joint", duration: "10 reps", desc: "Ngồi, nhấc chân. Vẽ vòng tròn lớn bằng mũi chân. Đổi chiều.", benefits: ["Ankle mobility", "Squat depth"] },
+            { id: 'm14', name: "Calf Stretch with Band", nameVi: "Stretch bắp chân với band", joint: "ankle", target: "Calves, Achilles", duration: "30s", desc: "Ngồi, band quanh bàn chân. Kéo band về phía người, giữ gối thẳng.", benefits: ["Calf flexibility", "Achilles health"] },
+            { id: 'm15', name: "Ankle Dorsiflexion", nameVi: "Gập cổ chân", joint: "ankle", target: "Ankle Dorsiflexion", duration: "10 reps", desc: "Quỳ gối, chân trước bước lên. Đẩy gối về trước qua mũi chân. Giữ gót trên sàn.", benefits: ["Squat depth", "Ankle mobility"] },
+            { id: 'm16', name: "Tibialis Raises", nameVi: "Nâng ống đồng", joint: "ankle", target: "Tibialis Anterior", duration: "15 reps", desc: "Đứng dựa tường, chân trước người. Nâng mũi chân lên cao.", benefits: ["Shin strength", "Ankle stability"] },
+            
+            // Thoracic Mobility (4)
+            { id: 'm17', name: "Thoracic Extension", nameVi: "Duỗi cột sống ngực", joint: "thoracic", target: "Thoracic Spine", duration: "10 reps", desc: "Ngồi, tay sau đầu. Ngả người ra sau qua ghế/foam roller. Thở sâu.", benefits: ["Overhead mobility", "Posture"] },
+            { id: 'm18', name: "Thread the Needle", nameVi: "Luồn kim", joint: "thoracic", target: "Thoracic Rotation", duration: "8 reps", desc: "Chống 4 điểm. Luồn 1 tay dưới người, xoay thân trên. Đổi bên.", benefits: ["Spinal rotation", "Shoulder mobility"] },
+            { id: 'm19', name: "Cat-Cow", nameVi: "Mèo-Bò", joint: "thoracic", target: "Full Spine", duration: "10 reps", desc: "Chống 4 điểm. Cong lưng lên (mèo) → võng lưng xuống (bò). Theo hơi thở.", benefits: ["Spinal mobility", "Warm-up"] },
+            { id: 'm20', name: "Open Book Stretch", nameVi: "Stretch mở sách", joint: "thoracic", target: "Thoracic Rotation", duration: "8 reps", desc: "Nằm nghiêng, 2 tay trước mặt. Mở tay trên ra sau, xoay thân trên. Nhìn theo tay.", benefits: ["Thoracic rotation", "Shoulder mobility"] }
+        ];
+        
+        const routines = {
+            cooldown: [
+                { name: "Child's Pose", duration: "60s" },
+                { name: "Cat-Cow", duration: "60s" },
+                { name: "Hamstring Stretch", duration: "30s" },
+                { name: "Quad Stretch", duration: "30s" },
+                { name: "Glute Stretch (Pigeon)", duration: "30s" },
+                { name: "Chest Doorway Stretch", duration: "30s" },
+                { name: "Lower Back Stretch", duration: "30s" },
+                { name: "Full Body Stretch", duration: "60s" }
+            ],
+            bedtime: [
+                { name: "Child's Pose", duration: "60s" },
+                { name: "Cat-Cow", duration: "60s" },
+                { name: "Lower Back Stretch", duration: "30s" },
+                { name: "Piriformis Stretch", duration: "30s" },
+                { name: "Hamstring Stretch", duration: "30s" },
+                { name: "Hip Flexor Stretch", duration: "30s" },
+                { name: "Full Body Stretch", duration: "120s" }
+            ],
+            office: [
+                { name: "Neck Stretches", duration: "30s" },
+                { name: "Shoulder Rolls", duration: "30s" },
+                { name: "Chest Doorway Stretch", duration: "30s" },
+                { name: "Seated Spinal Twist", duration: "30s" },
+                { name: "Wrist Stretches", duration: "30s" }
+            ]
+        };
+        
+        // ==================== STATE ====================
+        let currentStretchFilter = 'all';
+        let currentMobilityFilter = 'all';
+        let completedExercises = new Set();
+        
+        // ==================== TAB SWITCHING ====================
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(`tab-${tab}`).classList.add('active');
+        }
+        
+        // ==================== STRETCHING ====================
+        function renderStretching() {
+            const upperGrid = document.getElementById('upperBodyGrid');
+            const lowerGrid = document.getElementById('lowerBodyGrid');
+            
+            const upperExercises = currentStretchFilter === 'all' || currentStretchFilter === 'upper' 
+                ? stretchingExercises.filter(ex => ex.muscle === 'upper')
+                : [];
+            
+            const lowerExercises = currentStretchFilter === 'all' || currentStretchFilter === 'lower'
+                ? stretchingExercises.filter(ex => ex.muscle === 'lower')
+                : [];
+            
+            upperGrid.innerHTML = upperExercises.map(ex => createExerciseCard(ex)).join('');
+            lowerGrid.innerHTML = lowerExercises.map(ex => createExerciseCard(ex)).join('');
+            
+            document.getElementById('upperBodySection').style.display = upperExercises.length > 0 ? 'block' : 'none';
+            document.getElementById('lowerBodySection').style.display = lowerExercises.length > 0 ? 'block' : 'none';
+            
+            updateProgress();
+        }
+        
+        function createExerciseCard(ex) {
+            const isCompleted = completedExercises.has(ex.id);
+            return `
+                <div class="exercise-card ${isCompleted ? 'completed' : ''}" data-muscle="${ex.muscle}" data-id="${ex.id}" onclick="toggleExercise('${ex.id}')">
+                    <div class="exercise-header">
+                        <div>
+                            <div class="exercise-name">${ex.name}</div>
+                            <div class="exercise-name-vi">${ex.nameVi}</div>
+                        </div>
+                        <div class="exercise-duration">${ex.duration}</div>
+                    </div>
+                    <div class="exercise-target">${ex.target}</div>
+                    <div class="exercise-desc">${ex.desc}</div>
+                    <div class="exercise-benefits">
+                        ${ex.benefits.map(b => `<span class="benefit-tag">${b}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function filterExercises(filter, btn) {
+            currentStretchFilter = filter;
+            document.querySelectorAll('#tab-stretching .filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderStretching();
+        }
+        
+        function toggleExercise(id) {
+            if (completedExercises.has(id)) {
+                completedExercises.delete(id);
+            } else {
+                completedExercises.add(id);
+            }
+            saveProgress();
+            renderStretching();
+        }
+        
+        function updateProgress() {
+            const total = stretchingExercises.length;
+            const completed = Array.from(completedExercises).filter(id => 
+                stretchingExercises.some(ex => ex.id === id)
+            ).length;
+            const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+            
+            document.getElementById('completedCount').textContent = completed;
+            document.getElementById('percentComplete').textContent = percent + '%';
+            document.getElementById('progressFill').style.width = percent + '%';
+        }
+        
+        function resetProgress() {
+            if (!confirm('Reset tiến độ stretching hôm nay?')) return;
+            completedExercises.clear();
+            saveProgress();
+            renderStretching();
+        }
+        
+        function saveProgress() {
+            const today = new Date().toISOString().split('T')[0];
+            localStorage.setItem('fit30_recovery_progress', JSON.stringify({
+                date: today,
+                completed: Array.from(completedExercises)
+            }));
+        }
+        
+        function loadProgress() {
+            const saved = localStorage.getItem('fit30_recovery_progress');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    const today = new Date().toISOString().split('T')[0];
+                    if (data.date === today) {
+                        completedExercises = new Set(data.completed);
+                    }
+                } catch (e) {}
+            }
+        }
+        
+        // ==================== MOBILITY ====================
+        function renderMobility() {
+            const sections = {
+                hip: document.getElementById('hipMobilityGrid'),
+                shoulder: document.getElementById('shoulderMobilityGrid'),
+                ankle: document.getElementById('ankleMobilityGrid'),
+                thoracic: document.getElementById('thoracicMobilityGrid')
+            };
+            
+            Object.keys(sections).forEach(joint => {
+                const exercises = currentMobilityFilter === 'all' || currentMobilityFilter === joint
+                    ? mobilityExercises.filter(ex => ex.joint === joint)
+                    : [];
+                
+                sections[joint].innerHTML = exercises.map(ex => createMobilityCard(ex)).join('');
+                document.getElementById(`${joint}MobilitySection`).style.display = exercises.length > 0 ? 'block' : 'none';
+            });
+        }
+        
+        function createMobilityCard(ex) {
+            return `
+                <div class="exercise-card" data-muscle="specific">
+                    <div class="exercise-header">
+                        <div>
+                            <div class="exercise-name">${ex.name}</div>
+                            <div class="exercise-name-vi">${ex.nameVi}</div>
+                        </div>
+                        <div class="exercise-duration">${ex.duration}</div>
+                    </div>
+                    <div class="exercise-target">${ex.target}</div>
+                    <div class="exercise-desc">${ex.desc}</div>
+                    <div class="exercise-benefits">
+                        ${ex.benefits.map(b => `<span class="benefit-tag">${b}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function filterMobility(filter, btn) {
+            currentMobilityFilter = filter;
+            document.querySelectorAll('#tab-mobility .filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderMobility();
+        }
+        
+        // ==================== ROUTINES ====================
+        function renderRoutines() {
+            Object.keys(routines).forEach(routineKey => {
+                const container = document.getElementById(`${routineKey}Routine`);
+                const routine = routines[routineKey];
+                
+                container.innerHTML = routine.map((item, idx) => `
+                    <div class="routine-item">
+                        <div class="routine-number">${idx + 1}</div>
+                        <div class="routine-info">
+                            <div class="routine-name">${item.name}</div>
+                            <div class="routine-duration">Giữ ${item.duration}</div>
+                        </div>
+                        <div class="routine-time">${item.duration}</div>
+                    </div>
+                `).join('');
+            });
+        }
+        
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProgress();
+            renderStretching();
+            renderMobility();
+            renderRoutines();
+        });
+    </script>
+</body>
+</html>
