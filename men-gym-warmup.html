@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warm-up Library - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #4A90E2;
+            --primary-purple: #9B59B6;
+            --primary-orange: #F39C12;
+            --primary-green: #50C878;
+            --primary-red: #E74C3C;
+            --primary-teal: #1ABC9C;
+            
+            --text-dark: #1A202C;
+            --text-medium: #4A5568;
+            --text-light: #718096;
+            --bg-main: #F7FAFC;
+            --bg-card: #FFFFFF;
+            --border-soft: #E2E8F0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 16px 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover { color: var(--primary-blue); }
+        
+        /* Hero */
+        .hero {
+            padding: 60px 40px 40px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 100%);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.78rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 16px;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        
+        .hero p {
+            font-size: 1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+        
+        .stat-item:nth-child(1) .stat-value { color: var(--primary-blue); }
+        .stat-item:nth-child(2) .stat-value { color: var(--primary-purple); }
+        .stat-item:nth-child(3) .stat-value { color: var(--primary-orange); }
+        
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px 50px;
+        }
+        
+        /* Selector Section */
+        .selector-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .section-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+        }
+        
+        .selector-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+        
+        .selector-btn {
+            background: var(--bg-card);
+            border: 2px solid var(--border-soft);
+            border-radius: 14px;
+            padding: 20px 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .selector-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        
+        .selector-btn.active {
+            border-color: transparent;
+            color: white;
+        }
+        
+        .selector-btn[data-category="upper"].active { background: linear-gradient(135deg, #4A90E2 0%, #74B9FF 100%); }
+        .selector-btn[data-category="lower"].active { background: linear-gradient(135deg, #50C878 0%, #81ECEC 100%); }
+        .selector-btn[data-category="full"].active { background: linear-gradient(135deg, #F39C12 0%, #FDCB6E 100%); }
+        .selector-btn[data-category="mobility"].active { background: linear-gradient(135deg, #9B59B6 0%, #C39BD3 100%); }
+        .selector-btn[data-category="quick"].active { background: linear-gradient(135deg, #E74C3C 0%, #F1948A 100%); }
+        
+        .selector-btn:not(.active) .selector-title { color: var(--text-dark); }
+        .selector-btn:not(.active) .selector-desc { color: var(--text-light); }
+        .selector-btn.active .selector-title,
+        .selector-btn.active .selector-desc { color: white; }
+        
+        .selector-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .selector-desc {
+            font-size: 0.75rem;
+            line-height: 1.3;
+        }
+        
+        /* Progress Section */
+        .progress-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .progress-info {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .progress-label {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: var(--bg-main);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            border-radius: 5px;
+            transition: width 0.4s ease;
+        }
+        
+        .progress-stats {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .progress-stat {
+            text-align: center;
+        }
+        
+        .progress-stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .progress-stat-label {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        .btn-reset {
+            padding: 10px 20px;
+            background: var(--bg-main);
+            border: 1px solid var(--border-soft);
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            transition: all 0.2s;
+        }
+        
+        .btn-reset:hover {
+            background: var(--border-soft);
+            color: var(--text-dark);
+        }
+        
+        /* Exercise Grid */
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 50px;
+        }
+        
+        .exercise-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 4px solid;
+            position: relative;
+        }
+        
+        .exercise-card[data-category="upper"] { border-left-color: var(--primary-blue); }
+        .exercise-card[data-category="lower"] { border-left-color: var(--primary-green); }
+        .exercise-card[data-category="full"] { border-left-color: var(--primary-orange); }
+        .exercise-card[data-category="mobility"] { border-left-color: var(--primary-purple); }
+        .exercise-card[data-category="quick"] { border-left-color: var(--primary-red); }
+        
+        .exercise-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+        }
+        
+        .exercise-card.completed {
+            opacity: 0.7;
+        }
+        
+        .exercise-card.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 28px;
+            height: 28px;
+            background: var(--primary-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        
+        .exercise-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            padding-right: 30px;
+        }
+        
+        .exercise-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+        
+        .exercise-name-vi {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+        
+        .exercise-duration {
+            font-size: 0.72rem;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .exercise-card[data-category="upper"] .exercise-duration { background: #E8F0FF; color: var(--primary-blue); }
+        .exercise-card[data-category="lower"] .exercise-duration { background: #E8F8EE; color: var(--primary-green); }
+        .exercise-card[data-category="full"] .exercise-duration { background: #FFF3E0; color: var(--primary-orange); }
+        .exercise-card[data-category="mobility"] .exercise-duration { background: #F0E8FF; color: var(--primary-purple); }
+        .exercise-card[data-category="quick"] .exercise-duration { background: #FFE8E8; color: var(--primary-red); }
+        
+        .exercise-muscles {
+            font-size: 0.78rem;
+            color: var(--text-medium);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .exercise-desc {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        /* Tips Section */
+        .tips-section {
+            margin-bottom: 50px;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        
+        .tip-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-top: 3px solid;
+        }
+        
+        .tip-card:nth-child(1) { border-top-color: var(--primary-blue); }
+        .tip-card:nth-child(2) { border-top-color: var(--primary-purple); }
+        .tip-card:nth-child(3) { border-top-color: var(--primary-orange); }
+        .tip-card:nth-child(4) { border-top-color: var(--primary-green); }
+        
+        .tip-number {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            text-align: center;
+            line-height: 28px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .tip-card:nth-child(1) .tip-number { background: var(--primary-blue); }
+        .tip-card:nth-child(2) .tip-number { background: var(--primary-purple); }
+        .tip-card:nth-child(3) .tip-number { background: var(--primary-orange); }
+        .tip-card:nth-child(4) .tip-number { background: var(--primary-green); }
+        
+        .tip-card h4 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+        
+        .tip-card p {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-soft);
+            padding: 36px 40px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 14px;
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-blue);
+        }
+        
+        .footer-bottom {
+            color: var(--text-light);
+            font-size: 0.82rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .selector-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .tips-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 14px 20px; }
+            .hero { padding: 40px 20px 30px; }
+            .hero h1 { font-size: 2rem; }
+            .main-container { padding: 0 20px 40px; }
+            .selector-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .progress-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .progress-stats {
+                justify-content: space-around;
+            }
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="men-gym-overview.html" class="back-link">← Quay lại GYM Overview</a>
+    </header>
+    
+    <section class="hero">
+        <span class="hero-badge">WARM-UP LIBRARY</span>
+        <h1>Thư Viện <span>Warm-up</span></h1>
+        <div class="hero-subtitle">25+ bài khởi động cho mọi buổi tập</div>
+        <p>Khởi động đúng cách giúp giảm chấn thương 50%, tăng hiệu suất tập luyện và cải thiện phạm vi chuyển động.</p>
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-value">25+</div>
+                <div class="stat-label">Moves</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">5</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">5-10'</div>
+                <div class="stat-label">Thời gian</div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="main-container">
+        
+        <!-- Selector Section -->
+        <div class="selector-section">
+            <div class="section-header">
+                <h2 class="section-title">Chọn loại warm-up</h2>
+                <p class="section-subtitle">Phân loại theo nhóm cơ và mục đích</p>
+            </div>
+            
+            <div class="selector-grid">
+                <div class="selector-btn active" data-category="upper" onclick="selectCategory('upper', this)">
+                    <div class="selector-title">Upper Body</div>
+                    <div class="selector-desc">Ngực, lưng, vai, tay</div>
+                </div>
+                
+                <div class="selector-btn" data-category="lower" onclick="selectCategory('lower', this)">
+                    <div class="selector-title">Lower Body</div>
+                    <div class="selector-desc">Chân, mông, hông</div>
+                </div>
+                
+                <div class="selector-btn" data-category="full" onclick="selectCategory('full', this)">
+                    <div class="selector-title">Full Body</div>
+                    <div class="selector-desc">Toàn thân + cardio</div>
+                </div>
+                
+                <div class="selector-btn" data-category="mobility" onclick="selectCategory('mobility', this)">
+                    <div class="selector-title">Mobility Focus</div>
+                    <div class="selector-desc">Khớp & linh hoạt</div>
+                </div>
+                
+                <div class="selector-btn" data-category="quick" onclick="selectCategory('quick', this)">
+                    <div class="selector-title">Quick</div>
+                    <div class="selector-desc">5 phút cho ngày bận</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Progress Section -->
+        <div class="progress-section">
+            <div class="progress-info">
+                <div class="progress-label">Tiến độ warm-up hôm nay</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+            </div>
+            
+            <div class="progress-stats">
+                <div class="progress-stat">
+                    <div class="progress-stat-value" id="completedCount">0</div>
+                    <div class="progress-stat-label">Đã làm</div>
+                </div>
+                <div class="progress-stat">
+                    <div class="progress-stat-value" id="totalCount">0</div>
+                    <div class="progress-stat-label">Tổng</div>
+                </div>
+                <div class="progress-stat">
+                    <div class="progress-stat-value" id="percentComplete">0%</div>
+                    <div class="progress-stat-label">Hoàn thành</div>
+                </div>
+            </div>
+            
+            <button class="btn-reset" onclick="resetProgress()">Reset hôm nay</button>
+        </div>
+        
+        <!-- Exercise Grid -->
+        <div class="exercise-grid" id="exerciseGrid"></div>
+        
+        <!-- Tips Section -->
+        <div class="tips-section">
+            <div class="section-header">
+                <h2 class="section-title">Nguyên tắc warm-up</h2>
+                <p class="section-subtitle">4 điều cần nhớ để khởi động hiệu quả</p>
+            </div>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-number">1</div>
+                    <h4>Không stretch tĩnh trước tập</h4>
+                    <p>Static stretching (giữ 30s+) trước tập làm giảm sức mạnh cơ bắp 5-10%. Chỉ dùng dynamic stretching và mobility work trước tập.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-number">2</div>
+                    <h4>Tăng dần cường độ</h4>
+                    <p>Bắt đầu với cardio nhẹ 3-5 phút, sau đó đến mobility, rồi activation. Đừng bắt đầu với động tác quá mạnh ngay.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-number">3</div>
+                    <h4>Focus vào vùng sẽ tập</h4>
+                    <p>Nếu tập Upper, focus vào shoulder mobility và thoracic spine. Nếu tập Lower, focus vào hip và ankle mobility.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-number">4</div>
+                    <h4>Nghe cơ thể</h4>
+                    <p>Nếu thấy đau hoặc khó chịu bất thường, dừng lại và điều chỉnh. Warm-up không nên gây đau. "No pain, no gain" KHÔNG áp dụng cho warm-up.</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="men-30-40.html">Nam 30-40</a>
+            <a href="men-gym-overview.html">GYM Overview</a>
+            <a href="men-gym-library.html">Exercise Library</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // ==================== EXERCISE DATABASE ====================
+        const warmupExercises = [
+            // UPPER BODY (8)
+            { id: 'u1', name: "Arm Circles", nameVi: "Xoay cánh tay", category: "upper", duration: "30s", muscles: "Shoulders", desc: "Đứng thẳng, dang tay sang ngang. Xoay tròn nhỏ rồi to dần. Đổi chiều sau 15s." },
+            { id: 'u2', name: "Band Pull-aparts", nameVi: "Kéo band ngang", category: "upper", duration: "15 reps", muscles: "Rear Delts, Mid Back", desc: "Giữ band trước ngực, 2 tay rộng bằng vai. Kéo band ra 2 bên bằng lực vai sau. Siết bả vai." },
+            { id: 'u3', name: "External Rotation", nameVi: "Xoay ngoài vai", category: "upper", duration: "10 reps", muscles: "Rotator Cuff", desc: "Đứng bên cable/band, khuỷu tay sát người 90°. Xoay cẳng tay ra ngoài bằng lực rotator cuff." },
+            { id: 'u4', name: "Wall Slides", nameVi: "Trượt tay trên tường", category: "upper", duration: "10 reps", muscles: "Shoulders, Upper Back", desc: "Đứng dựa lưng vào tường, tay tạo hình chữ W. Trượt tay lên thành chữ Y, giữ contact với tường." },
+            { id: 'u5', name: "Scapular Push-ups", nameVi: "Push-up bả vai", category: "upper", duration: "12 reps", muscles: "Serratus Anterior", desc: "Tư thế plank cao. Không gập khuỷu tay, chỉ đẩy bả vai ra trước và ép vào nhau." },
+            { id: 'u6', name: "Shoulder Dislocates", nameVi: "Xoay vai qua đầu", category: "upper", duration: "10 reps", muscles: "Shoulders, Chest", desc: "Giữ stick/band rộng, đưa từ trước ra sau đầu qua lưng. Giữ tay thẳng suốt chuyển động." },
+            { id: 'u7', name: "Cat-Cow", nameVi: "Mèo-Bò", category: "upper", duration: "10 reps", muscles: "Spine, Core", desc: "Chống 4 điểm. Cong lưng lên (mèo) hít vào → võng lưng xuống (bò) thở ra. Di chuyển theo hơi thở." },
+            { id: 'u8', name: "Thoracic Rotation", nameVi: "Xoay cột sống ngực", category: "upper", duration: "8 reps", muscles: "Thoracic Spine", desc: "Chống 4 điểm, 1 tay sau đầu. Xoay khuỷu tay lên trần, nhìn theo tay. Đổi bên." },
+            
+            // LOWER BODY (8)
+            { id: 'l1', name: "Hip Circles", nameVi: "Xoay hông", category: "lower", duration: "10 reps", muscles: "Hips", desc: "Đứng 1 chân, chân kia co. Xoay gối theo vòng tròn. Đổi chiều và đổi chân." },
+            { id: 'l2', name: "Leg Swings", nameVi: "Đu chân", category: "lower", duration: "10 reps", muscles: "Hips, Hamstrings", desc: "Đứng dựa tường, đu chân ra trước-sau. Giữ thân trên ổn định. Đổi chân." },
+            { id: 'l3', name: "Glute Bridges", nameVi: "Cầu mông", category: "lower", duration: "15 reps", muscles: "Glutes, Hamstrings", desc: "Nằm ngửa, chân co. Đẩy hông lên bằng lực mông. Siết mông ở đỉnh 1-2 giây." },
+            { id: 'l4', name: "Bodyweight Squats", nameVi: "Squat không tạ", category: "lower", duration: "15 reps", muscles: "Quads, Glutes", desc: "Đứng rộng bằng vai. Hạ xuống như ngồi ghế, đầu gối theo mũi chân. Đẩy lên bằng gót chân." },
+            { id: 'l5', name: "Walking Lunges", nameVi: "Lunge đi tới", category: "lower", duration: "10 reps", muscles: "Quads, Glutes, Hips", desc: "Bước chân trước, hạ người xuống. Đầu gối sau gần chạm đất. Đẩy lên và bước chân kia." },
+            { id: 'l6', name: "Ankle Circles", nameVi: "Xoay cổ chân", category: "lower", duration: "10 reps", muscles: "Ankles", desc: "Ngồi hoặc đứng, nhấc 1 chân. Xoay cổ chân theo vòng tròn. Đổi chiều và đổi chân." },
+            { id: 'l7', name: "World's Greatest Stretch", nameVi: "Stretch vĩ đại nhất", category: "lower", duration: "5 reps", muscles: "Hips, Thoracic, Hamstrings", desc: "Bước chân trước vào lunge sâu. Tay cùng bên chạm sàn. Tay kia vươn lên trần. Xoay thân trên." },
+            { id: 'l8', name: "Inchworms", nameVi: "Sâu đo", category: "lower", duration: "6 reps", muscles: "Hamstrings, Shoulders, Core", desc: "Đứng, cúi xuống chạm sàn. Đi tay ra trước đến plank. Đi chân về phía tay. Lặp lại." },
+            
+            // FULL BODY (6)
+            { id: 'f1', name: "Jumping Jacks", nameVi: "Nhảy dang tay chân", category: "full", duration: "30s", muscles: "Full Body, Cardio", desc: "Nhảy dang tay chân, sau đó về tư thế đứng. Duy trì nhịp độ vừa phải." },
+            { id: 'f2', name: "High Knees", nameVi: "Nâng gối cao", category: "full", duration: "30s", muscles: "Hip Flexors, Cardio", desc: "Chạy tại chỗ, nâng gối cao đến ngang hông. Giữ thân trên thẳng." },
+            { id: 'f3', name: "Butt Kicks", nameVi: "Đá gót chạm mông", category: "full", duration: "30s", muscles: "Quads, Hamstrings", desc: "Chạy tại chỗ, gót chân đá về phía mông. Giữ nhịp độ nhanh." },
+            { id: 'f4', name: "Mountain Climbers", nameVi: "Leo núi", category: "full", duration: "30s", muscles: "Core, Hip Flexors", desc: "Tư thế plank cao. Kéo gối về ngực luân phiên nhanh như chạy. Giữ hông ổn định." },
+            { id: 'f5', name: "Bear Crawls", nameVi: "Bò gấu", category: "full", duration: "20m", muscles: "Full Body, Mobility", desc: "Chống 4 điểm, gối cách sàn 2-5cm. Bò về trước bằng tay và chân đối diện." },
+            { id: 'f6', name: "Inchworms", nameVi: "Sâu đo", category: "full", duration: "6 reps", muscles: "Hamstrings, Shoulders, Core", desc: "Đứng, cúi xuống chạm sàn. Đi tay ra trước đến plank. Đi chân về phía tay." },
+            
+            // MOBILITY FOCUS (6)
+            { id: 'm1', name: "90/90 Hip Switch", nameVi: "Chuyển đổi hông 90/90", category: "mobility", duration: "8 reps", muscles: "Hip Internal/External Rotation", desc: "Ngồi, 2 chân tạo góc 90°. Xoay gối từ bên này sang bên kia. Giữ lưng thẳng." },
+            { id: 'm2', name: "Cossack Squat", nameVi: "Squat Cossack", category: "mobility", duration: "6 reps", muscles: "Adductors, Ankles", desc: "Đứng rộng hơn vai. Hạ người sang 1 bên, chân kia duỗi thẳng. Giữ gót chân trụ trên sàn." },
+            { id: 'm3', name: "Thread the Needle", nameVi: "Luồn kim", category: "mobility", duration: "8 reps", muscles: "Thoracic Spine, Shoulders", desc: "Chống 4 điểm. Luồn 1 tay dưới người, xoay thân trên. Đổi bên." },
+            { id: 'm4', name: "Pigeon Pose", nameVi: "Tư thế bồ câu", category: "mobility", duration: "30s", muscles: "Hip Flexors, Glutes", desc: "Từ plank, đưa chân ra trước gập gối. Chân sau duỗi thẳng. Hạ hông xuống." },
+            { id: 'm5', name: "Deep Squat Hold", nameVi: "Giữ squat sâu", category: "mobility", duration: "30s", muscles: "Ankles, Hips, Thoracic", desc: "Ngồi xổm sâu, gót chân trên sàn. Tay đẩy gối ra ngoài. Giữ lưng thẳng." },
+            { id: 'm6', name: "Shoulder CARs", nameVi: "Xoay khớp vai có kiểm soát", category: "mobility", duration: "5 reps", muscles: "Shoulder Joint", desc: "Đứng thẳng. Vẽ vòng tròn lớn nhất có thể bằng cánh tay. Chậm và kiểm soát. Đổi chiều." },
+            
+            // QUICK (5)
+            { id: 'q1', name: "Jumping Jacks", nameVi: "Nhảy dang tay chân", category: "quick", duration: "30s", muscles: "Full Body", desc: "Nhảy dang tay chân, duy trì nhịp độ vừa phải." },
+            { id: 'q2', name: "Arm Circles", nameVi: "Xoay cánh tay", category: "quick", duration: "20s", muscles: "Shoulders", desc: "Xoay tay tròn, nhỏ rồi to dần. Đổi chiều." },
+            { id: 'q3', name: "Bodyweight Squats", nameVi: "Squat không tạ", category: "quick", duration: "15 reps", muscles: "Legs, Glutes", desc: "Squat nhanh, kiểm soát. Đầu gối theo mũi chân." },
+            { id: 'q4', name: "Inchworms", nameVi: "Sâu đo", category: "quick", duration: "5 reps", muscles: "Full Body", desc: "Cúi xuống, đi tay ra plank, đi chân về. Nhanh và mượt." },
+            { id: 'q5', name: "High Knees", nameVi: "Nâng gối cao", category: "quick", duration: "30s", muscles: "Cardio, Hips", desc: "Chạy tại chỗ, nâng gối cao. Hít thở theo nhịp." }
+        ];
+        
+        // ==================== STATE ====================
+        let currentCategory = 'upper';
+        let completedExercises = new Set();
+        
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProgress();
+            renderExercises();
+            updateProgress();
+        });
+        
+        // ==================== SELECTOR ====================
+        function selectCategory(category, btn) {
+            currentCategory = category;
+            
+            document.querySelectorAll('.selector-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            renderExercises();
+        }
+        
+        // ==================== RENDER ====================
+        function renderExercises() {
+            const grid = document.getElementById('exerciseGrid');
+            const filtered = warmupExercises.filter(ex => ex.category === currentCategory);
+            
+            document.getElementById('totalCount').textContent = filtered.length;
+            
+            grid.innerHTML = filtered.map(ex => {
+                const isCompleted = completedExercises.has(ex.id);
+                return `
+                    <div class="exercise-card ${isCompleted ? 'completed' : ''}" data-category="${ex.category}" data-id="${ex.id}" onclick="toggleExercise('${ex.id}')">
+                        <div class="exercise-header">
+                            <div>
+                                <div class="exercise-name">${ex.name}</div>
+                                <div class="exercise-name-vi">${ex.nameVi}</div>
+                            </div>
+                            <div class="exercise-duration">${ex.duration}</div>
+                        </div>
+                        <div class="exercise-muscles">${ex.muscles}</div>
+                        <div class="exercise-desc">${ex.desc}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // ==================== PROGRESS ====================
+        function toggleExercise(id) {
+            if (completedExercises.has(id)) {
+                completedExercises.delete(id);
+            } else {
+                completedExercises.add(id);
+            }
+            
+            saveProgress();
+            renderExercises();
+            updateProgress();
+        }
+        
+        function updateProgress() {
+            const filtered = warmupExercises.filter(ex => ex.category === currentCategory);
+            const completed = filtered.filter(ex => completedExercises.has(ex.id)).length;
+            const total = filtered.length;
+            const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+            
+            document.getElementById('completedCount').textContent = completed;
+            document.getElementById('percentComplete').textContent = percent + '%';
+            document.getElementById('progressFill').style.width = percent + '%';
+        }
+        
+        function resetProgress() {
+            if (!confirm('Reset tiến độ warm-up hôm nay?')) return;
+            
+            completedExercises.clear();
+            saveProgress();
+            renderExercises();
+            updateProgress();
+        }
+        
+        // ==================== STORAGE ====================
+        function saveProgress() {
+            const today = new Date().toISOString().split('T')[0];
+            localStorage.setItem('fit30_warmup_progress', JSON.stringify({
+                date: today,
+                completed: Array.from(completedExercises)
+            }));
+        }
+        
+        function loadProgress() {
+            const saved = localStorage.getItem('fit30_warmup_progress');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    const today = new Date().toISOString().split('T')[0];
+                    
+                    if (data.date === today) {
+                        completedExercises = new Set(data.completed);
+                    }
+                } catch (e) {}
+            }
+        }
+    </script>
+</body>
+</html>
