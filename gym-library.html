@@ -987,64 +987,69 @@
         }
         
         function openModal(id) {
-            const ex = exerciseDatabase.find(e => e.id === id);
-            if (!ex) return;
-            
-            const categoryColors = {
-                chest: '#E8734A', back: '#50C878', shoulder: '#9B59B6',
-                legs: '#1ABC9C', arms: '#F39C12', core: '#E74C3C', cardio: '#3498DB'
-            };
-            
-            const modal = document.getElementById('modal');
-            modal.style.setProperty('--modal-color', categoryColors[ex.category]);
-            
-            document.getElementById('modalTitle').textContent = ex.name;
-            document.getElementById('modalTitleVi').textContent = ex.nameVi;
-            
-            document.getElementById('modalMeta').innerHTML = `
-                <div class="modal-meta-item">🎯 ${ex.target}</div>
-                <div class="modal-meta-item">🔗 ${ex.secondary}</div>
-                <div class="modal-meta-item">⚙️ ${ex.equipment}</div>
-                <div class="modal-meta-item">⭐ ${ex.level}</div>
-                <div class="modal-meta-item">📊 ${ex.type}</div>
-                <div class="modal-meta-item">️ Tempo: ${ex.tempo}</div>
-                <div class="modal-meta-item">💪 RPE: ${ex.rpe}</div>
-            `;
-            
-            const techCues = ex.cues.filter(c => !c.startsWith('🌬️'));
-            const breathCues = ex.cues.filter(c => c.startsWith('🌬️'));
-            
-            const alternativesHtml = Object.keys(ex.alternatives).map(situation => `
-                <div class="alternative-group">
-                    <div class="alternative-label">${situation}</div>
-                    <div class="alternative-options">
-                        ${ex.alternatives[situation].map(alt => `<div class="alternative-chip">${alt}</div>`).join('')}
-                    </div>
-                </div>
-            `).join('');
-            
-            document.getElementById('modalBody').innerHTML = `
-                <div class="modal-section">
-                    <h3><span class="section-indicator"></span>Kỹ thuật chính</h3>
-                    <ul class="cue-list">${techCues.map(c => `<li>${c}</li>`).join('')}</ul>
-                </div>
-                <div class="modal-section">
-                    <h3><span class="section-indicator"></span>🌬️ Hướng dẫn hít thở</h3>
-                    <ul class="cue-list">${breathCues.map(c => `<li class="breathing">${c.replace('🌬️ ', '')}</li>`).join('')}</ul>
-                </div>
-                <div class="modal-section">
-                    <h3><span class="section-indicator"></span>Lỗi thường gặp</h3>
-                    <ul class="cue-list mistake-list">${ex.mistakes.map(m => `<li>${m}</li>`).join('')}</ul>
-                </div>
-                <div class="modal-section">
-                    <h3><span class="section-indicator"></span>Bài tập thay thế</h3>
-                    <div class="alternatives-section">${alternativesHtml}</div>
-                </div>
-            `;
-            
-            document.getElementById('modalOverlay').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+    const ex = exerciseDatabase.find(e => e.id === id);
+    if (!ex) return;
+    
+    const categoryColors = {
+        chest: '#E8734A', back: '#50C878', shoulder: '#9B59B6',
+        legs: '#1ABC9C', arms: '#F39C12', core: '#E74C3C', cardio: '#3498DB'
+    };
+    
+    const modal = document.getElementById('modal');
+    modal.style.setProperty('--modal-color', categoryColors[ex.category]);
+    
+    document.getElementById('modalTitle').textContent = ex.name;
+    document.getElementById('modalTitleVi').textContent = ex.nameVi;
+    
+    document.getElementById('modalMeta').innerHTML = `
+        <div class="modal-meta-item">🎯 ${ex.target}</div>
+        <div class="modal-meta-item">🔗 ${ex.secondary || ''}</div>
+        <div class="modal-meta-item">⚙️ ${ex.equipment}</div>
+        <div class="modal-meta-item">⭐ ${ex.level}</div>
+        <div class="modal-meta-item">📊 ${ex.type}</div>
+        <div class="modal-meta-item">⏱️ Tempo: ${ex.tempo}</div>
+        <div class="modal-meta-item">💪 RPE: ${ex.rpe}</div>
+    `;
+    
+    const alternativesHtml = Object.keys(ex.alternatives).map(situation => `
+        <div class="alternative-group">
+            <div class="alternative-label">${situation}</div>
+            <div class="alternative-options">
+                ${ex.alternatives[situation].map(alt => `<div class="alternative-chip">${alt}</div>`).join('')}
+            </div>
+        </div>
+    `).join('');
+    
+    // FIX: Đọc từ ex.breathing thay vì filter từ ex.cues
+    const breathCues = ex.breathing || [];
+    
+    document.getElementById('modalBody').innerHTML = `
+        <div class="modal-section">
+            <h3><span class="section-indicator"></span>Kỹ thuật chính</h3>
+            <ul class="cue-list">${ex.cues.map(c => `<li>${c}</li>`).join('')}</ul>
+        </div>
+        <div class="modal-section">
+            <h3><span class="section-indicator"></span>🌬️ Hướng dẫn hít thở</h3>
+            <ul class="cue-list">
+                ${breathCues.length > 0 
+                    ? breathCues.map(c => `<li class="breathing">${c}</li>`).join('')
+                    : '<li class="breathing">Hít thở đều, tự nhiên trong suốt bài tập</li>'
+                }
+            </ul>
+        </div>
+        <div class="modal-section">
+            <h3><span class="section-indicator"></span>Lỗi thường gặp</h3>
+            <ul class="cue-list mistake-list">${ex.mistakes.map(m => `<li>${m}</li>`).join('')}</ul>
+        </div>
+        <div class="modal-section">
+            <h3><span class="section-indicator"></span>Bài tập thay thế</h3>
+            <div class="alternatives-section">${alternativesHtml}</div>
+        </div>
+    `;
+    
+    document.getElementById('modalOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
         
         function closeModal() {
             document.getElementById('modalOverlay').classList.remove('active');
