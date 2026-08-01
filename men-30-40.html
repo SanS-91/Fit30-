@@ -5,63 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nam 30-40 - Fit30+</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --text-dark: #2D3436;
-            --text-medium: #636E72;
-            --text-light: #95A5A6;
-            --white: #FFFFFF;
-            --bg-primary: #F8F9FA;
-            --bg-soft: #F1F3F5;
-            --border-soft: #DFE4E8;
+            --gym-primary: #4A90E2;
+            --gym-light: #E8F0FF;
+            --gym-bg: #F5F8FF;
             
-            /* Male palette - Strong & Professional */
-            --primary: #2C5F8A;
-            --primary-soft: #D4E4F4;
-            --primary-dark: #1E4263;
-            --primary-gradient: linear-gradient(135deg, #D4E4F4 0%, #2C5F8A 100%);
+            --nutrition-primary: #F39C12;
+            --nutrition-light: #FFF3E0;
+            --nutrition-bg: #FFFAF0;
             
-            --secondary: #6B7B8C;
-            --secondary-soft: #E8ECEF;
-            --secondary-gradient: linear-gradient(135deg, #E8ECEF 0%, #6B7B8C 100%);
+            --lifestyle-primary: #50C878;
+            --lifestyle-light: #E8F8EE;
+            --lifestyle-bg: #F0FFF4;
             
-            --accent: #D4A850;
-            --accent-soft: #F5ECD4;
-            --accent-gradient: linear-gradient(135deg, #F5ECD4 0%, #D4A850 100%);
-            
-            --success: #4A7C59;
-            --success-soft: #D4E8D8;
-            --success-gradient: linear-gradient(135deg, #D4E8D8 0%, #4A7C59 100%);
-            
-            --main-gradient: linear-gradient(135deg, #2C5F8A 0%, #6B7B8C 50%, #D4A850 100%);
+            --text-dark: #1A202C;
+            --text-medium: #4A5568;
+            --text-light: #718096;
+            --bg-main: #F7FAFC;
+            --bg-card: #FFFFFF;
+            --border-soft: #E2E8F0;
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(180deg, #F8F9FA 0%, #E8ECEF 50%, #F5ECD4 100%);
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-main);
             color: var(--text-dark);
-            line-height: 1.6;
+            line-height: 1.5;
             min-height: 100vh;
         }
         
-        h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
-            color: var(--text-dark);
-        }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
         
+        /* Header */
         .header {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(15px);
-            padding: 18px 40px;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            padding: 16px 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -72,95 +57,121 @@
         
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 700;
-            background: var(--main-gradient);
+            background: linear-gradient(135deg, #4A90E2 0%, #50C878 50%, #F39C12 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
             text-decoration: none;
         }
         
         .back-link {
             color: var(--text-medium);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             transition: color 0.3s;
             font-weight: 500;
         }
         
-        .back-link:hover {
-            color: var(--primary);
-        }
+        .back-link:hover { color: var(--gym-primary); }
         
+        /* Hero */
         .hero {
-            padding: 70px 40px 50px;
+            padding: 60px 40px 40px;
             text-align: center;
-            max-width: 950px;
+            max-width: 900px;
             margin: 0 auto;
         }
         
         .hero-badge {
             display: inline-block;
-            background: var(--primary-gradient);
+            background: linear-gradient(135deg, #4A90E2 0%, #F39C12 100%);
             color: white;
-            padding: 7px 22px;
+            padding: 6px 20px;
             border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            margin-bottom: 22px;
-            letter-spacing: 1.5px;
-            box-shadow: 0 4px 15px rgba(44,95,138,0.3);
+            font-weight: 600;
+            font-size: 0.78rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
         }
         
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 18px;
+            font-size: 2.8rem;
+            margin-bottom: 16px;
+            color: var(--text-dark);
             line-height: 1.2;
         }
         
         .hero h1 span {
-            background: var(--primary-gradient);
+            background: linear-gradient(135deg, #4A90E2 0%, #F39C12 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.35rem;
-            color: var(--text-dark);
-            font-weight: 600;
-            margin-bottom: 15px;
         }
         
         .hero p {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: var(--text-medium);
-            max-width: 680px;
+            max-width: 600px;
             margin: 0 auto;
+            line-height: 1.6;
         }
         
-        .main-wrapper {
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gym-primary);
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        /* Main Container */
+        .main-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 0 40px 50px;
         }
         
-        /* Module Cards */
+        /* Modules Grid */
         .modules-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
             margin-bottom: 50px;
         }
         
+        /* Module Card */
         .module-card {
-            background: white;
-            border-radius: 24px;
-            padding: 35px 30px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
-            border: 2px solid transparent;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
             position: relative;
             overflow: hidden;
         }
@@ -171,53 +182,76 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 6px;
-            background: var(--module-gradient);
+            height: 3px;
         }
         
-        .module-card.gym { --module-color: var(--primary); --module-soft: var(--primary-soft); --module-gradient: var(--primary-gradient); }
-        .module-card.nutrition { --module-color: var(--accent); --module-soft: var(--accent-soft); --module-gradient: var(--accent-gradient); }
-        .module-card.lifestyle { --module-color: var(--success); --module-soft: var(--success-soft); --module-gradient: var(--success-gradient); }
+        .module-card.gym::before { background: linear-gradient(90deg, var(--gym-primary) 0%, #74B9FF 100%); }
+        .module-card.nutrition::before { background: linear-gradient(90deg, var(--nutrition-primary) 0%, #FDCB6E 100%); }
+        .module-card.lifestyle::before { background: linear-gradient(90deg, var(--lifestyle-primary) 0%, #81ECEC 100%); }
         
-        .module-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-            border-color: var(--module-soft);
+        .module-title {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+            letter-spacing: 0.5px;
         }
         
-        .module-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: 16px;
-            background: var(--module-gradient);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-        }
-        
-        .module-card h2 {
-            font-size: 1.8rem;
-            margin-bottom: 12px;
-        }
-        
-        .module-card > p {
+        .module-desc {
+            font-size: 0.88rem;
             color: var(--text-medium);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 25px;
+            line-height: 1.5;
+            margin-bottom: 14px;
         }
         
+        /* Overview Link */
+        .overview-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            transition: all 0.2s;
+        }
+        
+        .module-card.gym .overview-link {
+            background: var(--gym-bg);
+            color: var(--gym-primary);
+        }
+        .module-card.gym .overview-link:hover {
+            background: var(--gym-light);
+            gap: 10px;
+        }
+        
+        .module-card.nutrition .overview-link {
+            background: var(--nutrition-bg);
+            color: var(--nutrition-primary);
+        }
+        .module-card.nutrition .overview-link:hover {
+            background: var(--nutrition-light);
+            gap: 10px;
+        }
+        
+        .module-card.lifestyle .overview-link {
+            background: var(--lifestyle-bg);
+            color: var(--lifestyle-primary);
+        }
+        .module-card.lifestyle .overview-link:hover {
+            background: var(--lifestyle-light);
+            gap: 10px;
+        }
+        
+        /* Stats Row */
         .module-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 25px;
-            padding: 18px;
-            background: var(--bg-soft);
-            border-radius: 14px;
+            display: flex;
+            justify-content: space-around;
+            padding: 14px;
+            background: var(--bg-main);
+            border-radius: 12px;
+            margin-bottom: 18px;
         }
         
         .module-stat {
@@ -226,251 +260,196 @@
         
         .module-stat-value {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            color: var(--module-color);
             line-height: 1;
-            margin-bottom: 4px;
         }
         
+        .module-card.gym .module-stat-value { color: var(--gym-primary); }
+        .module-card.nutrition .module-stat-value { color: var(--nutrition-primary); }
+        .module-card.lifestyle .module-stat-value { color: var(--lifestyle-primary); }
+        
         .module-stat-label {
-            font-size: 0.72rem;
+            font-size: 0.65rem;
             color: var(--text-light);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            font-weight: 700;
+            margin-top: 4px;
+            font-weight: 600;
         }
         
-        .module-links {
+        /* Navigation Items */
+        .module-nav {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
         
-        .module-link {
+        .nav-item {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px 16px;
-            background: var(--bg-soft);
-            border-radius: 12px;
+            padding: 12px 14px;
+            border-radius: 10px;
             text-decoration: none;
             color: var(--text-dark);
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        
+        .module-card.gym .nav-item { background: var(--gym-bg); }
+        .module-card.nutrition .nav-item { background: var(--nutrition-bg); }
+        .module-card.lifestyle .nav-item { background: var(--lifestyle-bg); }
+        
+        .nav-item:hover {
+            transform: translateX(4px);
+            border-color: var(--border-soft);
+        }
+        
+        .module-card.gym .nav-item:hover { background: var(--gym-light); }
+        .module-card.nutrition .nav-item:hover { background: var(--nutrition-light); }
+        .module-card.lifestyle .nav-item:hover { background: var(--lifestyle-light); }
+        
+        .nav-text {
+            flex: 1;
+        }
+        
+        .nav-title {
+            font-size: 0.88rem;
             font-weight: 600;
-            font-size: 0.92rem;
-            transition: all 0.3s;
-            border: 2px solid transparent;
+            color: var(--text-dark);
+            margin-bottom: 2px;
         }
         
-        .module-link:hover {
-            background: white;
-            border-color: var(--module-color);
-            transform: translateX(5px);
-        }
-        
-        .module-link-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            background: var(--module-soft);
-            color: var(--module-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            flex-shrink: 0;
+        .nav-desc {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            line-height: 1.4;
         }
         
         /* Quick Nav Section */
         .quick-nav-section {
             background: white;
-            border-radius: 24px;
-            padding: 35px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
-            margin-bottom: 50px;
+            border-radius: 20px;
+            padding: 36px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
         }
         
-        .quick-nav-section h3 {
-            font-size: 1.6rem;
+        .quick-nav-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        
+        .quick-nav-header h2 {
+            font-size: 1.8rem;
+            color: var(--text-dark);
             margin-bottom: 8px;
-            text-align: center;
         }
         
-        .quick-nav-section > p {
+        .quick-nav-header p {
             color: var(--text-medium);
-            text-align: center;
-            margin-bottom: 25px;
+            font-size: 0.95rem;
         }
         
         .quick-nav-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 10px;
         }
         
         .quick-nav-item {
-            padding: 16px;
-            background: var(--bg-soft);
-            border-radius: 12px;
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 600;
-            font-size: 0.88rem;
-            transition: all 0.3s;
-            border: 2px solid transparent;
             display: flex;
             align-items: center;
             gap: 10px;
+            padding: 12px 14px;
+            background: var(--bg-main);
+            border-radius: 10px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            border: 1px solid transparent;
         }
         
         .quick-nav-item:hover {
             background: white;
-            border-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            border-color: var(--border-soft);
+            transform: translateX(4px);
         }
         
-        .quick-nav-icon {
-            font-size: 1.2rem;
+        .quick-nav-text {
+            flex: 1;
         }
         
-        /* CTA Section */
-        .cta-section {
-            margin: 60px 0;
+        .quick-nav-title {
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            font-weight: 600;
         }
         
-        .cta-card {
-            background: var(--primary-gradient);
-            border-radius: 32px;
-            padding: 70px 50px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+        .quick-nav-module {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            margin-top: 2px;
         }
         
-        .cta-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
-            background-size: 40px 40px;
-            opacity: 0.4;
-        }
-        
-        .cta-content {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .cta-card h2 {
-            font-size: 2.4rem;
-            color: white;
-            margin-bottom: 15px;
-        }
-        
-        .cta-card p {
-            font-size: 1.15rem;
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 30px;
-            max-width: 550px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .btn-cta {
-            display: inline-block;
-            padding: 15px 38px;
-            background: white;
-            color: var(--primary-dark);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1rem;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            transition: all 0.3s;
-        }
-        
-        .btn-cta:hover {
-            transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
-        }
-        
-        .btn-cta.secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid rgba(255,255,255,0.6);
-            box-shadow: none;
-        }
-        
-        .btn-cta.secondary:hover {
-            background: rgba(255,255,255,0.15);
-            border-color: white;
-        }
-        
+        /* Footer */
         .footer {
-            background: var(--text-dark);
-            color: white;
-            padding: 40px 40px 25px;
+            background: white;
+            border-top: 1px solid var(--border-soft);
+            padding: 36px 40px;
             text-align: center;
         }
         
         .footer-logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            background: var(--main-gradient);
+            font-size: 1.6rem;
+            margin-bottom: 14px;
+            background: linear-gradient(135deg, #4A90E2 0%, #50C878 50%, #F39C12 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: inline-block;
         }
         
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 25px;
-            margin-bottom: 20px;
+            gap: 28px;
+            margin-bottom: 18px;
             flex-wrap: wrap;
         }
         
         .footer-links a {
-            color: rgba(255,255,255,0.8);
+            color: var(--text-medium);
             text-decoration: none;
             transition: color 0.3s;
+            font-weight: 500;
             font-size: 0.9rem;
         }
         
         .footer-links a:hover {
-            color: var(--primary);
+            color: var(--gym-primary);
         }
         
         .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-            color: rgba(255,255,255,0.5);
-            font-size: 0.85rem;
+            color: var(--text-light);
+            font-size: 0.82rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 768px) {
-            .header { padding: 15px 20px; }
-            .hero { padding: 45px 20px 35px; }
+            .header { padding: 14px 20px; }
+            .hero { padding: 40px 20px 30px; }
             .hero h1 { font-size: 2rem; }
-            .main-wrapper { padding: 0 20px; }
-            .modules-grid { grid-template-columns: 1fr; }
-            .module-stats { grid-template-columns: 1fr; }
-            .quick-nav-grid { grid-template-columns: 1fr; }
-            .cta-card { padding: 50px 25px; }
-            .cta-card h2 { font-size: 1.8rem; }
+            .main-container { padding: 0 20px 40px; }
+            .quick-nav-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -481,26 +460,43 @@
     </header>
     
     <section class="hero">
-        <span class="hero-badge">NAM 30-40 TUỔI</span>
-        <h1>Strong. <span>Powerful.</span> Built to Last.</h1>
-        <div class="hero-subtitle">Tối ưu sức mạnh, xây dựng cơ bắp, bảo vệ khớp</div>
-        <p>Chương trình toàn diện cho nam giới 30-40 tuổi: từ tập luyện, dinh dưỡng đến lối sống. Thiết kế để bạn mạnh hơn hôm nay và khỏe mạnh đến 60+.</p>
+        <span class="hero-badge">DÀNH CHO NAM 30-40 TUỔI</span>
+        <h1>Strong. Powerful.<br><span>Built to Last.</span></h1>
+        <p>Hệ thống toàn diện giúp bạn xây dựng sức mạnh, tối ưu hormone và duy trì phong độ đỉnh cao.</p>
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-value">22</div>
+                <div class="stat-label">Trang chuyên sâu</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">3</div>
+                <div class="stat-label">Module chính</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">200+</div>
+                <div class="stat-label">Bài tập</div>
+            </div>
+        </div>
     </section>
     
-    <div class="main-wrapper">
+    <div class="main-container">
         
-        <!-- 3 Module Cards -->
+        <!-- 3 Modules Grid -->
         <div class="modules-grid">
             
-            <!-- GYM Module -->
+            <!-- GYM MODULE -->
             <div class="module-card gym">
-                <div class="module-icon">️</div>
-                <h2>GYM</h2>
-                <p>Hệ thống tập luyện modular với 250+ bài tập, workout builder, 12-week program với RPE và deload weeks. Từ beginner đến advanced.</p>
+                <h2 class="module-title">GYM</h2>
+                <p class="module-desc">Hệ thống tập luyện modular với 200+ bài tập, workout builder, 12-week program với RPE và deload weeks.</p>
+                
+                <a href="men-gym-overview.html" class="overview-link">
+                    Xem tổng quan module →
+                </a>
                 
                 <div class="module-stats">
                     <div class="module-stat">
-                        <div class="module-stat-value">250+</div>
+                        <div class="module-stat-value">200+</div>
                         <div class="module-stat-label">Bài tập</div>
                     </div>
                     <div class="module-stat">
@@ -513,35 +509,59 @@
                     </div>
                 </div>
                 
-                <div class="module-links">
-                    <a href="men-gym-overview.html" class="module-link">
-                        <div class="module-link-icon">📚</div>
-                        <span>Overview & Exercise Library</span>
+                <div class="module-nav">
+                    <a href="men-gym-warmup.html" class="nav-item">
+                        <div class="nav-text">
+                            <div class="nav-title">Warm-up</div>
+                            <div class="nav-desc">25+ bài khởi động phân loại theo nhóm cơ</div>
+                        </div>
                     </a>
-                    <a href="men-gym-planner.html" class="module-link">
-                        <div class="module-link-icon">📅</div>
-                        <span>Workout Builder & Roadmap</span>
+                    
+                    <a href="men-gym-library.html" class="nav-item">
+                        <div class="nav-text">
+                            <div class="nav-title">Exercise Library</div>
+                            <div class="nav-desc">200+ bài tập với metadata đầy đủ</div>
+                        </div>
                     </a>
-                    <a href="men-gym-tracker.html" class="module-link">
-                        <div class="module-link-icon">📊</div>
-                        <span>Goal Settings & Tracker</span>
+                    
+                    <a href="men-gym-planner.html" class="nav-item">
+                        <div class="nav-text">
+                            <div class="nav-title">Workout Planner</div>
+                            <div class="nav-desc">Builder + 12-week roadmap với RPE</div>
+                        </div>
                     </a>
-                    <a href="men-gym-recovery.html" class="module-link">
-                        <div class="module-link-icon">🧘</div>
-                        <span>Stretch & Mobility</span>
+                    
+                    <a href="men-gym-tracker.html" class="nav-item">
+                        <div class="nav-text">
+                            <div class="nav-title">Progress Tracker</div>
+                            <div class="nav-desc">Theo dõi tiến độ và habits hàng ngày</div>
+                        </div>
                     </a>
-                    <a href="men-gym-knowledge.html" class="module-link">
-                        <div class="module-link-icon">🧠</div>
-                        <span>Terms, Mistakes & Science</span>
+                    
+                    <a href="men-gym-recovery.html" class="nav-item">
+                        <div class="nav-text">
+                            <div class="nav-title">Recovery</div>
+                            <div class="nav-desc">Stretch + Mobility library 35+ moves</div>
+                        </div>
+                    </a>
+                    
+                    <a href="men-gym-knowledge.html" class="nav-item">
+                        <div class="nav-text">
+                            <div class="nav-title">Knowledge</div>
+                            <div class="nav-desc">Thuật ngữ, lỗi sai, khoa học fitness</div>
+                        </div>
                     </a>
                 </div>
             </div>
             
-            <!-- Nutrition Module -->
+            <!-- NUTRITION MODULE -->
             <div class="module-card nutrition">
-                <div class="module-icon">🥗</div>
-                <h2>Dinh Dưỡng</h2>
-                <p>Hệ thống dinh dưỡng evidence-based: 100+ thực phẩm, meal timing, eating out guide cho người Việt, và supplement recommendations.</p>
+                <h2 class="module-title">NUTRITION</h2>
+                <p class="module-desc">Hệ thống dinh dưỡng evidence-based: 100+ thực phẩm, meal timing, eating out guide cho người Việt.</p>
+                
+                <a href="men-nutrition-overview.html" class="overview-link">
+                    Xem tổng quan module →
+                </a>
                 
                 <div class="module-stats">
                     <div class="module-stat">
@@ -558,35 +578,59 @@
                     </div>
                 </div>
                 
-                <div class="module-links">
-                    <a href="men-nutrition-overview.html" class="module-link">
-                        <div class="module-link-icon">📖</div>
-                        <span>Tổng quan dinh dưỡng</span>
+                <div class="module-nav">
+                    <a href="men-nutrition-calculator.html" class="nav-item">
+                        <div class="nav-text">
+                            <div class="nav-title">TDEE Calculator</div>
+                            <div class="nav-desc">Tính calories và macros mục tiêu</div>
+                        </div>
                     </a>
-                    <a href="men-nutrition-calculator.html" class="module-link">
-                        <div class="module-link-icon">🧮</div>
-                        <span>TDEE & Macro Calculator</span>
+                    
+                    <a href="men-nutrition-food-library.html" class="nav-item">
+                        <div class="nav-text">
+                            <div class="nav-title">Food Library</div>
+                            <div class="nav-desc">100+ thực phẩm với thông tin dinh dưỡng</div>
+                        </div>
                     </a>
-                    <a href="men-nutrition-food-library.html" class="module-link">
-                        <div class="module-link-icon">🍗</div>
-                        <span>Food Library (100+ foods)</span>
+                    
+                    <a href="men-nutrition-guide.html" class="nav-item">
+                        <div class="nav-text">
+                            <div class="nav-title">Nutrition Guide</div>
+                            <div class="nav-desc">Meal plans 7 ngày + meal timing</div>
+                        </div>
                     </a>
-                    <a href="men-nutrition-guide.html" class="module-link">
-                        <div class="module-link-icon">🍜</div>
-                        <span>Nutrition Guide (Meal Plans, Timing, Eating Out)</span>
+                    
+                    <a href="men-nutrition-meal.html" class="nav-item">
+                        <div class="nav-text">
+                            <div class="nav-title">Eating Out & More</div>
+                            <div class="nav-desc">Ăn ngoài, quick meals, supplements</div>
+                        </div>
                     </a>
-                    <a href="men-nutrition-recipes.html" class="module-link">
-                        <div class="module-link-icon">👨‍🍳</div>
-                        <span>Recipes</span>
+                    
+                    <a href="men-nutrition-recipes.html" class="nav-item">
+                        <div class="nav-text">
+                            <div class="nav-title">Recipes</div>
+                            <div class="nav-desc">30+ công thức nấu ăn đơn giản</div>
+                        </div>
+                    </a>
+                    
+                    <a href="men-nutrition-logger.html" class="nav-item">
+                        <div class="nav-text">
+                            <div class="nav-title">Food Logger</div>
+                            <div class="nav-desc">Ghi chép bữa ăn hàng ngày</div>
+                        </div>
                     </a>
                 </div>
             </div>
             
-            <!-- Lifestyle Module -->
+            <!-- LIFESTYLE MODULE -->
             <div class="module-card lifestyle">
-                <div class="module-icon">🌿</div>
-                <h2>Lối Sống</h2>
-                <p>Quản lý stress, tối ưu giấc ngủ, cải thiện tư thế văn phòng, và xây dựng daily habits bền vững cho sức khỏe dài hạn.</p>
+                <h2 class="module-title">LIFESTYLE</h2>
+                <p class="module-desc">Quản lý stress, tối ưu giấc ngủ, cải thiện tư thế văn phòng, xây dựng daily habits bền vững.</p>
+                
+                <a href="men-lifestyle-overview.html" class="overview-link">
+                    Xem tổng quan module →
+                </a>
                 
                 <div class="module-stats">
                     <div class="module-stat">
@@ -603,34 +647,54 @@
                     </div>
                 </div>
                 
-                <div class="module-links">
-                    <a href="men-lifestyle-overview.html" class="module-link">
-                        <div class="module-link-icon">📋</div>
-                        <span>Tổng quan lối sống</span>
+                <div class="module-nav">
+                    <a href="men-lifestyle-sleep.html" class="nav-item">
+                        <div class="nav-text">
+                            <div class="nav-title">Giấc Ngủ</div>
+                            <div class="nav-desc">Sleep optimization deep dive</div>
+                        </div>
                     </a>
-                    <a href="men-lifestyle-sleep.html" class="module-link">
-                        <div class="module-link-icon">🌙</div>
-                        <span>Giấc ngủ (Deep Dive)</span>
+                    
+                    <a href="men-lifestyle-posture.html" class="nav-item">
+                        <div class="nav-text">
+                            <div class="nav-title">Tư Thế</div>
+                            <div class="nav-desc">Office ergonomic setup guide</div>
+                        </div>
                     </a>
-                    <a href="men-lifestyle-posture.html" class="module-link">
-                        <div class="module-link-icon">🪑</div>
-                        <span>Tư thế văn phòng</span>
+                    
+                    <a href="men-lifestyle-stress.html" class="nav-item">
+                        <div class="nav-text">
+                            <div class="nav-title">Stress</div>
+                            <div class="nav-desc">Stress management techniques</div>
+                        </div>
                     </a>
-                    <a href="men-lifestyle-stress.html" class="module-link">
-                        <div class="module-link-icon">🧘</div>
-                        <span>Quản lý stress</span>
+                    
+                    <a href="men-lifestyle-water.html" class="nav-item">
+                        <div class="nav-text">
+                            <div class="nav-title">Nước</div>
+                            <div class="nav-desc">Hydration 3-4L/ngày guide</div>
+                        </div>
                     </a>
-                    <a href="men-lifestyle-water.html" class="module-link">
-                        <div class="module-link-icon">💧</div>
-                        <span>Uống nước</span>
+                    
+                    <a href="men-lifestyle-recovery.html" class="nav-item">
+                        <div class="nav-text">
+                            <div class="nav-title">Phục Hồi</div>
+                            <div class="nav-desc">Sauna, ice bath, contrast therapy</div>
+                        </div>
                     </a>
-                    <a href="men-lifestyle-recovery.html" class="module-link">
-                        <div class="module-link-icon">🧊</div>
-                        <span>Phục hồi (Sauna, Ice bath)</span>
+                    
+                    <a href="men-lifestyle-hormones.html" class="nav-item">
+                        <div class="nav-text">
+                            <div class="nav-title">Hormone</div>
+                            <div class="nav-desc">Testosterone optimization focus</div>
+                        </div>
                     </a>
-                    <a href="men-lifestyle-hormones.html" class="module-link">
-                        <div class="module-link-icon">⚗️</div>
-                        <span>Hormone health</span>
+                    
+                    <a href="men-lifestyle-habits.html" class="nav-item">
+                        <div class="nav-text">
+                            <div class="nav-title">Thói Quen</div>
+                            <div class="nav-desc">10 habits + 21-day challenge</div>
+                        </div>
                     </a>
                 </div>
             </div>
@@ -639,84 +703,178 @@
         
         <!-- Quick Navigation -->
         <div class="quick-nav-section">
-            <h3>🎯 Điều hướng nhanh</h3>
-            <p>Truy cập nhanh các công cụ và tài nguyên phổ biến</p>
+            <div class="quick-nav-header">
+                <h2>Navigation Nhanh</h2>
+                <p>Truy cập nhanh tất cả 22 trang trong hệ thống</p>
+            </div>
             
             <div class="quick-nav-grid">
+                <!-- GYM -->
                 <a href="men-gym-overview.html" class="quick-nav-item">
-                    <span class="quick-nav-icon">📚</span>
-                    <span>Exercise Library</span>
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">GYM Overview</div>
+                        <div class="quick-nav-module">GYM Module</div>
+                    </div>
                 </a>
+                
+                <a href="men-gym-warmup.html" class="quick-nav-item">
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Warm-up</div>
+                        <div class="quick-nav-module">GYM Module</div>
+                    </div>
+                </a>
+                
+                <a href="men-gym-library.html" class="quick-nav-item">
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Exercise Library</div>
+                        <div class="quick-nav-module">GYM Module</div>
+                    </div>
+                </a>
+                
                 <a href="men-gym-planner.html" class="quick-nav-item">
-                    <span class="quick-nav-icon">📅</span>
-                    <span>Workout Planner</span>
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Workout Planner</div>
+                        <div class="quick-nav-module">GYM Module</div>
+                    </div>
                 </a>
+                
                 <a href="men-gym-tracker.html" class="quick-nav-item">
-                    <span class="quick-nav-icon">📊</span>
-                    <span>Progress Tracker</span>
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Progress Tracker</div>
+                        <div class="quick-nav-module">GYM Module</div>
+                    </div>
                 </a>
+                
                 <a href="men-gym-recovery.html" class="quick-nav-item">
-                    <span class="quick-nav-icon">🧘</span>
-                    <span>Recovery</span>
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Recovery</div>
+                        <div class="quick-nav-module">GYM Module</div>
+                    </div>
                 </a>
+                
                 <a href="men-gym-knowledge.html" class="quick-nav-item">
-                    <span class="quick-nav-icon"></span>
-                    <span>Knowledge Base</span>
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Knowledge</div>
+                        <div class="quick-nav-module">GYM Module</div>
+                    </div>
                 </a>
+                
+                <!-- NUTRITION -->
+                <a href="men-nutrition-overview.html" class="quick-nav-item">
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Nutrition Overview</div>
+                        <div class="quick-nav-module">Nutrition Module</div>
+                    </div>
+                </a>
+                
                 <a href="men-nutrition-calculator.html" class="quick-nav-item">
-                    <span class="quick-nav-icon">🧮</span>
-                    <span>Macro Calculator</span>
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">TDEE Calculator</div>
+                        <div class="quick-nav-module">Nutrition Module</div>
+                    </div>
                 </a>
+                
                 <a href="men-nutrition-food-library.html" class="quick-nav-item">
-                    <span class="quick-nav-icon">🍗</span>
-                    <span>Food Library</span>
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Food Library</div>
+                        <div class="quick-nav-module">Nutrition Module</div>
+                    </div>
                 </a>
+                
                 <a href="men-nutrition-guide.html" class="quick-nav-item">
-                    <span class="quick-nav-icon">📖</span>
-                    <span>Nutrition Guide</span>
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Nutrition Guide</div>
+                        <div class="quick-nav-module">Nutrition Module</div>
+                    </div>
                 </a>
+                
+                <a href="men-nutrition-meal.html" class="quick-nav-item">
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Eating Out & More</div>
+                        <div class="quick-nav-module">Nutrition Module</div>
+                    </div>
+                </a>
+                
                 <a href="men-nutrition-recipes.html" class="quick-nav-item">
-                    <span class="quick-nav-icon">👨‍🍳</span>
-                    <span>Recipes</span>
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Recipes</div>
+                        <div class="quick-nav-module">Nutrition Module</div>
+                    </div>
                 </a>
+                
+                <a href="men-nutrition-logger.html" class="quick-nav-item">
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Food Logger</div>
+                        <div class="quick-nav-module">Nutrition Module</div>
+                    </div>
+                </a>
+                
+                <!-- LIFESTYLE -->
+                <a href="men-lifestyle-overview.html" class="quick-nav-item">
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Lifestyle Overview</div>
+                        <div class="quick-nav-module">Lifestyle Module</div>
+                    </div>
+                </a>
+                
                 <a href="men-lifestyle-sleep.html" class="quick-nav-item">
-                    <span class="quick-nav-icon">😴</span>
-                    <span>Sleep Guide</span>
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Giấc Ngủ</div>
+                        <div class="quick-nav-module">Lifestyle Module</div>
+                    </div>
                 </a>
+                
                 <a href="men-lifestyle-posture.html" class="quick-nav-item">
-                    <span class="quick-nav-icon">🪑</span>
-                    <span>Office Posture</span>
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Tư Thế</div>
+                        <div class="quick-nav-module">Lifestyle Module</div>
+                    </div>
                 </a>
+                
+                <a href="men-lifestyle-stress.html" class="quick-nav-item">
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Stress</div>
+                        <div class="quick-nav-module">Lifestyle Module</div>
+                    </div>
+                </a>
+                
+                <a href="men-lifestyle-water.html" class="quick-nav-item">
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Nước</div>
+                        <div class="quick-nav-module">Lifestyle Module</div>
+                    </div>
+                </a>
+                
+                <a href="men-lifestyle-recovery.html" class="quick-nav-item">
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Phục Hồi</div>
+                        <div class="quick-nav-module">Lifestyle Module</div>
+                    </div>
+                </a>
+                
+                <a href="men-lifestyle-hormones.html" class="quick-nav-item">
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Hormone</div>
+                        <div class="quick-nav-module">Lifestyle Module</div>
+                    </div>
+                </a>
+                
                 <a href="men-lifestyle-habits.html" class="quick-nav-item">
-                    <span class="quick-nav-icon">✅</span>
-                    <span>Daily Habits</span>
+                    <div class="quick-nav-text">
+                        <div class="quick-nav-title">Thói Quen</div>
+                        <div class="quick-nav-module">Lifestyle Module</div>
+                    </div>
                 </a>
             </div>
         </div>
         
     </div>
     
-    <div class="cta-section">
-        <div class="cta-card">
-            <div class="cta-content">
-                <h2>Bắt đầu hành trình của bạn</h2>
-                <p>Chọn module phù hợp và bắt đầu ngay hôm nay. Hệ thống sẽ hướng dẫn bạn từng bước.</p>
-                <div class="cta-buttons">
-                    <a href="men-gym-overview.html" class="btn-cta">Bắt đầu với GYM</a>
-                    <a href="men-nutrition-overview.html" class="btn-cta secondary">Khám phá Dinh dưỡng</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
     <footer class="footer">
         <div class="footer-logo">Fit30+</div>
         <div class="footer-links">
             <a href="index.html">Trang chủ</a>
-            <a href="women-30-40.html">Nữ 30-40</a>
-            <a href="men-gym-overview.html">GYM</a>
-            <a href="men-nutrition-overview.html">Dinh dưỡng</a>
-            <a href="men-lifestyle-overview.html">Lối sống</a>
+            <a href="men-30-40.html">Nam 30-40</a>
         </div>
         <div class="footer-bottom">
             <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
