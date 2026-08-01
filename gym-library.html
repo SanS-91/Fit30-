@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise Library - Fit30+</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(180deg, #F8F9FA 0%, #E8ECEF 100%);
+            color: #2D3436;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        .header {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(15px);
+            padding: 18px 40px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4A90E2 0%, #50C878 50%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        .back-link {
+            color: #636E72;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        .back-link:hover { color: #4A90E2; }
+        
+        .hero {
+            padding: 70px 40px 50px;
+            text-align: center;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #4A90E2 0%, #50C878 100%);
+            color: white;
+            padding: 7px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 22px;
+            letter-spacing: 1.5px;
+        }
+        .hero h1 { font-size: 3rem; margin-bottom: 18px; }
+        .hero h1 span {
+            background: linear-gradient(135deg, #4A90E2 0%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-subtitle { font-size: 1.35rem; color: #2D3436; font-weight: 600; margin-bottom: 15px; }
+        .hero p { font-size: 1.1rem; color: #636E72; max-width: 680px; margin: 0 auto; }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 35px;
+            flex-wrap: wrap;
+        }
+        .hero-stat {
+            background: white;
+            padding: 14px 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid #DFE4E8;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .hero-stat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: #C4D4FA;
+            color: #2C5F8A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+        .hero-stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2C5F8A;
+        }
+        .hero-stat-label {
+            font-size: 0.72rem;
+            color: #95A5A6;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+        
+        .main-wrapper { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+        
+        .filter-bar {
+            background: white;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            border-radius: 22px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border: 1px solid #DFE4E8;
+        }
+        .search-box { position: relative; margin-bottom: 20px; }
+        .search-input {
+            width: 100%;
+            padding: 14px 20px 14px 50px;
+            border: 2px solid #DFE4E8;
+            border-radius: 14px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: #F1F3F5;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: #4A90E2;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(74,144,226,0.1);
+        }
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #95A5A6;
+        }
+        .filter-groups {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+        }
+        .filter-group h4 {
+            font-size: 0.75rem;
+            color: #95A5A6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .filter-options { display: flex; flex-wrap: wrap; gap: 8px; }
+        .filter-chip {
+            padding: 6px 14px;
+            background: #F1F3F5;
+            border: 2px solid transparent;
+            border-radius: 18px;
+            font-size: 0.82rem;
+            color: #636E72;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        .filter-chip:hover {
+            background: white;
+            border-color: #4A90E2;
+            color: #4A90E2;
+        }
+        .filter-chip.active {
+            background: linear-gradient(135deg, #4A90E2 0%, #50C878 100%);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .category-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        .category-tab {
+            padding: 11px 20px;
+            background: white;
+            border: 2px solid #DFE4E8;
+            border-radius: 14px;
+            font-weight: 600;
+            color: #636E72;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-size: 0.92rem;
+        }
+        .category-tab:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+        .category-tab.active {
+            background: linear-gradient(135deg, #4A90E2 0%, #50C878 100%);
+            color: white;
+            border-color: transparent;
+        }
+        .tab-count {
+            display: inline-block;
+            background: rgba(255,255,255,0.35);
+            padding: 2px 9px;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+        .category-tab:not(.active) .tab-count { background: #F1F3F5; color: #95A5A6; }
+        
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+        .exercise-card {
+            background: white;
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border: 2px solid transparent;
+            transition: all 0.4s;
+            cursor: pointer;
+        }
+        .exercise-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .exercise-card[data-category="chest"] { --card-color: #E8734A; --card-soft: #FAD4C4; }
+        .exercise-card[data-category="back"] { --card-color: #50C878; --card-soft: #C4FAD4; }
+        .exercise-card[data-category="shoulder"] { --card-color: #9B59B6; --card-soft: #D4C4FA; }
+        .exercise-card[data-category="legs"] { --card-color: #1ABC9C; --card-soft: #C4FAE8; }
+        .exercise-card[data-category="arms"] { --card-color: #F39C12; --card-soft: #FAE4C4; }
+        .exercise-card[data-category="core"] { --card-color: #E74C3C; --card-soft: #FAD4D4; }
+        .exercise-card[data-category="cardio"] { --card-color: #3498DB; --card-soft: #C4E4FA; }
+        
+        .exercise-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        .exercise-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #2D3436;
+            flex: 1;
+        }
+        .exercise-name-vi {
+            font-size: 0.78rem;
+            color: #95A5A6;
+            margin-top: 3px;
+            font-style: italic;
+        }
+        .exercise-difficulty { display: flex; gap: 3px; }
+        .difficulty-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #DFE4E8;
+        }
+        .difficulty-dot.filled { background: var(--card-color); }
+        .exercise-target {
+            display: inline-block;
+            background: var(--card-soft);
+            color: var(--card-color);
+            padding: 4px 12px;
+            border-radius: 10px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .exercise-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 12px; }
+        .tag {
+            font-size: 0.68rem;
+            padding: 3px 9px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+        .tag.compound { background: #FFE5E5; color: #D87070; }
+        .tag.isolation { background: #E5F0FF; color: #7090D8; }
+        .tag.beginner { background: #E5FFE5; color: #70D870; }
+        .tag.intermediate { background: #FFF5E5; color: #D8A870; }
+        .tag.advanced { background: #FFE5F0; color: #D870A8; }
+        .exercise-goals { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 10px; }
+        .goal-tag {
+            font-size: 0.7rem;
+            padding: 3px 10px;
+            background: #F1F3F5;
+            color: #636E72;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        .view-btn {
+            display: block;
+            margin-top: 15px;
+            padding: 10px;
+            background: var(--card-soft);
+            color: var(--card-color);
+            text-align: center;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            transition: all 0.3s;
+        }
+        .exercise-card:hover .view-btn {
+            background: var(--card-color);
+            color: white;
+        }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(45,52,54,0.7);
+            backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: white;
+            border-radius: 26px;
+            max-width: 850px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-header {
+            padding: 32px 35px 22px;
+            border-bottom: 1px solid #DFE4E8;
+            position: sticky;
+            top: 0;
+            background: white;
+            border-radius: 26px 26px 0 0;
+        }
+        .modal-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 5px;
+            background: var(--modal-color);
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px; right: 20px;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: #F1F3F5;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: #636E72;
+        }
+        .modal-close:hover { background: #C4D4FA; color: #4A90E2; }
+        .modal-title { font-size: 2rem; margin-bottom: 6px; }
+        .modal-title-vi {
+            font-size: 0.95rem;
+            color: #636E72;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+        .modal-meta { display: flex; gap: 10px; flex-wrap: wrap; }
+        .modal-meta-item {
+            padding: 6px 14px;
+            background: #F1F3F5;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            color: #636E72;
+            font-weight: 600;
+        }
+        .modal-body { padding: 30px 35px; }
+        .modal-section { margin-bottom: 28px; }
+        .modal-section h3 {
+            font-size: 1.05rem;
+            color: #2D3436;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-indicator {
+            width: 4px; height: 20px;
+            background: var(--modal-color);
+            border-radius: 2px;
+        }
+        .cue-list { list-style: none; }
+        .cue-list li {
+            padding: 11px 14px 11px 42px;
+            background: #F1F3F5;
+            border-radius: 12px;
+            position: relative;
+            color: #2D3436;
+            font-size: 0.92rem;
+            margin-bottom: 8px;
+        }
+        .cue-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 14px; top: 50%;
+            transform: translateY(-50%);
+            width: 20px; height: 20px;
+            background: var(--modal-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.72rem;
+        }
+        .cue-list li.breathing {
+            background: #E8F4FD;
+            border-left: 3px solid #3498DB;
+        }
+        .cue-list li.breathing::before {
+            content: '🌬️';
+            background: #3498DB;
+            font-size: 0.7rem;
+        }
+        .mistake-list li { background: #FFF0F0; }
+        .mistake-list li::before { content: '✕'; background: #E74C3C; }
+        .alternatives-section {
+            background: #F1F3F5;
+            padding: 20px;
+            border-radius: 16px;
+        }
+        .alternative-group { margin-bottom: 14px; }
+        .alternative-group:last-child { margin-bottom: 0; }
+        .alternative-label {
+            font-size: 0.82rem;
+            color: #95A5A6;
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .alternative-options { display: flex; gap: 8px; flex-wrap: wrap; }
+        .alternative-chip {
+            padding: 6px 14px;
+            background: white;
+            border: 1.5px solid #DFE4E8;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            color: #2D3436;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .alternative-chip:hover {
+            border-color: #4A90E2;
+            color: #4A90E2;
+        }
+        .modal-footer {
+            padding: 18px 35px 28px;
+            display: flex;
+            gap: 10px;
+            border-top: 1px solid #DFE4E8;
+        }
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            cursor: pointer;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #4A90E2 0%, #50C878 100%);
+            color: white;
+            flex: 1;
+        }
+        .btn-secondary {
+            background: #F1F3F5;
+            color: #636E72;
+        }
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #95A5A6;
+            display: none;
+        }
+        .no-results.active { display: block; }
+        
+        .footer {
+            background: #2D3436;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+        .footer-links a:hover { color: #4A90E2; }
+        
+        @media (max-width: 768px) {
+            .header { padding: 15px 20px; }
+            .hero { padding: 45px 20px 35px; }
+            .hero h1 { font-size: 2rem; }
+            .main-wrapper { padding: 0 20px; }
+            .filter-bar { padding: 20px; }
+            .exercise-grid { grid-template-columns: 1fr; }
+            .modal { max-height: 95vh; }
+            .modal-header, .modal-body, .modal-footer { padding-left: 22px; padding-right: 22px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="gym-overview.html" class="back-link">← Quay lại GYM Overview</a>
+    </header>
+    
+    <section class="hero">
+        <span class="hero-badge">EXERCISE LIBRARY · 200+ BÀI TẬP</span>
+        <h1>Thư Viện <span>Bài Tập</span></h1>
+        <div class="hero-subtitle">Database đầy đủ nhất với breathing cues & tempo</div>
+        <p>Mỗi bài tập có hướng dẫn kỹ thuật chi tiết kèm lưu ý hít thở, tempo, RPE, và bài tập thay thế.</p>
+        
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-icon">💪</div>
+                <div>
+                    <div class="hero-stat-value" id="stat-total">200+</div>
+                    <div class="hero-stat-label">Bài tập</div>
+                </div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-icon">🌬️</div>
+                <div>
+                    <div class="hero-stat-value">100%</div>
+                    <div class="hero-stat-label">Có breathing cues</div>
+                </div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-icon">⏱️</div>
+                <div>
+                    <div class="hero-stat-value">Tempo</div>
+                    <div class="hero-stat-label">Cho mỗi bài</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="main-wrapper">
+        <div class="filter-bar">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm bài tập... (VD: Bench Press, Đẩy ngực, Squat)">
+            </div>
+            <div class="filter-groups">
+                <div class="filter-group">
+                    <h4>Thiết bị</h4>
+                    <div class="filter-options" id="equipmentFilter">
+                        <div class="filter-chip active" data-filter="all" data-type="equipment">Tất cả</div>
+                        <div class="filter-chip" data-filter="machine" data-type="equipment">Machine</div>
+                        <div class="filter-chip" data-filter="dumbbell" data-type="equipment">Dumbbell</div>
+                        <div class="filter-chip" data-filter="barbell" data-type="equipment">Barbell</div>
+                        <div class="filter-chip" data-filter="cable" data-type="equipment">Cable</div>
+                        <div class="filter-chip" data-filter="bodyweight" data-type="equipment">Bodyweight</div>
+                        <div class="filter-chip" data-filter="band" data-type="equipment">Band</div>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <h4>Trình độ</h4>
+                    <div class="filter-options" id="levelFilter">
+                        <div class="filter-chip active" data-filter="all" data-type="level">Tất cả</div>
+                        <div class="filter-chip" data-filter="beginner" data-type="level">Beginner</div>
+                        <div class="filter-chip" data-filter="intermediate" data-type="level">Intermediate</div>
+                        <div class="filter-chip" data-filter="advanced" data-type="level">Advanced</div>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <h4>Loại</h4>
+                    <div class="filter-options" id="typeFilter">
+                        <div class="filter-chip active" data-filter="all" data-type="type">Tất cả</div>
+                        <div class="filter-chip" data-filter="compound" data-type="type">Compound</div>
+                        <div class="filter-chip" data-filter="isolation" data-type="type">Isolation</div>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <h4>Body Goal</h4>
+                    <div class="filter-options" id="goalFilter">
+                        <div class="filter-chip active" data-filter="all" data-type="goal">Tất cả</div>
+                        <div class="filter-chip" data-filter="v-taper" data-type="goal">V-Taper</div>
+                        <div class="filter-chip" data-filter="broad-shoulders" data-type="goal">Broad Shoulders</div>
+                        <div class="filter-chip" data-filter="strong-chest" data-type="goal">Strong Chest</div>
+                        <div class="filter-chip" data-filter="strength" data-type="goal">Strength</div>
+                        <div class="filter-chip" data-filter="fat-loss" data-type="goal">Fat Loss</div>
+                        <div class="filter-chip" data-filter="athletic" data-type="goal">Athletic</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-tabs" id="categoryTabs">
+            <div class="category-tab active" data-category="all">Tất cả <span class="tab-count" id="count-all">0</span></div>
+            <div class="category-tab" data-category="chest">Ngực <span class="tab-count" id="count-chest">0</span></div>
+            <div class="category-tab" data-category="back">Lưng <span class="tab-count" id="count-back">0</span></div>
+            <div class="category-tab" data-category="shoulder">Vai <span class="tab-count" id="count-shoulder">0</span></div>
+            <div class="category-tab" data-category="legs">Chân <span class="tab-count" id="count-legs">0</span></div>
+            <div class="category-tab" data-category="arms">Tay <span class="tab-count" id="count-arms">0</span></div>
+            <div class="category-tab" data-category="core">Core <span class="tab-count" id="count-core">0</span></div>
+            <div class="category-tab" data-category="cardio">Cardio <span class="tab-count" id="count-cardio">0</span></div>
+        </div>
+        
+        <div class="exercise-grid" id="exerciseGrid"></div>
+        <div class="no-results" id="noResults">
+            <h3>Không tìm thấy bài tập phù hợp</h3>
+            <p>Hãy thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</p>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <button class="modal-close" id="modalClose">✕</button>
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <div class="modal-title-vi" id="modalTitleVi"></div>
+                <div class="modal-meta" id="modalMeta"></div>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="modalCloseBtn">Đóng</button>
+                <button class="btn btn-primary" onclick="addToPlanner()">+ Thêm vào Planner</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="gym-overview.html">GYM Overview</a>
+            <a href="gym-planner.html">Workout Planner</a>
+            <a href="gym-tracker.html">Progress Tracker</a>
+        </div>
+    </footer>
+    
+    <script>
+        // ==================== EXERCISE DATABASE (200+ BÀI) ====================
+        const exerciseDatabase = [
+            // CHEST (25)
+            { id: 1, name: "Barbell Bench Press", nameVi: "Đẩy ngực với tạ đòn", category: "chest", target: "Pectoralis Major", secondary: "Triceps, Anterior Deltoid", equipment: "barbell", level: "intermediate", type: "compound", goals: ["strong-chest", "strength"], tempo: "3-1-1-0", rpe: "7-9", cues: ["Nằm trên ghế phẳng, chân chạm đất", "Nắm thanh rộng hơn vai", "Hạ thanh xuống ngực giữa", "Đẩy lên theo đường hơi chéo"], breathing: ["HÍT VÀO khi hạ tạ", "THỞ RA mạnh khi đẩy lên"], mistakes: ["Cong lưng quá mức", "Hạ tạ không đều"], alternatives: { "Không có barbell": ["Dumbbell Bench Press", "Machine Chest Press"], "Đau vai": ["Neutral Grip Press", "Floor Press"] } },
+            { id: 2, name: "Incline Dumbbell Press", nameVi: "Đẩy ngực trên với tạ đơn", category: "chest", target: "Upper Pectoralis", secondary: "Anterior Deltoid", equipment: "dumbbell", level: "intermediate", type: "compound", goals: ["strong-chest", "broad-shoulders"], tempo: "3-1-1-0", rpe: "7-8", cues: ["Ghế nghiêng 30-45°", "Giữ tạ ngang ngực", "Đẩy lên theo hình vòng cung", "Siết ngực ở đỉnh"], breathing: ["HÍT VÀO khi hạ tạ", "THỞ RA khi đẩy lên"], mistakes: ["Ghế nghiêng quá cao", "Mở khuỷu tay quá rộng"], alternatives: { "Không có dumbbell": ["Incline Machine Press"], "Đau vai": ["Low Incline 15°"] } },
+            { id: 3, name: "Dumbbell Fly", nameVi: "Ép ngực với tạ đơn", category: "chest", target: "Pectoralis Major", secondary: "Anterior Deltoid", equipment: "dumbbell", level: "intermediate", type: "isolation", goals: ["strong-chest"], tempo: "3-1-1-0", rpe: "6-7", cues: ["Nằm trên ghế phẳng", "Mở tay sang ngang theo hình vòng cung", "Giữ khuỷu hơi cong", "Ép về bằng lực ngực"], breathing: ["HÍT VÀO khi mở tay", "THỞ RA khi ép vào"], mistakes: ["Duỗi thẳng tay", "Hạ quá thấp"], alternatives: { "Không có dumbbell": ["Cable Fly", "Pec Deck"] } },
+            { id: 4, name: "Cable Crossover", nameVi: "Kéo cáp chéo ngực", category: "chest", target: "Pectoralis Major", secondary: "Anterior Deltoid", equipment: "cable", level: "intermediate", type: "isolation", goals: ["strong-chest", "v-taper"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Đứng giữa 2 cáp", "Hơi nghiêng người về trước", "Đưa 2 tay vào giữa", "Siết ngực 1-2 giây"], breathing: ["HÍT VÀO khi mở tay", "THỞ RA khi kéo vào"], mistakes: ["Đứng thẳng người", "Dùng lực vai"], alternatives: { "Không có cable": ["Dumbbell Fly", "Pec Deck"] } },
+            { id: 5, name: "Push-ups", nameVi: "Hít đất", category: "chest", target: "Pectoralis Major", secondary: "Triceps, Core", equipment: "bodyweight", level: "beginner", type: "compound", goals: ["strong-chest", "fat-loss"], tempo: "2-1-1-0", rpe: "6-8", cues: ["Hai tay rộng hơn vai", "Giữ người thẳng", "Hạ xuống đến khi ngực gần chạm đất", "Đẩy lên"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Hông võng", "Khuỷu tay mở quá rộng"], alternatives: { "Quá khó": ["Incline Push-ups", "Knee Push-ups"], "Quá dễ": ["Decline Push-ups"] } },
+            { id: 6, name: "Machine Chest Press", nameVi: "Đẩy ngực với máy", category: "chest", target: "Pectoralis Major", secondary: "Triceps", equipment: "machine", level: "beginner", type: "compound", goals: ["strong-chest", "strength"], tempo: "3-1-1-0", rpe: "7-8", cues: ["Ngồi thẳng, áp sát vào ghế", "Đẩy tay cầm về phía trước", "Hạ xuống chậm", "Kiểm soát"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Cong lưng", "Khóa khuỷu tay"], alternatives: { "Không có machine": ["Dumbbell Bench Press"] } },
+            { id: 7, name: "Decline Bench Press", nameVi: "Đẩy ngực dưới", category: "chest", target: "Lower Pectoralis", secondary: "Triceps", equipment: "barbell", level: "intermediate", type: "compound", goals: ["strong-chest"], tempo: "3-1-1-0", rpe: "7-8", cues: ["Ghế decline 15-30°", "Hạ thanh xuống ngực dưới", "Đẩy lên", "Không khóa khuỷu"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Hạ quá thấp", "Cong lưng"], alternatives: { "Không có decline bench": ["Flat Bench Press"] } },
+            { id: 8, name: "Pec Deck Fly", nameVi: "Ép ngực với máy Pec Deck", category: "chest", target: "Pectoralis Major", secondary: "Anterior Deltoid", equipment: "machine", level: "beginner", type: "isolation", goals: ["strong-chest"], tempo: "2-1-1-0", rpe: "6-7", cues: ["Ngồi vào máy", "Đưa tay vào giữa", "Siết ngực 1 giây", "Mở ra chậm"], breathing: ["HÍT VÀO khi mở", "THỞ RA khi ép"], mistakes: ["Duỗi thẳng tay", "Dùng lực cánh tay"], alternatives: { "Không có machine": ["Cable Fly", "Dumbbell Fly"] } },
+            { id: 9, name: "Chest Dips", nameVi: "Xà kép nghiêng người", category: "chest", target: "Lower Pectoralis", secondary: "Triceps", equipment: "bodyweight", level: "intermediate", type: "compound", goals: ["strong-chest", "v-taper"], tempo: "3-1-1-0", rpe: "7-9", cues: ["Nghiêng người 30°", "Hạ đến khi vai ngang khuỷu", "Đẩy lên bằng ngực", "Không khóa khuỷu"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Hạ quá thấp", "Người quá thẳng"], alternatives: { "Quá khó": ["Assisted Dips"], "Đau vai": ["Push-ups"] } },
+            { id: 10, name: "Incline Barbell Press", nameVi: "Đẩy ngực trên với tạ đòn", category: "chest", target: "Upper Pectoralis", secondary: "Anterior Deltoid", equipment: "barbell", level: "intermediate", type: "compound", goals: ["strong-chest", "broad-shoulders"], tempo: "3-1-1-0", rpe: "7-8", cues: ["Ghế nghiêng 30-45°", "Hạ thanh xuống ngực trên", "Đẩy lên", "Siết ngực"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Ghế nghiêng quá cao", "Hạ quá thấp"], alternatives: { "Quá khó": ["Incline Dumbbell Press"] } },
+            { id: 11, name: "Landmine Press", nameVi: "Đẩy ngực với landmine", category: "chest", target: "Pectoralis Major", secondary: "Anterior Deltoid", equipment: "barbell", level: "intermediate", type: "compound", goals: ["strong-chest", "strength"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Đứng hơi nghiêng", "Đẩy thanh lên theo đường chéo", "Siết ngực ở đỉnh", "Hạ xuống chậm"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Cong lưng", "Đẩy không ổn định"], alternatives: { "Không có landmine": ["Dumbbell Shoulder Press"] } },
+            { id: 12, name: "Svend Press", nameVi: "Ép 2 tạ vào nhau", category: "chest", target: "Pectoralis (Inner)", secondary: "Anterior Deltoid", equipment: "dumbbell", level: "beginner", type: "isolation", goals: ["strong-chest"], tempo: "3-1-1-0", rpe: "5-6", cues: ["Giữ 2 tạ ép vào nhau", "Đẩy ra trước", "Siết ngực trong", "Đưa về chậm"], breathing: ["HÍT VÀO khi đưa về", "THỞ RA khi đẩy ra"], mistakes: ["Không ép đủ mạnh", "Dùng lực vai"], alternatives: { "Muốn nặng hơn": ["Heavier Plate"] } },
+            { id: 13, name: "Weighted Dips", nameVi: "Xà kép có tạ", category: "chest", target: "Lower Pectoralis", secondary: "Triceps", equipment: "bodyweight", level: "advanced", type: "compound", goals: ["strong-chest", "strength"], tempo: "3-1-1-0", rpe: "8-9", cues: ["Đeo đai tạ", "Nghiêng người 30°", "Hạ xuống kiểm soát", "Đẩy lên"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Hạ quá thấp", "Lắc người"], alternatives: { "Quá khó": ["Regular Dips"] } },
+            { id: 14, name: "Floor Press", nameVi: "Đẩy ngực trên sàn", category: "chest", target: "Pectoralis Major", secondary: "Triceps", equipment: "barbell", level: "intermediate", type: "compound", goals: ["strong-chest", "strength"], tempo: "3-1-1-0", rpe: "7-8", cues: ["Nằm trên sàn", "Hạ thanh đến khi khuỷu chạm sàn", "Đẩy lên", "Không khóa khuỷu"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Hạ quá nhanh", "Cong lưng"], alternatives: { "Đau vai": ["Neutral Grip Floor Press"] } },
+            { id: 15, name: "Cable Chest Press", nameVi: "Đẩy ngực với cáp", category: "chest", target: "Pectoralis Major", secondary: "Anterior Deltoid", equipment: "cable", level: "intermediate", type: "compound", goals: ["strong-chest"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Đặt cáp ngang ngực", "Đẩy tay cầm về trước", "Siết ngực ở đỉnh", "Đưa về chậm"], breathing: ["HÍT VÀO khi đưa về", "THỞ RA khi đẩy"], mistakes: ["Dùng lực vai", "Khóa khuỷu"], alternatives: { "Không có cable": ["Machine Chest Press"] } },
+            { id: 16, name: "High to Low Cable Fly", nameVi: "Kéo cáp từ cao xuống thấp", category: "chest", target: "Lower Pectoralis", secondary: "Anterior Deltoid", equipment: "cable", level: "intermediate", type: "isolation", goals: ["strong-chest"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Đặt cáp cao", "Kéo xuống thấp", "Siết ngực dưới", "Đưa về chậm"], breathing: ["HÍT VÀO khi đưa lên", "THỞ RA khi kéo xuống"], mistakes: ["Kéo bằng tay", "Cong lưng"], alternatives: { "Muốn tập ngực trên": ["Low to High Cable Fly"] } },
+            { id: 17, name: "Low to High Cable Fly", nameVi: "Kéo cáp từ thấp lên cao", category: "chest", target: "Upper Pectoralis", secondary: "Anterior Deltoid", equipment: "cable", level: "intermediate", type: "isolation", goals: ["strong-chest", "broad-shoulders"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Đặt cáp thấp", "Kéo lên cao", "Siết ngực trên", "Hạ xuống chậm"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi kéo lên"], mistakes: ["Kéo bằng tay", "Cong lưng"], alternatives: { "Muốn tập ngực dưới": ["High to Low Cable Fly"] } },
+            { id: 18, name: "Incline Push-ups", nameVi: "Hít đất nghiêng lên", category: "chest", target: "Lower Pectoralis", secondary: "Triceps", equipment: "bodyweight", level: "beginner", type: "compound", goals: ["strong-chest"], tempo: "2-1-1-0", rpe: "5-7", cues: ["Tay trên bục cao", "Giữ người thẳng", "Hạ ngực về bục", "Đẩy lên"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Hông võng", "Hạ không đủ sâu"], alternatives: { "Muốn khó hơn": ["Flat Push-ups"] } },
+            { id: 19, name: "Knee Push-ups", nameVi: "Hít đất quỳ gối", category: "chest", target: "Pectoralis Major", secondary: "Triceps", equipment: "bodyweight", level: "beginner", type: "compound", goals: ["strong-chest"], tempo: "2-1-1-0", rpe: "5-7", cues: ["Quỳ gối", "Giữ người thẳng từ đầu đến gối", "Hạ ngực về sàn", "Đẩy lên"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Hông nhô lên", "Hạ không đủ sâu"], alternatives: { "Muốn khó hơn": ["Regular Push-ups"] } },
+            { id: 20, name: "Decline Push-ups", nameVi: "Hít đất chân trên bục", category: "chest", target: "Upper Pectoralis", secondary: "Triceps", equipment: "bodyweight", level: "intermediate", type: "compound", goals: ["strong-chest", "broad-shoulders"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Chân trên bục cao", "Giữ người thẳng", "Hạ ngực về sàn", "Đẩy lên"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Hông võng", "Hạ không đủ sâu"], alternatives: { "Quá khó": ["Weighted Decline Push-ups"] } },
+            { id: 21, name: "Diamond Push-ups", nameVi: "Hít đất kim cương", category: "chest", target: "Pectoralis (Inner), Triceps", secondary: "Anterior Deltoid", equipment: "bodyweight", level: "intermediate", type: "compound", goals: ["strong-chest"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Tay tạo hình kim cương", "Giữ người thẳng", "Hạ ngực về tay", "Đẩy lên"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Khuỷu tay mở quá rộng", "Hông võng"], alternatives: { "Quá khó": ["Regular Push-ups"] } },
+            { id: 22, name: "Archer Push-ups", nameVi: "Hít đất cung tên", category: "chest", target: "Pectoralis Major", secondary: "Triceps", equipment: "bodyweight", level: "advanced", type: "compound", goals: ["strong-chest", "strength"], tempo: "3-1-1-0", rpe: "8-9", cues: ["2 tay rất rộng", "Hạ về phía tay co", "Đẩy lên bằng tay co", "Đổi bên"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Mất thăng bằng", "Hạ không đủ sâu"], alternatives: { "Quá khó": ["Regular Push-ups"] } },
+            { id: 23, name: "Ring Push-ups", nameVi: "Hít đất với vòng gymnastic", category: "chest", target: "Pectoralis Major", secondary: "Triceps, Core", equipment: "bodyweight", level: "advanced", type: "compound", goals: ["strong-chest", "athletic"], tempo: "3-1-1-0", rpe: "8-9", cues: ["Giữ 2 vòng", "Hạ xuống kiểm soát", "Đẩy lên, xoay vòng ra ngoài", "Siết ngực và core"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy và xoay"], mistakes: ["Vòng lắc quá nhiều", "Không xoay được ở đỉnh"], alternatives: { "Quá khó": ["Regular Push-ups"] } },
+            { id: 24, name: "Plate Press", nameVi: "Ép tạ plate trước ngực", category: "chest", target: "Pectoralis (Inner)", secondary: "Anterior Deltoid", equipment: "barbell", level: "beginner", type: "isolation", goals: ["strong-chest"], tempo: "2-1-1-0", rpe: "5-6", cues: ["Giữ plate 2 tay trước ngực", "Đẩy ra trước", "Siết ngực ở đỉnh", "Đưa về chậm"], breathing: ["HÍT VÀO khi đưa về", "THỞ RA khi đẩy ra"], mistakes: ["Không ép đủ mạnh", "Dùng lực vai"], alternatives: { "Muốn nặng hơn": ["Svend Press với tạ nặng hơn"] } },
+            { id: 25, name: "Guillotine Press", nameVi: "Đẩy ngực kiểu guillotine", category: "chest", target: "Upper Pectoralis", secondary: "Anterior Deltoid", equipment: "barbell", level: "advanced", type: "compound", goals: ["strong-chest", "broad-shoulders"], tempo: "3-1-1-0", rpe: "7-8", cues: ["Hạ thanh về phía cổ", "Khuỷu tay mở rộng 90°", "Đẩy lên chậm", "DÙNG TẠ NHẸ"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Hạ quá thấp gây chấn thương vai", "Dùng tạ quá nặng"], alternatives: { "An toàn hơn": ["Incline Dumbbell Press"] } },
+            
+            // BACK (30)
+            { id: 26, name: "Pull-ups", nameVi: "Xà đơn", category: "back", target: "Latissimus Dorsi", secondary: "Biceps, Rear Deltoid", equipment: "bodyweight", level: "intermediate", type: "compound", goals: ["v-taper", "broad-shoulders", "strength"], tempo: "2-1-1-0", rpe: "8-9", cues: ["Nắm thanh rộng hơn vai", "Kéo người lên đến khi cằm qua thanh", "Siết lưng ở đỉnh", "Hạ xuống chậm"], breathing: ["THỞ RA khi kéo lên", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Kéo bằng tay thay vì lưng"], alternatives: { "Quá khó": ["Assisted Pull-ups", "Band Assisted"], "Muốn nặng hơn": ["Weighted Pull-ups"] } },
+            { id: 27, name: "Chin-ups", nameVi: "Xà đơn ngược tay", category: "back", target: "Lats, Biceps", secondary: "Rear Deltoid", equipment: "bodyweight", level: "intermediate", type: "compound", goals: ["v-taper", "broad-shoulders"], tempo: "2-1-1-0", rpe: "8-9", cues: ["Nắm thanh lòng bàn tay hướng vào mặt", "Kéo người lên", "Siết lưng và biceps", "Hạ xuống chậm"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Không hạ hết tầm"], alternatives: { "Quá khó": ["Assisted Chin-ups"], "Muốn nặng hơn": ["Weighted Chin-ups"] } },
+            { id: 28, name: "Lat Pulldown", nameVi: "Kéo cáp ngang lưng", category: "back", target: "Latissimus Dorsi", secondary: "Biceps, Rear Deltoid", equipment: "cable", level: "beginner", type: "compound", goals: ["v-taper", "broad-shoulders"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Ngồi thẳng, đùi cố định", "Kéo thanh xuống ngang ngực", "Siết lưng ở điểm cuối", "Đưa lên chậm"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi thả"], mistakes: ["Kéo sau đầu", "Dùng lực cánh tay"], alternatives: { "Phòng gym đông": ["Assisted Pull-up"], "Đau vai": ["Neutral Grip Pulldown"] } },
+            { id: 29, name: "Close Grip Pulldown", nameVi: "Kéo cáp hẹp tay", category: "back", target: "Latissimus Dorsi (Lower)", secondary: "Biceps", equipment: "cable", level: "beginner", type: "compound", goals: ["v-taper"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Dùng thanh V-bar", "Kéo xuống ngực", "Siết lưng", "Đưa lên chậm"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi thả"], mistakes: ["Cong lưng", "Dùng lực tay"], alternatives: { "Quá dễ": ["Wide Grip Pulldown"] } },
+            { id: 30, name: "Wide Grip Pulldown", nameVi: "Kéo cáp rộng tay", category: "back", target: "Latissimus Dorsi (Upper)", secondary: "Rear Deltoid", equipment: "cable", level: "intermediate", type: "compound", goals: ["v-taper", "broad-shoulders"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Nắm thanh rộng", "Kéo xuống ngực", "Siết lưng rộng", "Đưa lên chậm"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi thả"], mistakes: ["Kéo quá thấp", "Mở khuỷu quá rộng"], alternatives: { "Đau vai": ["Close Grip Pulldown"] } },
+            { id: 31, name: "Neutral Grip Pulldown", nameVi: "Kéo cáp lòng bàn tay hướng vào nhau", category: "back", target: "Latissimus Dorsi", secondary: "Biceps", equipment: "cable", level: "beginner", type: "compound", goals: ["v-taper"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Dùng thanh neutral", "Kéo xuống ngực", "Siết lưng", "Đưa lên chậm"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi thả"], mistakes: ["Cong lưng", "Dùng lực tay"], alternatives: { "Đau vai": ["Close Grip Pulldown"] } },
+            { id: 32, name: "Single Arm Pulldown", nameVi: "Kéo cáp 1 tay", category: "back", target: "Latissimus Dorsi", secondary: "Biceps", equipment: "cable", level: "intermediate", type: "compound", goals: ["v-taper"], tempo: "2-1-1-0", rpe: "7-8", cues: ["1 tay cầm D-handle", "Kéo xuống bằng lực lưng", "Siết lưng ở cuối", "Đổi bên"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi thả"], mistakes: ["Xoay người", "Dùng lực tay"], alternatives: { "Không có cable": ["Dumbbell Pullover"] } },
+            { id: 33, name: "Barbell Row", nameVi: "Gập người kéo tạ đòn", category: "back", target: "Mid Back, Lats", secondary: "Biceps, Rear Deltoid", equipment: "barbell", level: "intermediate", type: "compound", goals: ["v-taper", "strength"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Cúi người 45°, lưng thẳng", "Kéo thanh về bụng dưới", "Siết lưng", "Hạ xuống chậm"], breathing: ["HÍT VÀO bracing", "THỞ RA khi kéo"], mistakes: ["Cong lưng", "Đứng quá thẳng", "Kéo bằng tay"], alternatives: { "Đau lưng": ["Chest Supported Row"], "Quá khó": ["Dumbbell Row"] } },
+            { id: 34, name: "Pendlay Row", nameVi: "Kéo tạ Pendlay", category: "back", target: "Mid Back, Lats", secondary: "Biceps", equipment: "barbell", level: "advanced", type: "compound", goals: ["strength", "v-taper"], tempo: "1-0-1-0", rpe: "8-9", cues: ["Thanh trên sàn, cúi 90°", "Kéo mạnh lên bụng", "Hạ về sàn mỗi rep", "Siết lưng ở đỉnh"], breathing: ["HÍT VÀO trước mỗi rep", "THỞ RA khi kéo"], mistakes: ["Cong lưng", "Kéo không đều"], alternatives: { "Quá khó": ["Barbell Row", "Dumbbell Row"] } },
+            { id: 35, name: "Seated Cable Row", nameVi: "Ngồi kéo cáp", category: "back", target: "Mid Back", secondary: "Biceps, Rear Deltoid", equipment: "cable", level: "beginner", type: "compound", goals: ["v-taper", "posture"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Ngồi thẳng, ngực ưỡn", "Kéo tay cầm về bụng", "Siết lưng giữa", "Đưa tay về chậm"], breathing: ["HÍT VÀO khi đưa ra", "THỞ RA khi kéo về"], mistakes: ["Ngửa người ra sau", "Kéo bằng cánh tay"], alternatives: { "Phòng gym đông": ["Single Arm Row"], "Đau lưng": ["Chest Supported Row"] } },
+            { id: 36, name: "Dumbbell Row", nameVi: "Kéo tạ đơn 1 tay", category: "back", target: "Latissimus Dorsi", secondary: "Biceps, Rear Deltoid", equipment: "dumbbell", level: "intermediate", type: "compound", goals: ["v-taper", "strength"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Chống 1 tay 1 gối", "Kéo tạ lên ngang hông", "Khuỷu tay sát thân", "Hạ xuống chậm"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi hạ"], mistakes: ["Xoay người", "Kéo quá cao", "Lắc người"], alternatives: { "Phòng gym đông": ["Single Arm Cable Row"], "Đau lưng": ["Chest Supported Row"] } },
+            { id: 37, name: "T-Bar Row", nameVi: "Kéo tạ T-Bar", category: "back", target: "Mid Back", secondary: "Lats, Biceps", equipment: "barbell", level: "intermediate", type: "compound", goals: ["v-taper", "strength"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Đứng 2 bên thanh杠", "Lưng thẳng, ngực ưỡn", "Kéo về bụng dưới", "Siết lưng ở cuối"], breathing: ["HÍT VÀO bracing", "THỞ RA khi kéo"], mistakes: ["Cong lưng", "Đứng quá thẳng"], alternatives: { "Đau lưng": ["Chest Supported T-Bar Row"], "Quá khó": ["Seated Cable Row"] } },
+            { id: 38, name: "Chest Supported Row", nameVi: "Kéo tạ nằm sấp", category: "back", target: "Mid Back", secondary: "Biceps, Rear Deltoid", equipment: "machine", level: "beginner", type: "compound", goals: ["v-taper", "posture"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Nằm sấp trên ghế", "Kéo tạ lên ngang ngực", "Siết lưng", "Hạ xuống chậm"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi hạ"], mistakes: ["Cong lưng", "Kéo quá cao"], alternatives: { "Không có máy": ["Dumbbell Row", "Seated Row"] } },
+            { id: 39, name: "Meadows Row", nameVi: "Kéo tạ Meadows", category: "back", target: "Lats, Mid Back", secondary: "Biceps", equipment: "barbell", level: "advanced", type: "compound", goals: ["v-taper", "strength"], tempo: "2-1-1-0", rpe: "8-9", cues: ["Đứng sideways với landmine", "Kéo khuỷu tay lên cao", "Siết lưng", "Đổi bên"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi hạ"], mistakes: ["Mất thăng bằng", "Cong lưng"], alternatives: { "Quá khó": ["Dumbbell Row"] } },
+            { id: 40, name: "Deadlift", nameVi: "Deadlift", category: "back", target: "Lower Back, Glutes, Hamstrings", secondary: "Lats, Traps", equipment: "barbell", level: "advanced", type: "compound", goals: ["strength", "v-taper"], tempo: "2-1-1-0", rpe: "8-9", cues: ["Thanh杠 sát chân", "Lưng THẲNG TUYỆT ĐỐI", "Đẩy hông về trước", "Siết mông ở đỉnh"], breathing: ["HÍT VÀO SÂU bracing", "Giữ hơi khi nâng", "THỞ RA khi đứng"], mistakes: ["Cong lưng", "Thanh杠 không sát chân", "Hông lên trước"], alternatives: { "Quá khó": ["Romanian Deadlift", "Trap Bar Deadlift"], "Đau lưng": ["Hip Thrust"] } },
+            { id: 41, name: "Romanian Deadlift", nameVi: "Deadlift Romania", category: "back", target: "Hamstrings, Glutes, Lower Back", secondary: "Lats", equipment: "barbell", level: "intermediate", type: "compound", goals: ["strength", "fat-loss"], tempo: "3-1-1-0", rpe: "7-8", cues: ["Đẩy hông ra sau", "Hạ tạ dọc theo chân", "Lưng thẳng, ngực ưỡn", "Đẩy hông về trước"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đứng lên"], mistakes: ["Cong lưng", "Hạ quá thấp"], alternatives: { "Đau lưng": ["Glute Bridge", "Hip Thrust"], "Quá khó": ["Dumbbell RDL"] } },
+            { id: 42, name: "Trap Bar Deadlift", nameVi: "Deadlift với thanh trap bar", category: "back", target: "Full Back, Glutes, Quads", secondary: "Traps, Core", equipment: "barbell", level: "intermediate", type: "compound", goals: ["strength", "v-taper"], tempo: "2-1-1-0", rpe: "8-9", cues: ["Bước vào giữa trap bar", "Hạ xuống như squat nửa", "Đứng lên, giữ tạ sát người", "Siết mông ở đỉnh"], breathing: ["HÍT VÀO bracing", "THỞ RA khi đứng"], mistakes: ["Cong lưng", "Hông lên trước"], alternatives: { "Đau lưng": ["Conventional Deadlift nhẹ hơn"] } },
+            { id: 43, name: "Face Pull", nameVi: "Kéo cáp về mặt", category: "back", target: "Rear Deltoid, Mid Back", secondary: "Rotator Cuff", equipment: "cable", level: "beginner", type: "isolation", goals: ["broad-shoulders", "posture"], tempo: "2-1-1-0", rpe: "6-7", cues: ["Cáp ngang tầm mắt", "Kéo về mặt", "Mở rộng tay ở cuối", "Siết vai sau 1-2 giây"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi thả"], mistakes: ["Kéo quá thấp", "Dùng lực cánh tay"], alternatives: { "Phòng gym đông": ["Reverse Pec Deck"], "Không có cable": ["Reverse Fly"] } },
+            { id: 44, name: "Reverse Fly", nameVi: "Bay ngược", category: "back", target: "Rear Deltoid, Mid Back", secondary: "Rotator Cuff", equipment: "dumbbell", level: "beginner", type: "isolation", goals: ["broad-shoulders", "posture"], tempo: "2-1-1-0", rpe: "6-7", cues: ["Cúi người 45°", "Mở tay sang ngang", "Siết bả vai", "Hạ xuống chậm"], breathing: ["THỞ RA khi mở", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Mở quá rộng"], alternatives: { "Phòng gym đông": ["Reverse Pec Deck"], "Đau lưng": ["Seated Reverse Fly"] } },
+            { id: 45, name: "Reverse Pec Deck", nameVi: "Máy bay ngược", category: "back", target: "Rear Deltoid", secondary: "Mid Back", equipment: "machine", level: "beginner", type: "isolation", goals: ["broad-shoulders", "posture"], tempo: "2-1-1-0", rpe: "6-7", cues: ["Ngồi ngược trên máy", "Mở rộng tay ra 2 bên", "Siết vai sau", "Đóng lại chậm"], breathing: ["THỞ RA khi mở", "HÍT VÀO khi đóng"], mistakes: ["Cong khuỷu tay", "Dùng lực lưng"], alternatives: { "Phòng gym đông": ["Bent-over Reverse Fly"] } },
+            { id: 46, name: "Shrug", nameVi: "Nhún vai", category: "back", target: "Trapezius (Upper)", secondary: "Levator Scapulae", equipment: "dumbbell", level: "beginner", type: "isolation", goals: ["broad-shoulders"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Giữ tạ 2 bên", "Nhún vai LÊN CAO", "Giữ 1-2 giây", "Hạ xuống chậm"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi nhún"], mistakes: ["Lắc người", "Cuộn vai"], alternatives: { "Không có tạ": ["Band Shrug"], "Muốn nặng hơn": ["Barbell Shrug"] } },
+            { id: 47, name: "Straight Arm Pulldown", nameVi: "Kéo cáp tay thẳng", category: "back", target: "Latissimus Dorsi", secondary: "Triceps", equipment: "cable", level: "intermediate", type: "isolation", goals: ["v-taper"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Tay cầm thanh thẳng", "Giữ khuỷu hơi cong", "Kéo bằng lực lats", "Đưa lên chậm"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi đưa lên"], mistakes: ["Cong khuỷu tay", "Dùng lực cánh tay"], alternatives: { "Phòng gym đông": ["Dumbbell Pullover"] } },
+            { id: 48, name: "Dumbbell Pullover", nameVi: "Kéo tạ qua đầu", category: "back", target: "Lats, Chest", secondary: "Triceps", equipment: "dumbbell", level: "intermediate", type: "isolation", goals: ["v-taper", "strong-chest"], tempo: "3-1-1-0", rpe: "6-7", cues: ["Nằm trên ghế", "Hạ tạ ra sau đầu", "Kéo về bằng lực lats", "Kiểm soát"], breathing: ["HÍT VÀO SÂU khi hạ", "THỞ RA khi kéo về"], mistakes: ["Hạ quá thấp", "Cong lưng"], alternatives: { "Không có ghế": ["Floor Pullover"] } },
+            { id: 49, name: "Band Pull-apart", nameVi: "Kéo band ngang", category: "back", target: "Rear Deltoid, Mid Back", secondary: "Rotator Cuff", equipment: "band", level: "beginner", type: "isolation", goals: ["posture", "broad-shoulders"], tempo: "2-1-1-0", rpe: "5-6", cues: ["Giữ band trước ngực", "Kéo ra 2 bên", "Siết bả vai", "Đưa về chậm"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi thả"], mistakes: ["Lắc người", "Kéo bằng tay"], alternatives: { "Muốn nặng hơn": ["Heavier Band"] } },
+            { id: 50, name: "Inverted Row", nameVi: "Kéo xà ngược", category: "back", target: "Mid Back, Lats", secondary: "Biceps, Core", equipment: "bodyweight", level: "intermediate", type: "compound", goals: ["v-taper", "posture"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Nằm dưới thanh杠 thấp", "Kéo ngực về thanh", "Siết lưng", "Hạ xuống chậm"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi hạ"], mistakes: ["Cong lưng", "Kéo bằng tay"], alternatives: { "Quá khó": ["Band Assisted Row"], "Muốn nặng hơn": ["Weighted Inverted Row"] } },
+            { id: 51, name: "Seal Row", nameVi: "Kéo tạ nằm sấp trên ghế cao", category: "back", target: "Mid Back, Lats", secondary: "Biceps, Rear Deltoid", equipment: "dumbbell", level: "intermediate", type: "compound", goals: ["v-taper", "strength"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Nằm sấp trên ghế cao", "Kéo tạ lên 2 bên", "Siết bả vai", "Hạ xuống chậm"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi hạ"], mistakes: ["Nhấc ngực khỏi ghế", "Kéo không đều"], alternatives: { "Không có ghế cao": ["Chest Supported Row"] } },
+            { id: 52, name: "Rack Pull", nameVi: "Kéo tạ từ rack", category: "back", target: "Upper Back, Traps, Glutes", secondary: "Hamstrings", equipment: "barbell", level: "intermediate", type: "compound", goals: ["strength", "v-taper"], tempo: "2-1-1-0", rpe: "8-9", cues: ["Thanh杠 trên rack ngang gối", "Lưng thẳng, ngực ưỡn", "Kéo lên bằng đẩy hông", "Siết mông và lưng"], breathing: ["HÍT VÀO bracing", "THỞ RA khi kéo"], mistakes: ["Cong lưng", "Hyperextension ở đỉnh"], alternatives: { "Quá khó": ["Deadlift nhẹ hơn"] } },
+            { id: 53, name: "Good Morning", nameVi: "Chào buổi sáng", category: "back", target: "Hamstrings, Lower Back, Glutes", secondary: "Core", equipment: "barbell", level: "intermediate", type: "compound", goals: ["strength"], tempo: "3-1-1-0", rpe: "7-8", cues: ["Thanh杠 trên vai sau", "Đẩy hông ra sau", "Hạ thân trên xuống", "Lưng THẲNG TUYỆT ĐỐI"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đứng"], mistakes: ["Cong lưng", "Hạ quá thấp"], alternatives: { "Đau lưng": ["RDL", "Leg Curl"] } },
+            { id: 54, name: "Hyperextension", nameVi: "Gập lưng trên máy", category: "back", target: "Lower Back, Glutes", secondary: "Hamstrings", equipment: "machine", level: "beginner", type: "isolation", goals: ["posture"], tempo: "2-1-1-0", rpe: "6-7", cues: ["Nằm sấp trên máy", "Hạ người xuống", "Nâng lên bằng lưng dưới và mông", "Không hyperextension"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi nâng"], mistakes: ["Cong lưng quá mức", "Dùng lực quá mạnh"], alternatives: { "Đau lưng": ["Bird Dog", "Glute Bridge"] } },
+            { id: 55, name: "Cable Row (Standing)", nameVi: "Kéo cáp đứng", category: "back", target: "Mid Back", secondary: "Biceps", equipment: "cable", level: "intermediate", type: "compound", goals: ["v-taper"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Đứng trước cable", "Kéo về bụng", "Siết lưng", "Đưa tay về chậm"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi đưa về"], mistakes: ["Cong lưng", "Dùng lực tay"], alternatives: { "Không có cable": ["Dumbbell Row"] } },
+            
+            // SHOULDERS (28)
+            { id: 56, name: "Overhead Press", nameVi: "Đẩy vai đứng với tạ đòn", category: "shoulder", target: "Anterior & Lateral Deltoid", secondary: "Triceps, Upper Chest", equipment: "barbell", level: "intermediate", type: "compound", goals: ["broad-shoulders", "strength"], tempo: "2-1-1-0", rpe: "7-9", cues: ["Thanh杠 ngang ngực", "Core căng, mông siết", "Đẩy lên thẳng qua đầu", "Khóa khuỷu ở đỉnh"], breathing: ["HÍT VÀO SÂU bracing", "THỞ RA khi đẩy lên"], mistakes: ["Võng lưng", "Đẩy ra trước mặt"], alternatives: { "Đau lưng": ["Seated OHP", "Machine Shoulder Press"], "Đau vai": ["Neutral Grip Press"] } },
+            { id: 57, name: "Seated Dumbbell Press", nameVi: "Đẩy vai ngồi với tạ đơn", category: "shoulder", target: "Anterior & Lateral Deltoid", secondary: "Triceps", equipment: "dumbbell", level: "intermediate", type: "compound", goals: ["broad-shoulders"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Ngồi trên ghế 85-90°", "Đẩy lên, không chạm 2 tạ", "Hạ đến ngang tai", "Lưng áp ghế"], breathing: ["THỞ RA khi đẩy", "HÍT VÀO khi hạ"], mistakes: ["Tựa lưng võng", "Hạ quá thấp"], alternatives: { "Đau lưng": ["Machine Shoulder Press"] } },
+            { id: 58, name: "Arnold Press", nameVi: "Đẩy vai Arnold", category: "shoulder", target: "All 3 Deltoid Heads", secondary: "Triceps", equipment: "dumbbell", level: "intermediate", type: "compound", goals: ["broad-shoulders"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Tạ trước mặt, lòng bàn tay vào người", "Xoay và đẩy lên cùng lúc", "Ở đỉnh: lòng bàn tay ra ngoài", "Hạ và xoay ngược"], breathing: ["HÍT VÀO khi xoay vào", "THỞ RA khi đẩy và xoay ra"], mistakes: ["Xoay quá nhanh", "Lắc người"], alternatives: { "Đau vai": ["Regular Shoulder Press"] } },
+            { id: 59, name: "Lateral Raise", nameVi: "Nâng tạ ngang", category: "shoulder", target: "Lateral Deltoid", secondary: "Traps", equipment: "dumbbell", level: "beginner", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Khuỷu hơi cong", "Nâng đến ngang vai", "Dẫn bằng khuỷu", "Hạ chậm"], breathing: ["THỞ RA khi nâng", "HÍT VÀO khi hạ"], mistakes: ["Nâng quá cao", "Lắc người", "Dùng traps"], alternatives: { "Phòng gym đông": ["Cable Lateral Raise"], "Đau vai": ["Light Weight"] } },
+            { id: 60, name: "Cable Lateral Raise", nameVi: "Nâng tạ ngang với cáp", category: "shoulder", target: "Lateral Deltoid", equipment: "cable", level: "intermediate", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Đứng bên cable thấp", "Nâng đến ngang vai", "Siết vai giữa", "Hạ chậm"], breathing: ["THỞ RA khi nâng", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Nâng quá cao"], alternatives: { "Không có cable": ["DB Lateral Raise"] } },
+            { id: 61, name: "Front Raise", nameVi: "Nâng tạ trước mặt", category: "shoulder", target: "Anterior Deltoid", equipment: "dumbbell", level: "beginner", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "6-7", cues: ["Tạ trước hông", "Nâng đến ngang vai", "Khuỷu hơi cong", "Hạ chậm"], breathing: ["THỞ RA khi nâng", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Nâng quá cao"], alternatives: { "Phòng gym đông": ["Cable Front Raise"] } },
+            { id: 62, name: "Machine Shoulder Press", nameVi: "Đẩy vai với máy", category: "shoulder", target: "Anterior Deltoid", equipment: "machine", level: "beginner", type: "compound", goals: ["broad-shoulders"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Ngồi vào máy", "Đẩy lên, không khóa khuỷu", "Siết vai ở đỉnh", "Hạ chậm"], breathing: ["THỞ RA khi đẩy", "HÍT VÀO khi hạ"], mistakes: ["Dùng lực lưng", "Khóa khuỷu"], alternatives: { "Không có machine": ["DB Shoulder Press"] } },
+            { id: 63, name: "Push Press", nameVi: "Đẩy vai có leg drive", category: "shoulder", target: "All Deltoids, Triceps", secondary: "Quads, Core", equipment: "barbell", level: "intermediate", type: "compound", goals: ["broad-shoulders", "strength", "athletic"], tempo: "1-0-1-0", rpe: "8-9", cues: ["Hạ nhẹ (quarter squat)", "Đạp chân mạnh", "Dùng lực chân đẩy lên", "Khóa khuỷu ở đỉnh"], breathing: ["HÍT VÀO khi hạ", "THỞ RA MẠNH khi đạp"], mistakes: ["Dùng quá nhiều lưng", "Không dùng đủ chân"], alternatives: { "Quá khó": ["Strict OHP"] } },
+            { id: 64, name: "Bent Over Rear Delt Raise", nameVi: "Nâng tạ vai sau khi cúi", category: "shoulder", target: "Rear Deltoid", secondary: "Mid Back", equipment: "dumbbell", level: "beginner", type: "isolation", goals: ["broad-shoulders", "posture"], tempo: "2-0-2-0", rpe: "6-7", cues: ["Cúi 45°", "Nâng bằng vai sau", "Siết bả vai", "Hạ chậm"], breathing: ["THỞ RA khi nâng", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Dùng lực lưng"], alternatives: { "Phòng gym đông": ["Reverse Pec Deck"] } },
+            { id: 65, name: "Upright Row", nameVi: "Kéo tạ đứng lên cằm", category: "shoulder", target: "Lateral Deltoid, Traps", secondary: "Biceps", equipment: "barbell", level: "intermediate", type: "compound", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Nắm rộng bằng vai", "Kéo lên ngang ngực", "Dẫn bằng khuỷu", "Hạ chậm"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi hạ"], mistakes: ["Kéo quá cao gây impingement", "Nắm quá hẹp"], alternatives: { "Đau vai": ["TRÁNH BÀI NÀY", "Lateral Raise"] } },
+            { id: 66, name: "Face Pull (Shoulder Focus)", nameVi: "Kéo cáp mặt", category: "shoulder", target: "Rear Deltoid, Rotator Cuff", secondary: "Mid Back", equipment: "cable", level: "beginner", type: "isolation", goals: ["broad-shoulders", "posture"], tempo: "2-1-1-0", rpe: "6-7", cues: ["Cáp ngang mắt, rope", "Kéo về mặt, mở rộng tay", "Siết vai sau 1-2 giây", "Đưa về chậm"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi thả"], mistakes: ["Kéo quá thấp", "Dùng lực tay"], alternatives: { "Không có cable": ["Band Face Pull"] } },
+            { id: 67, name: "Cuban Rotation", nameVi: "Xoay tạ Cuban", category: "shoulder", target: "Rotator Cuff, Rear Deltoid", equipment: "dumbbell", level: "intermediate", type: "isolation", goals: ["broad-shoulders", "posture"], tempo: "2-1-1-0", rpe: "5-6", cues: ["Nâng khuỷu ngang vai", "Xoay cẳng tay lên", "Hạ xuống", "Tạ nhẹ, kiểm soát"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Tạ quá nặng", "Xoay quá nhanh"], alternatives: { "Quá khó": ["External Rotation với cable"] } },
+            { id: 68, name: "External Rotation", nameVi: "Xoay ngoài vai", category: "shoulder", target: "Rotator Cuff", equipment: "cable", level: "beginner", type: "isolation", goals: ["posture"], tempo: "2-1-1-0", rpe: "5-6", cues: ["Khuỷu sát người 90°", "Xoay ra ngoài", "Giữ khuỷu cố định", "Hạ chậm"], breathing: ["THỞ RA khi xoay", "HÍT VÀO khi vào"], mistakes: ["Khuỷu rời thân", "Dùng lực mạnh"], alternatives: { "Không có cable": ["Band External Rotation"] } },
+            { id: 69, name: "Internal Rotation", nameVi: "Xoay trong vai", category: "shoulder", target: "Rotator Cuff", equipment: "cable", level: "beginner", type: "isolation", goals: ["posture"], tempo: "2-1-1-0", rpe: "5-6", cues: ["Khuỷu sát người 90°", "Xoay vào trong", "Giữ khuỷu cố định", "Hạ chậm"], breathing: ["THỞ RA khi xoay", "HÍT VÀO khi ra"], mistakes: ["Khuỷu rời thân", "Dùng lực mạnh"], alternatives: { "Không có cable": ["Band Internal Rotation"] } },
+            { id: 70, name: "Landmine Press (Single Arm)", nameVi: "Đẩy landmine 1 tay", category: "shoulder", target: "Anterior Deltoid", secondary: "Triceps, Core", equipment: "barbell", level: "intermediate", type: "compound", goals: ["broad-shoulders"], tempo: "2-1-1-0", rpe: "7-8", cues: ["1 tay giữ landmine ngang vai", "Đẩy lên theo đường chéo", "Siết vai ở đỉnh", "Hạ chậm"], breathing: ["THỞ RA khi đẩy", "HÍT VÀO khi hạ"], mistakes: ["Cong lưng", "Đẩy không ổn định"], alternatives: { "Không có landmine": ["DB Shoulder Press"] } },
+            { id: 71, name: "Wall Slide", nameVi: "Trượt tay trên tường", category: "shoulder", target: "Shoulder Mobility", secondary: "Mid Back", equipment: "bodyweight", level: "beginner", type: "isolation", goals: ["posture"], tempo: "2-1-1-0", rpe: "4-5", cues: ["Dựa lưng vào tường", "Tay hình W", "Trượt lên thành Y", "Giữ contact tường"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Tay rời tường", "Võng lưng"], alternatives: { "Quá khó": ["Band Wall Slide"] } },
+            { id: 72, name: "Shoulder CARs", nameVi: "Controlled Articular Rotations", category: "shoulder", target: "Shoulder Joint", equipment: "bodyweight", level: "beginner", type: "isolation", goals: ["posture"], tempo: "3-1-1-0", rpe: "4-5", cues: ["Đứng thẳng", "Vẽ vòng tròn lớn", "Chậm và kiểm soát", "Đổi chiều"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Quá nhanh", "Vòng tròn nhỏ"], alternatives: { "Muốn khó hơn": ["Weighted CARs"] } },
+            { id: 73, name: "Y-T-W Raises", nameVi: "Nâng tạ hình Y-T-W", category: "shoulder", target: "Rear Deltoid, Mid Traps", equipment: "dumbbell", level: "beginner", type: "isolation", goals: ["posture", "broad-shoulders"], tempo: "2-1-1-0", rpe: "5-6", cues: ["Nằm sấp trên ghế", "Nâng thành Y", "Hạ, nâng thành T", "Hạ, nâng thành W"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Tạ quá nặng", "Lắc người"], alternatives: { "Không có tạ": ["Bodyweight Y-T-W"] } },
+            { id: 74, name: "Scaption Raise", nameVi: "Nâng tạ chếch 30°", category: "shoulder", target: "Supraspinatus, Anterior Deltoid", equipment: "dumbbell", level: "beginner", type: "isolation", goals: ["posture"], tempo: "2-1-1-0", rpe: "5-6", cues: ["Tạ 2 bên", "Nâng chếch 30°", "Ngón cái hướng lên", "Hạ chậm"], breathing: ["THỞ RA khi nâng", "HÍT VÀO khi hạ"], mistakes: ["Nâng quá cao", "Ngón cái xuống"], alternatives: { "Đau vai": ["Lighter weight"] } },
+            { id: 75, name: "Bradford Press", nameVi: "Đẩy vai Bradford", category: "shoulder", target: "All Deltoids", secondary: "Triceps", equipment: "barbell", level: "intermediate", type: "compound", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Thanh trước cổ", "Đẩy lên qua đầu", "Hạ ra sau cổ", "Đẩy lên, hạ về trước"], breathing: ["HÍT THỞ THEO NHỊP"], mistakes: ["Chạm thanh vào cổ", "Tạ quá nặng"], alternatives: { "Đau vai": ["Regular OHP"] } },
+            { id: 76, name: "Z Press", nameVi: "Đẩy vai ngồi sàn", category: "shoulder", target: "All Deltoids", secondary: "Triceps, Core", equipment: "barbell", level: "advanced", type: "compound", goals: ["broad-shoulders", "strength"], tempo: "2-1-1-0", rpe: "8-9", cues: ["Ngồi sàn, chân duỗi", "Thanh杠 trên vai", "Đẩy thẳng lên", "Core cực căng"], breathing: ["HÍT VÀO bracing", "THỞ RA khi đẩy"], mistakes: ["Cong lưng", "Mất thăng bằng"], alternatives: { "Quá khó": ["Seated OHP"] } },
+            { id: 77, name: "Behind the Neck Press", nameVi: "Đẩy vai sau cổ", category: "shoulder", target: "Lateral & Posterior Deltoid", secondary: "Triceps", equipment: "barbell", level: "advanced", type: "compound", goals: ["broad-shoulders"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Thanh杠 sau cổ", "Đẩy lên thẳng", "Hạ đến ngang tai", "🌬️ THỞ RA khi đẩy"], mistakes: ["Hạ quá thấp", "Mobility kém"], alternatives: { "An toàn hơn": ["Regular OHP"] } },
+            { id: 78, name: "Plate Raise", nameVi: "Nâng tạ đĩa trước mặt", category: "shoulder", target: "Anterior Deltoid", equipment: "barbell", level: "beginner", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "6-7", cues: ["Giữ plate 2 tay", "Nâng ngang vai", "Hạ chậm", "🌬️ THỞ RA khi nâng"], mistakes: ["Lắc người", "Nâng quá cao"], alternatives: { "Không có plate": ["DB Front Raise"] } },
+            { id: 79, name: "Lean Away Lateral Raise", nameVi: "Nâng tạ nghiêng người", category: "shoulder", target: "Lateral Deltoid", equipment: "dumbbell", level: "intermediate", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["1 tay giữ trụ", "Tay kia nâng sang ngang", "Siết vai giữa", "Hạ chậm"], breathing: ["THỞ RA khi nâng", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Nâng quá cao"], alternatives: { "Quá khó": ["DB Lateral Raise thường"] } },
+            { id: 80, name: "Machine Lateral Raise", nameVi: "Nâng vai với máy", category: "shoulder", target: "Lateral Deltoid", equipment: "machine", level: "beginner", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Ngồi vào máy", "Nâng sang ngang", "Siết vai giữa", "Hạ chậm"], breathing: ["THỞ RA khi nâng", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Nâng quá cao"], alternatives: { "Không có machine": ["DB Lateral Raise"] } },
+            { id: 81, name: "Partial Lateral Raise", nameVi: "Nâng tạ ngang một phần", category: "shoulder", target: "Lateral Deltoid", equipment: "dumbbell", level: "intermediate", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Nâng chỉ đến 45°", "Tập trung vai giữa", "Siết ở đỉnh", "Hạ chậm"], breathing: ["THỞ RA khi nâng", "HÍT VÀO khi hạ"], mistakes: ["Nâng quá cao", "Lắc người"], alternatives: { "Muốn ROM đầy đủ": ["DB Lateral Raise thường"] } },
+            { id: 82, name: "Rear Cable Fly", nameVi: "Kéo cáp vai sau", category: "shoulder", target: "Rear Deltoid", equipment: "cable", level: "intermediate", type: "isolation", goals: ["broad-shoulders", "posture"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Đứng giữa 2 cable thấp", "Kéo ra sau", "Siết bả vai", "Đưa về chậm"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi đưa về"], mistakes: ["Lắc người", "Kéo bằng tay"], alternatives: { "Không có cable": ["Bent Over Raise"] } },
+            { id: 83, name: "Cross Body Lateral Raise", nameVi: "Nâng tạ chéo người", category: "shoulder", target: "Lateral Deltoid", equipment: "cable", level: "intermediate", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Đứng bên cable thấp", "Kéo chéo qua người", "Siết vai giữa", "Hạ chậm"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi hạ"], mistakes: ["Xoay người", "Dùng lực tay"], alternatives: { "Không có cable": ["DB Lateral Raise"] } },
+            
+            // LEGS (35)
+            { id: 84, name: "Back Squat", nameVi: "Squat với tạ sau vai", category: "legs", target: "Quads, Glutes", secondary: "Hamstrings, Core", equipment: "barbell", level: "intermediate", type: "compound", goals: ["strength", "athletic"], tempo: "3-1-1-0", rpe: "7-9", cues: ["Thanh杠 trên vai sau", "HÍT VÀO SÂU bracing", "Hạ đến parallel", "Đạp gót đứng lên"], breathing: ["HÍT VÀO SÂU bracing", "GIỮ HƠI khi hạ và đẩy", "THỞ RA khi đứng"], mistakes: ["Gối valgus", "Nhón gót", "Butt wink"], alternatives: { "Đau lưng": ["Front Squat", "Leg Press"], "Đau gối": ["Box Squat"] } },
+            { id: 85, name: "Front Squat", nameVi: "Squat với tạ trước vai", category: "legs", target: "Quads", secondary: "Glutes, Core", equipment: "barbell", level: "intermediate", type: "compound", goals: ["strength", "athletic"], tempo: "3-1-1-0", rpe: "7-8", cues: ["Thanh杠 trên vai trước", "Khuỷu tay cao", "Hạ sâu", "Đạp gót đứng lên"], breathing: ["HÍT VÀO bracing", "THỞ RA khi đứng"], mistakes: ["Khuỷu tay hạ", "Thân quá nghiêng"], alternatives: { "Quá khó": ["Goblet Squat"] } },
+            { id: 86, name: "Goblet Squat", nameVi: "Squat với tạ trước ngực", category: "legs", target: "Quads, Glutes", secondary: "Core", equipment: "dumbbell", level: "beginner", type: "compound", goals: ["strength"], tempo: "3-1-1-0", rpe: "6-7", cues: ["Giữ tạ trước ngực", "Đứng rộng hơn vai", "Hạ như ngồi ghế", "Đạp gót đứng lên"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đứng"], mistakes: ["Gối khép", "Nhón gót", "Cong lưng"], alternatives: { "Quá khó": ["Bodyweight Squat"] } },
+            { id: 87, name: "Leg Press", nameVi: "Đạp leg với máy", category: "legs", target: "Quads, Glutes", secondary: "Hamstrings", equipment: "machine", level: "beginner", type: "compound", goals: ["strength"], tempo: "3-1-1-0", rpe: "7-9", cues: ["Chân rộng bằng vai", "Hạ đến gối 90°", "Đạp lên, KHÔNG khóa gối", "Kiểm soát"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đạp"], mistakes: ["Khóa gối", "Hạ quá sâu"], alternatives: { "Đau lưng": ["Leg Extension + Leg Curl"] } },
+            { id: 88, name: "Hack Squat", nameVi: "Squat trên máy hack", category: "legs", target: "Quads", equipment: "machine", level: "intermediate", type: "compound", goals: ["strength"], tempo: "3-1-1-0", rpe: "7-8", cues: ["Vai dưới đệm", "Hạ đến gối 90°", "Đạp bằng gót", "Không khóa gối"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đạp"], mistakes: ["Khóa gối", "Hạ quá nhanh"], alternatives: { "Không có máy": ["Leg Press", "Squat"] } },
+            { id: 89, name: "Bulgarian Split Squat", nameVi: "Squat 1 chân với chân sau trên ghế", category: "legs", target: "Quads, Glutes", secondary: "Hamstrings, Core", equipment: "dumbbell", level: "intermediate", type: "compound", goals: ["strength", "athletic"], tempo: "3-1-1-0", rpe: "7-8", cues: ["1 chân trước, chân sau trên ghế", "Hạ đến đùi song song", "Ngực thẳng, core căng", "Đẩy bằng gót chân trước"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Mất thăng bằng", "Gối trước vượt quá nhiều"], alternatives: { "Quá khó": ["Reverse Lunge", "Step-up"] } },
+            { id: 90, name: "Lunges", nameVi: "Bước chân lên xuống", category: "legs", target: "Quads, Glutes", secondary: "Hamstrings", equipment: "dumbbell", level: "beginner", type: "compound", goals: ["strength", "athletic"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Tạ 2 bên", "Bước chân trước", "Gối sau gần chạm đất", "Đẩy lên"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Bước quá ngắn", "Gối trước vượt quá nhiều"], alternatives: { "Đau đầu gối": ["Reverse Lunge"] } },
+            { id: 91, name: "Reverse Lunge", nameVi: "Bước lùi xuống", category: "legs", target: "Quads, Glutes", secondary: "Hamstrings", equipment: "dumbbell", level: "beginner", type: "compound", goals: ["strength"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Bước chân sau", "Hạ xuống", "Gối sau gần đất", "Đẩy lên"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Bước quá ngắn", "Gối trước vượt quá nhiều"], alternatives: { "Đau đầu gối": ["Glute Bridge"] } },
+            { id: 92, name: "Walking Lunges", nameVi: "Bước lunges đi tới", category: "legs", target: "Quads, Glutes", secondary: "Hamstrings, Core", equipment: "dumbbell", level: "intermediate", type: "compound", goals: ["fat-loss", "athletic"], tempo: "2-0-1-0", rpe: "7-8", cues: ["Bước chân trước", "Hạ xuống", "Đẩy lên và bước chân kia", "Tiếp tục đi"], breathing: ["HÍT THỞ THEO NHỊP"], mistakes: ["Bước quá ngắn", "Nghiêng người"], alternatives: { "Không có không gian": ["Reverse Lunge"] } },
+            { id: 93, name: "Step-up", nameVi: "Bước lên bục", category: "legs", target: "Quads, Glutes", equipment: "dumbbell", level: "beginner", type: "compound", goals: ["strength"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Đứng trước bục", "Đặt chân lên", "Đẩy lên bằng chân trên", "Hạ chậm, đổi chân"], breathing: ["THỞ RA khi đẩy", "HÍT VÀO khi hạ"], mistakes: ["Dùng lực chân dưới", "Không duỗi thẳng chân trên"], alternatives: { "Quá dễ": ["Weighted Step-up"] } },
+            { id: 94, name: "Leg Extension", nameVi: "Đá đùi trước với máy", category: "legs", target: "Quads", equipment: "machine", level: "beginner", type: "isolation", goals: ["strength"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Cổ chân dưới đòn", "Đá lên đến gối thẳng", "Siết quads ở đỉnh", "Hạ chậm"], breathing: ["THỞ RA khi đá", "HÍT VÀO khi hạ"], mistakes: ["Đá quá nhanh", "Hông nhấc"], alternatives: { "Đau gối": ["Light weight, high reps"] } },
+            { id: 95, name: "Leg Curl (Lying)", nameVi: "Cuộn đùi sau nằm sấp", category: "legs", target: "Hamstrings", equipment: "machine", level: "beginner", type: "isolation", goals: ["strength"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Cổ chân dưới đòn", "Cuộn về phía mông", "Siết hamstring", "Hạ chậm"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi hạ"], mistakes: ["Nhấc hông", "Cuộn quá nhanh"], alternatives: { "Phòng gym đông": ["Seated Leg Curl"] } },
+            { id: 96, name: "Seated Leg Curl", nameVi: "Cuộn đùi sau ngồi", category: "legs", target: "Hamstrings", equipment: "machine", level: "beginner", type: "isolation", goals: ["strength"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Đùi dưới đệm", "Cuộn về sau", "Siết hamstring", "Hạ chậm"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi hạ"], mistakes: ["Nhấc đùi", "Cuộn quá nhanh"], alternatives: { "Phòng gym đông": ["Lying Leg Curl"] } },
+            { id: 97, name: "Nordic Curl", nameVi: "Cuộn đùi sau Nordic", category: "legs", target: "Hamstrings", equipment: "bodyweight", level: "advanced", type: "isolation", goals: ["strength", "athletic"], tempo: "3-1-1-0", rpe: "8-9", cues: ["Quỳ gối, có người giữ", "Hạ người về trước chậm", "Lưng thẳng", "Dùng tay đẩy về khi cần"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy về"], mistakes: ["Hạ quá nhanh", "Cong lưng"], alternatives: { "Quá khó": ["Band Assisted Nordic Curl"] } },
+            { id: 98, name: "Swiss Ball Hamstring Curl", nameVi: "Cuộn đùi sau với bóng", category: "legs", target: "Hamstrings, Glutes", equipment: "bodyweight", level: "beginner", type: "isolation", goals: ["strength"], tempo: "2-1-1-0", rpe: "6-7", cues: ["Gót trên bóng", "Nâng hông, cuộn bóng về mông", "Siết hamstring và mông", "Hạ chậm"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi hạ"], mistakes: ["Hông hạ", "Bóng lăn không kiểm soát"], alternatives: { "Muốn nặng hơn": ["Single Leg Swiss Ball Curl"] } },
+            { id: 99, name: "Hip Thrust", nameVi: "Đẩy hông với thanh杠", category: "legs", target: "Glutes", secondary: "Hamstrings", equipment: "barbell", level: "intermediate", type: "compound", goals: ["strength", "athletic"], tempo: "2-1-1-0", rpe: "7-9", cues: ["Tựa lưng trên ghế", "Đẩy hông lên bằng mông", "Siết mông mạnh ở đỉnh", "Hạ chậm"], breathing: ["HÍT VÀO khi hạ", "THỞ RA MẠNH khi đẩy và siết"], mistakes: ["Vươn cổ", "Đẩy quá cao", "Gối mở rộng"], alternatives: { "Phòng gym đông": ["Smith Hip Thrust"], "Đau lưng": ["Glute Bridge"] } },
+            { id: 100, name: "Glute Bridge", nameVi: "Đẩy hông nằm sàn", category: "legs", target: "Glutes", secondary: "Hamstrings", equipment: "bodyweight", level: "beginner", type: "compound", goals: ["strength"], tempo: "2-1-1-0", rpe: "5-7", cues: ["Nằm ngửa, chân co", "Đẩy hông bằng mông", "Siết mông ở đỉnh", "Hạ chậm"], breathing: ["THỞ RA khi đẩy", "HÍT VÀO khi hạ"], mistakes: ["Đẩy quá cao", "Dùng lực đùi"], alternatives: { "Quá dễ": ["Single Leg Bridge", "Hip Thrust"] } },
+            { id: 101, name: "Standing Calf Raise", nameVi: "Nhón gót đứng", category: "legs", target: "Gastrocnemius", equipment: "machine", level: "beginner", type: "isolation", goals: ["strength"], tempo: "2-1-2-0", rpe: "7-8", cues: ["Hạ gót xuống thấp", "Nhón lên cao nhất", "Siết bắp chân", "Giữ 1-2 giây"], breathing: ["THỞ RA khi nhón", "HÍT VÀO khi hạ"], mistakes: ["Nhón quá nhanh", "Không hạ hết", "Cong gối"], alternatives: { "Phòng gym đông": ["Seated Calf Raise"] } },
+            { id: 102, name: "Seated Calf Raise", nameVi: "Nhón gót ngồi", category: "legs", target: "Soleus", equipment: "machine", level: "beginner", type: "isolation", goals: ["strength"], tempo: "2-1-2-0", rpe: "7-8", cues: ["Đùi dưới đệm", "Hạ gót thấp", "Nhón lên cao", "Giữ ở đỉnh"], breathing: ["THỞ RA khi nhón", "HÍT VÀO khi hạ"], mistakes: ["Nhón quá nhanh", "Không hạ hết"], alternatives: { "Phòng gym đông": ["Standing Calf Raise"] } },
+            { id: 103, name: "Single Leg Calf Raise", nameVi: "Nhón gót 1 chân", category: "legs", target: "Calves", equipment: "bodyweight", level: "beginner", type: "isolation", goals: ["strength"], tempo: "2-1-2-0", rpe: "6-8", cues: ["1 chân trên bậc", "Hạ gót thấp", "Nhón cao nhất", "Giữ 1 giây, đổi chân"], breathing: ["THỞ RA khi nhón", "HÍT VÀO khi hạ"], mistakes: ["Mất thăng bằng", "Nhón quá nhanh"], alternatives: { "Quá khó": ["2 chân Calf Raise"] } },
+            { id: 104, name: "Adductor Machine", nameVi: "Ép chân vào trong", category: "legs", target: "Adductors", equipment: "machine", level: "beginner", type: "isolation", goals: ["strength"], tempo: "2-1-1-0", rpe: "6-7", cues: ["Ép 2 chân vào nhau", "Siết ở đỉnh", "Mở ra chậm"], breathing: ["THỞ RA khi ép", "HÍT VÀO khi mở"], mistakes: ["Dùng lực lưng", "Ép quá nhanh"], alternatives: { "Không có machine": ["Band Adduction"] } },
+            { id: 105, name: "Abductor Machine", nameVi: "Mở chân ra ngoài", category: "legs", target: "Gluteus Medius", equipment: "machine", level: "beginner", type: "isolation", goals: ["strength"], tempo: "2-1-1-0", rpe: "6-7", cues: ["Mở 2 chân ra xa", "Siết mông ở đỉnh", "Đóng lại chậm"], breathing: ["THỞ RA khi mở", "HÍT VÀO khi đóng"], mistakes: ["Dùng lực lưng", "Mở quá nhanh"], alternatives: { "Không có machine": ["Band Abduction"] } },
+            { id: 106, name: "Sumo Squat", nameVi: "Squat rộng chân", category: "legs", target: "Adductors, Quads, Glutes", equipment: "dumbbell", level: "beginner", type: "compound", goals: ["strength"], tempo: "3-1-1-0", rpe: "7-8", cues: ["Đứng rộng, mũi chân 45°", "Hạ như ngồi ghế", "Đẩy bằng gót"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Gối khép", "Nhón gót"], alternatives: { "Quá khó": ["Goblet Squat"] } },
+            { id: 107, name: "Box Squat", nameVi: "Squat ngồi hộp", category: "legs", target: "Quads, Glutes", equipment: "barbell", level: "intermediate", type: "compound", goals: ["strength"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Hạ ngồi lên box", "Đẩy bằng gót", "Lưng thẳng"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Ngồi quá mạnh", "Cong lưng"], alternatives: { "Quá khó": ["Back Squat"] } },
+            { id: 108, name: "Pistol Squat", nameVi: "Squat 1 chân nâng chân kia", category: "legs", target: "Quads, Glutes, Balance", equipment: "bodyweight", level: "advanced", type: "compound", goals: ["strength", "athletic"], tempo: "3-1-1-0", rpe: "8-9", cues: ["1 chân, chân kia duỗi", "Hạ đến mông gần gót", "Ngực ưỡn", "Đẩy lên"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Mất thăng bằng", "Gối khép"], alternatives: { "Quá khó": ["Assisted Pistol Squat"] } },
+            { id: 109, name: "Sissy Squat", nameVi: "Sissy Squat", category: "legs", target: "Quads", equipment: "bodyweight", level: "intermediate", type: "isolation", goals: ["strength"], tempo: "3-1-1-0", rpe: "7-8", cues: ["Tay giữ trụ, nhón gót", "Ngả ra sau, hạ xuống", "Đầu gối về trước", "Đẩy bằng quads"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Đau đầu gối", "Mất thăng bằng"], alternatives: { "Quá khó": ["Leg Extension"] } },
+            { id: 110, name: "Wall Sit", nameVi: "Ngồi tựa tường", category: "legs", target: "Quads", equipment: "bodyweight", level: "beginner", type: "isolation", goals: ["strength"], tempo: "Static", rpe: "7-8", cues: ["Lưng tựa tường", "Đùi song song sàn", "Giữ 30-60 giây", "Hít thở đều"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Hông cao hơn gối", "Lưng không tựa"], alternatives: { "Muốn khó hơn": ["Weighted Wall Sit"] } },
+            { id: 111, name: "Jump Squat", nameVi: "Squat bật nhảy", category: "legs", target: "Quads, Glutes, Power", equipment: "bodyweight", level: "intermediate", type: "compound", goals: ["athletic", "fat-loss"], tempo: "X-0-X-0", rpe: "8-9", cues: ["Hạ squat", "Bật nhảy cao", "Tiếp đất nhẹ bằng mũi chân"], breathing: ["HÍT VÀO khi hạ", "THỞ RA MẠNH khi bật"], mistakes: ["Tiếp đất mạnh", "Cong lưng"], alternatives: { "Đau đầu gối": ["Bodyweight Squat"] } },
+            { id: 112, name: "Cossack Squat", nameVi: "Squat Cossack", category: "legs", target: "Adductors, Quads", secondary: "Mobility", equipment: "bodyweight", level: "intermediate", type: "compound", goals: ["athletic"], tempo: "3-1-1-0", rpe: "6-7", cues: ["Hạ sang 1 bên", "Chân kia duỗi", "Gót chân trụ trên sàn", "Đẩy về giữa, đổi bên"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Gót nhấc", "Cong lưng"], alternatives: { "Quá khó": ["Band Assisted Cossack Squat"] } },
+            { id: 113, name: "Jefferson Curl", nameVi: "Jefferson Curl", category: "legs", target: "Hamstrings, Lower Back, Mobility", equipment: "barbell", level: "advanced", type: "compound", goals: ["posture"], tempo: "3-1-1-0", rpe: "5-6", cues: ["Đứng trên bục", "Cuộn cột sống từ trên xuống", "Hạ thấp nhất có thể", "Cuộn ngược từ dưới lên"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi cuộn lên"], mistakes: ["Cong lưng quá mức", "Tạ quá nặng"], alternatives: { "Quá khó": ["RDL nhẹ"] } },
+            { id: 114, name: "Tibialis Raise", nameVi: "Nâng ống đồng", category: "legs", target: "Tibialis Anterior", equipment: "bodyweight", level: "beginner", type: "isolation", goals: ["athletic"], tempo: "2-1-1-0", rpe: "5-6", cues: ["Dựa lưng vào tường", "Nâng mũi chân lên", "Siết ống đồng", "Hạ chậm"], breathing: ["THỞ RA khi nâng", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Nâng không đủ cao"], alternatives: { "Muốn nặng hơn": ["Weighted Tibialis Raise"] } },
+            { id: 115, name: "Good Morning (Legs)", nameVi: "Chào buổi sáng", category: "legs", target: "Hamstrings, Glutes", secondary: "Lower Back", equipment: "barbell", level: "intermediate", type: "compound", goals: ["strength"], tempo: "3-1-1-0", rpe: "7-8", cues: ["Đẩy hông ra sau", "Hạ thân trên", "Lưng thẳng", "Đẩy hông về trước"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đứng"], mistakes: ["Cong lưng", "Hạ quá thấp"], alternatives: { "Đau lưng": ["RDL", "Leg Curl"] } },
+            { id: 116, name: "Belt Squat", nameVi: "Squat với đai", category: "legs", target: "Quads, Glutes", equipment: "machine", level: "intermediate", type: "compound", goals: ["strength"], tempo: "3-1-1-0", rpe: "7-8", cues: ["Đeo belt quanh hông", "Hạ như squat", "Đẩy bằng gót", "Lưng thẳng"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Mất thăng bằng", "Hạ không đủ sâu"], alternatives: { "Không có machine": ["Goblet Squat", "Leg Press"] } },
+            { id: 117, name: "Glute Ham Raise", nameVi: "GHR", category: "legs", target: "Hamstrings, Glutes", equipment: "machine", level: "advanced", type: "compound", goals: ["strength", "athletic"], tempo: "3-1-1-0", rpe: "8-9", cues: ["Quỳ trên máy GHR", "Hạ về trước chậm", "Đẩy về bằng hamstring và mông", "Lưng thẳng"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy về"], mistakes: ["Hạ quá nhanh", "Cong lưng"], alternatives: { "Quá khó": ["Nordic Curl", "Leg Curl"] } },
+            { id: 118, name: "Skater Lunge", nameVi: "Lunge trượt ngang", category: "legs", target: "Glutes, Quads", secondary: "Balance", equipment: "bodyweight", level: "intermediate", type: "compound", goals: ["athletic", "fat-loss"], tempo: "X-0-X-0", rpe: "7-8", cues: ["Nhảy sang chân kia", "Chân sau chéo ra sau", "Giữ thăng bằng", "Đổi bên"], breathing: ["HÍT THỞ THEO NHỊP"], mistakes: ["Mất thăng bằng", "Tiếp đất mạnh"], alternatives: { "Quá khó": ["Reverse Lunge"] } },
+            
+            // ARMS (30)
+            { id: 119, name: "Barbell Curl", nameVi: "Cuộn tạ đòn", category: "arms", target: "Biceps", secondary: "Brachialis", equipment: "barbell", level: "beginner", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Tay rộng bằng vai", "Khuỷu SÁT NGƯỜI", "Cuộn lên bằng bicep", "Hạ chậm"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Đưa khuỷu ra trước"], alternatives: { "Phòng gym đông": ["Dumbbell Curl", "EZ Bar Curl"] } },
+            { id: 120, name: "EZ Bar Curl", nameVi: "Cuộn tạ EZ bar", category: "arms", target: "Biceps", equipment: "barbell", level: "beginner", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Giữ EZ bar ở phần cong", "Cuộn lên bằng biceps", "Khuỷu sát người", "Hạ chậm"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Đưa khuỷu ra trước"], alternatives: { "Đau cổ tay": ["DB Curl", "Neutral Grip"] } },
+            { id: 121, name: "Dumbbell Curl", nameVi: "Cuộn tạ đơn", category: "arms", target: "Biceps", equipment: "dumbbell", level: "beginner", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Tạ 2 bên", "Cuộn lên luân phiên", "Khuỷu sát người", "Hạ chậm"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Đưa khuỷu ra trước"], alternatives: { "Muốn nặng hơn": ["Barbell Curl"] } },
+            { id: 122, name: "Hammer Curl", nameVi: "Cuộn tạ búa", category: "arms", target: "Brachialis, Brachioradialis", secondary: "Biceps", equipment: "dumbbell", level: "beginner", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Lòng bàn tay hướng vào nhau", "Khuỷu sát người", "Cuộn lên, giữ cổ tay", "Hạ chậm"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi hạ"], mistakes: ["Xoay cổ tay", "Lắc người"], alternatives: { "Phòng gym đông": ["Cable Hammer Curl"] } },
+            { id: 123, name: "Incline Dumbbell Curl", nameVi: "Cuộn tạ trên ghế nghiêng", category: "arms", target: "Biceps (Long Head)", equipment: "dumbbell", level: "intermediate", type: "isolation", goals: ["broad-shoulders"], tempo: "3-0-2-0", rpe: "7-8", cues: ["Ghế nghiêng 45°", "Thả tạ xuôi", "Cuộn lên, khuỷu cố định", "Hạ chậm, cảm nhận căng"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi hạ"], mistakes: ["Đưa khuỷu ra trước", "Lắc người"], alternatives: { "Đau vai": ["Seated Curl", "Regular Curl"] } },
+            { id: 124, name: "Spider Curl", nameVi: "Cuộn tạ nhện", category: "arms", target: "Biceps (Short Head)", equipment: "dumbbell", level: "intermediate", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Nằm sấp trên ghế nghiêng", "Cuộn lên bằng biceps", "Siết ở đỉnh", "Hạ chậm"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Đưa khuỷu ra trước"], alternatives: { "Không có ghế": ["Preacher Curl"] } },
+            { id: 125, name: "Preacher Curl", nameVi: "Cuộn tạ preacher", category: "arms", target: "Biceps (Short Head)", equipment: "barbell", level: "intermediate", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Tay trên đệm", "Cuộn lên bằng biceps", "Siết ở đỉnh", "Hạ chậm, không khóa khuỷu"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi hạ"], mistakes: ["Hạ quá nhanh", "Lắc người"], alternatives: { "Không có ghế": ["Spider Curl"] } },
+            { id: 126, name: "Concentration Curl", nameVi: "Cuộn tạ tập trung", category: "arms", target: "Biceps (Peak)", equipment: "dumbbell", level: "intermediate", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Khuỷu tựa đùi trong", "Cuộn lên bằng biceps", "Siết ở đỉnh", "Hạ chậm"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Đưa khuỷu ra trước"], alternatives: { "Muốn nặng hơn": ["Preacher Curl"] } },
+            { id: 127, name: "Cable Curl", nameVi: "Cuộn tạ với cáp", category: "arms", target: "Biceps", equipment: "cable", level: "beginner", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Tay cầm thanh", "Cuộn lên bằng biceps", "Khuỷu sát người", "Hạ chậm"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Đưa khuỷu ra trước"], alternatives: { "Không có cable": ["DB Curl"] } },
+            { id: 128, name: "Bayesian Curl", nameVi: "Cuộn tạ Bayesian", category: "arms", target: "Biceps (Long Head)", equipment: "cable", level: "intermediate", type: "isolation", goals: ["broad-shoulders"], tempo: "3-0-2-0", rpe: "7-8", cues: ["Quay lưng với cable thấp", "Kéo ra sau", "Cuộn lên bằng biceps", "Hạ chậm, cảm nhận căng"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Đưa khuỷu ra trước"], alternatives: { "Không có cable": ["Incline DB Curl"] } },
+            { id: 129, name: "Cross Body Hammer Curl", nameVi: "Cuộn tạ búa chéo người", category: "arms", target: "Brachialis", secondary: "Brachioradialis", equipment: "dumbbell", level: "beginner", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Lòng bàn tay vào nhau", "Cuộn chéo qua người", "Khuỷu sát người", "Hạ chậm"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Đưa khuỷu ra trước"], alternatives: { "Không có tạ": ["Band Cross Body Curl"] } },
+            { id: 130, name: "Tricep Pushdown", nameVi: "Đẩy cáp xuống", category: "arms", target: "Triceps", equipment: "cable", level: "beginner", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["KHUỶU TAY SÁT NGƯỜI", "Đẩy xuống bằng tricep", "Siết ở cuối", "Đưa lên chậm"], breathing: ["THỞ RA khi đẩy", "HÍT VÀO khi đưa lên"], mistakes: ["Đưa khuỷu ra trước", "Dùng lực ngực"], alternatives: { "Phòng gym đông": ["Rope Pushdown"] } },
+            { id: 131, name: "Rope Pushdown", nameVi: "Đẩy cáp với dây", category: "arms", target: "Triceps (Lateral Head)", equipment: "cable", level: "beginner", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Đẩy xuống, MỞ RỘNG rope ở cuối", "Siết triceps ở đỉnh", "Đưa lên chậm"], breathing: ["THỞ RA khi đẩy", "HÍT VÀO khi đưa lên"], mistakes: ["Đưa khuỷu ra trước", "Mở rope không đủ"], alternatives: { "Không có cable": ["DB Kickback"] } },
+            { id: 132, name: "Overhead Tricep Extension", nameVi: "Duỗi tạ qua đầu", category: "arms", target: "Triceps (Long Head)", equipment: "dumbbell", level: "intermediate", type: "isolation", goals: ["broad-shoulders"], tempo: "3-0-2-0", rpe: "7-8", cues: ["Giữ tạ trên đầu", "Hạ ra sau đầu", "Khuỷu SÁT ĐẦU", "Duỗi về"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi duỗi"], mistakes: ["Mở khuỷu quá rộng", "Cong lưng"], alternatives: { "Đau vai": ["Tricep Kickback", "Skull Crushers"] } },
+            { id: 133, name: "Skull Crusher", nameVi: "Nằm duỗi tạ", category: "arms", target: "Triceps", equipment: "barbell", level: "intermediate", type: "isolation", goals: ["broad-shoulders"], tempo: "3-0-2-0", rpe: "7-8", cues: ["Tạ thẳng trên ngực", "Hạ về phía trán", "Khuỷu cố định, hướng lên", "Duỗi về"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi duỗi"], mistakes: ["Mở khuỷu quá rộng", "Hạ quá thấp"], alternatives: { "Đau khuỷu tay": ["Rope Pushdown"] } },
+            { id: 134, name: "Tricep Kickback", nameVi: "Đá tạ ra sau", category: "arms", target: "Triceps", equipment: "dumbbell", level: "beginner", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "6-7", cues: ["Cúi 45°", "Đẩy ra sau bằng triceps", "Siết ở cuối, duỗi thẳng", "Hạ chậm"], breathing: ["THỞ RA khi đẩy", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Không duỗi thẳng"], alternatives: { "Không có tạ": ["Band Kickback"] } },
+            { id: 135, name: "Close Grip Bench Press", nameVi: "Đẩy ngực hẹp tay", category: "arms", target: "Triceps, Chest", secondary: "Anterior Deltoid", equipment: "barbell", level: "intermediate", type: "compound", goals: ["strength", "broad-shoulders"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Nắm HẸP HƠN VAI", "Hạ xuống ngực dưới", "Đẩy bằng triceps", "Không khóa khuỷu"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Cong lưng", "Nắm quá hẹp"], alternatives: { "Quá khó": ["DB Close Grip Press"] } },
+            { id: 136, name: "Bench Dip", nameVi: "Xà kép giữa 2 ghế", category: "arms", target: "Triceps", secondary: "Chest", equipment: "bodyweight", level: "beginner", type: "compound", goals: ["broad-shoulders"], tempo: "2-1-1-0", rpe: "6-8", cues: ["Tay trên ghế sau", "Hạ bằng gập khuỷu", "Đẩy bằng triceps", "Không hạ quá sâu"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Hạ quá sâu", "Khuỷu mở rộng"], alternatives: { "Quá khó": ["Parallel Bar Dip"] } },
+            { id: 137, name: "Parallel Bar Dip (Tricep)", nameVi: "Xà kép thẳng người", category: "arms", target: "Triceps, Chest", equipment: "bodyweight", level: "advanced", type: "compound", goals: ["strength", "broad-shoulders"], tempo: "2-1-1-0", rpe: "8-9", cues: ["Người THẲNG", "Hạ bằng gập khuỷu", "Đẩy bằng triceps", "Không khóa khuỷu"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Hạ quá thấp", "Lắc người"], alternatives: { "Quá khó": ["Weighted Dip", "Bench Dip"] } },
+            { id: 138, name: "Wrist Curl", nameVi: "Cuộn cổ tay", category: "arms", target: "Forearms (Flexors)", equipment: "dumbbell", level: "beginner", type: "isolation", goals: ["strength"], tempo: "2-0-2-0", rpe: "6-7", cues: ["Cẳng tay trên đùi", "Cuộn cổ tay lên", "Siết ở đỉnh", "Hạ chậm"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi hạ"], mistakes: ["Lắc cẳng tay", "Tạ quá nặng"], alternatives: { "Muốn nặng hơn": ["Barbell Wrist Curl"] } },
+            { id: 139, name: "Reverse Wrist Curl", nameVi: "Cuộn cổ tay ngược", category: "arms", target: "Forearms (Extensors)", equipment: "dumbbell", level: "beginner", type: "isolation", goals: ["strength"], tempo: "2-0-2-0", rpe: "6-7", cues: ["Lòng bàn tay xuống", "Nâng cổ tay lên", "Siết ở đỉnh", "Hạ chậm"], breathing: ["THỞ RA khi nâng", "HÍT VÀO khi hạ"], mistakes: ["Lắc cẳng tay", "Tạ quá nặng"], alternatives: { "Muốn nặng hơn": ["Barbell Reverse Wrist Curl"] } },
+            { id: 140, name: "Reverse Curl", nameVi: "Cuộn tạ ngược", category: "arms", target: "Brachioradialis, Forearms", secondary: "Biceps", equipment: "barbell", level: "intermediate", type: "isolation", goals: ["broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Lòng bàn tay xuống", "Cuộn lên bằng cẳng tay", "Khuỷu sát người", "Hạ chậm"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Đưa khuỷu ra trước"], alternatives: { "Muốn nhẹ hơn": ["DB Reverse Curl"] } },
+            { id: 141, name: "Cable Overhead Tricep Extension", nameVi: "Duỗi tạ qua đầu với cáp", category: "arms", target: "Triceps (Long Head)", equipment: "cable", level: "intermediate", type: "isolation", goals: ["broad-shoulders"], tempo: "3-0-2-0", rpe: "7-8", cues: ["Quay lưng với cable", "Hạ rope ra sau đầu", "Khuỷu sát đầu", "Duỗi về trước"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi duỗi"], mistakes: ["Mở khuỷu quá rộng", "Lắc người"], alternatives: { "Không có cable": ["DB Overhead Extension"] } },
+            { id: 142, name: "JM Press", nameVi: "JM Press", category: "arms", target: "Triceps", secondary: "Chest", equipment: "barbell", level: "intermediate", type: "compound", goals: ["strength", "broad-shoulders"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Nắm thanh hẹp", "Hạ về phía cổ/jaw", "Khuỷu về trước", "Đẩy lên"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Hạ quá thấp", "Mở khuỷu quá rộng"], alternatives: { "Quá khó": ["Close Grip Bench"] } },
+            { id: 143, name: "Diamond Push-up", nameVi: "Hít đất kim cương", category: "arms", target: "Triceps, Pectoralis (Inner)", equipment: "bodyweight", level: "intermediate", type: "compound", goals: ["broad-shoulders"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Tay hình kim cương", "Người thẳng", "Hạ ngực về tay", "Đẩy lên"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Khuỷu mở rộng", "Hông võng"], alternatives: { "Quá khó": ["Regular Push-up"] } },
+            { id: 144, name: "Tate Press", nameVi: "Tate Press", category: "arms", target: "Triceps", equipment: "dumbbell", level: "intermediate", type: "isolation", goals: ["broad-shoulders"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Tạ thẳng trên ngực", "Hạ về ngực bằng MỞ KHUỶU RA NGOÀI", "Đẩy lên"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đẩy"], mistakes: ["Hạ quá thấp", "Mở khuỷu không đủ"], alternatives: { "Đau vai": ["Tricep Pushdown"] } },
+            { id: 145, name: "Waiter Walk", nameVi: "Đi bộ giữ tạ trên đầu", category: "arms", target: "Shoulders, Core, Grip", equipment: "dumbbell", level: "intermediate", type: "compound", goals: ["athletic"], tempo: "Static", rpe: "6-7", cues: ["Tạ thẳng trên đầu", "Đi bộ thẳng", "Core căng", "Đi 20-40m"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Tạ nghiêng", "Cong lưng"], alternatives: { "Muốn nặng hơn": ["Heavier Dumbbell"] } },
+            { id: 146, name: "Farmer Walk", nameVi: "Đi bộ giữ tạ 2 bên", category: "arms", target: "Grip, Core, Traps", secondary: "Full Body", equipment: "dumbbell", level: "beginner", type: "compound", goals: ["strength", "athletic"], tempo: "Static", rpe: "7-8", cues: ["Tạ nặng 2 bên", "Đi bộ thẳng", "Core chặt, lưng thẳng", "Đi 20-40m"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Cong lưng", "Vai nhô lên"], alternatives: { "Muốn nặng hơn": ["Heavier Dumbbells"] } },
+            { id: 147, name: "Dead Hang", nameVi: "Treo xà thụ động", category: "arms", target: "Grip, Lats, Shoulder Mobility", equipment: "bodyweight", level: "beginner", type: "isolation", goals: ["posture"], tempo: "Static", rpe: "5-7", cues: ["Treo trên xà", "Thả lỏng toàn thân", "Giữ 20-60 giây", "Hạ chậm"], breathing: ["HÍT THỞ SÂU VÀ ĐỀU"], mistakes: ["Gồng vai", "Nín thở"], alternatives: { "Quá khó": ["Active Hang"] } },
+            { id: 148, name: "Active Hang", nameVi: "Treo xà chủ động", category: "arms", target: "Lats, Scapular Stabilizers", equipment: "bodyweight", level: "intermediate", type: "isolation", goals: ["posture"], tempo: "Static", rpe: "6-7", cues: ["Treo trên xà", "Kéo bả vai XUỐNG và VÀO", "Giữ 10-20 giây", "Thả lỏng"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Không kích hoạt lats", "Nhún vai"], alternatives: { "Quá khó": ["Dead Hang"] } },
+            { id: 149, name: "Scapular Pull-up", nameVi: "Pull-up chỉ bả vai", category: "arms", target: "Lats, Scapular Stabilizers", equipment: "bodyweight", level: "intermediate", type: "isolation", goals: ["posture", "v-taper"], tempo: "2-1-1-0", rpe: "6-7", cues: ["Treo trên xà, tay thẳng", "Kéo bả vai xuống và vào", "Giữ 1 giây", "Thả lỏng"], breathing: ["THỞ RA khi kéo", "HÍT VÀO khi thả"], mistakes: ["Gập khuỷu tay", "Lắc người"], alternatives: { "Quá khó": ["Active Hang"] } },
+            { id: 150, name: "Fat Bar Curl", nameVi: "Cuộn tạ với thanh dày", category: "arms", target: "Biceps, Forearms", equipment: "barbell", level: "intermediate", type: "isolation", goals: ["strength", "broad-shoulders"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Dùng Fat Bar", "Cuộn lên bằng biceps", "Giữ grip chặt", "Hạ chậm"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi hạ"], mistakes: ["Mất grip", "Lắc người"], alternatives: { "Không có Fat Bar": ["Regular Barbell Curl với grip mạnh"] } },
+            
+            // CORE (30)
+            { id: 151, name: "Plank", nameVi: "Tấm ván", category: "core", target: "Transverse Abdominis", secondary: "Rectus Abdominis, Obliques", equipment: "bodyweight", level: "beginner", type: "isolation", goals: ["posture"], tempo: "Static", rpe: "6-8", cues: ["Chống khuỷu tay và mũi chân", "Người THẲNG từ đầu đến chân", "SIẾT BỤNG VÀ MÔNG", "Hít thở đều"], breathing: ["HÍT THỞ ĐỀU, không nín thở"], mistakes: ["Võng lưng", "Nhô hông", "Nín thở"], alternatives: { "Quá khó": ["Knee Plank", "Incline Plank"], "Quá dễ": ["Plank with Leg Lift"] } },
+            { id: 152, name: "Side Plank", nameVi: "Tấm ván nghiêng", category: "core", target: "Obliques", secondary: "Transverse Abdominis", equipment: "bodyweight", level: "beginner", type: "isolation", goals: ["posture"], tempo: "Static", rpe: "6-8", cues: ["Nằm nghiêng, chống khuỷu", "Nâng hông, người thẳng", "Siết bụng và mông", "Giữ 20-60 giây, đổi bên"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Hông hạ", "Người không thẳng"], alternatives: { "Quá khó": ["Side Plank with Leg Lift"] } },
+            { id: 153, name: "Dead Bug", nameVi: "Con bọ chết", category: "core", target: "Transverse Abdominis", secondary: "Rectus Abdominis", equipment: "bodyweight", level: "beginner", type: "isolation", goals: ["posture"], tempo: "3-0-2-0", rpe: "5-7", cues: ["Tay lên trần, chân co 90°", "Hạ tay và chân ĐỐI DIỆN", "GIỮ LƯNG DƯỚI ÁP SÀN", "Đổi bên"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi đưa về"], mistakes: ["Nhấc lưng", "Hạ quá nhanh"], alternatives: { "Quá khó": ["Plank", "Bird Dog"], "Đau lưng": ["Pelvic Tilt"] } },
+            { id: 154, name: "Bird Dog", nameVi: "Chó chim", category: "core", target: "Transverse Abdominis, Lower Back", secondary: "Glutes", equipment: "bodyweight", level: "beginner", type: "isolation", goals: ["posture"], tempo: "2-1-1-0", rpe: "5-7", cues: ["Chống 2 tay 2 gối", "Nâng tay phải chân trái", "Giữ 2-3 giây", "Đổi bên"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Hông xoay", "Lưng võng", "Nâng quá cao"], alternatives: { "Quá khó": ["Plank"], "Đau lưng": ["Dead Bug", "Cat-Cow"] } },
+            { id: 155, name: "Pallof Press", nameVi: "Đẩy cáp chống xoay", category: "core", target: "Obliques, Anti Rotation", secondary: "Transverse Abdominis", equipment: "cable", level: "intermediate", type: "isolation", goals: ["posture"], tempo: "2-1-1-0", rpe: "6-7", cues: ["Tay cầm ở ngực", "Đẩy ra trước, giữ thẳng", "CHỐNG LẠI lực xoay", "Đổi bên"], breathing: ["HÍT VÀO khi đưa về", "THỞ RA khi đẩy ra"], mistakes: ["Để cable xoay người", "Cong lưng"], alternatives: { "Không có cable": ["Band Pallof Press"] } },
+            { id: 156, name: "Ab Wheel Rollout", nameVi: "Lăn bánh xe bụng", category: "core", target: "Rectus Abdominis, Core", secondary: "Lats", equipment: "bodyweight", level: "advanced", type: "isolation", goals: ["posture"], tempo: "3-0-2-0", rpe: "8-9", cues: ["Quỳ, tay cầm ab wheel", "Lăn ra trước, core chặt", "Hạ thấp nhất KHÔNG VÕNG LƯNG", "Kéo về bằng core"], breathing: ["HÍT VÀO khi lăn ra", "THỞ RA khi kéo về"], mistakes: ["Võng lưng", "Hạ quá thấp", "Dùng lực tay"], alternatives: { "Quá khó": ["Knee Rollout", "Partial Rollout"] } },
+            { id: 157, name: "Hanging Leg Raise", nameVi: "Nâng chân treo", category: "core", target: "Lower Abs, Hip Flexors", equipment: "bodyweight", level: "advanced", type: "isolation", goals: ["posture"], tempo: "2-0-2-0", rpe: "8-9", cues: ["Treo trên xà", "NÂNG CHÂN THẲNG đến ngang hông", "Siết bụng ở đỉnh", "Hạ chậm, không lắc"], breathing: ["THỞ RA khi nâng", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Dùng lực đung đưa", "Cong lưng"], alternatives: { "Quá khó": ["Hanging Knee Raise"] } },
+            { id: 158, name: "Hanging Knee Raise", nameVi: "Nâng gối treo", category: "core", target: "Lower Abs", equipment: "bodyweight", level: "intermediate", type: "isolation", goals: ["posture"], tempo: "2-0-2-0", rpe: "7-8", cues: ["Treo trên xà", "Nâng GỐI lên ngực", "Siết bụng ở đỉnh", "Hạ chậm"], breathing: ["THỞ RA khi nâng", "HÍT VÀO khi hạ"], mistakes: ["Lắc người", "Dùng lực đung đưa"], alternatives: { "Muốn khó hơn": ["Hanging Leg Raise"] } },
+            { id: 159, name: "Cable Crunch", nameVi: "Cuộn bụng với cáp", category: "core", target: "Rectus Abdominis", equipment: "cable", level: "intermediate", type: "isolation", goals: ["posture"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Quỳ trước cable cao", "CUỘN NGƯỜI XUỐNG bằng bụng", "Siết bụng ở cuối", "Đưa về chậm"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi đưa về"], mistakes: ["Dùng lực tay", "Kéo bằng hông"], alternatives: { "Không có cable": ["Weighted Crunch"] } },
+            { id: 160, name: "Reverse Crunch", nameVi: "Cuộn bụng ngược", category: "core", target: "Lower Abs", equipment: "bodyweight", level: "intermediate", type: "isolation", goals: ["posture"], tempo: "2-1-1-0", rpe: "6-7", cues: ["Tay 2 bên, chân co", "CUỘN HÔNG LÊN bằng bụng dưới", "Siết ở đỉnh", "Hạ chậm"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi hạ"], mistakes: ["Dùng lực lắc", "Hạ quá nhanh"], alternatives: { "Muốn nặng hơn": ["Hanging Knee Raise"] } },
+            { id: 161, name: "Leg Raise (Lying)", nameVi: "Nâng chân nằm", category: "core", target: "Lower Abs", equipment: "bodyweight", level: "intermediate", type: "isolation", goals: ["posture"], tempo: "3-0-2-0", rpe: "6-7", cues: ["Tay dưới mông", "Nâng chân đến 90°", "Hạ chậm, không chạm đất", "GIỮ LƯNG DƯỚI ÁP SÀN"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi nâng"], mistakes: ["Nhấc lưng", "Cong gối", "Hạ quá nhanh"], alternatives: { "Quá khó": ["Hanging Leg Raise"], "Đau lưng": ["Dead Bug"] } },
+            { id: 162, name: "Russian Twist", nameVi: "Xoay người Nga", category: "core", target: "Obliques", equipment: "bodyweight", level: "intermediate", type: "isolation", goals: ["posture"], tempo: "2-0-2-0", rpe: "6-7", cues: ["Chân hơi nhấc", "Ngả 45°", "Xoay sang hai bên", "Bụng siết chặt"], breathing: ["HÍT THỞ ĐỀU theo nhịp"], mistakes: ["Chỉ xoay tay", "Cong lưng", "Đạp chân xuống"], alternatives: { "Quá khó": ["Seated Russian Twist"], "Đau lưng": ["Side Plank", "Pallof Press"] } },
+            { id: 163, name: "Wood Chop", nameVi: "Chẻ gỗ với cáp", category: "core", target: "Obliques", secondary: "Full Core", equipment: "cable", level: "intermediate", type: "compound", goals: ["athletic", "fat-loss"], tempo: "2-0-1-0", rpe: "7-8", cues: ["2 tay cầm", "Xoay CHÉO xuống hông đối diện", "Dùng lực CORE VÀ HÔNG", "Đổi bên"], breathing: ["THỞ RA khi xoay", "HÍT VÀO khi đưa về"], mistakes: ["Chỉ dùng tay", "Cong lưng", "Xoay không đủ"], alternatives: { "Không có cable": ["Band Wood Chop", "DB Wood Chop"] } },
+            { id: 164, name: "Mountain Climber", nameVi: "Leo núi", category: "core", target: "Core, Hip Flexors", secondary: "Cardio", equipment: "bodyweight", level: "intermediate", type: "compound", goals: ["fat-loss", "athletic"], tempo: "X-0-X-0", rpe: "7-8", cues: ["Plank cao", "Kéo gối về ngực", "Đổi chân nhanh", "Giữ hông ổn định"], breathing: ["HÍT THỞ THEO NHỊP nhanh"], mistakes: ["Hông nhô", "Tốc độ quá nhanh mất form"], alternatives: { "Quá khó": ["Slow Mountain Climber"] } },
+            { id: 165, name: "Bicycle Crunch", nameVi: "Cuộn bụng đạp xe", category: "core", target: "Obliques, Rectus Abdominis", equipment: "bodyweight", level: "beginner", type: "isolation", goals: ["posture"], tempo: "2-0-2-0", rpe: "6-7", cues: ["Tay sau đầu", "Gối phải về ngực, khuỷu trái về", "Đổi bên luân phiên", "Chuyển động mượt"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Kéo cổ", "Hông nhấc", "Đổi quá nhanh"], alternatives: { "Đau cổ": ["Dead Bug"] } },
+            { id: 166, name: "Flutter Kick", nameVi: "Đá chân flutter", category: "core", target: "Lower Abs, Hip Flexors", equipment: "bodyweight", level: "intermediate", type: "isolation", goals: ["posture"], tempo: "X-0-X-0", rpe: "6-7", cues: ["Tay dưới mông", "Nâng chân 15cm, đá luân phiên", "GIỮ LƯNG DƯỚI ÁP SÀN", "Đá đều"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Lưng nhấc", "Đá quá cao", "Nín thở"], alternatives: { "Đau lưng": ["Dead Bug"] } },
+            { id: 167, name: "V-Up", nameVi: "Gập bụng chữ V", category: "core", target: "Rectus Abdominis", equipment: "bodyweight", level: "advanced", type: "isolation", goals: ["posture"], tempo: "2-0-1-0", rpe: "7-8", cues: ["Tay qua đầu, chân thẳng", "Nâng thân và chân cùng lúc", "Chạm tay vào ngón chân", "Hạ chậm"], breathing: ["THỞ RA khi gập", "HÍT VÀO khi hạ"], mistakes: ["Hạ quá nhanh", "Cong lưng", "Không đủ sức"], alternatives: { "Quá khó": ["Tuck-Up", "Knee V-Up"] } },
+            { id: 168, name: "Dragon Flag", nameVi: "Cờ rồng", category: "core", target: "Rectus Abdominis", secondary: "Hip Flexors", equipment: "bodyweight", level: "advanced", type: "isolation", goals: ["posture"], tempo: "4-0-2-0", rpe: "9-10", cues: ["Tay giữ sau đầu", "Nâng toàn bộ cơ thể", "Hạ chậm, GIỮ THNG", "Không để lưng võng"], breathing: ["HÍT VÀO khi hạ", "THỞ RA khi nâng"], mistakes: ["Lưng võng", "Hạ quá nhanh", "Dùng lực lắc"], alternatives: { "Quá khó": ["Hanging Leg Raise"] } },
+            { id: 169, name: "L-Sit", nameVi: "Chữ L", category: "core", target: "Hip Flexors, Core", equipment: "bodyweight", level: "advanced", type: "isolation", goals: ["posture"], tempo: "Static", rpe: "8-9", cues: ["Ngồi trên sàn hoặc bars", "Nâng người, chân duỗi chữ L", "Core chặt", "Giữ 10-30 giây"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Hông hạ", "Chân cong", "Cong lưng"], alternatives: { "Quá khó": ["Tuck L-Sit", "Knee L-Sit"] } },
+            { id: 170, name: "Stir the Pot", nameVi: "Khuấy nồi trên bóng", category: "core", target: "Core, Obliques", secondary: "Transverse Abdominis", equipment: "bodyweight", level: "intermediate", type: "isolation", goals: ["posture"], tempo: "Dynamic", rpe: "6-7", cues: ["Plank trên Swiss ball", "Xoay khuỷu theo vòng tròn nhỏ", "Core chặt, hông ổn định", "10 lần mỗi chiều"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Hông nhô", "Xoay quá to", "Mất thăng bằng"], alternatives: { "Quá khó": ["Plank thường"] } },
+            { id: 171, name: "Bear Crawl", nameVi: "Bò gấu", category: "core", target: "Full Core, Mobility", equipment: "bodyweight", level: "beginner", type: "compound", goals: ["fat-loss", "athletic", "posture"], tempo: "Dynamic", rpe: "6-7", cues: ["Gối cách sàn 2-5cm", "Bò bằng tay và chân đối diện", "Lưng thẳng, core chặt", "Bò 10-20m"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Hông nhô cao", "Gối chạm sàn", "Lưng võng"], alternatives: { "Quá khó": ["Slow Bear Crawl"] } },
+            { id: 172, name: "Turkish Get Up", nameVi: "Turkish Get Up", category: "core", target: "Full Core, Stability", secondary: "Shoulders, Legs", equipment: "dumbbell", level: "advanced", type: "compound", goals: ["posture", "athletic"], tempo: "Slow", rpe: "7-8", cues: ["Tạ thẳng trên tay", "Đứng lên từng bước", "Quay lại nằm theo ngược lại", "Core chặt suốt"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Tạ rơi", "Mất thăng bằng", "Cong lưng"], alternatives: { "Quá khó": ["Turkish Get Up không tạ"] } },
+            { id: 173, name: "Suitcase Carry", nameVi: "Mang vali 1 bên", category: "core", target: "Obliques, Anti Lateral Flexion", secondary: "Grip", equipment: "dumbbell", level: "intermediate", type: "compound", goals: ["posture"], tempo: "Static", rpe: "6-7", cues: ["1 tạ nặng 1 bên", "Đi thẳng, CHỐNG LẠI lực nghiêng", "Core chặt, vai ngang", "Đi 20-40m, đổi bên"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Nghiêng người", "Vai lệch"], alternatives: { "Muốn nặng hơn": ["Heavier Dumbbell"], "Không có tạ": ["Side Plank"] } },
+            { id: 174, name: "Medicine Ball Slam", nameVi: "Đập bóng y tế", category: "core", target: "Full Core, Power", equipment: "bodyweight", level: "intermediate", type: "compound", goals: ["fat-loss", "athletic"], tempo: "X-0-X-0", rpe: "8-9", cues: ["Bóng trên đầu", "ĐẬP BÓNG xuống mạnh", "Bắt bóng khi nảy", "10-15 lần"], breathing: ["THỞ RA MẠNH khi đập"], mistakes: ["Không dùng đủ lực", "Cong lưng", "Bóng không nảy"], alternatives: { "Không có med ball": ["Burpees", "Jump Squat"] } },
+            { id: 175, name: "Hollow Hold", nameVi: "Giữ tư thế hollow", category: "core", target: "Rectus Abdominis", equipment: "bodyweight", level: "intermediate", type: "isolation", goals: ["posture"], tempo: "Static", rpe: "7-8", cues: ["Tay qua đầu, chân duỗi", "Nâng vai và chân", "Lưng dưới áp sàn", "Giữ 20-45 giây"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Lưng dưới nhấc", "Nín thở"], alternatives: { "Quá khó": ["Hollow Hold with Movement"], "Đau lưng": ["Dead Bug"] } },
+            { id: 176, name: "Toe Touch", nameVi: "Chạm ngón chân", category: "core", target: "Upper Abs", equipment: "bodyweight", level: "beginner", type: "isolation", goals: ["posture"], tempo: "2-0-1-0", rpe: "5-6", cues: ["Chân thẳng lên trần", "Nâng vai, tay chạm ngón chân", "Siết bụng", "Hạ chậm"], breathing: ["THỞ RA khi nâng", "HÍT VÀO khi hạ"], mistakes: ["Kéo cổ", "Cong gối"], alternatives: { "Muốn nặng hơn": ["Weighted Toe Touch"] } },
+            { id: 177, name: "Crunch", nameVi: "Gập bụng cơ bản", category: "core", target: "Rectus Abdominis", equipment: "bodyweight", level: "beginner", type: "isolation", goals: ["posture"], tempo: "2-0-1-0", rpe: "5-6", cues: ["Chân co, tay sau đầu", "CUỘN NGƯỜI LÊN bằng bụng", "Siết ở đỉnh", "Hạ chậm"], breathing: ["THỞ RA khi cuộn", "HÍT VÀO khi hạ"], mistakes: ["Kéo cổ", "Dùng lực hông", "Hạ quá nhanh"], alternatives: { "Đau cổ": ["Dead Bug", "Plank"] } },
+            { id: 178, name: "Scissor Kick", nameVi: "Đá chân kéo cắt", category: "core", target: "Lower Abs", equipment: "bodyweight", level: "intermediate", type: "isolation", goals: ["posture"], tempo: "2-0-2-0", rpe: "6-7", cues: ["Chân thẳng", "Nâng chân, cắt chéo", "Lưng dưới áp sàn", "Chuyển động chậm"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Lưng nhấc", "Chân cong"], alternatives: { "Đau lưng": ["Dead Bug"] } },
+            { id: 179, name: "Cable Rotation", nameVi: "Xoay người với cáp", category: "core", target: "Obliques", equipment: "cable", level: "intermediate", type: "compound", goals: ["athletic"], tempo: "2-0-1-0", rpe: "7-8", cues: ["2 tay cầm", "Xoay thân từ bên này sang bên kia", "Dùng lực core và hông", "Kiểm soát"], breathing: ["THỞ RA khi xoay", "HÍT VÀO khi đưa về"], mistakes: ["Chỉ dùng tay", "Cong lưng", "Xoay quá nhanh"], alternatives: { "Không có cable": ["Band Rotation", "Russian Twist"] } },
+            { id: 180, name: "Plank to Push-up", nameVi: "Plank lên push-up", category: "core", target: "Core, Shoulders", secondary: "Triceps", equipment: "bodyweight", level: "intermediate", type: "compound", goals: ["posture", "athletic"], tempo: "2-1-1-0", rpe: "7-8", cues: ["Forearm plank", "Đẩy lên high plank từng tay", "Hạ xuống forearm", "Giữ hông ổn định"], breathing: ["HÍT THỞ ĐỀU"], mistakes: ["Hông lắc lư", "Quá nhanh"], alternatives: { "Quá khó": ["Plank thường"] } },
+            
+            // CARDIO (22)
+            { id: 181, name: "Incline Walk 5%", nameVi: "Đi bộ dốc 5%", category: "cardio", target: "Toàn thân, Đốt mỡ", equipment: "machine", level: "beginner", type: "steady", goals: ["fat-loss"], tempo: "Steady", rpe: "4-5", cues: ["Speed: 5-5.5 km/h", "Incline: 5%", "30 phút", "~200 kcal"], breathing: ["HÍT THỞ ĐỀU qua mũi"], mistakes: ["Nắm tay cầm", "Speed quá nhanh"], alternatives: { "Muốn khó hơn": ["Incline Walk 8%"], "Đau đầu gối": ["Elliptical"] } },
+            { id: 182, name: "Incline Walk 8%", nameVi: "Đi bộ dốc 8%", category: "cardio", target: "Toàn thân, Đốt mỡ", equipment: "machine", level: "intermediate", type: "steady", goals: ["fat-loss"], tempo: "Steady", rpe: "5-6", cues: ["Speed: 5-5.5 km/h", "Incline: 8%", "30-35 phút", "~250 kcal"], breathing: ["HÍT THỞ ĐỀU, hơi khó nói chuyện"], mistakes: ["Nắm tay cầm", "Speed quá nhanh"], alternatives: { "Quá khó": ["Incline Walk 5%"], "Muốn khó hơn": ["Incline Walk 10%"] } },
+            { id: 183, name: "Incline Walk 10%", nameVi: "Đi bộ dốc 10%", category: "cardio", target: "Toàn thân, Đốt mỡ", equipment: "machine", level: "advanced", type: "steady", goals: ["fat-loss"], tempo: "Steady", rpe: "6-7", cues: ["Speed: 5 km/h", "Incline: 10%", "30-40 phút", "~300 kcal"], breathing: ["HÍT THỞ MẠNH, khó nói chuyện"], mistakes: ["Nắm tay cầm", "Speed quá nhanh"], alternatives: { "Quá khó": ["Incline Walk 8%"], "Đau lưng": ["Elliptical"] } },
+            { id: 184, name: "Fat Burn Walk", nameVi: "Đi bộ vùng đốt mỡ", category: "cardio", target: "Đốt mỡ", equipment: "machine", level: "beginner", type: "steady", goals: ["fat-loss"], tempo: "Steady", rpe: "3-4", cues: ["Speed: 4.5-5 km/h", "Incline: 3-5%", "HR: 60-70% max", "40-45 phút"], breathing: ["HÍT THỞ QUA MŨI, nói chuyện thoải mái"], mistakes: ["Speed quá nhanh", "Thời gian quá ngắn"], alternatives: { "Muốn đốt nhiều hơn": ["Incline Walk 8%"], "Đau đầu gối": ["Cycling"] } },
+            { id: 185, name: "Recovery Walk", nameVi: "Đi bộ phục hồi", category: "cardio", target: "Phục hồi", equipment: "machine", level: "beginner", type: "steady", goals: ["posture"], tempo: "Steady", rpe: "2-3", cues: ["Speed: 4-4.5 km/h", "Incline: 0-2%", "HR: 50-60% max", "20-30 phút"], breathing: ["HÍT THỞ THOẢI MÁI, thư giãn"], mistakes: ["Speed quá nhanh"], alternatives: { "Muốn đốt nhiều hơn": ["Fat Burn Walk"], "Không có máy": ["Đi bộ ngoài trời"] } },
+            { id: 186, name: "Steady Bike", nameVi: "Đạp xe ổn định", category: "cardio", target: "Tim mạch, Đốt mỡ", equipment: "machine", level: "beginner", type: "steady", goals: ["fat-loss"], tempo: "Steady", rpe: "4-5", cues: ["Resistance: 5-7", "RPM: 60-70", "30-40 phút", "~250 kcal"], breathing: ["HÍT THỞ ĐỀU theo nhịp đạp"], mistakes: ["Resistance quá thấp", "RPM quá cao"], alternatives: { "Muốn khó hơn": ["Bike HIIT"], "Đau lưng": ["Recumbent Bike"] } },
+            { id: 187, name: "Bike HIIT", nameVi: "Đạp xe HIIT", category: "cardio", target: "Đốt mỡ, EPOC", equipment: "machine", level: "intermediate", type: "hiit", goals: ["fat-loss", "athletic"], tempo: "Intervals", rpe: "8-9", cues: ["Warm-up: 5 phút", "Sprint: 30s (max)", "Recovery: 60s (nhẹ)", "8-10 rounds"], breathing: ["Sprint: thở mạnh, Recovery: hít sâu"], mistakes: ["Không warm-up đủ", "Sprint không đủ mạnh"], alternatives: { "Quá khó": ["Steady Bike"], "Đau đầu gối": ["Elliptical HIIT"] } },
+            { id: 188, name: "Elliptical Steady", nameVi: "Máy elliptical ổn định", category: "cardio", target: "Toàn thân, Đốt mỡ", equipment: "machine", level: "beginner", type: "steady", goals: ["fat-loss"], tempo: "Steady", rpe: "4-5", cues: ["Resistance: 5-7", "RPM: 60-70", "30-40 phút", "~280 kcal"], breathing: ["HÍT THỞ ĐỀU, dùng cả tay"], mistakes: ["Không dùng tay cầm", "Resistance quá thấp"], alternatives: { "Muốn khó hơn": ["Elliptical HIIT"], "Đau đầu gối": ["Swimming"] } },
+            { id: 189, name: "Stairmaster", nameVi: "Máy leo cầu thang", category: "cardio", target: "Chân, Mông, Đốt mỡ", equipment: "machine", level: "intermediate", type: "steady", goals: ["fat-loss"], tempo: "Steady", rpe: "6-7", cues: ["Level: 6-8", "25-35 phút", "~300 kcal", "Lưng thẳng"], breathing: ["HÍT THỞ ĐỀU, bước đều"], mistakes: ["Nắm tay cầm quá chặt", "Bước quá ngắn"], alternatives: { "Đau đầu gối": ["Elliptical"], "Muốn khó hơn": ["Stairmaster Level 10"] } },
+            { id: 190, name: "Rowing Machine", nameVi: "Máy chèo thuyền", category: "cardio", target: "Toàn thân, Đốt mỡ", equipment: "machine", level: "intermediate", type: "steady", goals: ["fat-loss", "v-taper"], tempo: "Steady", rpe: "6-7", cues: ["Damper: 4-6", "SPM: 20-24", "20-30 phút", "~250 kcal"], breathing: ["THỞ RA khi kéo, HÍT VÀO khi đẩy về"], mistakes: ["Dùng tay quá nhiều", "Cong lưng"], alternatives: { "Đau lưng": ["Elliptical"], "Muốn khó hơn": ["Rowing HIIT"] } },
+            { id: 191, name: "Jump Rope Basic", nameVi: "Nhảy dây cơ bản", category: "cardio", target: "Toàn thân, Đốt mỡ", equipment: "bodyweight", level: "intermediate", type: "steady", goals: ["fat-loss", "athletic"], tempo: "Steady", rpe: "6-7", cues: ["Nhảy 2 chân", "10-15 phút", "Rest: 30s mỗi 2 phút", "~150 kcal/10 phút"], breathing: ["HÍT THỞ THEO NHỊP nhảy"], mistakes: ["Nhảy quá cao", "Dùng tay quá nhiều"], alternatives: { "Đau đầu gối": ["Jump Rope Low Impact"], "Muốn khó hơn": ["Double Unders"] } },
+            { id: 192, name: "HIIT Circuit", nameVi: "Mạch HIIT", category: "cardio", target: "Đốt mỡ, EPOC", equipment: "bodyweight", level: "advanced", type: "hiit", goals: ["fat-loss", "athletic"], tempo: "Circuit", rpe: "8-9", cues: ["40s work / 20s rest", "8-10 exercises", "3-4 rounds", "Rest 2 phút giữa rounds"], breathing: ["Work: thở mạnh, Rest: hít sâu"], mistakes: ["Không rest đủ", "Form sai khi mệt"], alternatives: { "Quá khó": ["Steady Cardio"], "Đau đầu gối": ["Low Impact HIIT"] } },
+            { id: 193, name: "Tabata Protocol", nameVi: "Tabata 4 phút", category: "cardio", target: "Đốt mỡ, EPOC", equipment: "bodyweight", level: "advanced", type: "hiit", goals: ["fat-loss", "athletic"], tempo: "Tabata", rpe: "9-10", cues: ["20s work / 10s rest", "8 rounds (4 phút)", "Max effort", "1-2 exercises"], breathing: ["MAX EFFORT, thở mạnh"], mistakes: ["Không đủ intensity", "Rest quá dài"], alternatives: { "Quá khó": ["HIIT Circuit"], "Muốn dài hơn": ["EMOM"] } },
+            { id: 194, name: "EMOM", nameVi: "Every Minute On the Minute", category: "cardio", target: "Đốt mỡ, Sức bền", equipment: "bodyweight", level: "intermediate", type: "circuit", goals: ["fat-loss"], tempo: "EMOM", rpe: "7-8", cues: ["Mỗi phút 1 exercise", "Rest thời gian còn lại", "10-20 phút", "5-10 exercises"], breathing: ["HÍT THỞ THEO NHỊP mỗi phút"], mistakes: ["Làm quá chậm", "Rest quá ít"], alternatives: { "Quá khó": ["Steady Cardio"], "Muốn khó hơn": ["Tabata"] } },
+            { id: 195, name: "LISS Walking", nameVi: "Đi bộ LISS ngoài trời", category: "cardio", target: "Đốt mỡ, Phục hồi", equipment: "bodyweight", level: "beginner", type: "steady", goals: ["fat-loss", "posture"], tempo: "Steady", rpe: "3-4", cues: ["Ngoài trời hoặc treadmill", "Speed: 5-6 km/h", "45-60 phút", "HR: 50-60% max"], breathing: ["HÍT THỞ QUA MŨI, thư giãn"], mistakes: ["Speed quá nhanh", "Thời gian quá ngắn"], alternatives: { "Muốn đốt nhiều hơn": ["Incline Walk 5%"], "Không có thời gian": ["HIIT"] } },
+            { id: 196, name: "Swimming", nameVi: "Bơi lội", category: "cardio", target: "Toàn thân, Đốt mỡ", equipment: "pool", level: "intermediate", type: "steady", goals: ["fat-loss"], tempo: "Steady", rpe: "5-7", cues: ["Bơi tự do hoặc ngửa", "30-45 phút", "20-30 laps", "~300 kcal"], breathing: ["HÍT THỞ THEO NHỊP bơi"], mistakes: ["Kỹ thuật sai", "Nghỉ quá nhiều"], alternatives: { "Không có hồ bơi": ["Rowing Machine"], "Muốn khó hơn": ["Swimming Intervals"] } },
+            { id: 197, name: "Dance Cardio", nameVi: "Nhảy aerobic", category: "cardio", target: "Toàn thân, Đốt mỡ", equipment: "bodyweight", level: "beginner", type: "circuit", goals: ["fat-loss"], tempo: "Dance", rpe: "5-7", cues: ["Zumba, hip-hop, aerobic", "30-45 phút", "Follow video hoặc class", "~250-350 kcal"], breathing: ["HÍT THỞ ĐỀU theo nhạc"], mistakes: ["Không đủ intensity", "Form sai"], alternatives: { "Muốn đốt nhiều hơn": ["HIIT Circuit"], "Đau đầu gối": ["Swimming"] } },
+            { id: 198, name: "Kickboxing Cardio", nameVi: "Kickboxing", category: "cardio", target: "Toàn thân, Đốt mỡ", equipment: "bodyweight", level: "intermediate", type: "circuit", goals: ["fat-loss", "broad-shoulders"], tempo: "Kickboxing", rpe: "7-8", cues: ["Jab, cross, hook, kick", "30-45 phút", "Follow class hoặc video", "~300-400 kcal"], breathing: ["THỞ RA MẠNH khi đấm/đá"], mistakes: ["Kỹ thuật sai", "Không đủ intensity"], alternatives: { "Đau đầu gối": ["Boxing (không kick)"], "Muốn khó hơn": ["Kickboxing HIIT"] } },
+            { id: 199, name: "Yoga Flow", nameVi: "Yoga Vinyasa", category: "cardio", target: "Linh hoạt, Phục hồi", equipment: "bodyweight", level: "beginner", type: "steady", goals: ["posture"], tempo: "Flow", rpe: "3-5", cues: ["Vinyasa flow hoặc power yoga", "30-60 phút", "Focus vào hơi thở", "~150-250 kcal"], breathing: ["HÍT THỞ SÂU THEO TỪNG POSE"], mistakes: ["Không đồng bộ hơi thở", "Form sai"], alternatives: { "Muốn đốt nhiều hơn": ["Power Yoga"], "Muốn thư giãn hơn": ["Yin Yoga"] } },
+            { id: 200, name: "Pilates", nameVi: "Pilates mat", category: "cardio", target: "Core, Linh hoạt", equipment: "bodyweight", level: "beginner", type: "steady", goals: ["posture"], tempo: "Controlled", rpe: "4-6", cues: ["Pilates mat hoặc reformer", "45-60 phút", "Focus vào core", "~200-300 kcal"], breathing: ["HÍT THỞ THEO NHỊP chuyển động"], mistakes: ["Không activate core", "Form sai"], alternatives: { "Muốn đốt nhiều hơn": ["Pilates HIIT"], "Muốn khó hơn": ["Reformer Pilates"] } },
+            { id: 201, name: "Battle Ropes", nameVi: "Dây battle", category: "cardio", target: "Upper Body, Power", equipment: "bodyweight", level: "intermediate", type: "hiit", goals: ["fat-loss", "athletic", "broad-shoulders"], tempo: "Intervals", rpe: "8-9", cues: ["30-60s work, 30s rest", "Alternating waves, slams", "5-8 rounds", "Core căng"], breathing: ["THỞ RA MẠNH mỗi wave"], mistakes: ["Chỉ dùng tay", "Cong lưng"], alternatives: { "Không có dây": ["Medicine Ball Slams"], "Đau vai": ["Lower intensity"] } },
+            { id: 202, name: "Sled Push", nameVi: "Đẩy xe tạ", category: "cardio", target: "Legs, Conditioning", equipment: "machine", level: "intermediate", type: "hiit", goals: ["athletic", "fat-loss"], tempo: "Push", rpe: "8-9", cues: ["Tay trên sled, người 45°", "ĐẠY XE bằng chân", "20-30m mỗi round", "5-8 rounds"], breathing: ["THỞ RA MẠNH khi đẩy"], mistakes: ["Hông quá cao", "Đẩy bằng tay"], alternatives: { "Không có sled": ["Hill Sprints", "Tire Flip"] } }
+        ];
+        
+        // ==================== STATE ====================
+        let currentFilters = {
+            category: 'all',
+            equipment: 'all',
+            level: 'all',
+            type: 'all',
+            goal: 'all',
+            search: ''
+        };
+        
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Page loaded, exercises:', exerciseDatabase.length);
+            updateCounts();
+            renderExercises();
+            setupEventListeners();
+        });
+        
+        function updateCounts() {
+            const counts = { all: 0, chest: 0, back: 0, shoulder: 0, legs: 0, arms: 0, core: 0, cardio: 0 };
+            exerciseDatabase.forEach(ex => {
+                counts.all++;
+                counts[ex.category]++;
+            });
+            Object.keys(counts).forEach(cat => {
+                const el = document.getElementById(`count-${cat}`);
+                if (el) el.textContent = counts[cat];
+            });
+            document.getElementById('stat-total').textContent = counts.all + '+';
+        }
+        
+        // ==================== RENDER ====================
+        function renderExercises() {
+            const grid = document.getElementById('exerciseGrid');
+            if (!grid) {
+                console.error('Grid not found!');
+                return;
+            }
+            
+            const filtered = exerciseDatabase.filter(ex => {
+                if (currentFilters.category !== 'all' && ex.category !== currentFilters.category) return false;
+                if (currentFilters.equipment !== 'all' && ex.equipment !== currentFilters.equipment) return false;
+                if (currentFilters.level !== 'all' && ex.level !== currentFilters.level) return false;
+                if (currentFilters.type !== 'all' && ex.type !== currentFilters.type) return false;
+                if (currentFilters.goal !== 'all' && !ex.goals.includes(currentFilters.goal)) return false;
+                if (currentFilters.search) {
+                    const search = currentFilters.search.toLowerCase();
+                    return ex.name.toLowerCase().includes(search) || 
+                           ex.nameVi.toLowerCase().includes(search) ||
+                           ex.target.toLowerCase().includes(search);
+                }
+                return true;
+            });
+            
+            console.log('Filtered:', filtered.length);
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                document.getElementById('noResults').classList.add('active');
+                return;
+            }
+            
+            document.getElementById('noResults').classList.remove('active');
+            grid.innerHTML = filtered.map(ex => renderExerciseCard(ex)).join('');
+        }
+        
+        function renderExerciseCard(ex) {
+            const diffLevel = ex.level === 'beginner' ? 1 : ex.level === 'intermediate' ? 2 : 3;
+            const difficultyDots = Array(3).fill(0).map((_, i) => 
+                `<div class="difficulty-dot ${i < diffLevel ? 'filled' : ''}"></div>`
+            ).join('');
+            
+            const goalNames = {
+                'v-taper': 'V-Taper', 'broad-shoulders': 'Broad Shoulders',
+                'strong-chest': 'Strong Chest', 'strength': 'Strength',
+                'fat-loss': 'Fat Loss', 'athletic': 'Athletic', 'posture': 'Posture'
+            };
+            
+            const goalTags = ex.goals.slice(0, 2).map(goal => 
+                `<span class="goal-tag">${goalNames[goal] || goal}</span>`
+            ).join('');
+            
+            return `
+                <div class="exercise-card" data-category="${ex.category}" onclick="openModal(${ex.id})">
+                    <div class="exercise-header">
+                        <div>
+                            <div class="exercise-name">${ex.name}</div>
+                            <div class="exercise-name-vi">${ex.nameVi}</div>
+                        </div>
+                        <div class="exercise-difficulty">${difficultyDots}</div>
+                    </div>
+                    <div class="exercise-target">${ex.target}</div>
+                    <div class="exercise-tags">
+                        <span class="tag ${ex.type}">${ex.type}</span>
+                        <span class="tag ${ex.level}">${ex.level}</span>
+                    </div>
+                    <div class="exercise-goals">${goalTags}</div>
+                    <div class="view-btn">Xem chi tiết</div>
+                </div>
+            `;
+        }
+        
+        function openModal(id) {
+            const ex = exerciseDatabase.find(e => e.id === id);
+            if (!ex) return;
+            
+            const categoryColors = {
+                chest: '#E8734A', back: '#50C878', shoulder: '#9B59B6',
+                legs: '#1ABC9C', arms: '#F39C12', core: '#E74C3C', cardio: '#3498DB'
+            };
+            
+            const modal = document.getElementById('modal');
+            modal.style.setProperty('--modal-color', categoryColors[ex.category]);
+            
+            document.getElementById('modalTitle').textContent = ex.name;
+            document.getElementById('modalTitleVi').textContent = ex.nameVi;
+            
+            document.getElementById('modalMeta').innerHTML = `
+                <div class="modal-meta-item">🎯 ${ex.target}</div>
+                <div class="modal-meta-item">🔗 ${ex.secondary}</div>
+                <div class="modal-meta-item">⚙️ ${ex.equipment}</div>
+                <div class="modal-meta-item">⭐ ${ex.level}</div>
+                <div class="modal-meta-item">📊 ${ex.type}</div>
+                <div class="modal-meta-item">️ Tempo: ${ex.tempo}</div>
+                <div class="modal-meta-item">💪 RPE: ${ex.rpe}</div>
+            `;
+            
+            const techCues = ex.cues.filter(c => !c.startsWith('🌬️'));
+            const breathCues = ex.cues.filter(c => c.startsWith('🌬️'));
+            
+            const alternativesHtml = Object.keys(ex.alternatives).map(situation => `
+                <div class="alternative-group">
+                    <div class="alternative-label">${situation}</div>
+                    <div class="alternative-options">
+                        ${ex.alternatives[situation].map(alt => `<div class="alternative-chip">${alt}</div>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('modalBody').innerHTML = `
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Kỹ thuật chính</h3>
+                    <ul class="cue-list">${techCues.map(c => `<li>${c}</li>`).join('')}</ul>
+                </div>
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>🌬️ Hướng dẫn hít thở</h3>
+                    <ul class="cue-list">${breathCues.map(c => `<li class="breathing">${c.replace('🌬️ ', '')}</li>`).join('')}</ul>
+                </div>
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Lỗi thường gặp</h3>
+                    <ul class="cue-list mistake-list">${ex.mistakes.map(m => `<li>${m}</li>`).join('')}</ul>
+                </div>
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Bài tập thay thế</h3>
+                    <div class="alternatives-section">${alternativesHtml}</div>
+                </div>
+            `;
+            
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        function addToPlanner() {
+            alert('Tính năng "Thêm vào Planner" sẽ kết nối với gym-planner.html!');
+            closeModal();
+        }
+        
+        // ==================== EVENT LISTENERS ====================
+        function setupEventListeners() {
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.addEventListener('click', function() {
+                    const type = this.dataset.type;
+                    const filter = this.dataset.filter;
+                    this.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilters[type] = filter;
+                    renderExercises();
+                });
+            });
+            
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilters.category = this.dataset.category;
+                    renderExercises();
+                });
+            });
+            
+            document.getElementById('searchInput').addEventListener('input', function() {
+                currentFilters.search = this.value;
+                renderExercises();
+            });
+            
+            document.getElementById('modalClose').addEventListener('click', closeModal);
+            document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+            document.getElementById('modalOverlay').addEventListener('click', function(e) {
+                if (e.target === this) closeModal();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeModal();
+            });
+        }
+    </script>
+</body>
+</html>
