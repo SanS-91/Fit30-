@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Tracker - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #4A90E2;
+            --primary-purple: #9B59B6;
+            --primary-orange: #F39C12;
+            --primary-green: #50C878;
+            --primary-red: #E74C3C;
+            --primary-teal: #1ABC9C;
+            
+            --text-dark: #1A202C;
+            --text-medium: #4A5568;
+            --text-light: #718096;
+            --bg-main: #F7FAFC;
+            --bg-card: #FFFFFF;
+            --border-soft: #E2E8F0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 16px 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover { color: var(--primary-blue); }
+        
+        /* Hero */
+        .hero {
+            padding: 60px 40px 40px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 100%);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.78rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 16px;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        
+        .hero p {
+            font-size: 1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px 50px;
+        }
+        
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            padding: 14px 28px;
+            background: var(--bg-card);
+            border: 2px solid var(--border-soft);
+            border-radius: 12px;
+            font-weight: 600;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .tab-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 100%);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .tab-content { display: none; }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* ============ GUIDE SECTIONS ============ */
+        .guide-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            margin-bottom: 24px;
+        }
+        
+        .guide-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--border-soft);
+        }
+        
+        .guide-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .guide-icon.blue { background: #E8F0FF; }
+        .guide-icon.purple { background: #F0E8FF; }
+        .guide-icon.orange { background: #FFF3E0; }
+        .guide-icon.green { background: #E8F8EE; }
+        .guide-icon.red { background: #FFE8E8; }
+        .guide-icon.teal { background: #E8F8F5; }
+        
+        .guide-title {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        
+        .guide-subtitle {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        .guide-content {
+            color: var(--text-medium);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+        
+        .guide-content p { margin-bottom: 12px; }
+        .guide-content strong { color: var(--text-dark); font-weight: 600; }
+        
+        /* Goal Cards */
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+        
+        .goal-card {
+            padding: 22px;
+            border-radius: 14px;
+            border: 2px solid;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--bg-main);
+        }
+        
+        .goal-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        }
+        
+        .goal-card.selected {
+            background: var(--bg-card);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        
+        .goal-card:nth-child(1) { border-color: var(--primary-blue); }
+        .goal-card:nth-child(2) { border-color: var(--primary-green); }
+        .goal-card:nth-child(3) { border-color: var(--primary-purple); }
+        .goal-card:nth-child(4) { border-color: var(--primary-orange); }
+        .goal-card:nth-child(5) { border-color: var(--primary-teal); }
+        .goal-card:nth-child(6) { border-color: var(--primary-red); }
+        
+        .goal-card:nth-child(1).selected { background: #E8F0FF; }
+        .goal-card:nth-child(2).selected { background: #E8F8EE; }
+        .goal-card:nth-child(3).selected { background: #F0E8FF; }
+        .goal-card:nth-child(4).selected { background: #FFF3E0; }
+        .goal-card:nth-child(5).selected { background: #E8F8F5; }
+        .goal-card:nth-child(6).selected { background: #FFE8E8; }
+        
+        .goal-icon { font-size: 2rem; margin-bottom: 10px; }
+        
+        .goal-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        
+        .goal-desc {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+        
+        .goal-macros {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border-soft);
+        }
+        
+        .goal-macro { text-align: center; }
+        
+        .goal-macro-value {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        .goal-macro-label {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+        
+        /* ============ WORKOUT LOG ============ */
+        .workout-log-container {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 24px;
+        }
+        
+        .workout-log-main {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .log-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .date-picker {
+            padding: 10px 16px;
+            border: 2px solid var(--border-soft);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            background: var(--bg-main);
+            cursor: pointer;
+        }
+        
+        .exercise-log-list {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .exercise-log-item {
+            display: grid;
+            grid-template-columns: 1fr 80px 80px 80px 40px;
+            gap: 10px;
+            align-items: center;
+            padding: 14px;
+            background: var(--bg-main);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-blue);
+        }
+        
+        .exercise-log-item .name {
+            font-weight: 600;
+            font-size: 0.92rem;
+            color: var(--text-dark);
+        }
+        
+        .log-input {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid var(--border-soft);
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: border-color 0.2s;
+        }
+        
+        .log-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+        
+        .remove-log-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: #FFE8E8;
+            color: var(--primary-red);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        
+        .remove-log-btn:hover {
+            background: var(--primary-red);
+            color: white;
+        }
+        
+        .add-exercise-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--bg-main);
+            border: 2px dashed var(--border-soft);
+            border-radius: 10px;
+            color: var(--text-medium);
+            font-weight: 600;
+            font-size: 0.92rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .add-exercise-btn:hover {
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+            background: #E8F0FF;
+        }
+        
+        .workout-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid var(--border-soft);
+        }
+        
+        .summary-item {
+            text-align: center;
+            padding: 16px;
+            background: var(--bg-main);
+            border-radius: 10px;
+        }
+        
+        .summary-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            line-height: 1;
+        }
+        
+        .summary-label {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin-top: 6px;
+            font-weight: 600;
+        }
+        
+        /* Workout Log Sidebar */
+        .workout-log-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .sidebar-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .sidebar-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+        
+        .recent-workouts {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .recent-workout-item {
+            padding: 12px;
+            background: var(--bg-main);
+            border-radius: 10px;
+            border-left: 3px solid var(--primary-green);
+        }
+        
+        .recent-workout-date {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+        
+        .recent-workout-exercises {
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        
+        .recent-workout-volume {
+            font-size: 0.75rem;
+            color: var(--primary-blue);
+            margin-top: 4px;
+        }
+        
+        /* ============ BODY METRICS ============ */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+        
+        .metric-input-group {
+            padding: 18px;
+            background: var(--bg-main);
+            border-radius: 12px;
+            border-left: 4px solid var(--metric-color);
+        }
+        
+        .metric-input-group:nth-child(1) { --metric-color: var(--primary-blue); }
+        .metric-input-group:nth-child(2) { --metric-color: var(--primary-green); }
+        .metric-input-group:nth-child(3) { --metric-color: var(--primary-purple); }
+        .metric-input-group:nth-child(4) { --metric-color: var(--primary-orange); }
+        .metric-input-group:nth-child(5) { --metric-color: var(--primary-teal); }
+        .metric-input-group:nth-child(6) { --metric-color: var(--primary-red); }
+        
+        .metric-label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .metric-change {
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        
+        .metric-change.positive { color: var(--primary-green); }
+        .metric-change.negative { color: var(--primary-red); }
+        .metric-change.neutral { color: var(--text-light); }
+        
+        .metric-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid var(--border-soft);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: border-color 0.2s;
+        }
+        
+        .metric-input:focus {
+            outline: none;
+            border-color: var(--metric-color);
+        }
+        
+        .metric-unit {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+        
+        /* ============ HABITS ============ */
+        .habits-container {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 24px;
+        }
+        
+        .habits-main {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .habit-list {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .habit-item {
+            display: grid;
+            grid-template-columns: 40px 1fr auto;
+            gap: 14px;
+            align-items: center;
+            padding: 16px;
+            background: var(--bg-main);
+            border-radius: 12px;
+            border-left: 4px solid var(--habit-color);
+            transition: all 0.2s;
+        }
+        
+        .habit-item:nth-child(1) { --habit-color: var(--primary-blue); }
+        .habit-item:nth-child(2) { --habit-color: var(--primary-green); }
+        .habit-item:nth-child(3) { --habit-color: var(--primary-orange); }
+        .habit-item:nth-child(4) { --habit-color: var(--primary-purple); }
+        .habit-item:nth-child(5) { --habit-color: var(--primary-teal); }
+        .habit-item:nth-child(6) { --habit-color: var(--primary-red); }
+        .habit-item:nth-child(7) { --habit-color: #3498DB; }
+        
+        .habit-item.completed {
+            background: #E8F8EE;
+            border-left-color: var(--primary-green);
+        }
+        
+        .habit-check {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--bg-card);
+            border: 2px solid var(--border-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.2rem;
+            color: transparent;
+        }
+        
+        .habit-item.completed .habit-check {
+            background: var(--primary-green);
+            border-color: var(--primary-green);
+            color: white;
+        }
+        
+        .habit-check:hover {
+            border-color: var(--primary-green);
+            transform: scale(1.05);
+        }
+        
+        .habit-info { flex: 1; }
+        
+        .habit-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 3px;
+        }
+        
+        .habit-desc {
+            font-size: 0.78rem;
+            color: var(--text-light);
+        }
+        
+        .habit-streak { text-align: right; }
+        
+        .streak-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+        }
+        
+        .streak-label {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+        
+        /* Habits Sidebar */
+        .habits-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .streak-display {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .streak-fire { font-size: 3rem; margin-bottom: 8px; }
+        
+        .streak-days {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            line-height: 1;
+        }
+        
+        .streak-text {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            margin-top: 4px;
+        }
+        
+        .weekly-stats {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            margin-top: 12px;
+        }
+        
+        .day-dot {
+            aspect-ratio: 1;
+            border-radius: 6px;
+            background: var(--bg-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        
+        .day-dot.completed {
+            background: var(--primary-green);
+            color: white;
+        }
+        
+        .day-dot.today {
+            border: 2px solid var(--primary-blue);
+        }
+        
+        /* Info Callout */
+        .info-callout {
+            padding: 16px 18px;
+            border-radius: 12px;
+            margin-top: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        
+        .info-callout.tip {
+            background: #E8F8EE;
+            border-left: 4px solid var(--primary-green);
+        }
+        
+        .info-callout.warning {
+            background: #FFF3E0;
+            border-left: 4px solid var(--primary-orange);
+        }
+        
+        .info-callout.important {
+            background: #FFE8E8;
+            border-left: 4px solid var(--primary-red);
+        }
+        
+        .info-callout-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .info-callout-text {
+            font-size: 0.88rem;
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+        
+        .info-callout-text strong { font-weight: 600; }
+        
+        /* Buttons */
+        .btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.92rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(74,144,226,0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-main);
+            color: var(--text-medium);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--border-soft);
+        }
+        
+        .btn-danger {
+            background: #FFE8E8;
+            color: var(--primary-red);
+        }
+        
+        .btn-danger:hover {
+            background: var(--primary-red);
+            color: white;
+        }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-soft);
+            padding: 36px 40px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 14px;
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover { color: var(--primary-blue); }
+        
+        .footer-bottom {
+            color: var(--text-light);
+            font-size: 0.82rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .goals-grid { grid-template-columns: repeat(2, 1fr); }
+            .workout-log-container,
+            .habits-container { grid-template-columns: 1fr; }
+            .exercise-log-item {
+                grid-template-columns: 1fr 60px 60px 60px 36px;
+            }
+            .metrics-grid { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 14px 20px; }
+            .hero { padding: 40px 20px 30px; }
+            .hero h1 { font-size: 2rem; }
+            .main-container { padding: 0 20px 40px; }
+            .goals-grid { grid-template-columns: 1fr; }
+            .guide-section { padding: 20px; }
+            .tab-btn { padding: 12px 20px; font-size: 0.88rem; }
+            .exercise-log-item {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .workout-summary { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="men-gym-overview.html" class="back-link">← Quay lại GYM Overview</a>
+    </header>
+    
+    <section class="hero">
+        <span class="hero-badge">PROGRESS TRACKER</span>
+        <h1>Theo Dõi <span>Tiến Độ</span></h1>
+        <div class="hero-subtitle">Đặt mục tiêu, ghi chép buổi tập, đo số cơ thể, và xây dựng thói quen bền vững</div>
+        <p>Tracking là chìa khóa của tiến bộ. Những gì được đo lường sẽ được cải thiện. Bắt đầu hành trình 1% better mỗi ngày.</p>
+    </section>
+    
+    <div class="main-container">
+        
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('goals')"> Goals</button>
+            <button class="tab-btn" onclick="switchTab('workout')"> Workout Log</button>
+            <button class="tab-btn" onclick="switchTab('metrics')"> Body Metrics</button>
+            <button class="tab-btn" onclick="switchTab('habits')">✅ Habits</button>
+        </div>
+        
+        <!-- ============ GOALS TAB ============ -->
+        <div class="tab-content active" id="tab-goals">
+            
+            <div class="guide-section">
+                <div class="guide-header">
+                    <div class="guide-icon blue">🎯</div>
+                    <div>
+                        <h2 class="guide-title">Tại Sao Cần Đặt Mục Tiêu Rõ Ràng?</h2>
+                        <div class="guide-subtitle">Goal setting là bước đầu tiên của mọi thành công</div>
+                    </div>
+                </div>
+                
+                <div class="guide-content">
+                    <p>Nghiên cứu của <strong>Dr. Edwin Locke (1968)</strong> - cha đẻ của Goal Setting Theory - chứng minh rằng người có mục tiêu cụ thể, thách thức sẽ đạt hiệu suất cao hơn <strong>90%</strong> so với người không có mục tiêu hoặc mục tiêu mơ hồ.</p>
+                    
+                    <p>Với tập luyện, goal không chỉ là "muốn đẹp hơn". Goal cụ thể giúp bạn: <strong>chọn đúng program</strong>, <strong>điều chỉnh dinh dưỡng phù hợp</strong>, và <strong>đo lường tiến độ</strong> một cách khách quan.</p>
+                </div>
+                
+                <div class="info-callout tip">
+                    <div class="info-callout-icon">💡</div>
+                    <div class="info-callout-text">
+                        <strong>SMART Goals:</strong> Specific (cụ thể) · Measurable (đo được) · Achievable (khả thi) · Relevant (liên quan) · Time-bound (có thời hạn). Ví dụ: "Tăng bench press từ 80kg lên 100kg trong 12 tuần" thay vì "muốn khỏe hơn".
+                    </div>
+                </div>
+            </div>
+            
+            <div class="guide-section">
+                <div class="guide-header">
+                    <div class="guide-icon purple">🏆</div>
+                    <div>
+                        <h2 class="guide-title">6 Mục Tiêu Tập Luyện</h2>
+                        <div class="guide-subtitle">Chọn mục tiêu phù hợp với bạn - mỗi goal có strategy riêng</div>
+                    </div>
+                </div>
+                
+                <div class="guide-content">
+                    <p>Mỗi mục tiêu đòi hỏi <strong>program khác nhau</strong>, <strong>dinh dưỡng khác nhau</strong>, và <strong>mindset khác nhau</strong>. Chọn 1 goal chính để focus, bạn có thể chuyển đổi sau 8-12 tuần.</p>
+                </div>
+                
+                <div class="goals-grid">
+                    <div class="goal-card selected" onclick="selectGoal(this, 'strength')">
+                        <div class="goal-icon">💪</div>
+                        <div class="goal-name">Strength</div>
+                        <div class="goal-desc">Tăng sức mạnh tối đa. Focus vào compound lifts với tạ nặng, reps thấp (3-6), rest dài.</div>
+                        <div class="goal-macros">
+                            <div class="goal-macro">
+                                <div class="goal-macro-value">2.0g</div>
+                                <div class="goal-macro-label">Protein/kg</div>
+                            </div>
+                            <div class="goal-macro">
+                                <div class="goal-macro-value">4-6g</div>
+                                <div class="goal-macro-label">Carb/kg</div>
+                            </div>
+                            <div class="goal-macro">
+                                <div class="goal-macro-value">85%+</div>
+                                <div class="goal-macro-label">Intensity</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="goal-card" onclick="selectGoal(this, 'hypertrophy')">
+                        <div class="goal-icon">🏋️</div>
+                        <div class="goal-name">Hypertrophy</div>
+                        <div class="goal-desc">Tăng khối lượng cơ bắp. Volume cao, reps trung bình (8-12), time under tension quan trọng.</div>
+                        <div class="goal-macros">
+                            <div class="goal-macro">
+                                <div class="goal-macro-value">2.2g</div>
+                                <div class="goal-macro-label">Protein/kg</div>
+                            </div>
+                            <div class="goal-macro">
+                                <div class="goal-macro-value">5-7g</div>
+                                <div class="goal-macro-label">Carb/kg</div>
+                            </div>
+                            <div class="goal-macro">
+                                <div class="goal-macro-value">+300</div>
+                                <div class="goal-macro-label">Cal surplus</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="goal-card" onclick="selectGoal(this, 'fatloss')">
+                        <div class="goal-icon">🔥</div>
+                        <div class="goal-name">Fat Loss</div>
+                        <div class="goal-desc">Giảm mỡ, giữ cơ. Caloric deficit vừa phải, protein cao, kết hợp strength + cardio.</div>
+                        <div class="goal-macros">
+                            <div class="goal-macro">
+                                <div class="goal-macro-value">2.4g</div>
+                                <div class="goal-macro-label">Protein/kg</div>
+                            </div>
+                            <div class="goal-macro">
+                                <div class="goal-macro-value">2-4g</div>
+                                <div class="goal-macro-label">Carb/kg</div>
+                            </div>
+                            <div class="goal-macro">
+                                <div class="goal-macro-value">-500</div>
+                                <div class="goal-macro-label">Cal deficit</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="goal-card" onclick="selectGoal(this, 'recomp')">
+                        <div class="goal-icon">⚖️</div>
+                        <div class="goal-name">Recomposition</div>
+                        <div class="goal-desc">Vừa giảm mỡ vừa tăng cơ. Dành cho beginner hoặc người quay lại tập sau thời gian dài nghỉ.</div>
+                        <div class="goal-macros">
+                            <div class="goal-macro">
+                                <div class="goal-macro-value">2.2g</div>
+                                <div class="goal-macro-label">Protein/kg</div>
+                            </div>
+                            <div class="goal-macro">
+                                <div class="goal-macro-value">3-5g</div>
+                                <div class="goal-macro-label">Carb/kg</div>
+                            </div>
+                            <div class="goal-macro">
+                                <div class="goal-macro-value">±0</div>
+                                <div class="goal-macro-label">Maintenance</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="goal-card" onclick="selectGoal(this, 'endurance')">
+                        <div class="goal-icon">🏃</div>
+                        <div class="goal-name">Endurance</div>
+                        <div class="goal-desc">Tăng sức bền tim mạch và cơ bắp. Reps cao (15-20+), rest ngắn, kết hợp cardio dài.</div>
+                        <div class="goal-macros">
+                            <div class="goal-macro">
+                                <div class="goal-macro-value">1.8g</div>
+                                <div class="goal-macro-label">Protein/kg</div>
+                            </div>
+                            <div class="goal-macro">
+                                <div class="goal-macro-value">6-8g</div>
+                                <div class="goal-macro-label">Carb/kg</div>
+                            </div>
+                            <div class="goal-macro">
+                                <div class="goal-macro-value">60-70%</div>
+                                <div class="goal-macro-label">HR Max</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="goal-card" onclick="selectGoal(this, 'athletic')">
+                        <div class="goal-icon">⚡</div>
+                        <div class="goal-name">Athletic Performance</div>
+                        <div class="goal-desc">Tăng power, speed, agility. Kết hợp strength, plyometrics, và sport-specific training.</div>
+                        <div class="goal-macros">
+                            <div class="goal-macro">
+                                <div class="goal-macro-value">2.0g</div>
+                                <div class="goal-macro-label">Protein/kg</div>
+                            </div>
+                            <div class="goal-macro">
+                                <div class="goal-macro-value">5-7g</div>
+                                <div class="goal-macro-label">Carb/kg</div>
+                            </div>
+                            <div class="goal-macro">
+                                <div class="goal-macro-value">Varied</div>
+                                <div class="goal-macro-label">Periodized</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-callout warning">
+                    <div class="info-callout-icon">⚠️</div>
+                    <div class="info-callout-text">
+                        <strong>Đừng chase nhiều goals cùng lúc!</strong> Strength + Fat Loss là 2 goals đối nghịch (1 cần surplus, 1 cần deficit). Chọn 1 goal chính, focus 8-12 tuần, rồi mới chuyển sang goal khác.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="guide-section" id="goalResult" style="display: none;">
+                <div class="guide-header">
+                    <div class="guide-icon green">✅</div>
+                    <div>
+                        <h2 class="guide-title" id="selectedGoalTitle">Goal đã chọn</h2>
+                        <div class="guide-subtitle">Strategy và next steps cho goal của bạn</div>
+                    </div>
+                </div>
+                <div class="guide-content" id="selectedGoalContent"></div>
+                <div style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
+                    <a href="men-gym-planner.html" class="btn btn-primary">Xem 12-Week Roadmap →</a>
+                    <a href="men-nutrition-overview.html" class="btn btn-secondary">Điều chỉnh dinh dưỡng</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ============ WORKOUT LOG TAB ============ -->
+        <div class="tab-content" id="tab-workout">
+            
+            <div class="guide-section">
+                <div class="guide-header">
+                    <div class="guide-icon orange">📝</div>
+                    <div>
+                        <h2 class="guide-title">Workout Log - Ghi Chép Buổi Tập</h2>
+                        <div class="guide-subtitle">Theo dõi sets, reps, weight, RPE để đảm bảo progressive overload</div>
+                    </div>
+                </div>
+                
+                <div class="guide-content">
+                    <p><strong>"What gets measured gets managed."</strong> - Peter Drucker. Ghi chép buổi tập giúp bạn:</p>
+                    <p>• <strong>Track progressive overload:</strong> Biết chính xác tuần trước tập bao nhiêu, tuần này cần tăng gì<br>
+                    • <strong>Identify patterns:</strong> Nhận ra bài tập nào hiệu quả, bài nào không<br>
+                    • <strong>Stay accountable:</strong> Không thể "feel good" về buổi tập nếu không có data<br>
+                    • <strong>Prevent overtraining:</strong> Theo dõi volume và frequency để tránh tập quá sức</p>
+                </div>
+                
+                <div class="info-callout tip">
+                    <div class="info-callout-icon">💡</div>
+                    <div class="info-callout-text">
+                        <strong>RPE Guide:</strong> RPE 6-7 = còn 3-4 reps trong kho · RPE 7-8 = còn 2-3 reps · RPE 8-9 = còn 1-2 reps · RPE 9-10 = max effort hoặc failure.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="workout-log-container">
+                <div class="workout-log-main">
+                    <div class="log-header">
+                        <h2 class="section-title" style="margin: 0;">Buổi tập hôm nay</h2>
+                        <input type="date" class="date-picker" id="workoutDate" onchange="loadWorkoutLog()">
+                    </div>
+                    
+                    <div class="exercise-log-list" id="exerciseLogList">
+                        <!-- Rendered by JS -->
+                    </div>
+                    
+                    <button class="add-exercise-btn" onclick="addExerciseLog()">+ Thêm bài tập</button>
+                    
+                    <div class="workout-summary">
+                        <div class="summary-item">
+                            <div class="summary-value" id="totalExercises">0</div>
+                            <div class="summary-label">Bài tập</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-value" id="totalSets">0</div>
+                            <div class="summary-label">Tổng sets</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-value" id="totalVolume">0</div>
+                            <div class="summary-label">Volume (kg)</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="workout-log-sidebar">
+                    <div class="sidebar-card">
+                        <div class="sidebar-title">Buổi tập gần đây</div>
+                        <div class="recent-workouts" id="recentWorkouts">
+                            <!-- Rendered by JS -->
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <div class="sidebar-title">Weekly Volume</div>
+                        <div style="display: grid; gap: 10px;">
+                            <div style="padding: 12px; background: #E8F0FF; border-radius: 10px; font-size: 0.85rem;">
+                                <strong style="color: var(--primary-blue);">Ngực:</strong> <span id="weeklyChest">0</span> sets
+                            </div>
+                            <div style="padding: 12px; background: #F0E8FF; border-radius: 10px; font-size: 0.85rem;">
+                                <strong style="color: var(--primary-purple);">Lưng:</strong> <span id="weeklyBack">0</span> sets
+                            </div>
+                            <div style="padding: 12px; background: #FFF3E0; border-radius: 10px; font-size: 0.85rem;">
+                                <strong style="color: var(--primary-orange);">Vai:</strong> <span id="weeklyShoulder">0</span> sets
+                            </div>
+                            <div style="padding: 12px; background: #E8F8EE; border-radius: 10px; font-size: 0.85rem;">
+                                <strong style="color: var(--primary-green);">Chân:</strong> <span id="weeklyLegs">0</span> sets
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ============ BODY METRICS TAB ============ -->
+        <div class="tab-content" id="tab-metrics">
+            
+            <div class="guide-section">
+                <div class="guide-header">
+                    <div class="guide-icon teal">📏</div>
+                    <div>
+                        <h2 class="guide-title">Body Metrics - Số Đo Cơ Thể</h2>
+                        <div class="guide-subtitle">Theo dõi thay đổi cơ thể khách quan, không chỉ dựa vào cân nặng</div>
+                    </div>
+                </div>
+                
+                <div class="guide-content">
+                    <p>Cân nặng chỉ là 1 con số. <strong>Body composition</strong> (tỷ lệ cơ/mỡ) mới là thứ quan trọng. Bạn có thể tăng cân nhưng vẫn giảm mỡ nếu đang build muscle. Đo số cơ thể mỗi 2 tuần giúp bạn thấy progress thật sự.</p>
+                    
+                    <p><strong>Khi nào đo:</strong> Buổi sáng, sau khi đi vệ sinh, trước khi ăn/uống. Dùng cùng 1 thước dây, cùng vị trí đo.</p>
+                </div>
+                
+                <div class="info-callout important">
+                    <div class="info-callout-icon"></div>
+                    <div class="info-callout-text">
+                        <strong>Progress Photos:</strong> Chụp ảnh mỗi 2 tuần cùng điều kiện (ánh sáng, pose, thời điểm). So sánh ảnh sẽ cho bạn thấy thay đổi rõ hơn số đo!
+                    </div>
+                </div>
+            </div>
+            
+            <div class="guide-section">
+                <div class="guide-header">
+                    <div class="guide-icon green">📊</div>
+                    <div>
+                        <h2 class="guide-title">Cập Nhật Số Đo</h2>
+                        <div class="guide-subtitle">Nhập số đo hiện tại - hệ thống tự động tính thay đổi so với lần đo trước</div>
+                    </div>
+                </div>
+                
+                <div class="metrics-grid" id="metricsGrid">
+                    <!-- Rendered by JS -->
+                </div>
+                
+                <div style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
+                    <button class="btn btn-primary" onclick="saveMetrics()"> Lưu số đo</button>
+                    <button class="btn btn-secondary" onclick="viewMetricsHistory()"> Xem lịch sử</button>
+                </div>
+                
+                <div class="info-callout warning" style="margin-top: 20px;">
+                    <div class="info-callout-icon">⚠️</div>
+                    <div class="info-callout-text">
+                        <strong>Đừng đo quá thường xuyên!</strong> Số đo thay đổi chậm. Đo mỗi 2 tuần là đủ. Đo hàng ngày sẽ gây stress và không chính xác do water retention.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ============ HABITS TAB ============ -->
+        <div class="tab-content" id="tab-habits">
+            
+            <div class="guide-section">
+                <div class="guide-header">
+                    <div class="guide-icon green">✅</div>
+                    <div>
+                        <h2 class="guide-title">Sức Mạnh Của Thói Quen Hàng Ngày</h2>
+                        <div class="guide-subtitle">1% better mỗi ngày = 37x better sau 1 năm</div>
+                    </div>
+                </div>
+                
+                <div class="guide-content">
+                    <p>Theo <strong>James Clear</strong> (tác giả Atomic Habits): "Bạn không lên đến level của goals, bạn rơi xuống level của systems." Habits là systems - chúng quyết định 90% kết quả dài hạn của bạn.</p>
+                    
+                    <p>Với tập luyện, <strong>consistency > intensity</strong>. Tập 3 buổi/tuần đều đặn trong 1 năm tốt hơn tập 6 buổi/tuần trong 1 tháng rồi bỏ. 7 habits dưới đây sẽ giúp bạn build consistency.</p>
+                </div>
+                
+                <div class="info-callout important">
+                    <div class="info-callout-icon">🔥</div>
+                    <div class="info-callout-text">
+                        <strong>Streak psychology:</strong> Khi bạn có streak 7+ ngày, não bộ sẽ "nghiện" cảm giác hoàn thành. Đừng break the chain! Nếu lỡ 1 ngày, rule là: <strong>never miss twice</strong> - không bao giờ bỏ 2 ngày liên tiếp.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="habits-container">
+                <div class="habits-main">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 class="section-title" style="margin: 0;">7 Habits Hàng Ngày</h2>
+                        <button class="btn btn-danger" onclick="resetHabits()">Reset hôm nay</button>
+                    </div>
+                    
+                    <div class="habit-list" id="habitList">
+                        <!-- Rendered by JS -->
+                    </div>
+                    
+                    <div class="info-callout tip" style="margin-top: 20px;">
+                        <div class="info-callout-icon">💡</div>
+                        <div class="info-callout-text">
+                            <strong>Habit stacking tip:</strong> Gắn habit mới vào habit cũ. Ví dụ: "Sau khi uống cà phê sáng (habit cũ), tôi sẽ uống 500ml nước (habit mới)." Hoặc: "Sau khi tập xong, tôi sẽ stretching 10 phút."
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="habits-sidebar">
+                    <div class="sidebar-card">
+                        <div class="sidebar-title">Current Streak</div>
+                        <div class="streak-display">
+                            <div class="streak-fire"></div>
+                            <div class="streak-days" id="streakDays">0</div>
+                            <div class="streak-text">ngày liên tiếp</div>
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--text-medium); text-align: center;">
+                            <strong id="completionRate">0%</strong> hoàn thành hôm nay
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <div class="sidebar-title">7 Ngày Qua</div>
+                        <div class="weekly-stats" id="weeklyStats">
+                            <!-- Rendered by JS -->
+                        </div>
+                        <div style="margin-top: 12px; font-size: 0.78rem; color: var(--text-light); text-align: center;">
+                            <span id="weeklyCompleted">0</span>/7 ngày hoàn thành
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <div class="sidebar-title">Milestone</div>
+                        <div style="display: grid; gap: 10px;">
+                            <div style="padding: 12px; background: #E8F0FF; border-radius: 10px; font-size: 0.85rem;">
+                                <strong style="color: var(--primary-blue);">7 ngày</strong> - Beginner streak
+                            </div>
+                            <div style="padding: 12px; background: #FFF3E0; border-radius: 10px; font-size: 0.85rem;">
+                                <strong style="color: var(--primary-orange);">21 ngày</strong> - Habit formed
+                            </div>
+                            <div style="padding: 12px; background: #E8F8EE; border-radius: 10px; font-size: 0.85rem;">
+                                <strong style="color: var(--primary-green);">30 ngày</strong> - Lifestyle change
+                            </div>
+                            <div style="padding: 12px; background: #F0E8FF; border-radius: 10px; font-size: 0.85rem;">
+                                <strong style="color: var(--primary-purple);">90 ngày</strong> - Identity shift
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="men-30-40.html">Nam 30-40</a>
+            <a href="men-gym-overview.html">GYM Overview</a>
+            <a href="men-gym-planner.html">Workout Planner</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // ==================== DATA ====================
+        const habitsData = [
+            { id: 'workout', name: 'Tập luyện hôm nay', desc: 'Dù chỉ 20 phút, quan trọng là consistency', icon: '💪' },
+            { id: 'protein', name: 'Đủ protein mục tiêu', desc: '2.0-2.4g/kg cân nặng', icon: '🥩' },
+            { id: 'sleep', name: 'Ngủ 7-8 tiếng', desc: 'Trước 23h, phòng tối, mát', icon: '' },
+            { id: 'water', name: 'Uống 3-4L nước', desc: '500ml ngay khi thức dậy', icon: '💧' },
+            { id: 'stretch', name: 'Stretching 10 phút', desc: 'Sau tập hoặc trước ngủ', icon: '🧘' },
+            { id: 'steps', name: '8,000-10,000 bước', desc: 'Đi bộ, cầu thang, active transport', icon: '🚶' },
+            { id: 'noreward', name: 'Không alcohol/junk food', desc: 'Hạn chế chất gây hại cho progress', icon: '🚫' }
+        ];
+        
+        const bodyMetricsData = [
+            { id: 'weight', name: 'Cân nặng', unit: 'kg', icon: '⚖️' },
+            { id: 'chest', name: 'Vòng ngực', unit: 'cm', icon: '📏' },
+            { id: 'waist', name: 'Vòng eo', unit: 'cm', icon: '📐' },
+            { id: 'hips', name: 'Vòng hông', unit: 'cm', icon: '📊' },
+            { id: 'arms', name: 'Vòng tay (bắp)', unit: 'cm', icon: '💪' },
+            { id: 'thighs', name: 'Vòng đùi', unit: 'cm', icon: '🦵' }
+        ];
+        
+        const goalStrategies = {
+            strength: {
+                title: '💪 Strength Goal - Strategy',
+                content: `
+                    <p><strong>Program recommendation:</strong> 12-week roadmap với focus vào compound lifts (Squat, Bench, Deadlift, OHP). Rep range 3-6, intensity 85-95% 1RM, rest 2-3 phút.</p>
+                    <p><strong>Frequency:</strong> 3-4 buổi/tuần. Full body hoặc Upper/Lower split. Tránh tập quá nhiều isolation.</p>
+                    <p><strong>Progressive overload:</strong> Tăng 2.5kg mỗi tuần cho upper body, 5kg cho lower body. Khi không tăng được tạ, tăng reps trước.</p>
+                    <p><strong>Deload:</strong> Mỗi 4-6 tuần, giảm volume 40%, intensity 20% để CNS phục hồi.</p>
+                    <p><strong>Key metric:</strong> Theo dõi 1RM estimates của 4 lifts chính mỗi 4 tuần.</p>
+                `
+            },
+            hypertrophy: {
+                title: '🏋️ Hypertrophy Goal - Strategy',
+                content: `
+                    <p><strong>Program recommendation:</strong> Volume-focused program. Rep range 8-12, intensity 70-80% 1RM, rest 60-90 giây. Time under tension quan trọng.</p>
+                    <p><strong>Frequency:</strong> 4-6 buổi/tuần. Push/Pull/Legs hoặc Bro split. Mỗi nhóm cơ 2-3 lần/tuần.</p>
+                    <p><strong>Volume target:</strong> 12-20 sets/nhóm cơ/tuần. Bắt đầu từ 12, tăng dần lên 20 nếu recovery tốt.</p>
+                    <p><strong>Nutrition:</strong> Caloric surplus +300-500 kcal. Protein 2.2g/kg. Carb cao để fuel workouts.</p>
+                    <p><strong>Key metric:</strong> Theo dõi body measurements (ngực, tay, đùi) và cân nặng mỗi 2 tuần.</p>
+                `
+            },
+            fatloss: {
+                title: '🔥 Fat Loss Goal - Strategy',
+                content: `
+                    <p><strong>Program recommendation:</strong> Strength training để giữ cơ + cardio vừa phải. Rep range 8-12, intensity 70-80%, rest ngắn 60 giây.</p>
+                    <p><strong>Frequency:</strong> 4-5 buổi strength + 2-3 buổi cardio/tuần. Đừng cắt strength khi cutting!</p>
+                    <p><strong>Deficit:</strong> -500 kcal/ngày = giảm 0.5kg/tuần. Đừng deficit quá nhiều (>1000 kcal) sẽ mất cơ.</p>
+                    <p><strong>Protein cao:</strong> 2.4g/kg để preserve muscle mass trong deficit.</p>
+                    <p><strong>Key metric:</strong> Cân nặng + body fat % + progress photos mỗi 2 tuần. Đừng chỉ nhìn cân!</p>
+                `
+            },
+            recomp: {
+                title: '⚖️ Recomposition Goal - Strategy',
+                content: `
+                    <p><strong>Program recommendation:</strong> Strength-focused với volume vừa phải. Rep range 6-10, intensity 75-85%. Perfect cho beginner hoặc người quay lại tập.</p>
+                    <p><strong>Frequency:</strong> 3-4 buổi/tuần. Full body hoặc Upper/Lower.</p>
+                    <p><strong>Calories:</strong> Maintenance hoặc surplus rất nhỏ (+100-200 kcal). Protein cao 2.2g/kg.</p>
+                    <p><strong>Timeline:</strong> Recomp chậm hơn pure bulk/cut. Kiên nhẫn 12-16 tuần mới thấy rõ kết quả.</p>
+                    <p><strong>Key metric:</strong> Body measurements + strength progress. Cân có thể không đổi nhưng body composition thay đổi.</p>
+                `
+            },
+            endurance: {
+                title: '🏃 Endurance Goal - Strategy',
+                content: `
+                    <p><strong>Program recommendation:</strong> Rep range 15-20+, intensity 50-65%, rest ngắn 30-60 giây. Circuit training hiệu quả.</p>
+                    <p><strong>Frequency:</strong> 4-5 buổi/tuần kết hợp strength + cardio.</p>
+                    <p><strong>Cardio:</strong> 2-3 buổi LISS (30-45 phút, HR 60-70%) + 1 buổi HIIT (20 phút).</p>
+                    <p><strong>Nutrition:</strong> Carb cao 6-8g/kg để fuel endurance work. Protein 1.8g/kg đủ.</p>
+                    <p><strong>Key metric:</strong> VO2 max estimates, resting HR, performance trong cardio sessions.</p>
+                `
+            },
+            athletic: {
+                title: '⚡ Athletic Performance Goal - Strategy',
+                content: `
+                    <p><strong>Program recommendation:</strong> Periodized program kết hợp strength, power, speed, agility. Rep range varied (3-6 cho strength, 1-5 cho power).</p>
+                    <p><strong>Frequency:</strong> 4-5 buổi/tuần với sport-specific training.</p>
+                    <p><strong>Components:</strong> Strength (2x) + Power/Plyometrics (1x) + Speed/Agility (1x) + Conditioning (1x).</p>
+                    <p><strong>Recovery:</strong> Cực kỳ quan trọng. Sleep 8h+, deload thường xuyên hơn.</p>
+                    <p><strong>Key metric:</strong> Vertical jump, sprint times, agility tests, strength benchmarks.</p>
+                `
+            }
+        };
+        
+        // ==================== STATE ====================
+        let currentGoal = 'strength';
+        let todayHabits = {};
+        let workoutLog = [];
+        
+        // ==================== TAB SWITCHING ====================
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(`tab-${tab}`).classList.add('active');
+            
+            if (tab === 'workout') {
+                document.getElementById('workoutDate').value = new Date().toISOString().split('T')[0];
+                loadWorkoutLog();
+            } else if (tab === 'metrics') {
+                renderMetrics();
+            }
+        }
+        
+        // ==================== GOAL SELECTION ====================
+        function selectGoal(card, goal) {
+            document.querySelectorAll('.goal-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            currentGoal = goal;
+            
+            const strategy = goalStrategies[goal];
+            document.getElementById('goalResult').style.display = 'block';
+            document.getElementById('selectedGoalTitle').textContent = strategy.title;
+            document.getElementById('selectedGoalContent').innerHTML = strategy.content;
+            
+            localStorage.setItem('fit30_men_goal', goal);
+            document.getElementById('goalResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        // ==================== WORKOUT LOG ====================
+        function loadWorkoutLog() {
+            const date = document.getElementById('workoutDate').value;
+            const saved = localStorage.getItem(`fit30_workout_${date}`);
+            workoutLog = saved ? JSON.parse(saved) : [];
+            
+            renderWorkoutLog();
+            loadRecentWorkouts();
+        }
+        
+        function renderWorkoutLog() {
+            const list = document.getElementById('exerciseLogList');
+            
+            if (workoutLog.length === 0) {
+                list.innerHTML = '<p style="text-align: center; color: var(--text-light); padding: 30px;">Chưa có bài tập nào. Click "+ Thêm bài tập" để bắt đầu.</p>';
+            } else {
+                list.innerHTML = workoutLog.map((ex, idx) => `
+                    <div class="exercise-log-item">
+                        <div class="name">${ex.name}</div>
+                        <input type="number" class="log-input" value="${ex.sets}" min="1" max="20" onchange="updateWorkoutLog(${idx}, 'sets', this.value)" placeholder="Sets">
+                        <input type="number" class="log-input" value="${ex.reps}" min="1" max="50" onchange="updateWorkoutLog(${idx}, 'reps', this.value)" placeholder="Reps">
+                        <input type="number" class="log-input" value="${ex.weight}" min="0" step="0.5" onchange="updateWorkoutLog(${idx}, 'weight', this.value)" placeholder="Weight (kg)">
+                        <button class="remove-log-btn" onclick="removeWorkoutLog(${idx})">✕</button>
+                    </div>
+                `).join('');
+            }
+            
+            updateWorkoutSummary();
+        }
+        
+        function addExerciseLog() {
+            const exerciseName = prompt('Tên bài tập:');
+            if (exerciseName) {
+                workoutLog.push({
+                    name: exerciseName,
+                    sets: 3,
+                    reps: 12,
+                    weight: 0
+                });
+                saveWorkoutLog();
+                renderWorkoutLog();
+            }
+        }
+        
+        function updateWorkoutLog(index, field, value) {
+            workoutLog[index][field] = parseFloat(value) || 0;
+            saveWorkoutLog();
+            updateWorkoutSummary();
+        }
+        
+        function removeWorkoutLog(index) {
+            workoutLog.splice(index, 1);
+            saveWorkoutLog();
+            renderWorkoutLog();
+        }
+        
+        function saveWorkoutLog() {
+            const date = document.getElementById('workoutDate').value;
+            localStorage.setItem(`fit30_workout_${date}`, JSON.stringify(workoutLog));
+        }
+        
+        function updateWorkoutSummary() {
+            const totalExercises = workoutLog.length;
+            const totalSets = workoutLog.reduce((sum, ex) => sum + ex.sets, 0);
+            const totalVolume = workoutLog.reduce((sum, ex) => sum + (ex.sets * ex.reps * ex.weight), 0);
+            
+            document.getElementById('totalExercises').textContent = totalExercises;
+            document.getElementById('totalSets').textContent = totalSets;
+            document.getElementById('totalVolume').textContent = Math.round(totalVolume);
+        }
+        
+        function loadRecentWorkouts() {
+            const recentDiv = document.getElementById('recentWorkouts');
+            const recent = [];
+            const today = new Date();
+            
+            for (let i = 1; i <= 7; i++) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                const saved = localStorage.getItem(`fit30_workout_${dateStr}`);
+                
+                if (saved) {
+                    const log = JSON.parse(saved);
+                    recent.push({
+                        date: dateStr,
+                        exercises: log.length,
+                        volume: log.reduce((sum, ex) => sum + (ex.sets * ex.reps * ex.weight), 0)
+                    });
+                }
+            }
+            
+            if (recent.length === 0) {
+                recentDiv.innerHTML = '<p style="color: var(--text-light); font-size: 0.88rem; text-align: center;">Chưa có buổi tập nào trong 7 ngày qua</p>';
+            } else {
+                recentDiv.innerHTML = recent.map(w => `
+                    <div class="recent-workout-item">
+                        <div class="recent-workout-date">${formatDate(w.date)}</div>
+                        <div class="recent-workout-exercises">${w.exercises} bài tập</div>
+                        <div class="recent-workout-volume">Volume: ${Math.round(w.volume)} kg</div>
+                    </div>
+                `).join('');
+            }
+        }
+        
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        }
+        
+        // ==================== BODY METRICS ====================
+        function renderMetrics() {
+            const grid = document.getElementById('metricsGrid');
+            const today = new Date().toISOString().split('T')[0];
+            const saved = localStorage.getItem(`fit30_metrics_${today}`);
+            const currentMetrics = saved ? JSON.parse(saved) : {};
+            
+            grid.innerHTML = bodyMetricsData.map(metric => {
+                const value = currentMetrics[metric.id] || '';
+                const previousValue = getPreviousMetric(metric.id);
+                const change = previousValue ? (value - previousValue).toFixed(1) : null;
+                
+                let changeClass = 'neutral';
+                let changeText = '—';
+                
+                if (change !== null) {
+                    if (metric.id === 'weight' || metric.id === 'waist' || metric.id === 'hips') {
+                        changeClass = change < 0 ? 'positive' : change > 0 ? 'negative' : 'neutral';
+                    } else {
+                        changeClass = change > 0 ? 'positive' : change < 0 ? 'negative' : 'neutral';
+                    }
+                    changeText = `${change > 0 ? '+' : ''}${change} ${metric.unit}`;
+                }
+                
+                return `
+                    <div class="metric-input-group">
+                        <div class="metric-label">
+                            <span>${metric.icon} ${metric.name}</span>
+                            <span class="metric-change ${changeClass}">${changeText}</span>
+                        </div>
+                        <input type="number" class="metric-input" id="metric-${metric.id}" value="${value}" step="0.1" placeholder="Nhập ${metric.name.toLowerCase()}">
+                        <div class="metric-unit">${metric.unit}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function getPreviousMetric(metricId) {
+            const today = new Date();
+            for (let i = 1; i <= 30; i++) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                const saved = localStorage.getItem(`fit30_metrics_${dateStr}`);
+                
+                if (saved) {
+                    const metrics = JSON.parse(saved);
+                    if (metrics[metricId]) {
+                        return parseFloat(metrics[metricId]);
+                    }
+                }
+            }
+            return null;
+        }
+        
+        function saveMetrics() {
+            const today = new Date().toISOString().split('T')[0];
+            const metrics = {};
+            
+            bodyMetricsData.forEach(metric => {
+                const value = document.getElementById(`metric-${metric.id}`).value;
+                if (value) {
+                    metrics[metric.id] = parseFloat(value);
+                }
+            });
+            
+            localStorage.setItem(`fit30_metrics_${today}`, JSON.stringify(metrics));
+            alert('✅ Đã lưu số đo!');
+            renderMetrics();
+        }
+        
+        function viewMetricsHistory() {
+            alert(' Tính năng xem lịch sử sẽ được phát triển trong phiên bản tiếp theo. Hiện tại bạn có thể xem thay đổi so với lần đo trước trong phần cập nhật số đo.');
+        }
+        
+        // ==================== HABITS TRACKER ====================
+        function renderHabits() {
+            const list = document.getElementById('habitList');
+            const today = new Date().toISOString().split('T')[0];
+            
+            const saved = localStorage.getItem(`fit30_habits_${today}`);
+            todayHabits = saved ? JSON.parse(saved) : {};
+            
+            list.innerHTML = habitsData.map(habit => {
+                const isCompleted = todayHabits[habit.id] || false;
+                const streak = getHabitStreak(habit.id);
+                
+                return `
+                    <div class="habit-item ${isCompleted ? 'completed' : ''}">
+                        <div class="habit-check" onclick="toggleHabit('${habit.id}')">
+                            ${isCompleted ? '✓' : ''}
+                        </div>
+                        <div class="habit-info">
+                            <div class="habit-name">${habit.icon} ${habit.name}</div>
+                            <div class="habit-desc">${habit.desc}</div>
+                        </div>
+                        <div class="habit-streak">
+                            <div class="streak-value">${streak}</div>
+                            <div class="streak-label">streak</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            updateStats();
+        }
+        
+        function toggleHabit(habitId) {
+            const today = new Date().toISOString().split('T')[0];
+            todayHabits[habitId] = !todayHabits[habitId];
+            
+            localStorage.setItem(`fit30_habits_${today}`, JSON.stringify(todayHabits));
+            renderHabits();
+        }
+        
+        function getHabitStreak(habitId) {
+            let streak = 0;
+            const today = new Date();
+            
+            for (let i = 0; i < 365; i++) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                const saved = localStorage.getItem(`fit30_habits_${dateStr}`);
+                
+                if (saved) {
+                    const habits = JSON.parse(saved);
+                    if (habits[habitId]) {
+                        streak++;
+                    } else {
+                        break;
+                    }
+                } else {
+                    break;
+                }
+            }
+            
+            return streak;
+        }
+        
+        function updateStats() {
+            const completed = Object.values(todayHabits).filter(v => v).length;
+            const total = habitsData.length;
+            const rate = Math.round((completed / total) * 100);
+            
+            document.getElementById('completionRate').textContent = `${rate}%`;
+            
+            let overallStreak = 0;
+            const today = new Date();
+            
+            for (let i = 0; i < 365; i++) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                const saved = localStorage.getItem(`fit30_habits_${dateStr}`);
+                
+                if (saved) {
+                    const habits = JSON.parse(saved);
+                    const allCompleted = habitsData.every(h => habits[h.id]);
+                    if (allCompleted) {
+                        overallStreak++;
+                    } else {
+                        break;
+                    }
+                } else {
+                    break;
+                }
+            }
+            
+            document.getElementById('streakDays').textContent = overallStreak;
+            
+            const weeklyStats = document.getElementById('weeklyStats');
+            const days = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+            const todayDay = new Date().getDay();
+            let weeklyCompleted = 0;
+            
+            weeklyStats.innerHTML = '';
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                const saved = localStorage.getItem(`fit30_habits_${dateStr}`);
+                const isCompleted = saved && habitsData.every(h => JSON.parse(saved)[h.id]);
+                const isToday = i === 0;
+                
+                if (isCompleted) weeklyCompleted++;
+                
+                const dayDiv = document.createElement('div');
+                dayDiv.className = `day-dot ${isCompleted ? 'completed' : ''} ${isToday ? 'today' : ''}`;
+                dayDiv.textContent = days[date.getDay()];
+                weeklyStats.appendChild(dayDiv);
+            }
+            
+            document.getElementById('weeklyCompleted').textContent = weeklyCompleted;
+        }
+        
+        function resetHabits() {
+            if (!confirm('Reset tất cả habits hôm nay?')) return;
+            
+            const today = new Date().toISOString().split('T')[0];
+            localStorage.removeItem(`fit30_habits_${today}`);
+            todayHabits = {};
+            
+            renderHabits();
+        }
+        
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedGoal = localStorage.getItem('fit30_men_goal');
+            if (savedGoal) {
+                currentGoal = savedGoal;
+                const goalCards = document.querySelectorAll('.goal-card');
+                const goalIndex = ['strength', 'hypertrophy', 'fatloss', 'recomp', 'endurance', 'athletic'].indexOf(savedGoal);
+                if (goalIndex >= 0 && goalCards[goalIndex]) {
+                    selectGoal(goalCards[goalIndex], savedGoal);
+                }
+            }
+            
+            renderHabits();
+        });
+    </script>
+</body>
+</html>
