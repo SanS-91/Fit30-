@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Planner - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #4A90E2;
+            --primary-purple: #9B59B6;
+            --primary-orange: #F39C12;
+            --primary-green: #50C878;
+            --primary-red: #E74C3C;
+            --primary-teal: #1ABC9C;
+            
+            --text-dark: #1A202C;
+            --text-medium: #4A5568;
+            --text-light: #718096;
+            --bg-main: #F7FAFC;
+            --bg-card: #FFFFFF;
+            --border-soft: #E2E8F0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 16px 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover { color: var(--primary-blue); }
+        
+        /* Hero */
+        .hero {
+            padding: 60px 40px 40px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 100%);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.78rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 16px;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        
+        .hero p {
+            font-size: 1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px 50px;
+        }
+        
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+        
+        .tab-btn {
+            padding: 14px 32px;
+            background: var(--bg-card);
+            border: 2px solid var(--border-soft);
+            border-radius: 12px;
+            font-weight: 600;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .tab-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 100%);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* ============ GUIDE SECTIONS (NEW) ============ */
+        .guide-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            margin-bottom: 24px;
+        }
+        
+        .guide-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--border-soft);
+        }
+        
+        .guide-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .guide-icon.blue { background: #E8F0FF; }
+        .guide-icon.purple { background: #F0E8FF; }
+        .guide-icon.orange { background: #FFF3E0; }
+        .guide-icon.green { background: #E8F8EE; }
+        .guide-icon.red { background: #FFE8E8; }
+        .guide-icon.teal { background: #E8F8F5; }
+        
+        .guide-title {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        
+        .guide-subtitle {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        .guide-content {
+            color: var(--text-medium);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+        
+        .guide-content p {
+            margin-bottom: 12px;
+        }
+        
+        .guide-content strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        
+        /* Principle List */
+        .principle-list {
+            display: grid;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        .principle-item {
+            display: grid;
+            grid-template-columns: 40px 1fr;
+            gap: 14px;
+            padding: 16px;
+            background: var(--bg-main);
+            border-radius: 12px;
+            border-left: 4px solid var(--principle-color);
+        }
+        
+        .principle-item:nth-child(1) { --principle-color: var(--primary-blue); }
+        .principle-item:nth-child(2) { --principle-color: var(--primary-purple); }
+        .principle-item:nth-child(3) { --principle-color: var(--primary-orange); }
+        .principle-item:nth-child(4) { --principle-color: var(--primary-green); }
+        .principle-item:nth-child(5) { --principle-color: var(--primary-red); }
+        .principle-item:nth-child(6) { --principle-color: var(--primary-teal); }
+        
+        .principle-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--principle-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .principle-text h4 {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+        
+        .principle-text p {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin: 0;
+        }
+        
+        /* Volume Guidelines Grid */
+        .volume-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        .volume-guide-card {
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid;
+        }
+        
+        .volume-guide-card.beginner {
+            background: #E8F0FF;
+            border-color: var(--primary-blue);
+        }
+        
+        .volume-guide-card.intermediate {
+            background: #FFF3E0;
+            border-color: var(--primary-orange);
+        }
+        
+        .volume-guide-card.advanced {
+            background: #FFE8E8;
+            border-color: var(--primary-red);
+        }
+        
+        .volume-guide-level {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        
+        .volume-guide-card.beginner .volume-guide-level { color: var(--primary-blue); }
+        .volume-guide-card.intermediate .volume-guide-level { color: var(--primary-orange); }
+        .volume-guide-card.advanced .volume-guide-level { color: var(--primary-red); }
+        
+        .volume-guide-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        
+        .volume-guide-desc {
+            font-size: 0.78rem;
+            color: var(--text-medium);
+            line-height: 1.4;
+        }
+        
+        /* Metrics Explain Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        .metric-card {
+            padding: 18px 14px;
+            background: var(--bg-main);
+            border-radius: 12px;
+            text-align: center;
+            border-top: 3px solid var(--metric-color);
+            transition: transform 0.2s;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .metric-card:nth-child(1) { --metric-color: var(--primary-blue); }
+        .metric-card:nth-child(2) { --metric-color: var(--primary-purple); }
+        .metric-card:nth-child(3) { --metric-color: var(--primary-green); }
+        .metric-card:nth-child(4) { --metric-color: var(--primary-orange); }
+        .metric-card:nth-child(5) { --metric-color: var(--primary-red); }
+        
+        .metric-icon {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+        
+        .metric-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        
+        .metric-desc {
+            font-size: 0.78rem;
+            color: var(--text-medium);
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+        
+        .metric-why {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            font-style: italic;
+            padding-top: 8px;
+            border-top: 1px dashed var(--border-soft);
+        }
+        
+        /* Info Callout */
+        .info-callout {
+            padding: 16px 18px;
+            border-radius: 12px;
+            margin-top: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        
+        .info-callout.tip {
+            background: #E8F8EE;
+            border-left: 4px solid var(--primary-green);
+        }
+        
+        .info-callout.warning {
+            background: #FFF3E0;
+            border-left: 4px solid var(--primary-orange);
+        }
+        
+        .info-callout.important {
+            background: #FFE8E8;
+            border-left: 4px solid var(--primary-red);
+        }
+        
+        .info-callout-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .info-callout-text {
+            font-size: 0.88rem;
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+        
+        .info-callout-text strong {
+            font-weight: 600;
+        }
+        
+        /* Builder Section */
+        .builder-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 24px;
+        }
+        
+        .builder-main {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+        
+        /* Muscle Selector */
+        .muscle-selector {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        
+        .muscle-btn {
+            background: var(--bg-main);
+            border: 2px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 16px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .muscle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        
+        .muscle-btn.active {
+            border-color: transparent;
+            color: white;
+        }
+        
+        .muscle-btn[data-muscle="chest"].active { background: linear-gradient(135deg, #4A90E2 0%, #74B9FF 100%); }
+        .muscle-btn[data-muscle="back"].active { background: linear-gradient(135deg, #9B59B6 0%, #C39BD3 100%); }
+        .muscle-btn[data-muscle="shoulder"].active { background: linear-gradient(135deg, #F39C12 0%, #FDCB6E 100%); }
+        .muscle-btn[data-muscle="legs"].active { background: linear-gradient(135deg, #50C878 0%, #81ECEC 100%); }
+        .muscle-btn[data-muscle="arms"].active { background: linear-gradient(135deg, #E74C3C 0%, #F1948A 100%); }
+        .muscle-btn[data-muscle="core"].active { background: linear-gradient(135deg, #1ABC9C 0%, #48C9B0 100%); }
+        
+        .muscle-btn:not(.active) .muscle-name { color: var(--text-dark); }
+        .muscle-btn.active .muscle-name { color: white; }
+        
+        .muscle-name {
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        
+        .muscle-count {
+            font-size: 0.72rem;
+            opacity: 0.7;
+        }
+        
+        /* Exercise Picker */
+        .exercise-picker {
+            background: var(--bg-main);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .exercise-picker-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .exercise-count-badge {
+            font-size: 0.78rem;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        
+        .exercise-count-badge[data-muscle="chest"] { background: #E8F0FF; color: var(--primary-blue); }
+        .exercise-count-badge[data-muscle="back"] { background: #F0E8FF; color: var(--primary-purple); }
+        .exercise-count-badge[data-muscle="shoulder"] { background: #FFF3E0; color: var(--primary-orange); }
+        .exercise-count-badge[data-muscle="legs"] { background: #E8F8EE; color: var(--primary-green); }
+        .exercise-count-badge[data-muscle="arms"] { background: #FFE8E8; color: var(--primary-red); }
+        .exercise-count-badge[data-muscle="core"] { background: #E8F8F5; color: var(--primary-teal); }
+        
+        .exercise-list {
+            display: grid;
+            gap: 8px;
+            max-height: 420px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        
+        .exercise-list::-webkit-scrollbar { width: 6px; }
+        .exercise-list::-webkit-scrollbar-track { background: var(--bg-main); border-radius: 3px; }
+        .exercise-list::-webkit-scrollbar-thumb { background: var(--border-soft); border-radius: 3px; }
+        
+        .exercise-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 14px;
+            background: var(--bg-card);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        
+        .exercise-item:hover {
+            border-color: var(--border-soft);
+            transform: translateX(3px);
+        }
+        
+        .exercise-item.selected {
+            background: #E8F0FF;
+            border-color: var(--primary-blue);
+        }
+        
+        .exercise-item .info { flex: 1; min-width: 0; }
+        
+        .exercise-item .name {
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .exercise-item .target {
+            font-size: 0.72rem;
+            color: var(--text-light);
+        }
+        
+        .exercise-item .add-btn {
+            padding: 5px 12px;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+        
+        .exercise-item.selected .add-btn { background: var(--primary-green); }
+        .exercise-item .add-btn:hover { transform: scale(1.05); }
+        
+        /* Selected Exercises */
+        .selected-section {
+            background: var(--bg-main);
+            border-radius: 14px;
+            padding: 20px;
+        }
+        
+        .selected-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .selected-count {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        .selected-list { display: grid; gap: 10px; }
+        
+        .selected-item {
+            display: grid;
+            grid-template-columns: 1fr 70px 70px 36px;
+            gap: 12px;
+            align-items: center;
+            padding: 12px 14px;
+            background: var(--bg-card);
+            border-radius: 10px;
+        }
+        
+        .selected-item .name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+        
+        .config-input {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid var(--border-soft);
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: border-color 0.2s;
+        }
+        
+        .config-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+        
+        .remove-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: #FFE8E8;
+            color: var(--primary-red);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        
+        .remove-btn:hover {
+            background: var(--primary-red);
+            color: white;
+        }
+        
+        /* Sidebar */
+        .builder-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .sidebar-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .sidebar-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+        
+        .volume-display { display: grid; gap: 10px; }
+        
+        .volume-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: var(--bg-main);
+            border-radius: 10px;
+        }
+        
+        .volume-item .muscle {
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--text-dark);
+        }
+        
+        .volume-item .sets {
+            font-weight: 700;
+            color: var(--primary-blue);
+            font-size: 0.92rem;
+        }
+        
+        .volume-item .status {
+            font-size: 0.72rem;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+        
+        .status.good { background: #E8F8EE; color: var(--primary-green); }
+        .status.warning { background: #FFF3E0; color: var(--primary-orange); }
+        .status.over { background: #FFE8E8; color: var(--primary-red); }
+        .status.empty { background: var(--bg-main); color: var(--text-light); }
+        
+        /* RPE Guide */
+        .rpe-guide {
+            background: linear-gradient(135deg, #E8F0FF 0%, #F0E8FF 100%);
+            border-radius: 12px;
+            padding: 18px;
+        }
+        
+        .rpe-guide-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+        
+        .rpe-scale { display: grid; gap: 8px; }
+        
+        .rpe-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            background: var(--bg-card);
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+        
+        .rpe-item .level {
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .rpe-item .desc {
+            color: var(--text-medium);
+            font-size: 0.82rem;
+        }
+        
+        /* ============ ROADMAP ============ */
+        .roadmap-container { display: grid; gap: 20px; }
+        
+        .phase-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-left: 4px solid var(--phase-color);
+        }
+        
+        .phase-card.phase-1 { --phase-color: var(--primary-blue); }
+        .phase-card.phase-2 { --phase-color: var(--primary-orange); }
+        .phase-card.phase-3 { --phase-color: var(--primary-red); }
+        
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .phase-title {
+            font-size: 1.2rem;
+            color: var(--phase-color);
+        }
+        
+        .phase-weeks {
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 5px 14px;
+            border-radius: 6px;
+        }
+        
+        .phase-card.phase-1 .phase-weeks { background: #E8F0FF; color: var(--primary-blue); }
+        .phase-card.phase-2 .phase-weeks { background: #FFF3E0; color: var(--primary-orange); }
+        .phase-card.phase-3 .phase-weeks { background: #FFE8E8; color: var(--primary-red); }
+        
+        .phase-params {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .param-box {
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .phase-card.phase-1 .param-box { background: #E8F0FF; }
+        .phase-card.phase-2 .param-box { background: #FFF3E0; }
+        .phase-card.phase-3 .param-box { background: #FFE8E8; }
+        
+        .param-box .label {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+        
+        .param-box .value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--phase-color);
+        }
+        
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        
+        .week-card {
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .phase-card.phase-1 .week-card { background: #E8F0FF; }
+        .phase-card.phase-2 .week-card { background: #FFF3E0; }
+        .phase-card.phase-3 .week-card { background: #FFE8E8; }
+        
+        .week-card:hover {
+            border-color: var(--phase-color);
+            transform: translateY(-2px);
+        }
+        
+        .week-card.deload {
+            background: #FFE0B2 !important;
+            border-color: var(--primary-orange);
+        }
+        
+        .week-card.assessment {
+            background: #C8E6C9 !important;
+            border-color: var(--primary-green);
+        }
+        
+        .week-card .week-num {
+            font-weight: 700;
+            font-size: 0.82rem;
+            color: var(--phase-color);
+            margin-bottom: 4px;
+        }
+        
+        .week-card .week-focus {
+            font-size: 0.82rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .week-card .week-rpe {
+            font-size: 0.72rem;
+            color: var(--text-light);
+        }
+        
+        .special-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 5px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            margin-top: 6px;
+            color: white;
+        }
+        
+        .badge-deload { background: var(--primary-orange); }
+        .badge-assessment { background: var(--primary-green); }
+        .badge-test { background: var(--primary-blue); }
+        
+        /* Deload Guide */
+        .deload-guide {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 16px;
+        }
+        
+        .deload-guide-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .deload-guide p {
+            color: var(--text-medium);
+            margin-bottom: 10px;
+            line-height: 1.5;
+            font-size: 0.88rem;
+        }
+        
+        .deload-rules {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        
+        .deload-rule {
+            padding: 10px;
+            background: var(--bg-card);
+            border-radius: 8px;
+            font-size: 0.82rem;
+            color: var(--text-dark);
+        }
+        
+        .deload-rule strong {
+            color: var(--primary-orange);
+            display: block;
+            margin-bottom: 3px;
+            font-size: 0.8rem;
+        }
+        
+        /* Assessment Guide */
+        .assessment-guide {
+            background: linear-gradient(135deg, #E8F8EE 0%, #C8E6C9 100%);
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 16px;
+        }
+        
+        .assessment-guide-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .assessment-guide p {
+            color: var(--text-medium);
+            margin-bottom: 10px;
+            line-height: 1.5;
+            font-size: 0.88rem;
+        }
+        
+        .assessment-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        
+        .assessment-item {
+            padding: 10px;
+            background: var(--bg-card);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .assessment-item .icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            background: var(--primary-green);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        
+        .assessment-item .info { flex: 1; min-width: 0; }
+        
+        .assessment-item .name {
+            font-weight: 600;
+            font-size: 0.82rem;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+        
+        .assessment-item .desc {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-soft);
+            padding: 36px 40px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 14px;
+            background: linear-gradient(135deg, #4A90E2 0%, #9B59B6 50%, #F39C12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover { color: var(--primary-blue); }
+        
+        .footer-bottom {
+            color: var(--text-light);
+            font-size: 0.82rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .builder-grid { grid-template-columns: 1fr; }
+            .muscle-selector { grid-template-columns: repeat(3, 1fr); }
+            .phase-params { grid-template-columns: repeat(3, 1fr); }
+            .week-grid { grid-template-columns: repeat(2, 1fr); }
+            .assessment-list { grid-template-columns: repeat(2, 1fr); }
+            .metrics-grid { grid-template-columns: repeat(3, 1fr); }
+            .volume-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 14px 20px; }
+            .hero { padding: 40px 20px 30px; }
+            .hero h1 { font-size: 2rem; }
+            .main-container { padding: 0 20px 40px; }
+            .muscle-selector { grid-template-columns: repeat(2, 1fr); }
+            .phase-params { grid-template-columns: repeat(2, 1fr); }
+            .week-grid { grid-template-columns: 1fr; }
+            .deload-rules,
+            .assessment-list,
+            .metrics-grid,
+            .volume-grid { grid-template-columns: 1fr; }
+            .selected-item { grid-template-columns: 1fr; gap: 8px; }
+            .guide-section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="men-gym-overview.html" class="back-link">← Quay lại GYM Overview</a>
+    </header>
+    
+    <section class="hero">
+        <span class="hero-badge">WORKOUT PLANNER</span>
+        <h1>Lên Kế Hoạch <span>Tập Luyện</span></h1>
+        <div class="hero-subtitle">Xây dựng buổi tập cá nhân hóa với Workout Builder và theo dõi lộ trình 12 tuần</div>
+        <p>Tự lắp ghép buổi tập từ 200+ bài tập hoặc theo dõi lộ trình 12 tuần với RPE, deload weeks, và assessment.</p>
+    </section>
+    
+    <div class="main-container">
+        
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('builder')">Workout Builder</button>
+            <button class="tab-btn" onclick="switchTab('roadmap')">12-Week Roadmap</button>
+        </div>
+        
+        <!-- ============ BUILDER TAB ============ -->
+        <div class="tab-content active" id="tab-builder">
+            
+            <!-- GUIDE: Nguyên tắc xây dựng buổi tập -->
+            <div class="guide-section">
+                <div class="guide-header">
+                    <div class="guide-icon blue">📋</div>
+                    <div>
+                        <h2 class="guide-title">6 Nguyên Tắc Vàng Khi Xây Dựng Buổi Tập</h2>
+                        <div class="guide-subtitle">Áp dụng để có buổi tập hiệu quả, an toàn và tiến bộ bền vững</div>
+                    </div>
+                </div>
+                
+                <div class="guide-content">
+                    <p>Việc chọn bài tập không chỉ là "thích bài nào thì tập bài đó". Một buổi tập được thiết kế đúng nguyên tắc sẽ giúp bạn <strong>tối ưu hóa thời gian</strong>, <strong>giảm chấn thương</strong> và <strong>đạt kết quả nhanh hơn</strong> gấp nhiều lần.</p>
+                </div>
+                
+                <div class="principle-list">
+                    <div class="principle-item">
+                        <div class="principle-number">1</div>
+                        <div class="principle-text">
+                            <h4>Compound trước, Isolation sau</h4>
+                            <p>Luôn bắt đầu bằng các bài đa khớp (Squat, Bench, Deadlift, Row) khi còn nhiều năng lượng. Bài cô lập (curl, extension) để cuối buổi. Lý do: bài compound cần sự tập trung cao và nhiều năng lượng nhất.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <div class="principle-number">2</div>
+                        <div class="principle-text">
+                            <h4>Volume phù hợp với trình độ</h4>
+                            <p>Beginner: 10-12 sets/nhóm cơ/tuần. Intermediate: 12-16 sets. Advanced: 16-20 sets. Quá ít = không kích thích đủ. Quá nhiều = overtraining và chấn thương. Xem bảng volume guide bên dưới.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <div class="principle-number">3</div>
+                        <div class="principle-text">
+                            <h4>Tần suất 2-3 lần/nhóm cơ/tuần</h4>
+                            <p>Nghiên cứu cho thấy tập mỗi nhóm cơ 2-3 lần/tuần cho kết quả hypertrophy tốt hơn là chỉ 1 lần (bro split). Ví dụ: Upper/Lower split 4 ngày hoặc Push/Pull/Legs 6 ngày.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <div class="principle-number">4</div>
+                        <div class="principle-text">
+                            <h4>Progressive Overload - Tiến bộ từng bước</h4>
+                            <p>Mỗi tuần phải cố gắng tăng: tạ nặng hơn, reps nhiều hơn, hoặc sets nhiều hơn. Không có progressive overload = không có tiến bộ. Ghi chép lại buổi tập để theo dõi.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <div class="principle-number">5</div>
+                        <div class="principle-text">
+                            <h4>Rest giữa các set đủ dài</h4>
+                            <p>Compound nặng: 2-3 phút. Compound nhẹ: 90-120 giây. Isolation: 60-90 giây. Rest quá ngắn = không phục hồi đủ ATP, giảm performance ở set sau.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <div class="principle-number">6</div>
+                        <div class="principle-text">
+                            <h4>Deload mỗi 4-8 tuần</h4>
+                            <p>Cơ thể cần thời gian phục hồi sâu. Sau 4-8 tuần tập liên tục, hãy dành 1 tuần deload (giảm volume 30-40%, intensity 10-20%) để tránh overtraining và chấn thương.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Volume Guidelines -->
+                <div class="info-callout tip">
+                    <div class="info-callout-icon">💡</div>
+                    <div class="info-callout-text">
+                        <strong>Weekly Volume Guide:</strong> Số sets khuyến nghị cho mỗi nhóm cơ mỗi tuần, tùy theo trình độ. Sidebar bên phải sẽ tự động cảnh báo nếu bạn chọn quá ít hoặc quá nhiều.
+                    </div>
+                </div>
+                
+                <div class="volume-grid">
+                    <div class="volume-guide-card beginner">
+                        <div class="volume-guide-level">Beginner</div>
+                        <div class="volume-guide-value">10-12</div>
+                        <div class="volume-guide-desc">sets/nhóm cơ/tuần<br>Dưới 1 năm tập</div>
+                    </div>
+                    <div class="volume-guide-card intermediate">
+                        <div class="volume-guide-level">Intermediate</div>
+                        <div class="volume-guide-value">12-16</div>
+                        <div class="volume-guide-desc">sets/nhóm cơ/tuần<br>1-3 năm tập</div>
+                    </div>
+                    <div class="volume-guide-card advanced">
+                        <div class="volume-guide-level">Advanced</div>
+                        <div class="volume-guide-value">16-20</div>
+                        <div class="volume-guide-desc">sets/nhóm cơ/tuần<br>3+ năm tập</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Builder Grid -->
+            <div class="builder-grid">
+                <div class="builder-main">
+                    <h2 class="section-title">Chọn nhóm cơ</h2>
+                    
+                    <div class="muscle-selector">
+                        <div class="muscle-btn active" data-muscle="chest" onclick="selectMuscle('chest', this)">
+                            <div class="muscle-name">Ngực</div>
+                            <div class="muscle-count">25 bài</div>
+                        </div>
+                        <div class="muscle-btn" data-muscle="back" onclick="selectMuscle('back', this)">
+                            <div class="muscle-name">Lưng</div>
+                            <div class="muscle-count">30 bài</div>
+                        </div>
+                        <div class="muscle-btn" data-muscle="shoulder" onclick="selectMuscle('shoulder', this)">
+                            <div class="muscle-name">Vai</div>
+                            <div class="muscle-count">28 bài</div>
+                        </div>
+                        <div class="muscle-btn" data-muscle="legs" onclick="selectMuscle('legs', this)">
+                            <div class="muscle-name">Chân</div>
+                            <div class="muscle-count">35 bài</div>
+                        </div>
+                        <div class="muscle-btn" data-muscle="arms" onclick="selectMuscle('arms', this)">
+                            <div class="muscle-name">Tay</div>
+                            <div class="muscle-count">30 bài</div>
+                        </div>
+                        <div class="muscle-btn" data-muscle="core" onclick="selectMuscle('core', this)">
+                            <div class="muscle-name">Core</div>
+                            <div class="muscle-count">30 bài</div>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-picker">
+                        <div class="exercise-picker-title">
+                            <span>Chọn bài tập</span>
+                            <span class="exercise-count-badge" id="exerciseCountBadge" data-muscle="chest">25 bài</span>
+                        </div>
+                        <div class="exercise-list" id="exerciseList"></div>
+                    </div>
+                    
+                    <div class="selected-section">
+                        <div class="selected-title">
+                            <span>Bài tập đã chọn</span>
+                            <span class="selected-count" id="selectedCount">0 bài</span>
+                        </div>
+                        <div class="selected-list" id="selectedList">
+                            <p style="color: var(--text-light); text-align: center; padding: 20px; font-size: 0.9rem;">Chưa chọn bài tập nào</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="builder-sidebar">
+                    <div class="sidebar-card">
+                        <div class="sidebar-title">Weekly Volume</div>
+                        <div class="volume-display" id="volumeDisplay">
+                            <div class="volume-item">
+                                <span class="muscle">Ngực</span>
+                                <span class="sets" id="chest-sets">0 sets</span>
+                                <span class="status empty" id="chest-status">—</span>
+                            </div>
+                            <div class="volume-item">
+                                <span class="muscle">Lưng</span>
+                                <span class="sets" id="back-sets">0 sets</span>
+                                <span class="status empty" id="back-status">—</span>
+                            </div>
+                            <div class="volume-item">
+                                <span class="muscle">Vai</span>
+                                <span class="sets" id="shoulder-sets">0 sets</span>
+                                <span class="status empty" id="shoulder-status">—</span>
+                            </div>
+                            <div class="volume-item">
+                                <span class="muscle">Chân</span>
+                                <span class="sets" id="legs-sets">0 sets</span>
+                                <span class="status empty" id="legs-status">—</span>
+                            </div>
+                            <div class="volume-item">
+                                <span class="muscle">Tay</span>
+                                <span class="sets" id="arms-sets">0 sets</span>
+                                <span class="status empty" id="arms-status">—</span>
+                            </div>
+                            <div class="volume-item">
+                                <span class="muscle">Core</span>
+                                <span class="sets" id="core-sets">0 sets</span>
+                                <span class="status empty" id="core-status">—</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <div class="rpe-guide">
+                            <div class="rpe-guide-title">RPE Guide - Thang đo cường độ</div>
+                            <div class="rpe-scale">
+                                <div class="rpe-item">
+                                    <span class="level">RPE 6-7</span>
+                                    <span class="desc">Nhẹ, còn 3-4 reps</span>
+                                </div>
+                                <div class="rpe-item">
+                                    <span class="level">RPE 7-8</span>
+                                    <span class="desc">Vừa, còn 2-3 reps</span>
+                                </div>
+                                <div class="rpe-item">
+                                    <span class="level">RPE 8-9</span>
+                                    <span class="desc">Nặng, còn 1-2 reps</span>
+                                </div>
+                                <div class="rpe-item">
+                                    <span class="level">RPE 9-10</span>
+                                    <span class="desc">Max effort</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-callout warning" style="margin-top: 16px;">
+                            <div class="info-callout-icon">⚠️</div>
+                            <div class="info-callout-text">
+                                <strong>Lưu ý:</strong> Không nên tập ở RPE 10 thường xuyên. Duy trì RPE 7-9 để có recovery tốt và tránh chấn thương.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ============ ROADMAP TAB ============ -->
+        <div class="tab-content" id="tab-roadmap">
+            
+            <!-- GUIDE: Hiểu về 12-Week Program -->
+            <div class="guide-section">
+                <div class="guide-header">
+                    <div class="guide-icon purple">🗺️</div>
+                    <div>
+                        <h2 class="guide-title">Tại Sao Lại Là 12 Tuần?</h2>
+                        <div class="guide-subtitle">Cấu trúc khoa học cho tiến bộ bền vững</div>
+                    </div>
+                </div>
+                
+                <div class="guide-content">
+                    <p>12 tuần là <strong>thời gian tối ưu</strong> cho một mesocycle (chu kỳ tập luyện). Đây là khoảng thời gian đủ dài để cơ thể thích nghi và tiến bộ rõ rệt, nhưng cũng đủ ngắn để tránh plateau (đình trệ) và overtraining.</p>
+                    
+                    <p>Chương trình được chia thành <strong>3 phases</strong> với mục tiêu khác nhau, mô phỏng nguyên tắc <strong>periodization</strong> (chu kỳ hóa) - phương pháp được sử dụng bởi các vận động viên Olympic và powerlifter chuyên nghiệp.</p>
+                </div>
+                
+                <div class="info-callout important">
+                    <div class="info-callout-icon">🎯</div>
+                    <div class="info-callout-text">
+                        <strong>Mục tiêu tổng thể:</strong> Sau 12 tuần, bạn sẽ có nền tảng strength vững chắc, khối lượng cơ bắp tăng đáng kể, và sẵn sàng bước vào chu kỳ tiếp theo với mức tạ cao hơn.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- GUIDE: Giải thích các chỉ số -->
+            <div class="guide-section">
+                <div class="guide-header">
+                    <div class="guide-icon orange">📊</div>
+                    <div>
+                        <h2 class="guide-title">Giải Thích Các Chỉ Số Tập Luyện</h2>
+                        <div class="guide-subtitle">Hiểu rõ từng thông số để tập đúng và hiệu quả</div>
+                    </div>
+                </div>
+                
+                <div class="guide-content">
+                    <p>Mỗi phase trong roadmap có 5 thông số chính. Hiểu rõ từng thông số sẽ giúp bạn <strong>tự điều chỉnh</strong> buổi tập cho phù hợp với thể trạng và mục tiêu cá nhân.</p>
+                </div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">🔢</div>
+                        <div class="metric-name">Sets</div>
+                        <div class="metric-desc">Số hiệp mỗi bài. Mỗi set = 1 lần thực hiện chuỗi reps.</div>
+                        <div class="metric-why">Sets quyết định tổng volume - yếu tố chính驱动 hypertrophy</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon">🔁</div>
+                        <div class="metric-name">Reps</div>
+                        <div class="metric-desc">Số lần lặp lại trong 1 set. Range phổ biến: 6-15 reps.</div>
+                        <div class="metric-why">Reps thấp (6-8) = strength. Reps cao (12-15) = endurance</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon">⏱️</div>
+                        <div class="metric-name">Rest</div>
+                        <div class="metric-desc">Thời gian nghỉ giữa các set. Tính bằng giây.</div>
+                        <div class="metric-why">Rest đủ = ATP phục hồi = performance set sau tốt hơn</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon"></div>
+                        <div class="metric-name">RPE</div>
+                        <div class="metric-desc">Rate of Perceived Exertion - Thang đo 1-10 về mức độ khó.</div>
+                        <div class="metric-why">RPE 8 = còn 2 reps "trong kho". Giúp điều chỉnh intensity linh hoạt</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon"></div>
+                        <div class="metric-name">Intensity</div>
+                        <div class="metric-desc">% của 1RM (1 Rep Max). Ví dụ: 75% = tạ bằng 75% mức tạ tối đa.</div>
+                        <div class="metric-why">Intensity cao = kích thích strength. Thấp hơn = hypertrophy</div>
+                    </div>
+                </div>
+                
+                <div class="info-callout tip">
+                    <div class="info-callout-icon"></div>
+                    <div class="info-callout-text">
+                        <strong>Mẹo tính 1RM:</strong> Nếu không muốn test 1RM thật (nguy hiểm), dùng công thức Epley: <strong>1RM = Weight × (1 + Reps/30)</strong>. Ví dụ: bench 80kg × 8 reps → 1RM ≈ 101kg.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Roadmap Phases -->
+            <div class="roadmap-container">
+                <!-- Phase 1 -->
+                <div class="phase-card phase-1">
+                    <div class="phase-header">
+                        <h2 class="phase-title">Phase 1: Foundation</h2>
+                        <span class="phase-weeks">Tuần 1-4</span>
+                    </div>
+                    
+                    <div class="guide-content" style="margin-bottom: 16px;">
+                        <p><strong>Mục tiêu:</strong> Xây dựng nền tảng kỹ thuật và chuẩn bị cơ thể cho khối lượng tập luyện cao hơn. Phase này tập trung vào <strong>học movement patterns đúng</strong> và tăng dần capacity của cơ bắp, gân, dây chằng.</p>
+                    </div>
+                    
+                    <div class="phase-params">
+                        <div class="param-box">
+                            <div class="label">Sets</div>
+                            <div class="value">3</div>
+                        </div>
+                        <div class="param-box">
+                            <div class="label">Reps</div>
+                            <div class="value">12-15</div>
+                        </div>
+                        <div class="param-box">
+                            <div class="label">Rest</div>
+                            <div class="value">60-90s</div>
+                        </div>
+                        <div class="param-box">
+                            <div class="label">RPE</div>
+                            <div class="value">6-7</div>
+                        </div>
+                        <div class="param-box">
+                            <div class="label">Intensity</div>
+                            <div class="value">50-60%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="week-grid">
+                        <div class="week-card">
+                            <div class="week-num">Tuần 1</div>
+                            <div class="week-focus">Học kỹ thuật</div>
+                            <div class="week-rpe">RPE 6</div>
+                        </div>
+                        <div class="week-card">
+                            <div class="week-num">Tuần 2</div>
+                            <div class="week-focus">Ổn định form</div>
+                            <div class="week-rpe">RPE 6-7</div>
+                        </div>
+                        <div class="week-card">
+                            <div class="week-num">Tuần 3</div>
+                            <div class="week-focus">Tăng nhẹ tạ</div>
+                            <div class="week-rpe">RPE 7</div>
+                        </div>
+                        <div class="week-card">
+                            <div class="week-num">Tuần 4</div>
+                            <div class="week-focus">Technique Test</div>
+                            <div class="week-rpe">RPE 7-8</div>
+                            <span class="special-badge badge-test">Test</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-callout tip" style="margin-top: 16px;">
+                        <div class="info-callout-icon">✅</div>
+                        <div class="info-callout-text">
+                            <strong>Tại sao reps cao (12-15)?</strong> Rep range này giúp bạn thực hành movement pattern nhiều lần hơn, tăng blood flow đến cơ bắp, và xây dựng muscular endurance - nền tảng cho strength về sau.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Phase 2 -->
+                <div class="phase-card phase-2">
+                    <div class="phase-header">
+                        <h2 class="phase-title">Phase 2: Volume</h2>
+                        <span class="phase-weeks">Tuần 5-8</span>
+                    </div>
+                    
+                    <div class="guide-content" style="margin-bottom: 16px;">
+                        <p><strong>Mục tiêu:</strong> Tăng tổng volume tập luyện để kích thích hypertrophy (phát triển cơ bắp). Đây là phase <strong>quan trọng nhất</strong> cho muscle growth. Volume tăng dần từ tuần 5-7, sau đó deload ở tuần 8.</p>
+                    </div>
+                    
+                    <div class="phase-params">
+                        <div class="param-box">
+                            <div class="label">Sets</div>
+                            <div class="value">4</div>
+                        </div>
+                        <div class="param-box">
+                            <div class="label">Reps</div>
+                            <div class="value">10-12</div>
+                        </div>
+                        <div class="param-box">
+                            <div class="label">Rest</div>
+                            <div class="value">60-90s</div>
+                        </div>
+                        <div class="param-box">
+                            <div class="label">RPE</div>
+                            <div class="value">7-8</div>
+                        </div>
+                        <div class="param-box">
+                            <div class="label">Intensity</div>
+                            <div class="value">65-75%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="week-grid">
+                        <div class="week-card">
+                            <div class="week-num">Tuần 5</div>
+                            <div class="week-focus">Tăng volume</div>
+                            <div class="week-rpe">RPE 7</div>
+                        </div>
+                        <div class="week-card">
+                            <div class="week-num">Tuần 6</div>
+                            <div class="week-focus">Tăng tạ nhẹ</div>
+                            <div class="week-rpe">RPE 7-8</div>
+                        </div>
+                        <div class="week-card">
+                            <div class="week-num">Tuần 7</div>
+                            <div class="week-focus">Volume peak</div>
+                            <div class="week-rpe">RPE 8</div>
+                        </div>
+                        <div class="week-card deload">
+                            <div class="week-num">Tuần 8</div>
+                            <div class="week-focus">Deload Week</div>
+                            <div class="week-rpe">RPE 5-6</div>
+                            <span class="special-badge badge-deload">Deload</span>
+                        </div>
+                    </div>
+                    
+                    <div class="deload-guide">
+                        <div class="deload-guide-title">🔄 Deload Week - Tuần 8</div>
+                        <p>Deload week là tuần giảm cường độ để cơ thể phục hồi và thích nghi. Đây là bước <strong>quan trọng nhất</strong> để tránh overtraining và chấn thương. Nhiều người bỏ qua deload và trả giá bằng chấn thương hoặc plateau kéo dài.</p>
+                        <div class="deload-rules">
+                            <div class="deload-rule">
+                                <strong>Giảm volume 30-40%</strong>
+                                Bỏ 1 set mỗi bài tập (4 sets → 3 sets)
+                            </div>
+                            <div class="deload-rule">
+                                <strong>Giảm intensity 10-20%</strong>
+                                Giảm tạ 10-20% so với tuần 7
+                            </div>
+                            <div class="deload-rule">
+                                <strong>Giữ nguyên kỹ thuật</strong>
+                                Tập trung vào form hoàn hảo, cảm nhận cơ
+                            </div>
+                            <div class="deload-rule">
+                                <strong>Tăng recovery</strong>
+                                Ngủ 8h+, ăn đủ protein, stretching nhiều hơn
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-callout warning" style="margin-top: 16px;">
+                        <div class="info-callout-icon">️</div>
+                        <div class="info-callout-text">
+                            <strong>Đừng sợ "mất progress" trong deload week!</strong> Nghiên cứu cho thấy 1 tuần deload KHÔNG làm giảm strength hay muscle mass. Ngược lại, nó giúp bạn trở lại mạnh hơn ở phase tiếp theo.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Phase 3 -->
+                <div class="phase-card phase-3">
+                    <div class="phase-header">
+                        <h2 class="phase-title">Phase 3: Intensity</h2>
+                        <span class="phase-weeks">Tuần 9-12</span>
+                    </div>
+                    
+                    <div class="guide-content" style="margin-bottom: 16px;">
+                        <p><strong>Mục tiêu:</strong> Tăng intensity (tạ nặng hơn) để phát triển strength và neural adaptation. Phase này đòi hỏi <strong>tinh thần cao</strong> và recovery tốt. Reps giảm xuống nhưng tạ nặng hơn - đây là lúc bạn突破 personal records.</p>
+                    </div>
+                    
+                    <div class="phase-params">
+                        <div class="param-box">
+                            <div class="label">Sets</div>
+                            <div class="value">4-5</div>
+                        </div>
+                        <div class="param-box">
+                            <div class="label">Reps</div>
+                            <div class="value">8-10</div>
+                        </div>
+                        <div class="param-box">
+                            <div class="label">Rest</div>
+                            <div class="value">90-120s</div>
+                        </div>
+                        <div class="param-box">
+                            <div class="label">RPE</div>
+                            <div class="value">8-9</div>
+                        </div>
+                        <div class="param-box">
+                            <div class="label">Intensity</div>
+                            <div class="value">75-85%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="week-grid">
+                        <div class="week-card">
+                            <div class="week-num">Tuần 9</div>
+                            <div class="week-focus">Heavy lifting</div>
+                            <div class="week-rpe">RPE 8</div>
+                        </div>
+                        <div class="week-card">
+                            <div class="week-num">Tuần 10</div>
+                            <div class="week-focus">Tăng tạ</div>
+                            <div class="week-rpe">RPE 8-9</div>
+                        </div>
+                        <div class="week-card">
+                            <div class="week-num">Tuần 11</div>
+                            <div class="week-focus">Peak week</div>
+                            <div class="week-rpe">RPE 9</div>
+                        </div>
+                        <div class="week-card assessment">
+                            <div class="week-num">Tuần 12</div>
+                            <div class="week-focus">Assessment</div>
+                            <div class="week-rpe">RPE 7-8</div>
+                            <span class="special-badge badge-assessment">Assessment</span>
+                        </div>
+                    </div>
+                    
+                    <div class="assessment-guide">
+                        <div class="assessment-guide-title">📊 Assessment Week - Tuần 12</div>
+                        <p>Tuần cuối cùng để <strong>đánh giá tiến độ</strong> và điều chỉnh cho chu kỳ tiếp theo. Đây là lúc bạn thấy rõ kết quả sau 12 tuần cố gắng. Đo lường các chỉ số quan trọng:</p>
+                        <div class="assessment-list">
+                            <div class="assessment-item">
+                                <div class="icon">️</div>
+                                <div class="info">
+                                    <div class="name">Cân nặng</div>
+                                    <div class="desc">Đo buổi sáng, sau khi đi vệ sinh</div>
+                                </div>
+                            </div>
+                            <div class="assessment-item">
+                                <div class="icon"></div>
+                                <div class="info">
+                                    <div class="name">Số đo cơ thể</div>
+                                    <div class="desc">Vòng eo, ngực, hông, tay, chân</div>
+                                </div>
+                            </div>
+                            <div class="assessment-item">
+                                <div class="icon">💪</div>
+                                <div class="info">
+                                    <div class="name">Sức mạnh</div>
+                                    <div class="desc">Test 1RM hoặc 5RM các bài chính</div>
+                                </div>
+                            </div>
+                            <div class="assessment-item">
+                                <div class="icon">📸</div>
+                                <div class="info">
+                                    <div class="name">Progress Photos</div>
+                                    <div class="desc">Chụp ảnh trước/sau cùng điều kiện</div>
+                                </div>
+                            </div>
+                            <div class="assessment-item">
+                                <div class="icon"></div>
+                                <div class="info">
+                                    <div class="name">Goal Review</div>
+                                    <div class="desc">Đánh giá mục tiêu và điều chỉnh</div>
+                                </div>
+                            </div>
+                            <div class="assessment-item">
+                                <div class="icon">📝</div>
+                                <div class="info">
+                                    <div class="name">Workout Log</div>
+                                    <div class="desc">Xem lại nhật ký tập 12 tuần qua</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-callout tip" style="margin-top: 16px;">
+                        <div class="info-callout-icon">🎉</div>
+                        <div class="info-callout-text">
+                            <strong>Sau 12 tuần:</strong> Bạn sẽ thấy strength tăng 15-25%, muscle mass tăng rõ rệt, và cơ thể có shape đẹp hơn. Đây là lúc bắt đầu mesocycle mới với mức tạ cao hơn 5-10%!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="men-30-40.html">Nam 30-40</a>
+            <a href="men-gym-overview.html">GYM Overview</a>
+            <a href="men-gym-library.html">Exercise Library</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // ==================== EXERCISE DATABASE (200+ BÀI) ====================
+        const exerciseDB = {
+            chest: [
+                { id: 1, name: "Barbell Bench Press", target: "Pectoralis Major" },
+                { id: 2, name: "Incline Dumbbell Press", target: "Upper Pectoralis" },
+                { id: 3, name: "Dumbbell Fly", target: "Pectoralis Major" },
+                { id: 4, name: "Cable Crossover", target: "Pectoralis Major" },
+                { id: 5, name: "Push-ups", target: "Pectoralis Major" },
+                { id: 6, name: "Machine Chest Press", target: "Pectoralis Major" },
+                { id: 7, name: "Decline Bench Press", target: "Lower Pectoralis" },
+                { id: 8, name: "Pec Deck Fly", target: "Pectoralis Major" },
+                { id: 9, name: "Chest Dips", target: "Lower Pectoralis" },
+                { id: 10, name: "Incline Barbell Press", target: "Upper Pectoralis" },
+                { id: 11, name: "Landmine Press", target: "Pectoralis Major" },
+                { id: 12, name: "Svend Press", target: "Pectoralis (Inner)" },
+                { id: 13, name: "Weighted Dips", target: "Lower Pectoralis" },
+                { id: 14, name: "Floor Press", target: "Pectoralis Major" },
+                { id: 15, name: "Cable Chest Press", target: "Pectoralis Major" },
+                { id: 16, name: "High to Low Cable Fly", target: "Lower Pectoralis" },
+                { id: 17, name: "Low to High Cable Fly", target: "Upper Pectoralis" },
+                { id: 18, name: "Incline Push-ups", target: "Lower Pectoralis" },
+                { id: 19, name: "Knee Push-ups", target: "Pectoralis Major" },
+                { id: 20, name: "Decline Push-ups", target: "Upper Pectoralis" },
+                { id: 21, name: "Diamond Push-ups", target: "Pectoralis (Inner)" },
+                { id: 22, name: "Archer Push-ups", target: "Pectoralis Major" },
+                { id: 23, name: "Ring Push-ups", target: "Pectoralis Major" },
+                { id: 24, name: "Plate Press", target: "Pectoralis (Inner)" },
+                { id: 25, name: "Guillotine Press", target: "Upper Pectoralis" }
+            ],
+            back: [
+                { id: 26, name: "Pull-ups", target: "Latissimus Dorsi" },
+                { id: 27, name: "Chin-ups", target: "Lats, Biceps" },
+                { id: 28, name: "Lat Pulldown", target: "Latissimus Dorsi" },
+                { id: 29, name: "Close Grip Pulldown", target: "Latissimus Dorsi (Lower)" },
+                { id: 30, name: "Wide Grip Pulldown", target: "Latissimus Dorsi (Upper)" },
+                { id: 31, name: "Neutral Grip Pulldown", target: "Latissimus Dorsi" },
+                { id: 32, name: "Single Arm Pulldown", target: "Latissimus Dorsi" },
+                { id: 33, name: "Barbell Row", target: "Mid Back, Lats" },
+                { id: 34, name: "Pendlay Row", target: "Mid Back, Lats" },
+                { id: 35, name: "Seated Cable Row", target: "Mid Back" },
+                { id: 36, name: "Dumbbell Row", target: "Latissimus Dorsi" },
+                { id: 37, name: "T-Bar Row", target: "Mid Back" },
+                { id: 38, name: "Chest Supported Row", target: "Mid Back" },
+                { id: 39, name: "Meadows Row", target: "Lats, Mid Back" },
+                { id: 40, name: "Deadlift", target: "Lower Back, Glutes, Hamstrings" },
+                { id: 41, name: "Romanian Deadlift", target: "Hamstrings, Glutes, Lower Back" },
+                { id: 42, name: "Trap Bar Deadlift", target: "Full Back, Glutes, Quads" },
+                { id: 43, name: "Face Pull", target: "Rear Deltoid, Mid Back" },
+                { id: 44, name: "Reverse Fly", target: "Rear Deltoid, Mid Back" },
+                { id: 45, name: "Reverse Pec Deck", target: "Rear Deltoid" },
+                { id: 46, name: "Shrug", target: "Trapezius (Upper)" },
+                { id: 47, name: "Straight Arm Pulldown", target: "Latissimus Dorsi" },
+                { id: 48, name: "Dumbbell Pullover", target: "Lats, Chest" },
+                { id: 49, name: "Band Pull-apart", target: "Rear Deltoid, Mid Back" },
+                { id: 50, name: "Inverted Row", target: "Mid Back, Lats" },
+                { id: 51, name: "Seal Row", target: "Mid Back, Lats" },
+                { id: 52, name: "Rack Pull", target: "Upper Back, Traps, Glutes" },
+                { id: 53, name: "Good Morning", target: "Hamstrings, Lower Back, Glutes" },
+                { id: 54, name: "Hyperextension", target: "Lower Back, Glutes" },
+                { id: 55, name: "Cable Row (Standing)", target: "Mid Back" }
+            ],
+            shoulder: [
+                { id: 56, name: "Overhead Press", target: "Anterior & Lateral Deltoid" },
+                { id: 57, name: "Seated Dumbbell Press", target: "Anterior Deltoid" },
+                { id: 58, name: "Arnold Press", target: "All 3 Deltoid Heads" },
+                { id: 59, name: "Lateral Raise", target: "Lateral Deltoid" },
+                { id: 60, name: "Cable Lateral Raise", target: "Lateral Deltoid" },
+                { id: 61, name: "Front Raise", target: "Anterior Deltoid" },
+                { id: 62, name: "Machine Shoulder Press", target: "Anterior Deltoid" },
+                { id: 63, name: "Push Press", target: "All Deltoids, Triceps" },
+                { id: 64, name: "Bent Over Rear Delt Raise", target: "Rear Deltoid" },
+                { id: 65, name: "Upright Row", target: "Lateral Deltoid, Traps" },
+                { id: 66, name: "Face Pull (Shoulder Focus)", target: "Rear Deltoid, Rotator Cuff" },
+                { id: 67, name: "Cuban Rotation", target: "Rotator Cuff, Rear Deltoid" },
+                { id: 68, name: "External Rotation", target: "Rotator Cuff" },
+                { id: 69, name: "Internal Rotation", target: "Rotator Cuff" },
+                { id: 70, name: "Landmine Press (Single Arm)", target: "Anterior Deltoid" },
+                { id: 71, name: "Wall Slide", target: "Shoulder Mobility" },
+                { id: 72, name: "Shoulder CARs", target: "Shoulder Joint" },
+                { id: 73, name: "Y-T-W Raises", target: "Rear Deltoid, Mid Traps" },
+                { id: 74, name: "Scaption Raise", target: "Supraspinatus, Anterior Deltoid" },
+                { id: 75, name: "Bradford Press", target: "All Deltoids" },
+                { id: 76, name: "Z Press", target: "All Deltoids" },
+                { id: 77, name: "Behind the Neck Press", target: "Lateral & Posterior Deltoid" },
+                { id: 78, name: "Plate Raise", target: "Anterior Deltoid" },
+                { id: 79, name: "Lean Away Lateral Raise", target: "Lateral Deltoid" },
+                { id: 80, name: "Machine Lateral Raise", target: "Lateral Deltoid" },
+                { id: 81, name: "Partial Lateral Raise", target: "Lateral Deltoid" },
+                { id: 82, name: "Rear Cable Fly", target: "Rear Deltoid" },
+                { id: 83, name: "Cross Body Lateral Raise", target: "Lateral Deltoid" }
+            ],
+            legs: [
+                { id: 84, name: "Back Squat", target: "Quads, Glutes" },
+                { id: 85, name: "Front Squat", target: "Quads" },
+                { id: 86, name: "Goblet Squat", target: "Quads, Glutes" },
+                { id: 87, name: "Leg Press", target: "Quads, Glutes" },
+                { id: 88, name: "Hack Squat", target: "Quads" },
+                { id: 89, name: "Bulgarian Split Squat", target: "Quads, Glutes" },
+                { id: 90, name: "Lunges", target: "Quads, Glutes" },
+                { id: 91, name: "Reverse Lunge", target: "Quads, Glutes" },
+                { id: 92, name: "Walking Lunges", target: "Quads, Glutes" },
+                { id: 93, name: "Step-up", target: "Quads, Glutes" },
+                { id: 94, name: "Leg Extension", target: "Quads" },
+                { id: 95, name: "Leg Curl (Lying)", target: "Hamstrings" },
+                { id: 96, name: "Seated Leg Curl", target: "Hamstrings" },
+                { id: 97, name: "Nordic Curl", target: "Hamstrings" },
+                { id: 98, name: "Swiss Ball Hamstring Curl", target: "Hamstrings, Glutes" },
+                { id: 99, name: "Hip Thrust", target: "Glutes" },
+                { id: 100, name: "Glute Bridge", target: "Glutes" },
+                { id: 101, name: "Standing Calf Raise", target: "Gastrocnemius" },
+                { id: 102, name: "Seated Calf Raise", target: "Soleus" },
+                { id: 103, name: "Single Leg Calf Raise", target: "Calves" },
+                { id: 104, name: "Adductor Machine", target: "Adductors" },
+                { id: 105, name: "Abductor Machine", target: "Gluteus Medius" },
+                { id: 106, name: "Sumo Squat", target: "Adductors, Quads, Glutes" },
+                { id: 107, name: "Box Squat", target: "Quads, Glutes" },
+                { id: 108, name: "Pistol Squat", target: "Quads, Glutes, Balance" },
+                { id: 109, name: "Sissy Squat", target: "Quads" },
+                { id: 110, name: "Wall Sit", target: "Quads" },
+                { id: 111, name: "Jump Squat", target: "Quads, Glutes, Power" },
+                { id: 112, name: "Cossack Squat", target: "Adductors, Quads" },
+                { id: 113, name: "Jefferson Curl", target: "Hamstrings, Lower Back, Mobility" },
+                { id: 114, name: "Tibialis Raise", target: "Tibialis Anterior" },
+                { id: 115, name: "Good Morning (Legs)", target: "Hamstrings, Glutes" },
+                { id: 116, name: "Belt Squat", target: "Quads, Glutes" },
+                { id: 117, name: "Glute Ham Raise", target: "Hamstrings, Glutes" },
+                { id: 118, name: "Skater Lunge", target: "Glutes, Quads" }
+            ],
+            arms: [
+                { id: 119, name: "Barbell Curl", target: "Biceps" },
+                { id: 120, name: "EZ Bar Curl", target: "Biceps" },
+                { id: 121, name: "Dumbbell Curl", target: "Biceps" },
+                { id: 122, name: "Hammer Curl", target: "Brachialis, Brachioradialis" },
+                { id: 123, name: "Incline Dumbbell Curl", target: "Biceps (Long Head)" },
+                { id: 124, name: "Spider Curl", target: "Biceps (Short Head)" },
+                { id: 125, name: "Preacher Curl", target: "Biceps (Short Head)" },
+                { id: 126, name: "Concentration Curl", target: "Biceps (Peak)" },
+                { id: 127, name: "Cable Curl", target: "Biceps" },
+                { id: 128, name: "Bayesian Curl", target: "Biceps (Long Head)" },
+                { id: 129, name: "Cross Body Hammer Curl", target: "Brachialis" },
+                { id: 130, name: "Tricep Pushdown", target: "Triceps" },
+                { id: 131, name: "Rope Pushdown", target: "Triceps (Lateral Head)" },
+                { id: 132, name: "Overhead Tricep Extension", target: "Triceps (Long Head)" },
+                { id: 133, name: "Skull Crusher", target: "Triceps" },
+                { id: 134, name: "Tricep Kickback", target: "Triceps" },
+                { id: 135, name: "Close Grip Bench Press", target: "Triceps, Chest" },
+                { id: 136, name: "Bench Dip", target: "Triceps" },
+                { id: 137, name: "Parallel Bar Dip (Tricep)", target: "Triceps, Chest" },
+                { id: 138, name: "Wrist Curl", target: "Forearms (Flexors)" },
+                { id: 139, name: "Reverse Wrist Curl", target: "Forearms (Extensors)" },
+                { id: 140, name: "Reverse Curl", target: "Brachioradialis, Forearms" },
+                { id: 141, name: "Cable Overhead Tricep Extension", target: "Triceps (Long Head)" },
+                { id: 142, name: "JM Press", target: "Triceps" },
+                { id: 143, name: "Diamond Push-up", target: "Triceps, Pectoralis (Inner)" },
+                { id: 144, name: "Tate Press", target: "Triceps" },
+                { id: 145, name: "Waiter Walk", target: "Shoulders, Core, Grip" },
+                { id: 146, name: "Farmer Walk", target: "Grip, Core, Traps" },
+                { id: 147, name: "Dead Hang", target: "Grip, Lats, Shoulder Mobility" },
+                { id: 148, name: "Active Hang", target: "Lats, Scapular Stabilizers" }
+            ],
+            core: [
+                { id: 149, name: "Plank", target: "Transverse Abdominis" },
+                { id: 150, name: "Side Plank", target: "Obliques" },
+                { id: 151, name: "Dead Bug", target: "Transverse Abdominis" },
+                { id: 152, name: "Bird Dog", target: "Transverse Abdominis, Lower Back" },
+                { id: 153, name: "Pallof Press", target: "Obliques, Anti Rotation" },
+                { id: 154, name: "Ab Wheel Rollout", target: "Rectus Abdominis, Core" },
+                { id: 155, name: "Hanging Leg Raise", target: "Lower Abs, Hip Flexors" },
+                { id: 156, name: "Hanging Knee Raise", target: "Lower Abs" },
+                { id: 157, name: "Cable Crunch", target: "Rectus Abdominis" },
+                { id: 158, name: "Reverse Crunch", target: "Lower Abs" },
+                { id: 159, name: "Leg Raise (Lying)", target: "Lower Abs" },
+                { id: 160, name: "Russian Twist", target: "Obliques" },
+                { id: 161, name: "Wood Chop", target: "Obliques" },
+                { id: 162, name: "Mountain Climber", target: "Core, Hip Flexors" },
+                { id: 163, name: "Bicycle Crunch", target: "Obliques, Rectus Abdominis" },
+                { id: 164, name: "Flutter Kick", target: "Lower Abs, Hip Flexors" },
+                { id: 165, name: "V-Up", target: "Rectus Abdominis" },
+                { id: 166, name: "Dragon Flag", target: "Rectus Abdominis" },
+                { id: 167, name: "L-Sit", target: "Hip Flexors, Core" },
+                { id: 168, name: "Stir the Pot", target: "Core, Obliques" },
+                { id: 169, name: "Bear Crawl", target: "Full Core, Mobility" },
+                { id: 170, name: "Turkish Get Up", target: "Full Core, Stability" },
+                { id: 171, name: "Suitcase Carry", target: "Obliques, Anti Lateral Flexion" },
+                { id: 172, name: "Medicine Ball Slam", target: "Full Core, Power" },
+                { id: 173, name: "Hollow Hold", target: "Rectus Abdominis" },
+                { id: 174, name: "Toe Touch", target: "Upper Abs" },
+                { id: 175, name: "Crunch", target: "Rectus Abdominis" },
+                { id: 176, name: "Scissor Kick", target: "Lower Abs" },
+                { id: 177, name: "Cable Rotation", target: "Obliques" },
+                { id: 178, name: "Plank to Push-up", target: "Core, Shoulders" }
+            ]
+        };
+        
+        // ==================== STATE ====================
+        let currentMuscle = 'chest';
+        let selectedExercises = [];
+        
+        // ==================== TAB SWITCHING ====================
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(`tab-${tab}`).classList.add('active');
+        }
+        
+        // ==================== MUSCLE SELECTOR ====================
+        function selectMuscle(muscle, btn) {
+            currentMuscle = muscle;
+            document.querySelectorAll('.muscle-btn').forEach(btn => btn.classList.remove('active'));
+            btn.classList.add('active');
+            renderExerciseList();
+        }
+        
+        // ==================== EXERCISE PICKER ====================
+        function renderExerciseList() {
+            const list = document.getElementById('exerciseList');
+            const exercises = exerciseDB[currentMuscle] || [];
+            
+            const badge = document.getElementById('exerciseCountBadge');
+            badge.textContent = `${exercises.length} bài`;
+            badge.setAttribute('data-muscle', currentMuscle);
+            
+            list.innerHTML = exercises.map(ex => {
+                const isSelected = selectedExercises.find(s => s.id === ex.id);
+                return `
+                    <div class="exercise-item ${isSelected ? 'selected' : ''}" onclick="toggleExercise(${ex.id}, '${ex.name}', '${ex.target}', '${currentMuscle}')">
+                        <div class="info">
+                            <div class="name">${ex.name}</div>
+                            <div class="target">${ex.target}</div>
+                        </div>
+                        <button class="add-btn">${isSelected ? '✓ Đã chọn' : '+ Thêm'}</button>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function toggleExercise(id, name, target, muscle) {
+            const index = selectedExercises.findIndex(ex => ex.id === id);
+            
+            if (index > -1) {
+                selectedExercises.splice(index, 1);
+            } else {
+                selectedExercises.push({ id, name, target, muscle, sets: 3, reps: 12 });
+            }
+            
+            renderExerciseList();
+            renderSelectedList();
+            updateVolume();
+        }
+        
+        // ==================== SELECTED LIST ====================
+        function renderSelectedList() {
+            const list = document.getElementById('selectedList');
+            document.getElementById('selectedCount').textContent = `${selectedExercises.length} bài`;
+            
+            if (selectedExercises.length === 0) {
+                list.innerHTML = '<p style="color: var(--text-light); text-align: center; padding: 20px; font-size: 0.9rem;">Chưa chọn bài tập nào</p>';
+                return;
+            }
+            
+            list.innerHTML = selectedExercises.map((ex, idx) => `
+                <div class="selected-item">
+                    <div class="name">${ex.name}</div>
+                    <input type="number" class="config-input" value="${ex.sets}" min="1" max="10" onchange="updateConfig(${idx}, 'sets', this.value)" placeholder="Sets">
+                    <input type="number" class="config-input" value="${ex.reps}" min="1" max="30" onchange="updateConfig(${idx}, 'reps', this.value)" placeholder="Reps">
+                    <button class="remove-btn" onclick="removeExercise(${idx})">✕</button>
+                </div>
+            `).join('');
+        }
+        
+        function updateConfig(index, field, value) {
+            selectedExercises[index][field] = parseInt(value);
+            updateVolume();
+        }
+        
+        function removeExercise(index) {
+            selectedExercises.splice(index, 1);
+            renderExerciseList();
+            renderSelectedList();
+            updateVolume();
+        }
+        
+        // ==================== VOLUME TRACKER ====================
+        function updateVolume() {
+            const volume = { chest: 0, back: 0, shoulder: 0, legs: 0, arms: 0, core: 0 };
+            
+            selectedExercises.forEach(ex => {
+                if (volume[ex.muscle] !== undefined) {
+                    volume[ex.muscle] += ex.sets;
+                }
+            });
+            
+            Object.keys(volume).forEach(muscle => {
+                const setsEl = document.getElementById(`${muscle}-sets`);
+                const statusEl = document.getElementById(`${muscle}-status`);
+                
+                if (setsEl) setsEl.textContent = `${volume[muscle]} sets`;
+                
+                if (statusEl) {
+                    if (volume[muscle] === 0) {
+                        statusEl.textContent = '—';
+                        statusEl.className = 'status empty';
+                    } else if (volume[muscle] >= 10 && volume[muscle] <= 20) {
+                        statusEl.textContent = '✓ Tốt';
+                        statusEl.className = 'status good';
+                    } else if (volume[muscle] < 10) {
+                        statusEl.textContent = '⚠ Ít';
+                        statusEl.className = 'status warning';
+                    } else {
+                        statusEl.textContent = '⚠ Nhiều';
+                        statusEl.className = 'status over';
+                    }
+                }
+            });
+        }
+        
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderExerciseList();
+            updateVolume();
+        });
+    </script>
+</body>
+</html>
