@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Habits - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-green: #50C878;
+            --primary-teal: #1ABC9C;
+            --primary-emerald: #2ECC71;
+            --primary-blue: #4A90E2;
+            --primary-purple: #9B59B6;
+            --primary-orange: #F39C12;
+            --primary-red: #E74C3C;
+            --primary-cyan: #00BCD4;
+            --primary-indigo: #5B6ABF;
+            
+            --text-dark: #1A202C;
+            --text-medium: #4A5568;
+            --text-light: #718096;
+            --bg-main: #F7FAFC;
+            --bg-card: #FFFFFF;
+            --border-soft: #E2E8F0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 14px 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover { color: var(--primary-green); }
+        
+        /* Hero */
+        .hero-wrapper {
+            width: 100%;
+            background: linear-gradient(135deg, #E8F8EE 0%, #F0FFF4 40%, #E8F8F5 100%);
+            border-radius: 0 0 24px 24px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .hero-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(80,200,120,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(26,188,156,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 40px 36px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 100%);
+            color: white;
+            padding: 5px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.72rem;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+        
+        .hero h1 {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--text-medium);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .hero p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px 40px;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+        
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+        }
+        
+        .section { margin-bottom: 36px; }
+        
+        /* 10 Daily Habits */
+        .habits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+        
+        .habit-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-left: 4px solid var(--habit-color);
+            transition: all 0.2s;
+        }
+        
+        .habit-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+        
+        .habit-card:nth-child(1) { --habit-color: var(--primary-orange); }
+        .habit-card:nth-child(2) { --habit-color: var(--primary-green); }
+        .habit-card:nth-child(3) { --habit-color: var(--primary-blue); }
+        .habit-card:nth-child(4) { --habit-color: var(--primary-cyan); }
+        .habit-card:nth-child(5) { --habit-color: var(--primary-teal); }
+        .habit-card:nth-child(6) { --habit-color: var(--primary-purple); }
+        .habit-card:nth-child(7) { --habit-color: var(--primary-indigo); }
+        .habit-card:nth-child(8) { --habit-color: var(--primary-red); }
+        .habit-card:nth-child(9) { --habit-color: var(--primary-emerald); }
+        .habit-card:nth-child(10) { --habit-color: var(--primary-orange); }
+        
+        .habit-number {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background: var(--habit-color);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            margin-bottom: 12px;
+        }
+        
+        .habit-time {
+            display: inline-block;
+            padding: 3px 10px;
+            background: var(--bg-main);
+            color: var(--habit-color);
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            margin-left: 8px;
+        }
+        
+        .habit-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .habit-card > p {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        
+        .habit-benefits {
+            list-style: none;
+        }
+        
+        .habit-benefits li {
+            padding: 4px 0 4px 16px;
+            position: relative;
+            font-size: 0.78rem;
+            color: var(--text-medium);
+            line-height: 1.4;
+        }
+        
+        .habit-benefits li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--habit-color);
+            font-weight: 700;
+        }
+        
+        /* 21-Day Challenge Tracker */
+        .tracker-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .tracker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-soft);
+        }
+        
+        .tracker-title {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+        }
+        
+        .tracker-stats {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .tracker-stat {
+            text-align: center;
+        }
+        
+        .tracker-stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            line-height: 1;
+        }
+        
+        .tracker-stat-label {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+        
+        .tracker-grid {
+            display: grid;
+            grid-template-columns: 120px repeat(21, 1fr);
+            gap: 4px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        
+        .tracker-header-cell {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-align: center;
+            padding: 6px 0;
+        }
+        
+        .tracker-habit-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            padding: 8px 4px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tracker-cell {
+            width: 28px;
+            height: 28px;
+            background: var(--bg-main);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        
+        .tracker-cell:hover {
+            border-color: var(--primary-green);
+            background: #E8F8EE;
+        }
+        
+        .tracker-cell.completed {
+            background: var(--primary-green);
+        }
+        
+        .tracker-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-soft);
+        }
+        
+        .tracker-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            border: none;
+        }
+        
+        .tracker-btn.primary {
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 100%);
+            color: white;
+        }
+        
+        .tracker-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(80,200,120,0.3);
+        }
+        
+        .tracker-btn.secondary {
+            background: var(--bg-main);
+            color: var(--text-medium);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .tracker-btn.secondary:hover {
+            background: var(--border-soft);
+        }
+        
+        /* Habit Stacking Guide */
+        .stacking-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-left: 4px solid var(--primary-purple);
+        }
+        
+        .stacking-formula {
+            background: var(--bg-main);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .formula-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-purple);
+            margin-bottom: 8px;
+        }
+        
+        .formula-desc {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+        }
+        
+        .stacking-examples {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .stacking-example {
+            padding: 16px;
+            background: var(--bg-main);
+            border-radius: 10px;
+            border-left: 3px solid var(--primary-purple);
+        }
+        
+        .stacking-example h4 {
+            font-size: 0.92rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+        }
+        
+        .stacking-example p {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        /* Tips Section */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        
+        .tip-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-top: 3px solid var(--tip-color);
+        }
+        
+        .tip-card:nth-child(1) { --tip-color: var(--primary-green); }
+        .tip-card:nth-child(2) { --tip-color: var(--primary-orange); }
+        .tip-card:nth-child(3) { --tip-color: var(--primary-blue); }
+        
+        .tip-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        
+        .tip-card > p {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        
+        .tip-list {
+            list-style: none;
+        }
+        
+        .tip-list li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        .tip-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--tip-color);
+            font-weight: 700;
+        }
+        
+        /* Info Callout */
+        .info-callout {
+            padding: 16px 18px;
+            border-radius: 12px;
+            margin-top: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        
+        .info-callout.tip { background: #E8F8EE; border-left: 4px solid var(--primary-green); }
+        .info-callout.warning { background: #FFF3E0; border-left: 4px solid var(--primary-orange); }
+        .info-callout.important { background: #FFE8E8; border-left: 4px solid var(--primary-red); }
+        
+        .info-callout-icon { font-size: 1.3rem; flex-shrink: 0; }
+        .info-callout-text { font-size: 0.88rem; color: var(--text-dark); line-height: 1.5; }
+        .info-callout-text strong { font-weight: 600; }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            border-radius: 18px;
+            padding: 48px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.4;
+        }
+        
+        .cta-content { position: relative; z-index: 1; }
+        
+        .cta-section h2 { font-size: 1.8rem; margin-bottom: 10px; }
+        
+        .cta-section p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            margin-bottom: 22px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            padding: 12px 28px;
+            background: white;
+            color: var(--primary-teal);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border: 2px solid white;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        .btn-cta.secondary {
+            background: transparent;
+            color: white;
+        }
+        
+        .btn-cta.secondary:hover { background: rgba(255,255,255,0.15); }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-soft);
+            padding: 28px 40px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        
+        .footer-links a:hover { color: var(--primary-green); }
+        
+        .footer-bottom {
+            color: var(--text-light);
+            font-size: 0.78rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .habits-grid { grid-template-columns: 1fr; }
+            .stacking-examples { grid-template-columns: 1fr; }
+            .tips-grid { grid-template-columns: 1fr; }
+            .tracker-grid { grid-template-columns: 100px repeat(21, 28px); }
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 12px 20px; }
+            .hero { padding: 36px 20px 28px; }
+            .hero h1 { font-size: 1.8rem; }
+            .main-container { padding: 0 20px 30px; }
+            .tracker-header { flex-direction: column; gap: 12px; }
+            .cta-section { padding: 36px 24px; }
+            .cta-section h2 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="men-lifestyle-overview.html" class="back-link">← Quay lại Lifestyle</a>
+    </header>
+    
+    <section class="hero-wrapper">
+        <div class="hero">
+            <span class="hero-badge">DAILY HABITS</span>
+            <h1>Xây Dựng <span>Thói Quen</span></h1>
+            <div class="hero-subtitle">10 habits · 21-day challenge · Habit stacking</div>
+            <p>1% better mỗi ngày = 37x better sau 1 năm. Không cần motivation - cần systems. Guide này giúp bạn build habits bền vững.</p>
+        </div>
+    </section>
+    
+    <div class="main-container">
+        
+        <!-- 10 Daily Habits -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">10 Daily Habits</h2>
+                <p class="section-subtitle">Foundation cho lifestyle cân bằng</p>
+            </div>
+            
+            <div class="habits-grid">
+                <div class="habit-card">
+                    <div class="habit-number">1</div>
+                    <div class="habit-time">Morning</div>
+                    <h3>Morning Sunlight (5-10 min)</h3>
+                    <p>Ánh sáng mặt trời buổi sáng điều chỉnh circadian rhythm, tăng cortisol tự nhiên, cải thiện sleep quality.</p>
+                    <ul class="habit-benefits">
+                        <li>Regulates sleep-wake cycle</li>
+                        <li>Boosts morning energy</li>
+                        <li>Improves mood (serotonin)</li>
+                        <li>Free vitamin D</li>
+                    </ul>
+                </div>
+                
+                <div class="habit-card">
+                    <div class="habit-number">2</div>
+                    <div class="habit-time">Breakfast</div>
+                    <h3>Protein Breakfast</h3>
+                    <p>30-40g protein trong bữa sáng giảm cravings, tăng satiety, preserve muscle mass.</p>
+                    <ul class="habit-benefits">
+                        <li>Reduces hunger throughout day</li>
+                        <li>Stabilizes blood sugar</li>
+                        <li>Preserves muscle mass</li>
+                        <li>Boosts metabolism</li>
+                    </ul>
+                </div>
+                
+                <div class="habit-card">
+                    <div class="habit-number">3</div>
+                    <div class="habit-time">Throughout day</div>
+                    <h3>8K-10K Steps</h3>
+                    <p>Walking là underrated exercise. Burns calories, improves cardiovascular health, clears mind.</p>
+                    <ul class="habit-benefits">
+                        <li>Burns 300-500 kcal/day</li>
+                        <li>Improves cardiovascular health</li>
+                        <li>Reduces stress</li>
+                        <li>Easy to track (phone/watch)</li>
+                    </ul>
+                </div>
+                
+                <div class="habit-card">
+                    <div class="habit-number">4</div>
+                    <div class="habit-time">Throughout day</div>
+                    <h3>3-4L Water</h3>
+                    <p>Hydration ảnh hưởng energy, focus, performance. Đa số người uống không đủ nước.</p>
+                    <ul class="habit-benefits">
+                        <li>Improves cognitive function</li>
+                        <li>Boosts physical performance</li>
+                        <li>Supports recovery</li>
+                        <li>Reduces headaches</li>
+                    </ul>
+                </div>
+                
+                <div class="habit-card">
+                    <div class="habit-number">5</div>
+                    <div class="habit-time">10 min</div>
+                    <h3>10-Min Stretching</h3>
+                    <p>Daily stretching maintains mobility, reduces injury risk, counteracts sitting.</p>
+                    <ul class="habit-benefits">
+                        <li>Maintains joint mobility</li>
+                        <li>Reduces muscle tension</li>
+                        <li>Prevents injuries</li>
+                        <li>Improves posture</li>
+                    </ul>
+                </div>
+                
+                <div class="habit-card">
+                    <div class="habit-number">6</div>
+                    <div class="habit-time">10 min</div>
+                    <h3>10-Min Meditation/Breathing</h3>
+                    <p>Mental health = physical health. Meditation reduces cortisol, improves focus, emotional regulation.</p>
+                    <ul class="habit-benefits">
+                        <li>Reduces stress & anxiety</li>
+                        <li>Improves focus & clarity</li>
+                        <li>Better emotional regulation</li>
+                        <li>Lowers blood pressure</li>
+                    </ul>
+                </div>
+                
+                <div class="habit-card">
+                    <div class="habit-number">7</div>
+                    <div class="habit-time">Evening</div>
+                    <h3>No Phone 1h Before Bed</h3>
+                    <p>Blue light suppress melatonin 50%. Social media increases anxiety. Protect sleep quality.</p>
+                    <ul class="habit-benefits">
+                        <li>Improves sleep quality</li>
+                        <li>Reduces anxiety</li>
+                        <li>Better relationships</li>
+                        <li>More mindful evenings</li>
+                    </ul>
+                </div>
+                
+                <div class="habit-card">
+                    <div class="habit-number">8</div>
+                    <div class="habit-time">23:00</div>
+                    <h3>Sleep by 23h</h3>
+                    <p>Consistent bedtime regulates circadian rhythm. 7-8h sleep = testosterone, recovery, cognitive function.</p>
+                    <ul class="habit-benefits">
+                        <li>Regulates circadian rhythm</li>
+                        <li>Maximizes deep sleep</li>
+                        <li>Boosts testosterone</li>
+                        <li>Improves recovery</li>
+                    </ul>
+                </div>
+                
+                <div class="habit-card">
+                    <div class="habit-number">9</div>
+                    <div class="habit-time">Evening</div>
+                    <h3>Gratitude Journaling</h3>
+                    <p>Writing 3 things grateful for rewires brain for positivity. Reduces stress, improves relationships.</p>
+                    <ul class="habit-benefits">
+                        <li>Increases happiness</li>
+                        <li>Reduces stress</li>
+                        <li>Improves relationships</li>
+                        <li>Better sleep quality</li>
+                    </ul>
+                </div>
+                
+                <div class="habit-card">
+                    <div class="habit-number">10</div>
+                    <div class="habit-time">Evening</div>
+                    <h3>Prepare Tomorrow</h3>
+                    <p>Lay out outfit, prep meals, review schedule. Reduces morning decision fatigue.</p>
+                    <ul class="habit-benefits">
+                        <li>Reduces morning stress</li>
+                        <li>Saves time</li>
+                        <li>Better meal choices</li>
+                        <li>More productive mornings</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-callout tip">
+                <div class="info-callout-icon">💡</div>
+                <div class="info-callout-text">
+                    <strong>Start small:</strong> Don't implement all 10 at once. Pick 2-3 habits, master them in 21 days, then add more. Consistency > intensity.
+                </div>
+            </div>
+        </div>
+        
+        <!-- 21-Day Challenge Tracker -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">21-Day Challenge Tracker</h2>
+                <p class="section-subtitle">Track daily progress, build streaks</p>
+            </div>
+            
+            <div class="tracker-card">
+                <div class="tracker-header">
+                    <div class="tracker-title">Habit Tracker</div>
+                    <div class="tracker-stats">
+                        <div class="tracker-stat">
+                            <div class="tracker-stat-value" id="currentStreak">0</div>
+                            <div class="tracker-stat-label">Current Streak</div>
+                        </div>
+                        <div class="tracker-stat">
+                            <div class="tracker-stat-value" id="totalCompleted">0</div>
+                            <div class="tracker-stat-label">Total Completed</div>
+                        </div>
+                        <div class="tracker-stat">
+                            <div class="tracker-stat-value" id="completionRate">0%</div>
+                            <div class="tracker-stat-label">Completion Rate</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tracker-grid" id="trackerGrid">
+                    <!-- Generated by JavaScript -->
+                </div>
+                
+                <div class="tracker-actions">
+                    <button class="tracker-btn primary" onclick="saveTracker()">Lưu Progress</button>
+                    <button class="tracker-btn secondary" onclick="resetTracker()">Reset Challenge</button>
+                </div>
+                
+                <div class="info-callout tip">
+                    <div class="info-callout-icon">💡</div>
+                    <div class="info-callout-text">
+                        <strong>How to use:</strong> Click cells to mark habits complete. Green = done. Track 21 days to build lasting habits.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Habit Stacking Guide -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Habit Stacking Guide</h2>
+                <p class="section-subtitle">How to build habits that stick</p>
+            </div>
+            
+            <div class="stacking-card">
+                <p style="font-size: 0.92rem; color: var(--text-medium); line-height: 1.6; margin-bottom: 16px;">
+                    Habit stacking = attaching new habits to existing ones. Formula: "After [CURRENT HABIT], I will [NEW HABIT]." Leverages existing neural pathways.
+                </p>
+                
+                <div class="stacking-formula">
+                    <div class="formula-text">After [CURRENT], I will [NEW]</div>
+                    <div class="formula-desc">Attach new habits to existing routines</div>
+                </div>
+                
+                <div class="stacking-examples">
+                    <div class="stacking-example">
+                        <h4>Morning Routine Stack</h4>
+                        <p>After I pour my morning coffee, I will drink 500ml water.<br><br>After I brush my teeth, I will do 10 min stretching.</p>
+                    </div>
+                    
+                    <div class="stacking-example">
+                        <h4>Work Routine Stack</h4>
+                        <p>After I sit at my desk, I will do 2 min breathing exercises.<br><br>After lunch, I will walk 10 minutes.</p>
+                    </div>
+                    
+                    <div class="stacking-example">
+                        <h4>Evening Routine Stack</h4>
+                        <p>After dinner, I will write 3 things I'm grateful for.<br><br>After I turn off my phone, I will read 10 pages.</p>
+                    </div>
+                    
+                    <div class="stacking-example">
+                        <h4>Bedtime Routine Stack</h4>
+                        <p>After I get into bed, I will do 5 min meditation.<br><br>After I set my alarm, I will prepare tomorrow's outfit.</p>
+                    </div>
+                </div>
+                
+                <div class="info-callout tip">
+                    <div class="info-callout-icon">💡</div>
+                    <div class="info-callout-text">
+                        <strong>Key principle:</strong> Make it obvious, attractive, easy, satisfying. Environment design > willpower.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tips Section -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Tips for Success</h2>
+                <p class="section-subtitle">3 principles for lasting change</p>
+            </div>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>Start Small</h3>
+                    <p>Don't try to change everything at once. Pick 1-2 habits, master them, then add more.</p>
+                    <ul class="tip-list">
+                        <li>2-minute rule: make it so easy you can't say no</li>
+                        <li>Focus on consistency, not perfection</li>
+                        <li>Celebrate small wins</li>
+                        <li>Don't break the chain twice</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>Consistency > Intensity</h3>
+                    <p>10 min daily > 2h weekly. Build the habit first, optimize later.</p>
+                    <ul class="tip-list">
+                        <li>Same time, same place daily</li>
+                        <li>Track progress visually</li>
+                        <li>Accountability partner helps</li>
+                        <li>Forgive slip-ups, keep going</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>Track Progress</h3>
+                    <p>What gets measured gets managed. Use the tracker above or any method that works.</p>
+                    <ul class="tip-list">
+                        <li>Visual tracking (calendar, app)</li>
+                        <li>Weekly reviews</li>
+                        <li>Adjust based on data</li>
+                        <li>Focus on trends, not daily perfection</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-callout important">
+                <div class="info-callout-icon"></div>
+                <div class="info-callout-text">
+                    <strong>Remember:</strong> 21 days to build a habit, 90 days to make it lifestyle. Be patient. Trust the process.
+                </div>
+            </div>
+        </div>
+        
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <div class="cta-content">
+                <h2>Bắt đầu 21-day challenge</h2>
+                <p>Pick 2-3 habits from the list. Track daily for 21 days. Small consistent actions compound into big results.</p>
+                <div class="cta-buttons">
+                    <a href="men-lifestyle-sleep.html" class="btn-cta">Cải thiện Giấc Ngủ</a>
+                    <a href="men-lifestyle-stress.html" class="btn-cta secondary">Quản lý Stress</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="men-30-40.html">Nam 30-40</a>
+            <a href="men-lifestyle-overview.html">Lifestyle Overview</a>
+            <a href="men-lifestyle-sleep.html">Sleep</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // ==================== 21-DAY TRACKER ====================
+        const STORAGE_KEY = 'fit30_habits_21day';
+        const habits = [
+            'Morning sunlight',
+            'Protein breakfast',
+            '8K-10K steps',
+            '3-4L water',
+            '10-min stretching',
+            '10-min meditation',
+            'No phone 1h before bed',
+            'Sleep by 23h',
+            'Gratitude journaling',
+            'Prepare tomorrow'
+        ];
+        
+        let trackerData = {};
+        
+        function init() {
+            loadTracker();
+            renderTracker();
+            updateStats();
+        }
+        
+        function loadTracker() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                trackerData = JSON.parse(saved);
+            } else {
+                // Initialize empty tracker
+                for (let day = 1; day <= 21; day++) {
+                    trackerData[day] = {};
+                    habits.forEach((habit, idx) => {
+                        trackerData[day][idx] = false;
+                    });
+                }
+            }
+        }
+        
+        function saveTracker() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(trackerData));
+            alert('✅ Đã lưu progress!');
+        }
+        
+        function resetTracker() {
+            if (!confirm('Reset toàn bộ 21-day challenge?')) return;
+            
+            for (let day = 1; day <= 21; day++) {
+                trackerData[day] = {};
+                habits.forEach((habit, idx) => {
+                    trackerData[day][idx] = false;
+                });
+            }
+            
+            saveTracker();
+            renderTracker();
+            updateStats();
+        }
+        
+        function toggleHabit(day, habitIdx) {
+            trackerData[day][habitIdx] = !trackerData[day][habitIdx];
+            renderTracker();
+            updateStats();
+        }
+        
+        function renderTracker() {
+            const grid = document.getElementById('trackerGrid');
+            grid.innerHTML = '';
+            
+            // Header row
+            grid.appendChild(createCell('Habit', 'tracker-header-cell'));
+            for (let day = 1; day <= 21; day++) {
+                grid.appendChild(createCell(`D${day}`, 'tracker-header-cell'));
+            }
+            
+            // Habit rows
+            habits.forEach((habit, habitIdx) => {
+                grid.appendChild(createCell(habit, 'tracker-habit-label'));
+                
+                for (let day = 1; day <= 21; day++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'tracker-cell';
+                    if (trackerData[day] && trackerData[day][habitIdx]) {
+                        cell.classList.add('completed');
+                    }
+                    cell.onclick = () => toggleHabit(day, habitIdx);
+                    grid.appendChild(cell);
+                }
+            });
+        }
+        
+        function createCell(text, className) {
+            const cell = document.createElement('div');
+            cell.className = className;
+            cell.textContent = text;
+            return cell;
+        }
+        
+        function updateStats() {
+            let totalCompleted = 0;
+            let totalCells = 0;
+            let currentStreak = 0;
+            
+            // Calculate totals
+            for (let day = 1; day <= 21; day++) {
+                for (let idx = 0; idx < habits.length; idx++) {
+                    totalCells++;
+                    if (trackerData[day] && trackerData[day][idx]) {
+                        totalCompleted++;
+                    }
+                }
+            }
+            
+            // Calculate current streak (consecutive days with all habits complete)
+            for (let day = 21; day >= 1; day--) {
+                const dayComplete = habits.every((_, idx) => trackerData[day] && trackerData[day][idx]);
+                if (dayComplete) {
+                    currentStreak++;
+                } else {
+                    break;
+                }
+            }
+            
+            const completionRate = totalCells > 0 ? Math.round((totalCompleted / totalCells) * 100) : 0;
+            
+            document.getElementById('currentStreak').textContent = currentStreak;
+            document.getElementById('totalCompleted').textContent = totalCompleted;
+            document.getElementById('completionRate').textContent = `${completionRate}%`;
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
