@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eating Out & More - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-amber: #F39C12;
+            --primary-orange: #E67E22;
+            --primary-green: #50C878;
+            --primary-teal: #1ABC9C;
+            --primary-red: #E74C3C;
+            --primary-blue: #4A90E2;
+            --primary-purple: #9B59B6;
+            
+            --text-dark: #1A202C;
+            --text-medium: #4A5568;
+            --text-light: #718096;
+            --bg-main: #F7FAFC;
+            --bg-card: #FFFFFF;
+            --border-soft: #E2E8F0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 14px 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 50%, #50C878 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover { color: var(--primary-amber); }
+        
+        /* Hero */
+        .hero {
+            position: relative;
+            padding: 48px 40px 36px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #FFF8E7 0%, #FFF3E0 40%, #E8F8EE 100%);
+            border-radius: 0 0 24px 24px;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(243,156,18,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(80,200,120,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero-content { position: relative; z-index: 1; }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%);
+            color: white;
+            padding: 5px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.72rem;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+        
+        .hero h1 {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 50%, #50C878 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--text-medium);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .hero p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 30px 40px 40px;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+        
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+        }
+        
+        /* Eating Out Section */
+        .eatingout-section { margin-bottom: 40px; }
+        
+        .eatingout-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        
+        .eatingout-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-left: 4px solid var(--card-color);
+            transition: all 0.2s;
+        }
+        
+        .eatingout-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+        
+        .eatingout-card:nth-child(4n+1) { --card-color: var(--primary-amber); }
+        .eatingout-card:nth-child(4n+2) { --card-color: var(--primary-green); }
+        .eatingout-card:nth-child(4n+3) { --card-color: var(--primary-blue); }
+        .eatingout-card:nth-child(4n+4) { --card-color: var(--primary-purple); }
+        
+        .eatingout-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .eatingout-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        .eatingout-calories {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--card-color);
+        }
+        
+        .eatingout-desc {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        
+        .eatingout-tips {
+            background: var(--bg-main);
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+        
+        .eatingout-tips strong {
+            color: var(--card-color);
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+        }
+        
+        /* Quick Meals Section */
+        .quickmeals-section { margin-bottom: 40px; }
+        
+        .meal-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .meal-tab {
+            padding: 12px 24px;
+            background: var(--bg-card);
+            border: 2px solid var(--border-soft);
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .meal-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        
+        .meal-tab.active {
+            background: var(--primary-amber);
+            color: white;
+            border-color: var(--primary-amber);
+        }
+        
+        .meal-content { display: none; }
+        .meal-content.active { display: block; animation: fadeIn 0.3s ease; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .meal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+        
+        .meal-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-left: 4px solid var(--meal-color);
+        }
+        
+        .meal-card:nth-child(5n+1) { --meal-color: var(--primary-amber); }
+        .meal-card:nth-child(5n+2) { --meal-color: var(--primary-green); }
+        .meal-card:nth-child(5n+3) { --meal-color: var(--primary-blue); }
+        .meal-card:nth-child(5n+4) { --meal-color: var(--primary-purple); }
+        .meal-card:nth-child(5n+5) { --meal-color: var(--primary-red); }
+        
+        .meal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .meal-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            flex: 1;
+        }
+        
+        .meal-time {
+            font-size: 0.72rem;
+            padding: 3px 10px;
+            background: var(--bg-main);
+            color: var(--meal-color);
+            border-radius: 6px;
+            font-weight: 700;
+            white-space: nowrap;
+            margin-left: 10px;
+        }
+        
+        .meal-ingredients {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        
+        .meal-macros {
+            display: flex;
+            gap: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-soft);
+        }
+        
+        .meal-macro {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+        
+        .meal-macro strong {
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+        
+        /* Supplements Section */
+        .supplements-section { margin-bottom: 40px; }
+        
+        .supp-tiers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .supp-tier {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-top: 4px solid var(--tier-color);
+        }
+        
+        .supp-tier:nth-child(1) { --tier-color: var(--primary-green); }
+        .supp-tier:nth-child(2) { --tier-color: var(--primary-amber); }
+        .supp-tier:nth-child(3) { --tier-color: var(--primary-red); }
+        
+        .tier-label {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--bg-main);
+            color: var(--tier-color);
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+        
+        .supp-tier h3 {
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            margin-bottom: 14px;
+        }
+        
+        .supp-list {
+            list-style: none;
+        }
+        
+        .supp-item {
+            padding: 12px;
+            background: var(--bg-main);
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .supp-item:last-child { margin-bottom: 0; }
+        
+        .supp-name {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        
+        .supp-dose {
+            font-size: 0.75rem;
+            color: var(--tier-color);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .supp-desc {
+            font-size: 0.78rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        /* Info Callout */
+        .info-callout {
+            padding: 16px 18px;
+            border-radius: 12px;
+            margin-top: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        
+        .info-callout.tip { background: #E8F8EE; border-left: 4px solid var(--primary-green); }
+        .info-callout.warning { background: #FFF3E0; border-left: 4px solid var(--primary-orange); }
+        .info-callout.important { background: #FFE8E8; border-left: 4px solid var(--primary-red); }
+        
+        .info-callout-icon { font-size: 1.3rem; flex-shrink: 0; }
+        .info-callout-text { font-size: 0.88rem; color: var(--text-dark); line-height: 1.5; }
+        .info-callout-text strong { font-weight: 600; }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 50%, #50C878 100%);
+            border-radius: 18px;
+            padding: 48px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.4;
+        }
+        
+        .cta-content { position: relative; z-index: 1; }
+        
+        .cta-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .cta-section p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            margin-bottom: 22px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            padding: 12px 28px;
+            background: white;
+            color: var(--primary-orange);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border: 2px solid white;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        .btn-cta.secondary {
+            background: transparent;
+            color: white;
+        }
+        
+        .btn-cta.secondary:hover {
+            background: rgba(255,255,255,0.15);
+        }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-soft);
+            padding: 28px 40px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 50%, #50C878 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        
+        .footer-links a:hover { color: var(--primary-amber); }
+        
+        .footer-bottom {
+            color: var(--text-light);
+            font-size: 0.78rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .eatingout-grid { grid-template-columns: repeat(2, 1fr); }
+            .meal-grid { grid-template-columns: 1fr; }
+            .supp-tiers { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 12px 20px; }
+            .hero { padding: 36px 20px 28px; border-radius: 0 0 18px 18px; }
+            .hero h1 { font-size: 1.8rem; }
+            .main-container { padding: 20px 20px 30px; }
+            .eatingout-grid { grid-template-columns: 1fr; }
+            .cta-section { padding: 36px 24px; }
+            .cta-section h2 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="men-nutrition-overview.html" class="back-link">← Quay lại Nutrition</a>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">EATING OUT & MORE</span>
+            <h1>Ăn Ngoài & <span>Thực Tế</span></h1>
+            <div class="hero-subtitle">Eating out guide · Quick meals · Supplements</div>
+            <p>Không thể nấu ăn mọi lúc. Guide này giúp bạn navigate eating out, có quick meals khi bận, và hiểu supplements nào thực sự cần.</p>
+        </div>
+    </section>
+    
+    <div class="main-container">
+        
+        <!-- Eating Out Guide -->
+        <div class="eatingout-section">
+            <div class="section-header">
+                <h2 class="section-title">Eating Out Guide</h2>
+                <p class="section-subtitle">12 scenarios phổ biến + cách order thông minh</p>
+            </div>
+            
+            <div class="eatingout-grid">
+                <div class="eatingout-card">
+                    <div class="eatingout-header">
+                        <div class="eatingout-name">Phở</div>
+                        <div class="eatingout-calories">~450 kcal</div>
+                    </div>
+                    <div class="eatingout-desc">Phở bò/tái/nạm. Carb cao từ bánh phở, protein từ thịt bò, ít fat nếu không gọi béo.</div>
+                    <div class="eatingout-tips">
+                        <strong>Order thông minh:</strong>
+                        • Phở tái/chín (nhiều protein)<br>
+                        • Ít bánh phở hoặc half portion<br>
+                        • Thêm rau, giá<br>
+                        • Tránh: phở béo, nước béo
+                    </div>
+                </div>
+                
+                <div class="eatingout-card">
+                    <div class="eatingout-header">
+                        <div class="eatingout-name">Bún Bò Huế</div>
+                        <div class="eatingout-calories">~550 kcal</div>
+                    </div>
+                    <div class="eatingout-desc">Spicy, flavorful. Có giò heo (fat cao), thịt bò, bún. Calorie cao hơn phở.</div>
+                    <div class="eatingout-tips">
+                        <strong>Order thông minh:</strong>
+                        • Bún bò không giò heo<br>
+                        • Half portion bún<br>
+                        • Thêm rau sống<br>
+                        • Tránh: extra giò heo, mắm ruốc nhiều
+                    </div>
+                </div>
+                
+                <div class="eatingout-card">
+                    <div class="eatingout-header">
+                        <div class="eatingout-name">Cơm Văn Phòng</div>
+                        <div class="eatingout-calories">~600-700 kcal</div>
+                    </div>
+                    <div class="eatingout-desc">Cơm + mặn + canh + rau. Thường nhiều oil, portion lớn. Easy to overeat.</div>
+                    <div class="eatingout-tips">
+                        <strong>Order thông minh:</strong>
+                        • Half cơm hoặc cơm ít<br>
+                        • Chọn đồ nướng/hấp thay chiên<br>
+                        • Ăn nhiều rau, canh<br>
+                        • Tránh: đồ chiên, kho nhiều đường
+                    </div>
+                </div>
+                
+                <div class="eatingout-card">
+                    <div class="eatingout-header">
+                        <div class="eatingout-name">KFC</div>
+                        <div class="eatingout-calories">~800-1200 kcal</div>
+                    </div>
+                    <div class="eatingout-desc">Fried chicken, high fat, high calorie. Combo thường có nước ngọt (sugar bomb).</div>
+                    <div class="eatingout-tips">
+                        <strong>Order thông minh:</strong>
+                        • Grilled chicken thay fried<br>
+                        • Không combo, order riêng<br>
+                        • Water hoặc diet coke<br>
+                        • Tránh: extra crispy, large combo
+                    </div>
+                </div>
+                
+                <div class="eatingout-card">
+                    <div class="eatingout-header">
+                        <div class="eatingout-name">McDonald's</div>
+                        <div class="eatingout-calories">~700-1000 kcal</div>
+                    </div>
+                    <div class="eatingout-desc">Burgers, fries, shakes. High calorie, low nutrition density. Easy to hit 1000+ kcal.</div>
+                    <div class="eatingout-tips">
+                        <strong>Order thông minh:</strong>
+                        • Grilled chicken sandwich<br>
+                        • Side salad thay fries<br>
+                        • Water hoặc diet drink<br>
+                        • Tránh: double patties, large fries, shakes
+                    </div>
+                </div>
+                
+                <div class="eatingout-card">
+                    <div class="eatingout-header">
+                        <div class="eatingout-name">Lotteria</div>
+                        <div class="eatingout-calories">~700-900 kcal</div>
+                    </div>
+                    <div class="eatingout-desc">Similar to KFC/McDonald's. Burger, chicken, fries. Korean-style có spicy options.</div>
+                    <div class="eatingout-tips">
+                        <strong>Order thông minh:</strong>
+                        • Grilled burger thay fried<br>
+                        • Small fries hoặc không<br>
+                        • Water hoặc trà không đường<br>
+                        • Tránh: combo large, extra cheese
+                    </div>
+                </div>
+                
+                <div class="eatingout-card">
+                    <div class="eatingout-header">
+                        <div class="eatingout-name">Lẩu</div>
+                        <div class="eatingout-calories">~600-800 kcal</div>
+                    </div>
+                    <div class="eatingout-desc">Social eating, nhiều rau, protein từ thịt/hải sản. Control được nếu order thông minh.</div>
+                    <div class="eatingout-tips">
+                        <strong>Order thông minh:</strong>
+                        • Nhiều rau, nấm, đậu phụ<br>
+                        • Thịt nạc, hải sản<br>
+                        • Nước lẩu trong thay béo<br>
+                        • Tránh: thịt ba chỉ, nước lẩu béo, nhiều bún/mì
+                    </div>
+                </div>
+                
+                <div class="eatingout-card">
+                    <div class="eatingout-header">
+                        <div class="eatingout-name">Buffet</div>
+                        <div class="eatingout-calories">~1000-1500+ kcal</div>
+                    </div>
+                    <div class="eatingout-desc">All-you-can-eat. Dangerous for calorie control. Easy to eat 2-3x normal intake.</div>
+                    <div class="eatingout-tips">
+                        <strong>Order thông minh:</strong>
+                        • Survey trước khi lấy đồ<br>
+                        • Protein + veg trước<br>
+                        • Small portions, nhiều lần<br>
+                        • Tránh: fried foods, desserts, sugary drinks
+                    </div>
+                </div>
+                
+                <div class="eatingout-card">
+                    <div class="eatingout-header">
+                        <div class="eatingout-name">Trà Sữa</div>
+                        <div class="eatingout-calories">~300-500 kcal</div>
+                    </div>
+                    <div class="eatingout-desc">Sugar bomb. 1 ly = 50-80g đường. Toppings (trân châu, pudding) thêm 100-200 kcal.</div>
+                    <div class="eatingout-tips">
+                        <strong>Order thông minh:</strong>
+                        • Less sugar (30-50%)<br>
+                        • No toppings hoặc ít<br>
+                        • Small size<br>
+                        • Tránh: full sugar, extra toppings, cheese foam
+                    </div>
+                </div>
+                
+                <div class="eatingout-card">
+                    <div class="eatingout-header">
+                        <div class="eatingout-name">Cà Phê</div>
+                        <div class="eatingout-calories">~50-300 kcal</div>
+                    </div>
+                    <div class="eatingout-desc">Cà phê đen ~5 kcal. Cà phê sữa đá ~150 kcal. Specialty drinks (latte, cappuccino) ~200-300 kcal.</div>
+                    <div class="eatingout-tips">
+                        <strong>Order thông minh:</strong>
+                        • Cà phê đen hoặc americano<br>
+                        • Ít sữa, không đường<br>
+                        • Small size<br>
+                        • Tránh: caramel macchiato, frappuccino
+                    </div>
+                </div>
+                
+                <div class="eatingout-card">
+                    <div class="eatingout-header">
+                        <div class="eatingout-name">Ăn Nhậu</div>
+                        <div class="eatingout-calories">~1000-2000+ kcal</div>
+                    </div>
+                    <div class="eatingout-desc">Alcohol + mồi = calorie bomb. Beer ~150 kcal/lon. Mồi thường fried, salty, high fat.</div>
+                    <div class="eatingout-tips">
+                        <strong>Order thông minh:</strong>
+                        • Light beer hoặc rượu vang<br>
+                        • Mồi: grilled meat, seafood, veg<br>
+                        • Drink water giữa rounds<br>
+                        • Tránh: fried mồi, heavy drinking
+                    </div>
+                </div>
+                
+                <div class="eatingout-card">
+                    <div class="eatingout-header">
+                        <div class="eatingout-name">Đồ Chay</div>
+                        <div class="eatingout-calories">~400-600 kcal</div>
+                    </div>
+                    <div class="eatingout-desc">Vegetarian food. Thường nhiều carb (cơm, bún), ít protein. Cần chú ý protein intake.</div>
+                    <div class="eatingout-tips">
+                        <strong>Order thông minh:</strong>
+                        • Đậu phụ, tempeh, edamame<br>
+                        • Nhiều rau, nấm<br>
+                        • Half portion cơm/bún<br>
+                        • Tránh: đồ chiên, nhiều oil, fake meat processed
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-callout tip">
+                <div class="info-callout-icon">💡</div>
+                <div class="info-callout-text">
+                    <strong>80/20 Rule:</strong> 80% meals nấu ở nhà, 20% eating out. Nếu eating out nhiều hơn, choose wisely và adjust portions.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Meals Section -->
+        <div class="quickmeals-section">
+            <div class="section-header">
+                <h2 class="section-title">Quick Meals at Home</h2>
+                <p class="section-subtitle">20 meals dưới 30 phút cho người bận rộn</p>
+            </div>
+            
+            <div class="meal-tabs">
+                <button class="meal-tab active" onclick="switchMeal('breakfast', this)">Breakfast (5)</button>
+                <button class="meal-tab" onclick="switchMeal('lunch', this)">Lunch (5)</button>
+                <button class="meal-tab" onclick="switchMeal('dinner', this)">Dinner (5)</button>
+                <button class="meal-tab" onclick="switchMeal('snacks', this)">Snacks (5)</button>
+            </div>
+            
+            <!-- Breakfast -->
+            <div class="meal-content active" id="meal-breakfast">
+                <div class="meal-grid">
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">Overnight Oats</div>
+                            <div class="meal-time">5 min prep</div>
+                        </div>
+                        <div class="meal-ingredients">Oats + milk + whey + berries + chia seeds. Mix tối trước, ăn sáng.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>450</strong> kcal</div>
+                            <div class="meal-macro"><strong>35g</strong> protein</div>
+                            <div class="meal-macro"><strong>55g</strong> carbs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">Egg Scramble</div>
+                            <div class="meal-time">10 min</div>
+                        </div>
+                        <div class="meal-ingredients">3 eggs + spinach + cheese + toast. Scramble eggs với spinach, ăn kèm toast.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>420</strong> kcal</div>
+                            <div class="meal-macro"><strong>28g</strong> protein</div>
+                            <div class="meal-macro"><strong>32g</strong> carbs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">Protein Smoothie</div>
+                            <div class="meal-time">5 min</div>
+                        </div>
+                        <div class="meal-ingredients">Whey + banana + oats + milk + PB. Blend tất cả, uống ngay.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>520</strong> kcal</div>
+                            <div class="meal-macro"><strong>38g</strong> protein</div>
+                            <div class="meal-macro"><strong>68g</strong> carbs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">Greek Yogurt Bowl</div>
+                            <div class="meal-time">5 min</div>
+                        </div>
+                        <div class="meal-ingredients">Greek yogurt + granola + berries + honey + almonds. Mix và ăn.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>380</strong> kcal</div>
+                            <div class="meal-macro"><strong>24g</strong> protein</div>
+                            <div class="meal-macro"><strong>48g</strong> carbs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">Avocado Toast + Eggs</div>
+                            <div class="meal-time">10 min</div>
+                        </div>
+                        <div class="meal-ingredients">2 toast + avocado + 2 eggs. Toast bread, mash avocado, fry/poach eggs.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>480</strong> kcal</div>
+                            <div class="meal-macro"><strong>22g</strong> protein</div>
+                            <div class="meal-macro"><strong>42g</strong> carbs</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lunch -->
+            <div class="meal-content" id="meal-lunch">
+                <div class="meal-grid">
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">Chicken Rice Bowl</div>
+                            <div class="meal-time">20 min</div>
+                        </div>
+                        <div class="meal-ingredients">Chicken breast + rice + broccoli + soy sauce. Grill chicken, steam rice & broccoli.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>580</strong> kcal</div>
+                            <div class="meal-macro"><strong>48g</strong> protein</div>
+                            <div class="meal-macro"><strong>62g</strong> carbs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">Tuna Salad Wrap</div>
+                            <div class="meal-time">10 min</div>
+                        </div>
+                        <div class="meal-ingredients">Canned tuna + whole wheat wrap + lettuce + tomato + olive oil. Mix và wrap.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>420</strong> kcal</div>
+                            <div class="meal-macro"><strong>32g</strong> protein</div>
+                            <div class="meal-macro"><strong>38g</strong> carbs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">Beef Stir-fry</div>
+                            <div class="meal-time">15 min</div>
+                        </div>
+                        <div class="meal-ingredients">Lean beef + mixed veg + rice + garlic + soy sauce. Stir-fry beef & veg, serve với rice.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>620</strong> kcal</div>
+                            <div class="meal-macro"><strong>46g</strong> protein</div>
+                            <div class="meal-macro"><strong>68g</strong> carbs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">Turkey Sandwich</div>
+                            <div class="meal-time">10 min</div>
+                        </div>
+                        <div class="meal-ingredients">Turkey breast + whole wheat bread + lettuce + tomato + mustard. Assemble sandwich.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>450</strong> kcal</div>
+                            <div class="meal-macro"><strong>38g</strong> protein</div>
+                            <div class="meal-macro"><strong>48g</strong> carbs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">Salmon + Sweet Potato</div>
+                            <div class="meal-time">25 min</div>
+                        </div>
+                        <div class="meal-ingredients">Salmon fillet + sweet potato + asparagus. Bake salmon & sweet potato, steam asparagus.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>640</strong> kcal</div>
+                            <div class="meal-macro"><strong>44g</strong> protein</div>
+                            <div class="meal-macro"><strong>58g</strong> carbs</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Dinner -->
+            <div class="meal-content" id="meal-dinner">
+                <div class="meal-grid">
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">Grilled Chicken + Quinoa</div>
+                            <div class="meal-time">25 min</div>
+                        </div>
+                        <div class="meal-ingredients">Chicken thigh + quinoa + mixed veg + olive oil. Grill chicken, cook quinoa, roast veg.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>620</strong> kcal</div>
+                            <div class="meal-macro"><strong>52g</strong> protein</div>
+                            <div class="meal-macro"><strong>58g</strong> carbs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">Shrimp Pasta</div>
+                            <div class="meal-time">20 min</div>
+                        </div>
+                        <div class="meal-ingredients">Shrimp + whole wheat pasta + garlic + olive oil + cherry tomatoes. Cook pasta, sauté shrimp & tomatoes.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>580</strong> kcal</div>
+                            <div class="meal-macro"><strong>42g</strong> protein</div>
+                            <div class="meal-macro"><strong>68g</strong> carbs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">Pork + Rice + Veg</div>
+                            <div class="meal-time">20 min</div>
+                        </div>
+                        <div class="meal-ingredients">Lean pork + rice + bok choy + garlic. Stir-fry pork & bok choy, serve với rice.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>640</strong> kcal</div>
+                            <div class="meal-macro"><strong>48g</strong> protein</div>
+                            <div class="meal-macro"><strong>72g</strong> carbs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">White Fish + Rice</div>
+                            <div class="meal-time">20 min</div>
+                        </div>
+                        <div class="meal-ingredients">Cod/tilapia + rice + broccoli + lemon. Bake fish, steam rice & broccoli.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>520</strong> kcal</div>
+                            <div class="meal-macro"><strong>46g</strong> protein</div>
+                            <div class="meal-macro"><strong>58g</strong> carbs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">Tofu Stir-fry</div>
+                            <div class="meal-time">15 min</div>
+                        </div>
+                        <div class="meal-ingredients">Firm tofu + mixed veg + rice + soy sauce + ginger. Stir-fry tofu & veg, serve với rice.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>540</strong> kcal</div>
+                            <div class="meal-macro"><strong>28g</strong> protein</div>
+                            <div class="meal-macro"><strong>68g</strong> carbs</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Snacks -->
+            <div class="meal-content" id="meal-snacks">
+                <div class="meal-grid">
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">Protein Shake + Banana</div>
+                            <div class="meal-time">3 min</div>
+                        </div>
+                        <div class="meal-ingredients">Whey protein + water/milk + banana. Shake và uống.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>280</strong> kcal</div>
+                            <div class="meal-macro"><strong>30g</strong> protein</div>
+                            <div class="meal-macro"><strong>32g</strong> carbs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">Greek Yogurt + Berries</div>
+                            <div class="meal-time">3 min</div>
+                        </div>
+                        <div class="meal-ingredients">Greek yogurt + mixed berries + honey. Mix và ăn.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>220</strong> kcal</div>
+                            <div class="meal-macro"><strong>20g</strong> protein</div>
+                            <div class="meal-macro"><strong>28g</strong> carbs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">Almonds + Apple</div>
+                            <div class="meal-time">2 min</div>
+                        </div>
+                        <div class="meal-ingredients">Handful almonds (23 nuts) + 1 apple. Eat together.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>280</strong> kcal</div>
+                            <div class="meal-macro"><strong>8g</strong> protein</div>
+                            <div class="meal-macro"><strong>28g</strong> carbs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">Hard Boiled Eggs</div>
+                            <div class="meal-time">10 min</div>
+                        </div>
+                        <div class="meal-ingredients">3 hard boiled eggs + salt + pepper. Boil eggs, peel, eat.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>240</strong> kcal</div>
+                            <div class="meal-macro"><strong>18g</strong> protein</div>
+                            <div class="meal-macro"><strong>2g</strong> carbs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-card">
+                        <div class="meal-header">
+                            <div class="meal-name">Cottage Cheese + Fruit</div>
+                            <div class="meal-time">3 min</div>
+                        </div>
+                        <div class="meal-ingredients">Cottage cheese + pineapple/berries. Mix và ăn.</div>
+                        <div class="meal-macros">
+                            <div class="meal-macro"><strong>200</strong> kcal</div>
+                            <div class="meal-macro"><strong>22g</strong> protein</div>
+                            <div class="meal-macro"><strong>24g</strong> carbs</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Supplements Section -->
+        <div class="supplements-section">
+            <div class="section-header">
+                <h2 class="section-title">Supplements Guide</h2>
+                <p class="section-subtitle">Essential · Optional · Not needed</p>
+            </div>
+            
+            <div class="supp-tiers">
+                <div class="supp-tier">
+                    <div class="tier-label">Tier 1</div>
+                    <h3>Essential</h3>
+                    <ul class="supp-list">
+                        <li class="supp-item">
+                            <div class="supp-name">Whey Protein</div>
+                            <div class="supp-dose">25-30g post-workout</div>
+                            <div class="supp-desc">Convenient protein source. Helps hit daily protein target. Not mandatory but very useful.</div>
+                        </li>
+                        <li class="supp-item">
+                            <div class="supp-name">Creatine Monohydrate</div>
+                            <div class="supp-dose">5g daily</div>
+                            <div class="supp-desc">Most researched supplement. Increases strength, muscle mass, performance. Safe long-term.</div>
+                        </li>
+                        <li class="supp-item">
+                            <div class="supp-name">Vitamin D3</div>
+                            <div class="supp-dose">2000-4000 IU daily</div>
+                            <div class="supp-desc">Most people deficient. Important for bone health, immunity, mood. Get blood test first.</div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="supp-tier">
+                    <div class="tier-label">Tier 2</div>
+                    <h3>Optional</h3>
+                    <ul class="supp-list">
+                        <li class="supp-item">
+                            <div class="supp-name">Omega-3 Fish Oil</div>
+                            <div class="supp-dose">2-3g EPA/DHA daily</div>
+                            <div class="supp-desc">Anti-inflammatory, heart health, brain function. Useful if you don't eat fish 2-3x/week.</div>
+                        </li>
+                        <li class="supp-item">
+                            <div class="supp-name">Zinc</div>
+                            <div class="supp-dose">15-30mg daily</div>
+                            <div class="supp-desc">Immune function, testosterone support. Useful if diet lacks zinc-rich foods (red meat, shellfish).</div>
+                        </li>
+                        <li class="supp-item">
+                            <div class="supp-name">Magnesium</div>
+                            <div class="supp-dose">200-400mg before bed</div>
+                            <div class="supp-desc">Sleep quality, muscle recovery, stress reduction. Many people deficient.</div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="supp-tier">
+                    <div class="tier-label">Tier 3</div>
+                    <h3>Not Needed</h3>
+                    <ul class="supp-list">
+                        <li class="supp-item">
+                            <div class="supp-name">BCAA</div>
+                            <div class="supp-dose">Save your money</div>
+                            <div class="supp-desc">If you eat enough protein, BCAA useless. Whey already has all BCAAs. Marketing hype.</div>
+                        </li>
+                        <li class="supp-item">
+                            <div class="supp-name">Fat Burners</div>
+                            <div class="supp-dose">Don't work</div>
+                            <div class="supp-desc">Calorie deficit là key. Fat burners có caffeine nhưng không magic. Save money, eat less.</div>
+                        </li>
+                        <li class="supp-item">
+                            <div class="supp-name">Testosterone Boosters</div>
+                            <div class="supp-dose">Scam</div>
+                            <div class="supp-desc">Natural test boosters không work. Sleep, diet, exercise là cách duy nhất optimize testosterone.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-callout warning">
+                <div class="info-callout-icon">⚠️</div>
+                <div class="info-callout-text">
+                    <strong>Reality check:</strong> Supplements = 5% of results. Food, training, sleep = 95%. Don't spend $100/month on supplements if you're not eating right.
+                </div>
+            </div>
+        </div>
+        
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <div class="cta-content">
+                <h2>Áp dụng vào thực tế</h2>
+                <p>Chọn 1-2 quick meals cho mỗi meal type, memorize eating out orders, và chỉ buy essential supplements. Keep it simple.</p>
+                <div class="cta-buttons">
+                    <a href="men-nutrition-recipes.html" class="btn-cta">Xem Recipes</a>
+                    <a href="men-nutrition-logger.html" class="btn-cta secondary">Bắt đầu Food Logger</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="men-30-40.html">Nam 30-40</a>
+            <a href="men-nutrition-overview.html">Nutrition Overview</a>
+            <a href="men-nutrition-calculator.html">Calculator</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <script>
+        function switchMeal(meal, btn) {
+            document.querySelectorAll('.meal-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.meal-content').forEach(c => c.classList.remove('active'));
+            
+            btn.classList.add('active');
+            document.getElementById(`meal-${meal}`).classList.add('active');
+        }
+    </script>
+</body>
+</html>
