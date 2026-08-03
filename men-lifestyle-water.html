@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uống Nước - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-green: #50C878;
+            --primary-teal: #1ABC9C;
+            --primary-emerald: #2ECC71;
+            --primary-blue: #4A90E2;
+            --primary-purple: #9B59B6;
+            --primary-orange: #F39C12;
+            --primary-red: #E74C3C;
+            --primary-cyan: #00BCD4;
+            
+            --text-dark: #1A202C;
+            --text-medium: #4A5568;
+            --text-light: #718096;
+            --bg-main: #F7FAFC;
+            --bg-card: #FFFFFF;
+            --border-soft: #E2E8F0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 14px 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover { color: var(--primary-green); }
+        
+        /* Hero */
+        .hero-wrapper {
+            width: 100%;
+            background: linear-gradient(135deg, #E8F8EE 0%, #F0FFF4 40%, #E8F8F5 100%);
+            border-radius: 0 0 24px 24px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .hero-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(80,200,120,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(26,188,156,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 40px 36px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 100%);
+            color: white;
+            padding: 5px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.72rem;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+        
+        .hero h1 {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--text-medium);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .hero p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px 40px;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+        
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+        }
+        
+        .section { margin-bottom: 36px; }
+        
+        /* Why Hydration Matters - 3 cards */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        
+        .impact-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 22px 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-top: 3px solid var(--impact-color);
+            transition: all 0.2s;
+        }
+        
+        .impact-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+        
+        .impact-card:nth-child(1) { --impact-color: var(--primary-cyan); }
+        .impact-card:nth-child(2) { --impact-color: var(--primary-green); }
+        .impact-card:nth-child(3) { --impact-color: var(--primary-blue); }
+        
+        .impact-stat {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--impact-color);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .impact-card h3 {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .impact-card p {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        /* Daily Target */
+        .target-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            text-align: center;
+        }
+        
+        .target-visual {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 24px 0;
+            flex-wrap: wrap;
+        }
+        
+        .target-bottle {
+            width: 60px;
+            height: 100px;
+            background: linear-gradient(180deg, #E8F8F5 0%, #B2DFDB 100%);
+            border-radius: 8px 8px 12px 12px;
+            position: relative;
+            border: 2px solid var(--primary-teal);
+        }
+        
+        .target-bottle::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 8px;
+            background: var(--primary-teal);
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .target-bottle.filled {
+            background: linear-gradient(180deg, var(--primary-teal) 0%, #00897B 100%);
+        }
+        
+        .target-bottle.filled::after {
+            content: '500ml';
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .target-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-teal);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .target-label {
+            font-size: 1rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .target-sublabel {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+        }
+        
+        .target-factors {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        .factor-item {
+            padding: 14px;
+            background: var(--bg-main);
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .factor-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-teal);
+            margin-bottom: 4px;
+        }
+        
+        .factor-label {
+            font-size: 0.75rem;
+            color: var(--text-medium);
+        }
+        
+        /* Timing Guide */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary-teal) 0%, var(--primary-green) 100%);
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-left: 4px solid var(--timing-color);
+        }
+        
+        .timeline-item:nth-child(1) { --timing-color: var(--primary-orange); }
+        .timeline-item:nth-child(2) { --timing-color: var(--primary-blue); }
+        .timeline-item:nth-child(3) { --timing-color: var(--primary-green); }
+        .timeline-item:nth-child(4) { --timing-color: var(--primary-purple); }
+        .timeline-item:nth-child(5) { --timing-color: var(--primary-teal); }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 24px;
+            width: 20px;
+            height: 20px;
+            background: var(--timing-color);
+            border-radius: 50%;
+            border: 4px solid var(--bg-main);
+        }
+        
+        .timeline-time {
+            display: inline-block;
+            padding: 3px 12px;
+            background: var(--bg-main);
+            color: var(--timing-color);
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .timeline-item h3 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        
+        .timeline-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--timing-color);
+            margin-bottom: 8px;
+        }
+        
+        .timeline-item > p {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-tips {
+            list-style: none;
+        }
+        
+        .timeline-tips li {
+            padding: 4px 0 4px 16px;
+            position: relative;
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.4;
+        }
+        
+        .timeline-tips li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--timing-color);
+            font-weight: 700;
+        }
+        
+        /* Infused Water Recipes */
+        .recipes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        
+        .recipe-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-top: 3px solid var(--recipe-color);
+        }
+        
+        .recipe-card:nth-child(1) { --recipe-color: var(--primary-orange); }
+        .recipe-card:nth-child(2) { --recipe-color: var(--primary-green); }
+        .recipe-card:nth-child(3) { --recipe-color: var(--primary-teal); }
+        
+        .recipe-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .recipe-benefits {
+            font-size: 0.82rem;
+            color: var(--recipe-color);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .recipe-ingredients {
+            list-style: none;
+            margin-bottom: 12px;
+        }
+        
+        .recipe-ingredients li {
+            padding: 4px 0 4px 16px;
+            position: relative;
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.4;
+        }
+        
+        .recipe-ingredients li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--recipe-color);
+            font-weight: 700;
+        }
+        
+        .recipe-steps {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            padding: 10px;
+            background: var(--bg-main);
+            border-radius: 8px;
+        }
+        
+        .recipe-steps strong {
+            color: var(--text-dark);
+        }
+        
+        /* Water Tracker */
+        .tracker-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .tracker-progress {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .progress-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary-teal) var(--progress, 0%), var(--bg-main) 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            position: relative;
+        }
+        
+        .progress-circle::before {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: white;
+            border-radius: 50%;
+        }
+        
+        .progress-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        
+        .progress-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-teal);
+            line-height: 1;
+        }
+        
+        .progress-label {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            margin-top: 4px;
+        }
+        
+        .progress-target {
+            font-size: 0.88rem;
+            color: var(--text-light);
+        }
+        
+        .tracker-controls {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .add-btn {
+            padding: 14px;
+            background: var(--bg-main);
+            border: 2px solid var(--border-soft);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .add-btn:hover {
+            border-color: var(--primary-teal);
+            background: #E8F8F5;
+        }
+        
+        .add-btn-amount {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-teal);
+            margin-bottom: 4px;
+        }
+        
+        .add-btn-label {
+            font-size: 0.72rem;
+            color: var(--text-medium);
+        }
+        
+        .tracker-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .tracker-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            border: none;
+        }
+        
+        .tracker-btn.primary {
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 100%);
+            color: white;
+        }
+        
+        .tracker-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(80,200,120,0.3);
+        }
+        
+        .tracker-btn.secondary {
+            background: var(--bg-main);
+            color: var(--text-medium);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .tracker-btn.secondary:hover {
+            background: var(--border-soft);
+        }
+        
+        .tracker-history {
+            border-top: 1px solid var(--border-soft);
+            padding-top: 20px;
+        }
+        
+        .tracker-history h4 {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+        
+        .history-list {
+            display: grid;
+            gap: 8px;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        
+        .history-item {
+            display: grid;
+            grid-template-columns: 80px 1fr auto 32px;
+            gap: 12px;
+            align-items: center;
+            padding: 12px;
+            background: var(--bg-main);
+            border-radius: 10px;
+        }
+        
+        .history-time {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .history-amount {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--primary-teal);
+        }
+        
+        .history-note {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+        
+        .history-delete {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: #FFE8E8;
+            color: var(--primary-red);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .tracker-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-soft);
+        }
+        
+        .tracker-stat {
+            text-align: center;
+            padding: 12px;
+            background: var(--bg-main);
+            border-radius: 10px;
+        }
+        
+        .tracker-stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-teal);
+            line-height: 1;
+        }
+        
+        .tracker-stat-label {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+        
+        /* Info Callout */
+        .info-callout {
+            padding: 16px 18px;
+            border-radius: 12px;
+            margin-top: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        
+        .info-callout.tip { background: #E8F8EE; border-left: 4px solid var(--primary-green); }
+        .info-callout.warning { background: #FFF3E0; border-left: 4px solid var(--primary-orange); }
+        .info-callout.important { background: #FFE8E8; border-left: 4px solid var(--primary-red); }
+        
+        .info-callout-icon { font-size: 1.3rem; flex-shrink: 0; }
+        .info-callout-text { font-size: 0.88rem; color: var(--text-dark); line-height: 1.5; }
+        .info-callout-text strong { font-weight: 600; }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            border-radius: 18px;
+            padding: 48px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.4;
+        }
+        
+        .cta-content { position: relative; z-index: 1; }
+        
+        .cta-section h2 { font-size: 1.8rem; margin-bottom: 10px; }
+        
+        .cta-section p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            margin-bottom: 22px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            padding: 12px 28px;
+            background: white;
+            color: var(--primary-teal);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border: 2px solid white;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        .btn-cta.secondary {
+            background: transparent;
+            color: white;
+        }
+        
+        .btn-cta.secondary:hover { background: rgba(255,255,255,0.15); }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-soft);
+            padding: 28px 40px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        
+        .footer-links a:hover { color: var(--primary-green); }
+        
+        .footer-bottom {
+            color: var(--text-light);
+            font-size: 0.78rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .impact-grid { grid-template-columns: 1fr; }
+            .target-factors { grid-template-columns: repeat(2, 1fr); }
+            .recipes-grid { grid-template-columns: 1fr; }
+            .tracker-controls { grid-template-columns: repeat(2, 1fr); }
+            .tracker-stats { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 12px 20px; }
+            .hero { padding: 36px 20px 28px; }
+            .hero h1 { font-size: 1.8rem; }
+            .main-container { padding: 0 20px 30px; }
+            .target-factors { grid-template-columns: 1fr; }
+            .history-item { grid-template-columns: 1fr; gap: 6px; }
+            .tracker-actions { flex-direction: column; }
+            .cta-section { padding: 36px 24px; }
+            .cta-section h2 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="men-lifestyle-overview.html" class="back-link">← Quay lại Lifestyle</a>
+    </header>
+    
+    <section class="hero-wrapper">
+        <div class="hero">
+            <span class="hero-badge">HYDRATION</span>
+            <h1>Uống <span>Nước</span></h1>
+            <div class="hero-subtitle">3-4L/ngày · Timing guide · Infused water</div>
+            <p>Hydration ảnh hưởng đến energy, focus, performance, và recovery. Đa số người uống không đủ nước. Guide này giúp bạn build hydration habit.</p>
+        </div>
+    </section>
+    
+    <div class="main-container">
+        
+        <!-- Why Hydration Matters -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Tại Sao Hydration Quan Trọng?</h2>
+                <p class="section-subtitle">3 areas bị ảnh hưởng nhiều nhất</p>
+            </div>
+            
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-stat">-25%</div>
+                    <h3>Performance</h3>
+                    <p>Dehydration 2% giảm physical performance 25%. Strength, endurance, power đều giảm. Pre-workout hydration là critical.</p>
+                </div>
+                
+                <div class="impact-card">
+                    <div class="impact-stat">-30%</div>
+                    <h3>Recovery</h3>
+                    <p>Nước vận chuyển nutrients đến muscles, remove waste products. Dehydration = slower recovery, more soreness.</p>
+                </div>
+                
+                <div class="impact-card">
+                    <div class="impact-stat">-20%</div>
+                    <h3>Cognition</h3>
+                    <p>Dehydration 1-2% giảm focus, memory, mood. Brain 75% water. Foggy brain? Drink water first.</p>
+                </div>
+            </div>
+            
+            <div class="info-callout important">
+                <div class="info-callout-icon"></div>
+                <div class="info-callout-text">
+                    <strong>Thirst lag:</strong> Khi bạn cảm thấy khát = đã dehydration 1-2%. Đừng đợi khát mới uống. Drink proactively throughout day.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Daily Target -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Daily Target</h2>
+                <p class="section-subtitle">3-4L cho nam 30-40 tuổi</p>
+            </div>
+            
+            <div class="target-card">
+                <div class="target-amount">3-4L</div>
+                <div class="target-label">Mục tiêu hàng ngày</div>
+                <div class="target-sublabel">= 6-8 chai 500ml</div>
+                
+                <div class="target-visual">
+                    <div class="target-bottle filled"></div>
+                    <div class="target-bottle filled"></div>
+                    <div class="target-bottle filled"></div>
+                    <div class="target-bottle filled"></div>
+                    <div class="target-bottle filled"></div>
+                    <div class="target-bottle filled"></div>
+                    <div class="target-bottle"></div>
+                    <div class="target-bottle"></div>
+                </div>
+                
+                <div class="target-factors">
+                    <div class="factor-item">
+                        <div class="factor-value">+500ml</div>
+                        <div class="factor-label">Per hour exercise</div>
+                    </div>
+                    <div class="factor-item">
+                        <div class="factor-value">+500ml</div>
+                        <div class="factor-label">Hot weather</div>
+                    </div>
+                    <div class="factor-item">
+                        <div class="factor-value">+300ml</div>
+                        <div class="factor-label">Per coffee/alcohol</div>
+                    </div>
+                    <div class="factor-item">
+                        <div class="factor-value">+20%</div>
+                        <div class="factor-label">High protein diet</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-callout tip">
+                <div class="info-callout-icon">💡</div>
+                <div class="info-callout-text">
+                    <strong>Urine check:</strong> Pale yellow = hydrated. Dark yellow = drink more. Clear = overhydrated. Aim for light straw color.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Timing Guide -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Timing Guide</h2>
+                <p class="section-subtitle">5 thời điểm quan trọng</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-time">Morning</div>
+                    <h3>Sau Khi Thức Dậy</h3>
+                    <div class="timeline-amount">500ml</div>
+                    <p>8 tiếng ngủ = 8 tiếng không uống nước. Rehydrate ngay khi thức dậy để kickstart metabolism, flush toxins.</p>
+                    <ul class="timeline-tips">
+                        <li>Uống trước khi ăn sáng 30 phút</li>
+                        <li>Thêm lemon cho vitamin C</li>
+                        <li>Room temperature tốt hơn cold water</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-time">Pre-workout</div>
+                    <h3>Trước Khi Tập</h3>
+                    <div class="timeline-amount">500ml</div>
+                    <p>Drink 2-3 hours before exercise. Top up 200ml 15-20 phút trước khi bắt đầu. Prevents early fatigue.</p>
+                    <ul class="timeline-tips">
+                        <li>Không uống quá nhiều ngay trước tập</li>
+                        <li>Avoid sugary drinks</li>
+                        <li>Electrolytes nếu tập >60 phút</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-time">During workout</div>
+                    <h3>Trong Khi Tập</h3>
+                    <div class="timeline-amount">200ml/15min</div>
+                    <p>Sip nhỏ thường xuyên thay vì uống nhiều 1 lần. Maintain performance, prevent cramps.</p>
+                    <ul class="timeline-tips">
+                        <li>200ml mỗi 15-20 phút</li>
+                        <li>Electrolyte water nếu sweaty</li>
+                        <li>Không đợi khát mới uống</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-time">Post-workout</div>
+                    <h3>Sau Khi Tập</h3>
+                    <div class="timeline-amount">500-750ml</div>
+                    <p>Replace fluid loss. Weigh before/after: drink 1.5L per kg lost. Critical for recovery.</p>
+                    <ul class="timeline-tips">
+                        <li>Drink within 30 minutes post-workout</li>
+                        <li>Add electrolytes nếu intense session</li>
+                        <li>Combine với protein shake</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-time">Throughout day</div>
+                    <h3>Xuyên Suốt Ngày</h3>
+                    <div class="timeline-amount">200-300ml/giờ</div>
+                    <p>Keep water bottle visible. Sip regularly. Set reminders nếu cần. Build habit, không phải chore.</p>
+                    <ul class="timeline-tips">
+                        <li>Keep bottle on desk</li>
+                        <li>Drink before each meal</li>
+                        <li>Set hourly reminders</li>
+                        <li>Flavor với lemon/cucumber nếu chán</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Infused Water Recipes -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Infused Water Recipes</h2>
+                <p class="section-subtitle">3 recipes để không chán nước lọc</p>
+            </div>
+            
+            <div class="recipes-grid">
+                <div class="recipe-card">
+                    <h3>Lemon Ginger</h3>
+                    <div class="recipe-benefits">Vitamin C · Digestion · Immunity</div>
+                    <ul class="recipe-ingredients">
+                        <li>1/2 lemon sliced</li>
+                        <li>3-4 slices fresh ginger</li>
+                        <li>1L water</li>
+                        <li>Optional: mint leaves</li>
+                    </ul>
+                    <div class="recipe-steps">
+                        <strong>Prep:</strong> Combine ingredients trong pitcher. Refrigerate 2-4 hours. Drink throughout day. Refresh daily.
+                    </div>
+                </div>
+                
+                <div class="recipe-card">
+                    <h3>Cucumber Mint</h3>
+                    <div class="recipe-benefits">Hydration · Refreshing · Cooling</div>
+                    <ul class="recipe-ingredients">
+                        <li>1/2 cucumber sliced</li>
+                        <li>10 fresh mint leaves</li>
+                        <li>1L water</li>
+                        <li>Optional: lime slices</li>
+                    </ul>
+                    <div class="recipe-steps">
+                        <strong>Prep:</strong> Muddle mint lightly. Add cucumber. Fill with water. Refrigerate 1-2 hours. Perfect for hot days.
+                    </div>
+                </div>
+                
+                <div class="recipe-card">
+                    <h3>Berry Citrus</h3>
+                    <div class="recipe-benefits">Antioxidants · Flavor · Vitamins</div>
+                    <ul class="recipe-ingredients">
+                        <li>1/2 cup mixed berries</li>
+                        <li>1/2 orange sliced</li>
+                        <li>1L water</li>
+                        <li>Optional: basil leaves</li>
+                    </ul>
+                    <div class="recipe-steps">
+                        <strong>Prep:</strong> Muddle berries lightly. Add orange slices. Fill with water. Refrigerate 2-4 hours. Sweet & refreshing.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-callout tip">
+                <div class="info-callout-icon">💡</div>
+                <div class="info-callout-text">
+                    <strong>Pro tip:</strong> Prep infused water tối trước để sáng có sẵn. Change ingredients daily để không chán. Glass pitcher tốt hơn plastic.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Water Tracker -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Water Tracker</h2>
+                <p class="section-subtitle">Track daily intake, build streak</p>
+            </div>
+            
+            <div class="tracker-card">
+                <div class="tracker-progress">
+                    <div class="progress-circle" id="progressCircle" style="--progress: 0%">
+                        <div class="progress-content">
+                            <div class="progress-value" id="progressValue">0ml</div>
+                            <div class="progress-label">Hôm nay</div>
+                        </div>
+                    </div>
+                    <div class="progress-target">Mục tiêu: <strong id="targetDisplay">3000ml</strong></div>
+                </div>
+                
+                <div class="tracker-controls">
+                    <button class="add-btn" onclick="addWater(200)">
+                        <div class="add-btn-amount">+200ml</div>
+                        <div class="add-btn-label">Ly nhỏ</div>
+                    </button>
+                    <button class="add-btn" onclick="addWater(330)">
+                        <div class="add-btn-amount">+330ml</div>
+                        <div class="add-btn-label">Lon nước</div>
+                    </button>
+                    <button class="add-btn" onclick="addWater(500)">
+                        <div class="add-btn-amount">+500ml</div>
+                        <div class="add-btn-label">Chai nước</div>
+                    </button>
+                    <button class="add-btn" onclick="addWater(750)">
+                        <div class="add-btn-amount">+750ml</div>
+                        <div class="add-btn-label">Bình lớn</div>
+                    </button>
+                </div>
+                
+                <div class="tracker-actions">
+                    <button class="tracker-btn primary" onclick="resetDaily()">Reset Hôm Nay</button>
+                    <button class="tracker-btn secondary" onclick="updateTarget()">Đổi Mục Tiêu</button>
+                </div>
+                
+                <div class="tracker-history">
+                    <h4>Lịch sử hôm nay</h4>
+                    <div class="history-list" id="historyList"></div>
+                    
+                    <div class="tracker-stats">
+                        <div class="tracker-stat">
+                            <div class="tracker-stat-value" id="streakDays">0</div>
+                            <div class="tracker-stat-label">Day Streak</div>
+                        </div>
+                        <div class="tracker-stat">
+                            <div class="tracker-stat-value" id="avgIntake">0ml</div>
+                            <div class="tracker-stat-label">7-Day Avg</div>
+                        </div>
+                        <div class="tracker-stat">
+                            <div class="tracker-stat-value" id="goalDays">0</div>
+                            <div class="tracker-stat-label">Goal Met</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <div class="cta-content">
+                <h2>Bắt đầu uống đủ nước</h2>
+                <p>Start với morning 500ml + keep bottle on desk. 2 small changes, big impact. Track daily để build habit.</p>
+                <div class="cta-buttons">
+                    <a href="men-lifestyle-habits.html" class="btn-cta">Xem Daily Habits</a>
+                    <a href="men-lifestyle-sleep.html" class="btn-cta secondary">Cải thiện Giấc Ngủ</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="men-30-40.html">Nam 30-40</a>
+            <a href="men-lifestyle-overview.html">Lifestyle Overview</a>
+            <a href="men-lifestyle-sleep.html">Sleep</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // ==================== WATER TRACKER ====================
+        const STORAGE_KEY = 'fit30_water_tracker';
+        const TARGET_KEY = 'fit30_water_target';
+        
+        let dailyTarget = 3000;
+        let todayIntake = 0;
+        let todayEntries = [];
+        
+        function init() {
+            loadTarget();
+            loadTodayData();
+            renderTracker();
+            renderHistory();
+            updateStats();
+        }
+        
+        function loadTarget() {
+            const saved = localStorage.getItem(TARGET_KEY);
+            if (saved) dailyTarget = parseInt(saved);
+            document.getElementById('targetDisplay').textContent = `${dailyTarget}ml`;
+        }
+        
+        function loadTodayData() {
+            const today = new Date().toISOString().split('T')[0];
+            const saved = localStorage.getItem(`${STORAGE_KEY}_${today}`);
+            
+            if (saved) {
+                const data = JSON.parse(saved);
+                todayIntake = data.total || 0;
+                todayEntries = data.entries || [];
+            }
+        }
+        
+        function saveTodayData() {
+            const today = new Date().toISOString().split('T')[0];
+            const data = {
+                total: todayIntake,
+                entries: todayEntries,
+                date: today
+            };
+            localStorage.setItem(`${STORAGE_KEY}_${today}`, JSON.stringify(data));
+            
+            // Update streak data
+            updateStreakData(today, todayIntake);
+        }
+        
+        function addWater(amount) {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+            
+            todayEntries.push({
+                time: timeStr,
+                amount: amount,
+                timestamp: now.getTime()
+            });
+            
+            todayIntake += amount;
+            saveTodayData();
+            renderTracker();
+            renderHistory();
+            updateStats();
+        }
+        
+        function deleteEntry(index) {
+            const entry = todayEntries[index];
+            todayIntake -= entry.amount;
+            if (todayIntake < 0) todayIntake = 0;
+            
+            todayEntries.splice(index, 1);
+            saveTodayData();
+            renderTracker();
+            renderHistory();
+            updateStats();
+        }
+        
+        function resetDaily() {
+            if (!confirm('Reset toàn bộ intake hôm nay?')) return;
+            
+            todayIntake = 0;
+            todayEntries = [];
+            saveTodayData();
+            renderTracker();
+            renderHistory();
+            updateStats();
+        }
+        
+        function updateTarget() {
+            const newTarget = prompt('Nhập mục tiêu mới (ml):', dailyTarget);
+            if (newTarget && !isNaN(newTarget) && newTarget > 0) {
+                dailyTarget = parseInt(newTarget);
+                localStorage.setItem(TARGET_KEY, dailyTarget);
+                document.getElementById('targetDisplay').textContent = `${dailyTarget}ml`;
+                renderTracker();
+            }
+        }
+        
+        function renderTracker() {
+            const progress = Math.min((todayIntake / dailyTarget) * 100, 100);
+            document.getElementById('progressCircle').style.setProperty('--progress', `${progress}%`);
+            document.getElementById('progressValue').textContent = `${todayIntake}ml`;
+        }
+        
+        function renderHistory() {
+            const list = document.getElementById('historyList');
+            
+            if (todayEntries.length === 0) {
+                list.innerHTML = '<p style="color: var(--text-light); text-align: center; padding: 20px; font-size: 0.88rem;">Chưa có entry nào hôm nay. Bắt đầu uống nước!</p>';
+                return;
+            }
+            
+            list.innerHTML = todayEntries.map((entry, idx) => `
+                <div class="history-item">
+                    <div class="history-time">${entry.time}</div>
+                    <div class="history-amount">+${entry.amount}ml</div>
+                    <div class="history-note">${entry.note || ''}</div>
+                    <button class="history-delete" onclick="deleteEntry(${idx})">✕</button>
+                </div>
+            `).join('');
+        }
+        
+        function updateStreakData(today, intake) {
+            const streakData = JSON.parse(localStorage.getItem('fit30_water_streak') || '{}');
+            streakData[today] = intake;
+            
+            // Keep last 30 days
+            const dates = Object.keys(streakData).sort();
+            if (dates.length > 30) {
+                dates.slice(0, dates.length - 30).forEach(date => {
+                    delete streakData[date];
+                });
+            }
+            
+            localStorage.setItem('fit30_water_streak', JSON.stringify(streakData));
+        }
+        
+        function updateStats() {
+            const streakData = JSON.parse(localStorage.getItem('fit30_water_streak') || '{}');
+            const dates = Object.keys(streakData).sort();
+            
+            // Calculate streak
+            let streak = 0;
+            const today = new Date().toISOString().split('T')[0];
+            
+            for (let i = 0; i < dates.length; i++) {
+                const date = dates[dates.length - 1 - i];
+                if (streakData[date] >= dailyTarget) {
+                    streak++;
+                } else if (date !== today) {
+                    break;
+                }
+            }
+            
+            // 7-day average
+            const last7Days = dates.slice(-7);
+            const avgIntake = last7Days.length > 0 
+                ? Math.round(last7Days.reduce((sum, date) => sum + streakData[date], 0) / last7Days.length)
+                : 0;
+            
+            // Goal met days
+            const goalDays = dates.filter(date => streakData[date] >= dailyTarget).length;
+            
+            document.getElementById('streakDays').textContent = streak;
+            document.getElementById('avgIntake').textContent = `${avgIntake}ml`;
+            document.getElementById('goalDays').textContent = goalDays;
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
