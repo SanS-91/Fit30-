@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinh Dưỡng - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-amber: #F39C12;
+            --primary-orange: #E67E22;
+            --primary-green: #50C878;
+            --primary-teal: #1ABC9C;
+            --primary-red: #E74C3C;
+            --primary-blue: #4A90E2;
+            
+            --text-dark: #1A202C;
+            --text-medium: #4A5568;
+            --text-light: #718096;
+            --bg-main: #F7FAFC;
+            --bg-card: #FFFFFF;
+            --border-soft: #E2E8F0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 14px 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 50%, #50C878 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover { color: var(--primary-amber); }
+        
+        /* Hero with gradient background */
+        .hero {
+            position: relative;
+            padding: 56px 40px 40px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #FFF8E7 0%, #FFF3E0 40%, #E8F8EE 100%);
+            border-radius: 0 0 24px 24px;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(243,156,18,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(80,200,120,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%);
+            color: white;
+            padding: 5px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.72rem;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+        
+        .hero h1 {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 50%, #50C878 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--text-medium);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .hero p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            text-align: center;
+            min-width: 110px;
+        }
+        
+        .stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-amber);
+            line-height: 1;
+        }
+        
+        .stat-item:nth-child(2) .stat-value { color: var(--primary-green); }
+        .stat-item:nth-child(3) .stat-value { color: var(--primary-orange); }
+        
+        .stat-label {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px 40px;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+        
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+        }
+        
+        /* Philosophy Section */
+        .philosophy-section {
+            margin-bottom: 36px;
+        }
+        
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        
+        .philosophy-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 20px 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-top: 3px solid var(--philosophy-color);
+            transition: all 0.2s;
+        }
+        
+        .philosophy-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+        
+        .philosophy-card:nth-child(1) { --philosophy-color: var(--primary-amber); }
+        .philosophy-card:nth-child(2) { --philosophy-color: var(--primary-green); }
+        .philosophy-card:nth-child(3) { --philosophy-color: var(--primary-teal); }
+        
+        .philosophy-card h3 {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .philosophy-compare {
+            font-size: 0.82rem;
+            margin-bottom: 10px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        
+        .philosophy-compare .new {
+            color: var(--philosophy-color);
+            font-weight: 700;
+        }
+        
+        .philosophy-compare .old {
+            color: var(--text-light);
+            text-decoration: line-through;
+        }
+        
+        .philosophy-card p {
+            color: var(--text-medium);
+            font-size: 0.82rem;
+            line-height: 1.5;
+        }
+        
+        /* Navigation Cards */
+        .nav-section {
+            margin-bottom: 36px;
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        
+        .nav-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-left: 3px solid var(--nav-color);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            border-color: var(--nav-color);
+        }
+        
+        .nav-card:nth-child(1) { --nav-color: var(--primary-amber); }
+        .nav-card:nth-child(2) { --nav-color: var(--primary-green); }
+        .nav-card:nth-child(3) { --nav-color: var(--primary-orange); }
+        .nav-card:nth-child(4) { --nav-color: var(--primary-teal); }
+        .nav-card:nth-child(5) { --nav-color: var(--primary-red); }
+        .nav-card:nth-child(6) { --nav-color: var(--primary-blue); }
+        
+        .nav-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .nav-card-number {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--nav-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-card-arrow {
+            color: var(--nav-color);
+            font-size: 1.1rem;
+            transition: transform 0.2s;
+        }
+        
+        .nav-card:hover .nav-card-arrow {
+            transform: translateX(3px);
+        }
+        
+        .nav-card h3 {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .nav-card p {
+            color: var(--text-medium);
+            font-size: 0.82rem;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            flex: 1;
+        }
+        
+        .nav-card-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 12px;
+        }
+        
+        .feature-tag {
+            font-size: 0.68rem;
+            padding: 3px 9px;
+            background: var(--bg-main);
+            color: var(--nav-color);
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
+        .nav-card-link {
+            font-size: 0.82rem;
+            color: var(--nav-color);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 50%, #50C878 100%);
+            border-radius: 18px;
+            padding: 48px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.4;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .cta-section p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            margin-bottom: 22px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            padding: 12px 28px;
+            background: white;
+            color: var(--primary-orange);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border: 2px solid white;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        .btn-cta.secondary {
+            background: transparent;
+            color: white;
+        }
+        
+        .btn-cta.secondary:hover {
+            background: rgba(255,255,255,0.15);
+        }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-soft);
+            padding: 28px 40px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 50%, #50C878 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        
+        .footer-links a:hover { color: var(--primary-amber); }
+        
+        .footer-bottom {
+            color: var(--text-light);
+            font-size: 0.78rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .philosophy-grid { grid-template-columns: 1fr; }
+            .nav-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 12px 20px; }
+            .hero { padding: 40px 20px 32px; border-radius: 0 0 18px 18px; }
+            .hero h1 { font-size: 1.8rem; }
+            .main-container { padding: 0 20px 30px; }
+            .nav-grid { grid-template-columns: 1fr; }
+            .cta-section { padding: 36px 24px; }
+            .cta-section h2 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="men-30-40.html" class="back-link">← Quay lại Hub</a>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">NUTRITION MODULE</span>
+            <h1>Dinh Dưỡng <span>Thông Minh</span></h1>
+            <div class="hero-subtitle">Evidence-based · Practical · Vietnamese-friendly</div>
+            <p>Hệ thống dinh dưỡng với 100+ thực phẩm, meal timing, eating out guide cho người Việt. Không cần đếm calorie obsessively - chỉ cần smart choices.</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-value">100+</div>
+                    <div class="stat-label">Thực phẩm</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">15</div>
+                    <div class="stat-label">Eating scenarios</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">20+</div>
+                    <div class="stat-label">Quick meals</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="main-container">
+        
+        <!-- Philosophy Section -->
+        <div class="philosophy-section">
+            <div class="section-header">
+                <h2 class="section-title">Triết lý dinh dưỡng</h2>
+                <p class="section-subtitle">3 nguyên tắc cốt lõi cho ăn uống bền vững</p>
+            </div>
+            
+            <div class="philosophy-grid">
+                <div class="philosophy-card">
+                    <h3>Food Library-first</h3>
+                    <div class="philosophy-compare">
+                        <span class="new">100+ foods với metadata</span> > <span class="old">Thực đơn cứng nhắc</span>
+                    </div>
+                    <p>Hiểu thực phẩm bạn ăn: calories, macros, micronutrients, best-for-goals. Tự build meals thay vì follow menu có sẵn.</p>
+                </div>
+                
+                <div class="philosophy-card">
+                    <h3>Context-aware</h3>
+                    <div class="philosophy-compare">
+                        <span class="new">Meal timing, eating out, quick meals</span> > <span class="old">Chỉ calorie counting</span>
+                    </div>
+                    <p>Dinh dưỡng không chỉ là "ăn gì" mà còn là "khi nào, ở đâu, trong tình huống nào". Guide cho real-life scenarios.</p>
+                </div>
+                
+                <div class="philosophy-card">
+                    <h3>Sustainable</h3>
+                    <div class="philosophy-compare">
+                        <span class="new">Ăn uống bền vững</span> > <span class="old">Diet ngắn hạn</span>
+                    </div>
+                    <p>Không có "perfect diet" - chỉ có diet bạn có thể maintain. Flexible, enjoyable, phù hợp lifestyle Việt Nam.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation Cards -->
+        <div class="nav-section">
+            <div class="section-header">
+                <h2 class="section-title">Khám phá module Dinh Dưỡng</h2>
+                <p class="section-subtitle">6 công cụ phục vụ từng mục đích riêng</p>
+            </div>
+            
+            <div class="nav-grid">
+                <a href="men-nutrition-calculator.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <span class="nav-card-number">01 · Calculator</span>
+                        <span class="nav-card-arrow">→</span>
+                    </div>
+                    <h3>TDEE & Macro Calculator</h3>
+                    <p>Tính calories mục tiêu và phân bổ Protein/Carb/Fat dựa trên cân nặng, chiều cao, mức vận động và goal.</p>
+                    <div class="nav-card-features">
+                        <span class="feature-tag">TDEE calculator</span>
+                        <span class="feature-tag">Macro split</span>
+                        <span class="feature-tag">Goal-based</span>
+                    </div>
+                    <div class="nav-card-link">Tính ngay →</div>
+                </a>
+                
+                <a href="men-nutrition-food-library.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <span class="nav-card-number">02 · Database</span>
+                        <span class="nav-card-arrow">→</span>
+                    </div>
+                    <h3>Food Library</h3>
+                    <p>100+ thực phẩm phân loại: Protein, Carbs, Fats, Vegetables, Fruits. Mỗi food có calories, macros, best for goals.</p>
+                    <div class="nav-card-features">
+                        <span class="feature-tag">100+ foods</span>
+                        <span class="feature-tag">5 categories</span>
+                        <span class="feature-tag">Goal tags</span>
+                    </div>
+                    <div class="nav-card-link">Khám phá thực phẩm →</div>
+                </a>
+                
+                <a href="men-nutrition-guide.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <span class="nav-card-number">03 · Guide</span>
+                        <span class="nav-card-arrow">→</span>
+                    </div>
+                    <h3>Nutrition Guide</h3>
+                    <p>Meal plans 7 ngày cho các goals + meal timing guide (pre/post workout, rest day, morning vs evening).</p>
+                    <div class="nav-card-features">
+                        <span class="feature-tag">7-day plans</span>
+                        <span class="feature-tag">Meal timing</span>
+                        <span class="feature-tag">3 goals</span>
+                    </div>
+                    <div class="nav-card-link">Xem guide →</div>
+                </a>
+                
+                <a href="men-nutrition-meal.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <span class="nav-card-number">04 · Real Life</span>
+                        <span class="nav-card-arrow">→</span>
+                    </div>
+                    <h3>Eating Out & More</h3>
+                    <p>Eating out guide (Phở, Bún, KFC, Lẩu...), quick meals tại nhà (15 phút), và supplement recommendations.</p>
+                    <div class="nav-card-features">
+                        <span class="feature-tag">Eating out</span>
+                        <span class="feature-tag">Quick meals</span>
+                        <span class="feature-tag">Supplements</span>
+                    </div>
+                    <div class="nav-card-link">Xem chi tiết →</div>
+                </a>
+                
+                <a href="men-nutrition-recipes.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <span class="nav-card-number">05 · Recipes</span>
+                        <span class="nav-card-arrow">→</span>
+                    </div>
+                    <h3>Recipes</h3>
+                    <p>30+ công thức nấu ăn đơn giản, nhanh gọn, phù hợp người bận rộn. Filter theo thời gian, calories, meal type.</p>
+                    <div class="nav-card-features">
+                        <span class="feature-tag">30+ recipes</span>
+                        <span class="feature-tag">Under 30 min</span>
+                        <span class="feature-tag">High protein</span>
+                    </div>
+                    <div class="nav-card-link">Xem công thức →</div>
+                </a>
+                
+                <a href="men-nutrition-logger.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <span class="nav-card-number">06 · Tracker</span>
+                        <span class="nav-card-arrow">→</span>
+                    </div>
+                    <h3>Food Logger</h3>
+                    <p>Ghi lại bữa ăn hàng ngày, tính tổng calories và macros. So sánh với mục tiêu và xem weekly report.</p>
+                    <div class="nav-card-features">
+                        <span class="feature-tag">Daily log</span>
+                        <span class="feature-tag">Macro tracking</span>
+                        <span class="feature-tag">Weekly report</span>
+                    </div>
+                    <div class="nav-card-link">Bắt đầu ghi chép →</div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <div class="cta-content">
+                <h2>Ăn uống thông minh hơn</h2>
+                <p>Bắt đầu với TDEE Calculator để biết chính xác bạn cần ăn bao nhiêu, hoặc khám phá Food Library để hiểu thực phẩm bạn ăn mỗi ngày.</p>
+                <div class="cta-buttons">
+                    <a href="men-nutrition-calculator.html" class="btn-cta">Tính Macro</a>
+                    <a href="men-nutrition-food-library.html" class="btn-cta secondary">Khám phá Food Library</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="men-30-40.html">Nam 30-40</a>
+            <a href="men-nutrition-calculator.html">Calculator</a>
+            <a href="men-nutrition-food-library.html">Food Library</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+</body>
+</html>
