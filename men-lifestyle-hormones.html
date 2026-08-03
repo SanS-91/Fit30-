@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hormone Health - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-green: #50C878;
+            --primary-teal: #1ABC9C;
+            --primary-emerald: #2ECC71;
+            --primary-blue: #4A90E2;
+            --primary-purple: #9B59B6;
+            --primary-orange: #F39C12;
+            --primary-red: #E74C3C;
+            --primary-cyan: #00BCD4;
+            --primary-indigo: #5B6ABF;
+            
+            --text-dark: #1A202C;
+            --text-medium: #4A5568;
+            --text-light: #718096;
+            --bg-main: #F7FAFC;
+            --bg-card: #FFFFFF;
+            --border-soft: #E2E8F0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 14px 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover { color: var(--primary-green); }
+        
+        /* Hero */
+        .hero-wrapper {
+            width: 100%;
+            background: linear-gradient(135deg, #E8F8EE 0%, #F0FFF4 40%, #E8F8F5 100%);
+            border-radius: 0 0 24px 24px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .hero-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(80,200,120,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(26,188,156,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 40px 36px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 100%);
+            color: white;
+            padding: 5px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.72rem;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+        
+        .hero h1 {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--text-medium);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .hero p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px 40px;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+        
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+        }
+        
+        .section { margin-bottom: 36px; }
+        
+        /* Why T Matters - 5 cards */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+        }
+        
+        .impact-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 22px 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-top: 3px solid var(--impact-color);
+            transition: all 0.2s;
+        }
+        
+        .impact-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+        
+        .impact-card:nth-child(1) { --impact-color: var(--primary-green); }
+        .impact-card:nth-child(2) { --impact-color: var(--primary-orange); }
+        .impact-card:nth-child(3) { --impact-color: var(--primary-blue); }
+        .impact-card:nth-child(4) { --impact-color: var(--primary-red); }
+        .impact-card:nth-child(5) { --impact-color: var(--primary-purple); }
+        
+        .impact-stat {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--impact-color);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .impact-card h3 {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .impact-card p {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        /* Natural Boosters - 5 cards */
+        .boosters-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        
+        .booster-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-left: 4px solid var(--booster-color);
+        }
+        
+        .booster-card:nth-child(1) { --booster-color: var(--primary-indigo); }
+        .booster-card:nth-child(2) { --booster-color: var(--primary-green); }
+        .booster-card:nth-child(3) { --booster-color: var(--primary-orange); }
+        .booster-card:nth-child(4) { --booster-color: var(--primary-teal); }
+        .booster-card:nth-child(5) { --booster-color: var(--primary-blue); }
+        
+        .booster-wide {
+            grid-column: span 2;
+        }
+        
+        .booster-time {
+            display: inline-block;
+            padding: 3px 10px;
+            background: var(--bg-main);
+            color: var(--booster-color);
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .booster-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .booster-card > p {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        
+        .booster-steps {
+            list-style: none;
+        }
+        
+        .booster-steps li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        .booster-steps li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--booster-color);
+            font-weight: 700;
+        }
+        
+        /* Killers - 5 cards */
+        .killers-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+        }
+        
+        .killer-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 22px 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-top: 3px solid var(--killer-color);
+        }
+        
+        .killer-card:nth-child(1) { --killer-color: var(--primary-red); }
+        .killer-card:nth-child(2) { --killer-color: var(--primary-orange); }
+        .killer-card:nth-child(3) { --killer-color: var(--primary-purple); }
+        .killer-card:nth-child(4) { --killer-color: var(--primary-blue); }
+        .killer-card:nth-child(5) { --killer-color: var(--primary-indigo); }
+        
+        .killer-impact {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--killer-color);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .killer-card h3 {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .killer-card p {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        /* Testing Section */
+        .testing-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-left: 4px solid var(--primary-blue);
+        }
+        
+        .testing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .testing-col h4 {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+        }
+        
+        .testing-list {
+            list-style: none;
+        }
+        
+        .testing-list li {
+            padding: 8px 0 8px 20px;
+            position: relative;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        .testing-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+        
+        .testing-range {
+            margin-top: 20px;
+            padding: 16px;
+            background: var(--bg-main);
+            border-radius: 10px;
+        }
+        
+        .testing-range h4 {
+            font-size: 0.92rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+        }
+        
+        .range-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-soft);
+            font-size: 0.85rem;
+        }
+        
+        .range-item:last-child { border-bottom: none; }
+        
+        .range-name {
+            color: var(--text-medium);
+        }
+        
+        .range-value {
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-align: right;
+        }
+        
+        /* Lifestyle Checklist */
+        .checklist-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .checklist-progress {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-soft);
+        }
+        
+        .progress-text {
+            font-size: 0.92rem;
+            color: var(--text-medium);
+        }
+        
+        .progress-text strong {
+            color: var(--primary-green);
+            font-size: 1.1rem;
+        }
+        
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: var(--bg-main);
+            border-radius: 4px;
+            margin: 0 16px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-green) 0%, var(--primary-teal) 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: var(--bg-main);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        
+        .checklist-item:hover {
+            border-color: var(--border-soft);
+        }
+        
+        .checklist-item.checked {
+            background: #E8F8EE;
+            border-color: var(--primary-green);
+        }
+        
+        .checklist-checkbox {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            border: 2px solid var(--border-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            color: transparent;
+        }
+        
+        .checklist-item.checked .checklist-checkbox {
+            background: var(--primary-green);
+            border-color: var(--primary-green);
+            color: white;
+        }
+        
+        .checklist-label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            flex: 1;
+        }
+        
+        .checklist-item.checked .checklist-label {
+            text-decoration: line-through;
+            color: var(--text-light);
+        }
+        
+        .checklist-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-soft);
+        }
+        
+        .checklist-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            border: none;
+        }
+        
+        .checklist-btn.primary {
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 100%);
+            color: white;
+        }
+        
+        .checklist-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(80,200,120,0.3);
+        }
+        
+        .checklist-btn.secondary {
+            background: var(--bg-main);
+            color: var(--text-medium);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .checklist-btn.secondary:hover {
+            background: var(--border-soft);
+        }
+        
+        /* Info Callout */
+        .info-callout {
+            padding: 16px 18px;
+            border-radius: 12px;
+            margin-top: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        
+        .info-callout.tip { background: #E8F8EE; border-left: 4px solid var(--primary-green); }
+        .info-callout.warning { background: #FFF3E0; border-left: 4px solid var(--primary-orange); }
+        .info-callout.important { background: #FFE8E8; border-left: 4px solid var(--primary-red); }
+        
+        .info-callout-icon { font-size: 1.3rem; flex-shrink: 0; }
+        .info-callout-text { font-size: 0.88rem; color: var(--text-dark); line-height: 1.5; }
+        .info-callout-text strong { font-weight: 600; }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            border-radius: 18px;
+            padding: 48px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.4;
+        }
+        
+        .cta-content { position: relative; z-index: 1; }
+        
+        .cta-section h2 { font-size: 1.8rem; margin-bottom: 10px; }
+        
+        .cta-section p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            margin-bottom: 22px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            padding: 12px 28px;
+            background: white;
+            color: var(--primary-teal);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border: 2px solid white;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        .btn-cta.secondary {
+            background: transparent;
+            color: white;
+        }
+        
+        .btn-cta.secondary:hover { background: rgba(255,255,255,0.15); }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-soft);
+            padding: 28px 40px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        
+        .footer-links a:hover { color: var(--primary-green); }
+        
+        .footer-bottom {
+            color: var(--text-light);
+            font-size: 0.78rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .impact-grid { grid-template-columns: repeat(3, 1fr); }
+            .boosters-grid { grid-template-columns: repeat(2, 1fr); }
+            .booster-wide { grid-column: span 2; }
+            .killers-grid { grid-template-columns: repeat(3, 1fr); }
+            .testing-grid { grid-template-columns: 1fr; }
+            .checklist-grid { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 12px 20px; }
+            .hero { padding: 36px 20px 28px; }
+            .hero h1 { font-size: 1.8rem; }
+            .main-container { padding: 0 20px 30px; }
+            .impact-grid { grid-template-columns: 1fr; }
+            .boosters-grid { grid-template-columns: 1fr; }
+            .booster-wide { grid-column: span 1; }
+            .killers-grid { grid-template-columns: 1fr; }
+            .range-item { grid-template-columns: 1fr; gap: 4px; }
+            .range-value { text-align: left; }
+            .cta-section { padding: 36px 24px; }
+            .cta-section h2 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="men-lifestyle-overview.html" class="back-link">← Quay lại Lifestyle</a>
+    </header>
+    
+    <section class="hero-wrapper">
+        <div class="hero">
+            <span class="hero-badge">HORMONE HEALTH</span>
+            <h1>Tối Ưu <span>Testosterone</span></h1>
+            <div class="hero-subtitle">Natural boosters · Killers to avoid · Testing guide</div>
+            <p>Testosterone là master hormone cho nam 30-40: muscle, fat, energy, libido, mood. Sau 30, T levels giảm 1%/năm. Nhưng lifestyle có thể optimize hoặc destroy nó.</p>
+        </div>
+    </section>
+    
+    <div class="main-container">
+        
+        <!-- Why Testosterone Matters -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Tại Sao Testosterone Quan Trọng?</h2>
+                <p class="section-subtitle">5 areas bị ảnh hưởng trực tiếp</p>
+            </div>
+            
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-stat">+40%</div>
+                    <h3>Muscle Mass</h3>
+                    <p>T tăng protein synthesis, muscle growth. Low T = khó build muscle, dễ mất cơ.</p>
+                </div>
+                
+                <div class="impact-card">
+                    <div class="impact-stat">-25%</div>
+                    <h3>Belly Fat</h3>
+                    <p>Low T tăng visceral fat storage. Belly fat lại convert T → estrogen. Vicious cycle.</p>
+                </div>
+                
+                <div class="impact-card">
+                    <div class="impact-stat">+30%</div>
+                    <h3>Energy Levels</h3>
+                    <p>T ảnh hưởng mitochondria function. Low T = fatigue, brain fog, low motivation.</p>
+                </div>
+                
+                <div class="impact-card">
+                    <div class="impact-stat">+50%</div>
+                    <h3>Libido</h3>
+                    <p>T là primary driver cho sex drive. Low T = low libido, erectile issues.</p>
+                </div>
+                
+                <div class="impact-card">
+                    <div class="impact-stat">+35%</div>
+                    <h3>Mood & Confidence</h3>
+                    <p>T ảnh hưởng serotonin, dopamine. Low T = depression, anxiety, low confidence.</p>
+                </div>
+            </div>
+            
+            <div class="info-callout important">
+                <div class="info-callout-icon"></div>
+                <div class="info-callout-text">
+                    <strong>Reality check:</strong> Sau 30 tuổi, T levels giảm 1%/năm. Nhưng lifestyle factors có thể accelerate hoặc decelerate decline. Optimize what you control.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Natural Boosters -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">5 Natural Testosterone Boosters</h2>
+                <p class="section-subtitle">Evidence-based, no supplements needed</p>
+            </div>
+            
+            <div class="boosters-grid">
+                <div class="booster-card">
+                    <div class="booster-time">Daily</div>
+                    <h3>Sleep (7-8h)</h3>
+                    <p>70% T release xảy ra trong sleep. 5h sleep = T levels của người già hơn 10 tuổi.</p>
+                    <ul class="booster-steps">
+                        <li>7-8 hours quality sleep</li>
+                        <li>Consistent bedtime</li>
+                        <li>Dark, cool room</li>
+                        <li>No screens 1h before bed</li>
+                    </ul>
+                </div>
+                
+                <div class="booster-card">
+                    <div class="booster-time">3-4x/week</div>
+                    <h3>Strength Training</h3>
+                    <p>Compound lifts (squat, deadlift, bench) tăng T acutely và chronically.</p>
+                    <ul class="booster-steps">
+                        <li>Heavy compound lifts</li>
+                        <li>6-12 rep range</li>
+                        <li>Rest 2-3 phút giữa sets</li>
+                        <li>Don't overtrain</li>
+                    </ul>
+                </div>
+                
+                <div class="booster-card">
+                    <div class="booster-time">Daily</div>
+                    <h3>Nutrition</h3>
+                    <p>Specific nutrients critical cho T production: zinc, vitamin D, healthy fats.</p>
+                    <ul class="booster-steps">
+                        <li><strong>Zinc:</strong> 15-30mg/day (oysters, beef)</li>
+                        <li><strong>Vitamin D:</strong> 2000-4000 IU</li>
+                        <li><strong>Healthy fats:</strong> 0.9g/kg (avocado, nuts)</li>
+                        <li><strong>Magnesium:</strong> 200-400mg</li>
+                    </ul>
+                </div>
+                
+                <div class="booster-card">
+                    <div class="booster-time">Daily</div>
+                    <h3>Stress Management</h3>
+                    <p>Cortisol và T có inverse relationship. High cortisol = low T. Manage stress.</p>
+                    <ul class="booster-steps">
+                        <li>Meditation 10 min/day</li>
+                        <li>Breathing exercises</li>
+                        <li>Nature exposure</li>
+                        <li>Say no to unnecessary stress</li>
+                    </ul>
+                </div>
+                
+                <div class="booster-card booster-wide">
+                    <div class="booster-time">Weekly</div>
+                    <h3>Avoid Overtraining</h3>
+                    <p>More ≠ better. Chronic cardio, excessive volume, no deload = T crash. Balance là key.</p>
+                    <ul class="booster-steps">
+                        <li>Limit cardio to 2-3x/week (Zone 2)</li>
+                        <li>Deload every 4-6 weeks</li>
+                        <li>7-8h sleep priority</li>
+                        <li>Listen to body - rest when needed</li>
+                        <li>Signs of overtraining: fatigue, low libido, poor sleep, mood changes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Testosterone Killers -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">5 Testosterone Killers</h2>
+                <p class="section-subtitle">Avoid these to protect T levels</p>
+            </div>
+            
+            <div class="killers-grid">
+                <div class="killer-card">
+                    <div class="killer-impact">-20%</div>
+                    <h3>Alcohol</h3>
+                    <p>Alcohol tăng estrogen, giảm T. Heavy drinking = T crash. Limit 2-3 drinks/week max.</p>
+                </div>
+                
+                <div class="killer-card">
+                    <div class="killer-impact">-30%</div>
+                    <h3>Chronic Stress</h3>
+                    <p>High cortisol = low T. Chronic stress shuts down HPT axis. Manage or eliminate stressors.</p>
+                </div>
+                
+                <div class="killer-card">
+                    <div class="killer-impact">-25%</div>
+                    <h3>Poor Sleep</h3>
+                    <p>5h sleep = T levels già hơn 10 tuổi. Sleep là #1 T booster. Prioritize 7-8h.</p>
+                </div>
+                
+                <div class="killer-card">
+                    <div class="killer-impact">-15%</div>
+                    <h3>Obesity</h3>
+                    <p>Fat cells convert T → estrogen. Belly fat đặc biệt harmful. Lose weight = boost T.</p>
+                </div>
+                
+                <div class="killer-card">
+                    <div class="killer-impact">-10%</div>
+                    <h3>Endocrine Disruptors</h3>
+                    <p>Plastics (BPA), phthalates, pesticides mimic estrogen. Reduce exposure where possible.</p>
+                </div>
+            </div>
+            
+            <div class="info-callout warning">
+                <div class="info-callout-icon">️</div>
+                <div class="info-callout-text">
+                    <strong>Plastics tip:</strong> Don't heat food in plastic. Use glass containers. Avoid BPA-lined cans. Filter tap water. Small changes, big impact.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Testing -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Testing Guide</h2>
+                <p class="section-subtitle">When to test, what to test</p>
+            </div>
+            
+            <div class="testing-card">
+                <p style="font-size: 0.92rem; color: var(--text-medium); line-height: 1.6; margin-bottom: 16px;">
+                    Blood test là cách duy nhất biết T levels. Symptoms không đủ reliable. Test morning (8-10AM) khi T highest. Fast 12h trước test.
+                </p>
+                
+                <div class="testing-grid">
+                    <div class="testing-col">
+                        <h4>When to Test</h4>
+                        <ul class="testing-list">
+                            <li>Experiencing low energy, libido, mood</li>
+                            <li>Difficulty building muscle despite training</li>
+                            <li>Unexplained weight gain (belly fat)</li>
+                            <li>Poor sleep quality</li>
+                            <li>Age 35+ (baseline test)</li>
+                            <li>After 3 months lifestyle optimization</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="testing-col">
+                        <h4>What to Test</h4>
+                        <ul class="testing-list">
+                            <li><strong>Total Testosterone</strong></li>
+                            <li><strong>Free Testosterone</strong> (active form)</li>
+                            <li><strong>SHBG</strong> (Sex Hormone Binding Globulin)</li>
+                            <li><strong>LH & FSH</strong> (pituitary hormones)</li>
+                            <li><strong>Estradiol</strong> (estrogen)</li>
+                            <li><strong>Cortisol</strong> (stress hormone)</li>
+                            <li><strong>Vitamin D</strong></li>
+                            <li><strong>Zinc, Magnesium</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="testing-range">
+                    <h4>Reference Ranges (Nam 30-40)</h4>
+                    <div class="range-item">
+                        <div class="range-name">Total Testosterone</div>
+                        <div class="range-value">300-1000 ng/dL</div>
+                    </div>
+                    <div class="range-item">
+                        <div class="range-name">Free Testosterone</div>
+                        <div class="range-value">9-30 pg/mL</div>
+                    </div>
+                    <div class="range-item">
+                        <div class="range-name">SHBG</div>
+                        <div class="range-value">10-57 nmol/L</div>
+                    </div>
+                    <div class="range-item">
+                        <div class="range-name">Estradiol</div>
+                        <div class="range-value">10-40 pg/mL</div>
+                    </div>
+                    <div class="range-item">
+                        <div class="range-name">Cortisol (AM)</div>
+                        <div class="range-value">10-20 mcg/dL</div>
+                    </div>
+                </div>
+                
+                <div class="info-callout tip">
+                    <div class="info-callout-icon">💡</div>
+                    <div class="info-callout-text">
+                        <strong>Important:</strong> "Normal" range rất wide (300-1000). Aim for 600+ ng/dL cho optimal health. Symptoms matter more than numbers.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Lifestyle Checklist -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Daily Hormone Health Checklist</h2>
+                <p class="section-subtitle">10 habits cho optimal testosterone</p>
+            </div>
+            
+            <div class="checklist-card">
+                <div class="checklist-progress">
+                    <div class="progress-text">Progress: <strong id="progressText">0/10</strong></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <div class="checklist-grid" id="checklistGrid">
+                    <div class="checklist-item" onclick="toggleCheck(0)">
+                        <div class="checklist-checkbox">✓</div>
+                        <div class="checklist-label">Sleep 7-8 hours</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(1)">
+                        <div class="checklist-checkbox">✓</div>
+                        <div class="checklist-label">Strength training (compound lifts)</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(2)">
+                        <div class="checklist-checkbox">✓</div>
+                        <div class="checklist-label">Zinc-rich foods (beef, oysters)</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(3)">
+                        <div class="checklist-checkbox">✓</div>
+                        <div class="checklist-label">Vitamin D supplement (2000-4000 IU)</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(4)">
+                        <div class="checklist-checkbox">✓</div>
+                        <div class="checklist-label">Healthy fats (avocado, nuts, olive oil)</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(5)">
+                        <div class="checklist-checkbox">✓</div>
+                        <div class="checklist-label">Stress management (meditation, breathing)</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(6)">
+                        <div class="checklist-checkbox">✓</div>
+                        <div class="checklist-label">Limit alcohol (2-3 drinks/week max)</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(7)">
+                        <div class="checklist-checkbox">✓</div>
+                        <div class="checklist-label">Avoid plastics (BPA-free containers)</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(8)">
+                        <div class="checklist-checkbox">✓</div>
+                        <div class="checklist-label">Maintain healthy body fat (12-18%)</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(9)">
+                        <div class="checklist-checkbox">✓</div>
+                        <div class="checklist-label">Morning sunlight (10-15 min)</div>
+                    </div>
+                </div>
+                
+                <div class="checklist-actions">
+                    <button class="checklist-btn primary" onclick="saveChecklist()">Lưu Progress</button>
+                    <button class="checklist-btn secondary" onclick="resetChecklist()">Reset Hôm Nay</button>
+                </div>
+                
+                <div class="info-callout tip">
+                    <div class="info-callout-icon">💡</div>
+                    <div class="info-callout-text">
+                        <strong>Goal:</strong> 8-10/10 daily. Consistency > perfection. Track weekly average, không daily perfection.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <div class="cta-content">
+                <h2>Optimize hormone health</h2>
+                <p>Start với sleep + strength training + zinc/vitamin D. 3 changes, biggest impact. Test sau 3 months.</p>
+                <div class="cta-buttons">
+                    <a href="men-lifestyle-sleep.html" class="btn-cta">Cải thiện Giấc Ngủ</a>
+                    <a href="men-lifestyle-habits.html" class="btn-cta secondary">Xem Daily Habits</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="men-30-40.html">Nam 30-40</a>
+            <a href="men-lifestyle-overview.html">Lifestyle Overview</a>
+            <a href="men-lifestyle-sleep.html">Sleep</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // ==================== CHECKLIST ====================
+        const STORAGE_KEY = 'fit30_hormone_checklist';
+        let checklistState = [false, false, false, false, false, false, false, false, false, false];
+        
+        function init() {
+            loadChecklist();
+            renderChecklist();
+        }
+        
+        function loadChecklist() {
+            const today = new Date().toISOString().split('T')[0];
+            const saved = localStorage.getItem(`${STORAGE_KEY}_${today}`);
+            
+            if (saved) {
+                checklistState = JSON.parse(saved);
+            }
+        }
+        
+        function saveChecklist() {
+            const today = new Date().toISOString().split('T')[0];
+            localStorage.setItem(`${STORAGE_KEY}_${today}`, JSON.stringify(checklistState));
+            alert('✅ Đã lưu progress!');
+        }
+        
+        function resetChecklist() {
+            if (!confirm('Reset checklist hôm nay?')) return;
+            checklistState = [false, false, false, false, false, false, false, false, false, false];
+            saveChecklist();
+            renderChecklist();
+        }
+        
+        function toggleCheck(index) {
+            checklistState[index] = !checklistState[index];
+            renderChecklist();
+        }
+        
+        function renderChecklist() {
+            const items = document.querySelectorAll('.checklist-item');
+            items.forEach((item, idx) => {
+                if (checklistState[idx]) {
+                    item.classList.add('checked');
+                } else {
+                    item.classList.remove('checked');
+                }
+            });
+            
+            const checked = checklistState.filter(v => v).length;
+            const percent = (checked / 10) * 100;
+            
+            document.getElementById('progressText').textContent = `${checked}/10`;
+            document.getElementById('progressFill').style.width = `${percent}%`;
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
