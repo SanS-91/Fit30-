@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giấc Ngủ - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-green: #50C878;
+            --primary-teal: #1ABC9C;
+            --primary-emerald: #2ECC71;
+            --primary-blue: #4A90E2;
+            --primary-purple: #9B59B6;
+            --primary-orange: #F39C12;
+            --primary-red: #E74C3C;
+            --primary-indigo: #5B6ABF;
+            --primary-slate: #64748B;
+            
+            --text-dark: #1A202C;
+            --text-medium: #4A5568;
+            --text-light: #718096;
+            --bg-main: #F7FAFC;
+            --bg-card: #FFFFFF;
+            --border-soft: #E2E8F0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 14px 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover { color: var(--primary-green); }
+        
+        /* Hero - Full width gradient */
+        .hero-wrapper {
+            width: 100%;
+            background: linear-gradient(135deg, #E8F8EE 0%, #F0FFF4 40%, #E8F8F5 100%);
+            border-radius: 0 0 24px 24px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .hero-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(80,200,120,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(26,188,156,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 40px 36px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 100%);
+            color: white;
+            padding: 5px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.72rem;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+        
+        .hero h1 {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--text-medium);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .hero p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px 40px;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+        
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+        }
+        
+        .section { margin-bottom: 36px; }
+        
+        /* Why Sleep Matters - 4 cards */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+        
+        .benefit-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 22px 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-top: 3px solid var(--benefit-color);
+            transition: all 0.2s;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+        
+        .benefit-card:nth-child(1) { --benefit-color: var(--primary-indigo); }
+        .benefit-card:nth-child(2) { --benefit-color: var(--primary-green); }
+        .benefit-card:nth-child(3) { --benefit-color: var(--primary-blue); }
+        .benefit-card:nth-child(4) { --benefit-color: var(--primary-orange); }
+        
+        .benefit-stat {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--benefit-color);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .benefit-card h3 {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .benefit-card p {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        /* Sleep Routine - 4 sub-sections */
+        .routine-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+        
+        .routine-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-left: 4px solid var(--routine-color);
+        }
+        
+        .routine-card:nth-child(1) { --routine-color: var(--primary-indigo); }
+        .routine-card:nth-child(2) { --routine-color: var(--primary-teal); }
+        .routine-card:nth-child(3) { --routine-color: var(--primary-orange); }
+        .routine-card:nth-child(4) { --routine-color: var(--primary-purple); }
+        
+        .routine-window {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--bg-main);
+            color: var(--routine-color);
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .routine-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        
+        .routine-card > p {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        
+        .routine-list {
+            list-style: none;
+        }
+        
+        .routine-list li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        .routine-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--routine-color);
+            font-weight: 700;
+        }
+        
+        /* Sleep Cycles - Visual */
+        .cycles-container {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .cycle-visual {
+            position: relative;
+            height: 220px;
+            margin: 20px 0;
+            background: linear-gradient(180deg, #1A202C 0%, #2D3748 100%);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .cycle-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .cycle-labels {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            margin-top: 12px;
+        }
+        
+        .cycle-label {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        
+        .cycle-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .cycle-stage {
+            padding: 16px;
+            background: var(--bg-main);
+            border-radius: 10px;
+            border-left: 3px solid var(--stage-color);
+        }
+        
+        .cycle-stage:nth-child(1) { --stage-color: var(--primary-blue); }
+        .cycle-stage:nth-child(2) { --stage-color: var(--primary-indigo); }
+        .cycle-stage:nth-child(3) { --stage-color: var(--primary-purple); }
+        
+        .stage-name {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        
+        .stage-percent {
+            font-size: 0.75rem;
+            color: var(--stage-color);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        
+        .stage-desc {
+            font-size: 0.78rem;
+            color: var(--text-medium);
+            line-height: 1.4;
+        }
+        
+        /* Nap Guide */
+        .nap-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-left: 4px solid var(--primary-orange);
+        }
+        
+        .nap-types {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        .nap-type {
+            padding: 16px;
+            background: var(--bg-main);
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .nap-duration {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        
+        .nap-name {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        
+        .nap-desc {
+            font-size: 0.78rem;
+            color: var(--text-medium);
+            line-height: 1.4;
+        }
+        
+        /* Supplements */
+        .supp-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+        
+        .supp-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-top: 3px solid var(--supp-color);
+        }
+        
+        .supp-card:nth-child(1) { --supp-color: var(--primary-green); }
+        .supp-card:nth-child(2) { --supp-color: var(--primary-purple); }
+        
+        .supp-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        
+        .supp-dose {
+            font-size: 0.82rem;
+            color: var(--supp-color);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .supp-card p {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        
+        .supp-warning {
+            font-size: 0.78rem;
+            color: var(--primary-red);
+            font-weight: 600;
+            padding: 8px 12px;
+            background: #FFE8E8;
+            border-radius: 8px;
+        }
+        
+        /* Sleep Tracker */
+        .tracker-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .tracker-form {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .tracker-item label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        
+        .tracker-item input, .tracker-item select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid var(--border-soft);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .tracker-item input:focus, .tracker-item select:focus {
+            outline: none;
+            border-color: var(--primary-green);
+        }
+        
+        .tracker-save {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            margin-bottom: 20px;
+        }
+        
+        .tracker-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(80,200,120,0.3);
+        }
+        
+        .tracker-history {
+            border-top: 1px solid var(--border-soft);
+            padding-top: 20px;
+        }
+        
+        .tracker-history h4 {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+        
+        .history-list {
+            display: grid;
+            gap: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .history-item {
+            display: grid;
+            grid-template-columns: 100px 1fr auto auto;
+            gap: 12px;
+            align-items: center;
+            padding: 12px;
+            background: var(--bg-main);
+            border-radius: 10px;
+            font-size: 0.85rem;
+        }
+        
+        .history-date {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .history-hours {
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+        
+        .history-quality {
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .history-quality.good { background: #E8F8EE; color: var(--primary-green); }
+        .history-quality.medium { background: #FFF3E0; color: var(--primary-orange); }
+        .history-quality.poor { background: #FFE8E8; color: var(--primary-red); }
+        
+        .history-delete {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: #FFE8E8;
+            color: var(--primary-red);
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .tracker-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-soft);
+        }
+        
+        .tracker-stat {
+            text-align: center;
+            padding: 12px;
+            background: var(--bg-main);
+            border-radius: 10px;
+        }
+        
+        .tracker-stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            line-height: 1;
+        }
+        
+        .tracker-stat-label {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+        
+        /* Info Callout */
+        .info-callout {
+            padding: 16px 18px;
+            border-radius: 12px;
+            margin-top: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        
+        .info-callout.tip { background: #E8F8EE; border-left: 4px solid var(--primary-green); }
+        .info-callout.warning { background: #FFF3E0; border-left: 4px solid var(--primary-orange); }
+        .info-callout.important { background: #FFE8E8; border-left: 4px solid var(--primary-red); }
+        
+        .info-callout-icon { font-size: 1.3rem; flex-shrink: 0; }
+        .info-callout-text { font-size: 0.88rem; color: var(--text-dark); line-height: 1.5; }
+        .info-callout-text strong { font-weight: 600; }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            border-radius: 18px;
+            padding: 48px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.4;
+        }
+        
+        .cta-content { position: relative; z-index: 1; }
+        
+        .cta-section h2 { font-size: 1.8rem; margin-bottom: 10px; }
+        
+        .cta-section p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            margin-bottom: 22px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            padding: 12px 28px;
+            background: white;
+            color: var(--primary-teal);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border: 2px solid white;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        .btn-cta.secondary {
+            background: transparent;
+            color: white;
+        }
+        
+        .btn-cta.secondary:hover { background: rgba(255,255,255,0.15); }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-soft);
+            padding: 28px 40px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        
+        .footer-links a:hover { color: var(--primary-green); }
+        
+        .footer-bottom {
+            color: var(--text-light);
+            font-size: 0.78rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+            .routine-grid { grid-template-columns: 1fr; }
+            .cycle-info { grid-template-columns: 1fr; }
+            .nap-types { grid-template-columns: 1fr; }
+            .supp-grid { grid-template-columns: 1fr; }
+            .tracker-form { grid-template-columns: 1fr; }
+            .tracker-stats { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 12px 20px; }
+            .hero { padding: 36px 20px 28px; }
+            .hero h1 { font-size: 1.8rem; }
+            .main-container { padding: 0 20px 30px; }
+            .benefits-grid { grid-template-columns: 1fr; }
+            .history-item { grid-template-columns: 1fr; gap: 6px; }
+            .cta-section { padding: 36px 24px; }
+            .cta-section h2 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="men-lifestyle-overview.html" class="back-link">← Quay lại Lifestyle</a>
+    </header>
+    
+    <section class="hero-wrapper">
+        <div class="hero">
+            <span class="hero-badge">SLEEP OPTIMIZATION</span>
+            <h1>Tối Ưu <span>Giấc Ngủ</span></h1>
+            <div class="hero-subtitle">Foundation của sức khỏe nam 30-40</div>
+            <p>7-8h sleep quality > 1h gym. Testosterone, recovery, cognitive function - tất cả đều phụ thuộc vào giấc ngủ. Guide này giúp bạn optimize sleep từ A-Z.</p>
+        </div>
+    </section>
+    
+    <div class="main-container">
+        
+        <!-- Why Sleep Matters -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Tại Sao Giấc Ngủ Quan Trọng?</h2>
+                <p class="section-subtitle">4 lý do khoa học để ưu tiên sleep</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-stat">70%</div>
+                    <h3>Testosterone Production</h3>
+                    <p>70% testosterone daily release xảy ra trong sleep. 5h sleep = testosterone của người già hơn 10 tuổi. 8h sleep = peak T levels.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-stat">95%</div>
+                    <h3>Recovery & Muscle Growth</h3>
+                    <p>Growth hormone release peak trong deep sleep (stage 3). Muscle repair, protein synthesis xảy ra khi bạn ngủ. No sleep = no gains.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-stat">30%</div>
+                    <h3>Cognitive Function</h3>
+                    <p>1 đêm thiếu ngủ giảm 30% cognitive performance. Memory consolidation, decision making, focus đều cần sleep.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-stat">500</div>
+                    <h3>Fat Loss Support</h3>
+                    <p>Thiếu ngủ tăng ghrelin (hunger hormone) 28%, giảm leptin (satiety) 18%. 5h sleep = +500 kcal/ngày từ cravings.</p>
+                </div>
+            </div>
+            
+            <div class="info-callout important">
+                <div class="info-callout-icon">️</div>
+                <div class="info-callout-text">
+                    <strong>Reality check:</strong> Nếu bạn đang tập 5 ngày/tuần, ăn đúng macros, nhưng ngủ 5-6h/đêm - bạn đang waste 50% effort. Fix sleep first.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sleep Routine -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Sleep Routine</h2>
+                <p class="section-subtitle">4 pillars cho giấc ngủ quality</p>
+            </div>
+            
+            <div class="routine-grid">
+                <div class="routine-card">
+                    <div class="routine-window">60 phút trước ngủ</div>
+                    <h3>Bedtime Ritual</h3>
+                    <p>Wind-down routine báo hiệu cho não rằng đã đến giờ ngủ. Consistency là key - cùng thời gian mỗi đêm.</p>
+                    <ul class="routine-list">
+                        <li>Tắt screens 60 phút trước ngủ</li>
+                        <li>Reading sách giấy (không Kindle)</li>
+                        <li>Light stretching hoặc yoga 10 phút</li>
+                        <li>Journaling: 3 things grateful for</li>
+                        <li>Breathing exercises (4-7-8 method)</li>
+                        <li>Dim lights, giảm brightness</li>
+                    </ul>
+                </div>
+                
+                <div class="routine-card">
+                    <div class="routine-window">Environment</div>
+                    <h3>Bedroom Optimization</h3>
+                    <p>Môi trường ngủ ảnh hưởng trực tiếp đến sleep quality. Optimize 3 yếu tố: temperature, light, noise.</p>
+                    <ul class="routine-list">
+                        <li><strong>Temperature:</strong> 18-20°C (mát giúp ngủ sâu)</li>
+                        <li><strong>Light:</strong> Dark room, blackout curtains</li>
+                        <li><strong>Noise:</strong> Earplugs hoặc white noise</li>
+                        <li><strong>Bed:</strong> Chỉ dùng để ngủ (no work)</li>
+                        <li><strong>Phone:</strong> Ngoài tầm với, charger xa giường</li>
+                    </ul>
+                </div>
+                
+                <div class="routine-card">
+                    <div class="routine-window">14:00 cutoff</div>
+                    <h3>Coffee Cutoff</h3>
+                    <p>Caffeine half-life = 5-6h. Coffee lúc 16h = 50% caffeine vẫn trong hệ thống lúc 22h. ảnh hưởng deep sleep.</p>
+                    <ul class="routine-list">
+                        <li>Last coffee trước 14:00 (2PM)</li>
+                        <li>Switch sang decaf sau 2PM</li>
+                        <li>Herbal tea: chamomile, valerian</li>
+                        <li>Water only sau 20:00</li>
+                        <li>Limit: 300-400mg caffeine/ngày max</li>
+                    </ul>
+                </div>
+                
+                <div class="routine-card">
+                    <div class="routine-window">Blue light</div>
+                    <h3>Screen Time</h3>
+                    <p>Blue light từ screens suppress melatonin production 50%. Não nghĩ là daytime → khó ngủ.</p>
+                    <ul class="routine-list">
+                        <li>No screens 60 phút trước ngủ</li>
+                        <li>Night mode / f.lux sau 20:00</li>
+                        <li>Blue light blocking glasses</li>
+                        <li>E-ink devices (Kindle paperwhite OK)</li>
+                        <li>Phone: grayscale mode sau 21:00</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sleep Cycles -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Sleep Cycles</h2>
+                <p class="section-subtitle">Hiểu 90-minute cycles để optimize</p>
+            </div>
+            
+            <div class="cycles-container">
+                <p style="font-size: 0.92rem; color: var(--text-medium); line-height: 1.6; margin-bottom: 16px;">
+                    Một đêm ngủ gồm <strong>4-6 cycles</strong>, mỗi cycle ~90 phút. Mỗi cycle có 4 stages: N1 (light) → N2 → N3 (deep) → REM. Deep sleep chiếm 1/3 đầu đêm, REM chiếm 1/3 cuối đêm. Đó là lý do ngủ 6h khác 8h rất nhiều.
+                </p>
+                
+                <div class="cycle-info">
+                    <div class="cycle-stage">
+                        <div class="stage-name">Light Sleep (N1-N2)</div>
+                        <div class="stage-percent">50-60% of night</div>
+                        <div class="stage-desc">Transition phase. Dễ bị wake up. Body temperature giảm, heart rate chậm lại.</div>
+                    </div>
+                    
+                    <div class="cycle-stage">
+                        <div class="stage-name">Deep Sleep (N3)</div>
+                        <div class="stage-percent">20-25% of night</div>
+                        <div class="stage-desc">Physical recovery. Growth hormone release. Muscle repair. Immune system boost. Khó bị wake up.</div>
+                    </div>
+                    
+                    <div class="cycle-stage">
+                        <div class="stage-name">REM Sleep</div>
+                        <div class="stage-percent">20-25% of night</div>
+                        <div class="stage-desc">Mental recovery. Memory consolidation. Dreaming. Emotional processing. Creativity boost.</div>
+                    </div>
+                </div>
+                
+                <div class="info-callout tip">
+                    <div class="info-callout-icon">💡</div>
+                    <div class="info-callout-text">
+                        <strong>90-minute rule:</strong> Set alarm theo bội số của 90 phút (6h, 7.5h, 9h). Wake up cuối cycle = tỉnh táo hơn wake up giữa deep sleep.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Nap Guide -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Nap Guide</h2>
+                <p class="section-subtitle">Power nap đúng cách</p>
+            </div>
+            
+            <div class="nap-card">
+                <p style="font-size: 0.92rem; color: var(--text-medium); line-height: 1.6; margin-bottom: 16px;">
+                    Nap có thể boost alertness 54%, performance 34%. Nhưng nap sai cách = grogginess (sleep inertia). Key: <strong>duration control</strong>.
+                </p>
+                
+                <div class="nap-types">
+                    <div class="nap-type">
+                        <div class="nap-duration">10-20'</div>
+                        <div class="nap-name">Power Nap</div>
+                        <div class="nap-desc">Best choice. Boost alertness, no grogginess. Ideal: 13:00-15:00.</div>
+                    </div>
+                    
+                    <div class="nap-type">
+                        <div class="nap-duration">30'</div>
+                        <div class="nap-name">Warning Zone</div>
+                        <div class="nap-desc">Risk of sleep inertia. Groggy 30-60 phút sau wake up. Avoid nếu có thể.</div>
+                    </div>
+                    
+                    <div class="nap-type">
+                        <div class="nap-duration">90'</div>
+                        <div class="nap-name">Full Cycle</div>
+                        <div class="nap-desc">Complete 1 cycle. Good cho creative work. Nhưng có thể ảnh hưởng night sleep.</div>
+                    </div>
+                </div>
+                
+                <div class="info-callout warning">
+                    <div class="info-callout-icon">️</div>
+                    <div class="info-callout-text">
+                        <strong>Rules:</strong> Nap trước 15:00. Set alarm. Coffee nap trick: uống coffee trước nap 20 phút - caffeine kicks in khi wake up.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Supplements -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Sleep Supplements</h2>
+                <p class="section-subtitle">Evidence-based, không phải marketing hype</p>
+            </div>
+            
+            <div class="supp-grid">
+                <div class="supp-card">
+                    <h3>Magnesium (Glycinate)</h3>
+                    <div class="supp-dose">200-400mg · 30-60 phút trước ngủ</div>
+                    <p>Magnesium glycinate có bioavailability cao nhất. Giúp relax muscles, giảm anxiety, improve sleep quality. 70% người thiếu magnesium.</p>
+                    <p style="font-size: 0.82rem; color: var(--text-dark); font-weight: 600;">✅ Tác dụng: 1-2 tuần để thấy kết quả</p>
+                </div>
+                
+                <div class="supp-card">
+                    <h3>Melatonin</h3>
+                    <div class="supp-dose">0.3-1mg · 30 phút trước ngủ</div>
+                    <p>Melatonin là sleep hormone, không phải sedative. Liều thấp (0.3-1mg) hiệu quả hơn liều cao (5-10mg). Dùng cho jet lag, shift work, không phải chronic insomnia.</p>
+                    <div class="supp-warning">⚠️ Không dùng dài hạn. Có thể suppress natural melatonin production. Consult doctor nếu dùng >2 tuần.</div>
+                </div>
+            </div>
+            
+            <div class="info-callout tip">
+                <div class="info-callout-icon">💡</div>
+                <div class="info-callout-text">
+                    <strong>Priority order:</strong> Sleep hygiene > Light exposure > Temperature > Supplements. Fix foundations trước khi dùng supplements.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sleep Tracker -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Sleep Tracker</h2>
+                <p class="section-subtitle">Track để improve - what gets measured gets managed</p>
+            </div>
+            
+            <div class="tracker-card">
+                <form id="sleepForm" onsubmit="saveSleep(event)">
+                    <div class="tracker-form">
+                        <div class="tracker-item">
+                            <label>Ngày</label>
+                            <input type="date" id="sleepDate" required>
+                        </div>
+                        <div class="tracker-item">
+                            <label>Giờ ngủ (h)</label>
+                            <input type="number" id="sleepHours" step="0.5" min="0" max="14" placeholder="VD: 7.5" required>
+                        </div>
+                        <div class="tracker-item">
+                            <label>Chất lượng</label>
+                            <select id="sleepQuality" required>
+                                <option value="good">Tốt (tỉnh táo)</option>
+                                <option value="medium">Trung bình</option>
+                                <option value="poor">Kém (mệt mỏi)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="tracker-save">Lưu giấc ngủ</button>
+                </form>
+                
+                <div class="tracker-history">
+                    <h4>Lịch sử 7 ngày gần nhất</h4>
+                    <div class="history-list" id="historyList"></div>
+                    
+                    <div class="tracker-stats">
+                        <div class="tracker-stat">
+                            <div class="tracker-stat-value" id="avgHours">0h</div>
+                            <div class="tracker-stat-label">Trung bình</div>
+                        </div>
+                        <div class="tracker-stat">
+                            <div class="tracker-stat-value" id="goodNights">0</div>
+                            <div class="tracker-stat-label">Đêm tốt</div>
+                        </div>
+                        <div class="tracker-stat">
+                            <div class="tracker-stat-value" id="consistency">0%</div>
+                            <div class="tracker-stat-label">Consistency</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <div class="cta-content">
+                <h2>Bắt đầu tối ưu giấc ngủ</h2>
+                <p>Chọn 1-2 changes từ guide này, áp dụng 2 tuần. Track progress. Small changes, big results.</p>
+                <div class="cta-buttons">
+                    <a href="men-lifestyle-habits.html" class="btn-cta">Xem Daily Habits</a>
+                    <a href="men-lifestyle-stress.html" class="btn-cta secondary">Quản lý Stress</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="men-30-40.html">Nam 30-40</a>
+            <a href="men-lifestyle-overview.html">Lifestyle Overview</a>
+            <a href="men-lifestyle-habits.html">Daily Habits</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // ==================== SLEEP TRACKER ====================
+        const STORAGE_KEY = 'fit30_sleep_tracker';
+        
+        function init() {
+            // Set default date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('sleepDate').value = today;
+            
+            renderHistory();
+        }
+        
+        function saveSleep(e) {
+            e.preventDefault();
+            
+            const date = document.getElementById('sleepDate').value;
+            const hours = parseFloat(document.getElementById('sleepHours').value);
+            const quality = document.getElementById('sleepQuality').value;
+            
+            if (!date || !hours) return;
+            
+            const data = getSleepData();
+            
+            // Update or add
+            const existingIndex = data.findIndex(item => item.date === date);
+            if (existingIndex >= 0) {
+                data[existingIndex] = { date, hours, quality };
+            } else {
+                data.push({ date, hours, quality });
+            }
+            
+            // Sort by date descending
+            data.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            // Keep only last 30 days
+            const trimmed = data.slice(0, 30);
+            
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(trimmed));
+            
+            renderHistory();
+            
+            // Reset form
+            document.getElementById('sleepHours').value = '';
+            document.getElementById('sleepQuality').value = 'good';
+        }
+        
+        function getSleepData() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            return saved ? JSON.parse(saved) : [];
+        }
+        
+        function deleteSleep(date) {
+            const data = getSleepData().filter(item => item.date !== date);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            renderHistory();
+        }
+        
+        function renderHistory() {
+            const data = getSleepData();
+            const list = document.getElementById('historyList');
+            
+            if (data.length === 0) {
+                list.innerHTML = '<p style="color: var(--text-light); text-align: center; padding: 20px; font-size: 0.88rem;">Chưa có dữ liệu. Bắt đầu track hôm nay!</p>';
+                updateStats([]);
+                return;
+            }
+            
+            const recent = data.slice(0, 7);
+            
+            list.innerHTML = recent.map(item => {
+                const date = new Date(item.date);
+                const dateStr = date.toLocaleDateString('vi-VN', { weekday: 'short', day: '2-digit', month: '2-digit' });
+                
+                return `
+                    <div class="history-item">
+                        <div class="history-date">${dateStr}</div>
+                        <div class="history-hours">${item.hours}h</div>
+                        <div class="history-quality ${item.quality}">
+                            ${item.quality === 'good' ? 'Tốt' : item.quality === 'medium' ? 'TB' : 'Kém'}
+                        </div>
+                        <button class="history-delete" onclick="deleteSleep('${item.date}')">✕</button>
+                    </div>
+                `;
+            }).join('');
+            
+            updateStats(data);
+        }
+        
+        function updateStats(data) {
+            if (data.length === 0) {
+                document.getElementById('avgHours').textContent = '0h';
+                document.getElementById('goodNights').textContent = '0';
+                document.getElementById('consistency').textContent = '0%';
+                return;
+            }
+            
+            const avg = data.reduce((sum, item) => sum + item.hours, 0) / data.length;
+            const goodCount = data.filter(item => item.quality === 'good').length;
+            const goodPercent = Math.round((goodCount / data.length) * 100);
+            
+            // Consistency: % of days with 7-9h sleep
+            const consistent = data.filter(item => item.hours >= 7 && item.hours <= 9).length;
+            const consistency = Math.round((consistent / data.length) * 100);
+            
+            document.getElementById('avgHours').textContent = `${avg.toFixed(1)}h`;
+            document.getElementById('goodNights').textContent = goodCount;
+            document.getElementById('consistency').textContent = `${consistency}%`;
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

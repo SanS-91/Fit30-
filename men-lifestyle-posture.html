@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tư Thế Văn Phòng - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-green: #50C878;
+            --primary-teal: #1ABC9C;
+            --primary-emerald: #2ECC71;
+            --primary-blue: #4A90E2;
+            --primary-purple: #9B59B6;
+            --primary-orange: #F39C12;
+            --primary-red: #E74C3C;
+            --primary-indigo: #5B6ABF;
+            
+            --text-dark: #1A202C;
+            --text-medium: #4A5568;
+            --text-light: #718096;
+            --bg-main: #F7FAFC;
+            --bg-card: #FFFFFF;
+            --border-soft: #E2E8F0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 14px 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover { color: var(--primary-green); }
+        
+        /* Hero - Full width gradient */
+        .hero-wrapper {
+            width: 100%;
+            background: linear-gradient(135deg, #E8F8EE 0%, #F0FFF4 40%, #E8F8F5 100%);
+            border-radius: 0 0 24px 24px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .hero-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(80,200,120,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(26,188,156,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 40px 36px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 100%);
+            color: white;
+            padding: 5px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.72rem;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+        
+        .hero h1 {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--text-medium);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .hero p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px 40px;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+        
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+        }
+        
+        .section { margin-bottom: 36px; }
+        
+        /* 90-90-90 Rule - Visual */
+        .posture-visual {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 32px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            text-align: center;
+        }
+        
+        .angle-diagram {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 24px 0;
+            flex-wrap: wrap;
+        }
+        
+        .angle-item {
+            text-align: center;
+        }
+        
+        .angle-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--angle-color) 0%, color-mix(in srgb, var(--angle-color) 60%, white) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            position: relative;
+        }
+        
+        .angle-circle::before {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+        }
+        
+        .angle-value {
+            position: relative;
+            z-index: 1;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .angle-item:nth-child(1) { --angle-color: var(--primary-green); }
+        .angle-item:nth-child(2) { --angle-color: var(--primary-teal); }
+        .angle-item:nth-child(3) { --angle-color: var(--primary-emerald); }
+        
+        .angle-label {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        
+        .angle-desc {
+            font-size: 0.78rem;
+            color: var(--text-medium);
+            max-width: 140px;
+            margin: 0 auto;
+        }
+        
+        /* Ergonomic Setup - 4 cards */
+        .ergo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+        
+        .ergo-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-left: 4px solid var(--ergo-color);
+        }
+        
+        .ergo-card:nth-child(1) { --ergo-color: var(--primary-blue); }
+        .ergo-card:nth-child(2) { --ergo-color: var(--primary-purple); }
+        .ergo-card:nth-child(3) { --ergo-color: var(--primary-orange); }
+        .ergo-card:nth-child(4) { --ergo-color: var(--primary-green); }
+        
+        .ergo-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        
+        .ergo-card > p {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        
+        .ergo-list {
+            list-style: none;
+        }
+        
+        .ergo-list li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        .ergo-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--ergo-color);
+            font-weight: 700;
+        }
+        
+        .ergo-recommendation {
+            margin-top: 12px;
+            padding: 10px 12px;
+            background: var(--bg-main);
+            border-radius: 8px;
+            font-size: 0.78rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        
+        .ergo-recommendation strong {
+            color: var(--ergo-color);
+        }
+        
+        /* Break Schedule */
+        .break-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+        
+        .break-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-top: 3px solid var(--break-color);
+        }
+        
+        .break-card:nth-child(1) { --break-color: var(--primary-green); }
+        .break-card:nth-child(2) { --break-color: var(--primary-orange); }
+        
+        .break-rule {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--break-color);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .break-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .break-card > p {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        
+        .break-steps {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+        
+        .break-steps li {
+            counter-increment: step-counter;
+            padding: 8px 0 8px 36px;
+            position: relative;
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        .break-steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 24px;
+            height: 24px;
+            background: var(--break-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+        
+        /* Standing Desk */
+        .standing-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-left: 4px solid var(--primary-teal);
+        }
+        
+        .standing-ratio {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+        
+        .ratio-item {
+            text-align: center;
+            padding: 16px;
+            background: var(--bg-main);
+            border-radius: 10px;
+        }
+        
+        .ratio-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-teal);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        
+        .ratio-label {
+            font-size: 0.78rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .ratio-desc {
+            font-size: 0.72rem;
+            color: var(--text-light);
+        }
+        
+        /* Desk Exercises */
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+        
+        .exercise-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-top: 3px solid var(--ex-color);
+            transition: all 0.2s;
+        }
+        
+        .exercise-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+        
+        .exercise-card:nth-child(1) { --ex-color: var(--primary-blue); }
+        .exercise-card:nth-child(2) { --ex-color: var(--primary-purple); }
+        .exercise-card:nth-child(3) { --ex-color: var(--primary-orange); }
+        .exercise-card:nth-child(4) { --ex-color: var(--primary-green); }
+        
+        .exercise-time {
+            display: inline-block;
+            padding: 3px 10px;
+            background: var(--bg-main);
+            color: var(--ex-color);
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .exercise-card h3 {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .exercise-card > p {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        
+        .exercise-steps {
+            list-style: none;
+        }
+        
+        .exercise-steps li {
+            padding: 4px 0 4px 16px;
+            position: relative;
+            font-size: 0.78rem;
+            color: var(--text-medium);
+            line-height: 1.4;
+        }
+        
+        .exercise-steps li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--ex-color);
+            font-weight: 700;
+        }
+        
+        /* Pain Solutions */
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        
+        .pain-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-left: 4px solid var(--pain-color);
+        }
+        
+        .pain-card:nth-child(1) { --pain-color: var(--primary-red); }
+        .pain-card:nth-child(2) { --pain-color: var(--primary-orange); }
+        .pain-card:nth-child(3) { --pain-color: var(--primary-blue); }
+        
+        .pain-location {
+            font-size: 0.72rem;
+            color: var(--pain-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        
+        .pain-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .pain-cause {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 12px;
+            padding: 10px;
+            background: var(--bg-main);
+            border-radius: 8px;
+        }
+        
+        .pain-solutions {
+            list-style: none;
+        }
+        
+        .pain-solutions li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 0.82rem;
+            color: var(--text-dark);
+            line-height: 1.5;
+            font-weight: 500;
+        }
+        
+        .pain-solutions li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--pain-color);
+            font-weight: 700;
+        }
+        
+        /* Info Callout */
+        .info-callout {
+            padding: 16px 18px;
+            border-radius: 12px;
+            margin-top: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        
+        .info-callout.tip { background: #E8F8EE; border-left: 4px solid var(--primary-green); }
+        .info-callout.warning { background: #FFF3E0; border-left: 4px solid var(--primary-orange); }
+        .info-callout.important { background: #FFE8E8; border-left: 4px solid var(--primary-red); }
+        
+        .info-callout-icon { font-size: 1.3rem; flex-shrink: 0; }
+        .info-callout-text { font-size: 0.88rem; color: var(--text-dark); line-height: 1.5; }
+        .info-callout-text strong { font-weight: 600; }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            border-radius: 18px;
+            padding: 48px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.4;
+        }
+        
+        .cta-content { position: relative; z-index: 1; }
+        
+        .cta-section h2 { font-size: 1.8rem; margin-bottom: 10px; }
+        
+        .cta-section p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            margin-bottom: 22px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            padding: 12px 28px;
+            background: white;
+            color: var(--primary-teal);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border: 2px solid white;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        .btn-cta.secondary {
+            background: transparent;
+            color: white;
+        }
+        
+        .btn-cta.secondary:hover { background: rgba(255,255,255,0.15); }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-soft);
+            padding: 28px 40px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #50C878 0%, #1ABC9C 50%, #2ECC71 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        
+        .footer-links a:hover { color: var(--primary-green); }
+        
+        .footer-bottom {
+            color: var(--text-light);
+            font-size: 0.78rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .ergo-grid { grid-template-columns: 1fr; }
+            .break-grid { grid-template-columns: 1fr; }
+            .exercise-grid { grid-template-columns: repeat(2, 1fr); }
+            .pain-grid { grid-template-columns: 1fr; }
+            .standing-ratio { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 12px 20px; }
+            .hero { padding: 36px 20px 28px; }
+            .hero h1 { font-size: 1.8rem; }
+            .main-container { padding: 0 20px 30px; }
+            .angle-diagram { gap: 20px; }
+            .angle-circle { width: 100px; height: 100px; }
+            .angle-circle::before { width: 65px; height: 65px; }
+            .angle-value { font-size: 1.5rem; }
+            .exercise-grid { grid-template-columns: 1fr; }
+            .cta-section { padding: 36px 24px; }
+            .cta-section h2 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="men-lifestyle-overview.html" class="back-link">← Quay lại Lifestyle</a>
+    </header>
+    
+    <section class="hero-wrapper">
+        <div class="hero">
+            <span class="hero-badge">OFFICE SETUP</span>
+            <h1>Tư Thế <span>Văn Phòng</span></h1>
+            <div class="hero-subtitle">Ergonomic setup · Break schedule · Desk exercises</div>
+            <p>8 tiếng ngồi sai tư thế = 8 tiếng phá hủy cơ thể. Guide này giúp bạn setup workstation đúng cách, giảm pain, và maintain posture tốt dù ngồi nhiều.</p>
+        </div>
+    </section>
+    
+    <div class="main-container">
+        
+        <!-- 90-90-90 Rule -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">90-90-90 Rule</h2>
+                <p class="section-subtitle">Golden rule cho sitting posture</p>
+            </div>
+            
+            <div class="posture-visual">
+                <p style="font-size: 0.92rem; color: var(--text-medium); line-height: 1.6; max-width: 700px; margin: 0 auto 20px;">
+                    Tư thế ngồi chuẩn: <strong>3 góc 90 độ</strong> - ankles, knees, hips. Giữ spine neutral, shoulders relaxed, screen ngang tầm mắt. Đây là foundation - mọi ergonomic setup khác đều build trên rule này.
+                </p>
+                
+                <div class="angle-diagram">
+                    <div class="angle-item">
+                        <div class="angle-circle">
+                            <div class="angle-value">90°</div>
+                        </div>
+                        <div class="angle-label">Ankles</div>
+                        <div class="angle-desc">Bàn chân phẳng trên sàn hoặc footrest</div>
+                    </div>
+                    
+                    <div class="angle-item">
+                        <div class="angle-circle">
+                            <div class="angle-value">90°</div>
+                        </div>
+                        <div class="angle-label">Knees</div>
+                        <div class="angle-desc">Gối ngang hoặc thấp hơn hips một chút</div>
+                    </div>
+                    
+                    <div class="angle-item">
+                        <div class="angle-circle">
+                            <div class="angle-value">90°</div>
+                        </div>
+                        <div class="angle-label">Hips</div>
+                        <div class="angle-desc">Lưng tựa vào chair, spine neutral</div>
+                    </div>
+                </div>
+                
+                <div class="info-callout tip">
+                    <div class="info-callout-icon">💡</div>
+                    <div class="info-callout-text">
+                        <strong>Quick check:</strong> Nếu feet không chạm sàn → dùng footrest. Nếu knees cao hơn hips → hạ chair hoặc dùng cushion. Nếu phải nhìn xuống screen → raise monitor.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Ergonomic Setup -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Ergonomic Setup</h2>
+                <p class="section-subtitle">4 components cần optimize</p>
+            </div>
+            
+            <div class="ergo-grid">
+                <div class="ergo-card">
+                    <h3>Laptop Height & Stand</h3>
+                    <p>Laptop quá thấp = neck flexion = neck pain, headaches. Top of screen phải ngang tầm mắt.</p>
+                    <ul class="ergo-list">
+                        <li>Dùng laptop stand raise screen lên</li>
+                        <li>Top of screen ngang eye level</li>
+                        <li>Distance: 50-70cm từ mắt</li>
+                        <li>External keyboard + mouse khi dùng stand</li>
+                        <li>Angle: 10-20° tilt back</li>
+                    </ul>
+                    <div class="ergo-recommendation">
+                        <strong>Recommendation:</strong> Laptop stand $20-40 + external keyboard/mouse. ROI: giảm neck pain 80%.
+                    </div>
+                </div>
+                
+                <div class="ergo-card">
+                    <h3>Mouse Selection</h3>
+                    <p>Traditional mouse = forearm pronation = wrist strain. Vertical mouse giữ forearm neutral position.</p>
+                    <ul class="ergo-list">
+                        <li>Vertical mouse: giảm wrist strain 50%</li>
+                        <li>Trackball mouse: alternative tốt</li>
+                        <li>Size: vừa với hand, không quá lớn</li>
+                        <li>Wireless để giảm cable clutter</li>
+                        <li>Switch hands nếu có thể</li>
+                    </ul>
+                    <div class="ergo-recommendation">
+                        <strong>Recommendation:</strong> Logitech MX Vertical hoặc Anker Vertical. Budget option: Jelly Comb vertical mouse.
+                    </div>
+                </div>
+                
+                <div class="ergo-card">
+                    <h3>Keyboard Setup</h3>
+                    <p>Keyboard quá cao = shoulder elevation = tension. Ergonomic keyboard giảm wrist extension.</p>
+                    <ul class="ergo-list">
+                        <li>Keyboard ngang elbow height</li>
+                        <li>Split keyboard cho wrist neutral</li>
+                        <li>Tent angle: 5-10° (không quá cao)</li>
+                        <li>Wrist rest: chỉ dùng khi typing pause</li>
+                        <li>Mechanical keyboard: tactile feedback tốt hơn</li>
+                    </ul>
+                    <div class="ergo-recommendation">
+                        <strong>Recommendation:</strong> Logitech ERGO K860 (split) hoặc Keychron K8 (mechanical, budget).
+                    </div>
+                </div>
+                
+                <div class="ergo-card">
+                    <h3>Monitor Distance & Height</h3>
+                    <p>Monitor quá gần = eye strain. Quá xa = lean forward = back pain. Height sai = neck pain.</p>
+                    <ul class="ergo-list">
+                        <li>Distance: 50-70cm (arm's length)</li>
+                        <li>Height: top of screen ngang eye level</li>
+                        <li>Tilt: 10-20° back</li>
+                        <li>Dual monitors: angle 30° inward</li>
+                        <li>Primary screen thẳng trước mặt</li>
+                    </ul>
+                    <div class="ergo-recommendation">
+                        <strong>Recommendation:</strong> Monitor arm mount (flexible positioning). 24-27" screen cho desk work.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Break Schedule -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Break Schedule</h2>
+                <p class="section-subtitle">2 rules để giảm strain</p>
+            </div>
+            
+            <div class="break-grid">
+                <div class="break-card">
+                    <div class="break-rule">20-20-20</div>
+                    <h3>Eye Strain Prevention</h3>
+                    <p>Mỗi 20 phút, nhìn vật cách 20 feet (6m) trong 20 giây. Giảm digital eye strain, headaches, dry eyes.</p>
+                    <ol class="break-steps">
+                        <li>Set timer mỗi 20 phút</li>
+                        <li>Nhìn ra xa (cửa sổ, wall far away)</li>
+                        <li>Focus 20 giây, blink nhiều</li>
+                        <li>Return to work</li>
+                    </ol>
+                </div>
+                
+                <div class="break-card">
+                    <div class="break-rule">60/5</div>
+                    <h3>Hourly Movement Break</h3>
+                    <p>Mỗi 60 phút ngồi, đứng lên 5 phút. Walk, stretch, refill water. Prevents stiffness, DVT, back pain.</p>
+                    <ol class="break-steps">
+                        <li>Stand up khỏi chair</li>
+                        <li>Walk 2-3 phút (refill water, bathroom)</li>
+                        <li>2 phút stretching (neck, shoulders, hips)</li>
+                        <li>Sit back down với posture check</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="info-callout warning">
+                <div class="info-callout-icon">⚠️</div>
+                <div class="info-callout-text">
+                    <strong>Reality check:</strong> Perfect posture không tồn tại. Best posture = next posture. Movement > static position. Change positions thường xuyên.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Standing Desk Guide -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Standing Desk Guide</h2>
+                <p class="section-subtitle">When & how to use đúng cách</p>
+            </div>
+            
+            <div class="standing-card">
+                <p style="font-size: 0.92rem; color: var(--text-medium); line-height: 1.6; margin-bottom: 16px;">
+                    Standing desk không phải solution cho mọi vấn đề. Standing quá lâu = leg pain, varicose veins. Key là <strong>alternating</strong> giữa sitting và standing.
+                </p>
+                
+                <div class="standing-ratio">
+                    <div class="ratio-item">
+                        <div class="ratio-value">1:3</div>
+                        <div class="ratio-label">Sitting Ratio</div>
+                        <div class="ratio-desc">45 phút ngồi</div>
+                    </div>
+                    <div class="ratio-item">
+                        <div class="ratio-value">15'</div>
+                        <div class="ratio-label">Standing</div>
+                        <div class="ratio-desc">15 phút đứng</div>
+                    </div>
+                    <div class="ratio-item">
+                        <div class="ratio-value">4-6h</div>
+                        <div class="ratio-label">Max Standing</div>
+                        <div class="ratio-desc">Không quá 6h/ngày</div>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 20px;">
+                    <div>
+                        <h4 style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 8px; font-family: 'Inter', sans-serif; font-weight: 700;">Standing Desk Height</h4>
+                        <ul class="ergo-list">
+                            <li>Elbows 90° khi typing</li>
+                            <li>Screen ngang eye level</li>
+                            <li>Weight distribute đều 2 chân</li>
+                            <li>Anti-fatigue mat nếu đứng lâu</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 8px; font-family: 'Inter', sans-serif; font-weight: 700;">When to Stand</h4>
+                        <ul class="ergo-list">
+                            <li>Sau 45-60 phút sitting</li>
+                            <li>During calls/meetings</li>
+                            <li>Reading emails (light tasks)</li>
+                            <li>Không đứng khi deep work</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="info-callout tip">
+                    <div class="info-callout-icon">💡</div>
+                    <div class="info-callout-text">
+                        <strong>Budget option:</strong> Laptop riser + external keyboard/mouse. Không cần $500 standing desk. Start simple, upgrade sau.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 5-min Desk Exercises -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">5-Minute Desk Exercises</h2>
+                <p class="section-subtitle">4 areas cần mobilize</p>
+            </div>
+            
+            <div class="exercise-grid">
+                <div class="exercise-card">
+                    <div class="exercise-time">2 min</div>
+                    <h3>Neck</h3>
+                    <p>Giảm neck tension, headaches từ screen time.</p>
+                    <ul class="exercise-steps">
+                        <li>Chin tucks: 10 reps</li>
+                        <li>Neck rotations: 5 mỗi bên</li>
+                        <li>Ear to shoulder: 30s mỗi bên</li>
+                        <li>Chin to chest: 30s hold</li>
+                    </ul>
+                </div>
+                
+                <div class="exercise-card">
+                    <div class="exercise-time">1 min</div>
+                    <h3>Shoulders</h3>
+                    <p>Counteract rounded shoulders từ typing.</p>
+                    <ul class="exercise-steps">
+                        <li>Shoulder rolls: 10 forward, 10 back</li>
+                        <li>Arm circles: 10 mỗi direction</li>
+                        <li>Chest stretch (doorway): 30s</li>
+                        <li>Scapular squeezes: 10 reps</li>
+                    </ul>
+                </div>
+                
+                <div class="exercise-card">
+                    <div class="exercise-time">1 min</div>
+                    <h3>Back</h3>
+                    <p>Reduce lower back stiffness từ sitting.</p>
+                    <ul class="exercise-steps">
+                        <li>Seated cat-cow: 10 reps</li>
+                        <li>Seated spinal twist: 30s mỗi bên</li>
+                        <li>Standing back extension: 10 reps</li>
+                        <li>Child's pose (nếu có space): 30s</li>
+                    </ul>
+                </div>
+                
+                <div class="exercise-card">
+                    <div class="exercise-time">1 min</div>
+                    <h3>Hips</h3>
+                    <p>Open tight hip flexors từ sitting.</p>
+                    <ul class="exercise-steps">
+                        <li>Seated figure-4: 30s mỗi bên</li>
+                        <li>Standing hip flexor stretch: 30s</li>
+                        <li>Glute squeezes: 10 reps</li>
+                        <li>Standing knee hugs: 5 mỗi bên</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-callout tip">
+                <div class="info-callout-icon">💡</div>
+                <div class="info-callout-text">
+                    <strong>When to do:</strong> Sau mỗi hourly break (60/5 rule). Total: 5 phút mỗi giờ = 40 phút/ngày. Preventive > reactive.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Common Office Pain Solutions -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Common Office Pain Solutions</h2>
+                <p class="section-subtitle">3 pain points phổ biến + fixes</p>
+            </div>
+            
+            <div class="pain-grid">
+                <div class="pain-card">
+                    <div class="pain-location">Lower Back</div>
+                    <h3>Lower Back Pain</h3>
+                    <div class="pain-cause">
+                        <strong>Cause:</strong> Prolonged sitting, weak core, tight hip flexors, poor lumbar support.
+                    </div>
+                    <ul class="pain-solutions">
+                        <li>Lumbar roll hoặc cushion cho chair</li>
+                        <li>Hip flexor stretches mỗi giờ</li>
+                        <li>Core strengthening (plank, bird dog)</li>
+                        <li>Standing desk alternating</li>
+                        <li>Dead hangs cho spinal decompression</li>
+                    </ul>
+                </div>
+                
+                <div class="pain-card">
+                    <div class="pain-location">Neck & Shoulders</div>
+                    <h3>Neck Pain & Tension</h3>
+                    <div class="pain-cause">
+                        <strong>Cause:</strong> Screen quá thấp, forward head posture, stress, phone use.
+                    </div>
+                    <ul class="pain-solutions">
+                        <li>Raise monitor đến eye level</li>
+                        <li>Chin tucks exercises daily</li>
+                        <li>Heat therapy (heating pad 15min)</li>
+                        <li>Massage ball cho trigger points</li>
+                        <li>Reduce phone use (text neck)</li>
+                    </ul>
+                </div>
+                
+                <div class="pain-card">
+                    <div class="pain-location">Wrists & Hands</div>
+                    <h3>Wrist Strain & Carpal Tunnel</h3>
+                    <div class="pain-cause">
+                        <strong>Cause:</strong> Repetitive typing, wrist extension, poor mouse position.
+                    </div>
+                    <ul class="pain-solutions">
+                        <li>Vertical mouse hoặc trackball</li>
+                        <li>Wrist stretches mỗi giờ</li>
+                        <li>Keyboard tray để wrists neutral</li>
+                        <li>Take frequent breaks (20-20-20)</li>
+                        <li>Night wrist splints nếu severe</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-callout important">
+                <div class="info-callout-icon"></div>
+                <div class="info-callout-text">
+                    <strong>Red flags:</strong> Numbness, tingling, weakness, pain radiating down arms/legs → consult doctor/physio. Đừng ignore nerve symptoms.
+                </div>
+            </div>
+        </div>
+        
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <div class="cta-content">
+                <h2>Cải thiện tư thế ngay hôm nay</h2>
+                <p>Start với 90-90-90 rule + hourly breaks. 2 small changes, big impact. Your future self will thank you.</p>
+                <div class="cta-buttons">
+                    <a href="men-lifestyle-habits.html" class="btn-cta">Xem Daily Habits</a>
+                    <a href="men-lifestyle-stress.html" class="btn-cta secondary">Quản lý Stress</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="men-30-40.html">Nam 30-40</a>
+            <a href="men-lifestyle-overview.html">Lifestyle Overview</a>
+            <a href="men-lifestyle-sleep.html">Sleep</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+</body>
+</html>
