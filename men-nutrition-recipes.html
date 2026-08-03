@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-amber: #F39C12;
+            --primary-orange: #E67E22;
+            --primary-green: #50C878;
+            --primary-teal: #1ABC9C;
+            --primary-red: #E74C3C;
+            --primary-blue: #4A90E2;
+            --primary-purple: #9B59B6;
+            
+            --text-dark: #1A202C;
+            --text-medium: #4A5568;
+            --text-light: #718096;
+            --bg-main: #F7FAFC;
+            --bg-card: #FFFFFF;
+            --border-soft: #E2E8F0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 14px 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 50%, #50C878 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover { color: var(--primary-amber); }
+        
+        /* Hero - Full width gradient */
+        .hero-wrapper {
+            width: 100%;
+            background: linear-gradient(135deg, #FFF8E7 0%, #FFF3E0 40%, #E8F8EE 100%);
+            border-radius: 0 0 24px 24px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .hero-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(243,156,18,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(80,200,120,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 40px 36px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%);
+            color: white;
+            padding: 5px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.72rem;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+        
+        .hero h1 {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 50%, #50C878 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--text-medium);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .hero p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            text-align: center;
+            min-width: 110px;
+        }
+        
+        .stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-amber);
+            line-height: 1;
+        }
+        
+        .stat-item:nth-child(2) .stat-value { color: var(--primary-green); }
+        .stat-item:nth-child(3) .stat-value { color: var(--primary-orange); }
+        
+        .stat-label {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px 40px;
+        }
+        
+        /* Filter Bar */
+        .filter-bar {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            margin-bottom: 20px;
+        }
+        
+        .search-box {
+            position: relative;
+            margin-bottom: 16px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 16px 12px 42px;
+            border: 2px solid var(--border-soft);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.92rem;
+            background: var(--bg-main);
+            transition: all 0.2s;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-amber);
+            background: white;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+        
+        .filter-groups {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        
+        .filter-group h4 {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .filter-chip {
+            padding: 6px 12px;
+            background: var(--bg-main);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .filter-chip:hover {
+            border-color: var(--primary-amber);
+            color: var(--primary-amber);
+        }
+        
+        .filter-chip.active {
+            background: var(--primary-amber);
+            color: white;
+            border-color: var(--primary-amber);
+        }
+        
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+        
+        .category-tab {
+            padding: 10px 18px;
+            background: var(--bg-card);
+            border: 2px solid var(--border-soft);
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .category-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        
+        .category-tab.active {
+            background: var(--primary-amber);
+            color: white;
+            border-color: var(--primary-amber);
+        }
+        
+        .tab-count {
+            font-size: 0.72rem;
+            padding: 2px 8px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 6px;
+            font-weight: 700;
+        }
+        
+        .category-tab:not(.active) .tab-count {
+            background: var(--bg-main);
+            color: var(--text-light);
+        }
+        
+        /* Results Counter */
+        .results-counter {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding: 10px 16px;
+            background: var(--bg-card);
+            border-radius: 10px;
+            border: 1px solid var(--border-soft);
+            font-size: 0.85rem;
+        }
+        
+        .results-count { font-weight: 600; color: var(--text-dark); }
+        .results-count strong { color: var(--primary-amber); font-weight: 700; }
+        .results-hint { color: var(--text-light); font-size: 0.78rem; }
+        
+        /* Recipe Grid */
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 14px;
+            margin-bottom: 36px;
+        }
+        
+        .recipe-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-left: 3px solid var(--recipe-color);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .recipe-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            border-color: var(--recipe-color);
+        }
+        
+        .recipe-card[data-category="breakfast"] { --recipe-color: var(--primary-amber); }
+        .recipe-card[data-category="lunch"] { --recipe-color: var(--primary-green); }
+        .recipe-card[data-category="dinner"] { --recipe-color: var(--primary-blue); }
+        .recipe-card[data-category="snacks"] { --recipe-color: var(--primary-purple); }
+        
+        .recipe-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .recipe-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.3;
+            flex: 1;
+        }
+        
+        .recipe-name-vi {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-top: 2px;
+        }
+        
+        .recipe-time {
+            font-size: 0.72rem;
+            padding: 3px 10px;
+            background: var(--recipe-color);
+            color: white;
+            border-radius: 6px;
+            font-weight: 700;
+            white-space: nowrap;
+            margin-left: 10px;
+        }
+        
+        .recipe-meta {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+            padding: 10px;
+            background: var(--bg-main);
+            border-radius: 8px;
+        }
+        
+        .meta-mini { text-align: center; }
+        
+        .meta-mini-value {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1;
+        }
+        
+        .meta-mini-label {
+            font-size: 0.65rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin-top: 3px;
+            font-weight: 600;
+        }
+        
+        .recipe-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .recipe-tag {
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            background: var(--bg-main);
+            color: var(--text-medium);
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
+        .recipe-tag.difficulty-easy { background: #E8F8EE; color: var(--primary-green); }
+        .recipe-tag.difficulty-medium { background: #FFF3E0; color: var(--primary-orange); }
+        .recipe-tag.difficulty-hard { background: #FFE8E8; color: var(--primary-red); }
+        
+        .recipe-view-btn {
+            display: block;
+            text-align: center;
+            padding: 8px;
+            background: var(--bg-main);
+            color: var(--recipe-color);
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .recipe-card:hover .recipe-view-btn {
+            background: var(--recipe-color);
+            color: white;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+            display: none;
+        }
+        
+        .no-results.active { display: block; }
+        .no-results h3 { color: var(--text-medium); margin-bottom: 8px; font-size: 1.2rem; }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 32, 44, 0.7);
+            backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        
+        .modal-overlay.active { display: flex; animation: fadeIn 0.3s ease; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal {
+            background: white;
+            border-radius: 20px;
+            max-width: 760px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-header {
+            padding: 28px 32px 20px;
+            border-bottom: 1px solid var(--border-soft);
+            position: sticky;
+            top: 0;
+            background: white;
+            border-radius: 20px 20px 0 0;
+            z-index: 10;
+        }
+        
+        .modal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--modal-color);
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-main);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text-medium);
+            transition: all 0.2s;
+            z-index: 11;
+        }
+        
+        .modal-close:hover {
+            background: var(--border-soft);
+            transform: rotate(90deg);
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+            padding-right: 40px;
+        }
+        
+        .modal-title-vi {
+            font-size: 0.92rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+        
+        .modal-meta {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .modal-meta-item {
+            padding: 5px 12px;
+            background: var(--bg-main);
+            border-radius: 8px;
+            font-size: 0.78rem;
+            color: var(--text-medium);
+            font-weight: 600;
+        }
+        
+        .modal-body { padding: 28px 32px; }
+        
+        .modal-section { margin-bottom: 24px; }
+        
+        .modal-section h3 {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section-indicator {
+            width: 4px;
+            height: 18px;
+            background: var(--modal-color);
+            border-radius: 2px;
+        }
+        
+        /* Nutrition Facts */
+        .nutrition-facts {
+            background: var(--bg-main);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        
+        .nutrition-main {
+            text-align: center;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-soft);
+            margin-bottom: 16px;
+        }
+        
+        .nutrition-main-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--modal-color);
+            line-height: 1;
+        }
+        
+        .nutrition-main-label {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+        
+        .nutrition-bars { display: grid; gap: 12px; }
+        
+        .nutrition-bar-item {
+            display: grid;
+            grid-template-columns: 80px 1fr 80px;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .nutrition-bar-label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .nutrition-bar-track {
+            height: 8px;
+            background: white;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .nutrition-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.4s ease;
+        }
+        
+        .nutrition-bar-fill.protein { background: var(--primary-green); }
+        .nutrition-bar-fill.carbs { background: var(--primary-orange); }
+        .nutrition-bar-fill.fat { background: var(--primary-amber); }
+        
+        .nutrition-bar-value {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-align: right;
+        }
+        
+        /* Ingredients */
+        .ingredients-list {
+            list-style: none;
+            display: grid;
+            gap: 8px;
+        }
+        
+        .ingredients-list li {
+            padding: 10px 12px 10px 36px;
+            background: var(--bg-main);
+            border-radius: 10px;
+            position: relative;
+            color: var(--text-dark);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+        
+        .ingredients-list li::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--modal-color);
+            border-radius: 4px;
+        }
+        
+        /* Steps */
+        .steps-list {
+            list-style: none;
+            counter-reset: step-counter;
+            display: grid;
+            gap: 10px;
+        }
+        
+        .steps-list li {
+            counter-increment: step-counter;
+            padding: 12px 12px 12px 50px;
+            background: var(--bg-main);
+            border-radius: 10px;
+            position: relative;
+            color: var(--text-dark);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+        
+        .steps-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            background: var(--modal-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.82rem;
+        }
+        
+        /* Tips */
+        .tip-list {
+            list-style: none;
+        }
+        
+        .tip-list li {
+            padding: 10px 12px 10px 36px;
+            background: var(--bg-main);
+            border-radius: 10px;
+            position: relative;
+            color: var(--text-dark);
+            font-size: 0.88rem;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        .tip-list li::before {
+            content: '💡';
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.9rem;
+        }
+        
+        .modal-footer {
+            padding: 16px 32px 24px;
+            border-top: 1px solid var(--border-soft);
+        }
+        
+        .modal-note {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            text-align: center;
+            font-style: italic;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 50%, #50C878 100%);
+            border-radius: 18px;
+            padding: 48px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.4;
+        }
+        
+        .cta-content { position: relative; z-index: 1; }
+        
+        .cta-section h2 { font-size: 1.8rem; margin-bottom: 10px; }
+        
+        .cta-section p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            margin-bottom: 22px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            padding: 12px 28px;
+            background: white;
+            color: var(--primary-orange);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border: 2px solid white;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        .btn-cta.secondary {
+            background: transparent;
+            color: white;
+        }
+        
+        .btn-cta.secondary:hover { background: rgba(255,255,255,0.15); }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-soft);
+            padding: 28px 40px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 50%, #50C878 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        
+        .footer-links a:hover { color: var(--primary-amber); }
+        
+        .footer-bottom {
+            color: var(--text-light);
+            font-size: 0.78rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .filter-groups { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 12px 20px; }
+            .hero { padding: 36px 20px 28px; }
+            .hero h1 { font-size: 1.8rem; }
+            .main-container { padding: 0 20px 30px; }
+            .filter-groups { grid-template-columns: 1fr; }
+            .recipe-grid { grid-template-columns: 1fr; }
+            .modal { max-height: 95vh; border-radius: 16px; }
+            .modal-header, .modal-body, .modal-footer { padding-left: 20px; padding-right: 20px; }
+            .modal-title { font-size: 1.4rem; }
+            .nutrition-bar-item { grid-template-columns: 70px 1fr 70px; }
+            .cta-section { padding: 36px 24px; }
+            .cta-section h2 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="men-nutrition-overview.html" class="back-link">← Quay lại Nutrition</a>
+    </header>
+    
+    <section class="hero-wrapper">
+        <div class="hero">
+            <span class="hero-badge">RECIPES</span>
+            <h1>Công Thức <span>Nấu Ăn</span></h1>
+            <div class="hero-subtitle">30+ recipes · Under 30 min · High protein</div>
+            <p>Công thức nấu ăn đơn giản, nhanh gọn, phù hợp người bận rộn. Filter theo thời gian, calories, meal type và difficulty.</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-value">30+</div>
+                    <div class="stat-label">Recipes</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">30'</div>
+                    <div class="stat-label">Max time</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">25g+</div>
+                    <div class="stat-label">Protein avg</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="main-container">
+        
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <div class="search-box">
+                <span class="search-icon"></span>
+                <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm công thức... (VD: Chicken, Pasta, Smoothie)">
+            </div>
+            
+            <div class="filter-groups">
+                <div class="filter-group">
+                    <h4>Time</h4>
+                    <div class="filter-options" id="timeFilter">
+                        <button class="filter-chip active" data-filter="all" data-type="time">Tất cả</button>
+                        <button class="filter-chip" data-filter="under15" data-type="time">&lt; 15 min</button>
+                        <button class="filter-chip" data-filter="15-30" data-type="time">15-30 min</button>
+                        <button class="filter-chip" data-filter="30+" data-type="time">30+ min</button>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h4>Calories</h4>
+                    <div class="filter-options" id="caloriesFilter">
+                        <button class="filter-chip active" data-filter="all" data-type="calories">Tất cả</button>
+                        <button class="filter-chip" data-filter="low" data-type="calories">&lt; 400 kcal</button>
+                        <button class="filter-chip" data-filter="medium" data-type="calories">400-600</button>
+                        <button class="filter-chip" data-filter="high" data-type="calories">&gt; 600 kcal</button>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h4>Difficulty</h4>
+                    <div class="filter-options" id="difficultyFilter">
+                        <button class="filter-chip active" data-filter="all" data-type="difficulty">Tất cả</button>
+                        <button class="filter-chip" data-filter="easy" data-type="difficulty">Easy</button>
+                        <button class="filter-chip" data-filter="medium" data-type="difficulty">Medium</button>
+                        <button class="filter-chip" data-filter="hard" data-type="difficulty">Hard</button>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h4>Servings</h4>
+                    <div class="filter-options" id="servingsFilter">
+                        <button class="filter-chip active" data-filter="all" data-type="servings">Tất cả</button>
+                        <button class="filter-chip" data-filter="1" data-type="servings">1 person</button>
+                        <button class="filter-chip" data-filter="2" data-type="servings">2 people</button>
+                        <button class="filter-chip" data-filter="4" data-type="servings">4+ people</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Category Tabs -->
+        <div class="category-tabs" id="categoryTabs">
+            <button class="category-tab active" data-category="all">Tất cả <span class="tab-count" id="count-all">32</span></button>
+            <button class="category-tab" data-category="breakfast">Breakfast <span class="tab-count" id="count-breakfast">8</span></button>
+            <button class="category-tab" data-category="lunch">Lunch <span class="tab-count" id="count-lunch">8</span></button>
+            <button class="category-tab" data-category="dinner">Dinner <span class="tab-count" id="count-dinner">8</span></button>
+            <button class="category-tab" data-category="snacks">Snacks <span class="tab-count" id="count-snacks">8</span></button>
+        </div>
+        
+        <!-- Results Counter -->
+        <div class="results-counter">
+            <div class="results-count">Hiển thị <strong id="showingCount">32</strong> công thức</div>
+            <div class="results-hint">Click vào recipe để xem chi tiết</div>
+        </div>
+        
+        <!-- Recipe Grid -->
+        <div class="recipe-grid" id="recipeGrid"></div>
+        
+        <!-- No Results -->
+        <div class="no-results" id="noResults">
+            <h3>Không tìm thấy công thức phù hợp</h3>
+            <p>Hãy thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</p>
+        </div>
+        
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <div class="cta-content">
+                <h2>Bắt đầu nấu ăn</h2>
+                <p>Chọn 1 công thức, chuẩn bị ingredients, và bắt đầu nấu. Cooking là skill - practice makes perfect.</p>
+                <div class="cta-buttons">
+                    <a href="men-nutrition-food-library.html" class="btn-cta">Khám phá Food Library</a>
+                    <a href="men-nutrition-logger.html" class="btn-cta secondary">Bắt đầu Food Logger</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <button class="modal-close" id="modalClose">✕</button>
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <div class="modal-title-vi" id="modalTitleVi"></div>
+                <div class="modal-meta" id="modalMeta"></div>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer">
+                <div class="modal-note">* Thông tin dinh dưỡng tính per serving</div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="men-30-40.html">Nam 30-40</a>
+            <a href="men-nutrition-overview.html">Nutrition Overview</a>
+            <a href="men-nutrition-calculator.html">Calculator</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // ==================== RECIPE DATABASE (32 recipes) ====================
+        const recipeDatabase = [
+            // ===== BREAKFAST (8) =====
+            { id: 1, name: "Overnight Oats", nameVi: "Yến mạch qua đêm", category: "breakfast", time: 5, calories: 450, protein: 35, carbs: 55, fat: 12, difficulty: "easy", servings: 1, ingredients: ["1/2 cup rolled oats", "1 cup milk (dairy hoặc plant-based)", "1 scoop whey protein", "1/2 banana sliced", "1 tbsp chia seeds", "1 tbsp honey", "Berries (optional)"], steps: ["Mix oats, milk, whey, chia seeds trong jar/bowl", "Khuấy đều, đậy nắp", "Để trong tủ lạnh qua đêm (8h+)", "Sáng lấy ra, thêm banana, berries, honey", "Ăn lạnh hoặc microwave 30s nếu thích ấm"], tips: ["Prep 3-4 jars cho cả tuần", "Dùng milk高蛋白 để tăng protein", "Thêm PB hoặc nuts cho healthy fats"] },
+            { id: 2, name: "Egg Scramble", nameVi: "Trứng scramble", category: "breakfast", time: 10, calories: 420, protein: 28, carbs: 32, fat: 18, difficulty: "easy", servings: 1, ingredients: ["3 eggs", "1 cup spinach", "1/4 cup cheese (cheddar/feta)", "2 slices whole wheat toast", "Salt, pepper", "1 tsp olive oil"], steps: ["Đập eggs vào bowl, đánh đều với salt, pepper", "Heat olive oil trong pan (medium heat)", "Đổ eggs vào, khuấy nhẹ", "Khi eggs gần chín, thêm spinach và cheese", "Ăn kèm toast"], tips: ["Đừng cook quá lâu - eggs sẽ khô", "Thêm veg khác: mushrooms, tomatoes, peppers", "Dùng non-stick pan để ít oil"] },
+            { id: 3, name: "Protein Smoothie", nameVi: "Smoothie protein", category: "breakfast", time: 5, calories: 520, protein: 38, carbs: 68, fat: 14, difficulty: "easy", servings: 1, ingredients: ["1 scoop whey protein", "1 banana", "1/2 cup oats", "1 cup milk", "1 tbsp peanut butter", "Ice cubes", "Cinnamon (optional)"], steps: ["Cho tất cả ingredients vào blender", "Blend 30-45s đến khi smooth", "Đổ ra ly, uống ngay"], tips: ["Freeze banana trước cho texture đặc hơn", "Thêm spinach - không taste nhưng tăng nutrients", "Dùng Greek yogurt thay milk cho thicker"] },
+            { id: 4, name: "Greek Yogurt Bowl", nameVi: "Bowl sữa chua Hy Lạp", category: "breakfast", time: 5, calories: 380, protein: 24, carbs: 48, fat: 10, difficulty: "easy", servings: 1, ingredients: ["1 cup Greek yogurt (plain)", "1/4 cup granola", "1/2 cup mixed berries", "1 tbsp honey", "1 tbsp almonds", "Chia seeds (optional)"], steps: ["Scoop yogurt vào bowl", "Top với granola, berries, almonds", "Drizzle honey", "Sprinkle chia seeds", "Ăn ngay"], tips: ["Chọn Greek yogurt không đường", "Make your own granola để control sugar", "Thêm protein powder vào yogurt để tăng protein"] },
+            { id: 5, name: "Avocado Toast + Eggs", nameVi: "Toast bơ + trứng", category: "breakfast", time: 10, calories: 480, protein: 22, carbs: 42, fat: 24, difficulty: "easy", servings: 1, ingredients: ["2 slices whole wheat bread", "1 ripe avocado", "2 eggs", "Salt, pepper, chili flakes", "Lemon juice", "Olive oil"], steps: ["Toast bread đến khi crispy", "Mash avocado với lemon juice, salt, pepper", "Spread avocado lên toast", "Fry/poach eggs (tùy thích)", "Đặt eggs lên toast, sprinkle chili flakes"], tips: ["Avocado phải chín mềm mới ngon", "Poached eggs healthy hơn fried", "Thêm smoked salmon để tăng protein"] },
+            { id: 6, name: "Egg Muffins", nameVi: "Muffins trứng", category: "breakfast", time: 25, calories: 380, protein: 28, carbs: 12, fat: 24, difficulty: "medium", servings: 6, ingredients: ["8 eggs", "1 cup spinach chopped", "1/2 cup diced bell peppers", "1/2 cup cheese", "1/4 cup diced onions", "Salt, pepper", "Olive oil spray"], steps: ["Preheat oven 180°C", "Đập eggs vào bowl, đánh đều", "Thêm veg, cheese, seasonings", "Spray muffin tin với oil", "Đổ mixture vào cups (3/4 full)", "Bake 20-25 phút đến khi set", "Để nguội 5 phút trước khi lấy ra"], tips: ["Make ahead - giữ trong tủ lạnh 5 ngày", "Freeze để ăn dần", "Customize với veg/protein tùy thích"] },
+            { id: 7, name: "French Toast", nameVi: "Bánh mì nướng kiểu Pháp", category: "breakfast", time: 15, calories: 520, protein: 24, carbs: 62, fat: 18, difficulty: "medium", servings: 2, ingredients: ["4 slices whole wheat bread", "2 eggs", "1/2 cup milk", "1 tsp cinnamon", "1 tsp vanilla extract", "Butter for cooking", "Maple syrup, berries"], steps: ["Đánh eggs, milk, cinnamon, vanilla trong bowl", "Nhúng bread vào mixture (2 sides)", "Heat butter trong pan (medium)", "Cook bread 2-3 phút mỗi side đến khi golden", "Serve với maple syrup, berries"], tips: ["Dùng bread cũ (1-2 ngày) sẽ thấm tốt hơn", "Đừng soak quá lâu - bread sẽ nát", "Whole wheat bread healthy hơn white"] },
+            { id: 8, name: "Breakfast Burrito", nameVi: "Burrito bữa sáng", category: "breakfast", time: 15, calories: 580, protein: 32, carbs: 58, fat: 22, difficulty: "medium", servings: 2, ingredients: ["2 whole wheat tortillas", "4 eggs scrambled", "1/2 cup black beans", "1/4 cup cheese", "1/4 cup salsa", "1/2 avocado sliced", "Greek yogurt (sour cream thay thế)"], steps: ["Scramble eggs với salt, pepper", "Heat tortillas trong pan 30s mỗi side", "Layer eggs, beans, cheese, salsa, avocado lên tortilla", "Top với Greek yogurt", "Cuộn chặt, ăn ngay"], tips: ["Prep ingredients tối trước để sáng nhanh hơn", "Thêm chicken/turkey để tăng protein", "Wrap trong foil để mang đi"] },
+            
+            // ===== LUNCH (8) =====
+            { id: 9, name: "Chicken Rice Bowl", nameVi: "Cơm gà", category: "lunch", time: 20, calories: 580, protein: 48, carbs: 62, fat: 12, difficulty: "easy", servings: 1, ingredients: ["150g chicken breast", "1 cup cooked brown rice", "1 cup broccoli", "2 tbsp soy sauce", "1 tsp sesame oil", "Garlic, ginger", "Sesame seeds"], steps: ["Cut chicken thành cubes, marinate với soy sauce, garlic, ginger (15min)", "Cook rice (hoặc dùng rice cooker)", "Steam broccoli 5-7 phút", "Heat sesame oil trong pan, cook chicken 6-8 phút", "Assemble bowl: rice, chicken, broccoli", "Drizzle soy sauce, sprinkle sesame seeds"], tips: ["Marinate chicken tối trước để tiết kiệm thời gian", "Batch cook rice cho cả tuần", "Thêm egg hoặc edamame để tăng protein"] },
+            { id: 10, name: "Tuna Salad Wrap", nameVi: "Wrap salad cá ngừ", category: "lunch", time: 10, calories: 420, protein: 32, carbs: 38, fat: 14, difficulty: "easy", servings: 1, ingredients: ["1 can tuna (in water)", "1 whole wheat wrap", "1 cup mixed lettuce", "1/2 cup cherry tomatoes", "1/4 avocado", "1 tbsp olive oil", "Lemon juice, salt, pepper"], steps: ["Drain tuna, mix với olive oil, lemon juice, salt, pepper", "Lay wrap flat, spread tuna mixture", "Add lettuce, tomatoes, avocado", "Cuộn chặt, cắt đôi", "Ăn ngay hoặc wrap trong foil"], tips: ["Dùng tuna in water thay vì oil để giảm calories", "Thêm Greek yogurt thay mayo", "Prep multiple wraps cho meal prep"] },
+            { id: 11, name: "Beef Stir-fry", nameVi: "Bò xào", category: "lunch", time: 15, calories: 620, protein: 46, carbs: 68, fat: 16, difficulty: "medium", servings: 2, ingredients: ["200g lean beef strips", "2 cups mixed vegetables (bell peppers, broccoli, carrots)", "2 cups cooked rice", "3 tbsp soy sauce", "1 tbsp oyster sauce", "2 cloves garlic minced", "1 tsp cornstarch", "Sesame oil"], steps: ["Slice beef mỏng, marinate với 1 tbsp soy sauce + cornstarch (10min)", "Heat oil trong wok/pan (high heat)", "Stir-fry beef 2-3 phút, lấy ra", "Stir-fry vegetables 3-4 phút", "Thêm garlic, remaining soy sauce, oyster sauce", "Return beef, toss together", "Serve với rice"], tips: ["High heat là key cho stir-fry ngon", "Đừng overcrowd pan - cook theo batches", "Slice beef against grain để tender hơn"] },
+            { id: 12, name: "Salmon Salad", nameVi: "Salad cá hồi", category: "lunch", time: 20, calories: 540, protein: 42, carbs: 28, fat: 28, difficulty: "medium", servings: 1, ingredients: ["150g salmon fillet", "2 cups mixed greens", "1/2 cup cherry tomatoes", "1/4 cucumber sliced", "1/4 avocado", "2 tbsp olive oil", "1 tbsp lemon juice", "Salt, pepper, dill"], steps: ["Season salmon với salt, pepper, dill", "Pan-sear salmon 4-5 phút mỗi side (medium heat)", "Trong khi đó, assemble salad với greens, tomatoes, cucumber, avocado", "Whisk olive oil, lemon juice, salt, pepper cho dressing", "Đặt salmon lên salad, drizzle dressing"], tips: ["Đừng overcook salmon - medium là best", "Skin-side down khi sear cho crispy skin", "Thêm quinoa hoặc chickpeas để tăng protein/fiber"] },
+            { id: 13, name: "Turkey Sandwich", nameVi: "Sandwich gà tây", category: "lunch", time: 10, calories: 450, protein: 38, carbs: 48, fat: 12, difficulty: "easy", servings: 1, ingredients: ["2 slices whole wheat bread", "100g turkey breast sliced", "1 slice cheese", "Lettuce, tomato", "1 tbsp mustard", "1/4 avocado", "Salt, pepper"], steps: ["Toast bread (optional)", "Spread mustard lên 1 slice", "Layer turkey, cheese, lettuce, tomato, avocado", "Season với salt, pepper", "Đặt slice còn lại lên, cắt đôi"], tips: ["Dùng turkey breast nạc thay deli meat (nhiều sodium)", "Thêm hummus thay mayo", "Wrap trong foil để mang đi"] },
+            { id: 14, name: "Quinoa Bowl", nameVi: "Bowl quinoa", category: "lunch", time: 25, calories: 560, protein: 28, carbs: 72, fat: 16, difficulty: "medium", servings: 2, ingredients: ["1 cup quinoa", "1 cup chickpeas (canned)", "1 cup roasted vegetables", "1/4 cup feta cheese", "2 tbsp olive oil", "1 tbsp lemon juice", "Fresh herbs (parsley, mint)", "Salt, pepper"], steps: ["Rinse quinoa, cook với 2 cups water (15 phút)", "Trong khi đó, roast vegetables (200°C, 20 phút)", "Drain, rinse chickpeas", "Fluff quinoa với fork", "Assemble bowls: quinoa, chickpeas, vegetables, feta", "Drizzle olive oil, lemon juice, herbs"], tips: ["Quinoa có complete protein - tốt cho vegetarians", "Batch cook quinoa cho cả tuần", "Customize với protein tùy thích"] },
+            { id: 15, name: "Veggie Wrap", nameVi: "Wrap rau củ", category: "lunch", time: 10, calories: 380, protein: 14, carbs: 52, fat: 14, difficulty: "easy", servings: 1, ingredients: ["1 whole wheat wrap", "1/2 cup hummus", "1 cup mixed vegetables (cucumber, carrots, bell peppers, lettuce)", "1/4 avocado", "2 tbsp feta cheese", "Salt, pepper, lemon juice"], steps: ["Spread hummus đều lên wrap", "Layer vegetables, avocado, feta", "Season với salt, pepper, lemon juice", "Cuộn chặt, cắt đôi", "Ăn ngay"], tips: ["Thêm grilled chicken/tofu để tăng protein", "Dùng spinach wrap thay whole wheat", "Make ahead - giữ trong tủ lạnh 1 ngày"] },
+            { id: 16, name: "Shrimp Pasta", nameVi: "Mì tôm", category: "lunch", time: 20, calories: 580, protein: 42, carbs: 68, fat: 14, difficulty: "medium", servings: 2, ingredients: ["200g whole wheat pasta", "200g shrimp peeled", "2 cups cherry tomatoes", "3 cloves garlic minced", "2 tbsp olive oil", "Fresh basil", "Salt, pepper, chili flakes", "Parmesan cheese"], steps: ["Cook pasta theo package directions (al dente)", "Trong khi đó, heat olive oil trong pan", "Sauté garlic 30s, thêm shrimp cook 2-3 phút mỗi side", "Thêm cherry tomatoes, cook 3-4 phút", "Drain pasta, add vào pan", "Toss với basil, salt, pepper, chili flakes", "Serve với parmesan"], tips: ["Don't overcook shrimp - sẽ rubbery", "Reserve 1/2 cup pasta water cho sauce", "Whole wheat pasta có nhiều fiber hơn"] },
+            
+            // ===== DINNER (8) =====
+            { id: 17, name: "Grilled Chicken + Quinoa", nameVi: "Gà nướng + quinoa", category: "dinner", time: 25, calories: 620, protein: 52, carbs: 58, fat: 18, difficulty: "medium", servings: 2, ingredients: ["2 chicken thighs (boneless)", "1 cup quinoa", "2 cups mixed vegetables", "2 tbsp olive oil", "2 cloves garlic", "Lemon, herbs (rosemary, thyme)", "Salt, pepper"], steps: ["Marinate chicken với olive oil, garlic, lemon, herbs, salt, pepper (30min+)", "Cook quinoa với 2 cups water (15 phút)", "Grill chicken 6-7 phút mỗi side (hoặc bake 200°C 25 phút)", "Trong khi đó, roast vegetables", "Slice chicken, serve với quinoa và vegetables"], tips: ["Chicken thighs juicy hơn breast", "Marinate overnight để flavor sâu hơn", "Dùng meat thermometer - 74°C internal temp"] },
+            { id: 18, name: "Baked Salmon", nameVi: "Cá hồi nướng", category: "dinner", time: 25, calories: 640, protein: 44, carbs: 58, fat: 22, difficulty: "easy", servings: 2, ingredients: ["2 salmon fillets (150g each)", "2 cups sweet potato cubes", "2 cups asparagus", "2 tbsp olive oil", "2 cloves garlic", "Lemon, dill", "Salt, pepper"], steps: ["Preheat oven 200°C", "Toss sweet potato với 1 tbsp olive oil, salt, pepper", "Roast sweet potato 20 phút", "Trong khi đó, season salmon với garlic, lemon, dill, salt, pepper", "Thêm salmon và asparagus vào tray (drizzle olive oil)", "Bake thêm 12-15 phút", "Serve với lemon wedges"], tips: ["Salmon cook nhanh - đừng overcook", "Skin-side down khi bake", "Thêm capers hoặc olives cho Mediterranean flavor"] },
+            { id: 19, name: "Beef Curry", nameVi: "Cà ri bò", category: "dinner", time: 30, calories: 680, protein: 48, carbs: 72, fat: 22, difficulty: "medium", servings: 4, ingredients: ["400g lean beef cubes", "1 can coconut milk", "2 cups potatoes cubes", "1 cup carrots", "1 onion diced", "3 tbsp curry powder", "2 cloves garlic", "1 inch ginger", "2 cups cooked rice", "Fresh cilantro"], steps: ["Heat oil trong pot, cook onion, garlic, ginger 3-4 phút", "Thêm curry powder, cook 1 phút", "Thêm beef, cook 5 phút đến khi browned", "Thêm coconut milk, potatoes, carrots", "Simmer 20 phút đến khi beef tender", "Serve với rice, garnish cilantro"], tips: ["Dùng beef chuck - rẻ và tender khi cook lâu", "Make ahead - curry ngon hơn ngày hôm sau", "Freeze portions cho meals sau"] },
+            { id: 20, name: "Pork Chops", nameVi: "Sườn heo", category: "dinner", time: 25, calories: 620, protein: 48, carbs: 48, fat: 24, difficulty: "medium", servings: 2, ingredients: ["2 pork chops (bone-in)", "2 cups mashed sweet potato", "2 cups green beans", "2 tbsp olive oil", "2 cloves garlic", "Rosemary, thyme", "Salt, pepper", "Apple cider vinegar"], steps: ["Season pork chops với salt, pepper, herbs", "Heat olive oil trong pan (medium-high)", "Sear pork chops 4-5 phút mỗi side", "Thêm garlic, rosemary, baste với pan juices", "Cook đến 63°C internal (medium)", "Trong khi đó, mash sweet potato, steam green beans", "Rest pork 5 phút trước khi serve"], tips: ["Bone-in pork chops flavorful hơn", "Đừng overcook - sẽ khô", "Rest meat để juices redistribute"] },
+            { id: 21, name: "Tofu Stir-fry", nameVi: "Đậu phụ xào", category: "dinner", time: 20, calories: 540, protein: 28, carbs: 68, fat: 18, difficulty: "easy", servings: 2, ingredients: ["300g firm tofu", "2 cups mixed vegetables", "2 cups cooked rice", "3 tbsp soy sauce", "1 tbsp sesame oil", "2 cloves garlic", "1 inch ginger", "1 tbsp cornstarch", "Sesame seeds, green onions"], steps: ["Press tofu 15 phút để remove water, cut thành cubes", "Toss tofu với cornstarch", "Heat oil trong pan, cook tofu đến khi crispy (8-10 phút)", "Remove tofu, stir-fry vegetables với garlic, ginger", "Thêm tofu back, drizzle soy sauce, sesame oil", "Serve với rice, garnish sesame seeds, green onions"], tips: ["Freeze tofu trước khi cook cho texture firm hơn", "Dùng non-stick pan để tofu không dính", "Customize với veg/protein tùy thích"] },
+            { id: 22, name: "Fish Tacos", nameVi: "Taco cá", category: "dinner", time: 25, calories: 580, protein: 42, carbs: 62, fat: 18, difficulty: "medium", servings: 4, ingredients: ["400g white fish (cod/tilapia)", "8 small corn tortillas", "2 cups cabbage shredded", "1 cup pico de gallo", "1/2 cup Greek yogurt", "2 limes", "1 tsp cumin", "1 tsp paprika", "Cilantro, salt, pepper"], steps: ["Season fish với cumin, paprika, salt, pepper", "Pan-sear or grill fish 4-5 phút mỗi side", "Trong khi đó, heat tortillas", "Flake fish thành pieces", "Assemble tacos: tortilla, cabbage, fish, pico de gallo", "Drizzle Greek yogurt (sour cream thay thế), lime juice, cilantro"], tips: ["Corn tortillas gluten-free", "Dùng Greek yogurt thay sour cream", "Thêm avocado hoặc guacamole"] },
+            { id: 23, name: "Lamb Kebab", nameVi: "Thịt cừu nướng xiên", category: "dinner", time: 30, calories: 640, protein: 48, carbs: 52, fat: 26, difficulty: "medium", servings: 4, ingredients: ["500g lamb leg cubes", "2 bell peppers", "1 red onion", "1 zucchini", "3 tbsp olive oil", "2 cloves garlic", "1 tsp cumin", "1 tsp paprika", "Fresh mint", "Salt, pepper", "Pita bread, tzatziki"], steps: ["Marinate lamb với olive oil, garlic, cumin, paprika, salt, pepper (2h+)", "Cut vegetables thành chunks", "Thread lamb và vegetables lên skewers (xen kẽ)", "Grill 10-12 phút, turn occasionally", "Serve với pita bread, tzatziki, fresh mint"], tips: ["Soak wooden skewers 30 phút trước khi grill", "Marinate overnight để flavor sâu hơn", "Dùng lamb leg - lean hơn shoulder"] },
+            { id: 24, name: "Chicken Thighs", nameVi: "Đùi gà nướng", category: "dinner", time: 35, calories: 620, protein: 46, carbs: 48, fat: 26, difficulty: "easy", servings: 4, ingredients: ["4 chicken thighs (bone-in, skin-on)", "4 cups potatoes quartered", "2 cups Brussels sprouts", "3 tbsp olive oil", "4 cloves garlic", "Lemon, rosemary, thyme", "Salt, pepper"], steps: ["Preheat oven 200°C", "Season chicken với salt, pepper, herbs", "Toss potatoes, Brussels sprouts với olive oil, garlic, salt, pepper", "Arrange trong baking tray (chicken trên rau)", "Roast 35-40 phút đến khi chicken 74°C internal", "Squeeze lemon juice trước khi serve"], tips: ["Skin-on chicken thighs juicy hơn", "Đừng overcrowd tray - rau sẽ steam thay vì roast", "Rest chicken 5 phút trước khi serve"] },
+            
+            // ===== SNACKS (8) =====
+            { id: 25, name: "Protein Balls", nameVi: "Balls protein", category: "snacks", time: 15, calories: 280, protein: 18, carbs: 32, fat: 12, difficulty: "easy", servings: 12, ingredients: ["1 cup oats", "1/2 cup peanut butter", "1/3 cup honey", "1/4 cup protein powder", "1/4 cup dark chocolate chips", "2 tbsp chia seeds", "1 tsp vanilla extract"], steps: ["Mix tất cả ingredients trong bowl", "Khuấy đều đến khi combine", "Để trong tủ lạnh 30 phút", "Roll thành balls (1 tbsp mỗi ball)", "Store trong tủ lạnh 1 tuần"], tips: ["Customize với nuts, seeds, dried fruit", "Freeze để ăn dần (1 tháng)", "Great pre/post workout snack"] },
+            { id: 26, name: "Energy Bars", nameVi: "Thanh năng lượng", category: "snacks", time: 20, calories: 240, protein: 12, carbs: 32, fat: 10, difficulty: "easy", servings: 8, ingredients: ["1.5 cups oats", "1/2 cup almond butter", "1/3 cup honey", "1/4 cup dark chocolate chips", "1/4 cup dried cranberries", "2 tbsp flax seeds", "1 tsp cinnamon"], steps: ["Line baking pan với parchment paper", "Mix tất cả ingredients trong bowl", "Press mixture vào pan (even layer)", "Refrigerate 2h đến khi firm", "Cut thành 8 bars", "Store trong tủ lạnh 1 tuần"], tips: ["Wrap individually để mang đi", "Customize với nuts, seeds tùy thích", "Dùng date syrup thay honey cho vegan"] },
+            { id: 27, name: "Hummus + Veg", nameVi: "Hummus + rau củ", category: "snacks", time: 5, calories: 220, protein: 8, carbs: 24, fat: 12, difficulty: "easy", servings: 2, ingredients: ["1/2 cup hummus", "1 cup carrot sticks", "1 cup cucumber sticks", "1 cup bell pepper strips", "1 tbsp olive oil", "Paprika, cumin"], steps: ["Scoop hummus vào bowl", "Drizzle olive oil, sprinkle paprika, cumin", "Arrange vegetables quanh bowl", "Dip và enjoy"], tips: ["Make homemade hummus: chickpeas + tahini + lemon + garlic", "Prep veg sticks cho cả tuần", "Thêm whole wheat pita để filling hơn"] },
+            { id: 28, name: "Trail Mix", nameVi: "Hỗn hợp hạt", category: "snacks", time: 5, calories: 320, protein: 10, carbs: 28, fat: 22, difficulty: "easy", servings: 4, ingredients: ["1/4 cup almonds", "1/4 cup walnuts", "1/4 cup cashews", "2 tbsp dark chocolate chips", "2 tbsp dried cranberries", "2 tbsp pumpkin seeds", "1 tbsp coconut flakes"], steps: ["Mix tất cả ingredients trong bowl", "Portion vào bags/containers (1/4 cup mỗi serving)", "Store trong tủ lạnh 2 tuần"], tips: ["Portion control - nuts calorie-dense", "Customize với nuts/dried fruit tùy thích", "Great for hiking, travel snacks"] },
+            { id: 29, name: "Cottage Cheese Bowl", nameVi: "Bowl phô mai cottage", category: "snacks", time: 5, calories: 240, protein: 24, carbs: 24, fat: 6, difficulty: "easy", servings: 1, ingredients: ["1 cup cottage cheese", "1/2 cup pineapple chunks", "2 tbsp walnuts", "1 tbsp honey", "Cinnamon"], steps: ["Scoop cottage cheese vào bowl", "Top với pineapple, walnuts", "Drizzle honey, sprinkle cinnamon", "Ăn ngay"], tips: ["High protein, low fat snack", "Savory version: thêm tomatoes, cucumber, olive oil", "Great trước bed (casein protein)"] },
+            { id: 30, name: "Banana Bread", nameVi: "Bánh mì chuối", category: "snacks", time: 30, calories: 280, protein: 8, carbs: 42, fat: 12, difficulty: "medium", servings: 8, ingredients: ["3 ripe bananas", "1/3 cup melted butter", "1/2 cup sugar", "1 egg", "1 tsp vanilla", "1 tsp baking soda", "1.5 cups whole wheat flour", "1/4 cup walnuts (optional)"], steps: ["Preheat oven 175°C", "Mash bananas trong bowl", "Mix với butter, sugar, egg, vanilla", "Thêm baking soda, flour, mix đến khi combine", "Pour vào loaf pan", "Bake 50-60 phút đến khi toothpick clean", "Cool 10 phút trước khi slice"], tips: ["Dùng bananas chín (nhiều đốm nâu) - ngọt hơn", "Freeze slices để ăn dần", "Thêm chocolate chips hoặc nuts cho variety"] },
+            { id: 31, name: "Chia Pudding", nameVi: "Pudding hạt chia", category: "snacks", time: 5, calories: 260, protein: 10, carbs: 32, fat: 14, difficulty: "easy", servings: 2, ingredients: ["1/4 cup chia seeds", "1 cup milk (dairy hoặc plant-based)", "2 tbsp honey", "1/2 tsp vanilla", "1/2 cup berries", "2 tbsp almonds"], steps: ["Mix chia seeds, milk, honey, vanilla trong jar", "Khuấy đều, để 5 phút, khuấy lại", "Refrigerate 4h+ (hoặc overnight)", "Top với berries, almonds trước khi ăn"], tips: ["Chia seeds hấp thụ 10x weight trong liquid", "Make ahead - giữ trong tủ lạnh 5 ngày", "Customize với fruit, nuts, cocoa powder"] },
+            { id: 32, name: "Rice Cakes + PB", nameVi: "Bánh gạo + bơ đậu phộng", category: "snacks", time: 3, calories: 220, protein: 10, carbs: 28, fat: 12, difficulty: "easy", servings: 1, ingredients: ["2 rice cakes", "2 tbsp peanut butter", "1/2 banana sliced", "1 tsp honey", "Cinnamon"], steps: ["Spread peanut butter lên rice cakes", "Top với banana slices", "Drizzle honey, sprinkle cinnamon", "Ăn ngay"], tips: ["Quick, no-cook snack", "Thêm protein powder vào PB để tăng protein", "Customize với avocado, eggs, smoked salmon"] }
+        ];
+        
+        // ==================== STATE ====================
+        let currentFilters = {
+            category: 'all',
+            time: 'all',
+            calories: 'all',
+            difficulty: 'all',
+            servings: 'all',
+            search: ''
+        };
+        
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCounts();
+            renderRecipes();
+            setupEventListeners();
+        });
+        
+        // ==================== RENDER ====================
+        function renderRecipes() {
+            const grid = document.getElementById('recipeGrid');
+            const filtered = recipeDatabase.filter(recipe => {
+                if (currentFilters.category !== 'all' && recipe.category !== currentFilters.category) return false;
+                if (currentFilters.time !== 'all') {
+                    if (currentFilters.time === 'under15' && recipe.time >= 15) return false;
+                    if (currentFilters.time === '15-30' && (recipe.time < 15 || recipe.time > 30)) return false;
+                    if (currentFilters.time === '30+' && recipe.time <= 30) return false;
+                }
+                if (currentFilters.calories !== 'all') {
+                    if (currentFilters.calories === 'low' && recipe.calories >= 400) return false;
+                    if (currentFilters.calories === 'medium' && (recipe.calories < 400 || recipe.calories > 600)) return false;
+                    if (currentFilters.calories === 'high' && recipe.calories <= 600) return false;
+                }
+                if (currentFilters.difficulty !== 'all' && recipe.difficulty !== currentFilters.difficulty) return false;
+                if (currentFilters.servings !== 'all') {
+                    if (currentFilters.servings === '1' && recipe.servings > 1) return false;
+                    if (currentFilters.servings === '2' && recipe.servings !== 2) return false;
+                    if (currentFilters.servings === '4' && recipe.servings < 4) return false;
+                }
+                if (currentFilters.search) {
+                    const search = currentFilters.search.toLowerCase();
+                    return recipe.name.toLowerCase().includes(search) || 
+                           recipe.nameVi.toLowerCase().includes(search) ||
+                           recipe.ingredients.some(ing => ing.toLowerCase().includes(search));
+                }
+                return true;
+            });
+            
+            document.getElementById('showingCount').textContent = filtered.length;
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                document.getElementById('noResults').classList.add('active');
+                return;
+            }
+            
+            document.getElementById('noResults').classList.remove('active');
+            
+            grid.innerHTML = filtered.map(recipe => {
+                const diffClass = `difficulty-${recipe.difficulty}`;
+                const diffLabel = { easy: 'Easy', medium: 'Medium', hard: 'Hard' }[recipe.difficulty];
+                
+                return `
+                    <div class="recipe-card" data-category="${recipe.category}" onclick="openModal(${recipe.id})">
+                        <div class="recipe-header">
+                            <div>
+                                <div class="recipe-name">${recipe.name}</div>
+                                <div class="recipe-name-vi">${recipe.nameVi}</div>
+                            </div>
+                            <div class="recipe-time">${recipe.time} min</div>
+                        </div>
+                        <div class="recipe-meta">
+                            <div class="meta-mini">
+                                <div class="meta-mini-value">${recipe.calories}</div>
+                                <div class="meta-mini-label">kcal</div>
+                            </div>
+                            <div class="meta-mini">
+                                <div class="meta-mini-value">${recipe.protein}g</div>
+                                <div class="meta-mini-label">Protein</div>
+                            </div>
+                            <div class="meta-mini">
+                                <div class="meta-mini-value">${recipe.servings}</div>
+                                <div class="meta-mini-label">Servings</div>
+                            </div>
+                        </div>
+                        <div class="recipe-tags">
+                            <span class="recipe-tag ${diffClass}">${diffLabel}</span>
+                            <span class="recipe-tag">${recipe.category}</span>
+                        </div>
+                        <div class="recipe-view-btn">Xem công thức →</div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function updateCounts() {
+            const counts = { all: 0, breakfast: 0, lunch: 0, dinner: 0, snacks: 0 };
+            recipeDatabase.forEach(recipe => {
+                counts.all++;
+                counts[recipe.category]++;
+            });
+            Object.keys(counts).forEach(cat => {
+                const el = document.getElementById(`count-${cat}`);
+                if (el) el.textContent = counts[cat];
+            });
+        }
+        
+        // ==================== MODAL ====================
+        function openModal(id) {
+            const recipe = recipeDatabase.find(r => r.id === id);
+            if (!recipe) return;
+            
+            const categoryColors = {
+                breakfast: '#F39C12', lunch: '#50C878', dinner: '#4A90E2', snacks: '#9B59B6'
+            };
+            
+            const modal = document.getElementById('modal');
+            modal.style.setProperty('--modal-color', categoryColors[recipe.category]);
+            
+            document.getElementById('modalTitle').textContent = recipe.name;
+            document.getElementById('modalTitleVi').textContent = recipe.nameVi;
+            
+            const diffLabel = { easy: 'Easy', medium: 'Medium', hard: 'Hard' }[recipe.difficulty];
+            
+            document.getElementById('modalMeta').innerHTML = `
+                <div class="modal-meta-item">⏱️ ${recipe.time} min</div>
+                <div class="modal-meta-item"> ${recipe.calories} kcal</div>
+                <div class="modal-meta-item"> ${recipe.servings} servings</div>
+                <div class="modal-meta-item"> ${diffLabel}</div>
+            `;
+            
+            const maxMacro = Math.max(recipe.protein * 4, recipe.carbs * 4, (recipe.calories - recipe.protein * 4 - recipe.carbs * 4));
+            const proteinWidth = Math.min((recipe.protein * 4 / recipe.calories) * 100, 100);
+            const carbsWidth = Math.min((recipe.carbs * 4 / recipe.calories) * 100, 100);
+            const fatWidth = 100 - proteinWidth - carbsWidth;
+            
+            const ingredientsHtml = recipe.ingredients.map(ing => `<li>${ing}</li>`).join('');
+            const stepsHtml = recipe.steps.map(step => `<li>${step}</li>`).join('');
+            const tipsHtml = recipe.tips.map(tip => `<li>${tip}</li>`).join('');
+            
+            document.getElementById('modalBody').innerHTML = `
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Nutrition Facts (per serving)</h3>
+                    <div class="nutrition-facts">
+                        <div class="nutrition-main">
+                            <div class="nutrition-main-value">${recipe.calories}</div>
+                            <div class="nutrition-main-label">Calories</div>
+                        </div>
+                        <div class="nutrition-bars">
+                            <div class="nutrition-bar-item">
+                                <div class="nutrition-bar-label">Protein</div>
+                                <div class="nutrition-bar-track">
+                                    <div class="nutrition-bar-fill protein" style="width: ${proteinWidth}%"></div>
+                                </div>
+                                <div class="nutrition-bar-value">${recipe.protein}g</div>
+                            </div>
+                            <div class="nutrition-bar-item">
+                                <div class="nutrition-bar-label">Carbs</div>
+                                <div class="nutrition-bar-track">
+                                    <div class="nutrition-bar-fill carbs" style="width: ${carbsWidth}%"></div>
+                                </div>
+                                <div class="nutrition-bar-value">${recipe.carbs}g</div>
+                            </div>
+                            <div class="nutrition-bar-item">
+                                <div class="nutrition-bar-label">Fat</div>
+                                <div class="nutrition-bar-track">
+                                    <div class="nutrition-bar-fill fat" style="width: ${fatWidth}%"></div>
+                                </div>
+                                <div class="nutrition-bar-value">${Math.round((recipe.calories - recipe.protein * 4 - recipe.carbs * 4) / 9)}g</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Ingredients</h3>
+                    <ul class="ingredients-list">${ingredientsHtml}</ul>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Steps</h3>
+                    <ol class="steps-list">${stepsHtml}</ol>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Tips</h3>
+                    <ul class="tip-list">${tipsHtml}</ul>
+                </div>
+            `;
+            
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // ==================== EVENT LISTENERS ====================
+        function setupEventListeners() {
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.addEventListener('click', function() {
+                    const type = this.dataset.type;
+                    const filter = this.dataset.filter;
+                    this.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilters[type] = filter;
+                    renderRecipes();
+                });
+            });
+            
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilters.category = this.dataset.category;
+                    renderRecipes();
+                });
+            });
+            
+            document.getElementById('searchInput').addEventListener('input', function() {
+                currentFilters.search = this.value;
+                renderRecipes();
+            });
+            
+            document.getElementById('modalClose').addEventListener('click', closeModal);
+            document.getElementById('modalOverlay').addEventListener('click', function(e) {
+                if (e.target === this) closeModal();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeModal();
+            });
+        }
+    </script>
+</body>
+</html>
