@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Library - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-amber: #F39C12;
+            --primary-orange: #E67E22;
+            --primary-green: #50C878;
+            --primary-teal: #1ABC9C;
+            --primary-red: #E74C3C;
+            --primary-blue: #4A90E2;
+            --primary-purple: #9B59B6;
+            
+            --text-dark: #1A202C;
+            --text-medium: #4A5568;
+            --text-light: #718096;
+            --bg-main: #F7FAFC;
+            --bg-card: #FFFFFF;
+            --border-soft: #E2E8F0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 14px 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 50%, #50C878 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover { color: var(--primary-amber); }
+        
+        /* Hero */
+        .hero {
+            position: relative;
+            padding: 48px 40px 36px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #FFF8E7 0%, #FFF3E0 40%, #E8F8EE 100%);
+            border-radius: 0 0 24px 24px;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(243,156,18,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(80,200,120,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero-content { position: relative; z-index: 1; }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%);
+            color: white;
+            padding: 5px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.72rem;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+        
+        .hero h1 {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 50%, #50C878 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--text-medium);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .hero p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            text-align: center;
+            min-width: 110px;
+        }
+        
+        .stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-amber);
+            line-height: 1;
+        }
+        
+        .stat-item:nth-child(2) .stat-value { color: var(--primary-green); }
+        .stat-item:nth-child(3) .stat-value { color: var(--primary-orange); }
+        .stat-item:nth-child(4) .stat-value { color: var(--primary-purple); }
+        .stat-item:nth-child(5) .stat-value { color: var(--primary-blue); }
+        
+        .stat-label {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 30px 40px 40px;
+        }
+        
+        /* Filter Bar */
+        .filter-bar {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            margin-bottom: 20px;
+        }
+        
+        .search-box {
+            position: relative;
+            margin-bottom: 16px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 16px 12px 42px;
+            border: 2px solid var(--border-soft);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.92rem;
+            background: var(--bg-main);
+            transition: all 0.2s;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-amber);
+            background: white;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+        
+        .filter-groups {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        
+        .filter-group h4 {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .filter-chip {
+            padding: 6px 12px;
+            background: var(--bg-main);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .filter-chip:hover {
+            border-color: var(--primary-amber);
+            color: var(--primary-amber);
+        }
+        
+        .filter-chip.active {
+            background: var(--primary-amber);
+            color: white;
+            border-color: var(--primary-amber);
+        }
+        
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+        
+        .category-tab {
+            padding: 10px 18px;
+            background: var(--bg-card);
+            border: 2px solid var(--border-soft);
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .category-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        
+        .category-tab.active {
+            background: var(--primary-amber);
+            color: white;
+            border-color: var(--primary-amber);
+        }
+        
+        .tab-count {
+            font-size: 0.72rem;
+            padding: 2px 8px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 6px;
+            font-weight: 700;
+        }
+        
+        .category-tab:not(.active) .tab-count {
+            background: var(--bg-main);
+            color: var(--text-light);
+        }
+        
+        /* Results Counter */
+        .results-counter {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding: 10px 16px;
+            background: var(--bg-card);
+            border-radius: 10px;
+            border: 1px solid var(--border-soft);
+            font-size: 0.85rem;
+        }
+        
+        .results-count {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .results-count strong {
+            color: var(--primary-amber);
+            font-weight: 700;
+        }
+        
+        .results-hint {
+            color: var(--text-light);
+            font-size: 0.78rem;
+        }
+        
+        /* Food Grid */
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 14px;
+            margin-bottom: 36px;
+        }
+        
+        .food-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-left: 3px solid var(--food-color);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .food-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            border-color: var(--food-color);
+        }
+        
+        .food-card[data-category="protein"] { --food-color: var(--primary-green); }
+        .food-card[data-category="carbs"] { --food-color: var(--primary-orange); }
+        .food-card[data-category="fats"] { --food-color: var(--primary-amber); }
+        .food-card[data-category="vegetables"] { --food-color: var(--primary-teal); }
+        .food-card[data-category="fruits"] { --food-color: var(--primary-red); }
+        
+        .food-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .food-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.3;
+            flex: 1;
+        }
+        
+        .food-name-vi {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-top: 2px;
+        }
+        
+        .food-calories {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--food-color);
+            text-align: right;
+            flex-shrink: 0;
+            margin-left: 12px;
+        }
+        
+        .food-calories-unit {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+        
+        .food-macros {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+            padding: 10px;
+            background: var(--bg-main);
+            border-radius: 8px;
+        }
+        
+        .macro-mini {
+            text-align: center;
+        }
+        
+        .macro-mini-value {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1;
+        }
+        
+        .macro-mini-label {
+            font-size: 0.65rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin-top: 3px;
+            font-weight: 600;
+        }
+        
+        .macro-mini.protein .macro-mini-value { color: var(--primary-green); }
+        .macro-mini.carbs .macro-mini-value { color: var(--primary-orange); }
+        .macro-mini.fat .macro-mini-value { color: var(--primary-amber); }
+        
+        .food-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .food-tag {
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            background: var(--bg-main);
+            color: var(--text-medium);
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
+        .food-tag.goal-fatloss { background: #FFE8E8; color: var(--primary-red); }
+        .food-tag.goal-muscle { background: #E8F8EE; color: var(--primary-green); }
+        .food-tag.goal-energy { background: #FFF3E0; color: var(--primary-orange); }
+        
+        .food-view-btn {
+            display: block;
+            text-align: center;
+            padding: 8px;
+            background: var(--bg-main);
+            color: var(--food-color);
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .food-card:hover .food-view-btn {
+            background: var(--food-color);
+            color: white;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+            display: none;
+        }
+        
+        .no-results.active { display: block; }
+        
+        .no-results h3 {
+            color: var(--text-medium);
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 32, 44, 0.7);
+            backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        
+        .modal-overlay.active { display: flex; animation: fadeIn 0.3s ease; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal {
+            background: white;
+            border-radius: 20px;
+            max-width: 720px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-header {
+            padding: 28px 32px 20px;
+            border-bottom: 1px solid var(--border-soft);
+            position: sticky;
+            top: 0;
+            background: white;
+            border-radius: 20px 20px 0 0;
+            z-index: 10;
+        }
+        
+        .modal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--modal-color);
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-main);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text-medium);
+            transition: all 0.2s;
+            z-index: 11;
+        }
+        
+        .modal-close:hover {
+            background: var(--border-soft);
+            transform: rotate(90deg);
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+            padding-right: 40px;
+        }
+        
+        .modal-title-vi {
+            font-size: 0.92rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+        
+        .modal-meta {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .modal-meta-item {
+            padding: 5px 12px;
+            background: var(--bg-main);
+            border-radius: 8px;
+            font-size: 0.78rem;
+            color: var(--text-medium);
+            font-weight: 600;
+        }
+        
+        .modal-body { padding: 28px 32px; }
+        
+        .modal-section { margin-bottom: 24px; }
+        
+        .modal-section h3 {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section-indicator {
+            width: 4px;
+            height: 18px;
+            background: var(--modal-color);
+            border-radius: 2px;
+        }
+        
+        /* Nutrition Facts Visual */
+        .nutrition-facts {
+            background: var(--bg-main);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        
+        .nutrition-main {
+            text-align: center;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-soft);
+            margin-bottom: 16px;
+        }
+        
+        .nutrition-main-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--modal-color);
+            line-height: 1;
+        }
+        
+        .nutrition-main-label {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+        
+        .nutrition-bars {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .nutrition-bar-item {
+            display: grid;
+            grid-template-columns: 80px 1fr 80px;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .nutrition-bar-label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .nutrition-bar-track {
+            height: 8px;
+            background: white;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .nutrition-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.4s ease;
+        }
+        
+        .nutrition-bar-fill.protein { background: var(--primary-green); }
+        .nutrition-bar-fill.carbs { background: var(--primary-orange); }
+        .nutrition-bar-fill.fat { background: var(--primary-amber); }
+        
+        .nutrition-bar-value {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-align: right;
+        }
+        
+        /* Lists */
+        .benefit-list, .tip-list {
+            list-style: none;
+        }
+        
+        .benefit-list li, .tip-list li {
+            padding: 10px 12px 10px 36px;
+            background: var(--bg-main);
+            border-radius: 10px;
+            position: relative;
+            color: var(--text-dark);
+            font-size: 0.88rem;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        .benefit-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            background: var(--modal-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.68rem;
+        }
+        
+        .tip-list li::before {
+            content: '💡';
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.9rem;
+        }
+        
+        /* Alternatives */
+        .alternatives-section {
+            background: var(--bg-main);
+            padding: 16px;
+            border-radius: 12px;
+        }
+        
+        .alternative-group { margin-bottom: 12px; }
+        .alternative-group:last-child { margin-bottom: 0; }
+        
+        .alternative-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-bottom: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .alternative-options {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        
+        .alternative-chip {
+            padding: 5px 12px;
+            background: white;
+            border: 1.5px solid var(--border-soft);
+            border-radius: 8px;
+            font-size: 0.82rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        
+        .modal-footer {
+            padding: 16px 32px 24px;
+            border-top: 1px solid var(--border-soft);
+        }
+        
+        .modal-note {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            text-align: center;
+            font-style: italic;
+        }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-soft);
+            padding: 28px 40px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 50%, #50C878 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        
+        .footer-links a:hover { color: var(--primary-amber); }
+        
+        .footer-bottom {
+            color: var(--text-light);
+            font-size: 0.78rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .filter-groups { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 12px 20px; }
+            .hero { padding: 36px 20px 28px; border-radius: 0 0 18px 18px; }
+            .hero h1 { font-size: 1.8rem; }
+            .main-container { padding: 20px 20px 30px; }
+            .food-grid { grid-template-columns: 1fr; }
+            .modal { max-height: 95vh; border-radius: 16px; }
+            .modal-header, .modal-body, .modal-footer { padding-left: 20px; padding-right: 20px; }
+            .modal-title { font-size: 1.4rem; }
+            .nutrition-bar-item { grid-template-columns: 70px 1fr 70px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="men-nutrition-overview.html" class="back-link">← Quay lại Nutrition</a>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">FOOD LIBRARY</span>
+            <h1>Thư Viện <span>Thực Phẩm</span></h1>
+            <div class="hero-subtitle">100+ foods với đầy đủ thông tin dinh dưỡng</div>
+            <p>Database thực phẩm với calories, macros, benefits, cooking tips và alternatives. Filter thông minh theo category, goal và cooking method.</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-value">100+</div>
+                    <div class="stat-label">Thực phẩm</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">30</div>
+                    <div class="stat-label">Protein foods</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">20</div>
+                    <div class="stat-label">Carbs</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">20</div>
+                    <div class="stat-label">Vegetables</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="main-container">
+        
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <div class="search-box">
+                <span class="search-icon"></span>
+                <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm thực phẩm... (VD: Chicken, Rice, Salmon)">
+            </div>
+            
+            <div class="filter-groups">
+                <div class="filter-group">
+                    <h4>Goal</h4>
+                    <div class="filter-options" id="goalFilter">
+                        <button class="filter-chip active" data-filter="all" data-type="goal">Tất cả</button>
+                        <button class="filter-chip" data-filter="fatloss" data-type="goal">Fat Loss</button>
+                        <button class="filter-chip" data-filter="muscle" data-type="goal">Muscle Gain</button>
+                        <button class="filter-chip" data-filter="energy" data-type="goal">Energy</button>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h4>Cooking Method</h4>
+                    <div class="filter-options" id="cookingFilter">
+                        <button class="filter-chip active" data-filter="all" data-type="cooking">Tất cả</button>
+                        <button class="filter-chip" data-filter="grilled" data-type="cooking">Grilled</button>
+                        <button class="filter-chip" data-filter="steamed" data-type="cooking">Steamed</button>
+                        <button class="filter-chip" data-filter="raw" data-type="cooking">Raw</button>
+                        <button class="filter-chip" data-filter="cooked" data-type="cooking">Cooked</button>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h4>Protein Level</h4>
+                    <div class="filter-options" id="proteinFilter">
+                        <button class="filter-chip active" data-filter="all" data-type="protein">Tất cả</button>
+                        <button class="filter-chip" data-filter="high" data-type="protein">High (>20g)</button>
+                        <button class="filter-chip" data-filter="medium" data-type="protein">Medium (10-20g)</button>
+                        <button class="filter-chip" data-filter="low" data-type="protein">Low (<10g)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Category Tabs -->
+        <div class="category-tabs" id="categoryTabs">
+            <button class="category-tab active" data-category="all">Tất cả <span class="tab-count" id="count-all">100</span></button>
+            <button class="category-tab" data-category="protein">Protein <span class="tab-count" id="count-protein">30</span></button>
+            <button class="category-tab" data-category="carbs">Carbs <span class="tab-count" id="count-carbs">20</span></button>
+            <button class="category-tab" data-category="fats">Fats <span class="tab-count" id="count-fats">15</span></button>
+            <button class="category-tab" data-category="vegetables">Vegetables <span class="tab-count" id="count-vegetables">20</span></button>
+            <button class="category-tab" data-category="fruits">Fruits <span class="tab-count" id="count-fruits">15</span></button>
+        </div>
+        
+        <!-- Results Counter -->
+        <div class="results-counter">
+            <div class="results-count">Hiển thị <strong id="showingCount">100</strong> thực phẩm</div>
+            <div class="results-hint">Click vào food để xem chi tiết</div>
+        </div>
+        
+        <!-- Food Grid -->
+        <div class="food-grid" id="foodGrid"></div>
+        
+        <!-- No Results -->
+        <div class="no-results" id="noResults">
+            <h3>Không tìm thấy thực phẩm phù hợp</h3>
+            <p>Hãy thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</p>
+        </div>
+        
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <button class="modal-close" id="modalClose">✕</button>
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <div class="modal-title-vi" id="modalTitleVi"></div>
+                <div class="modal-meta" id="modalMeta"></div>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer">
+                <div class="modal-note">* Thông tin dinh dưỡng tính trên 100g thực phẩm</div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="men-30-40.html">Nam 30-40</a>
+            <a href="men-nutrition-overview.html">Nutrition Overview</a>
+            <a href="men-nutrition-calculator.html">Calculator</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // ==================== FOOD DATABASE (100+ foods) ====================
+        const foodDatabase = [
+            // ===== PROTEIN (30) =====
+            { id: 1, name: "Chicken Breast", nameVi: "Ức gà", category: "protein", calories: 165, protein: 31, carbs: 0, fat: 3.6, goals: ["fatloss", "muscle"], cooking: ["grilled", "steamed", "cooked"], benefits: ["High protein, low fat", "Rich in B vitamins", "Great for muscle building"], tips: ["Marinate 30min trước khi nấu", "Nấu đến 74°C internal temp", "Để nghỉ 5 phút trước khi cắt"], alternatives: { "Không có gà": ["Turkey Breast", "Lean Pork"], "Vegetarian": ["Tofu", "Tempeh"], "Quick cook": ["Canned Tuna", "Egg Whites"] } },
+            { id: 2, name: "Salmon", nameVi: "Cá hồi", category: "protein", calories: 208, protein: 20, carbs: 0, fat: 13, goals: ["muscle", "energy"], cooking: ["grilled", "cooked"], benefits: ["Rich in Omega-3", "High quality protein", "Vitamin D source"], tips: ["Nấu da-side down trước", "Internal temp 63°C", "Don't overcook - sẽ khô"], alternatives: { "Đắt quá": ["Canned Tuna", "Mackerel"], "Không ăn cá": ["Chicken Breast", "Lean Beef"], "Budget": ["Sardines", "Tilapia"] } },
+            { id: 3, name: "Lean Beef", nameVi: "Thịt bò nạc", category: "protein", calories: 250, protein: 26, carbs: 0, fat: 15, goals: ["muscle", "energy"], cooking: ["grilled", "cooked"], benefits: ["High in iron & B12", "Complete amino acids", "Creatine source"], tips: ["Chọn cuts nạc: sirloin, tenderloin", "Marinate với acid (chanh, yogurt)", "Rest 5-10 phút sau nấu"], alternatives: { "Budget": ["Ground Beef 90%", "Chicken Thigh"], "Leaner": ["Chicken Breast", "Turkey"], "No red meat": ["Salmon", "Tofu"] } },
+            { id: 4, name: "Eggs", nameVi: "Trứng", category: "protein", calories: 155, protein: 13, carbs: 1.1, fat: 11, goals: ["muscle", "energy"], cooking: ["cooked"], benefits: ["Complete protein", "Choline for brain", "Versatile cooking"], tips: ["Eat whole eggs - yolk có nutrients", "Soft boiled: 6-7 phút", "Store trong tủ lạnh"], alternatives: { "Cholesterol concern": ["Egg Whites", "Tofu"], "Vegan": ["Tofu Scramble", "Chickpea Flour"], "Quick": ["Hard Boiled (pre-cooked)"] } },
+            { id: 5, name: "Greek Yogurt", nameVi: "Sữa chua Hy Lạp", category: "protein", calories: 97, protein: 9, carbs: 3.6, fat: 5, goals: ["fatloss", "muscle"], cooking: ["raw"], benefits: ["Probiotics for gut", "High protein dairy", "Calcium rich"], tips: ["Chọn plain, không đường", "Mix với berries cho flavor", "Dùng làm sauce thay mayo"], alternatives: { "Lactose": ["Coconut Yogurt", "Silken Tofu"], "Vegan": ["Soy Yogurt", "Almond Yogurt"], "Higher protein": ["Cottage Cheese", "Skyr"] } },
+            { id: 6, name: "Tuna (Canned)", nameVi: "Cá ngừ hộp", category: "protein", calories: 116, protein: 26, carbs: 0, fat: 1, goals: ["fatloss", "muscle"], cooking: ["raw"], benefits: ["Very high protein", "Low calorie", "Convenient"], tips: ["Chọn packed in water", "Rinse để giảm sodium", "Mix với avocado cho fat"], alternatives: { "Mercury concern": ["Salmon", "Sardines"], "Fresh": ["Fresh Tuna Steak", "Cod"], "Vegan": ["Chickpeas", "Lentils"] } },
+            { id: 7, name: "Tofu", nameVi: "Đậu phụ", category: "protein", calories: 76, protein: 8, carbs: 1.9, fat: 4.8, goals: ["fatloss", "muscle"], cooking: ["grilled", "steamed", "cooked"], benefits: ["Complete plant protein", "Isoflavones", "Low calorie"], tips: ["Press 30min để remove water", "Freeze rồi thaw cho texture", "Marinate ít nhất 15min"], alternatives: { "Higher protein": ["Tempeh", "Seitan"], "Firm texture": ["Tempeh", "Paneer"], "Soft texture": ["Silken Tofu", "Egg"] } },
+            { id: 8, name: "Tempeh", nameVi: "Tempeh", category: "protein", calories: 193, protein: 20, carbs: 9, fat: 11, goals: ["muscle", "energy"], cooking: ["grilled", "cooked"], benefits: ["Fermented - gut health", "Higher protein than tofu", "Fiber rich"], tips: ["Steam 10min trước khi nấu", "Slice mỏng để crispy", "Marinate với soy sauce"], alternatives: { "Không có": ["Tofu", "Seitan"], "Softer": ["Tofu", "Edamame"], "Lower fat": ["Tofu", "Lentils"] } },
+            { id: 9, name: "Shrimp", nameVi: "Tôm", category: "protein", calories: 99, protein: 24, carbs: 0.2, fat: 0.3, goals: ["fatloss", "muscle"], cooking: ["grilled", "steamed", "cooked"], benefits: ["Very lean protein", "Selenium rich", "Quick cooking"], tips: ["Cook 2-3 phút mỗi side", "Don't overcook - sẽ rubbery", "Devein trước khi nấu"], alternatives: { "Allergy": ["Chicken", "White Fish"], "Budget": ["Canned Tuna", "Eggs"], "Vegan": ["Chickpeas", "Edamame"] } },
+            { id: 10, name: "Turkey Breast", nameVi: "Ức gà tây", category: "protein", calories: 135, protein: 30, carbs: 0, fat: 1, goals: ["fatloss", "muscle"], cooking: ["grilled", "steamed", "cooked"], benefits: ["Leaner than chicken", "High protein", "Low fat"], tips: ["Brine 2-4 hours cho juicy", "Cook đến 74°C", "Slice against grain"], alternatives: { "Không có": ["Chicken Breast", "Lean Pork"], "Cheaper": ["Chicken Breast", "Eggs"], "Vegan": ["Seitan", "Tofu"] } },
+            { id: 11, name: "Cottage Cheese", nameVi: "Phô mai cottage", category: "protein", calories: 98, protein: 11, carbs: 3.4, fat: 4.3, goals: ["fatloss", "muscle"], cooking: ["raw"], benefits: ["Casein protein (slow digest)", "Low calorie", "Calcium rich"], tips: ["Ăn trước bed cho overnight protein", "Mix với fruit cho flavor", "Blend cho smooth texture"], alternatives: { "Lactose": ["Silken Tofu", "Hummus"], "Vegan": ["Cashew Cheese", "Tofu"], "Lower sodium": ["Fresh Mozzarella", "Ricotta"] } },
+            { id: 12, name: "Lentils", nameVi: "Đậu lăng", category: "protein", calories: 116, protein: 9, carbs: 20, fat: 0.4, goals: ["fatloss", "energy"], cooking: ["cooked"], benefits: ["Plant protein + fiber", "Iron rich", "Budget friendly"], tips: ["Rinse trước khi nấu", "Cook 20-30 phút", "Season với cumin, garlic"], alternatives: { "Faster cook": ["Canned Lentils", "Red Lentils"], "Higher protein": ["Chickpeas", "Black Beans"], "Lower carb": ["Edamame", "Tofu"] } },
+            { id: 13, name: "Chickpeas", nameVi: "Đậu xanh (garbanzo)", category: "protein", calories: 164, protein: 9, carbs: 27, fat: 2.6, goals: ["energy", "muscle"], cooking: ["cooked"], benefits: ["Protein + complex carbs", "Fiber rich", "Versatile"], tips: ["Soak overnight nếu dùng dried", "Roast cho crispy snack", "Blend thành hummus"], alternatives: { "Faster": ["Canned Chickpeas", "Lentils"], "Lower carb": ["Edamame", "Green Beans"], "Higher protein": ["Black Beans", "Lentils"] } },
+            { id: 14, name: "Pork Tenderloin", nameVi: "Thịt heo nạc (thăn)", category: "protein", calories: 143, protein: 26, carbs: 0, fat: 3.5, goals: ["fatloss", "muscle"], cooking: ["grilled", "cooked"], benefits: ["Lean cut of pork", "High protein", "B vitamins"], tips: ["Cook đến 63°C (medium rare OK)", "Rest 5 phút", "Marinate với herbs"], alternatives: { "Leaner": ["Chicken Breast", "Turkey"], "Budget": ["Ground Pork 90%", "Chicken Thigh"], "No pork": ["Beef Tenderloin", "Chicken"] } },
+            { id: 15, name: "Cod Fish", nameVi: "Cá tuyết", category: "protein", calories: 82, protein: 18, carbs: 0, fat: 0.7, goals: ["fatloss", "muscle"], cooking: ["grilled", "steamed", "cooked"], benefits: ["Very lean", "Low calorie", "Mild flavor"], tips: ["Bake 20min ở 200°C", "Season với lemon, herbs", "Don't overcook"], alternatives: { "Budget": ["Tilapia", "Pangasius"], "More flavor": ["Salmon", "Mackerel"], "Firm texture": ["Halibut", "Swordfish"] } },
+            { id: 16, name: "Edamame", nameVi: "Đậu nành non", category: "protein", calories: 121, protein: 11, carbs: 9, fat: 5, goals: ["fatloss", "muscle"], cooking: ["steamed", "cooked"], benefits: ["Complete plant protein", "Fiber + protein", "Quick snack"], tips: ["Steam 5-7 phút", "Salt lightly", "Eat straight from pod"], alternatives: { "Không có": ["Green Beans", "Snap Peas"], "Higher protein": ["Lentils", "Chickpeas"], "Lower carb": ["Green Beans", "Asparagus"] } },
+            { id: 17, name: "Whey Protein", nameVi: "Whey Protein Powder", category: "protein", calories: 120, protein: 24, carbs: 3, fat: 1.5, goals: ["muscle", "fatloss"], cooking: ["raw"], benefits: ["Fast absorbing", "Convenient", "High protein/Cal ratio"], tips: ["Post-workout trong 30min", "Mix với water hoặc milk", "25-30g per serving"], alternatives: { "Lactose": ["Whey Isolate", "Beef Protein"], "Vegan": ["Pea Protein", "Soy Protein"], "Whole food": ["Chicken", "Eggs"] } },
+            { id: 18, name: "Sardines", nameVi: "Cá mòi", category: "protein", calories: 208, protein: 25, carbs: 0, fat: 11, goals: ["muscle", "energy"], cooking: ["raw"], benefits: ["Omega-3 rich", "Calcium (với bones)", "Budget friendly"], tips: ["Choose packed in olive oil", "Eat with whole grain bread", "Great for omega-3"], alternatives: { "Don't like fishy": ["Salmon", "Tuna"], "Fresh": ["Mackerel", "Anchovies"], "Vegan": ["Walnuts", "Chia Seeds"] } },
+            { id: 19, name: "Duck Breast", nameVi: "Ức vịt", category: "protein", calories: 201, protein: 24, carbs: 0, fat: 11, goals: ["muscle", "energy"], cooking: ["grilled", "cooked"], benefits: ["Rich flavor", "Iron rich", "B vitamins"], tips: ["Score skin trước khi nấu", "Render fat slowly", "Medium-rare is best"], alternatives: { "Leaner": ["Chicken Breast", "Turkey"], "Budget": ["Chicken Thigh", "Pork"], "No poultry": ["Beef", "Lamb"] } },
+            { id: 20, name: "Venison", nameVi: "Thịt nai", category: "protein", calories: 158, protein: 30, carbs: 0, fat: 3.2, goals: ["fatloss", "muscle"], cooking: ["grilled", "cooked"], benefits: ["Very lean game meat", "High protein", "Iron rich"], tips: ["Don't overcook - rất lean", "Marinate 24h cho tender", "Cook medium-rare"], alternatives: { "Không có": ["Lean Beef", "Bison"], "Budget": ["Lean Beef", "Chicken"], "Milder": ["Beef Tenderloin", "Pork"] } },
+            { id: 21, name: "Protein Powder (Plant)", nameVi: "Protein thực vật", category: "protein", calories: 110, protein: 20, carbs: 4, fat: 2, goals: ["muscle", "fatloss"], cooking: ["raw"], benefits: ["Vegan friendly", "Easy to digest", "Complete amino (blend)"], tips: ["Mix pea + rice protein", "Post-workout hoặc breakfast", "30g per serving"], alternatives: { "Whey": ["Whey Protein", "Casein"], "Whole food": ["Lentils", "Tofu"], "Budget": ["Soy Milk", "Peanut Butter"] } },
+            { id: 22, name: "Mackerel", nameVi: "Cá thu", category: "protein", calories: 205, protein: 19, carbs: 0, fat: 14, goals: ["muscle", "energy"], cooking: ["grilled", "cooked"], benefits: ["Omega-3 rich", "Vitamin D", "Budget fish"], tips: ["Grill với lemon", "Remove bones cẩn thận", "Eat 2-3 times/week"], alternatives: { "Milder": ["Salmon", "Cod"], "Cheaper": ["Sardines", "Tuna"], "Fresh": ["Salmon", "Trout"] } },
+            { id: 23, name: "Lamb Loin", nameVi: "Thịt cừu nạc", category: "protein", calories: 234, protein: 25, carbs: 0, fat: 15, goals: ["muscle", "energy"], cooking: ["grilled", "cooked"], benefits: ["High quality protein", "Iron & B12", "Zinc rich"], tips: ["Cook medium-rare", "Season với rosemary, garlic", "Rest 5-10 phút"], alternatives: { "Leaner": ["Beef Tenderloin", "Chicken"], "Budget": ["Beef Chuck", "Pork"], "Milder": ["Beef", "Pork"] } },
+            { id: 24, name: "Seitan", nameVi: "Mì căn (wheat protein)", category: "protein", calories: 370, protein: 75, carbs: 14, fat: 1.9, goals: ["muscle"], cooking: ["cooked"], benefits: ["Very high protein", "Meaty texture", "Vegan"], tips: ["Slice mỏng cho stir-fry", "Marinate cho flavor", "Great meat substitute"], alternatives: { "Gluten-free": ["Tofu", "Tempeh"], "Lower calorie": ["Tofu", "Edamame"], "Whole food": ["Lentils", "Chickpeas"] } },
+            { id: 25, name: "Hemp Seeds", nameVi: "Hạt cây gai dầu", category: "protein", calories: 553, protein: 31, carbs: 9, fat: 49, goals: ["muscle", "energy"], cooking: ["raw"], benefits: ["Complete protein", "Omega-3", "Minerals"], tips: ["Sprinkle trên salad, yogurt", "3 tbsp per serving", "Store trong tủ lạnh"], alternatives: { "Cheaper": ["Chia Seeds", "Flax Seeds"], "Higher protein": ["Pumpkin Seeds", "Whey"], "Lower fat": ["Spirulina", "Nutritional Yeast"] } },
+            { id: 26, name: "Spirulina", nameVi: "Tảo xoắn", category: "protein", calories: 290, protein: 57, carbs: 24, fat: 8, goals: ["muscle", "energy"], cooking: ["raw"], benefits: ["Very high protein", "Complete amino", "Antioxidants"], tips: ["1-2 tsp trong smoothie", "Strong flavor - mix với fruit", "Start với small dose"], alternatives: { "Easier taste": ["Chlorella", "Wheatgrass"], "Whole food": ["Spinach", "Kale"], "Budget": ["Nutritional Yeast", "Lentils"] } },
+            { id: 27, name: "Nutritional Yeast", nameVi: "Men dinh dưỡng", category: "protein", calories: 325, protein: 50, carbs: 35, fat: 7, goals: ["muscle", "energy"], cooking: ["raw"], benefits: ["B12 fortified", "Cheesy flavor", "Complete protein"], tips: ["Sprinkle trên pasta, popcorn", "2 tbsp per serving", "Vegan 'cheese' flavor"], alternatives: { "Không có": ["Parmesan", "Miso"], "Lower calorie": ["Miso Paste", "Soy Sauce"], "B12 source": ["Fortified Cereals", "Supplements"] } },
+            { id: 28, name: "Quinoa", nameVi: "Hạt diêm mạch", category: "protein", calories: 120, protein: 4.4, carbs: 21, fat: 1.9, goals: ["energy", "muscle"], cooking: ["cooked"], benefits: ["Complete protein grain", "Gluten-free", "Fiber rich"], tips: ["Rinse trước khi nấu", "Ratio 1:2 (quinoa:water)", "Cook 15 phút"], alternatives: { "Budget": ["Brown Rice", "Barley"], "Lower carb": ["Cauliflower Rice", "Bulgur"], "Higher protein": ["Amaranth", "Buckwheat"] } },
+            { id: 29, name: "Peanut Butter", nameVi: "Bơ đậu phộng", category: "protein", calories: 588, protein: 25, carbs: 20, fat: 50, goals: ["muscle", "energy"], cooking: ["raw"], benefits: ["Protein + healthy fats", "Satiating", "Versatile"], tips: ["Choose natural (no sugar)", "2 tbsp per serving", "Great pre-workout"], alternatives: { "Lower calorie": ["Almond Butter", "PB2 Powder"], "Nut allergy": ["Sunflower Butter", "Soy Butter"], "Budget": ["Peanuts (whole)", "Lentils"] } },
+            { id: 30, name: "Bone Broth", nameVi: "Nước dùng xương", category: "protein", calories: 40, protein: 9, carbs: 0, fat: 0.5, goals: ["fatloss", "muscle"], cooking: ["cooked"], benefits: ["Collagen rich", "Gut health", "Low calorie"], tips: ["Simmer 12-24 hours", "Add apple cider vinegar", "Drink warm trước bed"], alternatives: { "Quick": ["Store-bought Broth", "Bouillon"], "Vegetarian": ["Mushroom Broth", "Vegetable Broth"], "Higher protein": ["Whey", "Chicken"] } },
+            
+            // ===== CARBS (20) =====
+            { id: 31, name: "White Rice", nameVi: "Cơm trắng", category: "carbs", calories: 130, protein: 2.7, carbs: 28, fat: 0.3, goals: ["energy", "muscle"], cooking: ["cooked"], benefits: ["Quick energy", "Easy digest", "Gluten-free"], tips: ["Rinse 3-4 lần trước nấu", "Ratio 1:1.5 (rice:water)", "Cool rồi reheat cho resistant starch"], alternatives: { "Lower GI": ["Brown Rice", "Basmati"], "Lower carb": ["Cauliflower Rice", "Quinoa"], "Higher fiber": ["Brown Rice", "Wild Rice"] } },
+            { id: 32, name: "Brown Rice", nameVi: "Gạo lứt", category: "carbs", calories: 111, protein: 2.6, carbs: 23, fat: 0.9, goals: ["energy", "fatloss"], cooking: ["cooked"], benefits: ["Whole grain", "Fiber rich", "B vitamins"], tips: ["Soak 30min trước nấu", "Cook 40-45 phút", "Ratio 1:2 (rice:water)"], alternatives: { "Faster cook": ["White Rice", "Quinoa"], "Lower carb": ["Cauliflower Rice", "Shirataki"], "Higher protein": ["Quinoa", "Amaranth"] } },
+            { id: 33, name: "Sweet Potato", nameVi: "Khoai lang", category: "carbs", calories: 86, protein: 1.6, carbs: 20, fat: 0.1, goals: ["energy", "fatloss"], cooking: ["cooked"], benefits: ["Complex carbs", "Beta-carotene", "Fiber rich"], tips: ["Bake 45min ở 200°C", "Eat với skin cho fiber", "Great post-workout"], alternatives: { "Lower carb": ["Cauliflower", "Turnip"], "Faster cook": ["White Potato", "Pumpkin"], "Higher protein": ["Lentils", "Chickpeas"] } },
+            { id: 34, name: "Oats", nameVi: "Yến mạch", category: "carbs", calories: 389, protein: 17, carbs: 66, fat: 7, goals: ["energy", "muscle"], cooking: ["cooked"], benefits: ["Beta-glucan fiber", "Sustained energy", "Heart health"], tips: ["Overnight oats: soak 8h", "Steel-cut > rolled > instant", "Add protein powder"], alternatives: { "Gluten-free": ["Buckwheat", "Quinoa Flakes"], "Lower carb": ["Chia Pudding", "Flax Porridge"], "Quick": ["Instant Oats", "Granola"] } },
+            { id: 35, name: "Whole Wheat Bread", nameVi: "Bánh mì nguyên cám", category: "carbs", calories: 247, protein: 13, carbs: 41, fat: 3.4, goals: ["energy"], cooking: ["raw"], benefits: ["Fiber rich", "B vitamins", "Satiating"], tips: ["Check ingredients: whole wheat first", "2 slices per serving", "Toast cho better texture"], alternatives: { "Gluten-free": ["Rice Bread", "Corn Tortilla"], "Lower carb": ["Cloud Bread", "Lettuce Wrap"], "Higher protein": ["Ezekiel Bread", "Protein Bread"] } },
+            { id: 36, name: "Pasta (Whole Wheat)", nameVi: "Mì nguyên cám", category: "carbs", calories: 124, protein: 5, carbs: 26, fat: 0.5, goals: ["energy", "muscle"], cooking: ["cooked"], benefits: ["Complex carbs", "Fiber", "Sustained energy"], tips: ["Cook al dente (lower GI)", "Salt water充分", "Toss với sauce ngay"], alternatives: { "Gluten-free": ["Rice Noodles", "Chickpea Pasta"], "Lower carb": ["Zucchini Noodles", "Shirataki"], "Higher protein": ["Chickpea Pasta", "Lentil Pasta"] } },
+            { id: 37, name: "Potato", nameVi: "Khoai tây", category: "carbs", calories: 77, protein: 2, carbs: 17, fat: 0.1, goals: ["energy", "muscle"], cooking: ["cooked"], benefits: ["Potassium rich", "Satiating", "Vitamin C"], tips: ["Cool rồi reheat cho resistant starch", "Bake thay vì fry", "Eat với skin"], alternatives: { "Lower carb": ["Cauliflower", "Turnip"], "Higher fiber": ["Sweet Potato", "Yam"], "Faster cook": ["Instant Mashed", "Microwave"] } },
+            { id: 38, name: "Banana", nameVi: "Chuối", category: "carbs", calories: 89, protein: 1.1, carbs: 23, fat: 0.3, goals: ["energy"], cooking: ["raw"], benefits: ["Quick energy", "Potassium", "Pre-workout fuel"], tips: ["Green = lower GI", "Ripe = quick energy", "Freeze cho smoothies"], alternatives: { "Lower sugar": ["Berries", "Apple"], "More potassium": ["Sweet Potato", "Avocado"], "Longer lasting": ["Oats", "Brown Rice"] } },
+            { id: 39, name: "Corn", nameVi: "Bắp ngô", category: "carbs", calories: 86, protein: 3.3, carbs: 19, fat: 1.2, goals: ["energy"], cooking: ["cooked"], benefits: ["Fiber rich", "Antioxidants", "B vitamins"], tips: ["Grill cho flavor", "Eat cob hoặc kernels", "Pair với protein"], alternatives: { "Lower carb": ["Green Beans", "Zucchini"], "Higher protein": ["Edamame", "Peas"], "Faster": ["Canned Corn", "Frozen Corn"] } },
+            { id: 40, name: "Buckwheat", nameVi: "Mạch ba góc", category: "carbs", calories: 92, protein: 3.4, carbs: 20, fat: 0.6, goals: ["energy", "fatloss"], cooking: ["cooked"], benefits: ["Gluten-free", "Complete protein", "Rutin antioxidant"], tips: ["Toast trước khi nấu cho flavor", "Ratio 1:2 (buckwheat:water)", "Great porridge base"], alternatives: { "More common": ["Oats", "Quinoa"], "Lower carb": ["Cauliflower Rice", "Shirataki"], "Higher protein": ["Quinoa", "Amaranth"] } },
+            { id: 41, name: "Barley", nameVi: "Lúa mạch", category: "carbs", calories: 123, protein: 2.3, carbs: 28, fat: 0.4, goals: ["energy", "fatloss"], cooking: ["cooked"], benefits: ["Beta-glucan fiber", "Satiating", "Heart health"], tips: ["Soak overnight", "Cook 40-50 phút", "Great trong soups"], alternatives: { "Faster cook": ["Quinoa", "Couscous"], "Gluten-free": ["Rice", "Quinoa"], "Lower carb": ["Cauliflower Rice"] } },
+            { id: 42, name: "Couscous", nameVi: "Bột mì vụn", category: "carbs", calories: 112, protein: 3.8, carbs: 23, fat: 0.2, goals: ["energy"], cooking: ["cooked"], benefits: ["Quick cooking", "Versatile", "Light texture"], tips: ["Just add boiling water", "Fluff với fork", "5 phút là xong"], alternatives: { "Whole grain": ["Whole Wheat Couscous", "Quinoa"], "Gluten-free": ["Quinoa", "Cauliflower Rice"], "Higher protein": ["Quinoa", "Lentils"] } },
+            { id: 43, name: "Tortilla (Corn)", nameVi: "Bánh ngô", category: "carbs", calories: 218, protein: 5.7, carbs: 44, fat: 2.8, goals: ["energy"], cooking: ["raw"], benefits: ["Gluten-free", "Whole grain", "Versatile"], tips: ["Warm trước khi dùng", "2 tortillas per meal", "Pair với protein + veg"], alternatives: { "Lower carb": ["Lettuce Wrap", "Collard Wrap"], "Higher fiber": ["Whole Wheat Tortilla", "Spinach Wrap"], "Higher protein": ["Protein Tortilla", "Chickpea Wrap"] } },
+            { id: 44, name: "Rice Cakes", nameVi: "Bánh gạo", category: "carbs", calories: 387, protein: 8, carbs: 82, fat: 3, goals: ["energy"], cooking: ["raw"], benefits: ["Low calorie per piece", "Gluten-free", "Quick snack"], tips: ["Top với protein (PB, tuna)", "2-3 cakes per serving", "Choose brown rice version"], alternatives: { "More filling": ["Rice Crackers", "Oat Cakes"], "Higher protein": ["Protein Bars", "Greek Yogurt"], "Lower GI": ["Apple Slices", "Carrot Sticks"] } },
+            { id: 45, name: "Dates", nameVi: "Chà là", category: "carbs", calories: 277, protein: 1.8, carbs: 75, fat: 0.2, goals: ["energy"], cooking: ["raw"], benefits: ["Natural energy", "Fiber rich", "Minerals"], tips: ["2-3 dates pre-workout", "Remove pit", "Pair với nuts cho balance"], alternatives: { "Lower sugar": ["Berries", "Apple"], "More fiber": ["Prunes", "Figs"], "Fresh": ["Banana", "Mango"] } },
+            { id: 46, name: "Honey", nameVi: "Mật ong", category: "carbs", calories: 304, protein: 0.3, carbs: 82, fat: 0, goals: ["energy"], cooking: ["raw"], benefits: ["Natural sweetener", "Antioxidants", "Quick energy"], tips: ["1 tbsp per serving", "Add post-workout", "Choose raw, unfiltered"], alternatives: { "Lower calorie": ["Stevia", "Monk Fruit"], "Vegan": ["Maple Syrup", "Agave"], "Lower GI": ["Coconut Sugar", "Date Syrup"] } },
+            { id: 47, name: "Maple Syrup", nameVi: "Siro cây phong", category: "carbs", calories: 260, protein: 0, carbs: 67, fat: 0.1, goals: ["energy"], cooking: ["raw"], benefits: ["Natural sweetener", "Minerals", "Lower GI than sugar"], tips: ["Choose Grade A Dark", "1-2 tbsp per serving", "Great trên oats, yogurt"], alternatives: { "Lower calorie": ["Stevia", "Monk Fruit"], "Cheaper": ["Honey", "Agave"], "Lower GI": ["Coconut Sugar", "Date Syrup"] } },
+            { id: 48, name: "Granola", nameVi: "Ngũ cốc granola", category: "carbs", calories: 471, protein: 10, carbs: 64, fat: 20, goals: ["energy"], cooking: ["raw"], benefits: ["Energy dense", "Fiber", "Versatile"], tips: ["Check sugar content", "1/4 cup per serving", "Mix với yogurt"], alternatives: { "Lower sugar": ["Homemade Granola", "Muesli"], "Lower calorie": ["Oats", "Chia Pudding"], "Higher protein": ["Protein Granola", "Greek Yogurt"] } },
+            { id: 49, name: "Bagel (Whole Wheat)", nameVi: "Bánh mì vòng nguyên cám", category: "carbs", calories: 245, protein: 10, carbs: 48, fat: 1.7, goals: ["energy"], cooking: ["raw"], benefits: ["Fiber rich", "Satiating", "Versatile"], tips: ["1/2 bagel per serving", "Toast cho texture", "Top với protein"], alternatives: { "Lower carb": ["English Muffin", "Toast"], "Gluten-free": ["Rice Cake", "Corn Tortilla"], "Higher protein": ["Protein Bagel", "Ezekiel Bagel"] } },
+            { id: 50, name: "Cereal (Whole Grain)", nameVi: "Ngũ cốc nguyên cám", category: "carbs", calories: 379, protein: 10, carbs: 76, fat: 4.5, goals: ["energy"], cooking: ["raw"], benefits: ["Fortified vitamins", "Quick breakfast", "Fiber"], tips: ["Check sugar <10g/serving", "1 cup với milk", "Add nuts cho protein"], alternatives: { "Lower sugar": ["Oats", "Muesli"], "Higher protein": ["Protein Cereal", "Greek Yogurt"], "Whole food": ["Oatmeal", "Smoothie Bowl"] } },
+            
+            // ===== FATS (15) =====
+            { id: 51, name: "Avocado", nameVi: "Bơ", category: "fats", calories: 160, protein: 2, carbs: 9, fat: 15, goals: ["energy", "muscle"], cooking: ["raw"], benefits: ["Monounsaturated fats", "Fiber rich", "Potassium"], tips: ["1/2 avocado per serving", "Eat khi vừa chín", "Great trên toast, salad"], alternatives: { "Lower calorie": ["Cucumber", "Zucchini"], "Similar fats": ["Olive Oil", "Nuts"], "Budget": ["Peanut Butter", "Sunflower Seeds"] } },
+            { id: 52, name: "Olive Oil", nameVi: "Dầu ô liu", category: "fats", calories: 884, protein: 0, carbs: 0, fat: 100, goals: ["energy"], cooking: ["raw", "cooked"], benefits: ["Heart healthy fats", "Antioxidants", "Anti-inflammatory"], tips: ["Extra virgin cho raw", "1-2 tbsp per serving", "Don't heat quá cao"], alternatives: { "Lower calorie": ["Cooking Spray", "Broth"], "Higher smoke point": ["Avocado Oil", "Ghee"], "Budget": ["Canola Oil", "Sunflower Oil"] } },
+            { id: 53, name: "Almonds", nameVi: "Hạnh nhân", category: "fats", calories: 579, protein: 21, carbs: 22, fat: 50, goals: ["energy", "muscle"], cooking: ["raw"], benefits: ["Vitamin E", "Protein + fats", "Satiating"], tips: ["23 almonds = 1 oz", "Soak overnight cho digest", "Choose raw, unsalted"], alternatives: { "Lower calorie": ["Pistachios", "Chestnuts"], "Budget": ["Peanuts", "Sunflower Seeds"], "Nut allergy": ["Seeds", "Coconut"] } },
+            { id: 54, name: "Walnuts", nameVi: "Óc chó", category: "fats", calories: 654, protein: 15, carbs: 14, fat: 65, goals: ["energy"], cooking: ["raw"], benefits: ["Omega-3 (ALA)", "Brain health", "Antioxidants"], tips: ["14 halves = 1 oz", "Store trong tủ lạnh", "Great trên salad, oats"], alternatives: { "Cheaper": ["Peanuts", "Sunflower Seeds"], "Higher protein": ["Almonds", "Pumpkin Seeds"], "Omega-3": ["Chia Seeds", "Flax Seeds"] } },
+            { id: 55, name: "Chia Seeds", nameVi: "Hạt chia", category: "fats", calories: 486, protein: 17, carbs: 42, fat: 31, goals: ["energy", "fatloss"], cooking: ["raw"], benefits: ["Omega-3", "Fiber rich", "Complete protein"], tips: ["1-2 tbsp per serving", "Soak 15min trong liquid", "Great trong pudding, smoothie"], alternatives: { "Cheaper": ["Flax Seeds", "Hemp Seeds"], "Higher protein": ["Hemp Seeds", "Pumpkin Seeds"], "Easier digest": ["Ground Flax", "Psyllium"] } },
+            { id: 56, name: "Flax Seeds", nameVi: "Hạt lanh", category: "fats", calories: 534, protein: 18, carbs: 29, fat: 42, goals: ["energy"], cooking: ["raw"], benefits: ["Omega-3 (ALA)", "Lignans", "Fiber"], tips: ["Ground trước khi dùng", "1-2 tbsp per serving", "Store trong tủ lạnh"], alternatives: { "Better taste": ["Chia Seeds", "Hemp Seeds"], "Higher protein": ["Hemp Seeds", "Pumpkin Seeds"], "Easier find": ["Chia Seeds", "Walnuts"] } },
+            { id: 57, name: "Coconut Oil", nameVi: "Dầu dừa", category: "fats", calories: 862, protein: 0, carbs: 0, fat: 100, goals: ["energy"], cooking: ["cooked"], benefits: ["MCTs for energy", "Heat stable", "Antimicrobial"], tips: ["1 tbsp per serving", "Good for high-heat cooking", "Use virgin, unrefined"], alternatives: { "Lower calorie": ["Cooking Spray", "Olive Oil"], "More healthy": ["Olive Oil", "Avocado Oil"], "Budget": ["Canola Oil", "Sunflower Oil"] } },
+            { id: 58, name: "Butter (Grass-fed)", nameVi: "Bơ (grass-fed)", category: "fats", calories: 717, protein: 0.9, carbs: 0.1, fat: 81, goals: ["energy"], cooking: ["cooked"], benefits: ["Fat-soluble vitamins", "Butyrate", " CLA"], tips: ["1 tbsp per serving", "Choose grass-fed", "Great trên vegetables"], alternatives: { "Lower calorie": ["Olive Oil Spray", "Ghee"], "Dairy-free": ["Ghee", "Coconut Oil"], "Budget": ["Regular Butter", "Margarine"] } },
+            { id: 59, name: "Peanuts", nameVi: "Đậu phộng", category: "fats", calories: 567, protein: 26, carbs: 16, fat: 49, goals: ["energy", "muscle"], cooking: ["raw"], benefits: ["Protein + fats", "Satiating", "Budget friendly"], tips: ["1 oz = 28 peanuts", "Choose roasted, unsalted", "Great snack pre-workout"], alternatives: { "Lower calorie": ["Edamame", "Roasted Chickpeas"], "Nut allergy": ["Sunflower Seeds", "Pumpkin Seeds"], "Higher protein": ["Almonds", "Pistachios"] } },
+            { id: 60, name: "Cashews", nameVi: "Hạt điều", category: "fats", calories: 553, protein: 18, carbs: 30, fat: 44, goals: ["energy"], cooking: ["raw"], benefits: ["Creamy texture", "Minerals", "Versatile"], tips: ["18 cashews = 1 oz", "Soak cho cashew cream", "Choose raw, unsalted"], alternatives: { "Lower calorie": ["Pistachios", "Almonds"], "Budget": ["Peanuts", "Sunflower Seeds"], "Higher protein": ["Almonds", "Pumpkin Seeds"] } },
+            { id: 61, name: "Pumpkin Seeds", nameVi: "Hạt bí", category: "fats", calories: 559, protein: 30, carbs: 11, fat: 49, goals: ["muscle", "energy"], cooking: ["raw"], benefits: ["Very high protein", "Zinc rich", "Magnesium"], tips: ["1 oz per serving", "Roast với spices", "Great trên salad, soup"], alternatives: { "Cheaper": ["Sunflower Seeds", "Peanuts"], "Higher protein": ["Hemp Seeds", "Spirulina"], "Easier find": ["Almonds", "Walnuts"] } },
+            { id: 62, name: "Sunflower Seeds", nameVi: "Hạt hướng dương", category: "fats", calories: 584, protein: 21, carbs: 20, fat: 51, goals: ["energy", "muscle"], cooking: ["raw"], benefits: ["Vitamin E", "Protein", "Budget friendly"], tips: ["1 oz per serving", "Choose unsalted", "Great trên salad"], alternatives: { "Higher protein": ["Pumpkin Seeds", "Hemp Seeds"], "Lower calorie": ["Chia Seeds", "Flax Seeds"], "Nut allergy OK": ["Pumpkin Seeds", "Chia Seeds"] } },
+            { id: 63, name: "Tahini", nameVi: "Bơ mè", category: "fats", calories: 595, protein: 17, carbs: 21, fat: 54, goals: ["energy", "muscle"], cooking: ["raw"], benefits: ["Calcium rich", "Healthy fats", "Versatile"], tips: ["2 tbsp per serving", "Stir trước khi dùng", "Great trong hummus, dressing"], alternatives: { "Nut-free": ["Sunflower Butter", "Pumpkin Seed Butter"], "Lower calorie": ["Hummus", "Greek Yogurt"], "Budget": ["Peanut Butter", "Sesame Seeds"] } },
+            { id: 64, name: "Dark Chocolate (85%)", nameVi: "Sô cô la đen 85%", category: "fats", calories: 598, protein: 8, carbs: 46, fat: 43, goals: ["energy"], cooking: ["raw"], benefits: ["Antioxidants", "Magnesium", "Mood boost"], tips: ["1-2 squares per serving", "Choose 70%+ cacao", "Pair với nuts"], alternatives: { "Lower sugar": ["Cacao Nibs", "100% Cacao"], "Lower calorie": ["Cacao Powder", "Carob"], "Budget": ["Cacao Powder", "Raisins"] } },
+            { id: 65, name: "Ghee", nameVi: "Bơ clarified", category: "fats", calories: 900, protein: 0, carbs: 0, fat: 100, goals: ["energy"], cooking: ["cooked"], benefits: ["High smoke point", "Lactose-free", "Fat-soluble vitamins"], tips: ["1 tbsp per serving", "Great for high-heat cooking", "Indian cooking essential"], alternatives: { "Lower calorie": ["Olive Oil", "Coconut Oil"], "Budget": ["Butter", "Coconut Oil"], "Vegan": ["Coconut Oil", "Avocado Oil"] } },
+            
+            // ===== VEGETABLES (20) =====
+            { id: 66, name: "Broccoli", nameVi: "Bông cải xanh", category: "vegetables", calories: 34, protein: 2.8, carbs: 7, fat: 0.4, goals: ["fatloss", "energy"], cooking: ["steamed", "cooked"], benefits: ["Vitamin C & K", "Fiber", "Sulforaphane"], tips: ["Steam 5-7 phút", "Don't overcook", "Eat với olive oil"], alternatives: { "Similar": ["Cauliflower", "Brussels Sprouts"], "Faster cook": ["Baby Broccoli", "Frozen Broccoli"], "Milder": ["Cauliflower", "Green Beans"] } },
+            { id: 67, name: "Spinach", nameVi: "Rau bina (cải bó xôi)", category: "vegetables", calories: 23, protein: 2.9, carbs: 3.6, fat: 0.4, goals: ["fatloss", "energy"], cooking: ["raw", "cooked"], benefits: ["Iron rich", "Vitamin K", "Low calorie"], tips: ["Eat raw trong salad", "Sauté 2-3 phút", "Pair với vitamin C cho iron absorption"], alternatives: { "Similar": ["Kale", "Swiss Chard"], "Milder": ["Lettuce", "Arugula"], "Frozen": ["Frozen Spinach", "Kale"] } },
+            { id: 68, name: "Kale", nameVi: "Cải xoăn", category: "vegetables", calories: 49, protein: 4.3, carbs: 9, fat: 0.9, goals: ["fatloss", "energy"], cooking: ["raw", "cooked"], benefits: ["Superfood", "Vitamin K", "Antioxidants"], tips: ["Massage với oil cho tender", "Bake thành chips", "Add to smoothies"], alternatives: { "Milder": ["Spinach", "Swiss Chard"], "Cheaper": ["Spinach", "Cabbage"], "Frozen": ["Frozen Kale", "Frozen Spinach"] } },
+            { id: 69, name: "Carrots", nameVi: "Cà rốt", category: "vegetables", calories: 41, protein: 0.9, carbs: 10, fat: 0.2, goals: ["fatloss", "energy"], cooking: ["raw", "cooked"], benefits: ["Beta-carotene", "Fiber", "Eye health"], tips: ["Eat raw cho crunch", "Roast cho sweetness", "Pair với fat cho absorption"], alternatives: { "Lower carb": ["Celery", "Cucumber"], "Similar": ["Sweet Potato", "Squash"], "Quick snack": ["Baby Carrots", "Cherry Tomatoes"] } },
+            { id: 70, name: "Bell Peppers", nameVi: "Ớt chuông", category: "vegetables", calories: 31, protein: 1, carbs: 6, fat: 0.3, goals: ["fatloss", "energy"], cooking: ["raw", "cooked"], benefits: ["Vitamin C (3x orange)", "Antioxidants", "Colorful"], tips: ["Red = ripest, sweetest", "Eat raw trong salad", "Roast cho flavor"], alternatives: { "Similar": ["Tomatoes", "Zucchini"], "Lower carb": ["Celery", "Cucumber"], "Spicier": ["Chili Peppers", "Jalapeños"] } },
+            { id: 71, name: "Tomatoes", nameVi: "Cà chua", category: "vegetables", calories: 18, protein: 0.9, carbs: 3.9, fat: 0.2, goals: ["fatloss", "energy"], cooking: ["raw", "cooked"], benefits: ["Lycopene", "Vitamin C", "Low calorie"], tips: ["Cooked tăng lycopene", "Pair với olive oil", "Cherry tomatoes cho snack"], alternatives: { "Similar": ["Bell Peppers", "Cucumber"], "Lower carb": ["Celery", "Zucchini"], "Cooked": ["Tomato Sauce", "Sundried Tomatoes"] } },
+            { id: 72, name: "Cucumber", nameVi: "Dưa leo", category: "vegetables", calories: 16, protein: 0.7, carbs: 3.6, fat: 0.1, goals: ["fatloss"], cooking: ["raw"], benefits: ["Hydrating", "Very low calorie", "Refreshing"], tips: ["Eat với skin cho fiber", "Slice cho water infusion", "Great trong salad"], alternatives: { "Similar": ["Zucchini", "Celery"], "More flavor": ["Bell Peppers", "Tomatoes"], "Crunchy": ["Radishes", "Jicama"] } },
+            { id: 73, name: "Cauliflower", nameVi: "Súp lơ trắng", category: "vegetables", calories: 25, protein: 1.9, carbs: 5, fat: 0.3, goals: ["fatloss", "energy"], cooking: ["steamed", "cooked"], benefits: ["Low carb", "Versatile", "Vitamin C"], tips: ["Rice thay cơm", "Roast cho crispy", "Mash thay potato"], alternatives: { "Similar": ["Broccoli", "Cabbage"], "Lower carb": ["Zucchini", "Shirataki"], "More flavor": ["Broccoli", "Brussels Sprouts"] } },
+            { id: 74, name: "Zucchini", nameVi: "Bí ngòi", category: "vegetables", calories: 17, protein: 1.2, carbs: 3.1, fat: 0.3, goals: ["fatloss"], cooking: ["raw", "cooked"], benefits: ["Very low calorie", "Versatile", "Hydrating"], tips: ["Spiralize thành noodles", "Grill 3-4 phút", "Eat với skin"], alternatives: { "Similar": ["Cucumber", "Yellow Squash"], "Lower carb": ["Shirataki", "Kelp Noodles"], "More filling": ["Eggplant", "Bell Peppers"] } },
+            { id: 75, name: "Asparagus", nameVi: "Măng tây", category: "vegetables", calories: 20, protein: 2.2, carbs: 3.9, fat: 0.1, goals: ["fatloss", "energy"], cooking: ["grilled", "steamed", "cooked"], benefits: ["Folate", "Vitamin K", "Prebiotic fiber"], tips: ["Grill 5-7 phút", "Snap off woody ends", "Pair với lemon"], alternatives: { "Similar": ["Green Beans", "Broccoli"], "Cheaper": ["Green Beans", "Cabbage"], "Year-round": ["Broccoli", "Green Beans"] } },
+            { id: 76, name: "Green Beans", nameVi: "Đậu que", category: "vegetables", calories: 31, protein: 1.8, carbs: 7, fat: 0.1, goals: ["fatloss", "energy"], cooking: ["steamed", "cooked"], benefits: ["Fiber", "Vitamin C", "Low calorie"], tips: ["Steam 5-7 phút", "Don't overcook", "Season với garlic"], alternatives: { "Similar": ["Asparagus", "Snap Peas"], "Lower carb": ["Zucchini", "Cucumber"], "Frozen": ["Frozen Green Beans", "Frozen Broccoli"] } },
+            { id: 77, name: "Mushrooms", nameVi: "Nấm", category: "vegetables", calories: 22, protein: 3.1, carbs: 3.3, fat: 0.3, goals: ["fatloss", "energy"], cooking: ["cooked"], benefits: ["Vitamin D", "Umami flavor", "Low calorie"], tips: ["Sauté 5-7 phút", "Don't wash - brush clean", "Mix varieties cho flavor"], alternatives: { "Similar": ["Eggplant", "Zucchini"], "Meaty texture": ["Eggplant", "Jackfruit"], "Raw": ["Bell Peppers", "Cucumber"] } },
+            { id: 78, name: "Eggplant", nameVi: "Cà tím", category: "vegetables", calories: 25, protein: 1, carbs: 6, fat: 0.2, goals: ["fatloss", "energy"], cooking: ["cooked"], benefits: ["Antioxidants", "Fiber", "Versatile"], tips: ["Salt trước khi nấu để remove bitterness", "Roast hoặc grill", "Absorbs oil - cook dry first"], alternatives: { "Similar": ["Zucchini", "Mushrooms"], "Lower carb": ["Zucchini", "Cucumber"], "Faster cook": ["Zucchini", "Bell Peppers"] } },
+            { id: 79, name: "Cabbage", nameVi: "Bắp cải", category: "vegetables", calories: 25, protein: 1.3, carbs: 6, fat: 0.1, goals: ["fatloss", "energy"], cooking: ["raw", "cooked"], benefits: ["Vitamin C & K", "Fiber", "Budget friendly"], tips: ["Shred cho coleslaw", "Ferment thành kimchi", "Stir-fry 5 phút"], alternatives: { "Similar": ["Bok Choy", "Napa Cabbage"], "Milder": ["Lettuce", "Spinach"], "Fermented": ["Kimchi", "Sauerkraut"] } },
+            { id: 80, name: "Brussels Sprouts", nameVi: "Bắp cải tí hon", category: "vegetables", calories: 43, protein: 3.4, carbs: 9, fat: 0.3, goals: ["fatloss", "energy"], cooking: ["cooked"], benefits: ["Vitamin K", "Fiber", "Antioxidants"], tips: ["Halve trước khi nấu", "Roast 20min ở 200°C", "Add balsamic cho flavor"], alternatives: { "Similar": ["Broccoli", "Cabbage"], "Milder": ["Broccoli", "Green Beans"], "Faster cook": ["Broccoli", "Green Beans"] } },
+            { id: 81, name: "Celery", nameVi: "Cần tây", category: "vegetables", calories: 16, protein: 0.7, carbs: 3, fat: 0.2, goals: ["fatloss"], cooking: ["raw"], benefits: ["Very low calorie", "Hydrating", "Fiber"], tips: ["Eat raw với PB", "Juice cho detox", "Base cho soups"], alternatives: { "Similar": ["Cucumber", "Zucchini"], "More flavor": ["Bell Peppers", "Fennel"], "Crunchy": ["Radishes", "Jicama"] } },
+            { id: 82, name: "Onions", nameVi: "Hành tây", category: "vegetables", calories: 40, protein: 1.1, carbs: 9, fat: 0.1, goals: ["energy"], cooking: ["cooked"], benefits: ["Quercetin antioxidant", "Prebiotic", "Flavor base"], tips: ["Caramelize 30-40 phút", "Raw trong salad", "Base cho nhiều món"], alternatives: { "Milder": ["Shallots", "Leeks"], "No onion": ["Garlic", "Celery"], "Raw": ["Shallots", "Radishes"] } },
+            { id: 83, name: "Garlic", nameVi: "Tỏi", category: "vegetables", calories: 149, protein: 6.4, carbs: 33, fat: 0.5, goals: ["energy"], cooking: ["cooked"], benefits: ["Antimicrobial", "Heart health", "Flavor"], tips: ["1-2 cloves per serving", "Crush rồi wait 10min", "Add cuối cooking"], alternatives: { "Milder": ["Shallots", "Leeks"], "Powder": ["Garlic Powder", "Onion Powder"], "No allium": ["Ginger", "Turmeric"] } },
+            { id: 84, name: "Ginger", nameVi: "Gừng", category: "vegetables", calories: 80, protein: 1.8, carbs: 18, fat: 0.8, goals: ["energy"], cooking: ["raw", "cooked"], benefits: ["Anti-inflammatory", "Digestion", "Nausea relief"], tips: ["1 tsp grated per serving", "Tea cho digestion", "Add to stir-fry"], alternatives: { "Similar": ["Turmeric", "Galangal"], "Powder": ["Ginger Powder", "Turmeric"], "Milder": ["Lemon", "Mint"] } },
+            { id: 85, name: "Seaweed (Nori)", nameVi: "Rong biển", category: "vegetables", calories: 35, protein: 5.8, carbs: 6, fat: 0.3, goals: ["fatloss", "energy"], cooking: ["raw"], benefits: ["Iodine", "Minerals", "Low calorie"], tips: ["1-2 sheets per serving", "Wrap sushi", "Crumble trên salad"], alternatives: { "Similar": ["Kelp", "Dulse"], "More common": ["Spinach", "Kale"], "Fresh": ["Spirulina", "Chlorella"] } },
+            
+            // ===== FRUITS (15) =====
+            { id: 86, name: "Apple", nameVi: "Táo", category: "fruits", calories: 52, protein: 0.3, carbs: 14, fat: 0.2, goals: ["fatloss", "energy"], cooking: ["raw"], benefits: ["Fiber (pectin)", "Vitamin C", "Satiating"], tips: ["Eat với skin cho fiber", "1 medium per serving", "Pair với PB cho protein"], alternatives: { "Lower sugar": ["Berries", "Grapefruit"], "Similar": ["Pear", "Peach"], "Crunchy": ["Pear", "Jicama"] } },
+            { id: 87, name: "Berries (Mixed)", nameVi: "Các loại berry", category: "fruits", calories: 57, protein: 0.7, carbs: 14, fat: 0.3, goals: ["fatloss", "energy"], cooking: ["raw"], benefits: ["Antioxidants", "Low sugar", "Fiber"], tips: ["1 cup per serving", "Frozen = fresh nutrition", "Great trong yogurt, oats"], alternatives: { "Cheaper": ["Frozen Berries", "Apple"], "Higher fiber": ["Raspberries", "Blackberries"], "Fresh": ["Strawberries", "Blueberries"] } },
+            { id: 88, name: "Orange", nameVi: "Cam", category: "fruits", calories: 47, protein: 0.9, carbs: 12, fat: 0.1, goals: ["energy"], cooking: ["raw"], benefits: ["Vitamin C", "Folate", "Hydrating"], tips: ["Eat whole thay vì juice", "1 medium per serving", "Pair với iron foods"], alternatives: { "Lower sugar": ["Grapefruit", "Lemon"], "Similar": ["Mandarin", "Clementine"], "More fiber": ["Whole Orange", "Kiwi"] } },
+            { id: 89, name: "Blueberries", nameVi: "Việt quất", category: "fruits", calories: 57, protein: 0.7, carbs: 14, fat: 0.3, goals: ["fatloss", "energy"], cooking: ["raw"], benefits: ["Antioxidants (anthocyanins)", "Brain health", "Low sugar"], tips: ["1 cup per serving", "Frozen = fresh", "Great trong smoothies"], alternatives: { "Cheaper": ["Frozen Blueberries", "Blackberries"], "Similar": ["Raspberries", "Strawberries"], "Local": ["Blackberries", "Mulberries"] } },
+            { id: 90, name: "Strawberries", nameVi: "Dâu tây", category: "fruits", calories: 32, protein: 0.7, carbs: 7.7, fat: 0.3, goals: ["fatloss", "energy"], cooking: ["raw"], benefits: ["Vitamin C", "Low calorie", "Antioxidants"], tips: ["1 cup = 8 large berries", "Wash trước khi ăn", "Great trong salad"], alternatives: { "Cheaper": ["Frozen Strawberries", "Apple"], "Similar": ["Raspberries", "Blackberries"], "Year-round": ["Frozen Berries", "Apple"] } },
+            { id: 91, name: "Grapefruit", nameVi: "Bưởi", category: "fruits", calories: 42, protein: 0.8, carbs: 11, fat: 0.1, goals: ["fatloss"], cooking: ["raw"], benefits: ["Vitamin C", "Low sugar", "Fat burning"], tips: ["1/2 grapefruit per serving", "Check med interactions", "Eat trước meals"], alternatives: { "Sweeter": ["Orange", "Mandarin"], "Similar": ["Pomelo", "Lemon"], "Lower sugar": ["Lemon", "Lime"] } },
+            { id: 92, name: "Kiwi", nameVi: "Kiwi", category: "fruits", calories: 61, protein: 1.1, carbs: 15, fat: 0.5, goals: ["energy"], cooking: ["raw"], benefits: ["Vitamin C (2x orange)", "Fiber", "Digestion enzyme"], tips: ["Eat với skin (fuzzy OK)", "2 kiwis per serving", "Great trước bed cho sleep"], alternatives: { "Similar": ["Starfruit", "Papaya"], "Cheaper": ["Orange", "Apple"], "More fiber": ["Raspberries", "Pear"] } },
+            { id: 93, name: "Pineapple", nameVi: "Dứa", category: "fruits", calories: 50, protein: 0.5, carbs: 13, fat: 0.1, goals: ["energy"], cooking: ["raw"], benefits: ["Bromelain enzyme", "Vitamin C", "Anti-inflammatory"], tips: ["1 cup chunks per serving", "Remove core", "Great grilled"], alternatives: { "Lower sugar": ["Berries", "Grapefruit"], "Similar": ["Mango", "Papaya"], "Frozen": ["Frozen Pineapple", "Frozen Mango"] } },
+            { id: 94, name: "Mango", nameVi: "Xoài", category: "fruits", calories: 60, protein: 0.8, carbs: 15, fat: 0.4, goals: ["energy"], cooking: ["raw"], benefits: ["Vitamin A & C", "Fiber", "Antioxidants"], tips: ["1 cup sliced per serving", "Score & scoop method", "Great trong smoothies"], alternatives: { "Lower sugar": ["Berries", "Kiwi"], "Similar": ["Papaya", "Peach"], "Frozen": ["Frozen Mango", "Frozen Peach"] } },
+            { id: 95, name: "Papaya", nameVi: "Đu đủ", category: "fruits", calories: 43, protein: 0.5, carbs: 11, fat: 0.3, goals: ["fatloss", "energy"], cooking: ["raw"], benefits: ["Papain enzyme", "Vitamin C", "Digestion"], tips: ["1 cup per serving", "Remove seeds", "Great với lime"], alternatives: { "Similar": ["Mango", "Cantaloupe"], "Lower sugar": ["Berries", "Kiwi"], "Cheaper": ["Banana", "Apple"] } },
+            { id: 96, name: "Watermelon", nameVi: "Dưa hấu", category: "fruits", calories: 30, protein: 0.6, carbs: 7.6, fat: 0.2, goals: ["fatloss"], cooking: ["raw"], benefits: ["Hydrating (92% water)", "Lycopene", "Low calorie"], tips: ["1 cup per serving", "Remove seeds", "Great post-workout"], alternatives: { "Similar": ["Cantaloupe", "Honeydew"], "Lower sugar": ["Cucumber", "Berries"], "More filling": ["Apple", "Pear"] } },
+            { id: 97, name: "Grapes", nameVi: "Nho", category: "fruits", calories: 69, protein: 0.7, carbs: 18, fat: 0.2, goals: ["energy"], cooking: ["raw"], benefits: ["Antioxidants", "Quick energy", "Hydrating"], tips: ["1 cup per serving", "Freeze cho snack", "Pair với cheese"], alternatives: { "Lower sugar": ["Berries", "Kiwi"], "Similar": ["Cherry Tomatoes", "Berries"], "Frozen": ["Frozen Grapes", "Frozen Berries"] } },
+            { id: 98, name: "Peach", nameVi: "Đào", category: "fruits", calories: 39, protein: 0.9, carbs: 9.5, fat: 0.3, goals: ["fatloss", "energy"], cooking: ["raw"], benefits: ["Vitamin C & A", "Fiber", "Low calorie"], tips: ["1 medium per serving", "Eat khi vừa chín", "Great grilled"], alternatives: { "Similar": ["Nectarine", "Apricot"], "Lower sugar": ["Berries", "Kiwi"], "Frozen": ["Frozen Peach", "Frozen Mango"] } },
+            { id: 99, name: "Pear", nameVi: "Lê", category: "fruits", calories: 57, protein: 0.4, carbs: 15, fat: 0.1, goals: ["energy"], cooking: ["raw"], benefits: ["Fiber rich", "Vitamin C", "Satiating"], tips: ["1 medium per serving", "Eat khi vừa chín", "Pair với cheese"], alternatives: { "Similar": ["Apple", "Asian Pear"], "Lower sugar": ["Berries", "Kiwi"], "Crunchy": ["Apple", "Jicama"] } },
+            { id: 100, name: "Pomegranate", nameVi: "Lựu", category: "fruits", calories: 83, protein: 1.7, carbs: 19, fat: 1.2, goals: ["energy"], cooking: ["raw"], benefits: ["Antioxidants (punicalagins)", "Anti-inflammatory", "Vitamin C"], tips: ["1/2 cup seeds per serving", "Roll trước khi cut", "Sprinkle trên salad"], alternatives: { "Cheaper": ["Berries", "Grapes"], "Similar": ["Cranberries", "Cherries"], "Easier": ["Berries", "Grapes"] } }
+        ];
+        
+        // ==================== STATE ====================
+        let currentFilters = {
+            category: 'all',
+            goal: 'all',
+            cooking: 'all',
+            protein: 'all',
+            search: ''
+        };
+        
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCounts();
+            renderFoods();
+            setupEventListeners();
+        });
+        
+        // ==================== RENDER ====================
+        function renderFoods() {
+            const grid = document.getElementById('foodGrid');
+            const filtered = foodDatabase.filter(food => {
+                if (currentFilters.category !== 'all' && food.category !== currentFilters.category) return false;
+                if (currentFilters.goal !== 'all' && !food.goals.includes(currentFilters.goal)) return false;
+                if (currentFilters.cooking !== 'all' && !food.cooking.includes(currentFilters.cooking)) return false;
+                if (currentFilters.protein !== 'all') {
+                    if (currentFilters.protein === 'high' && food.protein <= 20) return false;
+                    if (currentFilters.protein === 'medium' && (food.protein < 10 || food.protein > 20)) return false;
+                    if (currentFilters.protein === 'low' && food.protein >= 10) return false;
+                }
+                if (currentFilters.search) {
+                    const search = currentFilters.search.toLowerCase();
+                    return food.name.toLowerCase().includes(search) || 
+                           food.nameVi.toLowerCase().includes(search) ||
+                           food.category.toLowerCase().includes(search);
+                }
+                return true;
+            });
+            
+            document.getElementById('showingCount').textContent = filtered.length;
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                document.getElementById('noResults').classList.add('active');
+                return;
+            }
+            
+            document.getElementById('noResults').classList.remove('active');
+            
+            grid.innerHTML = filtered.map(food => {
+                const goalTags = food.goals.map(goal => {
+                    const goalMap = { fatloss: 'goal-fatloss', muscle: 'goal-muscle', energy: 'goal-energy' };
+                    const labelMap = { fatloss: 'Fat Loss', muscle: 'Muscle', energy: 'Energy' };
+                    return `<span class="food-tag ${goalMap[goal]}">${labelMap[goal]}</span>`;
+                }).join('');
+                
+                return `
+                    <div class="food-card" data-category="${food.category}" onclick="openModal(${food.id})">
+                        <div class="food-header">
+                            <div>
+                                <div class="food-name">${food.name}</div>
+                                <div class="food-name-vi">${food.nameVi}</div>
+                            </div>
+                            <div class="food-calories">
+                                ${food.calories}
+                                <div class="food-calories-unit">kcal</div>
+                            </div>
+                        </div>
+                        <div class="food-macros">
+                            <div class="macro-mini protein">
+                                <div class="macro-mini-value">${food.protein}g</div>
+                                <div class="macro-mini-label">Protein</div>
+                            </div>
+                            <div class="macro-mini carbs">
+                                <div class="macro-mini-value">${food.carbs}g</div>
+                                <div class="macro-mini-label">Carbs</div>
+                            </div>
+                            <div class="macro-mini fat">
+                                <div class="macro-mini-value">${food.fat}g</div>
+                                <div class="macro-mini-label">Fat</div>
+                            </div>
+                        </div>
+                        <div class="food-tags">${goalTags}</div>
+                        <div class="food-view-btn">Xem chi tiết →</div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function updateCounts() {
+            const counts = { all: 0, protein: 0, carbs: 0, fats: 0, vegetables: 0, fruits: 0 };
+            foodDatabase.forEach(food => {
+                counts.all++;
+                counts[food.category]++;
+            });
+            Object.keys(counts).forEach(cat => {
+                const el = document.getElementById(`count-${cat}`);
+                if (el) el.textContent = counts[cat];
+            });
+        }
+        
+        // ==================== MODAL ====================
+        function openModal(id) {
+            const food = foodDatabase.find(f => f.id === id);
+            if (!food) return;
+            
+            const categoryColors = {
+                protein: '#50C878', carbs: '#E67E22', fats: '#F39C12',
+                vegetables: '#1ABC9C', fruits: '#E74C3C'
+            };
+            
+            const modal = document.getElementById('modal');
+            modal.style.setProperty('--modal-color', categoryColors[food.category]);
+            
+            document.getElementById('modalTitle').textContent = food.name;
+            document.getElementById('modalTitleVi').textContent = food.nameVi;
+            
+            document.getElementById('modalMeta').innerHTML = `
+                <div class="modal-meta-item">📊 ${food.category}</div>
+                <div class="modal-meta-item">🔥 ${food.calories} kcal/100g</div>
+                <div class="modal-meta-item"> ${food.protein}g protein</div>
+            `;
+            
+            const maxMacro = Math.max(food.protein * 4, food.carbs * 4, food.fat * 9);
+            const proteinWidth = (food.protein * 4 / maxMacro) * 100;
+            const carbsWidth = (food.carbs * 4 / maxMacro) * 100;
+            const fatWidth = (food.fat * 9 / maxMacro) * 100;
+            
+            const alternativesHtml = Object.keys(food.alternatives).map(situation => `
+                <div class="alternative-group">
+                    <div class="alternative-label">${situation}</div>
+                    <div class="alternative-options">
+                        ${food.alternatives[situation].map(alt => `<div class="alternative-chip">${alt}</div>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('modalBody').innerHTML = `
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Nutrition Facts (per 100g)</h3>
+                    <div class="nutrition-facts">
+                        <div class="nutrition-main">
+                            <div class="nutrition-main-value">${food.calories}</div>
+                            <div class="nutrition-main-label">Calories</div>
+                        </div>
+                        <div class="nutrition-bars">
+                            <div class="nutrition-bar-item">
+                                <div class="nutrition-bar-label">Protein</div>
+                                <div class="nutrition-bar-track">
+                                    <div class="nutrition-bar-fill protein" style="width: ${proteinWidth}%"></div>
+                                </div>
+                                <div class="nutrition-bar-value">${food.protein}g</div>
+                            </div>
+                            <div class="nutrition-bar-item">
+                                <div class="nutrition-bar-label">Carbs</div>
+                                <div class="nutrition-bar-track">
+                                    <div class="nutrition-bar-fill carbs" style="width: ${carbsWidth}%"></div>
+                                </div>
+                                <div class="nutrition-bar-value">${food.carbs}g</div>
+                            </div>
+                            <div class="nutrition-bar-item">
+                                <div class="nutrition-bar-label">Fat</div>
+                                <div class="nutrition-bar-track">
+                                    <div class="nutrition-bar-fill fat" style="width: ${fatWidth}%"></div>
+                                </div>
+                                <div class="nutrition-bar-value">${food.fat}g</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Benefits</h3>
+                    <ul class="benefit-list">
+                        ${food.benefits.map(b => `<li>${b}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Cooking Tips</h3>
+                    <ul class="tip-list">
+                        ${food.tips.map(t => `<li>${t}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="modal-section">
+                    <h3><span class="section-indicator"></span>Alternatives</h3>
+                    <div class="alternatives-section">${alternativesHtml}</div>
+                </div>
+            `;
+            
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // ==================== EVENT LISTENERS ====================
+        function setupEventListeners() {
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.addEventListener('click', function() {
+                    const type = this.dataset.type;
+                    const filter = this.dataset.filter;
+                    this.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilters[type] = filter;
+                    renderFoods();
+                });
+            });
+            
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilters.category = this.dataset.category;
+                    renderFoods();
+                });
+            });
+            
+            document.getElementById('searchInput').addEventListener('input', function() {
+                currentFilters.search = this.value;
+                renderFoods();
+            });
+            
+            document.getElementById('modalClose').addEventListener('click', closeModal);
+            document.getElementById('modalOverlay').addEventListener('click', function(e) {
+                if (e.target === this) closeModal();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeModal();
+            });
+        }
+    </script>
+</body>
+</html>
