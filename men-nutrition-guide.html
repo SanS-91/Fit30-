@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Guide - Fit30+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-amber: #F39C12;
+            --primary-orange: #E67E22;
+            --primary-green: #50C878;
+            --primary-teal: #1ABC9C;
+            --primary-red: #E74C3C;
+            --primary-blue: #4A90E2;
+            --primary-purple: #9B59B6;
+            
+            --text-dark: #1A202C;
+            --text-medium: #4A5568;
+            --text-light: #718096;
+            --bg-main: #F7FAFC;
+            --bg-card: #FFFFFF;
+            --border-soft: #E2E8F0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 14px 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 50%, #50C878 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .back-link:hover { color: var(--primary-amber); }
+        
+        /* Hero */
+        .hero {
+            position: relative;
+            padding: 48px 40px 36px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #FFF8E7 0%, #FFF3E0 40%, #E8F8EE 100%);
+            border-radius: 0 0 24px 24px;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(243,156,18,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(80,200,120,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hero-content { position: relative; z-index: 1; }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%);
+            color: white;
+            padding: 5px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.72rem;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+        
+        .hero h1 {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 50%, #50C878 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--text-medium);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .hero p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 30px 40px 40px;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+        
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+        }
+        
+        /* Meal Timing Section */
+        .timing-section { margin-bottom: 40px; }
+        
+        .timing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+        
+        .timing-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-left: 4px solid var(--timing-color);
+            transition: all 0.2s;
+        }
+        
+        .timing-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+        
+        .timing-card:nth-child(1) { --timing-color: var(--primary-orange); }
+        .timing-card:nth-child(2) { --timing-color: var(--primary-green); }
+        .timing-card:nth-child(3) { --timing-color: var(--primary-blue); }
+        .timing-card:nth-child(4) { --timing-color: var(--primary-purple); }
+        
+        .timing-window {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--bg-main);
+            color: var(--timing-color);
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .timing-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        
+        .timing-card p {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        
+        .timing-examples {
+            background: var(--bg-main);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            color: var(--text-dark);
+        }
+        
+        .timing-examples strong {
+            color: var(--timing-color);
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+        
+        /* Meal Plans Section */
+        .mealplans-section { margin-bottom: 40px; }
+        
+        .plan-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .plan-tab {
+            padding: 12px 24px;
+            background: var(--bg-card);
+            border: 2px solid var(--border-soft);
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .plan-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        
+        .plan-tab.active {
+            color: white;
+            border-color: transparent;
+        }
+        
+        .plan-tab[data-plan="fatloss"].active { background: linear-gradient(135deg, #E74C3C 0%, #F1948A 100%); }
+        .plan-tab[data-plan="muscle"].active { background: linear-gradient(135deg, #50C878 0%, #81ECEC 100%); }
+        .plan-tab[data-plan="recomp"].active { background: linear-gradient(135deg, #F39C12 0%, #FDCB6E 100%); }
+        
+        .plan-calories {
+            font-size: 0.72rem;
+            padding: 2px 8px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 5px;
+            font-weight: 700;
+        }
+        
+        .plan-tab:not(.active) .plan-calories {
+            background: var(--bg-main);
+            color: var(--text-light);
+        }
+        
+        .plan-content { display: none; }
+        .plan-content.active { display: block; animation: fadeIn 0.3s ease; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .plan-info {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border-soft);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        
+        .plan-info-item {
+            text-align: center;
+            padding: 12px;
+            background: var(--bg-main);
+            border-radius: 10px;
+        }
+        
+        .plan-info-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        
+        .plan-info-label {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        .day-grid {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .day-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-soft);
+        }
+        
+        .day-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        .day-calories {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--primary-amber);
+        }
+        
+        .meals-list {
+            display: grid;
+            gap: 8px;
+        }
+        
+        .meal-row {
+            display: grid;
+            grid-template-columns: 90px 1fr 80px;
+            gap: 12px;
+            align-items: center;
+            padding: 10px 12px;
+            background: var(--bg-main);
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+        
+        .meal-time {
+            font-weight: 700;
+            color: var(--text-light);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+        
+        .meal-foods {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        
+        .meal-macros {
+            text-align: right;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        
+        /* Intermittent Fasting */
+        .if-section { margin-bottom: 40px; }
+        
+        .protocols-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .protocol-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-top: 4px solid var(--protocol-color);
+            text-align: center;
+        }
+        
+        .protocol-card:nth-child(1) { --protocol-color: var(--primary-amber); }
+        .protocol-card:nth-child(2) { --protocol-color: var(--primary-green); }
+        .protocol-card:nth-child(3) { --protocol-color: var(--primary-purple); }
+        
+        .protocol-ratio {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--protocol-color);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        
+        .protocol-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .protocol-desc {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        
+        .protocol-schedule {
+            background: var(--bg-main);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        
+        .pros-cons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        
+        .pros-card, .cons-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+        }
+        
+        .pros-card { border-left: 4px solid var(--primary-green); }
+        .cons-card { border-left: 4px solid var(--primary-red); }
+        
+        .pc-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .pros-card .pc-title { color: var(--primary-green); }
+        .cons-card .pc-title { color: var(--primary-red); }
+        
+        .pc-list {
+            list-style: none;
+        }
+        
+        .pc-list li {
+            padding: 8px 0 8px 24px;
+            position: relative;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        .pros-card .pc-list li::before {
+            content: '+';
+            position: absolute;
+            left: 0;
+            color: var(--primary-green);
+            font-weight: 700;
+        }
+        
+        .cons-card .pc-list li::before {
+            content: '−';
+            position: absolute;
+            left: 0;
+            color: var(--primary-red);
+            font-weight: 700;
+        }
+        
+        /* Tips Section */
+        .tips-section { margin-bottom: 40px; }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+        
+        .tip-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-soft);
+            border-top: 3px solid var(--tip-color);
+        }
+        
+        .tip-card:nth-child(1) { --tip-color: var(--primary-amber); }
+        .tip-card:nth-child(2) { --tip-color: var(--primary-green); }
+        .tip-card:nth-child(3) { --tip-color: var(--primary-blue); }
+        .tip-card:nth-child(4) { --tip-color: var(--primary-purple); }
+        
+        .tip-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        
+        .tip-card p {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        
+        .tip-list {
+            list-style: none;
+        }
+        
+        .tip-list li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+        
+        .tip-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--tip-color);
+            font-weight: 700;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 50%, #50C878 100%);
+            border-radius: 18px;
+            padding: 48px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.4;
+        }
+        
+        .cta-content { position: relative; z-index: 1; }
+        
+        .cta-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .cta-section p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            margin-bottom: 22px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            padding: 12px 28px;
+            background: white;
+            color: var(--primary-orange);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border: 2px solid white;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        .btn-cta.secondary {
+            background: transparent;
+            color: white;
+        }
+        
+        .btn-cta.secondary:hover {
+            background: rgba(255,255,255,0.15);
+        }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--border-soft);
+            padding: 28px 40px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #F39C12 0%, #E67E22 50%, #50C878 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        
+        .footer-links a:hover { color: var(--primary-amber); }
+        
+        .footer-bottom {
+            color: var(--text-light);
+            font-size: 0.78rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .timing-grid { grid-template-columns: 1fr; }
+            .protocols-grid { grid-template-columns: 1fr; }
+            .pros-cons-grid { grid-template-columns: 1fr; }
+            .tips-grid { grid-template-columns: 1fr; }
+            .plan-info { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 12px 20px; }
+            .hero { padding: 36px 20px 28px; border-radius: 0 0 18px 18px; }
+            .hero h1 { font-size: 1.8rem; }
+            .main-container { padding: 20px 20px 30px; }
+            .meal-row { grid-template-columns: 1fr; gap: 4px; }
+            .meal-macros { text-align: left; }
+            .plan-info { grid-template-columns: 1fr 1fr; }
+            .cta-section { padding: 36px 24px; }
+            .cta-section h2 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Fit30+</a>
+        <a href="men-nutrition-overview.html" class="back-link">← Quay lại Nutrition</a>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">NUTRITION GUIDE</span>
+            <h1>Hướng Dẫn <span>Dinh Dưỡng</span></h1>
+            <div class="hero-subtitle">Meal timing · 7-day plans · Intermittent fasting</div>
+            <p>Không chỉ là "ăn gì" mà còn là "khi nào ăn" và "ăn bao nhiêu". Guide này giúp bạn optimize nutrition timing, có meal plans cụ thể, và hiểu về intermittent fasting.</p>
+        </div>
+    </section>
+    
+    <div class="main-container">
+        
+        <!-- Meal Timing Section -->
+        <div class="timing-section">
+            <div class="section-header">
+                <h2 class="section-title">Meal Timing</h2>
+                <p class="section-subtitle">4 thời điểm quan trọng cần optimize</p>
+            </div>
+            
+            <div class="timing-grid">
+                <div class="timing-card">
+                    <div class="timing-window">1-2 giờ trước tập</div>
+                    <h3>Pre-Workout Nutrition</h3>
+                    <p>Bữa ăn trước tập cung cấp energy cho workout. Focus vào carbs dễ tiêu + protein vừa phải. Tránh fat cao vì làm chậm digestion.</p>
+                    <div class="timing-examples">
+                        <strong>Nên ăn:</strong>
+                        • Oats + banana + whey<br>
+                        • Rice + chicken (portion nhỏ)<br>
+                        • Toast + PB + honey<br>
+                        <strong>Tránh:</strong> Heavy meals, high fat, high fiber
+                    </div>
+                </div>
+                
+                <div class="timing-card">
+                    <div class="timing-window">30-60 phút sau tập</div>
+                    <h3>Post-Workout Nutrition</h3>
+                    <p>Anabolic window không hẹp như xưa nghĩ, nhưng ăn trong 2h sau tập vẫn optimal. Focus vào protein (20-40g) + carbs để replenish glycogen.</p>
+                    <div class="timing-examples">
+                        <strong>Nên ăn:</strong>
+                        • Whey + banana (quick)<br>
+                        • Chicken + rice + veg<br>
+                        • Greek yogurt + berries + granola<br>
+                        <strong>Ratio:</strong> 1:2 hoặc 1:3 (protein:carbs)
+                    </div>
+                </div>
+                
+                <div class="timing-card">
+                    <div class="timing-window">Ngày không tập</div>
+                    <h3>Rest Day Nutrition</h3>
+                    <p>Rest day vẫn quan trọng cho recovery. Giảm carbs nhẹ (10-20%), giữ protein cao, tăng healthy fats. Total calories có thể giảm 200-300 kcal.</p>
+                    <div class="timing-examples">
+                        <strong>Điều chỉnh:</strong>
+                        • Protein: giữ nguyên (2.2g/kg)<br>
+                        • Carbs: giảm 20-30%<br>
+                        • Fats: tăng nhẹ<br>
+                        • Focus: anti-inflammatory foods
+                    </div>
+                </div>
+                
+                <div class="timing-card">
+                    <div class="timing-window">Sáng vs Tối</div>
+                    <h3>Morning vs Evening Meals</h3>
+                    <p>Research cho thấy total daily intake quan trọng hơn timing. Nhưng: bữa sáng lớn giúp control appetite, bữa tối nhẹ giúp sleep quality.</p>
+                    <div class="timing-examples">
+                        <strong>Morning:</strong> Protein + complex carbs<br>
+                        <strong>Evening:</strong> Protein + veg + healthy fats<br>
+                        <strong>Tránh:</strong> Heavy carbs 2h trước ngủ<br>
+                        <strong>Tip:</strong> Casein protein trước bed
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-callout tip" style="background: #E8F8EE; border-left: 4px solid var(--primary-green); padding: 16px 18px; border-radius: 12px; margin-top: 16px; display: flex; gap: 12px; align-items: flex-start;">
+                <div style="font-size: 1.3rem; flex-shrink: 0;">💡</div>
+                <div style="font-size: 0.88rem; color: var(--text-dark); line-height: 1.5;">
+                    <strong>Key insight:</strong> Meal timing matters ~10%, total daily intake matters ~90%. Đừng obsess về timing nếu chưa hit daily targets.
+                </div>
+            </div>
+        </div>
+        
+        <!-- 7-Day Meal Plans -->
+        <div class="mealplans-section">
+            <div class="section-header">
+                <h2 class="section-title">7-Day Meal Plans</h2>
+                <p class="section-subtitle">Chọn plan phù hợp với goal của bạn</p>
+            </div>
+            
+            <div class="plan-tabs">
+                <button class="plan-tab active" data-plan="fatloss" onclick="switchPlan('fatloss', this)">
+                    Fat Loss
+                    <span class="plan-calories">2000-2200 kcal</span>
+                </button>
+                <button class="plan-tab" data-plan="muscle" onclick="switchPlan('muscle', this)">
+                    Muscle Gain
+                    <span class="plan-calories">2800-3200 kcal</span>
+                </button>
+                <button class="plan-tab" data-plan="recomp" onclick="switchPlan('recomp', this)">
+                    Recomp
+                    <span class="plan-calories">2400-2600 kcal</span>
+                </button>
+            </div>
+            
+            <!-- Fat Loss Plan -->
+            <div class="plan-content active" id="plan-fatloss">
+                <div class="plan-info">
+                    <div class="plan-info-item">
+                        <div class="plan-info-value">2100</div>
+                        <div class="plan-info-label">Avg kcal/day</div>
+                    </div>
+                    <div class="plan-info-item">
+                        <div class="plan-info-value">165g</div>
+                        <div class="plan-info-label">Protein</div>
+                    </div>
+                    <div class="plan-info-item">
+                        <div class="plan-info-value">180g</div>
+                        <div class="plan-info-label">Carbs</div>
+                    </div>
+                    <div class="plan-info-item">
+                        <div class="plan-info-value">70g</div>
+                        <div class="plan-info-label">Fat</div>
+                    </div>
+                </div>
+                
+                <div class="day-grid" id="fatloss-days"></div>
+            </div>
+            
+            <!-- Muscle Gain Plan -->
+            <div class="plan-content" id="plan-muscle">
+                <div class="plan-info">
+                    <div class="plan-info-item">
+                        <div class="plan-info-value">3000</div>
+                        <div class="plan-info-label">Avg kcal/day</div>
+                    </div>
+                    <div class="plan-info-item">
+                        <div class="plan-info-value">180g</div>
+                        <div class="plan-info-label">Protein</div>
+                    </div>
+                    <div class="plan-info-item">
+                        <div class="plan-info-value">380g</div>
+                        <div class="plan-info-label">Carbs</div>
+                    </div>
+                    <div class="plan-info-item">
+                        <div class="plan-info-value">95g</div>
+                        <div class="plan-info-label">Fat</div>
+                    </div>
+                </div>
+                
+                <div class="day-grid" id="muscle-days"></div>
+            </div>
+            
+            <!-- Recomp Plan -->
+            <div class="plan-content" id="plan-recomp">
+                <div class="plan-info">
+                    <div class="plan-info-item">
+                        <div class="plan-info-value">2500</div>
+                        <div class="plan-info-label">Avg kcal/day</div>
+                    </div>
+                    <div class="plan-info-item">
+                        <div class="plan-info-value">175g</div>
+                        <div class="plan-info-label">Protein</div>
+                    </div>
+                    <div class="plan-info-item">
+                        <div class="plan-info-value">260g</div>
+                        <div class="plan-info-label">Carbs</div>
+                    </div>
+                    <div class="plan-info-item">
+                        <div class="plan-info-value">80g</div>
+                        <div class="plan-info-label">Fat</div>
+                    </div>
+                </div>
+                
+                <div class="day-grid" id="recomp-days"></div>
+            </div>
+        </div>
+        
+        <!-- Intermittent Fasting -->
+        <div class="if-section">
+            <div class="section-header">
+                <h2 class="section-title">Intermittent Fasting</h2>
+                <p class="section-subtitle">3 protocols phổ biến + pros/cons</p>
+            </div>
+            
+            <div class="protocols-grid">
+                <div class="protocol-card">
+                    <div class="protocol-ratio">16:8</div>
+                    <div class="protocol-name">Leangains Protocol</div>
+                    <div class="protocol-desc">Phổ biến nhất cho người tập gym. 16h fast, 8h eating window. Dễ maintain, social-friendly.</div>
+                    <div class="protocol-schedule">
+                        Fast: 8PM - 12PM<br>
+                        Eat: 12PM - 8PM (2-3 meals)
+                    </div>
+                </div>
+                
+                <div class="protocol-card">
+                    <div class="protocol-ratio">18:6</div>
+                    <div class="protocol-name">Moderate Fast</div>
+                    <div class="protocol-desc">Nâng cao hơn 16:8. Tốt cho fat loss. 2 meals trong window. Đòi hỏi discipline cao hơn.</div>
+                    <div class="protocol-schedule">
+                        Fast: 8PM - 2PM<br>
+                        Eat: 2PM - 8PM (2 meals)
+                    </div>
+                </div>
+                
+                <div class="protocol-card">
+                    <div class="protocol-ratio">20:4</div>
+                    <div class="protocol-name">Warrior Diet</div>
+                    <div class="protocol-desc">Advanced protocol. 1 large meal + 1 snack. Không recommended cho người mới hoặc athletes.</div>
+                    <div class="protocol-schedule">
+                        Fast: 8PM - 4PM<br>
+                        Eat: 4PM - 8PM (1-2 meals)
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pros-cons-grid">
+                <div class="pros-card">
+                    <div class="pc-title">✅ Pros</div>
+                    <ul class="pc-list">
+                        <li>Đơn giản hóa meal planning - ít decisions hơn</li>
+                        <li>Auto calorie control - khó overeat trong window ngắn</li>
+                        <li>Insulin sensitivity cải thiện</li>
+                        <li>Autophagy activation (cellular cleanup)</li>
+                        <li>Tiết kiệm thời gian nấu ăn</li>
+                        <li>Mental clarity trong fasting window</li>
+                    </ul>
+                </div>
+                
+                <div class="cons-card">
+                    <div class="pc-title">⚠️ Cons</div>
+                    <ul class="pc-list">
+                        <li>Khó hit protein target trong window ngắn</li>
+                        <li>Không ideal cho pre/post workout timing</li>
+                        <li>Hunger, irritability ban đầu (1-2 tuần)</li>
+                        <li>Không phù hợp: pregnant, underweight, eating disorders</li>
+                        <li>Social limitations (bữa sáng với gia đình)</li>
+                        <li>Risk of binge eating khi mở window</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-callout warning" style="background: #FFF3E0; border-left: 4px solid var(--primary-orange); padding: 16px 18px; border-radius: 12px; margin-top: 16px; display: flex; gap: 12px; align-items: flex-start;">
+                <div style="font-size: 1.3rem; flex-shrink: 0;">⚠️</div>
+                <div style="font-size: 0.88rem; color: var(--text-dark); line-height: 1.5;">
+                    <strong>For gym-goers:</strong> IF không bắt buộc. Nếu bạn struggle hit protein hoặc workout performance giảm, skip IF. Total intake > timing.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tips Section -->
+        <div class="tips-section">
+            <div class="section-header">
+                <h2 class="section-title">Practical Tips</h2>
+                <p class="section-subtitle">Meal prep & portion control để sustain lâu dài</p>
+            </div>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>Meal Prep Basics</h3>
+                    <p>Dành 2-3h Chủ Nhật để prep meals cho cả tuần. Giảm decision fatigue và đảm bảo luôn có healthy options.</p>
+                    <ul class="tip-list">
+                        <li>Cook protein bulk: chicken, beef, eggs</li>
+                        <li>Prep carb sources: rice, sweet potato, oats</li>
+                        <li>Wash & chop vegetables</li>
+                        <li>Portion vào containers (5 ngày)</li>
+                        <li>Freeze portions cho tuần sau</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>Portion Control</h3>
+                    <p>Không cần cân food mãi mãi, nhưng cần biết portion sizes ban đầu để calibrate mắt.</p>
+                    <ul class="tip-list">
+                        <li>Protein: 1 palm = ~25-30g protein</li>
+                        <li>Carbs: 1 cupped hand = ~40g carbs</li>
+                        <li>Fats: 1 thumb = ~10g fat</li>
+                        <li>Veg: 2 fists = unlimited</li>
+                        <li>Dùng smaller plates (20-23cm)</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>80/20 Rule</h3>
+                    <p>80% whole foods, 20% flexible. Perfect diet không tồn tại - consistency mới là key.</p>
+                    <ul class="tip-list">
+                        <li>5-6 meals "clean" / tuần</li>
+                        <li>1-2 meals flexible (pizza, burger OK)</li>
+                        <li>Đừng compensate bằng cách skip meals</li>
+                        <li>Track weekly average, không daily</li>
+                        <li>Progress > perfection</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>Hydration & Supplements</h3>
+                    <p>Nước và basic supplements support nutrition nhưng không replace real food.</p>
+                    <ul class="tip-list">
+                        <li>Water: 3-4L/ngày (30-40ml/kg)</li>
+                        <li>Creatine: 5g/ngày (most researched)</li>
+                        <li>Vitamin D: 2000-4000 IU (nếu thiếu nắng)</li>
+                        <li>Omega-3: 2-3g EPA/DHA</li>
+                        <li>Whey: convenient, không bắt buộc</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <div class="cta-content">
+                <h2>Áp dụng vào thực tế</h2>
+                <p>Chọn 1 meal plan, follow 2 tuần, adjust dựa trên results. Không có plan nào perfect - chỉ có plan bạn có thể maintain.</p>
+                <div class="cta-buttons">
+                    <a href="men-nutrition-food-library.html" class="btn-cta">Khám phá Food Library</a>
+                    <a href="men-nutrition-recipes.html" class="btn-cta secondary">Xem Recipes</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-logo">Fit30+</div>
+        <div class="footer-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="men-30-40.html">Nam 30-40</a>
+            <a href="men-nutrition-overview.html">Nutrition Overview</a>
+            <a href="men-nutrition-calculator.html">Calculator</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Fit30+ · Strong Body. Better Life.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // ==================== MEAL PLANS DATA ====================
+        const mealPlans = {
+            fatloss: [
+                { day: "Day 1 · Monday", kcal: 2050, meals: [
+                    { time: "7:30 AM", foods: "3 eggs + 2 toast + avocado + coffee", macros: "480 kcal · 28P · 42C · 22F" },
+                    { time: "10:30 AM", foods: "Greek yogurt + berries + almonds", macros: "280 kcal · 22P · 28C · 10F" },
+                    { time: "1:00 PM", foods: "Chicken breast + brown rice + broccoli", macros: "520 kcal · 48P · 58C · 8F" },
+                    { time: "4:30 PM", foods: "Protein shake + banana", macros: "220 kcal · 28P · 24C · 2F" },
+                    { time: "7:30 PM", foods: "Salmon + sweet potato + asparagus", macros: "550 kcal · 42P · 48C · 18F" }
+                ]},
+                { day: "Day 2 · Tuesday", kcal: 2100, meals: [
+                    { time: "7:30 AM", foods: "Oats + whey + banana + PB", macros: "520 kcal · 38P · 68C · 12F" },
+                    { time: "10:30 AM", foods: "Apple + cottage cheese", macros: "220 kcal · 20P · 24C · 4F" },
+                    { time: "1:00 PM", foods: "Lean beef + quinoa + mixed veg", macros: "580 kcal · 48P · 62C · 12F" },
+                    { time: "4:30 PM", foods: "Tuna salad + olive oil", macros: "240 kcal · 32P · 8C · 10F" },
+                    { time: "7:30 PM", foods: "Chicken thigh + rice + green beans", macros: "540 kcal · 42P · 58C · 14F" }
+                ]},
+                { day: "Day 3 · Wednesday", kcal: 2080, meals: [
+                    { time: "7:30 AM", foods: "Egg whites omelette + spinach + toast", macros: "420 kcal · 38P · 42C · 8F" },
+                    { time: "10:30 AM", foods: "Protein bar + coffee", macros: "220 kcal · 20P · 24C · 6F" },
+                    { time: "1:00 PM", foods: "Turkey breast + sweet potato + salad", macros: "540 kcal · 48P · 62C · 8F" },
+                    { time: "4:30 PM", foods: "Greek yogurt + honey + walnuts", macros: "280 kcal · 18P · 32C · 10F" },
+                    { time: "7:30 PM", foods: "White fish + rice + broccoli", macros: "480 kcal · 42P · 52C · 6F" }
+                ]},
+                { day: "Day 4 · Thursday", kcal: 2120, meals: [
+                    { time: "7:30 AM", foods: "Smoothie: whey + oats + berries + milk", macros: "520 kcal · 38P · 68C · 10F" },
+                    { time: "10:30 AM", foods: "Hard boiled eggs + carrot sticks", macros: "200 kcal · 14P · 8C · 12F" },
+                    { time: "1:00 PM", foods: "Chicken + couscous + roasted veg", macros: "560 kcal · 48P · 64C · 10F" },
+                    { time: "4:30 PM", foods: "Cottage cheese + pineapple", macros: "220 kcal · 22P · 28C · 2F" },
+                    { time: "7:30 PM", foods: "Lean pork + rice + bok choy", macros: "580 kcal · 44P · 62C · 14F" }
+                ]},
+                { day: "Day 5 · Friday", kcal: 2050, meals: [
+                    { time: "7:30 AM", foods: "2 eggs + 2 toast + smoked salmon", macros: "480 kcal · 32P · 42C · 18F" },
+                    { time: "10:30 AM", foods: "Protein shake + apple", macros: "240 kcal · 28P · 26C · 2F" },
+                    { time: "1:00 PM", foods: "Beef stir-fry + brown rice", macros: "560 kcal · 46P · 62C · 12F" },
+                    { time: "4:30 PM", foods: "Edamame + cherry tomatoes", macros: "180 kcal · 14P · 14C · 6F" },
+                    { time: "7:30 PM", foods: "Baked chicken + quinoa + salad", macros: "540 kcal · 48P · 48C · 14F" }
+                ]},
+                { day: "Day 6 · Saturday", kcal: 2150, meals: [
+                    { time: "8:30 AM", foods: "Pancakes: oats + eggs + banana", macros: "520 kcal · 28P · 72C · 12F" },
+                    { time: "11:30 AM", foods: "Greek yogurt + granola + berries", macros: "320 kcal · 22P · 42C · 8F" },
+                    { time: "2:00 PM", foods: "Grilled fish + sweet potato + veg", macros: "540 kcal · 44P · 58C · 12F" },
+                    { time: "5:00 PM", foods: "Protein bar + almonds", macros: "280 kcal · 22P · 24C · 12F" },
+                    { time: "8:00 PM", foods: "Chicken + rice + stir-fried veg", macros: "540 kcal · 46P · 58C · 12F" }
+                ]},
+                { day: "Day 7 · Sunday", kcal: 2100, meals: [
+                    { time: "8:30 AM", foods: "Eggs benedict (whole wheat)", macros: "520 kcal · 32P · 48C · 20F" },
+                    { time: "11:30 AM", foods: "Smoothie: protein + spinach + fruit", macros: "240 kcal · 28P · 32C · 2F" },
+                    { time: "2:00 PM", foods: "Roast chicken + potatoes + veg", macros: "580 kcal · 52P · 58C · 14F" },
+                    { time: "5:00 PM", foods: "Cottage cheese + fruit", macros: "200 kcal · 20P · 24C · 2F" },
+                    { time: "8:00 PM", foods: "Salmon + asparagus + rice", macros: "560 kcal · 42P · 52C · 18F" }
+                ]}
+            ],
+            muscle: [
+                { day: "Day 1 · Monday", kcal: 3000, meals: [
+                    { time: "7:00 AM", foods: "4 eggs + 3 toast + avocado + OJ", macros: "780 kcal · 42P · 88C · 32F" },
+                    { time: "10:00 AM", foods: "Mass gainer shake + banana", macros: "520 kcal · 40P · 72C · 8F" },
+                    { time: "1:00 PM", foods: "Beef + 2 cups rice + veg + olive oil", macros: "820 kcal · 58P · 98C · 22F" },
+                    { time: "4:30 PM", foods: "Greek yogurt + granola + honey + nuts", macros: "480 kcal · 28P · 62C · 16F" },
+                    { time: "7:30 PM", foods: "Chicken + pasta + cheese + salad", macros: "780 kcal · 58P · 88C · 22F" },
+                    { time: "10:00 PM", foods: "Casein shake + PB sandwich", macros: "420 kcal · 32P · 42C · 14F" }
+                ]},
+                { day: "Day 2 · Tuesday", kcal: 3050, meals: [
+                    { time: "7:00 AM", foods: "Oats + 2 scoops whey + banana + milk", macros: "720 kcal · 52P · 98C · 14F" },
+                    { time: "10:00 AM", foods: "4 egg whites + 2 whole + toast", macros: "480 kcal · 38P · 42C · 18F" },
+                    { time: "1:00 PM", foods: "Salmon + 2 cups rice + broccoli", macros: "780 kcal · 52P · 92C · 22F" },
+                    { time: "4:30 PM", foods: "Turkey sandwich + fruit + milk", macros: "520 kcal · 38P · 68C · 10F" },
+                    { time: "7:30 PM", foods: "Lean beef + sweet potato + veg", macros: "720 kcal · 52P · 78C · 20F" },
+                    { time: "10:00 PM", foods: "Cottage cheese + nuts + honey", macros: "380 kcal · 28P · 32C · 16F" }
+                ]},
+                { day: "Day 3 · Wednesday", kcal: 2980, meals: [
+                    { time: "7:00 AM", foods: "Pancakes + eggs + bacon + OJ", macros: "820 kcal · 42P · 92C · 32F" },
+                    { time: "10:00 AM", foods: "Protein shake + oats + PB", macros: "520 kcal · 38P · 62C · 14F" },
+                    { time: "1:00 PM", foods: "Chicken + 2 cups rice + avocado", macros: "780 kcal · 58P · 88C · 22F" },
+                    { time: "4:30 PM", foods: "Bagel + cream cheese + smoked salmon", macros: "480 kcal · 28P · 58C · 16F" },
+                    { time: "7:30 PM", foods: "Pork + pasta + cheese + salad", macros: "820 kcal · 52P · 92C · 26F" },
+                    { time: "10:00 PM", foods: "Casein + banana + almonds", macros: "380 kcal · 28P · 42C · 12F" }
+                ]},
+                { day: "Day 4 · Thursday", kcal: 3020, meals: [
+                    { time: "7:00 AM", foods: "5 eggs + 3 toast + avocado + fruit", macros: "820 kcal · 48P · 82C · 36F" },
+                    { time: "10:00 AM", foods: "Mass shake + granola bar", macros: "520 kcal · 38P · 68C · 12F" },
+                    { time: "1:00 PM", foods: "Steak + 2 cups rice + veg + butter", macros: "820 kcal · 58P · 88C · 26F" },
+                    { time: "4:30 PM", foods: "Greek yogurt + fruit + nuts + honey", macros: "480 kcal · 28P · 62C · 16F" },
+                    { time: "7:30 PM", foods: "Chicken + quinoa + olive oil + veg", macros: "720 kcal · 54P · 72C · 22F" },
+                    { time: "10:00 PM", foods: "PB sandwich + milk", macros: "480 kcal · 24P · 52C · 20F" }
+                ]},
+                { day: "Day 5 · Friday", kcal: 3050, meals: [
+                    { time: "7:00 AM", foods: "Oats + 2 scoops whey + berries + milk", macros: "720 kcal · 52P · 92C · 14F" },
+                    { time: "10:00 AM", foods: "Egg sandwich + fruit + coffee", macros: "480 kcal · 28P · 58C · 16F" },
+                    { time: "1:00 PM", foods: "Fish + 2 cups rice + avocado", macros: "780 kcal · 48P · 92C · 24F" },
+                    { time: "4:30 PM", foods: "Protein bar + nuts + banana", macros: "480 kcal · 28P · 58C · 18F" },
+                    { time: "7:30 PM", foods: "Beef + pasta + cheese + salad", macros: "820 kcal · 54P · 92C · 26F" },
+                    { time: "10:00 PM", foods: "Casein + oats + honey", macros: "420 kcal · 32P · 52C · 8F" }
+                ]},
+                { day: "Day 6 · Saturday", kcal: 3100, meals: [
+                    { time: "8:00 AM", foods: "Big breakfast: eggs, bacon, toast, OJ", macros: "880 kcal · 48P · 88C · 38F" },
+                    { time: "11:00 AM", foods: "Smoothie: whey + oats + PB + banana", macros: "620 kcal · 42P · 78C · 18F" },
+                    { time: "2:00 PM", foods: "Burger (lean) + fries + salad", macros: "820 kcal · 52P · 88C · 28F" },
+                    { time: "5:00 PM", foods: "Greek yogurt + granola + fruit", macros: "420 kcal · 28P · 58C · 10F" },
+                    { time: "8:00 PM", foods: "Chicken + rice + stir-fry veg", macros: "720 kcal · 54P · 82C · 18F" },
+                    { time: "10:30 PM", foods: "Casein + PB + banana", macros: "420 kcal · 30P · 42C · 16F" }
+                ]},
+                { day: "Day 7 · Sunday", kcal: 2980, meals: [
+                    { time: "8:00 AM", foods: "French toast + eggs + fruit", macros: "720 kcal · 32P · 92C · 24F" },
+                    { time: "11:00 AM", foods: "Protein shake + bagel + cream cheese", macros: "520 kcal · 32P · 68C · 12F" },
+                    { time: "2:00 PM", foods: "Roast chicken + potatoes + veg", macros: "780 kcal · 58P · 82C · 22F" },
+                    { time: "5:00 PM", foods: "Nuts + fruit + yogurt", macros: "380 kcal · 18P · 42C · 16F" },
+                    { time: "8:00 PM", foods: "Salmon + rice + asparagus", macros: "680 kcal · 48P · 72C · 20F" },
+                    { time: "10:30 PM", foods: "Cottage cheese + honey + nuts", macros: "380 kcal · 28P · 32C · 16F" }
+                ]}
+            ],
+            recomp: [
+                { day: "Day 1 · Monday", kcal: 2500, meals: [
+                    { time: "7:30 AM", foods: "3 eggs + 2 toast + avocado + coffee", macros: "580 kcal · 32P · 52C · 26F" },
+                    { time: "10:30 AM", foods: "Greek yogurt + berries + almonds", macros: "320 kcal · 24P · 32C · 12F" },
+                    { time: "1:00 PM", foods: "Chicken + brown rice + broccoli", macros: "620 kcal · 52P · 72C · 12F" },
+                    { time: "4:30 PM", foods: "Protein shake + banana", macros: "280 kcal · 30P · 32C · 4F" },
+                    { time: "7:30 PM", foods: "Salmon + sweet potato + asparagus", macros: "640 kcal · 46P · 58C · 22F" },
+                    { time: "10:00 PM", foods: "Casein + almonds", macros: "220 kcal · 24P · 8C · 12F" }
+                ]},
+                { day: "Day 2 · Tuesday", kcal: 2520, meals: [
+                    { time: "7:30 AM", foods: "Oats + whey + banana + PB", macros: "620 kcal · 42P · 78C · 16F" },
+                    { time: "10:30 AM", foods: "Apple + cottage cheese", macros: "260 kcal · 22P · 28C · 6F" },
+                    { time: "1:00 PM", foods: "Lean beef + quinoa + mixed veg", macros: "660 kcal · 52P · 72C · 16F" },
+                    { time: "4:30 PM", foods: "Tuna salad + olive oil", macros: "280 kcal · 34P · 12C · 12F" },
+                    { time: "7:30 PM", foods: "Chicken + rice + green beans", macros: "620 kcal · 48P · 68C · 14F" },
+                    { time: "10:00 PM", foods: "Greek yogurt + honey", macros: "220 kcal · 18P · 28C · 4F" }
+                ]},
+                { day: "Day 3 · Wednesday", kcal: 2480, meals: [
+                    { time: "7:30 AM", foods: "Egg omelette + spinach + toast", macros: "520 kcal · 38P · 48C · 18F" },
+                    { time: "10:30 AM", foods: "Protein bar + coffee", macros: "260 kcal · 22P · 28C · 8F" },
+                    { time: "1:00 PM", foods: "Turkey + sweet potato + salad", macros: "620 kcal · 52P · 72C · 12F" },
+                    { time: "4:30 PM", foods: "Greek yogurt + walnuts", macros: "320 kcal · 20P · 28C · 14F" },
+                    { time: "7:30 PM", foods: "White fish + rice + broccoli", macros: "560 kcal · 46P · 62C · 10F" },
+                    { time: "10:00 PM", foods: "Casein + banana", macros: "220 kcal · 24P · 28C · 2F" }
+                ]},
+                { day: "Day 4 · Thursday", kcal: 2540, meals: [
+                    { time: "7:30 AM", foods: "Smoothie: whey + oats + berries", macros: "620 kcal · 42P · 82C · 14F" },
+                    { time: "10:30 AM", foods: "Hard boiled eggs + carrot", macros: "240 kcal · 16P · 12C · 14F" },
+                    { time: "1:00 PM", foods: "Chicken + couscous + roasted veg", macros: "640 kcal · 52P · 74C · 14F" },
+                    { time: "4:30 PM", foods: "Cottage cheese + pineapple", macros: "260 kcal · 24P · 32C · 4F" },
+                    { time: "7:30 PM", foods: "Lean pork + rice + bok choy", macros: "660 kcal · 48P · 72C · 18F" },
+                    { time: "10:00 PM", foods: "Almonds + dark chocolate", macros: "280 kcal · 8P · 18C · 20F" }
+                ]},
+                { day: "Day 5 · Friday", kcal: 2500, meals: [
+                    { time: "7:30 AM", foods: "2 eggs + 2 toast + smoked salmon", macros: "560 kcal · 36P · 48C · 22F" },
+                    { time: "10:30 AM", foods: "Protein shake + apple", macros: "280 kcal · 30P · 30C · 4F" },
+                    { time: "1:00 PM", foods: "Beef stir-fry + brown rice", macros: "640 kcal · 50P · 72C · 16F" },
+                    { time: "4:30 PM", foods: "Edamame + cherry tomatoes", macros: "220 kcal · 16P · 18C · 8F" },
+                    { time: "7:30 PM", foods: "Baked chicken + quinoa + salad", macros: "620 kcal · 52P · 58C · 18F" },
+                    { time: "10:00 PM", foods: "Casein + PB", macros: "240 kcal · 24P · 12C · 12F" }
+                ]},
+                { day: "Day 6 · Saturday", kcal: 2580, meals: [
+                    { time: "8:30 AM", foods: "Pancakes: oats + eggs + banana", macros: "620 kcal · 32P · 82C · 16F" },
+                    { time: "11:30 AM", foods: "Greek yogurt + granola + berries", macros: "380 kcal · 24P · 48C · 10F" },
+                    { time: "2:00 PM", foods: "Grilled fish + sweet potato + veg", macros: "620 kcal · 48P · 68C · 16F" },
+                    { time: "5:00 PM", foods: "Protein bar + almonds", macros: "320 kcal · 24P · 28C · 14F" },
+                    { time: "8:00 PM", foods: "Chicken + rice + stir-fried veg", macros: "620 kcal · 50P · 68C · 14F" },
+                    { time: "10:30 PM", foods: "Cottage cheese + honey", macros: "220 kcal · 20P · 28C · 2F" }
+                ]},
+                { day: "Day 7 · Sunday", kcal: 2520, meals: [
+                    { time: "8:30 AM", foods: "Eggs benedict (whole wheat)", macros: "620 kcal · 36P · 58C · 26F" },
+                    { time: "11:30 AM", foods: "Smoothie: protein + spinach + fruit", macros: "280 kcal · 30P · 38C · 4F" },
+                    { time: "2:00 PM", foods: "Roast chicken + potatoes + veg", macros: "660 kcal · 56P · 68C · 18F" },
+                    { time: "5:00 PM", foods: "Cottage cheese + fruit", macros: "240 kcal · 22P · 28C · 4F" },
+                    { time: "8:00 PM", foods: "Salmon + asparagus + rice", macros: "640 kcal · 46P · 62C · 22F" },
+                    { time: "10:30 PM", foods: "Casein + almonds", macros: "240 kcal · 24P · 10C · 14F" }
+                ]}
+            ]
+        };
+        
+        // ==================== RENDER MEAL PLANS ====================
+        function renderMealPlans() {
+            Object.keys(mealPlans).forEach(planKey => {
+                const container = document.getElementById(`${planKey}-days`);
+                const days = mealPlans[planKey];
+                
+                container.innerHTML = days.map(day => `
+                    <div class="day-card">
+                        <div class="day-header">
+                            <div class="day-name">${day.day}</div>
+                            <div class="day-calories">${day.kcal} kcal</div>
+                        </div>
+                        <div class="meals-list">
+                            ${day.meals.map(meal => `
+                                <div class="meal-row">
+                                    <div class="meal-time">${meal.time}</div>
+                                    <div class="meal-foods">${meal.foods}</div>
+                                    <div class="meal-macros">${meal.macros}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+            });
+        }
+        
+        // ==================== PLAN TABS ====================
+        function switchPlan(plan, btn) {
+            document.querySelectorAll('.plan-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.plan-content').forEach(c => c.classList.remove('active'));
+            
+            btn.classList.add('active');
+            document.getElementById(`plan-${plan}`).classList.add('active');
+        }
+        
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMealPlans();
+        });
+    </script>
+</body>
+</html>
